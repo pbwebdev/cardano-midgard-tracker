@@ -1,0 +1,371 @@
+<!doctype html>
+<!--
+
+███╗   ███╗███████╗███████╗██╗  ██╗    ██╗    ██╗██╗████████╗██╗  ██╗    ██╗   ██╗███████╗
+████╗ ████║██╔════╝██╔════╝██║  ██║    ██║    ██║██║╚══██╔══╝██║  ██║    ██║   ██║██╔════╝
+██╔████╔██║█████╗  ███████╗███████║    ██║ █╗ ██║██║   ██║   ███████║    ██║   ██║███████╗
+██║╚██╔╝██║██╔══╝  ╚════██║██╔══██║    ██║███╗██║██║   ██║   ██╔══██║    ██║   ██║╚════██║
+██║ ╚═╝ ██║███████╗███████║██║  ██║    ╚███╔███╔╝██║   ██║   ██║  ██║    ╚██████╔╝███████║
+╚═╝     ╚═╝╚══════╝╚══════╝╚═╝  ╚═╝     ╚══╝╚══╝ ╚═╝   ╚═╝   ╚═╝  ╚═╝     ╚═════╝ ╚══════╝
+
+Built by Mesh With Us
+https://meshwithus.com.au
+
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Midgard Development Tracker</title>
+  <meta name="description" content="Open development tracker for Midgard — Cardano's first optimistic rollup L2, built by Anastasia Labs. Live milestones, commits, issues and resources." />
+  <link rel="icon" href="assets/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png" />
+  <link rel="manifest" href="assets/site.webmanifest" />
+
+  <!-- Social preview -->
+  <meta property="og:title" content="Midgard Development Tracker" />
+  <meta property="og:description" content="Live dev tracker for Midgard — Cardano's first optimistic rollup L2. Milestones, commits, ecosystem and resources." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="assets/hero-bg.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Midgard Development Tracker" />
+  <meta name="twitter:description" content="Live dev tracker for Midgard — Cardano's first optimistic rollup L2." />
+  <meta name="twitter:image" content="assets/hero-bg.jpg" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<header class="topbar">
+  <a class="brand" href="#top">
+    <img src="assets/android-chrome-192x192.png" alt="" width="32" height="32" />
+    <span class="brand-text">MIDGARD</span>
+    <span class="brand-sub">tracker</span>
+  </a>
+  <nav>
+    <a href="#metrics">Activity</a>
+    <a href="#about">About</a>
+    <a href="#milestones">Milestones</a>
+    <a href="#ecosystem">Ecosystem</a>
+    <a href="#releases">Releases</a>
+    <a href="#commits">Commits</a>
+    <a href="#issues">Issues</a>
+    <a href="#videos">Videos</a>
+    <a href="#resources">Resources</a>
+  </nav>
+  <a class="cta" href="https://github.com/anastasia-Labs/midgard" target="_blank" rel="noopener">GitHub →</a>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="hero-inner">
+      <div class="status-pill"><span class="dot"></span> Active development</div>
+      <h1>Midgard <span class="muted">/</span> Cardano Optimistic Rollup L2</h1>
+      <p class="lede">
+        An open-source, community-visible development tracker for
+        <a href="https://github.com/anastasia-Labs/midgard" target="_blank" rel="noopener">anastasia-Labs/midgard</a>
+        — the first permissionless optimistic rollup on Cardano, built by
+        <a href="https://www.anastasialabs.com/" target="_blank" rel="noopener">Anastasia Labs</a>.
+        Updated automatically from GitHub.
+      </p>
+      <div class="hero-bottom">
+        <p class="updated">Last refreshed <span id="lastUpdated">—</span></p>
+        <div class="countdown">
+          <div class="countdown-num" id="cdDays">—</div>
+          <div class="countdown-label">days until EOY 2026 mainnet target</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="activity-strip">
+    <div class="activity-inner">
+      <div>
+        <div class="activity-label">Commits, last 52 weeks</div>
+        <svg id="sparkline" viewBox="0 0 520 56" preserveAspectRatio="none" aria-label="Commit activity sparkline"></svg>
+      </div>
+      <div class="contributors">
+        <div class="activity-label">Top contributors</div>
+        <div class="avatar-row" id="avatarRow"><span class="muted">Loading…</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="metrics" class="metrics">
+    <div class="metric">
+      <div class="metric-value" id="m-commits">—</div>
+      <div class="metric-label">Commits (default branch)</div>
+    </div>
+    <div class="metric">
+      <div class="metric-value" id="m-contributors">—</div>
+      <div class="metric-label">Contributors</div>
+    </div>
+    <div class="metric">
+      <div class="metric-value" id="m-open-prs">—</div>
+      <div class="metric-label">Open pull requests</div>
+    </div>
+    <div class="metric">
+      <div class="metric-value" id="m-open-issues">—</div>
+      <div class="metric-label">Open issues</div>
+    </div>
+    <div class="metric">
+      <div class="metric-value" id="m-stars">—</div>
+      <div class="metric-label">Stars</div>
+    </div>
+    <div class="metric">
+      <div class="metric-value" id="m-forks">—</div>
+      <div class="metric-label">Forks</div>
+    </div>
+  </section>
+
+  <section id="about" class="section">
+    <div class="section-head">
+      <h2>What is Midgard?</h2>
+      <p class="muted">A plain-English intro for anyone new to Cardano scaling.</p>
+    </div>
+
+    <p class="about-lede">
+      Midgard is a <b>Layer 2</b> for Cardano — think of it as a fast express lane that sits on top of the main Cardano blockchain.
+      Transactions happen on Midgard quickly and cheaply, and Cardano (Layer 1) acts as the trusted settlement court underneath.
+      It's an <b>optimistic rollup</b>, meaning transactions are assumed valid by default and anyone can challenge a bad one with a fraud proof — no central operator gets to decide.
+    </p>
+
+    <div class="benefits">
+      <div class="benefit">
+        <div class="benefit-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2 4 5v6c0 5 3.5 9 8 11 4.5-2 8-6 8-11V5l-8-3Z"/>
+            <path d="m9 12 2 2 4-4"/>
+          </svg>
+        </div>
+        <h3>Permissionless &amp; trustless</h3>
+        <p>No central sequencer, no multisig, no custodians. Anyone can run a Midgard operator, and a single honest participant can keep the network safe through fraud proofs.</p>
+      </div>
+
+      <div class="benefit">
+        <div class="benefit-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z"/>
+          </svg>
+        </div>
+        <h3>Fast &amp; cheap</h3>
+        <p>By batching activity off-chain and posting compact commitments to Cardano, Midgard targets transaction costs below one cent with near-instant confirmation in your wallet.</p>
+      </div>
+
+      <div class="benefit">
+        <div class="benefit-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3"  width="8" height="8" rx="1.5"/>
+            <rect x="13" y="13" width="8" height="8" rx="1.5"/>
+            <path d="M11 7h4a2 2 0 0 1 2 2v4"/>
+            <path d="M13 17H9a2 2 0 0 1-2-2v-4"/>
+          </svg>
+        </div>
+        <h3>Familiar for builders</h3>
+        <p>Midgard preserves Cardano's EUTxO model, so dApps built with Aiken or Plutus can move over without being rewritten for a new execution environment.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="milestones" class="section">
+    <div class="section-head">
+      <h2>Promised milestones</h2>
+      <p class="muted">Sources: Project Catalyst F12 (₳500,000) + Cardano Governance Action <code>gov_action13tfag48…</code> (₳2,162,096 treasury withdrawal). Combined committed funding: <b>₳2,662,096</b>.</p>
+    </div>
+
+    <ol class="milestones" id="milestoneList">
+      <!-- populated by app.js -->
+    </ol>
+  </section>
+
+  <section class="section two-col">
+    <div>
+      <div class="section-head">
+        <h2>Work area allocation</h2>
+        <p class="muted">FTE allocation from the Midgard Project Scope document.</p>
+      </div>
+      <ul class="fte-list">
+        <li><span>Onchain code</span><b>4 FTE</b></li>
+        <li><span>Offchain code</span><b>2 FTE</b></li>
+        <li><span>DA Layer</span><b>1 FTE</b></li>
+        <li><span>Midgard Node</span><b>0 FTE</b></li>
+        <li><span>Tx Builder</span><b>1 FTE</b></li>
+        <li><span>Testnet Deployment</span><b>0 FTE</b></li>
+        <li class="total"><span>Total secured</span><b>8 FTE</b></li>
+      </ul>
+    </div>
+    <div>
+      <div class="section-head">
+        <h2>Tech stack</h2>
+        <p class="muted">From the repository language composition.</p>
+      </div>
+      <ul class="stack-list" id="stackList"><li class="muted">Loading…</li></ul>
+    </div>
+  </section>
+
+  <section id="ecosystem" class="section">
+    <div class="section-head">
+      <h2>Ecosystem</h2>
+      <p class="muted">Projects publicly building with or on Midgard. Because Midgard is isomorphic to Cardano L1, any existing Cardano dApp can in principle redeploy unchanged — this list tracks confirmed collaborations.</p>
+    </div>
+
+    <div class="ecosystem-grid">
+      <a class="eco-card" href="https://www.sundialprotocol.com/" target="_blank" rel="noopener">
+        <div class="eco-head">
+          <img class="eco-logo" src="https://www.google.com/s2/favicons?domain=sundialprotocol.com&sz=128" alt="" onerror="this.style.display='none'" />
+          <div class="eco-badge">Building on</div>
+        </div>
+        <h3>Sundial</h3>
+        <p>The first UTXO-native Layer 2 for institutional Bitcoin DeFi — secure, compliant BTC yield generation. Architected in collaboration with Anastasia Labs and Midgard.</p>
+      </a>
+
+      <a class="eco-card" href="https://www.bitcoinos.build/" target="_blank" rel="noopener">
+        <div class="eco-head">
+          <img class="eco-logo" src="https://www.google.com/s2/favicons?domain=bitcoinos.build&sz=128" alt="" onerror="this.style.display='none'" />
+          <div class="eco-badge">Partner</div>
+        </div>
+        <h3>BitcoinOS</h3>
+        <p>Smart contract layer for Bitcoin. Partnered on the Catalyst F13 "Institutional-Grade Layer-2 for Bitcoin DeFi on Cardano" proposal targeting Midgard.</p>
+      </a>
+
+      <a class="eco-card" href="https://tesseract.fi/" target="_blank" rel="noopener">
+        <div class="eco-head">
+          <img class="eco-logo" src="https://tesseract.fi/wp-content/uploads/cropped-gradient_1160ad_8562a1-1-192x192.png" alt="" onerror="this.style.display='none'" />
+          <div class="eco-badge">Partner</div>
+        </div>
+        <h3>Tesseract</h3>
+        <p>Co-signatory on the F13 institutional-grade Bitcoin DeFi L2 proposal alongside Anastasia Labs.</p>
+      </a>
+
+      <a class="eco-card" href="https://fairway.global/" target="_blank" rel="noopener">
+        <div class="eco-head">
+          <img class="eco-logo" src="https://fairway.global/assets/apple-touch-icon.png" alt="" onerror="this.style.display='none'" />
+          <div class="eco-badge">Partner</div>
+        </div>
+        <h3>Fairway</h3>
+        <p>Institutional identity layer paired with Sundial in the F15 "Sundial + Fairway: Institutional Identity for Bitcoin DeFi" Catalyst proposal.</p>
+      </a>
+
+      <div class="eco-card eco-card--ghost">
+        <div class="eco-head">
+          <div class="eco-logo eco-logo--placeholder eco-logo--ghost">+</div>
+          <div class="eco-badge eco-badge--ghost">Coming</div>
+        </div>
+        <h3>Your project here?</h3>
+        <p>Midgard preserves Cardano's EUTxO model, so dApps built with Aiken or Plutus can redeploy on the rollup without rewriting their contracts.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="releases" class="section">
+    <div class="section-head">
+      <h2>Releases</h2>
+      <p class="muted">Tagged releases on the upstream repo. Empty until Anastasia Labs starts cutting versioned releases.</p>
+    </div>
+    <ul class="release-list" id="releaseList"><li class="muted">Loading…</li></ul>
+  </section>
+
+  <section id="commits" class="section">
+    <div class="section-head">
+      <h2>Recent commits</h2>
+      <p class="muted">Latest 15 commits on the default branch.</p>
+    </div>
+    <ul class="commit-list" id="commitList"><li class="muted">Loading…</li></ul>
+  </section>
+
+  <section id="issues" class="section two-col">
+    <div>
+      <div class="section-head"><h2>Open pull requests</h2></div>
+      <ul class="issue-list" id="prList"><li class="muted">Loading…</li></ul>
+    </div>
+    <div>
+      <div class="section-head"><h2>Recent issues</h2></div>
+      <ul class="issue-list" id="issueList"><li class="muted">Loading…</li></ul>
+    </div>
+  </section>
+
+  <section id="videos" class="section">
+    <div class="section-head">
+      <h2>Videos</h2>
+      <p class="muted">Talks and explainers about Midgard.</p>
+    </div>
+    <div class="video-grid">
+      <a class="video-card" href="https://www.youtube.com/watch?v=uBeULeLCsGE" target="_blank" rel="noopener">
+        <img loading="lazy" src="https://i.ytimg.com/vi/uBeULeLCsGE/hqdefault.jpg" alt="" />
+        <div class="video-meta">
+          <h3>Cardano: NerdOut — Midgard</h3>
+          <p>Deep dive on Midgard as Cardano's first optimistic rollup L2.</p>
+        </div>
+      </a>
+      <a class="video-card" href="https://www.youtube.com/watch?v=cllswpyo53A" target="_blank" rel="noopener">
+        <img loading="lazy" src="https://i.ytimg.com/vi/cllswpyo53A/hqdefault.jpg" alt="" />
+        <div class="video-meta">
+          <h3>L2s Like Midgard are a Game-changer for Cardano Scaling</h3>
+          <p>Interview on the L2 landscape and Midgard's role.</p>
+        </div>
+      </a>
+      <a class="video-card" href="https://www.youtube.com/shorts/UuRQtZqr7o4" target="_blank" rel="noopener">
+        <img loading="lazy" src="https://i.ytimg.com/vi/UuRQtZqr7o4/hqdefault.jpg" alt="" />
+        <div class="video-meta">
+          <h3>Cardano Midgard: Custom Security & Institutional Adoption</h3>
+          <p>Rare Evo short on Midgard's security model.</p>
+        </div>
+      </a>
+      <a class="video-card" href="https://www.youtube.com/watch?v=_eJ-BDXj5o4" target="_blank" rel="noopener">
+        <img loading="lazy" src="https://i.ytimg.com/vi/_eJ-BDXj5o4/hqdefault.jpg" alt="" />
+        <div class="video-meta">
+          <h3>Midgard — Scaling Cardano &amp; Bitcoin DeFi (VI)</h3>
+          <p>Vietnamese-language overview of Midgard.</p>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <section id="resources" class="section">
+    <div class="section-head"><h2>Resources</h2></div>
+    <div class="links-grid">
+      <a href="https://github.com/anastasia-Labs/midgard" target="_blank" rel="noopener">
+        <h3>Source code →</h3><p>anastasia-Labs/midgard on GitHub</p>
+      </a>
+      <a href="https://www.cardanocube.com/governance/gov_actions/gov_action13tfag48nf94rtjcdq7c06vhkslmxxw9h6c88sl7q5g5nnewcsvlqqfgyy3v" target="_blank" rel="noopener">
+        <h3>Governance action →</h3><p>Cardano gov action for Midgard funding (₳2.16M)</p>
+      </a>
+      <a href="https://projectcatalyst.io/funds/12/cardano-use-cases-product/anastasia-labs-midgard-cardano-layer-2" target="_blank" rel="noopener">
+        <h3>Project Catalyst F12 →</h3><p>Original 500,000 ADA proposal &amp; milestones</p>
+      </a>
+      <a href="https://bafybeicct27qnakhth7bfsysv6j2mmcfmykfnz7cunagwxftsocekjve6m.ipfs.inbrowser.link/" target="_blank" rel="noopener">
+        <h3>Project Scope (PDF) →</h3><p>Anastasia Labs Midgard scope document on IPFS</p>
+      </a>
+      <a href="https://github.com/anastasia-Labs/midgard/blob/staging/technical-spec/midgard.pdf" target="_blank" rel="noopener">
+        <h3>Technical specification →</h3><p>Live LaTeX-rendered protocol spec (built via <code>make spec</code>)</p>
+      </a>
+      <a href="https://www.anastasialabs.com/" target="_blank" rel="noopener">
+        <h3>Anastasia Labs →</h3><p>The team building Midgard</p>
+      </a>
+      <a href="https://x.com/midgardprotocol" target="_blank" rel="noopener">
+        <h3>Midgard on X →</h3><p>@midgardprotocol — official protocol account</p>
+      </a>
+      <a href="https://x.com/anastasialabs" target="_blank" rel="noopener">
+        <h3>Anastasia Labs on X →</h3><p>@anastasialabs — team updates</p>
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <p>
+    Independent community tracker. Not affiliated with Anastasia Labs.
+    Data pulled live from the
+    <a href="https://docs.github.com/rest" target="_blank" rel="noopener">GitHub REST API</a>.
+  </p>
+  <p class="muted">Source for this tracker: <a href="#" id="trackerRepo">add your repo URL in app.js</a></p>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
