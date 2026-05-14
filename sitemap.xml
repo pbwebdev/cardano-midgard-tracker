@@ -6,7 +6,7 @@
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
     <image:image>
-      <image:loc>https://midgard-tracker.learncardano.io/assets/twitter-card.png</image:loc>
+      <image:loc>https://midgard-tracker.learncardano.io/assets/twitter-card.webp</image:loc>
       <image:title>Midgard Development Tracker</image:title>
     </image:image>
   </url>
