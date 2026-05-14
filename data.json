@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-05-14T10:05:03.524Z",
+  "fetchedAt": "2026-05-14T11:48:51.385Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 23,
@@ -17,6 +17,90 @@
   },
   "commits": [
     {
+      "sha": "a9e405a02467fd0936589ee60f40473067ab9fc6",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/a9e405a02467fd0936589ee60f40473067ab9fc6",
+      "message": "chore(aiken): formatting",
+      "authorName": "keyanmaskoot",
+      "authorDate": "2026-05-13T20:28:38Z"
+    },
+    {
+      "sha": "44292badc890ebaa44c7e177e55c7cf466a254b8",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/44292badc890ebaa44c7e177e55c7cf466a254b8",
+      "message": "fix(aiken): store compact body in compact tx\n\nSwitching from hash of the compact body to the compact body itself in\nthe compact form of the Midgard transaction datatype.",
+      "authorName": "keyanmaskoot",
+      "authorDate": "2026-05-13T19:13:06Z"
+    },
+    {
+      "sha": "99c86e948830629953b3d073266a4e3d5d695730",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/99c86e948830629953b3d073266a4e3d5d695730",
+      "message": "feat: update codec and harden state queue finalization",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-05-13T02:18:11Z"
+    },
+    {
+      "sha": "3cd3dbe40c472a919ed0c913f2eecbf87e49c715",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/3cd3dbe40c472a919ed0c913f2eecbf87e49c715",
+      "message": "fix(aiken): cleanup fraud proofs",
+      "authorName": "keyanmaskoot",
+      "authorDate": "2026-05-12T22:53:26Z"
+    },
+    {
+      "sha": "2bc52a546ad5264e8b4adb2145b03bc379d7f563",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/2bc52a546ad5264e8b4adb2145b03bc379d7f563",
+      "message": "refactor(aiken): split double spend's 1st step\n\nThe first step is not implicitly two steps anymore.",
+      "authorName": "keyanmaskoot",
+      "authorDate": "2026-05-12T22:36:46Z"
+    },
+    {
+      "sha": "fe4e71264a17ff00ac1226c0df0bc2c95abf0715",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/fe4e71264a17ff00ac1226c0df0bc2c95abf0715",
+      "message": "refactor(aiken): update `zero-input` fraud proof",
+      "authorName": "keyanmaskoot",
+      "authorDate": "2026-05-12T22:26:30Z"
+    },
+    {
+      "sha": "fd549e1cc48673d033813dd6b8c90ef631d2ceab",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/fd549e1cc48673d033813dd6b8c90ef631d2ceab",
+      "message": "refactor(aiken): update `withdrawn-reference-input`",
+      "authorName": "keyanmaskoot",
+      "authorDate": "2026-05-12T22:15:36Z"
+    },
+    {
+      "sha": "d6d534b7fe84bb5e86ca5f2a80ce317a0d8f9db5",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d6d534b7fe84bb5e86ca5f2a80ce317a0d8f9db5",
+      "message": "refactor(aiken): update no ref. input fraud proof",
+      "authorName": "keyanmaskoot",
+      "authorDate": "2026-05-12T22:03:09Z"
+    },
+    {
+      "sha": "c1f67898b7786b8d10d47fafc2d850c414c71e61",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/c1f67898b7786b8d10d47fafc2d850c414c71e61",
+      "message": "refactor(aiken): update `no-input` fraud proof",
+      "authorName": "keyanmaskoot",
+      "authorDate": "2026-05-12T20:58:57Z"
+    },
+    {
+      "sha": "1b2448c3d32464a05c996a1e49b135814190a46e",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/1b2448c3d32464a05c996a1e49b135814190a46e",
+      "message": "refactor(aiken): update missing signature fp",
+      "authorName": "keyanmaskoot",
+      "authorDate": "2026-05-12T18:32:04Z"
+    },
+    {
+      "sha": "841a57f18c8d45936f3b03b5e4022b4cba76a138",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/841a57f18c8d45936f3b03b5e4022b4cba76a138",
+      "message": "fix(aiken): resolve warning",
+      "authorName": "keyanmaskoot",
+      "authorDate": "2026-05-12T18:14:33Z"
+    },
+    {
+      "sha": "ffb46e614b45074b3557aaa1c36b70607dc6cf90",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ffb46e614b45074b3557aaa1c36b70607dc6cf90",
+      "message": "fix: missing native script\n\nThe fraud proof in the specs is now split in two to mirror the missing\nrequired signer fraud proof.\n\nNow an input with a missing script can either come from a producing\ntransaction within the block itself, or from a previously available UTxO\nin the ledger.\n\nThe Aiken code is also updated so that no redeemer carries more than a\nsingle pre-image or script bytes.",
+      "authorName": "keyanmaskoot",
+      "authorDate": "2026-05-12T18:11:42Z"
+    },
+    {
       "sha": "5b0a11ac6c3d96858c594229b00f92314e52f030",
       "html_url": "https://github.com/Anastasia-Labs/midgard/commit/5b0a11ac6c3d96858c594229b00f92314e52f030",
       "message": "Add draft midgard node API spec",
@@ -24,102 +108,18 @@
       "authorDate": "2026-05-12T17:38:25Z"
     },
     {
-      "sha": "367ede9ae356ef4da0f0fb45b7eedc59c64585d6",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/367ede9ae356ef4da0f0fb45b7eedc59c64585d6",
-      "message": "polish: codec improvements",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-05-05T22:27:18Z"
+      "sha": "4a74d5997431fbbadad6a4003991f9582109525e",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/4a74d5997431fbbadad6a4003991f9582109525e",
+      "message": "Fixes after rebase",
+      "authorName": "Drop-Table-Users",
+      "authorDate": "2026-05-12T09:19:14Z"
     },
     {
-      "sha": "3e0d0f64f1cc7d8ea833dcbfb113c6d4dd7150c6",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/3e0d0f64f1cc7d8ea833dcbfb113c6d4dd7150c6",
-      "message": "fix(aiken): nft check",
+      "sha": "81a134fca67cffd1a3c22d7ac2796db8b72935d9",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/81a134fca67cffd1a3c22d7ac2796db8b72935d9",
+      "message": "fix(aiken): use `Pairs` instead of `Dict`\n\nSince fraud proofs need to be provided with preimages, they can't be of\ntype `Dict`. This PR changes them to `Pairs`.",
       "authorName": "keyanmaskoot",
-      "authorDate": "2026-05-05T16:10:30Z"
-    },
-    {
-      "sha": "b2691d77d7eaff6ec26e80cc3dc08f914a2d6f62",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/b2691d77d7eaff6ec26e80cc3dc08f914a2d6f62",
-      "message": "feat: midgard-lucid, native codec and reserve / withdrawal prototype",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-05-05T15:29:58Z"
-    },
-    {
-      "sha": "5bf9109d55a7e77f2be3f48678ecc3d67e1a49da",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/5bf9109d55a7e77f2be3f48678ecc3d67e1a49da",
-      "message": "feat(aiken): payout conclusion seems done",
-      "authorName": "keyanmaskoot",
-      "authorDate": "2026-05-05T15:19:43Z"
-    },
-    {
-      "sha": "54c151005dc62ea52e716ddf6e88eaebc6614a63",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/54c151005dc62ea52e716ddf6e88eaebc6614a63",
-      "message": "fix(aiken): prevent 0 lovelace and empty assets",
-      "authorName": "keyanmaskoot",
-      "authorDate": "2026-05-04T22:30:16Z"
-    },
-    {
-      "sha": "6e3f609b459658d4bc556dd9330712e66cf3a179",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/6e3f609b459658d4bc556dd9330712e66cf3a179",
-      "message": "refactor(aiken): more explicit positivity check",
-      "authorName": "keyanmaskoot",
-      "authorDate": "2026-05-04T22:12:55Z"
-    },
-    {
-      "sha": "58ec07586e43bc57c87a1dcc226485a7406ddfaa",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/58ec07586e43bc57c87a1dcc226485a7406ddfaa",
-      "message": "fix(aiken): proper outref check in payout",
-      "authorName": "keyanmaskoot",
-      "authorDate": "2026-05-04T22:06:41Z"
-    },
-    {
-      "sha": "90db194afdf78eab0f87b2b91e2c3859f9a504ec",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/90db194afdf78eab0f87b2b91e2c3859f9a504ec",
-      "message": "refactor(aiken): payout/reserve observer withdraw",
-      "authorName": "keyanmaskoot",
-      "authorDate": "2026-05-04T21:45:04Z"
-    },
-    {
-      "sha": "50add6b4dfa1b5186edfa685307d4ebc2e08756a",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/50add6b4dfa1b5186edfa685307d4ebc2e08756a",
-      "message": "Update scheduler to work with more realistic shift duration",
-      "authorName": "TotallyNotChase",
-      "authorDate": "2026-05-04T20:53:56Z"
-    },
-    {
-      "sha": "75ceaf14206822e335e85133d1ca908784ee38dd",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/75ceaf14206822e335e85133d1ca908784ee38dd",
-      "message": "refactor(aiken): re-organize for withdraw-0",
-      "authorName": "keyanmaskoot",
-      "authorDate": "2026-05-04T17:53:35Z"
-    },
-    {
-      "sha": "ee130143917b304ff63ce19e2569147935982f8a",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ee130143917b304ff63ce19e2569147935982f8a",
-      "message": "Merge branch 'staging' into chase/offchain-state-txs",
-      "authorName": "TotallyNotChase",
-      "authorDate": "2026-05-04T17:06:23Z"
-    },
-    {
-      "sha": "a038744392d51c0f0d70a90dde6cc1b355e98304",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/a038744392d51c0f0d70a90dde6cc1b355e98304",
-      "message": "feat(aiken): add tests and minor refinements",
-      "authorName": "keyanmaskoot",
-      "authorDate": "2026-05-04T16:38:08Z"
-    },
-    {
-      "sha": "cd3d16dfdd1521a6bc324c902f8906da13f17aa2",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/cd3d16dfdd1521a6bc324c902f8906da13f17aa2",
-      "message": "Merge branch 'general-fixes' into finalize-payout",
-      "authorName": "keyanmaskoot",
-      "authorDate": "2026-05-04T09:11:38Z"
-    },
-    {
-      "sha": "da8cb6d24e743391b9af5c81e139df4399625369",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/da8cb6d24e743391b9af5c81e139df4399625369",
-      "message": "Merge branch 'matteoProofs' into general-fixes",
-      "authorName": "keyanmaskoot",
-      "authorDate": "2026-05-04T09:10:47Z"
+      "authorDate": "2026-05-11T21:53:36Z"
     }
   ],
   "contributors": [
@@ -340,55 +340,55 @@
     },
     {
       "week": 1748131200,
-      "total": 39
+      "total": 40
     },
     {
       "week": 1748736000,
-      "total": 5
+      "total": 6
     },
     {
       "week": 1749340800,
-      "total": 9
+      "total": 14
     },
     {
       "week": 1749945600,
-      "total": 11
+      "total": 16
     },
     {
       "week": 1750550400,
-      "total": 0
+      "total": 7
     },
     {
       "week": 1751155200,
-      "total": 4
+      "total": 15
     },
     {
       "week": 1751760000,
-      "total": 0
-    },
-    {
-      "week": 1752364800,
-      "total": 1
-    },
-    {
-      "week": 1752969600,
-      "total": 0
-    },
-    {
-      "week": 1753574400,
-      "total": 0
-    },
-    {
-      "week": 1754179200,
-      "total": 8
-    },
-    {
-      "week": 1754784000,
       "total": 23
     },
     {
+      "week": 1752364800,
+      "total": 13
+    },
+    {
+      "week": 1752969600,
+      "total": 27
+    },
+    {
+      "week": 1753574400,
+      "total": 32
+    },
+    {
+      "week": 1754179200,
+      "total": 63
+    },
+    {
+      "week": 1754784000,
+      "total": 35
+    },
+    {
       "week": 1755388800,
-      "total": 18
+      "total": 34
     },
     {
       "week": 1755993600,
@@ -396,11 +396,11 @@
     },
     {
       "week": 1756598400,
-      "total": 4
+      "total": 5
     },
     {
       "week": 1757203200,
-      "total": 56
+      "total": 59
     },
     {
       "week": 1757808000,
@@ -440,19 +440,19 @@
     },
     {
       "week": 1763251200,
-      "total": 23
+      "total": 32
     },
     {
       "week": 1763856000,
-      "total": 15
+      "total": 44
     },
     {
       "week": 1764460800,
-      "total": 8
+      "total": 17
     },
     {
       "week": 1765065600,
-      "total": 6
+      "total": 7
     },
     {
       "week": 1765670400,
@@ -496,51 +496,51 @@
     },
     {
       "week": 1771718400,
-      "total": 43
+      "total": 47
     },
     {
       "week": 1772323200,
-      "total": 13
+      "total": 16
     },
     {
       "week": 1772928000,
-      "total": 22
-    },
-    {
-      "week": 1773532800,
-      "total": 11
-    },
-    {
-      "week": 1774137600,
       "total": 23
     },
     {
+      "week": 1773532800,
+      "total": 25
+    },
+    {
+      "week": 1774137600,
+      "total": 37
+    },
+    {
       "week": 1774742400,
-      "total": 12
-    },
-    {
-      "week": 1775347200,
-      "total": 28
-    },
-    {
-      "week": 1775952000,
       "total": 31
     },
     {
+      "week": 1775347200,
+      "total": 42
+    },
+    {
+      "week": 1775952000,
+      "total": 32
+    },
+    {
       "week": 1776556800,
-      "total": 17
+      "total": 30
     },
     {
       "week": 1777161600,
-      "total": 26
+      "total": 39
     },
     {
       "week": 1777766400,
-      "total": 26
+      "total": 35
     },
     {
       "week": 1778371200,
-      "total": 1
+      "total": 22
     }
   ]
 }
