@@ -43,13 +43,18 @@ img, svg, video { max-width: 100%; height: auto; }
   border-radius: 4px;
 }
 
-/* Reduced motion — WCAG 2.3.3 */
+/* Reduced motion — WCAG 2.3.3
+   The status-dot flicker is a small opacity pulse (no spatial motion,
+   under 3 flashes/sec) so it stays on even when reduced motion is set. */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+  .status-pill .dot {
+    animation: dot-flicker 6.3s infinite !important;
   }
 }
 html { background: var(--bg); }
