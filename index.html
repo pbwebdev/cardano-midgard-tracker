@@ -158,6 +158,41 @@ img, svg, video { max-width: 100%; height: auto; }
 body::before { content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none; background-image: radial-gradient(rgba(96,96,96,0.55) 1px, transparent 1px); background-size: 20px 20px; -webkit-mask-image: radial-gradient(ellipse at center, black 20%, transparent 75%); mask-image: radial-gradient(ellipse at center, black 20%, transparent 75%); }
 a { color: var(--accent); text-decoration: none; }
 a:hover { text-decoration: underline; }
+/* WCAG 1.4.1 — text-content links must be distinguishable by more than colour.
+   Underline + small ↗ arrow on external links, scoped to body-text contexts
+   so card / nav / button-shaped links aren't double-decorated. */
+.text-links a,
+.hero-inner p a,
+.about-lede a,
+.section-head p a,
+.benefit p a,
+.eco-card p a,
+.footer p a,
+.cookie-banner p a {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-thickness: 1px;
+  text-decoration-color: var(--accent-dim);
+}
+.text-links a:hover,
+.hero-inner p a:hover,
+.about-lede a:hover,
+.section-head p a:hover,
+.benefit p a:hover,
+.eco-card p a:hover,
+.footer p a:hover,
+.cookie-banner p a:hover { text-decoration-color: var(--accent); }
+.hero-inner p a[target="_blank"]::after,
+.about-lede a[target="_blank"]::after,
+.section-head p a[target="_blank"]::after,
+.footer p a[target="_blank"]::after,
+.cookie-banner p a[target="_blank"]::after {
+  content: "\00a0\2197";
+  font-size: 0.85em;
+  opacity: 0.75;
+  text-decoration: none;
+  display: inline-block;
+}
 code { font-family: var(--mono); font-size: 0.85em; background: var(--panel-2); padding: 1px 6px; border-radius: 4px; }
 h1, h2, h3 { font-weight: 600; letter-spacing: -0.01em; }
 .topbar { position: sticky; top: 0; z-index: 50; display: flex; align-items: center; gap: 24px; padding: 14px 28px; background: rgba(0,0,0,0.75); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); }
