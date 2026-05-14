@@ -4,3 +4,11 @@ Thumbs.db
 node_modules/
 .vscode/
 .idea/
+
+# Never commit secrets — these are blocked even if some future tool tries to write them.
+.env
+.env.*
+*.pem
+*.key
+secrets.json
+credentials.json

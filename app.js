@@ -61,6 +61,16 @@ const relTime = (iso) => {
 function escapeHtml(s) {
   return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
 }
+// Defence-in-depth — only allow safe URL schemes when interpolating into href/src.
+// Source is GitHub's API so these should always be https://, but if data.json is
+// ever poisoned a javascript: or data: URL could execute. Block them.
+function safeUrl(u) {
+  if (typeof u !== "string") return "#";
+  if (/^https?:\/\//i.test(u) || u.startsWith("assets/") || u.startsWith("/") || u.startsWith("#")) {
+    return escapeHtml(u);
+  }
+  return "#";
+}
 
 /* ---------- renderers ---------- */
 function slippageBadge(m) {
@@ -117,8 +127,8 @@ function renderSparkline(weeks) {
 function renderAvatars(contributors) {
   const top = (contributors || []).slice(0, 12).filter(c => c.login);
   $("avatarRow").innerHTML = top.map(c => `
-    <a href="${c.html_url}" target="_blank" rel="noopener" title="${escapeHtml(c.login)} · ${c.contributions} commits">
-      <img loading="lazy" decoding="async" width="36" height="36" src="${c.avatar_url}" alt="${escapeHtml(c.login)}" />
+    <a href="${safeUrl(c.html_url)}" target="_blank" rel="noopener" title="${escapeHtml(c.login)} · ${c.contributions} commits">
+      <img loading="lazy" decoding="async" width="36" height="36" src="${safeUrl(c.avatar_url)}" alt="${escapeHtml(c.login)}" />
     </a>
   `).join("") || `<span class="muted">No contributors yet.</span>`;
 }
@@ -153,7 +163,7 @@ function renderCommits(commits) {
   if (!commits?.length) { $("commitList").innerHTML = `<li class="muted">No commits yet.</li>`; return; }
   $("commitList").innerHTML = commits.map(c => `
     <li>
-      <a class="commit-sha" href="${c.html_url}" target="_blank" rel="noopener">${c.sha.slice(0,7)}</a>
+      <a class="commit-sha" href="${safeUrl(c.html_url)}" target="_blank" rel="noopener">${escapeHtml(c.sha.slice(0,7))}</a>
       <span class="commit-msg" title="${escapeHtml(c.message)}">${escapeHtml(c.message.split("\n")[0])}</span>
       <span class="commit-meta">${escapeHtml(c.authorName || "—")} · ${relTime(c.authorDate)}</span>
     </li>
@@ -164,7 +174,7 @@ function renderIssuesAndPRs(prs, issues) {
   $("prList").innerHTML = (prs && prs.length) ? prs.map(pr => `
     <li>
       <span class="issue-num">#${pr.number}</span>
-      <a class="issue-title" href="${pr.html_url}" target="_blank" rel="noopener">${escapeHtml(pr.title)}</a>
+      <a class="issue-title" href="${safeUrl(pr.html_url)}" target="_blank" rel="noopener">${escapeHtml(pr.title)}</a>
       <span class="commit-meta">${relTime(pr.updated_at)}</span>
     </li>
   `).join("") : `<li class="muted">No open pull requests.</li>`;
@@ -172,7 +182,7 @@ function renderIssuesAndPRs(prs, issues) {
   $("issueList").innerHTML = (issues && issues.length) ? issues.map(i => `
     <li>
       <span class="issue-num">#${i.number}</span>
-      <a class="issue-title" href="${i.html_url}" target="_blank" rel="noopener">${escapeHtml(i.title)}</a>
+      <a class="issue-title" href="${safeUrl(i.html_url)}" target="_blank" rel="noopener">${escapeHtml(i.title)}</a>
       <span class="commit-meta">${relTime(i.updated_at)}</span>
     </li>
   `).join("") : `<li class="muted">No open issues.</li>`;
@@ -185,7 +195,7 @@ function renderReleases(releases) {
   }
   $("releaseList").innerHTML = releases.map(r => `
     <li>
-      <a class="release-tag" href="${r.html_url}" target="_blank" rel="noopener">${escapeHtml(r.tag_name)}</a>
+      <a class="release-tag" href="${safeUrl(r.html_url)}" target="_blank" rel="noopener">${escapeHtml(r.tag_name)}</a>
       <span class="release-name">${escapeHtml(r.name || "")}</span>
       <span class="commit-meta">${relTime(r.published_at)}${r.prerelease ? " · pre-release" : ""}</span>
     </li>
