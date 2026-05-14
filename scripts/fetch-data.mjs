@@ -7,13 +7,17 @@
 //
 // Requires Node 20+ (built-in fetch). No npm deps.
 
-import { writeFile, mkdir, readdir, unlink } from "node:fs/promises";
+import { writeFile, mkdir, readdir, unlink, stat } from "node:fs/promises";
 import { join } from "node:path";
 
-const REPO        = "anastasia-Labs/midgard";
-const TOKEN       = process.env.GITHUB_TOKEN;
-const OUT         = "data.json";
-const AVATAR_DIR  = "assets/avatars";
+const REPO              = "anastasia-Labs/midgard";
+const TOKEN             = process.env.GITHUB_TOKEN;
+const OUT               = "data.json";
+const AVATAR_DIR        = "assets/avatars";
+// Avatars are essentially static — same person, same photo for months.
+// Refresh each file at most once per day so the hourly run only hits the
+// network when a NEW contributor appears or an existing one is genuinely due.
+const AVATAR_MAX_AGE_MS = 24 * 60 * 60 * 1000;
 
 const headers = {
   Accept: "application/vnd.github+json",
@@ -61,14 +65,24 @@ const [
 // Download each contributor's avatar to assets/avatars/<login>.png so we can
 // serve them from our own origin (under Cloudflare cache). Stale files for
 // contributors who no longer appear are removed each run.
+async function isFresh(path) {
+  try {
+    const s = await stat(path);
+    return (Date.now() - s.mtimeMs) < AVATAR_MAX_AGE_MS;
+  } catch { return false; }
+}
+
 async function downloadAvatar(url, login) {
+  const path = join(AVATAR_DIR, `${login}.png`);
+  if (await isFresh(path)) return `${AVATAR_DIR}/${login}.png`;
   try {
     const u = new URL(url);
     u.searchParams.set("s", "36");
     const r = await fetch(u.toString());
     if (!r.ok) { console.error(`avatar ${login}: HTTP ${r.status}`); return null; }
     const buf = Buffer.from(await r.arrayBuffer());
-    await writeFile(join(AVATAR_DIR, `${login}.png`), buf);
+    await writeFile(path, buf);
+    console.log(`refreshed avatar ${login}`);
     return `${AVATAR_DIR}/${login}.png`;
   } catch (e) {
     console.error(`avatar ${login}: ${e.message}`);
