@@ -248,7 +248,7 @@ async function renderIssuesAndPRs() {
       return;
     }
     const realIssues = issues.filter(i => !i.pull_request);
-    $("m-open-prs").textContent = fmt(prs.length >= 10 ? `${prs.length}+` : prs.length);
+    $("m-open-prs").textContent = prs.length >= 10 ? `${prs.length}+` : fmt(prs.length);
     $("prList").innerHTML = prs.length ? prs.map(pr => `
       <li>
         <span class="issue-num">#${pr.number}</span>
