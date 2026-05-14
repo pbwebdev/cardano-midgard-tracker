@@ -118,7 +118,7 @@ function renderAvatars(contributors) {
   const top = (contributors || []).slice(0, 12).filter(c => c.login);
   $("avatarRow").innerHTML = top.map(c => `
     <a href="${c.html_url}" target="_blank" rel="noopener" title="${escapeHtml(c.login)} · ${c.contributions} commits">
-      <img loading="lazy" decoding="async" width="36" height="36" src="${c.avatar_url}&s=48" alt="${escapeHtml(c.login)}" />
+      <img loading="lazy" decoding="async" width="36" height="36" src="${c.avatar_url}&s=36" alt="${escapeHtml(c.login)}" />
     </a>
   `).join("") || `<span class="muted">No contributors yet.</span>`;
 }
