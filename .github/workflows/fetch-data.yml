@@ -1,16 +1,14 @@
 name: Refresh data.json
 
-# Runs hourly. Fetches the upstream Midgard repo data from the GitHub API
-# (authenticated, 1000 req/hour limit) and commits any changes to data.json.
-# The commit triggers deploy.yml, which publishes a fresh Pages snapshot.
-#
-# Net effect: every visitor reads from a static data.json instead of hitting
-# the GitHub API from their browser, so the per-visitor 60/hr unauth limit
-# can never be tripped.
+# Runs once a day. Upstream commit cadence on anastasia-Labs/midgard is low
+# enough (a handful of commits per week, mostly in bursts) that hourly was
+# overkill — we were committing identical files most runs. Daily keeps the
+# tracker fresh without the noise. Trigger manually via "Run workflow" when
+# you want an immediate refresh.
 
 on:
   schedule:
-    - cron: "0 * * * *"   # top of every hour
+    - cron: "0 6 * * *"   # 06:00 UTC daily
   workflow_dispatch:
 
 permissions:

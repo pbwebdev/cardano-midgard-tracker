@@ -1,5 +1,5 @@
 // Fetches Midgard repo data from the GitHub API at build time and writes
-// it to data.json. Runs hourly via .github/workflows/fetch-data.yml.
+// it to data.json. Runs daily via .github/workflows/fetch-data.yml.
 //
 // Using build-time fetching means every visitor gets the same cached
 // snapshot, so the page never hits GitHub from the browser and the
@@ -18,10 +18,9 @@ const REPO              = "anastasia-Labs/midgard";
 const TOKEN             = process.env.GITHUB_TOKEN;
 const OUT               = "data.json";
 const AVATAR_DIR        = "assets/avatars";
-// Avatars are essentially static — same person, same photo for months.
-// Refresh each file at most once per day so the hourly run only hits the
-// network when a NEW contributor appears or an existing one is genuinely due.
-const AVATAR_MAX_AGE_MS = 24 * 60 * 60 * 1000;
+// Avatars are essentially static. Refresh each file at most once per week
+// so daily runs only hit the network when a NEW contributor appears.
+const AVATAR_MAX_AGE_MS = 7 * 24 * 60 * 60 * 1000;
 
 const headers = {
   Accept: "application/vnd.github+json",
