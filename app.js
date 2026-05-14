@@ -192,6 +192,32 @@ function renderReleases(releases) {
   `).join("");
 }
 
+/* ---------- video-card image fade-in on scroll ---------- */
+(function initVideoFadeIn() {
+  const imgs = document.querySelectorAll(".video-card img");
+  if (!imgs.length) return;
+
+  // Mark as loaded as soon as the browser has decoded the image.
+  imgs.forEach(img => {
+    if (img.complete && img.naturalWidth > 0) img.classList.add("is-loaded");
+    else img.addEventListener("load", () => img.classList.add("is-loaded"), { once: true });
+  });
+
+  if (!("IntersectionObserver" in window)) {
+    imgs.forEach(img => img.classList.add("is-visible"));
+    return;
+  }
+  const io = new IntersectionObserver((entries) => {
+    for (const e of entries) {
+      if (e.isIntersecting) {
+        e.target.classList.add("is-visible");
+        io.unobserve(e.target);
+      }
+    }
+  }, { rootMargin: "0px 80px", threshold: 0.1 });
+  imgs.forEach(img => io.observe(img));
+})();
+
 /* ---------- hero parallax ---------- */
 (function initHeroParallax() {
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
