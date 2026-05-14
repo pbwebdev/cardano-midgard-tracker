@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-05-14T14:00:40.699Z",
+  "fetchedAt": "2026-05-14T16:58:04.792Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 23,
@@ -16,6 +16,20 @@
     "Perl": 37
   },
   "commits": [
+    {
+      "sha": "4c9a1d6d5334dd1ea492700de8424786b4bd6cb6",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/4c9a1d6d5334dd1ea492700de8424786b4bd6cb6",
+      "message": "feat: fault proof cli",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-05-14T16:06:22Z"
+    },
+    {
+      "sha": "c096f2d1841f37d6ea02811250eb1001293201f9",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/c096f2d1841f37d6ea02811250eb1001293201f9",
+      "message": "fix(aiken): bring some fixes from phil's branch",
+      "authorName": "keyanmaskoot",
+      "authorDate": "2026-05-14T15:49:38Z"
+    },
     {
       "sha": "a9e405a02467fd0936589ee60f40473067ab9fc6",
       "html_url": "https://github.com/Anastasia-Labs/midgard/commit/a9e405a02467fd0936589ee60f40473067ab9fc6",
@@ -106,20 +120,6 @@
       "message": "Add draft midgard node API spec",
       "authorName": "TotallyNotChase",
       "authorDate": "2026-05-12T17:38:25Z"
-    },
-    {
-      "sha": "4a74d5997431fbbadad6a4003991f9582109525e",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/4a74d5997431fbbadad6a4003991f9582109525e",
-      "message": "Fixes after rebase",
-      "authorName": "Drop-Table-Users",
-      "authorDate": "2026-05-12T09:19:14Z"
-    },
-    {
-      "sha": "81a134fca67cffd1a3c22d7ac2796db8b72935d9",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/81a134fca67cffd1a3c22d7ac2796db8b72935d9",
-      "message": "fix(aiken): use `Pairs` instead of `Dict`\n\nSince fraud proofs need to be provided with preimages, they can't be of\ntype `Dict`. This PR changes them to `Pairs`.",
-      "authorName": "keyanmaskoot",
-      "authorDate": "2026-05-11T21:53:36Z"
     }
   ],
   "contributors": [
@@ -540,7 +540,7 @@
     },
     {
       "week": 1778371200,
-      "total": 22
+      "total": 24
     }
   ]
 }
