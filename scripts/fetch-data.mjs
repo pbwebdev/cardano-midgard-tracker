@@ -11,10 +11,10 @@ import { writeFile, mkdir, readdir, unlink, stat } from "node:fs/promises";
 import { join } from "node:path";
 
 const REPO              = "anastasia-Labs/midgard";
-// Track the active development branch, not the repo default. The Midgard
-// team explicitly asked the tracker to follow tx-validation as their
-// canonical "progress" branch.
-const BRANCH            = "tx-validation";
+// We aggregate activity across ALL branches, not just one. The Midgard
+// team confirmed work is happening in parallel across many branches and
+// every commit counts toward "progress" — picking a single branch would
+// understate the team's real output.
 const TOKEN             = process.env.GITHUB_TOKEN;
 const OUT               = "data.json";
 const AVATAR_DIR        = "assets/avatars";
@@ -35,23 +35,40 @@ async function gh(path) {
   return r.json();
 }
 
-// Branch-scoped commit total via the Link "rel=last" page index trick:
-// requesting per_page=1 + reading the last-page number = total count.
-async function branchCommitTotal() {
-  const r = await fetch(`https://api.github.com/repos/${REPO}/commits?sha=${BRANCH}&per_page=1`, { headers });
-  if (!r.ok) return null;
-  const m = (r.headers.get("link") || "").match(/[?&]page=(\d+)>;\s*rel="last"/);
-  return m ? parseInt(m[1], 10) : null;
-}
+// Pull commits across every branch, dedupe by SHA, sort newest first.
+// Used to power both the "recent commits" list and the weekly sparkline.
+// (`/stats/commit_activity` only covers the default branch, so we build
+// the sparkline ourselves by bucketing this combined commit set.)
+async function allBranchCommits() {
+  const branches = await gh(`/repos/${REPO}/branches?per_page=100`);
+  if (!branches) return [];
+  console.log(`Fetching commits across ${branches.length} branches…`);
 
-// Pull up to 500 commits from the branch, used both to populate the
-// "recent commits" list and to build a branch-scoped weekly sparkline
-// (the /stats/commit_activity endpoint only covers the default branch).
-async function branchCommitHistory() {
-  const pages = await Promise.all([1, 2, 3, 4, 5].map(p =>
-    gh(`/repos/${REPO}/commits?sha=${BRANCH}&per_page=100&page=${p}`)
-  ));
-  return pages.flat().filter(Boolean);
+  // Two pages of 100 commits per branch → up to 200 commits per branch.
+  // Most branches share most of their history so the unique set easily
+  // covers the trailing 52 weeks once deduplicated.
+  const pages = await Promise.all(
+    branches.flatMap(b => [
+      gh(`/repos/${REPO}/commits?sha=${encodeURIComponent(b.name)}&per_page=100&page=1`),
+      gh(`/repos/${REPO}/commits?sha=${encodeURIComponent(b.name)}&per_page=100&page=2`)
+    ])
+  );
+
+  const seen = new Set();
+  const unique = [];
+  for (const page of pages) {
+    if (!page) continue;
+    for (const c of page) {
+      if (c.sha && !seen.has(c.sha)) {
+        seen.add(c.sha);
+        unique.push(c);
+      }
+    }
+  }
+  unique.sort((a, b) =>
+    new Date(b.commit?.author?.date || 0) - new Date(a.commit?.author?.date || 0)
+  );
+  return unique;
 }
 
 function bucketWeekly(commits) {
@@ -82,8 +99,7 @@ function bucketWeekly(commits) {
 const [
   repo,
   languages,
-  branchCommits,
-  branchTotal,
+  combinedCommits,
   contributors,
   prs,
   issues,
@@ -91,16 +107,15 @@ const [
 ] = await Promise.all([
   gh(`/repos/${REPO}`),
   gh(`/repos/${REPO}/languages`),
-  branchCommitHistory(),
-  branchCommitTotal(),
+  allBranchCommits(),
   gh(`/repos/${REPO}/contributors?per_page=100&anon=1`),
   gh(`/repos/${REPO}/pulls?state=open&per_page=10&sort=updated`),
   gh(`/repos/${REPO}/issues?state=open&per_page=10&sort=updated`),
   gh(`/repos/${REPO}/releases?per_page=5`)
 ]);
 
-const commits = (branchCommits || []).slice(0, 15);
-const commitActivity = bucketWeekly(branchCommits || []);
+const commits = combinedCommits.slice(0, 15);
+const commitActivity = bucketWeekly(combinedCommits);
 
 // Download each contributor's avatar to assets/avatars/<login>.png so we can
 // serve them from our own origin (under Cloudflare cache). Stale files for
@@ -155,12 +170,11 @@ try {
 // Keeps data.json small (typically <30 KB) so the page loads instantly.
 const slim = {
   fetchedAt: new Date().toISOString(),
-  branch: BRANCH,
+  scope: "all-branches",
   repo: repo && {
     stargazers_count: repo.stargazers_count,
     forks_count:      repo.forks_count,
-    open_issues_count: repo.open_issues_count,
-    branch_total_commits: branchTotal
+    open_issues_count: repo.open_issues_count
   },
   languages,
   commits: (commits || []).map(c => ({
@@ -199,4 +213,4 @@ const slim = {
 };
 
 await writeFile(OUT, JSON.stringify(slim, null, 2) + "\n");
-console.log(`Wrote ${OUT} — tracking ${BRANCH}: ${slim.commits.length} recent of ${branchTotal ?? "?"} branch commits, ${slim.contributors.length} contributors, ${slim.prs.length} PRs, ${slim.issues.length} issues, ${slim.releases.length} releases.`);
+console.log(`Wrote ${OUT} — all branches: ${combinedCommits.length} unique commits sampled, ${slim.commits.length} most recent listed, ${slim.contributors.length} contributors, ${slim.prs.length} PRs, ${slim.issues.length} issues, ${slim.releases.length} releases.`);

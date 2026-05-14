@@ -47,7 +47,6 @@ const MILESTONES = [
 const MAINNET_TARGET = new Date("2026-12-31T00:00:00Z");
 const STATUS_LABEL   = { done: "Completed", active: "In progress", pending: "Pending" };
 const REPO_SLUG      = "anastasia-Labs/midgard";
-const BRANCH         = "tx-validation";
 
 /* ---------- helpers ---------- */
 const $ = (id) => document.getElementById(id);
@@ -140,10 +139,9 @@ function renderMetrics(d) {
   $("m-forks").textContent       = fmt(r.forks_count ?? 0);
   $("m-open-issues").textContent = fmt(r.open_issues_count ?? 0);
   $("m-contributors").textContent = fmt(d.contributors?.length ?? 0);
-  // Prefer the branch-scoped total when present; fall back to repo-wide
-  // sum from contributors (older data.json shape).
-  const totalCommits = r.branch_total_commits
-    ?? (d.contributors || []).reduce((a,c) => a + (c.contributions||0), 0);
+  // Total commits across every branch = sum of contributions from the
+  // repo-wide contributors endpoint (GitHub already aggregates this).
+  const totalCommits = (d.contributors || []).reduce((a,c) => a + (c.contributions||0), 0);
   $("m-commits").textContent = fmt(totalCommits);
   $("m-open-prs").textContent = (d.prs?.length ?? 0) >= 10 ? `${d.prs.length}+` : fmt(d.prs?.length ?? 0);
 }
