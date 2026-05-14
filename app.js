@@ -61,11 +61,12 @@ const relTime = (iso) => {
    Keeps us well under the 60-req/hour unauthenticated rate limit and
    makes reloads feel instant. Returns null on rate-limit so callers
    can render a friendly placeholder. */
+const CACHE_VERSION = "v2";
 const CACHE_TTL_MS = 10 * 60 * 1000;
 let rateLimited = false;
 
 async function gh(path) {
-  const key = `gh:${path}`;
+  const key = `gh:${CACHE_VERSION}:${path}`;
   try {
     const raw = localStorage.getItem(key);
     if (raw) {
