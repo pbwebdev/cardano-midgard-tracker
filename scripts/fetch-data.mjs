@@ -7,11 +7,13 @@
 //
 // Requires Node 20+ (built-in fetch). No npm deps.
 
-import { writeFile } from "node:fs/promises";
+import { writeFile, mkdir, readdir, unlink } from "node:fs/promises";
+import { join } from "node:path";
 
-const REPO  = "anastasia-Labs/midgard";
-const TOKEN = process.env.GITHUB_TOKEN;
-const OUT   = "data.json";
+const REPO        = "anastasia-Labs/midgard";
+const TOKEN       = process.env.GITHUB_TOKEN;
+const OUT         = "data.json";
+const AVATAR_DIR  = "assets/avatars";
 
 const headers = {
   Accept: "application/vnd.github+json",
@@ -56,6 +58,45 @@ const [
   gh(`/repos/${REPO}/stats/commit_activity`, { allow202: true })
 ]);
 
+// Download each contributor's avatar to assets/avatars/<login>.png so we can
+// serve them from our own origin (under Cloudflare cache). Stale files for
+// contributors who no longer appear are removed each run.
+async function downloadAvatar(url, login) {
+  try {
+    const u = new URL(url);
+    u.searchParams.set("s", "36");
+    const r = await fetch(u.toString());
+    if (!r.ok) { console.error(`avatar ${login}: HTTP ${r.status}`); return null; }
+    const buf = Buffer.from(await r.arrayBuffer());
+    await writeFile(join(AVATAR_DIR, `${login}.png`), buf);
+    return `${AVATAR_DIR}/${login}.png`;
+  } catch (e) {
+    console.error(`avatar ${login}: ${e.message}`);
+    return null;
+  }
+}
+
+await mkdir(AVATAR_DIR, { recursive: true });
+const kept = new Set();
+const enrichedContributors = await Promise.all(
+  (contributors || []).map(async (c) => {
+    if (!c.login || !c.avatar_url) return c;
+    const localPath = await downloadAvatar(c.avatar_url, c.login);
+    if (localPath) { kept.add(`${c.login}.png`); c.local_avatar = localPath; }
+    return c;
+  })
+);
+
+// Cleanup avatars belonging to contributors who left the project.
+try {
+  for (const f of await readdir(AVATAR_DIR)) {
+    if (f.endsWith(".png") && !kept.has(f)) {
+      await unlink(join(AVATAR_DIR, f));
+      console.log(`removed stale avatar ${f}`);
+    }
+  }
+} catch (e) { /* dir might not exist on first run */ }
+
 // Slim each response down to only the fields the page actually renders.
 // Keeps data.json small (typically <30 KB) so the page loads instantly.
 const slim = {
@@ -73,10 +114,10 @@ const slim = {
     authorName: c.commit.author?.name || "",
     authorDate: c.commit.author?.date || ""
   })),
-  contributors: (contributors || []).map(c => ({
-    login:        c.login,
-    html_url:     c.html_url,
-    avatar_url:   c.avatar_url,
+  contributors: enrichedContributors.map(c => ({
+    login:         c.login,
+    html_url:      c.html_url,
+    avatar_url:    c.local_avatar || c.avatar_url,
     contributions: c.contributions
   })),
   prs: (prs || []).map(p => ({
