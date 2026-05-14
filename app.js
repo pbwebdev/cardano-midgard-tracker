@@ -225,10 +225,14 @@ function renderReleases(releases) {
   if (window.matchMedia("(pointer: coarse)").matches) return;
   const img = document.querySelector(".hero-image");
   if (!img) return;
-  const MAX_SHIFT = 28;     // px, in each axis
+  const MAX_SHIFT = 28;
+  // Cache viewport dimensions. Reading window.innerWidth/innerHeight inside a
+  // mousemove handler — after the previous frame wrote a transform — forces a
+  // synchronous layout flush on every mouse event (~150ms accumulated per PSI).
+  let vw = window.innerWidth, vh = window.innerHeight;
+  window.addEventListener("resize", () => { vw = window.innerWidth; vh = window.innerHeight; }, { passive: true });
   let tx = 0, ty = 0, targetX = 0, targetY = 0, raf = 0;
   function loop() {
-    // Lerp toward target for buttery follow even between mouse events.
     tx += (targetX - tx) * 0.08;
     ty += (targetY - ty) * 0.08;
     img.style.transform = `translate3d(${tx.toFixed(2)}px, ${ty.toFixed(2)}px, 0) scale(1.08)`;
@@ -237,9 +241,9 @@ function renderReleases(releases) {
     } else { raf = 0; }
   }
   window.addEventListener("mousemove", (e) => {
-    const nx = (e.clientX / window.innerWidth  - 0.5) * 2;  // -1..1
-    const ny = (e.clientY / window.innerHeight - 0.5) * 2;
-    targetX = -nx * MAX_SHIFT;   // opposite direction
+    const nx = (e.clientX / vw - 0.5) * 2;
+    const ny = (e.clientY / vh - 0.5) * 2;
+    targetX = -nx * MAX_SHIFT;
     targetY = -ny * MAX_SHIFT;
     if (!raf) raf = requestAnimationFrame(loop);
   }, { passive: true });
