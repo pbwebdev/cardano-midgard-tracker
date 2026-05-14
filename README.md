@@ -1,5 +1,7 @@
 # Midgard Development Tracker
 
+**Live site:** <https://midgard-tracker.learncardano.io/>
+
 A one-page, Leios-inspired public tracker for [anastasia-Labs/midgard](https://github.com/anastasia-Labs/midgard) — Cardano's first permissionless optimistic rollup L2.
 
 The site is **static HTML/CSS/JS**. There is no build step. All live data (commits, issues, PRs, contributors, stars, language breakdown) is fetched from the public GitHub REST API directly in the visitor's browser — so the site is always current without server infrastructure.
