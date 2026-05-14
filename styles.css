@@ -469,9 +469,18 @@ h1, h2, h3 { font-weight: 600; letter-spacing: -0.01em; }
   margin-bottom: 6px;
   font-size: 14px;
   display: flex; gap: 12px; align-items: baseline;
+  flex-wrap: wrap;
+  row-gap: 4px;
 }
 .issue-num { font-family: var(--mono); color: var(--muted); font-size: 12px; flex-shrink: 0; }
-.issue-title { color: var(--text); flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.issue-title {
+  color: var(--text);
+  flex: 1 1 0;
+  min-width: 0;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  line-height: 1.4;
+}
 
 /* Videos */
 .video-grid {
@@ -586,7 +595,5 @@ h1, h2, h3 { font-weight: 600; letter-spacing: -0.01em; }
   .commit-list li { grid-template-columns: 60px 1fr; }
   .commit-list .commit-meta { grid-column: 2; }
   .video-grid { grid-auto-columns: 85%; }
-  /* Stack issue rows so long titles can wrap and meta drops below */
-  .issue-list li { flex-wrap: wrap; row-gap: 4px; }
-  .issue-title { flex: 1 1 100%; white-space: normal; }
+  .issue-title { flex-basis: 100%; }
 }
