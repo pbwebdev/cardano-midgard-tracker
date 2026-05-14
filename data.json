@@ -1,9 +1,11 @@
 {
-  "fetchedAt": "2026-05-14T04:04:37.697Z",
+  "fetchedAt": "2026-05-14T05:29:22.832Z",
+  "branch": "tx-validation",
   "repo": {
     "stargazers_count": 23,
     "forks_count": 9,
-    "open_issues_count": 93
+    "open_issues_count": 93,
+    "branch_total_commits": 1895
   },
   "languages": {
     "TeX": 340459,
@@ -16,109 +18,109 @@
   },
   "commits": [
     {
-      "sha": "15361d94a1180c51d957cc8e4bc53a5231568b71",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/15361d94a1180c51d957cc8e4bc53a5231568b71",
-      "message": "Merge pull request #439 from Anastasia-Labs/fix-scheduler\n\nRevise Scheduler",
-      "authorName": "keyanm",
-      "authorDate": "2026-05-09T08:20:22Z"
+      "sha": "99c86e948830629953b3d073266a4e3d5d695730",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/99c86e948830629953b3d073266a4e3d5d695730",
+      "message": "feat: update codec and harden state queue finalization",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-05-13T02:18:11Z"
     },
     {
-      "sha": "67b1b4d86453cb169a776a7ba82c96624a0083b9",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/67b1b4d86453cb169a776a7ba82c96624a0083b9",
-      "message": "fix(aiken): state queue redeemer look up",
-      "authorName": "keyanmaskoot",
-      "authorDate": "2026-05-06T18:27:48Z"
+      "sha": "367ede9ae356ef4da0f0fb45b7eedc59c64585d6",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/367ede9ae356ef4da0f0fb45b7eedc59c64585d6",
+      "message": "polish: codec improvements",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-05-05T22:27:18Z"
     },
     {
-      "sha": "f6c414a497467128a3dea09c773f61ae4573260c",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/f6c414a497467128a3dea09c773f61ae4573260c",
-      "message": "feat(aiken): allow immediate activation\n\nIf the active operators set is empty, the earliest registered operator\ncan now activate, regardless of its activation time.",
-      "authorName": "keyanmaskoot",
-      "authorDate": "2026-05-06T15:51:07Z"
+      "sha": "b2691d77d7eaff6ec26e80cc3dc08f914a2d6f62",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/b2691d77d7eaff6ec26e80cc3dc08f914a2d6f62",
+      "message": "feat: midgard-lucid, native codec and reserve / withdrawal prototype",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-05-05T15:29:58Z"
     },
     {
-      "sha": "8bedfc294bca1ad0b8fae080b4fce762529a9aca",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/8bedfc294bca1ad0b8fae080b4fce762529a9aca",
-      "message": "docs: clarify role of shift interval",
-      "authorName": "keyanmaskoot",
-      "authorDate": "2026-05-05T13:51:56Z"
+      "sha": "a1a05d3ed348be4964f2293509b44bb99fdde545",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/a1a05d3ed348be4964f2293509b44bb99fdde545",
+      "message": "feat: hardening and stability",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-04-27T14:58:13Z"
     },
     {
-      "sha": "3fd30a0987597a2c0d7d1ef0395ad698ede05724",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/3fd30a0987597a2c0d7d1ef0395ad698ede05724",
-      "message": "Merge branch 'staging' into fix-scheduler",
-      "authorName": "keyanmaskoot",
-      "authorDate": "2026-05-04T08:01:37Z"
+      "sha": "fd75522762fcff85c60074f96ac8579ad6b0f85c",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/fd75522762fcff85c60074f96ac8579ad6b0f85c",
+      "message": "feat: hardening and stability",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-04-27T14:57:32Z"
     },
     {
-      "sha": "ad82b44ecef6fdf225d6ad4b3ed6a5bf733f7c7d",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ad82b44ecef6fdf225d6ad4b3ed6a5bf733f7c7d",
-      "message": "Merge pull request #443 from Anastasia-Labs/use-aiken-env\n\nMove Constants & Parameters to Aiken's `env`",
-      "authorName": "keyanm",
-      "authorDate": "2026-05-03T18:34:34Z"
+      "sha": "1f1c8588def5684aa1b1f9a4b0d47a4ca02f7356",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/1f1c8588def5684aa1b1f9a4b0d47a4ca02f7356",
+      "message": "fix: push missing SDK changes",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-04-23T18:54:58Z"
     },
     {
-      "sha": "16ddcbe43bb5a55e5fd742083739b64c44492f51",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/16ddcbe43bb5a55e5fd742083739b64c44492f51",
-      "message": "feat: add aiken fmt to prefix generator script",
-      "authorName": "keyanmaskoot",
-      "authorDate": "2026-05-03T16:40:20Z"
+      "sha": "69294a431bc7123cbc92bdae9cb54ac1546b0611",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/69294a431bc7123cbc92bdae9cb54ac1546b0611",
+      "message": "feat: updated contracts, fix kupmios, fix node instability",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-04-23T02:18:00Z"
     },
     {
-      "sha": "1ddab7448736bd25c299ccc9d1f875fa9f28e0dd",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/1ddab7448736bd25c299ccc9d1f875fa9f28e0dd",
-      "message": "feat: add script for generating witness prefix\n\nMoved the witness script prefix from its library module to `env`\nmodules, and added a script that builds Aiken blueprint for both\nenvironments (`default` and `testnet`), extracts the final prefixes, and\ninjects them into their respective `.ak` files.\n\nAlso added a diff check to the CI for the `main` branch.",
-      "authorName": "keyanmaskoot",
-      "authorDate": "2026-05-03T16:24:29Z"
+      "sha": "d65e7c5774cd80d9e569805ca083eb45c1a24bc9",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d65e7c5774cd80d9e569805ca083eb45c1a24bc9",
+      "message": "feat: wire in contract updates",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-04-22T15:27:22Z"
     },
     {
-      "sha": "1143021e1f725db5ca95596b9c7f5ada52119110",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/1143021e1f725db5ca95596b9c7f5ada52119110",
-      "message": "refactor(aiken): move constants to env",
-      "authorName": "keyanmaskoot",
-      "authorDate": "2026-05-03T13:44:34Z"
+      "sha": "ff3924054ba30a5f071e76ca4e9801b56b20a9a9",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ff3924054ba30a5f071e76ca4e9801b56b20a9a9",
+      "message": "feat: deposit flow end-to-end",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-04-14T05:23:36Z"
     },
     {
-      "sha": "9ce2b7be0c42169f8e22fe305992c4a066e5fb05",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/9ce2b7be0c42169f8e22fe305992c4a066e5fb05",
-      "message": "fix(aiken): remove re-registration path\n\nSince removal of bad state queue blocks required non-membership proof\nfor operators that had already been slashed, carrying bond unlock times\nin regsitered nodes was not practical (registered set is ordered by\nactivation times rather than public key hashes).\n\nThis path also didn't seem very necessary compared to the level\ncomplexity it had introduced.\n\nThe downside of this removal is that operators retired due to inactivity\ncaused by technical issues rather that negligence will have to wait\nlonger to get back into the queue.",
-      "authorName": "keyanmaskoot",
-      "authorDate": "2026-05-01T21:35:47Z"
+      "sha": "f579ff4764a655c85d0d3bd152b84a649db63408",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/f579ff4764a655c85d0d3bd152b84a649db63408",
+      "message": "feat: finish wiring offchain into midgard-node, add more extensive documentation, finish up end-to-end deposit support",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-04-08T02:20:28Z"
     },
     {
-      "sha": "253d51f72d694f4d83e0d5eb85e305fa462a9c89",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/253d51f72d694f4d83e0d5eb85e305fa462a9c89",
-      "message": "feat(aiken): prepare lib modules for fixing slash\n\nState queue and settlement contracts only considered slashing of active\nor retired operators. However, now that registered operators can also be\nslashed for bad state / resolution claim, they need to allow for that as\nwell.",
-      "authorName": "keyanmaskoot",
-      "authorDate": "2026-05-01T16:40:16Z"
+      "sha": "e479e33f280afdb255b7917f25c3beea8f176f07",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/e479e33f280afdb255b7917f25c3beea8f176f07",
+      "message": "feat: end-to-end deposits working",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-04-04T01:48:41Z"
     },
     {
-      "sha": "d54031e4d6bb794d99600629b2011605009e6695",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d54031e4d6bb794d99600629b2011605009e6695",
-      "message": "fix(docs): align with aiken code",
-      "authorName": "keyanmaskoot",
-      "authorDate": "2026-05-01T16:36:19Z"
+      "sha": "cb60fb419f687fcda05e10d7cb427407ce3a7568",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/cb60fb419f687fcda05e10d7cb427407ce3a7568",
+      "message": "feat: fix contracts for wiring",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-04-02T14:18:06Z"
     },
     {
-      "sha": "3a43af8bc0c2614953cd046d85c6443b302fba67",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/3a43af8bc0c2614953cd046d85c6443b302fba67",
-      "message": "fix(docs): syntax and incorrect restraint in sched",
-      "authorName": "keyanmaskoot",
-      "authorDate": "2026-05-01T15:11:49Z"
+      "sha": "25b216052d18cb6ccebb1f96ebf5f33c5d783933",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/25b216052d18cb6ccebb1f96ebf5f33c5d783933",
+      "message": "feat: wiring the rest of the contracts",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-04-02T14:10:38Z"
     },
     {
-      "sha": "55fe98f1ec3150f09a3b87b47a9488d8bbaba3f0",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/55fe98f1ec3150f09a3b87b47a9488d8bbaba3f0",
-      "message": "fix(aiken): prevent shortening of bond unlock time\n\nSince new bond unlock times are computed based on the validity range's\nupper bound, it was possible for an operator to pull back their bond\nunlock time by first committing a fraud with a transaction that had\nvalidity range with an upper bound far in the future, and follow it with\nan honest commitment that's closest possible to present.\n\nThis commit ensures bond unlock times are monotonically increasing.",
-      "authorName": "keyanmaskoot",
-      "authorDate": "2026-04-26T22:49:42Z"
+      "sha": "5cfe43019ea208abdb537da68bcccfc0a6453dc6",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/5cfe43019ea208abdb537da68bcccfc0a6453dc6",
+      "message": "chore: remove tracked temp artifacts",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-03-17T15:13:47Z"
     },
     {
-      "sha": "d29eafd68c0acf571713ae90ffe904fba6519705",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d29eafd68c0acf571713ae90ffe904fba6519705",
-      "message": "fix(aiken): preserve anchor's ada on op. reg.\n\nWith removal of the requirement for new registered operators getting\nprepended to the list, it now becomes crucial to ensure the anchor\nelement's ADA is preserved, since it now is not necessarily the root\nelement.",
-      "authorName": "keyanmaskoot",
-      "authorDate": "2026-04-26T17:46:36Z"
+      "sha": "fd7b47ddf5b508cfd613bdccbd3de51b964073b7",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/fd7b47ddf5b508cfd613bdccbd3de51b964073b7",
+      "message": "feat: tx validation",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-03-17T15:08:31Z"
     }
   ],
   "contributors": [
@@ -332,5 +334,214 @@
     }
   ],
   "releases": [],
-  "commitActivity": []
+  "commitActivity": [
+    {
+      "week": 1747526400,
+      "total": 0
+    },
+    {
+      "week": 1748131200,
+      "total": 0
+    },
+    {
+      "week": 1748736000,
+      "total": 0
+    },
+    {
+      "week": 1749340800,
+      "total": 0
+    },
+    {
+      "week": 1749945600,
+      "total": 0
+    },
+    {
+      "week": 1750550400,
+      "total": 0
+    },
+    {
+      "week": 1751155200,
+      "total": 0
+    },
+    {
+      "week": 1751760000,
+      "total": 0
+    },
+    {
+      "week": 1752364800,
+      "total": 0
+    },
+    {
+      "week": 1752969600,
+      "total": 0
+    },
+    {
+      "week": 1753574400,
+      "total": 0
+    },
+    {
+      "week": 1754179200,
+      "total": 0
+    },
+    {
+      "week": 1754784000,
+      "total": 0
+    },
+    {
+      "week": 1755388800,
+      "total": 0
+    },
+    {
+      "week": 1755993600,
+      "total": 0
+    },
+    {
+      "week": 1756598400,
+      "total": 0
+    },
+    {
+      "week": 1757203200,
+      "total": 0
+    },
+    {
+      "week": 1757808000,
+      "total": 17
+    },
+    {
+      "week": 1758412800,
+      "total": 45
+    },
+    {
+      "week": 1759017600,
+      "total": 44
+    },
+    {
+      "week": 1759622400,
+      "total": 36
+    },
+    {
+      "week": 1760227200,
+      "total": 33
+    },
+    {
+      "week": 1760832000,
+      "total": 45
+    },
+    {
+      "week": 1761436800,
+      "total": 93
+    },
+    {
+      "week": 1762041600,
+      "total": 31
+    },
+    {
+      "week": 1762646400,
+      "total": 0
+    },
+    {
+      "week": 1763251200,
+      "total": 11
+    },
+    {
+      "week": 1763856000,
+      "total": 8
+    },
+    {
+      "week": 1764460800,
+      "total": 8
+    },
+    {
+      "week": 1765065600,
+      "total": 6
+    },
+    {
+      "week": 1765670400,
+      "total": 23
+    },
+    {
+      "week": 1766275200,
+      "total": 12
+    },
+    {
+      "week": 1766880000,
+      "total": 0
+    },
+    {
+      "week": 1767484800,
+      "total": 24
+    },
+    {
+      "week": 1768089600,
+      "total": 9
+    },
+    {
+      "week": 1768694400,
+      "total": 7
+    },
+    {
+      "week": 1769299200,
+      "total": 11
+    },
+    {
+      "week": 1769904000,
+      "total": 13
+    },
+    {
+      "week": 1770508800,
+      "total": 1
+    },
+    {
+      "week": 1771113600,
+      "total": 0
+    },
+    {
+      "week": 1771718400,
+      "total": 8
+    },
+    {
+      "week": 1772323200,
+      "total": 0
+    },
+    {
+      "week": 1772928000,
+      "total": 0
+    },
+    {
+      "week": 1773532800,
+      "total": 2
+    },
+    {
+      "week": 1774137600,
+      "total": 0
+    },
+    {
+      "week": 1774742400,
+      "total": 3
+    },
+    {
+      "week": 1775347200,
+      "total": 1
+    },
+    {
+      "week": 1775952000,
+      "total": 1
+    },
+    {
+      "week": 1776556800,
+      "total": 3
+    },
+    {
+      "week": 1777161600,
+      "total": 2
+    },
+    {
+      "week": 1777766400,
+      "total": 2
+    },
+    {
+      "week": 1778371200,
+      "total": 1
+    }
+  ]
 }
