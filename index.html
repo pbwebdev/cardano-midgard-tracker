@@ -122,14 +122,40 @@ https://meshwithus.com.au
 
   <link rel="stylesheet" href="styles.css" />
 
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-38SC0LMJ06"></script>
+  <!-- Google tag (gtag.js) with Consent Mode v2 -->
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
+
+    // Consent Mode v2 — default to denied for all storage until the user opts in.
+    // This is the GDPR-safe default; gtag will fire cookieless pings only.
+    gtag('consent', 'default', {
+      ad_storage:            'denied',
+      ad_user_data:          'denied',
+      ad_personalization:    'denied',
+      analytics_storage:     'denied',
+      functionality_storage: 'granted',
+      security_storage:      'granted',
+      wait_for_update:       500
+    });
+
+    // Restore any previous choice from localStorage before GA loads.
+    try {
+      var saved = JSON.parse(localStorage.getItem('cookie-consent-v1') || 'null');
+      if (saved && saved.choice === 'accept') {
+        gtag('consent', 'update', {
+          ad_storage:         'granted',
+          ad_user_data:       'granted',
+          ad_personalization: 'granted',
+          analytics_storage:  'granted'
+        });
+      }
+    } catch (e) {}
+
     gtag('js', new Date());
-    gtag('config', 'G-38SC0LMJ06');
+    gtag('config', 'G-38SC0LMJ06', { anonymize_ip: true });
   </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-38SC0LMJ06"></script>
 </head>
 <body>
 
@@ -472,7 +498,62 @@ https://meshwithus.com.au
     · Built by
     <a href="https://meshwithus.com.au" target="_blank" rel="noopener">Mesh With Us</a>
   </p>
+  <p class="muted">
+    <a href="#" id="cookieSettings">Cookie settings</a>
+  </p>
 </footer>
+
+<div id="cookieBanner" class="cookie-banner" role="region" aria-label="Cookie consent" hidden>
+  <div class="cookie-banner-inner">
+    <p>
+      We use cookies for anonymous analytics (Google Analytics) to understand how this tracker is used.
+      No personal data is sold. You can change your choice at any time via the
+      <a href="#" id="cookieReopen">cookie settings</a> link in the footer.
+    </p>
+    <div class="cookie-actions">
+      <button type="button" class="cookie-btn cookie-btn--ghost" data-consent="reject">Reject all</button>
+      <button type="button" class="cookie-btn cookie-btn--primary" data-consent="accept">Accept all</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var KEY = 'cookie-consent-v1';
+  var banner = document.getElementById('cookieBanner');
+  var reopen = document.getElementById('cookieReopen');
+
+  function applyConsent(choice) {
+    if (typeof gtag !== 'function') return;
+    var v = choice === 'accept' ? 'granted' : 'denied';
+    gtag('consent', 'update', {
+      ad_storage:         v,
+      ad_user_data:       v,
+      ad_personalization: v,
+      analytics_storage:  v
+    });
+  }
+  function save(choice) {
+    try { localStorage.setItem(KEY, JSON.stringify({ choice: choice, ts: Date.now() })); } catch (e) {}
+    applyConsent(choice);
+    banner.hidden = true;
+  }
+  function show() { banner.hidden = false; }
+
+  // Show banner if no saved choice exists.
+  var saved = null;
+  try { saved = JSON.parse(localStorage.getItem(KEY) || 'null'); } catch (e) {}
+  if (!saved) show();
+
+  banner.addEventListener('click', function (e) {
+    var btn = e.target.closest('[data-consent]');
+    if (btn) save(btn.dataset.consent);
+  });
+  if (reopen) reopen.addEventListener('click', function (e) { e.preventDefault(); show(); });
+  var settings = document.getElementById('cookieSettings');
+  if (settings) settings.addEventListener('click', function (e) { e.preventDefault(); show(); });
+})();
+</script>
 
 <script src="app.js"></script>
 </body>
