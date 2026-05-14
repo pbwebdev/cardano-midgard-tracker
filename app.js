@@ -192,6 +192,33 @@ function renderReleases(releases) {
   `).join("");
 }
 
+/* ---------- hero parallax ---------- */
+(function initHeroParallax() {
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  // Pointer-coarse devices (touch) get no parallax — no mouse, no hover.
+  if (window.matchMedia("(pointer: coarse)").matches) return;
+  const img = document.querySelector(".hero-image");
+  if (!img) return;
+  const MAX_SHIFT = 28;     // px, in each axis
+  let tx = 0, ty = 0, targetX = 0, targetY = 0, raf = 0;
+  function loop() {
+    // Lerp toward target for buttery follow even between mouse events.
+    tx += (targetX - tx) * 0.08;
+    ty += (targetY - ty) * 0.08;
+    img.style.transform = `translate3d(${tx.toFixed(2)}px, ${ty.toFixed(2)}px, 0) scale(1.08)`;
+    if (Math.abs(targetX - tx) > 0.05 || Math.abs(targetY - ty) > 0.05) {
+      raf = requestAnimationFrame(loop);
+    } else { raf = 0; }
+  }
+  window.addEventListener("mousemove", (e) => {
+    const nx = (e.clientX / window.innerWidth  - 0.5) * 2;  // -1..1
+    const ny = (e.clientY / window.innerHeight - 0.5) * 2;
+    targetX = -nx * MAX_SHIFT;   // opposite direction
+    targetY = -ny * MAX_SHIFT;
+    if (!raf) raf = requestAnimationFrame(loop);
+  }, { passive: true });
+})();
+
 /* ---------- boot ---------- */
 (async function init() {
   renderMilestones();
