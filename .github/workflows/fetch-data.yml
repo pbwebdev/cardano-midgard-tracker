@@ -1,0 +1,48 @@
+name: Refresh data.json
+
+# Runs hourly. Fetches the upstream Midgard repo data from the GitHub API
+# (authenticated, 1000 req/hour limit) and commits any changes to data.json.
+# The commit triggers deploy.yml, which publishes a fresh Pages snapshot.
+#
+# Net effect: every visitor reads from a static data.json instead of hitting
+# the GitHub API from their browser, so the per-visitor 60/hr unauth limit
+# can never be tripped.
+
+on:
+  schedule:
+    - cron: "0 * * * *"   # top of every hour
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-data
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Fetch upstream data
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node scripts/fetch-data.mjs
+
+      - name: Commit changes (if any)
+        run: |
+          if [ -n "$(git status --porcelain data.json)" ]; then
+            git config user.name  "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add data.json
+            git commit -m "chore: refresh data.json ($(date -u +%FT%TZ))"
+            git push
+          else
+            echo "No changes to data.json."
+          fi

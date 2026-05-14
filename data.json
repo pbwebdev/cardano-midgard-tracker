@@ -1,0 +1,336 @@
+{
+  "fetchedAt": "2026-05-14T02:46:19.474Z",
+  "repo": {
+    "stargazers_count": 23,
+    "forks_count": 9,
+    "open_issues_count": 93
+  },
+  "languages": {
+    "TeX": 340459,
+    "Aiken": 281804,
+    "Haskell": 211981,
+    "Nix": 11973,
+    "Shell": 5586,
+    "Makefile": 1517,
+    "Perl": 37
+  },
+  "commits": [
+    {
+      "sha": "15361d94a1180c51d957cc8e4bc53a5231568b71",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/15361d94a1180c51d957cc8e4bc53a5231568b71",
+      "message": "Merge pull request #439 from Anastasia-Labs/fix-scheduler\n\nRevise Scheduler",
+      "authorName": "keyanm",
+      "authorDate": "2026-05-09T08:20:22Z"
+    },
+    {
+      "sha": "67b1b4d86453cb169a776a7ba82c96624a0083b9",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/67b1b4d86453cb169a776a7ba82c96624a0083b9",
+      "message": "fix(aiken): state queue redeemer look up",
+      "authorName": "keyanmaskoot",
+      "authorDate": "2026-05-06T18:27:48Z"
+    },
+    {
+      "sha": "f6c414a497467128a3dea09c773f61ae4573260c",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/f6c414a497467128a3dea09c773f61ae4573260c",
+      "message": "feat(aiken): allow immediate activation\n\nIf the active operators set is empty, the earliest registered operator\ncan now activate, regardless of its activation time.",
+      "authorName": "keyanmaskoot",
+      "authorDate": "2026-05-06T15:51:07Z"
+    },
+    {
+      "sha": "8bedfc294bca1ad0b8fae080b4fce762529a9aca",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/8bedfc294bca1ad0b8fae080b4fce762529a9aca",
+      "message": "docs: clarify role of shift interval",
+      "authorName": "keyanmaskoot",
+      "authorDate": "2026-05-05T13:51:56Z"
+    },
+    {
+      "sha": "3fd30a0987597a2c0d7d1ef0395ad698ede05724",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/3fd30a0987597a2c0d7d1ef0395ad698ede05724",
+      "message": "Merge branch 'staging' into fix-scheduler",
+      "authorName": "keyanmaskoot",
+      "authorDate": "2026-05-04T08:01:37Z"
+    },
+    {
+      "sha": "ad82b44ecef6fdf225d6ad4b3ed6a5bf733f7c7d",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ad82b44ecef6fdf225d6ad4b3ed6a5bf733f7c7d",
+      "message": "Merge pull request #443 from Anastasia-Labs/use-aiken-env\n\nMove Constants & Parameters to Aiken's `env`",
+      "authorName": "keyanm",
+      "authorDate": "2026-05-03T18:34:34Z"
+    },
+    {
+      "sha": "16ddcbe43bb5a55e5fd742083739b64c44492f51",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/16ddcbe43bb5a55e5fd742083739b64c44492f51",
+      "message": "feat: add aiken fmt to prefix generator script",
+      "authorName": "keyanmaskoot",
+      "authorDate": "2026-05-03T16:40:20Z"
+    },
+    {
+      "sha": "1ddab7448736bd25c299ccc9d1f875fa9f28e0dd",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/1ddab7448736bd25c299ccc9d1f875fa9f28e0dd",
+      "message": "feat: add script for generating witness prefix\n\nMoved the witness script prefix from its library module to `env`\nmodules, and added a script that builds Aiken blueprint for both\nenvironments (`default` and `testnet`), extracts the final prefixes, and\ninjects them into their respective `.ak` files.\n\nAlso added a diff check to the CI for the `main` branch.",
+      "authorName": "keyanmaskoot",
+      "authorDate": "2026-05-03T16:24:29Z"
+    },
+    {
+      "sha": "1143021e1f725db5ca95596b9c7f5ada52119110",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/1143021e1f725db5ca95596b9c7f5ada52119110",
+      "message": "refactor(aiken): move constants to env",
+      "authorName": "keyanmaskoot",
+      "authorDate": "2026-05-03T13:44:34Z"
+    },
+    {
+      "sha": "9ce2b7be0c42169f8e22fe305992c4a066e5fb05",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/9ce2b7be0c42169f8e22fe305992c4a066e5fb05",
+      "message": "fix(aiken): remove re-registration path\n\nSince removal of bad state queue blocks required non-membership proof\nfor operators that had already been slashed, carrying bond unlock times\nin regsitered nodes was not practical (registered set is ordered by\nactivation times rather than public key hashes).\n\nThis path also didn't seem very necessary compared to the level\ncomplexity it had introduced.\n\nThe downside of this removal is that operators retired due to inactivity\ncaused by technical issues rather that negligence will have to wait\nlonger to get back into the queue.",
+      "authorName": "keyanmaskoot",
+      "authorDate": "2026-05-01T21:35:47Z"
+    },
+    {
+      "sha": "253d51f72d694f4d83e0d5eb85e305fa462a9c89",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/253d51f72d694f4d83e0d5eb85e305fa462a9c89",
+      "message": "feat(aiken): prepare lib modules for fixing slash\n\nState queue and settlement contracts only considered slashing of active\nor retired operators. However, now that registered operators can also be\nslashed for bad state / resolution claim, they need to allow for that as\nwell.",
+      "authorName": "keyanmaskoot",
+      "authorDate": "2026-05-01T16:40:16Z"
+    },
+    {
+      "sha": "d54031e4d6bb794d99600629b2011605009e6695",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d54031e4d6bb794d99600629b2011605009e6695",
+      "message": "fix(docs): align with aiken code",
+      "authorName": "keyanmaskoot",
+      "authorDate": "2026-05-01T16:36:19Z"
+    },
+    {
+      "sha": "3a43af8bc0c2614953cd046d85c6443b302fba67",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/3a43af8bc0c2614953cd046d85c6443b302fba67",
+      "message": "fix(docs): syntax and incorrect restraint in sched",
+      "authorName": "keyanmaskoot",
+      "authorDate": "2026-05-01T15:11:49Z"
+    },
+    {
+      "sha": "55fe98f1ec3150f09a3b87b47a9488d8bbaba3f0",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/55fe98f1ec3150f09a3b87b47a9488d8bbaba3f0",
+      "message": "fix(aiken): prevent shortening of bond unlock time\n\nSince new bond unlock times are computed based on the validity range's\nupper bound, it was possible for an operator to pull back their bond\nunlock time by first committing a fraud with a transaction that had\nvalidity range with an upper bound far in the future, and follow it with\nan honest commitment that's closest possible to present.\n\nThis commit ensures bond unlock times are monotonically increasing.",
+      "authorName": "keyanmaskoot",
+      "authorDate": "2026-04-26T22:49:42Z"
+    },
+    {
+      "sha": "d29eafd68c0acf571713ae90ffe904fba6519705",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d29eafd68c0acf571713ae90ffe904fba6519705",
+      "message": "fix(aiken): preserve anchor's ada on op. reg.\n\nWith removal of the requirement for new registered operators getting\nprepended to the list, it now becomes crucial to ensure the anchor\nelement's ADA is preserved, since it now is not necessarily the root\nelement.",
+      "authorName": "keyanmaskoot",
+      "authorDate": "2026-04-26T17:46:36Z"
+    }
+  ],
+  "contributors": [
+    {
+      "login": "keyan-m",
+      "html_url": "https://github.com/keyan-m",
+      "avatar_url": "https://avatars.githubusercontent.com/u/86695999?v=4",
+      "contributions": 989
+    },
+    {
+      "login": "Cauterization",
+      "html_url": "https://github.com/Cauterization",
+      "avatar_url": "https://avatars.githubusercontent.com/u/71918928?v=4",
+      "contributions": 308
+    },
+    {
+      "login": "VenInf",
+      "html_url": "https://github.com/VenInf",
+      "avatar_url": "https://avatars.githubusercontent.com/u/54953043?v=4",
+      "contributions": 275
+    },
+    {
+      "login": "GeorgeFlerovsky",
+      "html_url": "https://github.com/GeorgeFlerovsky",
+      "avatar_url": "https://avatars.githubusercontent.com/u/12205799?v=4",
+      "contributions": 195
+    },
+    {
+      "login": "hadelive",
+      "html_url": "https://github.com/hadelive",
+      "avatar_url": "https://avatars.githubusercontent.com/u/127402781?v=4",
+      "contributions": 98
+    },
+    {
+      "login": "matteocoppola",
+      "html_url": "https://github.com/matteocoppola",
+      "avatar_url": "https://avatars.githubusercontent.com/u/46167820?v=4",
+      "contributions": 85
+    },
+    {
+      "login": "0xBora",
+      "html_url": "https://github.com/0xBora",
+      "avatar_url": "https://avatars.githubusercontent.com/u/133051383?v=4",
+      "contributions": 58
+    },
+    {
+      "login": "TotallyNotChase",
+      "html_url": "https://github.com/TotallyNotChase",
+      "avatar_url": "https://avatars.githubusercontent.com/u/44284917?v=4",
+      "contributions": 51
+    },
+    {
+      "login": "HarunJr",
+      "html_url": "https://github.com/HarunJr",
+      "avatar_url": "https://avatars.githubusercontent.com/u/8613326?v=4",
+      "contributions": 31
+    },
+    {
+      "login": "mpetruska",
+      "html_url": "https://github.com/mpetruska",
+      "avatar_url": "https://avatars.githubusercontent.com/u/6648274?v=4",
+      "contributions": 17
+    },
+    {
+      "login": "colll78",
+      "html_url": "https://github.com/colll78",
+      "avatar_url": "https://avatars.githubusercontent.com/u/14356239?v=4",
+      "contributions": 15
+    },
+    {
+      "login": "Drop-Table-Users",
+      "html_url": "https://github.com/Drop-Table-Users",
+      "avatar_url": "https://avatars.githubusercontent.com/u/89545210?v=4",
+      "contributions": 11
+    },
+    {
+      "login": "elRaulito",
+      "html_url": "https://github.com/elRaulito",
+      "avatar_url": "https://avatars.githubusercontent.com/u/42917076?v=4",
+      "contributions": 11
+    },
+    {
+      "login": "SuganyaAK",
+      "html_url": "https://github.com/SuganyaAK",
+      "avatar_url": "https://avatars.githubusercontent.com/u/99989138?v=4",
+      "contributions": 7
+    },
+    {
+      "login": "solidsnakedev",
+      "html_url": "https://github.com/solidsnakedev",
+      "avatar_url": "https://avatars.githubusercontent.com/u/57915702?v=4",
+      "contributions": 6
+    },
+    {
+      "login": "Riley-Kilgore",
+      "html_url": "https://github.com/Riley-Kilgore",
+      "avatar_url": "https://avatars.githubusercontent.com/u/31012930?v=4",
+      "contributions": 3
+    },
+    {
+      "login": "aie0",
+      "html_url": "https://github.com/aie0",
+      "avatar_url": "https://avatars.githubusercontent.com/u/149175774?v=4",
+      "contributions": 3
+    },
+    {
+      "login": "ypytomets",
+      "html_url": "https://github.com/ypytomets",
+      "avatar_url": "https://avatars.githubusercontent.com/u/195169237?v=4",
+      "contributions": 2
+    },
+    {
+      "login": "nau",
+      "html_url": "https://github.com/nau",
+      "avatar_url": "https://avatars.githubusercontent.com/u/138045?v=4",
+      "contributions": 1
+    },
+    {
+      "login": "martinceresa",
+      "html_url": "https://github.com/martinceresa",
+      "avatar_url": "https://avatars.githubusercontent.com/u/14997847?v=4",
+      "contributions": 1
+    },
+    {
+      "login": "deeprnd",
+      "html_url": "https://github.com/deeprnd",
+      "avatar_url": "https://avatars.githubusercontent.com/u/4572520?v=4",
+      "contributions": 1
+    },
+    {
+      "login": "veronicapmi",
+      "html_url": "https://github.com/veronicapmi",
+      "avatar_url": "https://avatars.githubusercontent.com/u/72529710?v=4",
+      "contributions": 1
+    }
+  ],
+  "prs": [
+    {
+      "number": 235,
+      "title": "Uplc export for plutarch functions",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/pull/235",
+      "updated_at": "2025-04-29T11:25:00Z"
+    },
+    {
+      "number": 111,
+      "title": "off-chain-decoding uplc changes",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/pull/111",
+      "updated_at": "2025-06-11T01:51:35Z"
+    },
+    {
+      "number": 229,
+      "title": "MISSING REQ SIGNER Fraud proof",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/pull/229",
+      "updated_at": "2025-07-01T12:34:36Z"
+    },
+    {
+      "number": 291,
+      "title": "Fraud Proof: No ADA Minted",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/pull/291",
+      "updated_at": "2025-07-17T16:33:39Z"
+    },
+    {
+      "number": 290,
+      "title": "FP: Double withdrawal",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/pull/290",
+      "updated_at": "2025-08-26T14:41:20Z"
+    },
+    {
+      "number": 332,
+      "title": "Clarify phase 2 validation rules",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/pull/332",
+      "updated_at": "2025-09-09T13:43:56Z"
+    },
+    {
+      "number": 353,
+      "title": "Hub Oracle Midgard Aiken SDK",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/pull/353",
+      "updated_at": "2025-10-21T12:33:46Z"
+    },
+    {
+      "number": 384,
+      "title": "User events endpoints",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/pull/384",
+      "updated_at": "2025-11-27T11:21:25Z"
+    },
+    {
+      "number": 381,
+      "title": "Fixes for chapter 5 (Ledger Rules and Fraud Proofs)",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/pull/381",
+      "updated_at": "2025-12-01T18:43:41Z"
+    },
+    {
+      "number": 342,
+      "title": "Preliminary Off-Chain for Deposits",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/pull/342",
+      "updated_at": "2026-02-25T14:04:06Z"
+    }
+  ],
+  "issues": [
+    {
+      "number": 446,
+      "title": "Switch Fraud Proof Catalogue to a Linked List",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/446",
+      "updated_at": "2026-05-12T23:46:54Z"
+    },
+    {
+      "number": 442,
+      "title": "Add Aiken Tests",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/442",
+      "updated_at": "2026-04-30T19:02:48Z"
+    }
+  ],
+  "releases": [],
+  "commitActivity": []
+}
