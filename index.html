@@ -383,21 +383,28 @@ h1, h2, h3 { font-weight: 600; letter-spacing: -0.01em; }
     gtag('js', new Date());
     gtag('config', 'G-38SC0LMJ06', { anonymize_ip: true });
 
-    // Defer the GA library itself until the user interacts (or after 8s as
-    // a fallback). Keeps the main thread free during initial paint and
-    // satisfies PageSpeed's "reduce unused/third-party JavaScript" rule.
+    // Defer all third-party telemetry (GA4 + Cloudflare Web Analytics) until
+    // the user actually interacts with the page, or 8s as a fallback. Keeps
+    // the main thread free during initial paint and stops these scripts
+    // forcing layout reflows during the critical render window.
     (function () {
       var loaded = false;
-      function loadGA() {
+      function loadTelemetry() {
         if (loaded) return; loaded = true;
-        var s = document.createElement('script');
-        s.async = true; s.src = 'assets/gtag.js';
-        document.head.appendChild(s);
+
+        var ga = document.createElement('script');
+        ga.async = true; ga.src = 'assets/gtag.js';
+        document.head.appendChild(ga);
+
+        var cf = document.createElement('script');
+        cf.defer = true; cf.src = 'assets/cf-beacon.js';
+        cf.setAttribute('data-cf-beacon', '{"token":"5bf7a5aa75c84e9196fc44b433a92e0b"}');
+        document.body.appendChild(cf);
       }
       ['scroll','mousemove','touchstart','keydown','pointerdown'].forEach(function (ev) {
-        addEventListener(ev, loadGA, { once: true, passive: true });
+        addEventListener(ev, loadTelemetry, { once: true, passive: true });
       });
-      setTimeout(loadGA, 8000);
+      setTimeout(loadTelemetry, 8000);
     })();
   </script>
 </head>
