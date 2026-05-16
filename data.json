@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-05-15T08:55:44.675Z",
+  "fetchedAt": "2026-05-16T08:11:13.743Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 23,
@@ -17,6 +17,41 @@
   },
   "commits": [
     {
+      "sha": "b26e55633836da26a3e0eda10fdde2eeb46c817c",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/b26e55633836da26a3e0eda10fdde2eeb46c817c",
+      "message": "feat: onchain decoding for midgard native tx cbor",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-05-15T15:36:41Z"
+    },
+    {
+      "sha": "53ccf13364dff77470a0fabbc0bf129527fdb369",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/53ccf13364dff77470a0fabbc0bf129527fdb369",
+      "message": "wip",
+      "authorName": "Drop-Table-Users",
+      "authorDate": "2026-05-15T11:34:47Z"
+    },
+    {
+      "sha": "02fe4f2dfc9040f68c23c5a43b213f6bd05778b0",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/02fe4f2dfc9040f68c23c5a43b213f6bd05778b0",
+      "message": "feat(aiken): bring in phil's tx encoding\n\nProper Midgard transaction encoding. This commits moves the new module\nunder `ledger-state` directory, but some re-organization might be\nneeded.",
+      "authorName": "keyanmaskoot",
+      "authorDate": "2026-05-15T11:11:08Z"
+    },
+    {
+      "sha": "a1f3b2115d8cd30bd8c3e9b0595af4f8fb998d3d",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/a1f3b2115d8cd30bd8c3e9b0595af4f8fb998d3d",
+      "message": "wip",
+      "authorName": "Drop-Table-Users",
+      "authorDate": "2026-05-15T10:22:58Z"
+    },
+    {
+      "sha": "1732d8216f22ecfbef38cc2fd44f35ad9e9c3f98",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/1732d8216f22ecfbef38cc2fd44f35ad9e9c3f98",
+      "message": "wip",
+      "authorName": "Drop-Table-Users",
+      "authorDate": "2026-05-15T09:39:54Z"
+    },
+    {
       "sha": "4c9a1d6d5334dd1ea492700de8424786b4bd6cb6",
       "html_url": "https://github.com/Anastasia-Labs/midgard/commit/4c9a1d6d5334dd1ea492700de8424786b4bd6cb6",
       "message": "feat: fault proof cli",
@@ -31,6 +66,48 @@
       "authorDate": "2026-05-14T15:49:38Z"
     },
     {
+      "sha": "f7d24ce1082ba4e189915f4d94462615863b0dcc",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/f7d24ce1082ba4e189915f4d94462615863b0dcc",
+      "message": "wip",
+      "authorName": "Drop-Table-Users",
+      "authorDate": "2026-05-14T13:16:16Z"
+    },
+    {
+      "sha": "d17a06f9a6f936a4b4f867f87055680c837a4f2f",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d17a06f9a6f936a4b4f867f87055680c837a4f2f",
+      "message": "wip",
+      "authorName": "Drop-Table-Users",
+      "authorDate": "2026-05-14T12:55:34Z"
+    },
+    {
+      "sha": "3d45c7bfd414860e6a4910e7a3f39369405a5237",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/3d45c7bfd414860e6a4910e7a3f39369405a5237",
+      "message": "wip",
+      "authorName": "Drop-Table-Users",
+      "authorDate": "2026-05-14T12:35:43Z"
+    },
+    {
+      "sha": "c331dd51c376a59c2745f9d5f249843ec9c5b3cd",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/c331dd51c376a59c2745f9d5f249843ec9c5b3cd",
+      "message": "wip",
+      "authorName": "Drop-Table-Users",
+      "authorDate": "2026-05-14T12:15:35Z"
+    },
+    {
+      "sha": "e68a5d7286f83f5394b3197bc1b9fb4f203fc581",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/e68a5d7286f83f5394b3197bc1b9fb4f203fc581",
+      "message": "wip",
+      "authorName": "Drop-Table-Users",
+      "authorDate": "2026-05-14T11:25:58Z"
+    },
+    {
+      "sha": "541fc4eae33534518121cb8475fbc4264fad955f",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/541fc4eae33534518121cb8475fbc4264fad955f",
+      "message": "wip",
+      "authorName": "Drop-Table-Users",
+      "authorDate": "2026-05-14T11:03:18Z"
+    },
+    {
       "sha": "a9e405a02467fd0936589ee60f40473067ab9fc6",
       "html_url": "https://github.com/Anastasia-Labs/midgard/commit/a9e405a02467fd0936589ee60f40473067ab9fc6",
       "message": "chore(aiken): formatting",
@@ -43,83 +120,6 @@
       "message": "fix(aiken): store compact body in compact tx\n\nSwitching from hash of the compact body to the compact body itself in\nthe compact form of the Midgard transaction datatype.",
       "authorName": "keyanmaskoot",
       "authorDate": "2026-05-13T19:13:06Z"
-    },
-    {
-      "sha": "99c86e948830629953b3d073266a4e3d5d695730",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/99c86e948830629953b3d073266a4e3d5d695730",
-      "message": "feat: update codec and harden state queue finalization",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-05-13T02:18:11Z"
-    },
-    {
-      "sha": "3cd3dbe40c472a919ed0c913f2eecbf87e49c715",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/3cd3dbe40c472a919ed0c913f2eecbf87e49c715",
-      "message": "fix(aiken): cleanup fraud proofs",
-      "authorName": "keyanmaskoot",
-      "authorDate": "2026-05-12T22:53:26Z"
-    },
-    {
-      "sha": "2bc52a546ad5264e8b4adb2145b03bc379d7f563",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/2bc52a546ad5264e8b4adb2145b03bc379d7f563",
-      "message": "refactor(aiken): split double spend's 1st step\n\nThe first step is not implicitly two steps anymore.",
-      "authorName": "keyanmaskoot",
-      "authorDate": "2026-05-12T22:36:46Z"
-    },
-    {
-      "sha": "fe4e71264a17ff00ac1226c0df0bc2c95abf0715",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/fe4e71264a17ff00ac1226c0df0bc2c95abf0715",
-      "message": "refactor(aiken): update `zero-input` fraud proof",
-      "authorName": "keyanmaskoot",
-      "authorDate": "2026-05-12T22:26:30Z"
-    },
-    {
-      "sha": "fd549e1cc48673d033813dd6b8c90ef631d2ceab",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/fd549e1cc48673d033813dd6b8c90ef631d2ceab",
-      "message": "refactor(aiken): update `withdrawn-reference-input`",
-      "authorName": "keyanmaskoot",
-      "authorDate": "2026-05-12T22:15:36Z"
-    },
-    {
-      "sha": "d6d534b7fe84bb5e86ca5f2a80ce317a0d8f9db5",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d6d534b7fe84bb5e86ca5f2a80ce317a0d8f9db5",
-      "message": "refactor(aiken): update no ref. input fraud proof",
-      "authorName": "keyanmaskoot",
-      "authorDate": "2026-05-12T22:03:09Z"
-    },
-    {
-      "sha": "c1f67898b7786b8d10d47fafc2d850c414c71e61",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/c1f67898b7786b8d10d47fafc2d850c414c71e61",
-      "message": "refactor(aiken): update `no-input` fraud proof",
-      "authorName": "keyanmaskoot",
-      "authorDate": "2026-05-12T20:58:57Z"
-    },
-    {
-      "sha": "1b2448c3d32464a05c996a1e49b135814190a46e",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/1b2448c3d32464a05c996a1e49b135814190a46e",
-      "message": "refactor(aiken): update missing signature fp",
-      "authorName": "keyanmaskoot",
-      "authorDate": "2026-05-12T18:32:04Z"
-    },
-    {
-      "sha": "841a57f18c8d45936f3b03b5e4022b4cba76a138",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/841a57f18c8d45936f3b03b5e4022b4cba76a138",
-      "message": "fix(aiken): resolve warning",
-      "authorName": "keyanmaskoot",
-      "authorDate": "2026-05-12T18:14:33Z"
-    },
-    {
-      "sha": "ffb46e614b45074b3557aaa1c36b70607dc6cf90",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ffb46e614b45074b3557aaa1c36b70607dc6cf90",
-      "message": "fix: missing native script\n\nThe fraud proof in the specs is now split in two to mirror the missing\nrequired signer fraud proof.\n\nNow an input with a missing script can either come from a producing\ntransaction within the block itself, or from a previously available UTxO\nin the ledger.\n\nThe Aiken code is also updated so that no redeemer carries more than a\nsingle pre-image or script bytes.",
-      "authorName": "keyanmaskoot",
-      "authorDate": "2026-05-12T18:11:42Z"
-    },
-    {
-      "sha": "5b0a11ac6c3d96858c594229b00f92314e52f030",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/5b0a11ac6c3d96858c594229b00f92314e52f030",
-      "message": "Add draft midgard node API spec",
-      "authorName": "TotallyNotChase",
-      "authorDate": "2026-05-12T17:38:25Z"
     }
   ],
   "contributors": [
@@ -540,7 +540,7 @@
     },
     {
       "week": 1778371200,
-      "total": 24
+      "total": 44
     }
   ]
 }
