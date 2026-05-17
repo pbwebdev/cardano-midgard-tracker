@@ -331,7 +331,10 @@ h1, h2, h3 { font-weight: 600; letter-spacing: -0.01em; }
 .footer { max-width: var(--max); margin: 0 auto; padding: 40px 28px 60px; color: var(--muted); font-size: 13px; }
 .footer p { margin: 4px 0; }
 #eggTrigger {
-  background: transparent; border: 0; padding: 2px 4px; margin-left: 6px;
+  background: transparent; border: 0; margin-left: 4px;
+  /* Keep the icon visually subtle but give it a 24×24 hit area for touch. */
+  min-width: 24px; min-height: 24px;
+  display: inline-flex; align-items: center; justify-content: center;
   color: var(--muted); opacity: 0.35; cursor: pointer;
   border-radius: 4px;
   vertical-align: middle; line-height: 0;
@@ -373,7 +376,7 @@ h1, h2, h3 { font-weight: 600; letter-spacing: -0.01em; }
 }
 .cookie-banner { position: fixed; bottom: 16px; left: 16px; right: 16px; z-index: 200; background: var(--panel); border: 1px solid var(--accent-dim); border-radius: var(--radius); padding: 18px 22px; box-shadow: 0 12px 40px rgba(0,0,0,0.6), 0 0 0 1px rgba(31,220,106,0.08); max-width: 980px; margin: 0 auto; }
 .cookie-banner-inner { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
-.cookie-banner p { margin: 0; flex: 1; min-width: 260px; color: var(--text); font-size: 14px; line-height: 1.5; }
+.cookie-banner p { margin: 0; flex: 1; min-width: 260px; color: var(--text); font-size: 14px; line-height: 1.75; }
 .cookie-banner a { color: var(--accent); }
 .cookie-actions { display: flex; gap: 10px; flex-wrap: wrap; }
 .cookie-btn { font: inherit; padding: 9px 18px; border-radius: 999px; border: 1px solid var(--border); cursor: pointer; font-size: 14px; font-weight: 600; transition: background 0.15s, border-color 0.15s, color 0.15s; }
@@ -806,7 +809,7 @@ h1, h2, h3 { font-weight: 600; letter-spacing: -0.01em; }
 
 <!-- Easter egg: Pete peeks in from bottom-right when triggered.
      Triggers: 5 clicks on the padlock button within 3s, or typing "beware". -->
-<aside id="petEgg" class="pet-egg" aria-hidden="true">
+<aside id="petEgg" class="pet-egg" inert>
   <button class="pet-egg-close" type="button" aria-label="Close easter egg">×</button>
   <img src="assets/pete.webp" alt="Anime character saying you found me, now beware of scammers" width="320" height="320" loading="lazy" decoding="async" />
 </aside>
@@ -877,13 +880,13 @@ h1, h2, h3 { font-weight: 600; letter-spacing: -0.01em; }
 
   function show() {
     egg.classList.add('is-visible');
-    egg.setAttribute('aria-hidden', 'false');
+    egg.removeAttribute('inert');
     clearTimeout(hideTimer);
     hideTimer = setTimeout(hide, 8000);
   }
   function hide() {
     egg.classList.remove('is-visible');
-    egg.setAttribute('aria-hidden', 'true');
+    egg.setAttribute('inert', '');
     clearTimeout(hideTimer);
   }
 
