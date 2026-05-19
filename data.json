@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-05-18T10:19:14.339Z",
+  "fetchedAt": "2026-05-19T09:56:23.127Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 24,
@@ -16,6 +16,34 @@
     "Perl": 37
   },
   "commits": [
+    {
+      "sha": "cd726e602c6307b5fb6ac70c7bb66d8d4f3e7f95",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/cd726e602c6307b5fb6ac70c7bb66d8d4f3e7f95",
+      "message": "first draft:tests for utility functions",
+      "authorName": "Suganya Arun",
+      "authorDate": "2026-05-19T03:12:41Z"
+    },
+    {
+      "sha": "d64865ed4ff7e806d4f207b3054b38f7a7e40dcc",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d64865ed4ff7e806d4f207b3054b38f7a7e40dcc",
+      "message": "feat: fault proof end-to-end preprod acceptance",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-05-19T01:25:37Z"
+    },
+    {
+      "sha": "268a739990c28012d30d6eef017351b35db7b4cc",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/268a739990c28012d30d6eef017351b35db7b4cc",
+      "message": "Update operators contracts",
+      "authorName": "TotallyNotChase",
+      "authorDate": "2026-05-18T20:11:18Z"
+    },
+    {
+      "sha": "2b3e67dec63d412916a08502d655503aa17dcb57",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/2b3e67dec63d412916a08502d655503aa17dcb57",
+      "message": "Update types",
+      "authorName": "TotallyNotChase",
+      "authorDate": "2026-05-18T19:52:09Z"
+    },
     {
       "sha": "b26e55633836da26a3e0eda10fdde2eeb46c817c",
       "html_url": "https://github.com/Anastasia-Labs/midgard/commit/b26e55633836da26a3e0eda10fdde2eeb46c817c",
@@ -92,34 +120,6 @@
       "message": "wip",
       "authorName": "Drop-Table-Users",
       "authorDate": "2026-05-14T12:15:35Z"
-    },
-    {
-      "sha": "e68a5d7286f83f5394b3197bc1b9fb4f203fc581",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/e68a5d7286f83f5394b3197bc1b9fb4f203fc581",
-      "message": "wip",
-      "authorName": "Drop-Table-Users",
-      "authorDate": "2026-05-14T11:25:58Z"
-    },
-    {
-      "sha": "541fc4eae33534518121cb8475fbc4264fad955f",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/541fc4eae33534518121cb8475fbc4264fad955f",
-      "message": "wip",
-      "authorName": "Drop-Table-Users",
-      "authorDate": "2026-05-14T11:03:18Z"
-    },
-    {
-      "sha": "a9e405a02467fd0936589ee60f40473067ab9fc6",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/a9e405a02467fd0936589ee60f40473067ab9fc6",
-      "message": "chore(aiken): formatting",
-      "authorName": "keyanmaskoot",
-      "authorDate": "2026-05-13T20:28:38Z"
-    },
-    {
-      "sha": "44292badc890ebaa44c7e177e55c7cf466a254b8",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/44292badc890ebaa44c7e177e55c7cf466a254b8",
-      "message": "fix(aiken): store compact body in compact tx\n\nSwitching from hash of the compact body to the compact body itself in\nthe compact form of the Midgard transaction datatype.",
-      "authorName": "keyanmaskoot",
-      "authorDate": "2026-05-13T19:13:06Z"
     }
   ],
   "contributors": [
@@ -540,7 +540,7 @@
     },
     {
       "week": 1778976000,
-      "total": 0
+      "total": 4
     }
   ]
 }
