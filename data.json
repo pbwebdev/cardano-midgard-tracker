@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-05-20T09:44:16.832Z",
+  "fetchedAt": "2026-05-21T09:53:17.289Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 24,
@@ -16,6 +16,13 @@
     "Perl": 37
   },
   "commits": [
+    {
+      "sha": "b7c55624feb48a51cd0f522f91fb9045826b1ff1",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/b7c55624feb48a51cd0f522f91fb9045826b1ff1",
+      "message": "cleanup: refactor, modularize, and reduce LOC bloat",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-05-20T18:38:44Z"
+    },
     {
       "sha": "cd726e602c6307b5fb6ac70c7bb66d8d4f3e7f95",
       "html_url": "https://github.com/Anastasia-Labs/midgard/commit/cd726e602c6307b5fb6ac70c7bb66d8d4f3e7f95",
@@ -113,13 +120,6 @@
       "message": "wip",
       "authorName": "Drop-Table-Users",
       "authorDate": "2026-05-14T12:35:43Z"
-    },
-    {
-      "sha": "c331dd51c376a59c2745f9d5f249843ec9c5b3cd",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/c331dd51c376a59c2745f9d5f249843ec9c5b3cd",
-      "message": "wip",
-      "authorName": "Drop-Table-Users",
-      "authorDate": "2026-05-14T12:15:35Z"
     }
   ],
   "contributors": [
@@ -392,11 +392,11 @@
     },
     {
       "week": 1756598400,
-      "total": 4
+      "total": 5
     },
     {
       "week": 1757203200,
-      "total": 58
+      "total": 59
     },
     {
       "week": 1757808000,
@@ -436,11 +436,11 @@
     },
     {
       "week": 1763251200,
-      "total": 23
+      "total": 32
     },
     {
       "week": 1763856000,
-      "total": 16
+      "total": 44
     },
     {
       "week": 1764460800,
@@ -536,11 +536,11 @@
     },
     {
       "week": 1778371200,
-      "total": 42
+      "total": 44
     },
     {
       "week": 1778976000,
-      "total": 4
+      "total": 5
     }
   ]
 }
