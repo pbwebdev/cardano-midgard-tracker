@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-05-21T09:53:17.289Z",
+  "fetchedAt": "2026-05-22T09:38:15.346Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 24,
@@ -17,11 +17,25 @@
   },
   "commits": [
     {
+      "sha": "f8cf009906e5c5bfd61a9acde97eef0744b02723",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/f8cf009906e5c5bfd61a9acde97eef0744b02723",
+      "message": "wip",
+      "authorName": "Drop-Table-Users",
+      "authorDate": "2026-05-21T12:46:18Z"
+    },
+    {
       "sha": "b7c55624feb48a51cd0f522f91fb9045826b1ff1",
       "html_url": "https://github.com/Anastasia-Labs/midgard/commit/b7c55624feb48a51cd0f522f91fb9045826b1ff1",
       "message": "cleanup: refactor, modularize, and reduce LOC bloat",
       "authorName": "Philip DiSarro",
       "authorDate": "2026-05-20T18:38:44Z"
+    },
+    {
+      "sha": "61a7812812496e7e6735f2b6651cacaacbcd34f9",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/61a7812812496e7e6735f2b6651cacaacbcd34f9",
+      "message": "wip",
+      "authorName": "Drop-Table-Users",
+      "authorDate": "2026-05-20T10:24:42Z"
     },
     {
       "sha": "cd726e602c6307b5fb6ac70c7bb66d8d4f3e7f95",
@@ -106,20 +120,6 @@
       "message": "wip",
       "authorName": "Drop-Table-Users",
       "authorDate": "2026-05-14T13:16:16Z"
-    },
-    {
-      "sha": "d17a06f9a6f936a4b4f867f87055680c837a4f2f",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d17a06f9a6f936a4b4f867f87055680c837a4f2f",
-      "message": "wip",
-      "authorName": "Drop-Table-Users",
-      "authorDate": "2026-05-14T12:55:34Z"
-    },
-    {
-      "sha": "3d45c7bfd414860e6a4910e7a3f39369405a5237",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/3d45c7bfd414860e6a4910e7a3f39369405a5237",
-      "message": "wip",
-      "authorName": "Drop-Table-Users",
-      "authorDate": "2026-05-14T12:35:43Z"
     }
   ],
   "contributors": [
@@ -540,7 +540,7 @@
     },
     {
       "week": 1778976000,
-      "total": 5
+      "total": 7
     }
   ]
 }
