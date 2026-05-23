@@ -1,21 +1,70 @@
 {
-  "fetchedAt": "2026-05-22T09:38:15.346Z",
+  "fetchedAt": "2026-05-23T08:26:12.269Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 24,
     "forks_count": 9,
-    "open_issues_count": 93
+    "open_issues_count": 92
   },
   "languages": {
     "TeX": 340459,
     "Aiken": 281804,
-    "Haskell": 211981,
+    "Haskell": 216433,
     "Nix": 11973,
     "Shell": 5586,
     "Makefile": 1517,
     "Perl": 37
   },
   "commits": [
+    {
+      "sha": "190405ff7aeb71e6689629fbef7385db695f815c",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/190405ff7aeb71e6689629fbef7385db695f815c",
+      "message": "feat: redeemer indexing",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-05-22T20:56:10Z"
+    },
+    {
+      "sha": "a5f1e94ac5a0bf4ed43a20f45c603f1b59d82ac8",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/a5f1e94ac5a0bf4ed43a20f45c603f1b59d82ac8",
+      "message": "Merge pull request #430 from Anastasia-Labs/chase/offchain-scheduler-txs\n\nAdd scheduler transactions",
+      "authorName": "colll78",
+      "authorDate": "2026-05-22T18:03:11Z"
+    },
+    {
+      "sha": "2428b27cec46c95fa27d60aaf603932b8d3b2346",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/2428b27cec46c95fa27d60aaf603932b8d3b2346",
+      "message": "Merge pull request #438 from Anastasia-Labs/chase/update-operators\n\nUpdate operators contract according to new script changes",
+      "authorName": "colll78",
+      "authorDate": "2026-05-22T18:03:00Z"
+    },
+    {
+      "sha": "0df88f1973acb52adb28140a85cec62ff350e22b",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/0df88f1973acb52adb28140a85cec62ff350e22b",
+      "message": "Plug in the binary encoding",
+      "authorName": "Drop-Table-Users",
+      "authorDate": "2026-05-22T14:22:05Z"
+    },
+    {
+      "sha": "449fb14f5d68e7f42a346c6df614582aa0f42049",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/449fb14f5d68e7f42a346c6df614582aa0f42049",
+      "message": "cleanup",
+      "authorName": "Drop-Table-Users",
+      "authorDate": "2026-05-22T13:12:59Z"
+    },
+    {
+      "sha": "0be4504b0cfbadd29439950732fc79091b268fec",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/0be4504b0cfbadd29439950732fc79091b268fec",
+      "message": "refactor",
+      "authorName": "Drop-Table-Users",
+      "authorDate": "2026-05-22T12:47:40Z"
+    },
+    {
+      "sha": "87f9826bf424ad6ba15654285feb328e709706a9",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/87f9826bf424ad6ba15654285feb328e709706a9",
+      "message": "previous binary encoding",
+      "authorName": "Drop-Table-Users",
+      "authorDate": "2026-05-22T11:08:48Z"
+    },
     {
       "sha": "f8cf009906e5c5bfd61a9acde97eef0744b02723",
       "html_url": "https://github.com/Anastasia-Labs/midgard/commit/f8cf009906e5c5bfd61a9acde97eef0744b02723",
@@ -71,55 +120,6 @@
       "message": "feat: onchain decoding for midgard native tx cbor",
       "authorName": "Philip DiSarro",
       "authorDate": "2026-05-15T15:36:41Z"
-    },
-    {
-      "sha": "53ccf13364dff77470a0fabbc0bf129527fdb369",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/53ccf13364dff77470a0fabbc0bf129527fdb369",
-      "message": "wip",
-      "authorName": "Drop-Table-Users",
-      "authorDate": "2026-05-15T11:34:47Z"
-    },
-    {
-      "sha": "02fe4f2dfc9040f68c23c5a43b213f6bd05778b0",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/02fe4f2dfc9040f68c23c5a43b213f6bd05778b0",
-      "message": "feat(aiken): bring in phil's tx encoding\n\nProper Midgard transaction encoding. This commits moves the new module\nunder `ledger-state` directory, but some re-organization might be\nneeded.",
-      "authorName": "keyanmaskoot",
-      "authorDate": "2026-05-15T11:11:08Z"
-    },
-    {
-      "sha": "a1f3b2115d8cd30bd8c3e9b0595af4f8fb998d3d",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/a1f3b2115d8cd30bd8c3e9b0595af4f8fb998d3d",
-      "message": "wip",
-      "authorName": "Drop-Table-Users",
-      "authorDate": "2026-05-15T10:22:58Z"
-    },
-    {
-      "sha": "1732d8216f22ecfbef38cc2fd44f35ad9e9c3f98",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/1732d8216f22ecfbef38cc2fd44f35ad9e9c3f98",
-      "message": "wip",
-      "authorName": "Drop-Table-Users",
-      "authorDate": "2026-05-15T09:39:54Z"
-    },
-    {
-      "sha": "4c9a1d6d5334dd1ea492700de8424786b4bd6cb6",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/4c9a1d6d5334dd1ea492700de8424786b4bd6cb6",
-      "message": "feat: fault proof cli",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-05-14T16:06:22Z"
-    },
-    {
-      "sha": "c096f2d1841f37d6ea02811250eb1001293201f9",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/c096f2d1841f37d6ea02811250eb1001293201f9",
-      "message": "fix(aiken): bring some fixes from phil's branch",
-      "authorName": "keyanmaskoot",
-      "authorDate": "2026-05-14T15:49:38Z"
-    },
-    {
-      "sha": "f7d24ce1082ba4e189915f4d94462615863b0dcc",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/f7d24ce1082ba4e189915f4d94462615863b0dcc",
-      "message": "wip",
-      "authorName": "Drop-Table-Users",
-      "authorDate": "2026-05-14T13:16:16Z"
     }
   ],
   "contributors": [
@@ -169,7 +169,7 @@
       "login": "TotallyNotChase",
       "html_url": "https://github.com/TotallyNotChase",
       "avatar_url": "assets/avatars/TotallyNotChase.png",
-      "contributions": 51
+      "contributions": 54
     },
     {
       "login": "HarunJr",
@@ -187,7 +187,7 @@
       "login": "colll78",
       "html_url": "https://github.com/colll78",
       "avatar_url": "assets/avatars/colll78.png",
-      "contributions": 15
+      "contributions": 16
     },
     {
       "login": "Drop-Table-Users",
@@ -440,7 +440,7 @@
     },
     {
       "week": 1763856000,
-      "total": 44
+      "total": 37
     },
     {
       "week": 1764460800,
@@ -540,7 +540,7 @@
     },
     {
       "week": 1778976000,
-      "total": 7
+      "total": 14
     }
   ]
 }
