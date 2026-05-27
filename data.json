@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-05-26T10:06:34.118Z",
+  "fetchedAt": "2026-05-27T10:04:45.417Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 24,
@@ -16,6 +16,13 @@
     "Perl": 37
   },
   "commits": [
+    {
+      "sha": "bbab477b2ac0ff959db51e07f2e2e163251ceb9f",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/bbab477b2ac0ff959db51e07f2e2e163251ceb9f",
+      "message": "WIP",
+      "authorName": "TotallyNotChase",
+      "authorDate": "2026-05-26T21:15:35Z"
+    },
     {
       "sha": "190405ff7aeb71e6689629fbef7385db695f815c",
       "html_url": "https://github.com/Anastasia-Labs/midgard/commit/190405ff7aeb71e6689629fbef7385db695f815c",
@@ -36,34 +43,6 @@
       "message": "Merge pull request #438 from Anastasia-Labs/chase/update-operators\n\nUpdate operators contract according to new script changes",
       "authorName": "colll78",
       "authorDate": "2026-05-22T18:03:00Z"
-    },
-    {
-      "sha": "0df88f1973acb52adb28140a85cec62ff350e22b",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/0df88f1973acb52adb28140a85cec62ff350e22b",
-      "message": "Plug in the binary encoding",
-      "authorName": "Drop-Table-Users",
-      "authorDate": "2026-05-22T14:22:05Z"
-    },
-    {
-      "sha": "449fb14f5d68e7f42a346c6df614582aa0f42049",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/449fb14f5d68e7f42a346c6df614582aa0f42049",
-      "message": "cleanup",
-      "authorName": "Drop-Table-Users",
-      "authorDate": "2026-05-22T13:12:59Z"
-    },
-    {
-      "sha": "0be4504b0cfbadd29439950732fc79091b268fec",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/0be4504b0cfbadd29439950732fc79091b268fec",
-      "message": "refactor",
-      "authorName": "Drop-Table-Users",
-      "authorDate": "2026-05-22T12:47:40Z"
-    },
-    {
-      "sha": "87f9826bf424ad6ba15654285feb328e709706a9",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/87f9826bf424ad6ba15654285feb328e709706a9",
-      "message": "previous binary encoding",
-      "authorName": "Drop-Table-Users",
-      "authorDate": "2026-05-22T11:08:48Z"
     },
     {
       "sha": "f8cf009906e5c5bfd61a9acde97eef0744b02723",
@@ -120,6 +99,27 @@
       "message": "feat: onchain decoding for midgard native tx cbor",
       "authorName": "Philip DiSarro",
       "authorDate": "2026-05-15T15:36:41Z"
+    },
+    {
+      "sha": "53ccf13364dff77470a0fabbc0bf129527fdb369",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/53ccf13364dff77470a0fabbc0bf129527fdb369",
+      "message": "wip",
+      "authorName": "Drop-Table-Users",
+      "authorDate": "2026-05-15T11:34:47Z"
+    },
+    {
+      "sha": "02fe4f2dfc9040f68c23c5a43b213f6bd05778b0",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/02fe4f2dfc9040f68c23c5a43b213f6bd05778b0",
+      "message": "feat(aiken): bring in phil's tx encoding\n\nProper Midgard transaction encoding. This commits moves the new module\nunder `ledger-state` directory, but some re-organization might be\nneeded.",
+      "authorName": "keyanmaskoot",
+      "authorDate": "2026-05-15T11:11:08Z"
+    },
+    {
+      "sha": "a1f3b2115d8cd30bd8c3e9b0595af4f8fb998d3d",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/a1f3b2115d8cd30bd8c3e9b0595af4f8fb998d3d",
+      "message": "wip",
+      "authorName": "Drop-Table-Users",
+      "authorDate": "2026-05-15T10:22:58Z"
     }
   ],
   "contributors": [
@@ -380,7 +380,7 @@
     },
     {
       "week": 1755388800,
-      "total": 29
+      "total": 34
     },
     {
       "week": 1755993600,
@@ -532,15 +532,15 @@
     },
     {
       "week": 1778371200,
-      "total": 44
+      "total": 42
     },
     {
       "week": 1778976000,
-      "total": 14
+      "total": 10
     },
     {
       "week": 1779580800,
-      "total": 0
+      "total": 1
     }
   ]
 }
