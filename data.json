@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-05-27T10:04:45.417Z",
+  "fetchedAt": "2026-05-28T10:13:39.659Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 24,
@@ -17,11 +17,32 @@
   },
   "commits": [
     {
+      "sha": "ea5d07fc8a818f6c950b6de1f145479f35cd8bfc",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ea5d07fc8a818f6c950b6de1f145479f35cd8bfc",
+      "message": "Binary encoding optimization",
+      "authorName": "Drop-Table-Users",
+      "authorDate": "2026-05-27T12:54:47Z"
+    },
+    {
+      "sha": "7dfa06563b2115445f12c05e7689a7f16b179b48",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/7dfa06563b2115445f12c05e7689a7f16b179b48",
+      "message": "wip",
+      "authorName": "Drop-Table-Users",
+      "authorDate": "2026-05-27T11:00:59Z"
+    },
+    {
       "sha": "bbab477b2ac0ff959db51e07f2e2e163251ceb9f",
       "html_url": "https://github.com/Anastasia-Labs/midgard/commit/bbab477b2ac0ff959db51e07f2e2e163251ceb9f",
       "message": "WIP",
       "authorName": "TotallyNotChase",
       "authorDate": "2026-05-26T21:15:35Z"
+    },
+    {
+      "sha": "1054c9528b08e236835a074130d3ecf231c49fea",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/1054c9528b08e236835a074130d3ecf231c49fea",
+      "message": "wip",
+      "authorName": "Drop-Table-Users",
+      "authorDate": "2026-05-26T15:43:40Z"
     },
     {
       "sha": "190405ff7aeb71e6689629fbef7385db695f815c",
@@ -43,6 +64,34 @@
       "message": "Merge pull request #438 from Anastasia-Labs/chase/update-operators\n\nUpdate operators contract according to new script changes",
       "authorName": "colll78",
       "authorDate": "2026-05-22T18:03:00Z"
+    },
+    {
+      "sha": "0df88f1973acb52adb28140a85cec62ff350e22b",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/0df88f1973acb52adb28140a85cec62ff350e22b",
+      "message": "Plug in the binary encoding",
+      "authorName": "Drop-Table-Users",
+      "authorDate": "2026-05-22T14:22:05Z"
+    },
+    {
+      "sha": "449fb14f5d68e7f42a346c6df614582aa0f42049",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/449fb14f5d68e7f42a346c6df614582aa0f42049",
+      "message": "cleanup",
+      "authorName": "Drop-Table-Users",
+      "authorDate": "2026-05-22T13:12:59Z"
+    },
+    {
+      "sha": "0be4504b0cfbadd29439950732fc79091b268fec",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/0be4504b0cfbadd29439950732fc79091b268fec",
+      "message": "refactor",
+      "authorName": "Drop-Table-Users",
+      "authorDate": "2026-05-22T12:47:40Z"
+    },
+    {
+      "sha": "87f9826bf424ad6ba15654285feb328e709706a9",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/87f9826bf424ad6ba15654285feb328e709706a9",
+      "message": "previous binary encoding",
+      "authorName": "Drop-Table-Users",
+      "authorDate": "2026-05-22T11:08:48Z"
     },
     {
       "sha": "f8cf009906e5c5bfd61a9acde97eef0744b02723",
@@ -71,55 +120,6 @@
       "message": "first draft:tests for utility functions",
       "authorName": "Suganya Arun",
       "authorDate": "2026-05-19T03:12:41Z"
-    },
-    {
-      "sha": "d64865ed4ff7e806d4f207b3054b38f7a7e40dcc",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d64865ed4ff7e806d4f207b3054b38f7a7e40dcc",
-      "message": "feat: fault proof end-to-end preprod acceptance",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-05-19T01:25:37Z"
-    },
-    {
-      "sha": "268a739990c28012d30d6eef017351b35db7b4cc",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/268a739990c28012d30d6eef017351b35db7b4cc",
-      "message": "Update operators contracts",
-      "authorName": "TotallyNotChase",
-      "authorDate": "2026-05-18T20:11:18Z"
-    },
-    {
-      "sha": "2b3e67dec63d412916a08502d655503aa17dcb57",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/2b3e67dec63d412916a08502d655503aa17dcb57",
-      "message": "Update types",
-      "authorName": "TotallyNotChase",
-      "authorDate": "2026-05-18T19:52:09Z"
-    },
-    {
-      "sha": "b26e55633836da26a3e0eda10fdde2eeb46c817c",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/b26e55633836da26a3e0eda10fdde2eeb46c817c",
-      "message": "feat: onchain decoding for midgard native tx cbor",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-05-15T15:36:41Z"
-    },
-    {
-      "sha": "53ccf13364dff77470a0fabbc0bf129527fdb369",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/53ccf13364dff77470a0fabbc0bf129527fdb369",
-      "message": "wip",
-      "authorName": "Drop-Table-Users",
-      "authorDate": "2026-05-15T11:34:47Z"
-    },
-    {
-      "sha": "02fe4f2dfc9040f68c23c5a43b213f6bd05778b0",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/02fe4f2dfc9040f68c23c5a43b213f6bd05778b0",
-      "message": "feat(aiken): bring in phil's tx encoding\n\nProper Midgard transaction encoding. This commits moves the new module\nunder `ledger-state` directory, but some re-organization might be\nneeded.",
-      "authorName": "keyanmaskoot",
-      "authorDate": "2026-05-15T11:11:08Z"
-    },
-    {
-      "sha": "a1f3b2115d8cd30bd8c3e9b0595af4f8fb998d3d",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/a1f3b2115d8cd30bd8c3e9b0595af4f8fb998d3d",
-      "message": "wip",
-      "authorName": "Drop-Table-Users",
-      "authorDate": "2026-05-15T10:22:58Z"
     }
   ],
   "contributors": [
@@ -380,7 +380,7 @@
     },
     {
       "week": 1755388800,
-      "total": 34
+      "total": 29
     },
     {
       "week": 1755993600,
@@ -432,11 +432,11 @@
     },
     {
       "week": 1763251200,
-      "total": 32
+      "total": 23
     },
     {
       "week": 1763856000,
-      "total": 44
+      "total": 16
     },
     {
       "week": 1764460800,
@@ -536,11 +536,11 @@
     },
     {
       "week": 1778976000,
-      "total": 10
+      "total": 14
     },
     {
       "week": 1779580800,
-      "total": 1
+      "total": 4
     }
   ]
 }
