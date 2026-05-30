@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-05-29T10:03:52.637Z",
+  "fetchedAt": "2026-05-30T08:34:12.031Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 24,
@@ -73,6 +73,13 @@
       "authorDate": "2026-05-22T18:03:11Z"
     },
     {
+      "sha": "2428b27cec46c95fa27d60aaf603932b8d3b2346",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/2428b27cec46c95fa27d60aaf603932b8d3b2346",
+      "message": "Merge pull request #438 from Anastasia-Labs/chase/update-operators\n\nUpdate operators contract according to new script changes",
+      "authorName": "colll78",
+      "authorDate": "2026-05-22T18:03:00Z"
+    },
+    {
       "sha": "0df88f1973acb52adb28140a85cec62ff350e22b",
       "html_url": "https://github.com/Anastasia-Labs/midgard/commit/0df88f1973acb52adb28140a85cec62ff350e22b",
       "message": "Plug in the binary encoding",
@@ -113,13 +120,6 @@
       "message": "cleanup: refactor, modularize, and reduce LOC bloat",
       "authorName": "Philip DiSarro",
       "authorDate": "2026-05-20T18:38:44Z"
-    },
-    {
-      "sha": "61a7812812496e7e6735f2b6651cacaacbcd34f9",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/61a7812812496e7e6735f2b6651cacaacbcd34f9",
-      "message": "wip",
-      "authorName": "Drop-Table-Users",
-      "authorDate": "2026-05-20T10:24:42Z"
     }
   ],
   "contributors": [
@@ -340,35 +340,35 @@
     },
     {
       "week": 1749340800,
-      "total": 14
-    },
-    {
-      "week": 1749945600,
-      "total": 16
-    },
-    {
-      "week": 1750550400,
-      "total": 7
-    },
-    {
-      "week": 1751155200,
-      "total": 15
-    },
-    {
-      "week": 1751760000,
-      "total": 23
-    },
-    {
-      "week": 1752364800,
       "total": 13
     },
     {
+      "week": 1749945600,
+      "total": 15
+    },
+    {
+      "week": 1750550400,
+      "total": 2
+    },
+    {
+      "week": 1751155200,
+      "total": 5
+    },
+    {
+      "week": 1751760000,
+      "total": 0
+    },
+    {
+      "week": 1752364800,
+      "total": 1
+    },
+    {
       "week": 1752969600,
-      "total": 27
+      "total": 0
     },
     {
       "week": 1753574400,
-      "total": 32
+      "total": 14
     },
     {
       "week": 1754179200,
@@ -380,7 +380,7 @@
     },
     {
       "week": 1755388800,
-      "total": 29
+      "total": 34
     },
     {
       "week": 1755993600,
@@ -432,11 +432,11 @@
     },
     {
       "week": 1763251200,
-      "total": 32
+      "total": 23
     },
     {
       "week": 1763856000,
-      "total": 44
+      "total": 16
     },
     {
       "week": 1764460800,
@@ -488,19 +488,19 @@
     },
     {
       "week": 1771718400,
-      "total": 45
+      "total": 47
     },
     {
       "week": 1772323200,
-      "total": 14
+      "total": 16
     },
     {
       "week": 1772928000,
-      "total": 22
+      "total": 23
     },
     {
       "week": 1773532800,
-      "total": 24
+      "total": 25
     },
     {
       "week": 1774137600,
@@ -532,11 +532,11 @@
     },
     {
       "week": 1778371200,
-      "total": 44
+      "total": 42
     },
     {
       "week": 1778976000,
-      "total": 13
+      "total": 14
     },
     {
       "week": 1779580800,
