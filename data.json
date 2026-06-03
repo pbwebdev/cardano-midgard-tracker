@@ -1,10 +1,10 @@
 {
-  "fetchedAt": "2026-06-02T10:45:20.869Z",
+  "fetchedAt": "2026-06-03T11:10:28.395Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 24,
     "forks_count": 9,
-    "open_issues_count": 93
+    "open_issues_count": 94
   },
   "languages": {
     "TeX": 340459,
@@ -16,6 +16,27 @@
     "Perl": 37
   },
   "commits": [
+    {
+      "sha": "ed877810696310a09f0ba3c42a04b61e8413cf9d",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ed877810696310a09f0ba3c42a04b61e8413cf9d",
+      "message": "all tests",
+      "authorName": "Suganya Arun",
+      "authorDate": "2026-06-02T18:40:24Z"
+    },
+    {
+      "sha": "c015752e58a80a8ec9795eeeae688006ca41a0b2",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/c015752e58a80a8ec9795eeeae688006ca41a0b2",
+      "message": "chore: commit remaining local changes",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-06-02T15:39:28Z"
+    },
+    {
+      "sha": "5b5e46b268804146c8466ddeba86cc1d989cefc0",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/5b5e46b268804146c8466ddeba86cc1d989cefc0",
+      "message": "test: harden fault-proof non-tail removal coverage",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-06-02T15:37:40Z"
+    },
     {
       "sha": "640c009f7f91a05d95a9e8424f4139c8af86895b",
       "html_url": "https://github.com/Anastasia-Labs/midgard/commit/640c009f7f91a05d95a9e8424f4139c8af86895b",
@@ -99,27 +120,6 @@
       "message": "Merge pull request #430 from Anastasia-Labs/chase/offchain-scheduler-txs\n\nAdd scheduler transactions",
       "authorName": "colll78",
       "authorDate": "2026-05-22T18:03:11Z"
-    },
-    {
-      "sha": "2428b27cec46c95fa27d60aaf603932b8d3b2346",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/2428b27cec46c95fa27d60aaf603932b8d3b2346",
-      "message": "Merge pull request #438 from Anastasia-Labs/chase/update-operators\n\nUpdate operators contract according to new script changes",
-      "authorName": "colll78",
-      "authorDate": "2026-05-22T18:03:00Z"
-    },
-    {
-      "sha": "0df88f1973acb52adb28140a85cec62ff350e22b",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/0df88f1973acb52adb28140a85cec62ff350e22b",
-      "message": "Plug in the binary encoding",
-      "authorName": "Drop-Table-Users",
-      "authorDate": "2026-05-22T14:22:05Z"
-    },
-    {
-      "sha": "449fb14f5d68e7f42a346c6df614582aa0f42049",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/449fb14f5d68e7f42a346c6df614582aa0f42049",
-      "message": "cleanup",
-      "authorName": "Drop-Table-Users",
-      "authorDate": "2026-05-22T13:12:59Z"
     }
   ],
   "contributors": [
@@ -320,16 +320,16 @@
   ],
   "issues": [
     {
+      "number": 451,
+      "title": "Support Multi-Block Submissions",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/451",
+      "updated_at": "2026-06-02T19:55:40Z"
+    },
+    {
       "number": 446,
       "title": "Switch Fraud Proof Catalogue to a Linked List",
       "html_url": "https://github.com/Anastasia-Labs/midgard/issues/446",
       "updated_at": "2026-05-12T23:46:54Z"
-    },
-    {
-      "number": 442,
-      "title": "Add Aiken Tests",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/442",
-      "updated_at": "2026-04-30T19:02:48Z"
     }
   ],
   "releases": [],
@@ -340,11 +340,11 @@
     },
     {
       "week": 1749945600,
-      "total": 15
+      "total": 16
     },
     {
       "week": 1750550400,
-      "total": 6
+      "total": 7
     },
     {
       "week": 1751155200,
@@ -376,7 +376,7 @@
     },
     {
       "week": 1755388800,
-      "total": 34
+      "total": 29
     },
     {
       "week": 1755993600,
@@ -440,7 +440,7 @@
     },
     {
       "week": 1765065600,
-      "total": 6
+      "total": 7
     },
     {
       "week": 1765670400,
@@ -528,7 +528,7 @@
     },
     {
       "week": 1778371200,
-      "total": 42
+      "total": 44
     },
     {
       "week": 1778976000,
@@ -540,7 +540,7 @@
     },
     {
       "week": 1780185600,
-      "total": 5
+      "total": 8
     }
   ]
 }
