@@ -1,21 +1,56 @@
 {
-  "fetchedAt": "2026-06-03T11:10:28.395Z",
+  "fetchedAt": "2026-06-04T10:04:06.016Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 24,
     "forks_count": 9,
-    "open_issues_count": 94
+    "open_issues_count": 93
   },
   "languages": {
     "TeX": 340459,
-    "Aiken": 281804,
-    "Haskell": 216433,
+    "Aiken": 281839,
+    "Haskell": 255897,
     "Nix": 11973,
     "Shell": 5586,
     "Makefile": 1517,
     "Perl": 37
   },
   "commits": [
+    {
+      "sha": "497d9cc6ec2da37c8cd800b6d10794c5bcfebee5",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/497d9cc6ec2da37c8cd800b6d10794c5bcfebee5",
+      "message": "Merge pull request #450 from Anastasia-Labs/chase/offchain-scheduler-txs\n\nUpdate scheduler transactions",
+      "authorName": "colll78",
+      "authorDate": "2026-06-03T21:44:57Z"
+    },
+    {
+      "sha": "eef8a312488579c37b781421140a57aa70487ac6",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/eef8a312488579c37b781421140a57aa70487ac6",
+      "message": "Documentation for advanceOrRewind",
+      "authorName": "TotallyNotChase",
+      "authorDate": "2026-06-03T18:44:45Z"
+    },
+    {
+      "sha": "058237bc3803920574294bed77508bcbd932831c",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/058237bc3803920574294bed77508bcbd932831c",
+      "message": "Update scheduler transactions and tests",
+      "authorName": "TotallyNotChase",
+      "authorDate": "2026-06-03T18:19:37Z"
+    },
+    {
+      "sha": "6a5619cb9e5c6cef9497a34393d3ab2778730bcb",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/6a5619cb9e5c6cef9497a34393d3ab2778730bcb",
+      "message": "Update lucid-evolution version",
+      "authorName": "Drop-Table-Users",
+      "authorDate": "2026-06-03T15:24:35Z"
+    },
+    {
+      "sha": "fecd4ae9e0ad862f10a542784defd14da4817e7b",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/fecd4ae9e0ad862f10a542784defd14da4817e7b",
+      "message": "Fix empty active utxos set calculation",
+      "authorName": "TotallyNotChase",
+      "authorDate": "2026-06-02T19:30:24Z"
+    },
     {
       "sha": "ed877810696310a09f0ba3c42a04b61e8413cf9d",
       "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ed877810696310a09f0ba3c42a04b61e8413cf9d",
@@ -85,41 +120,6 @@
       "message": "add: more test cases",
       "authorName": "Suganya Arun",
       "authorDate": "2026-05-28T02:46:25Z"
-    },
-    {
-      "sha": "ea5d07fc8a818f6c950b6de1f145479f35cd8bfc",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ea5d07fc8a818f6c950b6de1f145479f35cd8bfc",
-      "message": "Binary encoding optimization",
-      "authorName": "Drop-Table-Users",
-      "authorDate": "2026-05-27T12:54:47Z"
-    },
-    {
-      "sha": "7dfa06563b2115445f12c05e7689a7f16b179b48",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/7dfa06563b2115445f12c05e7689a7f16b179b48",
-      "message": "wip",
-      "authorName": "Drop-Table-Users",
-      "authorDate": "2026-05-27T11:00:59Z"
-    },
-    {
-      "sha": "1054c9528b08e236835a074130d3ecf231c49fea",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/1054c9528b08e236835a074130d3ecf231c49fea",
-      "message": "wip",
-      "authorName": "Drop-Table-Users",
-      "authorDate": "2026-05-26T15:43:40Z"
-    },
-    {
-      "sha": "190405ff7aeb71e6689629fbef7385db695f815c",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/190405ff7aeb71e6689629fbef7385db695f815c",
-      "message": "feat: redeemer indexing",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-05-22T20:56:10Z"
-    },
-    {
-      "sha": "a5f1e94ac5a0bf4ed43a20f45c603f1b59d82ac8",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/a5f1e94ac5a0bf4ed43a20f45c603f1b59d82ac8",
-      "message": "Merge pull request #430 from Anastasia-Labs/chase/offchain-scheduler-txs\n\nAdd scheduler transactions",
-      "authorName": "colll78",
-      "authorDate": "2026-05-22T18:03:11Z"
     }
   ],
   "contributors": [
@@ -160,16 +160,16 @@
       "contributions": 85
     },
     {
+      "login": "TotallyNotChase",
+      "html_url": "https://github.com/TotallyNotChase",
+      "avatar_url": "assets/avatars/TotallyNotChase.png",
+      "contributions": 72
+    },
+    {
       "login": "0xBora",
       "html_url": "https://github.com/0xBora",
       "avatar_url": "assets/avatars/0xBora.png",
       "contributions": 58
-    },
-    {
-      "login": "TotallyNotChase",
-      "html_url": "https://github.com/TotallyNotChase",
-      "avatar_url": "assets/avatars/TotallyNotChase.png",
-      "contributions": 54
     },
     {
       "login": "HarunJr",
@@ -187,7 +187,7 @@
       "login": "colll78",
       "html_url": "https://github.com/colll78",
       "avatar_url": "assets/avatars/colll78.png",
-      "contributions": 16
+      "contributions": 17
     },
     {
       "login": "Drop-Table-Users",
@@ -330,6 +330,12 @@
       "title": "Switch Fraud Proof Catalogue to a Linked List",
       "html_url": "https://github.com/Anastasia-Labs/midgard/issues/446",
       "updated_at": "2026-05-12T23:46:54Z"
+    },
+    {
+      "number": 442,
+      "title": "Add Aiken Tests",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/442",
+      "updated_at": "2026-04-30T19:02:48Z"
     }
   ],
   "releases": [],
@@ -376,7 +382,7 @@
     },
     {
       "week": 1755388800,
-      "total": 29
+      "total": 34
     },
     {
       "week": 1755993600,
@@ -456,19 +462,19 @@
     },
     {
       "week": 1767484800,
-      "total": 29
+      "total": 24
     },
     {
       "week": 1768089600,
-      "total": 19
+      "total": 16
     },
     {
       "week": 1768694400,
-      "total": 21
+      "total": 18
     },
     {
       "week": 1769299200,
-      "total": 26
+      "total": 25
     },
     {
       "week": 1769904000,
@@ -528,7 +534,7 @@
     },
     {
       "week": 1778371200,
-      "total": 44
+      "total": 42
     },
     {
       "week": 1778976000,
@@ -540,7 +546,7 @@
     },
     {
       "week": 1780185600,
-      "total": 8
+      "total": 13
     }
   ]
 }
