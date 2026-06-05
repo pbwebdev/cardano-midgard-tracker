@@ -1,10 +1,10 @@
 {
-  "fetchedAt": "2026-06-04T10:04:06.016Z",
+  "fetchedAt": "2026-06-05T10:01:34.077Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 24,
     "forks_count": 9,
-    "open_issues_count": 93
+    "open_issues_count": 94
   },
   "languages": {
     "TeX": 340459,
@@ -16,6 +16,13 @@
     "Perl": 37
   },
   "commits": [
+    {
+      "sha": "a433be3fd55649b59d431f9d8da7a2c4cfbcc8d5",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/a433be3fd55649b59d431f9d8da7a2c4cfbcc8d5",
+      "message": "refactor(aiken): bump `aiken-design-patterns`\n\nFixes the vulnerability that allowed multiple spends during linked list\nmint operations.\n\nAlso removed extra checks around `LinkedListMutation` endpoint of the\nstate queue. All minting endpoints of state queue are routed through the\nlinked list module, and it should suffice for the spending endpoint to\nsimply delegate its logic to the minting policy.",
+      "authorName": "keyanmaskoot",
+      "authorDate": "2026-06-04T17:32:03Z"
+    },
     {
       "sha": "497d9cc6ec2da37c8cd800b6d10794c5bcfebee5",
       "html_url": "https://github.com/Anastasia-Labs/midgard/commit/497d9cc6ec2da37c8cd800b6d10794c5bcfebee5",
@@ -113,13 +120,6 @@
       "message": "conversion between encodings to compare size",
       "authorName": "Drop-Table-Users",
       "authorDate": "2026-05-28T11:17:11Z"
-    },
-    {
-      "sha": "18497647634def8b8389ecb4627eef09b30a0d52",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/18497647634def8b8389ecb4627eef09b30a0d52",
-      "message": "add: more test cases",
-      "authorName": "Suganya Arun",
-      "authorDate": "2026-05-28T02:46:25Z"
     }
   ],
   "contributors": [
@@ -330,12 +330,6 @@
       "title": "Switch Fraud Proof Catalogue to a Linked List",
       "html_url": "https://github.com/Anastasia-Labs/midgard/issues/446",
       "updated_at": "2026-05-12T23:46:54Z"
-    },
-    {
-      "number": 442,
-      "title": "Add Aiken Tests",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/442",
-      "updated_at": "2026-04-30T19:02:48Z"
     }
   ],
   "releases": [],
@@ -434,11 +428,11 @@
     },
     {
       "week": 1763251200,
-      "total": 32
+      "total": 23
     },
     {
       "week": 1763856000,
-      "total": 44
+      "total": 16
     },
     {
       "week": 1764460800,
@@ -462,19 +456,19 @@
     },
     {
       "week": 1767484800,
-      "total": 24
+      "total": 29
     },
     {
       "week": 1768089600,
-      "total": 16
+      "total": 19
     },
     {
       "week": 1768694400,
-      "total": 18
+      "total": 21
     },
     {
       "week": 1769299200,
-      "total": 25
+      "total": 26
     },
     {
       "week": 1769904000,
@@ -494,7 +488,7 @@
     },
     {
       "week": 1772323200,
-      "total": 16
+      "total": 15
     },
     {
       "week": 1772928000,
@@ -534,7 +528,7 @@
     },
     {
       "week": 1778371200,
-      "total": 42
+      "total": 44
     },
     {
       "week": 1778976000,
@@ -546,7 +540,7 @@
     },
     {
       "week": 1780185600,
-      "total": 13
+      "total": 14
     }
   ]
 }
