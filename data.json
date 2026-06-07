@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-06-06T08:40:22.184Z",
+  "fetchedAt": "2026-06-07T09:23:15.954Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 24,
@@ -16,6 +16,83 @@
     "Perl": 37
   },
   "commits": [
+    {
+      "sha": "0aebecac60c2f5af4ba5e4f3d113cae7c41cd545",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/0aebecac60c2f5af4ba5e4f3d113cae7c41cd545",
+      "message": "fix: remove stale redeemer argument",
+      "authorName": "keyanmaskoot",
+      "authorDate": "2026-06-06T16:29:29Z"
+    },
+    {
+      "sha": "ca9173670f2cfa82dc6d8960403b698593da0dc6",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ca9173670f2cfa82dc6d8960403b698593da0dc6",
+      "message": "fix(tests): revert increases max tx size in emultr",
+      "authorName": "keyanmaskoot",
+      "authorDate": "2026-06-06T15:43:57Z"
+    },
+    {
+      "sha": "8ddfa5480ade1743fedd711ad5678c30a62971a0",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/8ddfa5480ade1743fedd711ad5678c30a62971a0",
+      "message": "ci: set db port explicitly",
+      "authorName": "keyanmaskoot",
+      "authorDate": "2026-06-06T13:34:07Z"
+    },
+    {
+      "sha": "a89ea71018714a1f148c51257d2203bf3349ed32",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/a89ea71018714a1f148c51257d2203bf3349ed32",
+      "message": "fix(aiken): revert `phas` script hash",
+      "authorName": "keyanmaskoot",
+      "authorDate": "2026-06-06T12:56:40Z"
+    },
+    {
+      "sha": "9d6f0ea71c76b2934aff237f6751e6e07a08cfb0",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/9d6f0ea71c76b2934aff237f6751e6e07a08cfb0",
+      "message": "ci: 2nd attempt fixing midgard node's",
+      "authorName": "keyanmaskoot",
+      "authorDate": "2026-06-06T11:11:40Z"
+    },
+    {
+      "sha": "3e7f7a071375efb6c133843c55bfe39e73dd53c6",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/3e7f7a071375efb6c133843c55bfe39e73dd53c6",
+      "message": "ci: attempt fixing midgard node's",
+      "authorName": "keyanmaskoot",
+      "authorDate": "2026-06-06T10:39:58Z"
+    },
+    {
+      "sha": "973d7999fdb6de7ef2bdbd916a2809ec681b05a2",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/973d7999fdb6de7ef2bdbd916a2809ec681b05a2",
+      "message": "ci: fix aiken version",
+      "authorName": "keyanmaskoot",
+      "authorDate": "2026-06-06T10:22:12Z"
+    },
+    {
+      "sha": "7a50333eb1286b04fff4b600c18e68c888a61b2e",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/7a50333eb1286b04fff4b600c18e68c888a61b2e",
+      "message": "fix(aiken): resolve warnings",
+      "authorName": "keyanmaskoot",
+      "authorDate": "2026-06-06T10:19:46Z"
+    },
+    {
+      "sha": "a98eb6153fe7ba1f3f814f2ffe5616b93b966b26",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/a98eb6153fe7ba1f3f814f2ffe5616b93b966b26",
+      "message": "refactor(aiken): new `phas` script hash 4 testnet",
+      "authorName": "keyanmaskoot",
+      "authorDate": "2026-06-06T10:07:32Z"
+    },
+    {
+      "sha": "3dd6404fd3ddd6e478bdb00a01f31fa6a489ed8c",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/3dd6404fd3ddd6e478bdb00a01f31fa6a489ed8c",
+      "message": "refactor(demo): align with aiken changes",
+      "authorName": "keyanmaskoot",
+      "authorDate": "2026-06-06T09:51:42Z"
+    },
+    {
+      "sha": "4e42e3f5e68308bbc443f2d3c43de2e9432b04ab",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/4e42e3f5e68308bbc443f2d3c43de2e9432b04ab",
+      "message": "fix(aiken): state queue redeemer lookup",
+      "authorName": "keyanmaskoot",
+      "authorDate": "2026-06-05T09:40:18Z"
+    },
     {
       "sha": "a433be3fd55649b59d431f9d8da7a2c4cfbcc8d5",
       "html_url": "https://github.com/Anastasia-Labs/midgard/commit/a433be3fd55649b59d431f9d8da7a2c4cfbcc8d5",
@@ -43,83 +120,6 @@
       "message": "Update scheduler transactions and tests",
       "authorName": "TotallyNotChase",
       "authorDate": "2026-06-03T18:19:37Z"
-    },
-    {
-      "sha": "6a5619cb9e5c6cef9497a34393d3ab2778730bcb",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/6a5619cb9e5c6cef9497a34393d3ab2778730bcb",
-      "message": "Update lucid-evolution version",
-      "authorName": "Drop-Table-Users",
-      "authorDate": "2026-06-03T15:24:35Z"
-    },
-    {
-      "sha": "fecd4ae9e0ad862f10a542784defd14da4817e7b",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/fecd4ae9e0ad862f10a542784defd14da4817e7b",
-      "message": "Fix empty active utxos set calculation",
-      "authorName": "TotallyNotChase",
-      "authorDate": "2026-06-02T19:30:24Z"
-    },
-    {
-      "sha": "ed877810696310a09f0ba3c42a04b61e8413cf9d",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ed877810696310a09f0ba3c42a04b61e8413cf9d",
-      "message": "all tests",
-      "authorName": "Suganya Arun",
-      "authorDate": "2026-06-02T18:40:24Z"
-    },
-    {
-      "sha": "c015752e58a80a8ec9795eeeae688006ca41a0b2",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/c015752e58a80a8ec9795eeeae688006ca41a0b2",
-      "message": "chore: commit remaining local changes",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-06-02T15:39:28Z"
-    },
-    {
-      "sha": "5b5e46b268804146c8466ddeba86cc1d989cefc0",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/5b5e46b268804146c8466ddeba86cc1d989cefc0",
-      "message": "test: harden fault-proof non-tail removal coverage",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-06-02T15:37:40Z"
-    },
-    {
-      "sha": "640c009f7f91a05d95a9e8424f4139c8af86895b",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/640c009f7f91a05d95a9e8424f4139c8af86895b",
-      "message": "Fix Aiken fmt",
-      "authorName": "TotallyNotChase",
-      "authorDate": "2026-06-01T18:11:47Z"
-    },
-    {
-      "sha": "447686a18c7051a4c2b63d7c0fd670a1fa3b7af4",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/447686a18c7051a4c2b63d7c0fd670a1fa3b7af4",
-      "message": "Rename scheduler datum in light of Aiken bug",
-      "authorName": "TotallyNotChase",
-      "authorDate": "2026-06-01T17:11:01Z"
-    },
-    {
-      "sha": "2b729003a8236ebd146d289653314a89a94a1432",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/2b729003a8236ebd146d289653314a89a94a1432",
-      "message": "Update retire operators as per scheduler script changes",
-      "authorName": "TotallyNotChase",
-      "authorDate": "2026-06-01T17:10:46Z"
-    },
-    {
-      "sha": "5b2d3addefc83fb08638eaa91d384bf5388d046d",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/5b2d3addefc83fb08638eaa91d384bf5388d046d",
-      "message": "Failed to stabilize the commit window error fix",
-      "authorName": "Drop-Table-Users",
-      "authorDate": "2026-06-01T14:46:42Z"
-    },
-    {
-      "sha": "e22bab7b6489fdccd4559782b6325c74e9bd85bf",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/e22bab7b6489fdccd4559782b6325c74e9bd85bf",
-      "message": "Fix initial deposit creation",
-      "authorName": "Drop-Table-Users",
-      "authorDate": "2026-06-01T12:54:41Z"
-    },
-    {
-      "sha": "244736bda18dd14e2f32dd6f2f6178ee8eae6838",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/244736bda18dd14e2f32dd6f2f6178ee8eae6838",
-      "message": "conversion between encodings to compare size",
-      "authorName": "Drop-Table-Users",
-      "authorDate": "2026-05-28T11:17:11Z"
     }
   ],
   "contributors": [
@@ -335,10 +335,6 @@
   "releases": [],
   "commitActivity": [
     {
-      "week": 1749340800,
-      "total": 13
-    },
-    {
       "week": 1749945600,
       "total": 15
     },
@@ -384,11 +380,11 @@
     },
     {
       "week": 1756598400,
-      "total": 4
+      "total": 5
     },
     {
       "week": 1757203200,
-      "total": 58
+      "total": 59
     },
     {
       "week": 1757808000,
@@ -532,15 +528,19 @@
     },
     {
       "week": 1778976000,
-      "total": 14
+      "total": 10
     },
     {
       "week": 1779580800,
-      "total": 5
+      "total": 4
     },
     {
       "week": 1780185600,
-      "total": 14
+      "total": 25
+    },
+    {
+      "week": 1780790400,
+      "total": 0
     }
   ]
 }
