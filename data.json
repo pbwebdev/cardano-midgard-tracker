@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-06-08T11:07:16.713Z",
+  "fetchedAt": "2026-06-09T09:54:54.344Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 24,
@@ -16,6 +16,13 @@
     "Perl": 37
   },
   "commits": [
+    {
+      "sha": "a237187dcf2108092cea2340bd044bd50f4c6e90",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/a237187dcf2108092cea2340bd044bd50f4c6e90",
+      "message": "Initialize midgard-node Haskell scaffold",
+      "authorName": "TotallyNotChase",
+      "authorDate": "2026-06-08T19:20:25Z"
+    },
     {
       "sha": "a580d4b5473d31c6bd7d30879e4a41a63bdaf5a0",
       "html_url": "https://github.com/Anastasia-Labs/midgard/commit/a580d4b5473d31c6bd7d30879e4a41a63bdaf5a0",
@@ -113,13 +120,6 @@
       "message": "Merge pull request #450 from Anastasia-Labs/chase/offchain-scheduler-txs\n\nUpdate scheduler transactions",
       "authorName": "colll78",
       "authorDate": "2026-06-03T21:44:57Z"
-    },
-    {
-      "sha": "eef8a312488579c37b781421140a57aa70487ac6",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/eef8a312488579c37b781421140a57aa70487ac6",
-      "message": "Documentation for advanceOrRewind",
-      "authorName": "TotallyNotChase",
-      "authorDate": "2026-06-03T18:44:45Z"
     }
   ],
   "contributors": [
@@ -386,11 +386,11 @@
     },
     {
       "week": 1756598400,
-      "total": 5
+      "total": 4
     },
     {
       "week": 1757203200,
-      "total": 59
+      "total": 58
     },
     {
       "week": 1757808000,
@@ -430,11 +430,11 @@
     },
     {
       "week": 1763251200,
-      "total": 23
+      "total": 32
     },
     {
       "week": 1763856000,
-      "total": 16
+      "total": 44
     },
     {
       "week": 1764460800,
@@ -474,15 +474,15 @@
     },
     {
       "week": 1769904000,
-      "total": 45
+      "total": 46
     },
     {
       "week": 1770508800,
-      "total": 32
+      "total": 36
     },
     {
       "week": 1771113600,
-      "total": 10
+      "total": 14
     },
     {
       "week": 1771718400,
@@ -490,19 +490,19 @@
     },
     {
       "week": 1772323200,
-      "total": 16
+      "total": 26
     },
     {
       "week": 1772928000,
-      "total": 23
+      "total": 36
     },
     {
       "week": 1773532800,
-      "total": 25
+      "total": 29
     },
     {
       "week": 1774137600,
-      "total": 37
+      "total": 47
     },
     {
       "week": 1774742400,
@@ -510,7 +510,7 @@
     },
     {
       "week": 1775347200,
-      "total": 40
+      "total": 45
     },
     {
       "week": 1775952000,
@@ -518,11 +518,11 @@
     },
     {
       "week": 1776556800,
-      "total": 18
+      "total": 29
     },
     {
       "week": 1777161600,
-      "total": 39
+      "total": 26
     },
     {
       "week": 1777766400,
@@ -530,11 +530,11 @@
     },
     {
       "week": 1778371200,
-      "total": 24
+      "total": 44
     },
     {
       "week": 1778976000,
-      "total": 12
+      "total": 16
     },
     {
       "week": 1779580800,
@@ -542,11 +542,11 @@
     },
     {
       "week": 1780185600,
-      "total": 25
+      "total": 29
     },
     {
       "week": 1780790400,
-      "total": 1
+      "total": 2
     }
   ]
 }
