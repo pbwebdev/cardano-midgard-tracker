@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-06-09T09:54:54.344Z",
+  "fetchedAt": "2026-06-10T10:12:11.097Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 24,
@@ -16,6 +16,55 @@
     "Perl": 37
   },
   "commits": [
+    {
+      "sha": "3a47748657747f5fdd44e8f8738edc045cc534b8",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/3a47748657747f5fdd44e8f8738edc045cc534b8",
+      "message": "Binary encoding",
+      "authorName": "Drop-Table-Users",
+      "authorDate": "2026-06-10T10:00:48Z"
+    },
+    {
+      "sha": "b8c2cf56fbd95fec7ac319ea640a387dd47941ef",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/b8c2cf56fbd95fec7ac319ea640a387dd47941ef",
+      "message": "fix(aiken): resolve compiler error",
+      "authorName": "keyanmaskoot",
+      "authorDate": "2026-06-09T22:40:42Z"
+    },
+    {
+      "sha": "68109c8726821601b4501cbbcad868475d9efc07",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/68109c8726821601b4501cbbcad868475d9efc07",
+      "message": "refactor(aiken): refine fraud proof catalogue impl",
+      "authorName": "keyanmaskoot",
+      "authorDate": "2026-06-09T22:32:37Z"
+    },
+    {
+      "sha": "84638990f91f15f5b851c51e3412544804d4534a",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/84638990f91f15f5b851c51e3412544804d4534a",
+      "message": "Basic DB setup and DB tests",
+      "authorName": "TotallyNotChase",
+      "authorDate": "2026-06-09T16:39:17Z"
+    },
+    {
+      "sha": "b32f6bbf0c60b150b0809dc1982a064c79e63a64",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/b32f6bbf0c60b150b0809dc1982a064c79e63a64",
+      "message": "feat(aiken): 1st draft for updated catalogue",
+      "authorName": "keyanmaskoot",
+      "authorDate": "2026-06-09T15:01:49Z"
+    },
+    {
+      "sha": "fdf075a952d0715cf97c67146bf605481107ea59",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/fdf075a952d0715cf97c67146bf605481107ea59",
+      "message": "In-progress comments",
+      "authorName": "TotallyNotChase",
+      "authorDate": "2026-06-08T20:45:53Z"
+    },
+    {
+      "sha": "2b90ef77d78ba6d1f17a671d7470d882db3636c5",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/2b90ef77d78ba6d1f17a671d7470d882db3636c5",
+      "message": "Basic DB setup",
+      "authorName": "TotallyNotChase",
+      "authorDate": "2026-06-08T20:27:07Z"
+    },
     {
       "sha": "a237187dcf2108092cea2340bd044bd50f4c6e90",
       "html_url": "https://github.com/Anastasia-Labs/midgard/commit/a237187dcf2108092cea2340bd044bd50f4c6e90",
@@ -71,55 +120,6 @@
       "message": "ci: attempt fixing midgard node's",
       "authorName": "keyanmaskoot",
       "authorDate": "2026-06-06T10:39:58Z"
-    },
-    {
-      "sha": "973d7999fdb6de7ef2bdbd916a2809ec681b05a2",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/973d7999fdb6de7ef2bdbd916a2809ec681b05a2",
-      "message": "ci: fix aiken version",
-      "authorName": "keyanmaskoot",
-      "authorDate": "2026-06-06T10:22:12Z"
-    },
-    {
-      "sha": "7a50333eb1286b04fff4b600c18e68c888a61b2e",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/7a50333eb1286b04fff4b600c18e68c888a61b2e",
-      "message": "fix(aiken): resolve warnings",
-      "authorName": "keyanmaskoot",
-      "authorDate": "2026-06-06T10:19:46Z"
-    },
-    {
-      "sha": "a98eb6153fe7ba1f3f814f2ffe5616b93b966b26",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/a98eb6153fe7ba1f3f814f2ffe5616b93b966b26",
-      "message": "refactor(aiken): new `phas` script hash 4 testnet",
-      "authorName": "keyanmaskoot",
-      "authorDate": "2026-06-06T10:07:32Z"
-    },
-    {
-      "sha": "3dd6404fd3ddd6e478bdb00a01f31fa6a489ed8c",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/3dd6404fd3ddd6e478bdb00a01f31fa6a489ed8c",
-      "message": "refactor(demo): align with aiken changes",
-      "authorName": "keyanmaskoot",
-      "authorDate": "2026-06-06T09:51:42Z"
-    },
-    {
-      "sha": "4e42e3f5e68308bbc443f2d3c43de2e9432b04ab",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/4e42e3f5e68308bbc443f2d3c43de2e9432b04ab",
-      "message": "fix(aiken): state queue redeemer lookup",
-      "authorName": "keyanmaskoot",
-      "authorDate": "2026-06-05T09:40:18Z"
-    },
-    {
-      "sha": "a433be3fd55649b59d431f9d8da7a2c4cfbcc8d5",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/a433be3fd55649b59d431f9d8da7a2c4cfbcc8d5",
-      "message": "refactor(aiken): bump `aiken-design-patterns`\n\nFixes the vulnerability that allowed multiple spends during linked list\nmint operations.\n\nAlso removed extra checks around `LinkedListMutation` endpoint of the\nstate queue. All minting endpoints of state queue are routed through the\nlinked list module, and it should suffice for the spending endpoint to\nsimply delegate its logic to the minting policy.",
-      "authorName": "keyanmaskoot",
-      "authorDate": "2026-06-04T17:32:03Z"
-    },
-    {
-      "sha": "497d9cc6ec2da37c8cd800b6d10794c5bcfebee5",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/497d9cc6ec2da37c8cd800b6d10794c5bcfebee5",
-      "message": "Merge pull request #450 from Anastasia-Labs/chase/offchain-scheduler-txs\n\nUpdate scheduler transactions",
-      "authorName": "colll78",
-      "authorDate": "2026-06-03T21:44:57Z"
     }
   ],
   "contributors": [
@@ -358,7 +358,7 @@
     },
     {
       "week": 1752364800,
-      "total": 13
+      "total": 12
     },
     {
       "week": 1752969600,
@@ -378,7 +378,7 @@
     },
     {
       "week": 1755388800,
-      "total": 34
+      "total": 29
     },
     {
       "week": 1755993600,
@@ -386,11 +386,11 @@
     },
     {
       "week": 1756598400,
-      "total": 4
+      "total": 5
     },
     {
       "week": 1757203200,
-      "total": 58
+      "total": 59
     },
     {
       "week": 1757808000,
@@ -430,11 +430,11 @@
     },
     {
       "week": 1763251200,
-      "total": 32
+      "total": 23
     },
     {
       "week": 1763856000,
-      "total": 44
+      "total": 16
     },
     {
       "week": 1764460800,
@@ -482,7 +482,7 @@
     },
     {
       "week": 1771113600,
-      "total": 14
+      "total": 13
     },
     {
       "week": 1771718400,
@@ -514,7 +514,7 @@
     },
     {
       "week": 1775952000,
-      "total": 32
+      "total": 28
     },
     {
       "week": 1776556800,
@@ -522,15 +522,15 @@
     },
     {
       "week": 1777161600,
-      "total": 26
+      "total": 24
     },
     {
       "week": 1777766400,
-      "total": 35
+      "total": 23
     },
     {
       "week": 1778371200,
-      "total": 44
+      "total": 41
     },
     {
       "week": 1778976000,
@@ -538,15 +538,15 @@
     },
     {
       "week": 1779580800,
-      "total": 5
+      "total": 2
     },
     {
       "week": 1780185600,
-      "total": 29
+      "total": 26
     },
     {
       "week": 1780790400,
-      "total": 2
+      "total": 9
     }
   ]
 }
