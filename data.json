@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-06-10T10:12:11.097Z",
+  "fetchedAt": "2026-06-11T10:46:36.091Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 24,
@@ -17,11 +17,88 @@
   },
   "commits": [
     {
+      "sha": "b8c877426476a6fcf05bc0519986f2e613f2a19e",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/b8c877426476a6fcf05bc0519986f2e613f2a19e",
+      "message": "refactor(demo): more consistent naming",
+      "authorName": "keyanmaskoot",
+      "authorDate": "2026-06-11T08:22:41Z"
+    },
+    {
+      "sha": "dffb182a8a735aa7a57b00cca710053af3e26f9f",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/dffb182a8a735aa7a57b00cca710053af3e26f9f",
+      "message": "feat(node): start updating the node",
+      "authorName": "keyanmaskoot",
+      "authorDate": "2026-06-10T21:14:50Z"
+    },
+    {
+      "sha": "f2e9888509addc9b2737d7a45a78e621f96865c7",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/f2e9888509addc9b2737d7a45a78e621f96865c7",
+      "message": "feat(sdk): abstraction for fault proof chains",
+      "authorName": "keyanmaskoot",
+      "authorDate": "2026-06-10T21:12:25Z"
+    },
+    {
+      "sha": "17b391006d89649e02ab0bbce543698c4bfcdcf6",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/17b391006d89649e02ab0bbce543698c4bfcdcf6",
+      "message": "feat(sdk): checkpoint",
+      "authorName": "keyanmaskoot",
+      "authorDate": "2026-06-10T17:11:51Z"
+    },
+    {
+      "sha": "e9c6458f5ddc35b087b245833abcf8e044545c3c",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/e9c6458f5ddc35b087b245833abcf8e044545c3c",
+      "message": "feat(sdk): update computation thread",
+      "authorName": "keyanmaskoot",
+      "authorDate": "2026-06-10T15:30:19Z"
+    },
+    {
+      "sha": "409454d1a30862aa01438649d5421ea815f85ab2",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/409454d1a30862aa01438649d5421ea815f85ab2",
+      "message": "feat(demo): update sdk's initialization module",
+      "authorName": "keyanmaskoot",
+      "authorDate": "2026-06-10T12:58:37Z"
+    },
+    {
+      "sha": "f9c4358acb92a6fa9c442bb8f2ac311be098db94",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/f9c4358acb92a6fa9c442bb8f2ac311be098db94",
+      "message": "fix(demo): remove unused fpc init tx program",
+      "authorName": "keyanmaskoot",
+      "authorDate": "2026-06-10T12:42:04Z"
+    },
+    {
+      "sha": "87c4585ade584173ebfcc6d121da52a008942857",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/87c4585ade584173ebfcc6d121da52a008942857",
+      "message": "feat(demo): update sdk's catalogue module",
+      "authorName": "keyanmaskoot",
+      "authorDate": "2026-06-10T12:23:52Z"
+    },
+    {
+      "sha": "704dec461fa49910ae4ba5b5878579bef3faf673",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/704dec461fa49910ae4ba5b5878579bef3faf673",
+      "message": "feat(demo): add a minimal nested list module",
+      "authorName": "keyanmaskoot",
+      "authorDate": "2026-06-10T10:07:42Z"
+    },
+    {
       "sha": "3a47748657747f5fdd44e8f8738edc045cc534b8",
       "html_url": "https://github.com/Anastasia-Labs/midgard/commit/3a47748657747f5fdd44e8f8738edc045cc534b8",
       "message": "Binary encoding",
       "authorName": "Drop-Table-Users",
       "authorDate": "2026-06-10T10:00:48Z"
+    },
+    {
+      "sha": "a69abe21bb71c1f4f8e4e325631510de4e201b9c",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/a69abe21bb71c1f4f8e4e325631510de4e201b9c",
+      "message": "fix(aiken): remove stale constant",
+      "authorName": "keyanmaskoot",
+      "authorDate": "2026-06-10T07:02:58Z"
+    },
+    {
+      "sha": "1ff3e0d602509540d6243a31dff159cc8b03cc95",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/1ff3e0d602509540d6243a31dff159cc8b03cc95",
+      "message": "refactor(aiken): use int 4 fraud proof id in rdmr",
+      "authorName": "keyanmaskoot",
+      "authorDate": "2026-06-10T06:22:03Z"
     },
     {
       "sha": "b8c2cf56fbd95fec7ac319ea640a387dd47941ef",
@@ -43,83 +120,6 @@
       "message": "Basic DB setup and DB tests",
       "authorName": "TotallyNotChase",
       "authorDate": "2026-06-09T16:39:17Z"
-    },
-    {
-      "sha": "b32f6bbf0c60b150b0809dc1982a064c79e63a64",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/b32f6bbf0c60b150b0809dc1982a064c79e63a64",
-      "message": "feat(aiken): 1st draft for updated catalogue",
-      "authorName": "keyanmaskoot",
-      "authorDate": "2026-06-09T15:01:49Z"
-    },
-    {
-      "sha": "fdf075a952d0715cf97c67146bf605481107ea59",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/fdf075a952d0715cf97c67146bf605481107ea59",
-      "message": "In-progress comments",
-      "authorName": "TotallyNotChase",
-      "authorDate": "2026-06-08T20:45:53Z"
-    },
-    {
-      "sha": "2b90ef77d78ba6d1f17a671d7470d882db3636c5",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/2b90ef77d78ba6d1f17a671d7470d882db3636c5",
-      "message": "Basic DB setup",
-      "authorName": "TotallyNotChase",
-      "authorDate": "2026-06-08T20:27:07Z"
-    },
-    {
-      "sha": "a237187dcf2108092cea2340bd044bd50f4c6e90",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/a237187dcf2108092cea2340bd044bd50f4c6e90",
-      "message": "Initialize midgard-node Haskell scaffold",
-      "authorName": "TotallyNotChase",
-      "authorDate": "2026-06-08T19:20:25Z"
-    },
-    {
-      "sha": "a580d4b5473d31c6bd7d30879e4a41a63bdaf5a0",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/a580d4b5473d31c6bd7d30879e4a41a63bdaf5a0",
-      "message": "Merge pull request #452 from Anastasia-Labs/bump-adp\n\nBump `aiken-design-patterns`",
-      "authorName": "colll78",
-      "authorDate": "2026-06-08T08:54:42Z"
-    },
-    {
-      "sha": "0aebecac60c2f5af4ba5e4f3d113cae7c41cd545",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/0aebecac60c2f5af4ba5e4f3d113cae7c41cd545",
-      "message": "fix: remove stale redeemer argument",
-      "authorName": "keyanmaskoot",
-      "authorDate": "2026-06-06T16:29:29Z"
-    },
-    {
-      "sha": "ca9173670f2cfa82dc6d8960403b698593da0dc6",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ca9173670f2cfa82dc6d8960403b698593da0dc6",
-      "message": "fix(tests): revert increases max tx size in emultr",
-      "authorName": "keyanmaskoot",
-      "authorDate": "2026-06-06T15:43:57Z"
-    },
-    {
-      "sha": "8ddfa5480ade1743fedd711ad5678c30a62971a0",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/8ddfa5480ade1743fedd711ad5678c30a62971a0",
-      "message": "ci: set db port explicitly",
-      "authorName": "keyanmaskoot",
-      "authorDate": "2026-06-06T13:34:07Z"
-    },
-    {
-      "sha": "a89ea71018714a1f148c51257d2203bf3349ed32",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/a89ea71018714a1f148c51257d2203bf3349ed32",
-      "message": "fix(aiken): revert `phas` script hash",
-      "authorName": "keyanmaskoot",
-      "authorDate": "2026-06-06T12:56:40Z"
-    },
-    {
-      "sha": "9d6f0ea71c76b2934aff237f6751e6e07a08cfb0",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/9d6f0ea71c76b2934aff237f6751e6e07a08cfb0",
-      "message": "ci: 2nd attempt fixing midgard node's",
-      "authorName": "keyanmaskoot",
-      "authorDate": "2026-06-06T11:11:40Z"
-    },
-    {
-      "sha": "3e7f7a071375efb6c133843c55bfe39e73dd53c6",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/3e7f7a071375efb6c133843c55bfe39e73dd53c6",
-      "message": "ci: attempt fixing midgard node's",
-      "authorName": "keyanmaskoot",
-      "authorDate": "2026-06-06T10:39:58Z"
     }
   ],
   "contributors": [
@@ -358,7 +358,7 @@
     },
     {
       "week": 1752364800,
-      "total": 12
+      "total": 13
     },
     {
       "week": 1752969600,
@@ -378,7 +378,7 @@
     },
     {
       "week": 1755388800,
-      "total": 29
+      "total": 34
     },
     {
       "week": 1755993600,
@@ -482,7 +482,7 @@
     },
     {
       "week": 1771113600,
-      "total": 13
+      "total": 14
     },
     {
       "week": 1771718400,
@@ -514,23 +514,23 @@
     },
     {
       "week": 1775952000,
-      "total": 28
+      "total": 32
     },
     {
       "week": 1776556800,
-      "total": 29
+      "total": 30
     },
     {
       "week": 1777161600,
-      "total": 24
+      "total": 39
     },
     {
       "week": 1777766400,
-      "total": 23
+      "total": 35
     },
     {
       "week": 1778371200,
-      "total": 41
+      "total": 42
     },
     {
       "week": 1778976000,
@@ -546,7 +546,7 @@
     },
     {
       "week": 1780790400,
-      "total": 9
+      "total": 20
     }
   ]
 }
