@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-06-12T10:22:04.867Z",
+  "fetchedAt": "2026-06-13T09:24:17.768Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 24,
@@ -17,11 +17,11 @@
   },
   "commits": [
     {
-      "sha": "41284d8974568f47ef35cb96e23acbf1b56894c2",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/41284d8974568f47ef35cb96e23acbf1b56894c2",
-      "message": "Merge pull request #434 from Anastasia-Labs/matteoProofs\n\nRefactoring of all the fraud proofs",
-      "authorName": "keyanm",
-      "authorDate": "2026-06-12T09:42:36Z"
+      "sha": "95840f63d10cf3b3a8ef2664a876b17308819e14",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/95840f63d10cf3b3a8ef2664a876b17308819e14",
+      "message": "refactor(aiken): use native tx for tx orders",
+      "authorName": "keyanmaskoot",
+      "authorDate": "2026-06-12T14:12:38Z"
     },
     {
       "sha": "b2794afa5a9a57cbadf3c47d0d9ae762ef07a451",
@@ -352,27 +352,27 @@
     },
     {
       "week": 1750550400,
-      "total": 2
+      "total": 6
     },
     {
       "week": 1751155200,
-      "total": 5
+      "total": 15
     },
     {
       "week": 1751760000,
-      "total": 0
+      "total": 23
     },
     {
       "week": 1752364800,
-      "total": 1
+      "total": 13
     },
     {
       "week": 1752969600,
-      "total": 0
+      "total": 27
     },
     {
       "week": 1753574400,
-      "total": 14
+      "total": 32
     },
     {
       "week": 1754179200,
@@ -536,11 +536,11 @@
     },
     {
       "week": 1778371200,
-      "total": 23
+      "total": 43
     },
     {
       "week": 1778976000,
-      "total": 10
+      "total": 12
     },
     {
       "week": 1779580800,
