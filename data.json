@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-06-13T09:24:17.768Z",
+  "fetchedAt": "2026-06-14T09:44:40.194Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 24,
@@ -22,6 +22,13 @@
       "message": "refactor(aiken): use native tx for tx orders",
       "authorName": "keyanmaskoot",
       "authorDate": "2026-06-12T14:12:38Z"
+    },
+    {
+      "sha": "41284d8974568f47ef35cb96e23acbf1b56894c2",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/41284d8974568f47ef35cb96e23acbf1b56894c2",
+      "message": "Merge pull request #434 from Anastasia-Labs/matteoProofs\n\nRefactoring of all the fraud proofs",
+      "authorName": "keyanm",
+      "authorDate": "2026-06-12T09:42:36Z"
     },
     {
       "sha": "b2794afa5a9a57cbadf3c47d0d9ae762ef07a451",
@@ -113,13 +120,6 @@
       "message": "feat(demo): update sdk's initialization module",
       "authorName": "keyanmaskoot",
       "authorDate": "2026-06-10T12:58:37Z"
-    },
-    {
-      "sha": "f9c4358acb92a6fa9c442bb8f2ac311be098db94",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/f9c4358acb92a6fa9c442bb8f2ac311be098db94",
-      "message": "fix(demo): remove unused fpc init tx program",
-      "authorName": "keyanmaskoot",
-      "authorDate": "2026-06-10T12:42:04Z"
     }
   ],
   "contributors": [
@@ -347,12 +347,8 @@
   "releases": [],
   "commitActivity": [
     {
-      "week": 1749945600,
-      "total": 15
-    },
-    {
       "week": 1750550400,
-      "total": 6
+      "total": 7
     },
     {
       "week": 1751155200,
@@ -384,7 +380,7 @@
     },
     {
       "week": 1755388800,
-      "total": 29
+      "total": 34
     },
     {
       "week": 1755993600,
@@ -392,11 +388,11 @@
     },
     {
       "week": 1756598400,
-      "total": 4
+      "total": 5
     },
     {
       "week": 1757203200,
-      "total": 58
+      "total": 59
     },
     {
       "week": 1757808000,
@@ -540,11 +536,11 @@
     },
     {
       "week": 1778976000,
-      "total": 12
+      "total": 16
     },
     {
       "week": 1779580800,
-      "total": 1
+      "total": 2
     },
     {
       "week": 1780185600,
@@ -552,7 +548,11 @@
     },
     {
       "week": 1780790400,
-      "total": 27
+      "total": 29
+    },
+    {
+      "week": 1781395200,
+      "total": 0
     }
   ]
 }
