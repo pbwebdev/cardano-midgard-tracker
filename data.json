@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-06-14T09:44:40.194Z",
+  "fetchedAt": "2026-06-15T12:27:40.229Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 24,
@@ -16,6 +16,13 @@
     "Perl": 37
   },
   "commits": [
+    {
+      "sha": "af54a9bab970f2028807a0ec709739fda89aa9b7",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/af54a9bab970f2028807a0ec709739fda89aa9b7",
+      "message": "Implement SDK and CLI support for Non-Existent-Input fraud proof",
+      "authorName": "Drop-Table-Users",
+      "authorDate": "2026-06-15T11:56:42Z"
+    },
     {
       "sha": "95840f63d10cf3b3a8ef2664a876b17308819e14",
       "html_url": "https://github.com/Anastasia-Labs/midgard/commit/95840f63d10cf3b3a8ef2664a876b17308819e14",
@@ -113,13 +120,6 @@
       "message": "feat(sdk): update computation thread",
       "authorName": "keyanmaskoot",
       "authorDate": "2026-06-10T15:30:19Z"
-    },
-    {
-      "sha": "409454d1a30862aa01438649d5421ea815f85ab2",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/409454d1a30862aa01438649d5421ea815f85ab2",
-      "message": "feat(demo): update sdk's initialization module",
-      "authorName": "keyanmaskoot",
-      "authorDate": "2026-06-10T12:58:37Z"
     }
   ],
   "contributors": [
@@ -552,7 +552,7 @@
     },
     {
       "week": 1781395200,
-      "total": 0
+      "total": 1
     }
   ]
 }
