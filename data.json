@@ -1,10 +1,10 @@
 {
-  "fetchedAt": "2026-06-15T12:27:40.229Z",
+  "fetchedAt": "2026-06-16T11:21:20.235Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 24,
     "forks_count": 9,
-    "open_issues_count": 93
+    "open_issues_count": 94
   },
   "languages": {
     "Aiken": 359544,
@@ -16,6 +16,27 @@
     "Perl": 37
   },
   "commits": [
+    {
+      "sha": "ed21542d4da61fc56eb350d5a1f85e1512b3e771",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ed21542d4da61fc56eb350d5a1f85e1512b3e771",
+      "message": "Fix the commit time issue",
+      "authorName": "Drop-Table-Users",
+      "authorDate": "2026-06-16T09:24:58Z"
+    },
+    {
+      "sha": "fb668d09574569d0e702958f8b8032cedd9384a0",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/fb668d09574569d0e702958f8b8032cedd9384a0",
+      "message": "Non Existent Input",
+      "authorName": "Drop-Table-Users",
+      "authorDate": "2026-06-16T09:02:46Z"
+    },
+    {
+      "sha": "ec056549132cd32f7597dd09ada5e38fd45c029a",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ec056549132cd32f7597dd09ada5e38fd45c029a",
+      "message": "fix(sdk): revert witness prefix change\n\nThe demo currently fails because of unrelated mismatch with the onchain\ncode.\n\nTo keep the SDK more aligned with the untouched real blueprint in\n`midgard-demo`, this commit also reverts the updated witness prefix in\n`midgard-sdk`.",
+      "authorName": "keyanmaskoot",
+      "authorDate": "2026-06-15T17:45:43Z"
+    },
     {
       "sha": "af54a9bab970f2028807a0ec709739fda89aa9b7",
       "html_url": "https://github.com/Anastasia-Labs/midgard/commit/af54a9bab970f2028807a0ec709739fda89aa9b7",
@@ -99,27 +120,6 @@
       "message": "feat(node): start updating the node",
       "authorName": "keyanmaskoot",
       "authorDate": "2026-06-10T21:14:50Z"
-    },
-    {
-      "sha": "f2e9888509addc9b2737d7a45a78e621f96865c7",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/f2e9888509addc9b2737d7a45a78e621f96865c7",
-      "message": "feat(sdk): abstraction for fault proof chains",
-      "authorName": "keyanmaskoot",
-      "authorDate": "2026-06-10T21:12:25Z"
-    },
-    {
-      "sha": "17b391006d89649e02ab0bbce543698c4bfcdcf6",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/17b391006d89649e02ab0bbce543698c4bfcdcf6",
-      "message": "feat(sdk): checkpoint",
-      "authorName": "keyanmaskoot",
-      "authorDate": "2026-06-10T17:11:51Z"
-    },
-    {
-      "sha": "e9c6458f5ddc35b087b245833abcf8e044545c3c",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/e9c6458f5ddc35b087b245833abcf8e044545c3c",
-      "message": "feat(sdk): update computation thread",
-      "authorName": "keyanmaskoot",
-      "authorDate": "2026-06-10T15:30:19Z"
     }
   ],
   "contributors": [
@@ -336,19 +336,13 @@
       "title": "Switch Fraud Proof Catalogue to a Linked List",
       "html_url": "https://github.com/Anastasia-Labs/midgard/issues/446",
       "updated_at": "2026-05-12T23:46:54Z"
-    },
-    {
-      "number": 442,
-      "title": "Add Aiken Tests",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/442",
-      "updated_at": "2026-04-30T19:02:48Z"
     }
   ],
   "releases": [],
   "commitActivity": [
     {
       "week": 1750550400,
-      "total": 7
+      "total": 6
     },
     {
       "week": 1751155200,
@@ -376,11 +370,11 @@
     },
     {
       "week": 1754784000,
-      "total": 35
+      "total": 23
     },
     {
       "week": 1755388800,
-      "total": 34
+      "total": 23
     },
     {
       "week": 1755993600,
@@ -392,7 +386,7 @@
     },
     {
       "week": 1757203200,
-      "total": 59
+      "total": 57
     },
     {
       "week": 1757808000,
@@ -520,11 +514,11 @@
     },
     {
       "week": 1776556800,
-      "total": 30
+      "total": 29
     },
     {
       "week": 1777161600,
-      "total": 39
+      "total": 26
     },
     {
       "week": 1777766400,
@@ -532,7 +526,7 @@
     },
     {
       "week": 1778371200,
-      "total": 43
+      "total": 41
     },
     {
       "week": 1778976000,
@@ -552,7 +546,7 @@
     },
     {
       "week": 1781395200,
-      "total": 1
+      "total": 4
     }
   ]
 }
