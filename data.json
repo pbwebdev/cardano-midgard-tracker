@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-06-16T11:21:20.235Z",
+  "fetchedAt": "2026-06-17T11:06:24.360Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 24,
@@ -17,18 +17,60 @@
   },
   "commits": [
     {
-      "sha": "ed21542d4da61fc56eb350d5a1f85e1512b3e771",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ed21542d4da61fc56eb350d5a1f85e1512b3e771",
-      "message": "Fix the commit time issue",
-      "authorName": "Drop-Table-Users",
-      "authorDate": "2026-06-16T09:24:58Z"
+      "sha": "32232a71f97bc18440989a750727cc5d0197aa89",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/32232a71f97bc18440989a750727cc5d0197aa89",
+      "message": "fix(aiken): update witness prefixes\n\nThe SDK here only hardcodes the testnet version. This should probably be\nchanged so that it becomes environment aware.",
+      "authorName": "keyanm",
+      "authorDate": "2026-06-17T10:04:36Z"
     },
     {
-      "sha": "fb668d09574569d0e702958f8b8032cedd9384a0",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/fb668d09574569d0e702958f8b8032cedd9384a0",
-      "message": "Non Existent Input",
+      "sha": "41b4e5f5888022722046b4f813fc1280c17a97c8",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/41b4e5f5888022722046b4f813fc1280c17a97c8",
+      "message": "fix(aiken): add missing constant",
+      "authorName": "keyanm",
+      "authorDate": "2026-06-17T08:46:53Z"
+    },
+    {
+      "sha": "cee2dd0dd8242ae728b339ebaffcc9b00758ba6a",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/cee2dd0dd8242ae728b339ebaffcc9b00758ba6a",
+      "message": "Merge branch 'tx-validation' into merge-latest-to-txv",
+      "authorName": "keyanm",
+      "authorDate": "2026-06-17T08:28:30Z"
+    },
+    {
+      "sha": "c35a410a3429092a024b4bacb5cd23041f279cb0",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/c35a410a3429092a024b4bacb5cd23041f279cb0",
+      "message": "feat: add DA payload validation and e2e support",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-06-17T01:01:43Z"
+    },
+    {
+      "sha": "843ca67eaa4eb6ae3200ea51e4e0d2ca61801a03",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/843ca67eaa4eb6ae3200ea51e4e0d2ca61801a03",
+      "message": "refactor(aiken): cleanup of some helpers",
+      "authorName": "keyanm",
+      "authorDate": "2026-06-16T13:29:09Z"
+    },
+    {
+      "sha": "f944415acedbddce337bacf1c1167dd391bf2307",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/f944415acedbddce337bacf1c1167dd391bf2307",
+      "message": "refactor(aiken): data equality over per field eq.",
+      "authorName": "keyanm",
+      "authorDate": "2026-06-16T13:03:13Z"
+    },
+    {
+      "sha": "27f9b0521fa2514ad2707295640ed725a71f35f2",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/27f9b0521fa2514ad2707295640ed725a71f35f2",
+      "message": "Implement SDK, CLI support, Udpate Contracts for Non-Existent-Input FP",
       "authorName": "Drop-Table-Users",
-      "authorDate": "2026-06-16T09:02:46Z"
+      "authorDate": "2026-06-16T12:53:46Z"
+    },
+    {
+      "sha": "3f98116ee007a266ad4763aa8f10300d6a3bb8a4",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/3f98116ee007a266ad4763aa8f10300d6a3bb8a4",
+      "message": "chore(aiken): align da with the contribution guide",
+      "authorName": "keyanm",
+      "authorDate": "2026-06-16T09:47:49Z"
     },
     {
       "sha": "ec056549132cd32f7597dd09ada5e38fd45c029a",
@@ -36,13 +78,6 @@
       "message": "fix(sdk): revert witness prefix change\n\nThe demo currently fails because of unrelated mismatch with the onchain\ncode.\n\nTo keep the SDK more aligned with the untouched real blueprint in\n`midgard-demo`, this commit also reverts the updated witness prefix in\n`midgard-sdk`.",
       "authorName": "keyanmaskoot",
       "authorDate": "2026-06-15T17:45:43Z"
-    },
-    {
-      "sha": "af54a9bab970f2028807a0ec709739fda89aa9b7",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/af54a9bab970f2028807a0ec709739fda89aa9b7",
-      "message": "Implement SDK and CLI support for Non-Existent-Input fraud proof",
-      "authorName": "Drop-Table-Users",
-      "authorDate": "2026-06-15T11:56:42Z"
     },
     {
       "sha": "95840f63d10cf3b3a8ef2664a876b17308819e14",
@@ -85,41 +120,6 @@
       "message": "fix(demo): remove artifacts",
       "authorName": "keyanmaskoot",
       "authorDate": "2026-06-11T18:47:33Z"
-    },
-    {
-      "sha": "6ef7b75ae7dc4615398b17f99a3d8520bb37852a",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/6ef7b75ae7dc4615398b17f99a3d8520bb37852a",
-      "message": "fix(aiken): merge artifacts",
-      "authorName": "keyanmaskoot",
-      "authorDate": "2026-06-11T18:05:00Z"
-    },
-    {
-      "sha": "511aea7f2525632c2adf2c16293f54869b75f7cc",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/511aea7f2525632c2adf2c16293f54869b75f7cc",
-      "message": "Merge branch 'staging' into merge-latest-to-txv",
-      "authorName": "keyanmaskoot",
-      "authorDate": "2026-06-11T16:24:35Z"
-    },
-    {
-      "sha": "440a462acf70b5d6e20a6b3217e75b6848390139",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/440a462acf70b5d6e20a6b3217e75b6848390139",
-      "message": "Merge branch 'tx-validation' into merge-latest-to-txv\n\nSyncronize latest stable implementations with `tx-validations`.\n\nThis commit preserves `demo` from `tx-validation` in entirety.\n\nThe source branch is `matteoProofs`.",
-      "authorName": "keyanmaskoot",
-      "authorDate": "2026-06-11T15:28:26Z"
-    },
-    {
-      "sha": "b8c877426476a6fcf05bc0519986f2e613f2a19e",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/b8c877426476a6fcf05bc0519986f2e613f2a19e",
-      "message": "refactor(demo): more consistent naming",
-      "authorName": "keyanmaskoot",
-      "authorDate": "2026-06-11T08:22:41Z"
-    },
-    {
-      "sha": "dffb182a8a735aa7a57b00cca710053af3e26f9f",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/dffb182a8a735aa7a57b00cca710053af3e26f9f",
-      "message": "feat(node): start updating the node",
-      "authorName": "keyanmaskoot",
-      "authorDate": "2026-06-10T21:14:50Z"
     }
   ],
   "contributors": [
@@ -342,7 +342,7 @@
   "commitActivity": [
     {
       "week": 1750550400,
-      "total": 6
+      "total": 7
     },
     {
       "week": 1751155200,
@@ -530,11 +530,11 @@
     },
     {
       "week": 1778976000,
-      "total": 16
+      "total": 12
     },
     {
       "week": 1779580800,
-      "total": 2
+      "total": 1
     },
     {
       "week": 1780185600,
@@ -542,11 +542,11 @@
     },
     {
       "week": 1780790400,
-      "total": 29
+      "total": 30
     },
     {
       "week": 1781395200,
-      "total": 4
+      "total": 9
     }
   ]
 }
