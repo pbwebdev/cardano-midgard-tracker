@@ -1,10 +1,10 @@
 {
-  "fetchedAt": "2026-06-17T11:06:24.360Z",
+  "fetchedAt": "2026-06-18T10:38:08.023Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 24,
     "forks_count": 9,
-    "open_issues_count": 94
+    "open_issues_count": 93
   },
   "languages": {
     "Aiken": 359544,
@@ -16,6 +16,34 @@
     "Perl": 37
   },
   "commits": [
+    {
+      "sha": "65790f9e020def967a8f9591411774ac8741a6e6",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/65790f9e020def967a8f9591411774ac8741a6e6",
+      "message": "Merge pull request #453 from Anastasia-Labs/merge-latest-to-txv\n\nSync Branches",
+      "authorName": "colll78",
+      "authorDate": "2026-06-18T01:25:27Z"
+    },
+    {
+      "sha": "5716d5edae6e6de3c5f94e4f3e64de0a908114ee",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/5716d5edae6e6de3c5f94e4f3e64de0a908114ee",
+      "message": "test: gate live scheduler debug test",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-06-18T01:16:36Z"
+    },
+    {
+      "sha": "b089a011cc640f4a5c8a8c80c455e90b3d316914",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/b089a011cc640f4a5c8a8c80c455e90b3d316914",
+      "message": "fix: attest deposit-flow state queue merges",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-06-18T01:04:52Z"
+    },
+    {
+      "sha": "39c4e645221f5f34647b791fc8e729c8b49b89b4",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/39c4e645221f5f34647b791fc8e729c8b49b89b4",
+      "message": "Merge branch 'merge-latest-to-txv' into refine-da-att",
+      "authorName": "keyanm",
+      "authorDate": "2026-06-17T13:58:14Z"
+    },
     {
       "sha": "32232a71f97bc18440989a750727cc5d0197aa89",
       "html_url": "https://github.com/Anastasia-Labs/midgard/commit/32232a71f97bc18440989a750727cc5d0197aa89",
@@ -92,34 +120,6 @@
       "message": "Merge pull request #434 from Anastasia-Labs/matteoProofs\n\nRefactoring of all the fraud proofs",
       "authorName": "keyanm",
       "authorDate": "2026-06-12T09:42:36Z"
-    },
-    {
-      "sha": "b2794afa5a9a57cbadf3c47d0d9ae762ef07a451",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/b2794afa5a9a57cbadf3c47d0d9ae762ef07a451",
-      "message": "feat(demo): align with aiken changes",
-      "authorName": "keyanmaskoot",
-      "authorDate": "2026-06-12T09:33:10Z"
-    },
-    {
-      "sha": "47930b0a4b572641887821cc0c3563bbbcbb9602",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/47930b0a4b572641887821cc0c3563bbbcbb9602",
-      "message": "docs(aiken): add todos for tx order representation",
-      "authorName": "keyanmaskoot",
-      "authorDate": "2026-06-12T09:32:08Z"
-    },
-    {
-      "sha": "e420c8aee618d7bce8ea59416e8ca31636963b91",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/e420c8aee618d7bce8ea59416e8ca31636963b91",
-      "message": "fix(aiken): bring back missing import",
-      "authorName": "keyanmaskoot",
-      "authorDate": "2026-06-11T19:01:17Z"
-    },
-    {
-      "sha": "d4f0c1f9c492ca5b3bc0ccfde5423cccab6d2436",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d4f0c1f9c492ca5b3bc0ccfde5423cccab6d2436",
-      "message": "fix(demo): remove artifacts",
-      "authorName": "keyanmaskoot",
-      "authorDate": "2026-06-11T18:47:33Z"
     }
   ],
   "contributors": [
@@ -336,6 +336,12 @@
       "title": "Switch Fraud Proof Catalogue to a Linked List",
       "html_url": "https://github.com/Anastasia-Labs/midgard/issues/446",
       "updated_at": "2026-05-12T23:46:54Z"
+    },
+    {
+      "number": 442,
+      "title": "Add Aiken Tests",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/442",
+      "updated_at": "2026-04-30T19:02:48Z"
     }
   ],
   "releases": [],
@@ -530,11 +536,11 @@
     },
     {
       "week": 1778976000,
-      "total": 12
+      "total": 16
     },
     {
       "week": 1779580800,
-      "total": 1
+      "total": 2
     },
     {
       "week": 1780185600,
@@ -546,7 +552,7 @@
     },
     {
       "week": 1781395200,
-      "total": 9
+      "total": 13
     }
   ]
 }
