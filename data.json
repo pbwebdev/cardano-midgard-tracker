@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-06-20T09:26:27.837Z",
+  "fetchedAt": "2026-06-21T09:57:17.164Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 24,
@@ -16,6 +16,48 @@
     "Perl": 37
   },
   "commits": [
+    {
+      "sha": "dd2f2a8f8d1dcfc1f6c5548be9308b8e588ceef3",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/dd2f2a8f8d1dcfc1f6c5548be9308b8e588ceef3",
+      "message": "Consolidate node tests",
+      "authorName": "TotallyNotChase",
+      "authorDate": "2026-06-20T18:25:39Z"
+    },
+    {
+      "sha": "0940c69182a69f5ea929d2b2139c2dc3bc5c55bb",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/0940c69182a69f5ea929d2b2139c2dc3bc5c55bb",
+      "message": "Modularize server and remove DB integration (temp)",
+      "authorName": "TotallyNotChase",
+      "authorDate": "2026-06-20T18:00:43Z"
+    },
+    {
+      "sha": "ac646eeb11679594c59274f5908d35d334777fb7",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ac646eeb11679594c59274f5908d35d334777fb7",
+      "message": "fix(aiken): align with upstream",
+      "authorName": "keyanm",
+      "authorDate": "2026-06-20T15:25:16Z"
+    },
+    {
+      "sha": "f7a10458d2b4dd0fbffcb529da45f0980e27fdf7",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/f7a10458d2b4dd0fbffcb529da45f0980e27fdf7",
+      "message": "chore(aiken): minor cleanups",
+      "authorName": "keyanm",
+      "authorDate": "2026-06-20T12:13:18Z"
+    },
+    {
+      "sha": "bba5ab453b3d91b31ce712e3e4dd52a927eae219",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/bba5ab453b3d91b31ce712e3e4dd52a927eae219",
+      "message": "Merge branch 'tx-validation' into refine-da-att",
+      "authorName": "keyanm",
+      "authorDate": "2026-06-20T11:36:52Z"
+    },
+    {
+      "sha": "703219a508d30b4ff328f0a4fe0722f9cd6baa41",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/703219a508d30b4ff328f0a4fe0722f9cd6baa41",
+      "message": "refactor(aiken): 1st draft for granular hub utxos",
+      "authorName": "keyanm",
+      "authorDate": "2026-06-20T11:27:15Z"
+    },
     {
       "sha": "65790f9e020def967a8f9591411774ac8741a6e6",
       "html_url": "https://github.com/Anastasia-Labs/midgard/commit/65790f9e020def967a8f9591411774ac8741a6e6",
@@ -78,48 +120,6 @@
       "message": "refactor(aiken): cleanup of some helpers",
       "authorName": "keyanm",
       "authorDate": "2026-06-16T13:29:09Z"
-    },
-    {
-      "sha": "f944415acedbddce337bacf1c1167dd391bf2307",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/f944415acedbddce337bacf1c1167dd391bf2307",
-      "message": "refactor(aiken): data equality over per field eq.",
-      "authorName": "keyanm",
-      "authorDate": "2026-06-16T13:03:13Z"
-    },
-    {
-      "sha": "27f9b0521fa2514ad2707295640ed725a71f35f2",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/27f9b0521fa2514ad2707295640ed725a71f35f2",
-      "message": "Implement SDK, CLI support, Udpate Contracts for Non-Existent-Input FP",
-      "authorName": "Drop-Table-Users",
-      "authorDate": "2026-06-16T12:53:46Z"
-    },
-    {
-      "sha": "3f98116ee007a266ad4763aa8f10300d6a3bb8a4",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/3f98116ee007a266ad4763aa8f10300d6a3bb8a4",
-      "message": "chore(aiken): align da with the contribution guide",
-      "authorName": "keyanm",
-      "authorDate": "2026-06-16T09:47:49Z"
-    },
-    {
-      "sha": "ec056549132cd32f7597dd09ada5e38fd45c029a",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ec056549132cd32f7597dd09ada5e38fd45c029a",
-      "message": "fix(sdk): revert witness prefix change\n\nThe demo currently fails because of unrelated mismatch with the onchain\ncode.\n\nTo keep the SDK more aligned with the untouched real blueprint in\n`midgard-demo`, this commit also reverts the updated witness prefix in\n`midgard-sdk`.",
-      "authorName": "keyanmaskoot",
-      "authorDate": "2026-06-15T17:45:43Z"
-    },
-    {
-      "sha": "95840f63d10cf3b3a8ef2664a876b17308819e14",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/95840f63d10cf3b3a8ef2664a876b17308819e14",
-      "message": "refactor(aiken): use native tx for tx orders",
-      "authorName": "keyanmaskoot",
-      "authorDate": "2026-06-12T14:12:38Z"
-    },
-    {
-      "sha": "41284d8974568f47ef35cb96e23acbf1b56894c2",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/41284d8974568f47ef35cb96e23acbf1b56894c2",
-      "message": "Merge pull request #434 from Anastasia-Labs/matteoProofs\n\nRefactoring of all the fraud proofs",
-      "authorName": "keyanm",
-      "authorDate": "2026-06-12T09:42:36Z"
     }
   ],
   "contributors": [
@@ -347,10 +347,6 @@
   "releases": [],
   "commitActivity": [
     {
-      "week": 1750550400,
-      "total": 7
-    },
-    {
       "week": 1751155200,
       "total": 15
     },
@@ -380,7 +376,7 @@
     },
     {
       "week": 1755388800,
-      "total": 23
+      "total": 18
     },
     {
       "week": 1755993600,
@@ -532,15 +528,15 @@
     },
     {
       "week": 1778371200,
-      "total": 43
+      "total": 41
     },
     {
       "week": 1778976000,
-      "total": 12
+      "total": 16
     },
     {
       "week": 1779580800,
-      "total": 1
+      "total": 2
     },
     {
       "week": 1780185600,
@@ -548,11 +544,15 @@
     },
     {
       "week": 1780790400,
-      "total": 30
+      "total": 32
     },
     {
       "week": 1781395200,
-      "total": 13
+      "total": 19
+    },
+    {
+      "week": 1782000000,
+      "total": 0
     }
   ]
 }
