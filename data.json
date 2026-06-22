@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-06-21T09:57:17.164Z",
+  "fetchedAt": "2026-06-22T12:14:07.225Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 24,
@@ -16,6 +16,20 @@
     "Perl": 37
   },
   "commits": [
+    {
+      "sha": "b9fa850764765a369272fd8e3baac8067bc2723c",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/b9fa850764765a369272fd8e3baac8067bc2723c",
+      "message": "feat: update e2e skill",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-06-21T16:44:30Z"
+    },
+    {
+      "sha": "1f878d436ddcf9bb2de0ed916f202eb77255d487",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/1f878d436ddcf9bb2de0ed916f202eb77255d487",
+      "message": "feat: transition_trace_root addition",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-06-21T13:49:15Z"
+    },
     {
       "sha": "dd2f2a8f8d1dcfc1f6c5548be9308b8e588ceef3",
       "html_url": "https://github.com/Anastasia-Labs/midgard/commit/dd2f2a8f8d1dcfc1f6c5548be9308b8e588ceef3",
@@ -38,6 +52,13 @@
       "authorDate": "2026-06-20T15:25:16Z"
     },
     {
+      "sha": "c6fb29c5fc2d22d03823831a8fedeb58b90cad01",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/c6fb29c5fc2d22d03823831a8fedeb58b90cad01",
+      "message": "feat: state transition trace commitments",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-06-20T14:52:12Z"
+    },
+    {
       "sha": "f7a10458d2b4dd0fbffcb529da45f0980e27fdf7",
       "html_url": "https://github.com/Anastasia-Labs/midgard/commit/f7a10458d2b4dd0fbffcb529da45f0980e27fdf7",
       "message": "chore(aiken): minor cleanups",
@@ -57,6 +78,13 @@
       "message": "refactor(aiken): 1st draft for granular hub utxos",
       "authorName": "keyanm",
       "authorDate": "2026-06-20T11:27:15Z"
+    },
+    {
+      "sha": "52eb706cc23ad3bc1819186aabf56aaf5d8da0fa",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/52eb706cc23ad3bc1819186aabf56aaf5d8da0fa",
+      "message": "feat: move in da",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-06-19T23:54:48Z"
     },
     {
       "sha": "65790f9e020def967a8f9591411774ac8741a6e6",
@@ -92,34 +120,6 @@
       "message": "fix(aiken): update witness prefixes\n\nThe SDK here only hardcodes the testnet version. This should probably be\nchanged so that it becomes environment aware.",
       "authorName": "keyanm",
       "authorDate": "2026-06-17T10:04:36Z"
-    },
-    {
-      "sha": "41b4e5f5888022722046b4f813fc1280c17a97c8",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/41b4e5f5888022722046b4f813fc1280c17a97c8",
-      "message": "fix(aiken): add missing constant",
-      "authorName": "keyanm",
-      "authorDate": "2026-06-17T08:46:53Z"
-    },
-    {
-      "sha": "cee2dd0dd8242ae728b339ebaffcc9b00758ba6a",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/cee2dd0dd8242ae728b339ebaffcc9b00758ba6a",
-      "message": "Merge branch 'tx-validation' into merge-latest-to-txv",
-      "authorName": "keyanm",
-      "authorDate": "2026-06-17T08:28:30Z"
-    },
-    {
-      "sha": "c35a410a3429092a024b4bacb5cd23041f279cb0",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/c35a410a3429092a024b4bacb5cd23041f279cb0",
-      "message": "feat: add DA payload validation and e2e support",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-06-17T01:01:43Z"
-    },
-    {
-      "sha": "843ca67eaa4eb6ae3200ea51e4e0d2ca61801a03",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/843ca67eaa4eb6ae3200ea51e4e0d2ca61801a03",
-      "message": "refactor(aiken): cleanup of some helpers",
-      "authorName": "keyanm",
-      "authorDate": "2026-06-16T13:29:09Z"
     }
   ],
   "contributors": [
@@ -376,7 +376,7 @@
     },
     {
       "week": 1755388800,
-      "total": 18
+      "total": 23
     },
     {
       "week": 1755993600,
@@ -384,11 +384,11 @@
     },
     {
       "week": 1756598400,
-      "total": 5
+      "total": 4
     },
     {
       "week": 1757203200,
-      "total": 57
+      "total": 56
     },
     {
       "week": 1757808000,
@@ -428,15 +428,15 @@
     },
     {
       "week": 1763251200,
-      "total": 23
+      "total": 32
     },
     {
       "week": 1763856000,
-      "total": 16
+      "total": 43
     },
     {
       "week": 1764460800,
-      "total": 17
+      "total": 8
     },
     {
       "week": 1765065600,
@@ -544,15 +544,15 @@
     },
     {
       "week": 1780790400,
-      "total": 32
+      "total": 31
     },
     {
       "week": 1781395200,
-      "total": 19
+      "total": 21
     },
     {
       "week": 1782000000,
-      "total": 0
+      "total": 2
     }
   ]
 }
