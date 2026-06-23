@@ -1,10 +1,10 @@
 {
-  "fetchedAt": "2026-06-22T12:14:07.225Z",
+  "fetchedAt": "2026-06-23T09:52:31.538Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 24,
     "forks_count": 9,
-    "open_issues_count": 93
+    "open_issues_count": 95
   },
   "languages": {
     "Aiken": 359544,
@@ -16,6 +16,41 @@
     "Perl": 37
   },
   "commits": [
+    {
+      "sha": "b44dae93bdc499f95930b6fc44049129ac0a7051",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/b44dae93bdc499f95930b6fc44049129ac0a7051",
+      "message": "Update State Queue TXs",
+      "authorName": "TotallyNotChase",
+      "authorDate": "2026-06-22T20:59:19Z"
+    },
+    {
+      "sha": "cbf95a04917397235f14d94e0de295933d7d3848",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/cbf95a04917397235f14d94e0de295933d7d3848",
+      "message": "Update operator redeemer types and associated transactions",
+      "authorName": "TotallyNotChase",
+      "authorDate": "2026-06-22T18:14:02Z"
+    },
+    {
+      "sha": "b8c6a6525119287184a6629cb5830122c8993a1b",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/b8c6a6525119287184a6629cb5830122c8993a1b",
+      "message": "Merge branch 'tx-validation' into chase/tx-validation-haskell-scaffold",
+      "authorName": "TotallyNotChase",
+      "authorDate": "2026-06-22T17:10:30Z"
+    },
+    {
+      "sha": "dd7f5784855af1d909e4b86ffb0d429612273e3a",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/dd7f5784855af1d909e4b86ffb0d429612273e3a",
+      "message": "Remove dead cache host",
+      "authorName": "TotallyNotChase",
+      "authorDate": "2026-06-22T17:05:51Z"
+    },
+    {
+      "sha": "89cd64f915c337fb5ece4f32a63ded7cbfe6662e",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/89cd64f915c337fb5ece4f32a63ded7cbfe6662e",
+      "message": "Add dummy config",
+      "authorName": "TotallyNotChase",
+      "authorDate": "2026-06-22T17:05:00Z"
+    },
     {
       "sha": "b9fa850764765a369272fd8e3baac8067bc2723c",
       "html_url": "https://github.com/Anastasia-Labs/midgard/commit/b9fa850764765a369272fd8e3baac8067bc2723c",
@@ -85,41 +120,6 @@
       "message": "feat: move in da",
       "authorName": "Philip DiSarro",
       "authorDate": "2026-06-19T23:54:48Z"
-    },
-    {
-      "sha": "65790f9e020def967a8f9591411774ac8741a6e6",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/65790f9e020def967a8f9591411774ac8741a6e6",
-      "message": "Merge pull request #453 from Anastasia-Labs/merge-latest-to-txv\n\nSync Branches",
-      "authorName": "colll78",
-      "authorDate": "2026-06-18T01:25:27Z"
-    },
-    {
-      "sha": "5716d5edae6e6de3c5f94e4f3e64de0a908114ee",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/5716d5edae6e6de3c5f94e4f3e64de0a908114ee",
-      "message": "test: gate live scheduler debug test",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-06-18T01:16:36Z"
-    },
-    {
-      "sha": "b089a011cc640f4a5c8a8c80c455e90b3d316914",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/b089a011cc640f4a5c8a8c80c455e90b3d316914",
-      "message": "fix: attest deposit-flow state queue merges",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-06-18T01:04:52Z"
-    },
-    {
-      "sha": "39c4e645221f5f34647b791fc8e729c8b49b89b4",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/39c4e645221f5f34647b791fc8e729c8b49b89b4",
-      "message": "Merge branch 'merge-latest-to-txv' into refine-da-att",
-      "authorName": "keyanm",
-      "authorDate": "2026-06-17T13:58:14Z"
-    },
-    {
-      "sha": "32232a71f97bc18440989a750727cc5d0197aa89",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/32232a71f97bc18440989a750727cc5d0197aa89",
-      "message": "fix(aiken): update witness prefixes\n\nThe SDK here only hardcodes the testnet version. This should probably be\nchanged so that it becomes environment aware.",
-      "authorName": "keyanm",
-      "authorDate": "2026-06-17T10:04:36Z"
     }
   ],
   "contributors": [
@@ -336,12 +336,6 @@
       "title": "Switch Fraud Proof Catalogue to a Linked List",
       "html_url": "https://github.com/Anastasia-Labs/midgard/issues/446",
       "updated_at": "2026-05-12T23:46:54Z"
-    },
-    {
-      "number": 442,
-      "title": "Add Aiken Tests",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/442",
-      "updated_at": "2026-04-30T19:02:48Z"
     }
   ],
   "releases": [],
@@ -384,11 +378,11 @@
     },
     {
       "week": 1756598400,
-      "total": 4
+      "total": 5
     },
     {
       "week": 1757203200,
-      "total": 56
+      "total": 57
     },
     {
       "week": 1757808000,
@@ -428,19 +422,19 @@
     },
     {
       "week": 1763251200,
-      "total": 32
+      "total": 23
     },
     {
       "week": 1763856000,
-      "total": 43
+      "total": 16
     },
     {
       "week": 1764460800,
-      "total": 8
+      "total": 17
     },
     {
       "week": 1765065600,
-      "total": 7
+      "total": 6
     },
     {
       "week": 1765670400,
@@ -500,15 +494,15 @@
     },
     {
       "week": 1774137600,
-      "total": 47
+      "total": 36
     },
     {
       "week": 1774742400,
-      "total": 31
+      "total": 30
     },
     {
       "week": 1775347200,
-      "total": 45
+      "total": 42
     },
     {
       "week": 1775952000,
@@ -524,7 +518,7 @@
     },
     {
       "week": 1777766400,
-      "total": 35
+      "total": 33
     },
     {
       "week": 1778371200,
@@ -544,7 +538,7 @@
     },
     {
       "week": 1780790400,
-      "total": 31
+      "total": 32
     },
     {
       "week": 1781395200,
@@ -552,7 +546,7 @@
     },
     {
       "week": 1782000000,
-      "total": 2
+      "total": 7
     }
   ]
 }
