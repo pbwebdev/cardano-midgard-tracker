@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-06-23T09:52:31.538Z",
+  "fetchedAt": "2026-06-24T09:39:47.314Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 24,
@@ -16,6 +16,20 @@
     "Perl": 37
   },
   "commits": [
+    {
+      "sha": "210b1030b9e5181f9220ffa43db5e1ad7905b4bf",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/210b1030b9e5181f9220ffa43db5e1ad7905b4bf",
+      "message": "Finish up basic state queue contracts and test",
+      "authorName": "TotallyNotChase",
+      "authorDate": "2026-06-23T20:56:06Z"
+    },
+    {
+      "sha": "dbfc6c6aefd289502674bb783cd9b5632329f379",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/dbfc6c6aefd289502674bb783cd9b5632329f379",
+      "message": "Use reference script for scheduler and state queue minting policies",
+      "authorName": "TotallyNotChase",
+      "authorDate": "2026-06-23T19:11:34Z"
+    },
     {
       "sha": "b44dae93bdc499f95930b6fc44049129ac0a7051",
       "html_url": "https://github.com/Anastasia-Labs/midgard/commit/b44dae93bdc499f95930b6fc44049129ac0a7051",
@@ -106,20 +120,6 @@
       "message": "Merge branch 'tx-validation' into refine-da-att",
       "authorName": "keyanm",
       "authorDate": "2026-06-20T11:36:52Z"
-    },
-    {
-      "sha": "703219a508d30b4ff328f0a4fe0722f9cd6baa41",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/703219a508d30b4ff328f0a4fe0722f9cd6baa41",
-      "message": "refactor(aiken): 1st draft for granular hub utxos",
-      "authorName": "keyanm",
-      "authorDate": "2026-06-20T11:27:15Z"
-    },
-    {
-      "sha": "52eb706cc23ad3bc1819186aabf56aaf5d8da0fa",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/52eb706cc23ad3bc1819186aabf56aaf5d8da0fa",
-      "message": "feat: move in da",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-06-19T23:54:48Z"
     }
   ],
   "contributors": [
@@ -370,7 +370,7 @@
     },
     {
       "week": 1755388800,
-      "total": 23
+      "total": 18
     },
     {
       "week": 1755993600,
@@ -422,11 +422,11 @@
     },
     {
       "week": 1763251200,
-      "total": 23
+      "total": 32
     },
     {
       "week": 1763856000,
-      "total": 16
+      "total": 44
     },
     {
       "week": 1764460800,
@@ -434,7 +434,7 @@
     },
     {
       "week": 1765065600,
-      "total": 6
+      "total": 7
     },
     {
       "week": 1765670400,
@@ -546,7 +546,7 @@
     },
     {
       "week": 1782000000,
-      "total": 7
+      "total": 9
     }
   ]
 }
