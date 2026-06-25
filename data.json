@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-06-24T09:39:47.314Z",
+  "fetchedAt": "2026-06-25T09:32:11.432Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 24,
@@ -16,6 +16,13 @@
     "Perl": 37
   },
   "commits": [
+    {
+      "sha": "7d180503daf20b770e98eed6df64fb6cc95bf4cc",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/7d180503daf20b770e98eed6df64fb6cc95bf4cc",
+      "message": "Update cabal file",
+      "authorName": "TotallyNotChase",
+      "authorDate": "2026-06-24T17:46:39Z"
+    },
     {
       "sha": "210b1030b9e5181f9220ffa43db5e1ad7905b4bf",
       "html_url": "https://github.com/Anastasia-Labs/midgard/commit/210b1030b9e5181f9220ffa43db5e1ad7905b4bf",
@@ -113,13 +120,6 @@
       "message": "chore(aiken): minor cleanups",
       "authorName": "keyanm",
       "authorDate": "2026-06-20T12:13:18Z"
-    },
-    {
-      "sha": "bba5ab453b3d91b31ce712e3e4dd52a927eae219",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/bba5ab453b3d91b31ce712e3e4dd52a927eae219",
-      "message": "Merge branch 'tx-validation' into refine-da-att",
-      "authorName": "keyanm",
-      "authorDate": "2026-06-20T11:36:52Z"
     }
   ],
   "contributors": [
@@ -342,23 +342,23 @@
   "commitActivity": [
     {
       "week": 1751155200,
-      "total": 15
+      "total": 5
     },
     {
       "week": 1751760000,
-      "total": 23
+      "total": 0
     },
     {
       "week": 1752364800,
-      "total": 13
+      "total": 1
     },
     {
       "week": 1752969600,
-      "total": 27
+      "total": 0
     },
     {
       "week": 1753574400,
-      "total": 32
+      "total": 12
     },
     {
       "week": 1754179200,
@@ -422,11 +422,11 @@
     },
     {
       "week": 1763251200,
-      "total": 32
+      "total": 23
     },
     {
       "week": 1763856000,
-      "total": 44
+      "total": 16
     },
     {
       "week": 1764460800,
@@ -546,7 +546,7 @@
     },
     {
       "week": 1782000000,
-      "total": 9
+      "total": 10
     }
   ]
 }
