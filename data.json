@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-07-02T09:21:22.299Z",
+  "fetchedAt": "2026-07-03T09:26:45.368Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 24,
@@ -16,6 +16,34 @@
     "Perl": 37
   },
   "commits": [
+    {
+      "sha": "f7a7163b04e28b15b67d82d82ea7cff52e3de9fd",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/f7a7163b04e28b15b67d82d82ea7cff52e3de9fd",
+      "message": "feat(demo): add libp2p DA transport and stress tooling\n\n- add shared DA transport encoding plus libp2p payload/proof protocols\n- wire Midgard node and DA committee runtime manifests, producer, and watcher paths\n- add stress stage metrics, persisted stress-wallet prep, and submit timing helpers\n- update migrations, docs, final summary gates, and focused DA/stress tests",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-07-03T02:21:10Z"
+    },
+    {
+      "sha": "2de61a5ab60814b9c15d3571e10a763860d5d95c",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/2de61a5ab60814b9c15d3571e10a763860d5d95c",
+      "message": "Update midgard node config template",
+      "authorName": "TotallyNotChase",
+      "authorDate": "2026-07-03T00:55:55Z"
+    },
+    {
+      "sha": "4105621892f0e590d8c6908a2c3484bf670f47f6",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/4105621892f0e590d8c6908a2c3484bf670f47f6",
+      "message": "Non semantic changes to conform with persistent sql generation",
+      "authorName": "TotallyNotChase",
+      "authorDate": "2026-07-03T00:53:42Z"
+    },
+    {
+      "sha": "d577e895a667897c773c3ac20c009c29ae4228ff",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d577e895a667897c773c3ac20c009c29ae4228ff",
+      "message": "Persistent typed DB declaration that conforms with external SQL",
+      "authorName": "TotallyNotChase",
+      "authorDate": "2026-07-03T00:53:16Z"
+    },
     {
       "sha": "7d180503daf20b770e98eed6df64fb6cc95bf4cc",
       "html_url": "https://github.com/Anastasia-Labs/midgard/commit/7d180503daf20b770e98eed6df64fb6cc95bf4cc",
@@ -92,34 +120,6 @@
       "message": "Consolidate node tests",
       "authorName": "TotallyNotChase",
       "authorDate": "2026-06-20T18:25:39Z"
-    },
-    {
-      "sha": "0940c69182a69f5ea929d2b2139c2dc3bc5c55bb",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/0940c69182a69f5ea929d2b2139c2dc3bc5c55bb",
-      "message": "Modularize server and remove DB integration (temp)",
-      "authorName": "TotallyNotChase",
-      "authorDate": "2026-06-20T18:00:43Z"
-    },
-    {
-      "sha": "ac646eeb11679594c59274f5908d35d334777fb7",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ac646eeb11679594c59274f5908d35d334777fb7",
-      "message": "fix(aiken): align with upstream",
-      "authorName": "keyanm",
-      "authorDate": "2026-06-20T15:25:16Z"
-    },
-    {
-      "sha": "c6fb29c5fc2d22d03823831a8fedeb58b90cad01",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/c6fb29c5fc2d22d03823831a8fedeb58b90cad01",
-      "message": "feat: state transition trace commitments",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-06-20T14:52:12Z"
-    },
-    {
-      "sha": "f7a10458d2b4dd0fbffcb529da45f0980e27fdf7",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/f7a10458d2b4dd0fbffcb529da45f0980e27fdf7",
-      "message": "chore(aiken): minor cleanups",
-      "authorName": "keyanm",
-      "authorDate": "2026-06-20T12:13:18Z"
     }
   ],
   "contributors": [
@@ -354,11 +354,11 @@
     },
     {
       "week": 1753574400,
-      "total": 20
+      "total": 32
     },
     {
       "week": 1754179200,
-      "total": 8
+      "total": 63
     },
     {
       "week": 1754784000,
@@ -366,7 +366,7 @@
     },
     {
       "week": 1755388800,
-      "total": 18
+      "total": 23
     },
     {
       "week": 1755993600,
@@ -374,11 +374,11 @@
     },
     {
       "week": 1756598400,
-      "total": 4
+      "total": 5
     },
     {
       "week": 1757203200,
-      "total": 56
+      "total": 57
     },
     {
       "week": 1757808000,
@@ -522,11 +522,11 @@
     },
     {
       "week": 1778976000,
-      "total": 16
+      "total": 12
     },
     {
       "week": 1779580800,
-      "total": 2
+      "total": 1
     },
     {
       "week": 1780185600,
@@ -534,7 +534,7 @@
     },
     {
       "week": 1780790400,
-      "total": 32
+      "total": 31
     },
     {
       "week": 1781395200,
@@ -546,7 +546,7 @@
     },
     {
       "week": 1782604800,
-      "total": 0
+      "total": 4
     }
   ]
 }
