@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-07-03T09:26:45.368Z",
+  "fetchedAt": "2026-07-04T08:44:15.463Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 24,
@@ -16,6 +16,13 @@
     "Perl": 37
   },
   "commits": [
+    {
+      "sha": "a0b72eb7ebca70aae2f7f5ce31a3126890341996",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/a0b72eb7ebca70aae2f7f5ce31a3126890341996",
+      "message": "Add design overview and pointers for continuing work",
+      "authorName": "TotallyNotChase",
+      "authorDate": "2026-07-03T17:19:04Z"
+    },
     {
       "sha": "f7a7163b04e28b15b67d82d82ea7cff52e3de9fd",
       "html_url": "https://github.com/Anastasia-Labs/midgard/commit/f7a7163b04e28b15b67d82d82ea7cff52e3de9fd",
@@ -113,13 +120,6 @@
       "message": "feat: transition_trace_root addition",
       "authorName": "Philip DiSarro",
       "authorDate": "2026-06-21T13:49:15Z"
-    },
-    {
-      "sha": "dd2f2a8f8d1dcfc1f6c5548be9308b8e588ceef3",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/dd2f2a8f8d1dcfc1f6c5548be9308b8e588ceef3",
-      "message": "Consolidate node tests",
-      "authorName": "TotallyNotChase",
-      "authorDate": "2026-06-20T18:25:39Z"
     }
   ],
   "contributors": [
@@ -374,11 +374,11 @@
     },
     {
       "week": 1756598400,
-      "total": 5
+      "total": 4
     },
     {
       "week": 1757203200,
-      "total": 57
+      "total": 56
     },
     {
       "week": 1757808000,
@@ -522,11 +522,11 @@
     },
     {
       "week": 1778976000,
-      "total": 12
+      "total": 16
     },
     {
       "week": 1779580800,
-      "total": 1
+      "total": 2
     },
     {
       "week": 1780185600,
@@ -534,7 +534,7 @@
     },
     {
       "week": 1780790400,
-      "total": 31
+      "total": 32
     },
     {
       "week": 1781395200,
@@ -546,7 +546,7 @@
     },
     {
       "week": 1782604800,
-      "total": 4
+      "total": 5
     }
   ]
 }
