@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-07-07T09:51:09.868Z",
+  "fetchedAt": "2026-07-08T08:36:39.305Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 24,
@@ -16,6 +16,13 @@
     "Perl": 37
   },
   "commits": [
+    {
+      "sha": "0e708059221fffe063d6ee45a12950c702f3b802",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/0e708059221fffe063d6ee45a12950c702f3b802",
+      "message": "feat: scheduler fix and e2e benchmark observability",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-07-07T15:44:50Z"
+    },
     {
       "sha": "a0b72eb7ebca70aae2f7f5ce31a3126890341996",
       "html_url": "https://github.com/Anastasia-Labs/midgard/commit/a0b72eb7ebca70aae2f7f5ce31a3126890341996",
@@ -113,13 +120,6 @@
       "message": "feat: update e2e skill",
       "authorName": "Philip DiSarro",
       "authorDate": "2026-06-21T16:44:30Z"
-    },
-    {
-      "sha": "1f878d436ddcf9bb2de0ed916f202eb77255d487",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/1f878d436ddcf9bb2de0ed916f202eb77255d487",
-      "message": "feat: transition_trace_root addition",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-06-21T13:49:15Z"
     }
   ],
   "contributors": [
@@ -362,7 +362,7 @@
     },
     {
       "week": 1755388800,
-      "total": 23
+      "total": 18
     },
     {
       "week": 1755993600,
@@ -414,15 +414,15 @@
     },
     {
       "week": 1763251200,
-      "total": 32
+      "total": 23
     },
     {
       "week": 1763856000,
-      "total": 43
+      "total": 16
     },
     {
       "week": 1764460800,
-      "total": 8
+      "total": 17
     },
     {
       "week": 1765065600,
@@ -470,7 +470,7 @@
     },
     {
       "week": 1771718400,
-      "total": 45
+      "total": 47
     },
     {
       "week": 1772323200,
@@ -498,31 +498,31 @@
     },
     {
       "week": 1775952000,
-      "total": 28
+      "total": 32
     },
     {
       "week": 1776556800,
-      "total": 28
+      "total": 29
     },
     {
       "week": 1777161600,
-      "total": 10
+      "total": 26
     },
     {
       "week": 1777766400,
-      "total": 19
+      "total": 33
     },
     {
       "week": 1778371200,
-      "total": 42
+      "total": 41
     },
     {
       "week": 1778976000,
-      "total": 16
+      "total": 12
     },
     {
       "week": 1779580800,
-      "total": 2
+      "total": 1
     },
     {
       "week": 1780185600,
@@ -546,7 +546,7 @@
     },
     {
       "week": 1783209600,
-      "total": 0
+      "total": 1
     }
   ]
 }
