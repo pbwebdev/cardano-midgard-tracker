@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-07-09T09:54:05.394Z",
+  "fetchedAt": "2026-07-10T09:44:38.111Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 24,
@@ -17,18 +17,46 @@
   },
   "commits": [
     {
-      "sha": "2766e38dadbb847666654586532384a6a198e0a0",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/2766e38dadbb847666654586532384a6a198e0a0",
-      "message": "wip",
-      "authorName": "Drop-Table-Users",
-      "authorDate": "2026-07-08T16:58:20Z"
+      "sha": "ac278053d0221640008f53e6b24e95dbf42a7e27",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ac278053d0221640008f53e6b24e95dbf42a7e27",
+      "message": "Merge pull request #457 from Anastasia-Labs/fp/non-existent-input\n\nNon-existent input FP",
+      "authorName": "colll78",
+      "authorDate": "2026-07-10T02:36:51Z"
     },
     {
-      "sha": "bc9f9865751f1c0b6313684e48566c0cc0fe64a1",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/bc9f9865751f1c0b6313684e48566c0cc0fe64a1",
-      "message": "wip",
+      "sha": "95d176f2d03237cf3348a3efbd217558b0d8e1b4",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/95d176f2d03237cf3348a3efbd217558b0d8e1b4",
+      "message": "Port and Env vars",
       "authorName": "Drop-Table-Users",
-      "authorDate": "2026-07-08T11:17:36Z"
+      "authorDate": "2026-07-09T22:00:42Z"
+    },
+    {
+      "sha": "fcaa4bc778d58b9b814be9883a886c7a0026886e",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/fcaa4bc778d58b9b814be9883a886c7a0026886e",
+      "message": "Merge pull request #458 from Anastasia-Labs/fp/use-counted-proofs-in-contracts\n\nUse counted-root in the Aiken contracts",
+      "authorName": "colll78",
+      "authorDate": "2026-07-09T16:26:09Z"
+    },
+    {
+      "sha": "480ef4f7ee9971924b841bf9143ebee44e69f5e9",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/480ef4f7ee9971924b841bf9143ebee44e69f5e9",
+      "message": "Include the contract in the deployment",
+      "authorName": "Drop-Table-Users",
+      "authorDate": "2026-07-09T16:00:32Z"
+    },
+    {
+      "sha": "5169b7f7a00250d7a7747615c39c8eb1068e618d",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/5169b7f7a00250d7a7747615c39c8eb1068e618d",
+      "message": "Use counted-root in the Aiken contracts",
+      "authorName": "Drop-Table-Users",
+      "authorDate": "2026-07-09T14:58:25Z"
+    },
+    {
+      "sha": "dbfa7426bc38e10d53d6f05fc8a410d6a6a2885f",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/dbfa7426bc38e10d53d6f05fc8a410d6a6a2885f",
+      "message": "Non-Existent Input Fault Proof",
+      "authorName": "Drop-Table-Users",
+      "authorDate": "2026-07-09T11:17:35Z"
     },
     {
       "sha": "0e708059221fffe063d6ee45a12950c702f3b802",
@@ -92,34 +120,6 @@
       "message": "Use reference script for scheduler and state queue minting policies",
       "authorName": "TotallyNotChase",
       "authorDate": "2026-06-23T19:11:34Z"
-    },
-    {
-      "sha": "b44dae93bdc499f95930b6fc44049129ac0a7051",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/b44dae93bdc499f95930b6fc44049129ac0a7051",
-      "message": "Update State Queue TXs",
-      "authorName": "TotallyNotChase",
-      "authorDate": "2026-06-22T20:59:19Z"
-    },
-    {
-      "sha": "cbf95a04917397235f14d94e0de295933d7d3848",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/cbf95a04917397235f14d94e0de295933d7d3848",
-      "message": "Update operator redeemer types and associated transactions",
-      "authorName": "TotallyNotChase",
-      "authorDate": "2026-06-22T18:14:02Z"
-    },
-    {
-      "sha": "b8c6a6525119287184a6629cb5830122c8993a1b",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/b8c6a6525119287184a6629cb5830122c8993a1b",
-      "message": "Merge branch 'tx-validation' into chase/tx-validation-haskell-scaffold",
-      "authorName": "TotallyNotChase",
-      "authorDate": "2026-06-22T17:10:30Z"
-    },
-    {
-      "sha": "dd7f5784855af1d909e4b86ffb0d429612273e3a",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/dd7f5784855af1d909e4b86ffb0d429612273e3a",
-      "message": "Remove dead cache host",
-      "authorName": "TotallyNotChase",
-      "authorDate": "2026-06-22T17:05:51Z"
     }
   ],
   "contributors": [
@@ -326,6 +326,12 @@
   ],
   "issues": [
     {
+      "number": 459,
+      "title": "[spec] Resolve \"No mints\": unwritten rule, unenforced by validation, exposed by SDK",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/459",
+      "updated_at": "2026-07-09T16:13:08Z"
+    },
+    {
       "number": 451,
       "title": "Support Multi-Block Submissions",
       "html_url": "https://github.com/Anastasia-Labs/midgard/issues/451",
@@ -342,19 +348,19 @@
   "commitActivity": [
     {
       "week": 1752364800,
-      "total": 1
+      "total": 13
     },
     {
       "week": 1752969600,
-      "total": 0
+      "total": 27
     },
     {
       "week": 1753574400,
-      "total": 0
+      "total": 32
     },
     {
       "week": 1754179200,
-      "total": 8
+      "total": 63
     },
     {
       "week": 1754784000,
@@ -370,11 +376,11 @@
     },
     {
       "week": 1756598400,
-      "total": 4
+      "total": 5
     },
     {
       "week": 1757203200,
-      "total": 56
+      "total": 57
     },
     {
       "week": 1757808000,
@@ -414,11 +420,11 @@
     },
     {
       "week": 1763251200,
-      "total": 23
+      "total": 32
     },
     {
       "week": 1763856000,
-      "total": 16
+      "total": 44
     },
     {
       "week": 1764460800,
@@ -426,7 +432,7 @@
     },
     {
       "week": 1765065600,
-      "total": 7
+      "total": 6
     },
     {
       "week": 1765670400,
@@ -466,7 +472,7 @@
     },
     {
       "week": 1771113600,
-      "total": 14
+      "total": 13
     },
     {
       "week": 1771718400,
@@ -518,11 +524,11 @@
     },
     {
       "week": 1778976000,
-      "total": 16
+      "total": 12
     },
     {
       "week": 1779580800,
-      "total": 2
+      "total": 1
     },
     {
       "week": 1780185600,
@@ -546,7 +552,7 @@
     },
     {
       "week": 1783209600,
-      "total": 3
+      "total": 7
     }
   ]
 }
