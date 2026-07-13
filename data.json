@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-07-12T08:24:32.451Z",
+  "fetchedAt": "2026-07-13T09:36:42.302Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 24,
@@ -17,11 +17,74 @@
   },
   "commits": [
     {
+      "sha": "0d74cc47e84c3ae6fd81a8be54a421881cd6f9d7",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/0d74cc47e84c3ae6fd81a8be54a421881cd6f9d7",
+      "message": "docs: Sync with new fault proofs, add tutorials, grow facts check\n\n- Document the non-existent-input fraud-proof family (prepare command,\n  four submit steps, fourth --fraud-category) across the fault-proofs pages\n- Add DA committee node required configuration to the libp2p runtime page\n- Add getting-the-code prerequisites and two tutorials: run a local stack,\n  submit a first L2 transaction\n- Lead validation and node overviews with the reader's task\n- Extend check-docs-facts.mjs from 3 to 6 derived facts: node CLI commands,\n  workspace members, L1 env variables\n- Drop the removed L1_PROVIDER_FAILOVER reference and one leftover\n  source-citation phrase\n- Move pnpm overrides to pnpm-workspace.yaml (pnpm 10 stopped reading\n  package.json overrides), drop unused tailwind-merge and lib/cn.ts",
+      "authorName": "Harun Mwangi",
+      "authorDate": "2026-07-10T13:15:40Z"
+    },
+    {
+      "sha": "17eddc7ee027362935864a3848e3d21d46b50dda",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/17eddc7ee027362935864a3848e3d21d46b50dda",
+      "message": "docs: Fix perspective errors and remove named-chain comparison",
+      "authorName": "Harun Mwangi",
+      "authorDate": "2026-07-10T12:52:25Z"
+    },
+    {
+      "sha": "6058c3b40ab9d3d2cc17e3d1054a37cd50fec098",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/6058c3b40ab9d3d2cc17e3d1054a37cd50fec098",
+      "message": "Merge branch 'tx-validation' of https://github.com/Anastasia-Labs/midgard into tx-validation",
+      "authorName": "Harun Mwangi",
+      "authorDate": "2026-07-10T12:47:04Z"
+    },
+    {
+      "sha": "ac278053d0221640008f53e6b24e95dbf42a7e27",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ac278053d0221640008f53e6b24e95dbf42a7e27",
+      "message": "Merge pull request #457 from Anastasia-Labs/fp/non-existent-input\n\nNon-existent input FP",
+      "authorName": "colll78",
+      "authorDate": "2026-07-10T02:36:51Z"
+    },
+    {
       "sha": "95d176f2d03237cf3348a3efbd217558b0d8e1b4",
       "html_url": "https://github.com/Anastasia-Labs/midgard/commit/95d176f2d03237cf3348a3efbd217558b0d8e1b4",
       "message": "Port and Env vars",
       "authorName": "Drop-Table-Users",
       "authorDate": "2026-07-09T22:00:42Z"
+    },
+    {
+      "sha": "c58224e6489468c072c615508e78ce330fd4cad6",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/c58224e6489468c072c615508e78ce330fd4cad6",
+      "message": "docs: Reference the docs site from the root README, table-drive facts check",
+      "authorName": "Harun Mwangi",
+      "authorDate": "2026-07-09T19:29:25Z"
+    },
+    {
+      "sha": "05d790074d36c4741f2ae7eb320f02c5fb50be2a",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/05d790074d36c4741f2ae7eb320f02c5fb50be2a",
+      "message": "docs(sdk): Link README to the module reference\n\nRelative path, which resolves on github.com. Switch to an absolute URL\nonce the docs site has a deployment.",
+      "authorName": "Harun Mwangi",
+      "authorDate": "2026-07-09T19:20:01Z"
+    },
+    {
+      "sha": "c6a359af72b38212d899f25fa9f128d6f119b9e9",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/c6a359af72b38212d899f25fa9f128d6f119b9e9",
+      "message": "docs: Check documented facts against source\n\n- Add check-docs-facts.mjs, run by prebuild and CI: fibers, fault-proof\n  commands, and transaction statuses must match their source\n- Drop the status page feature matrix; public_testnet_readiness.md owns it\n- Replace the DA blueprint commit pin with an aiken build step",
+      "authorName": "Harun Mwangi",
+      "authorDate": "2026-07-09T19:11:10Z"
+    },
+    {
+      "sha": "1aeac054e19b49fb64d7eabcd8b2f99b4953dff6",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/1aeac054e19b49fb64d7eabcd8b2f99b4953dff6",
+      "message": "docs: Add Midgard documentation site\n\nFumadocs/Next.js site covering the SDK packages, validation engine, operator\nnode, watchers and DA, fault proofs, on-chain validators, and the spec.\n\n- Type-check SDK code samples with twoslash; `prebuild` builds the linked\n  packages the samples resolve against\n- Add docs-site-ci.yml\n- Anchor the root `docs/` ignore rule, which also matched\n  docs-site/content/docs and docs-site/app/docs\n- Document \"No mints\" as an open protocol question, tracked in #459",
+      "authorName": "Harun Mwangi",
+      "authorDate": "2026-07-09T18:52:07Z"
+    },
+    {
+      "sha": "27a5c35c61b59abedc76074c267fd1c87e52a9f7",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/27a5c35c61b59abedc76074c267fd1c87e52a9f7",
+      "message": "fix(sdk): Correct README example and package description\n\n- Replace `incompleteInitTxProgram` with `incompleteInitializationTxProgram`,\n  which is the name exported from `src/initialization.ts`\n- Set the `description` field, which was a placeholder GitHub docs URL\n- Capitalise TypeScript",
+      "authorName": "Harun Mwangi",
+      "authorDate": "2026-07-09T18:47:31Z"
     },
     {
       "sha": "fcaa4bc778d58b9b814be9883a886c7a0026886e",
@@ -57,69 +120,6 @@
       "message": "feat: scheduler fix and e2e benchmark observability",
       "authorName": "Philip DiSarro",
       "authorDate": "2026-07-07T15:44:50Z"
-    },
-    {
-      "sha": "a0b72eb7ebca70aae2f7f5ce31a3126890341996",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/a0b72eb7ebca70aae2f7f5ce31a3126890341996",
-      "message": "Add design overview and pointers for continuing work",
-      "authorName": "TotallyNotChase",
-      "authorDate": "2026-07-03T17:19:04Z"
-    },
-    {
-      "sha": "f7a7163b04e28b15b67d82d82ea7cff52e3de9fd",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/f7a7163b04e28b15b67d82d82ea7cff52e3de9fd",
-      "message": "feat(demo): add libp2p DA transport and stress tooling\n\n- add shared DA transport encoding plus libp2p payload/proof protocols\n- wire Midgard node and DA committee runtime manifests, producer, and watcher paths\n- add stress stage metrics, persisted stress-wallet prep, and submit timing helpers\n- update migrations, docs, final summary gates, and focused DA/stress tests",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-07-03T02:21:10Z"
-    },
-    {
-      "sha": "2de61a5ab60814b9c15d3571e10a763860d5d95c",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/2de61a5ab60814b9c15d3571e10a763860d5d95c",
-      "message": "Update midgard node config template",
-      "authorName": "TotallyNotChase",
-      "authorDate": "2026-07-03T00:55:55Z"
-    },
-    {
-      "sha": "4105621892f0e590d8c6908a2c3484bf670f47f6",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/4105621892f0e590d8c6908a2c3484bf670f47f6",
-      "message": "Non semantic changes to conform with persistent sql generation",
-      "authorName": "TotallyNotChase",
-      "authorDate": "2026-07-03T00:53:42Z"
-    },
-    {
-      "sha": "d577e895a667897c773c3ac20c009c29ae4228ff",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d577e895a667897c773c3ac20c009c29ae4228ff",
-      "message": "Persistent typed DB declaration that conforms with external SQL",
-      "authorName": "TotallyNotChase",
-      "authorDate": "2026-07-03T00:53:16Z"
-    },
-    {
-      "sha": "7d180503daf20b770e98eed6df64fb6cc95bf4cc",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/7d180503daf20b770e98eed6df64fb6cc95bf4cc",
-      "message": "Update cabal file",
-      "authorName": "TotallyNotChase",
-      "authorDate": "2026-06-24T17:46:39Z"
-    },
-    {
-      "sha": "210b1030b9e5181f9220ffa43db5e1ad7905b4bf",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/210b1030b9e5181f9220ffa43db5e1ad7905b4bf",
-      "message": "Finish up basic state queue contracts and test",
-      "authorName": "TotallyNotChase",
-      "authorDate": "2026-06-23T20:56:06Z"
-    },
-    {
-      "sha": "dbfc6c6aefd289502674bb783cd9b5632329f379",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/dbfc6c6aefd289502674bb783cd9b5632329f379",
-      "message": "Use reference script for scheduler and state queue minting policies",
-      "authorName": "TotallyNotChase",
-      "authorDate": "2026-06-23T19:11:34Z"
-    },
-    {
-      "sha": "b44dae93bdc499f95930b6fc44049129ac0a7051",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/b44dae93bdc499f95930b6fc44049129ac0a7051",
-      "message": "Update State Queue TXs",
-      "authorName": "TotallyNotChase",
-      "authorDate": "2026-06-22T20:59:19Z"
     }
   ],
   "contributors": [
@@ -352,11 +352,11 @@
     },
     {
       "week": 1753574400,
-      "total": 20
+      "total": 32
     },
     {
       "week": 1754179200,
-      "total": 8
+      "total": 63
     },
     {
       "week": 1754784000,
@@ -372,11 +372,11 @@
     },
     {
       "week": 1756598400,
-      "total": 4
+      "total": 5
     },
     {
       "week": 1757203200,
-      "total": 56
+      "total": 57
     },
     {
       "week": 1757808000,
@@ -416,11 +416,11 @@
     },
     {
       "week": 1763251200,
-      "total": 23
+      "total": 32
     },
     {
       "week": 1763856000,
-      "total": 16
+      "total": 44
     },
     {
       "week": 1764460800,
@@ -516,7 +516,7 @@
     },
     {
       "week": 1778371200,
-      "total": 41
+      "total": 43
     },
     {
       "week": 1778976000,
@@ -532,7 +532,7 @@
     },
     {
       "week": 1780790400,
-      "total": 31
+      "total": 32
     },
     {
       "week": 1781395200,
@@ -548,7 +548,7 @@
     },
     {
       "week": 1783209600,
-      "total": 6
+      "total": 15
     },
     {
       "week": 1783814400,
