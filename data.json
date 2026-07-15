@@ -1,10 +1,10 @@
 {
-  "fetchedAt": "2026-07-14T08:17:02.313Z",
+  "fetchedAt": "2026-07-15T08:22:21.963Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 24,
     "forks_count": 9,
-    "open_issues_count": 95
+    "open_issues_count": 97
   },
   "languages": {
     "Aiken": 359544,
@@ -16,6 +16,41 @@
     "Perl": 37
   },
   "commits": [
+    {
+      "sha": "c4e0ac9a7d7cd9c5788bb3b5a2c46f74b609c94d",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/c4e0ac9a7d7cd9c5788bb3b5a2c46f74b609c94d",
+      "message": "perf: integrate throughput phases 1-5 on tx-validation",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-07-14T23:01:58Z"
+    },
+    {
+      "sha": "411ae1457ba05079f3999010f183479876d3472f",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/411ae1457ba05079f3999010f183479876d3472f",
+      "message": "fix: harden tx validation integration",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-07-14T23:01:48Z"
+    },
+    {
+      "sha": "6347044394b91b6f7b4f7a89de7643a60e97e453",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/6347044394b91b6f7b4f7a89de7643a60e97e453",
+      "message": "Add deployment and test",
+      "authorName": "Drop-Table-Users",
+      "authorDate": "2026-07-14T14:55:23Z"
+    },
+    {
+      "sha": "73fca401f798cb6925d0dae57379ca4dcccfe3a1",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/73fca401f798cb6925d0dae57379ca4dcccfe3a1",
+      "message": "Fix contract CI",
+      "authorName": "Drop-Table-Users",
+      "authorDate": "2026-07-14T14:28:16Z"
+    },
+    {
+      "sha": "bf4f5cb70e9f7e0aa43474216e13b26fff7fb604",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/bf4f5cb70e9f7e0aa43474216e13b26fff7fb604",
+      "message": "Zero-input FP",
+      "authorName": "Drop-Table-Users",
+      "authorDate": "2026-07-14T11:53:55Z"
+    },
     {
       "sha": "0d74cc47e84c3ae6fd81a8be54a421881cd6f9d7",
       "html_url": "https://github.com/Anastasia-Labs/midgard/commit/0d74cc47e84c3ae6fd81a8be54a421881cd6f9d7",
@@ -85,41 +120,6 @@
       "message": "fix(sdk): Correct README example and package description\n\n- Replace `incompleteInitTxProgram` with `incompleteInitializationTxProgram`,\n  which is the name exported from `src/initialization.ts`\n- Set the `description` field, which was a placeholder GitHub docs URL\n- Capitalise TypeScript",
       "authorName": "Harun Mwangi",
       "authorDate": "2026-07-09T18:47:31Z"
-    },
-    {
-      "sha": "fcaa4bc778d58b9b814be9883a886c7a0026886e",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/fcaa4bc778d58b9b814be9883a886c7a0026886e",
-      "message": "Merge pull request #458 from Anastasia-Labs/fp/use-counted-proofs-in-contracts\n\nUse counted-root in the Aiken contracts",
-      "authorName": "colll78",
-      "authorDate": "2026-07-09T16:26:09Z"
-    },
-    {
-      "sha": "480ef4f7ee9971924b841bf9143ebee44e69f5e9",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/480ef4f7ee9971924b841bf9143ebee44e69f5e9",
-      "message": "Include the contract in the deployment",
-      "authorName": "Drop-Table-Users",
-      "authorDate": "2026-07-09T16:00:32Z"
-    },
-    {
-      "sha": "5169b7f7a00250d7a7747615c39c8eb1068e618d",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/5169b7f7a00250d7a7747615c39c8eb1068e618d",
-      "message": "Use counted-root in the Aiken contracts",
-      "authorName": "Drop-Table-Users",
-      "authorDate": "2026-07-09T14:58:25Z"
-    },
-    {
-      "sha": "dbfa7426bc38e10d53d6f05fc8a410d6a6a2885f",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/dbfa7426bc38e10d53d6f05fc8a410d6a6a2885f",
-      "message": "Non-Existent Input Fault Proof",
-      "authorName": "Drop-Table-Users",
-      "authorDate": "2026-07-09T11:17:35Z"
-    },
-    {
-      "sha": "0e708059221fffe063d6ee45a12950c702f3b802",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/0e708059221fffe063d6ee45a12950c702f3b802",
-      "message": "feat: scheduler fix and e2e benchmark observability",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-07-07T15:44:50Z"
     }
   ],
   "contributors": [
@@ -336,12 +336,6 @@
       "title": "Support Multi-Block Submissions",
       "html_url": "https://github.com/Anastasia-Labs/midgard/issues/451",
       "updated_at": "2026-06-02T19:55:40Z"
-    },
-    {
-      "number": 446,
-      "title": "Switch Fraud Proof Catalogue to a Linked List",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/446",
-      "updated_at": "2026-05-12T23:46:54Z"
     }
   ],
   "releases": [],
@@ -496,7 +490,7 @@
     },
     {
       "week": 1775347200,
-      "total": 42
+      "total": 41
     },
     {
       "week": 1775952000,
@@ -516,15 +510,15 @@
     },
     {
       "week": 1778371200,
-      "total": 41
+      "total": 43
     },
     {
       "week": 1778976000,
-      "total": 12
+      "total": 16
     },
     {
       "week": 1779580800,
-      "total": 1
+      "total": 2
     },
     {
       "week": 1780185600,
@@ -532,7 +526,7 @@
     },
     {
       "week": 1780790400,
-      "total": 32
+      "total": 31
     },
     {
       "week": 1781395200,
@@ -552,7 +546,7 @@
     },
     {
       "week": 1783814400,
-      "total": 0
+      "total": 5
     }
   ]
 }
