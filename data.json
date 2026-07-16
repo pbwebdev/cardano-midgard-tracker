@@ -1,10 +1,10 @@
 {
-  "fetchedAt": "2026-07-15T08:22:21.963Z",
+  "fetchedAt": "2026-07-16T08:21:47.624Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 24,
     "forks_count": 9,
-    "open_issues_count": 97
+    "open_issues_count": 99
   },
   "languages": {
     "Aiken": 359544,
@@ -16,6 +16,48 @@
     "Perl": 37
   },
   "commits": [
+    {
+      "sha": "918df0eae0f2581aaec2ad426e37294fb466b11c",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/918df0eae0f2581aaec2ad426e37294fb466b11c",
+      "message": "docs: document the zero-input fault-proof commands\n\n- Add prepare-zero-input, submit-zero-input-step-01, and\n  submit-zero-input-step-02 to the fault-proofs overview: the dispatch\n  guard, the command groups table, and the fraud categories list\n- Update the command count to nineteen and the category count to five\n- Correct the prepare-* exception count in the wallets section",
+      "authorName": "Harun Mwangi",
+      "authorDate": "2026-07-16T08:04:52Z"
+    },
+    {
+      "sha": "3783cabd90cf22d4166b0f5dae91329afd96624f",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/3783cabd90cf22d4166b0f5dae91329afd96624f",
+      "message": "docs: note the docs-site CI contract in the root README",
+      "authorName": "Harun Mwangi",
+      "authorDate": "2026-07-16T07:59:41Z"
+    },
+    {
+      "sha": "4420ccf2111360d1b9594b8fdaa2ed006ef77ae9",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/4420ccf2111360d1b9594b8fdaa2ed006ef77ae9",
+      "message": "chore: use released lucid-evolution Ogmios support",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-07-16T00:34:50Z"
+    },
+    {
+      "sha": "d90727bee7ed84784db5acea245455df246e50af",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d90727bee7ed84784db5acea245455df246e50af",
+      "message": "fix: make deposit submission crash-safe",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-07-15T19:20:38Z"
+    },
+    {
+      "sha": "5826145d79e0cdc58930c58744b1747afe2b5182",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/5826145d79e0cdc58930c58744b1747afe2b5182",
+      "message": "feat: add safe reference-script pre-submit capture",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-07-15T18:03:50Z"
+    },
+    {
+      "sha": "fa7f050142262c0fd8f795abb30faa25480c6cc6",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/fa7f050142262c0fd8f795abb30faa25480c6cc6",
+      "message": "Merge pull request #462 from Anastasia-Labs/throughput/phase-1-5-tx-validation\n\nIntegrate throughput phases 1–5 into tx-validation",
+      "authorName": "colll78",
+      "authorDate": "2026-07-15T14:28:19Z"
+    },
     {
       "sha": "c4e0ac9a7d7cd9c5788bb3b5a2c46f74b609c94d",
       "html_url": "https://github.com/Anastasia-Labs/midgard/commit/c4e0ac9a7d7cd9c5788bb3b5a2c46f74b609c94d",
@@ -78,48 +120,6 @@
       "message": "Merge pull request #457 from Anastasia-Labs/fp/non-existent-input\n\nNon-existent input FP",
       "authorName": "colll78",
       "authorDate": "2026-07-10T02:36:51Z"
-    },
-    {
-      "sha": "95d176f2d03237cf3348a3efbd217558b0d8e1b4",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/95d176f2d03237cf3348a3efbd217558b0d8e1b4",
-      "message": "Port and Env vars",
-      "authorName": "Drop-Table-Users",
-      "authorDate": "2026-07-09T22:00:42Z"
-    },
-    {
-      "sha": "c58224e6489468c072c615508e78ce330fd4cad6",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/c58224e6489468c072c615508e78ce330fd4cad6",
-      "message": "docs: Reference the docs site from the root README, table-drive facts check",
-      "authorName": "Harun Mwangi",
-      "authorDate": "2026-07-09T19:29:25Z"
-    },
-    {
-      "sha": "05d790074d36c4741f2ae7eb320f02c5fb50be2a",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/05d790074d36c4741f2ae7eb320f02c5fb50be2a",
-      "message": "docs(sdk): Link README to the module reference\n\nRelative path, which resolves on github.com. Switch to an absolute URL\nonce the docs site has a deployment.",
-      "authorName": "Harun Mwangi",
-      "authorDate": "2026-07-09T19:20:01Z"
-    },
-    {
-      "sha": "c6a359af72b38212d899f25fa9f128d6f119b9e9",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/c6a359af72b38212d899f25fa9f128d6f119b9e9",
-      "message": "docs: Check documented facts against source\n\n- Add check-docs-facts.mjs, run by prebuild and CI: fibers, fault-proof\n  commands, and transaction statuses must match their source\n- Drop the status page feature matrix; public_testnet_readiness.md owns it\n- Replace the DA blueprint commit pin with an aiken build step",
-      "authorName": "Harun Mwangi",
-      "authorDate": "2026-07-09T19:11:10Z"
-    },
-    {
-      "sha": "1aeac054e19b49fb64d7eabcd8b2f99b4953dff6",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/1aeac054e19b49fb64d7eabcd8b2f99b4953dff6",
-      "message": "docs: Add Midgard documentation site\n\nFumadocs/Next.js site covering the SDK packages, validation engine, operator\nnode, watchers and DA, fault proofs, on-chain validators, and the spec.\n\n- Type-check SDK code samples with twoslash; `prebuild` builds the linked\n  packages the samples resolve against\n- Add docs-site-ci.yml\n- Anchor the root `docs/` ignore rule, which also matched\n  docs-site/content/docs and docs-site/app/docs\n- Document \"No mints\" as an open protocol question, tracked in #459",
-      "authorName": "Harun Mwangi",
-      "authorDate": "2026-07-09T18:52:07Z"
-    },
-    {
-      "sha": "27a5c35c61b59abedc76074c267fd1c87e52a9f7",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/27a5c35c61b59abedc76074c267fd1c87e52a9f7",
-      "message": "fix(sdk): Correct README example and package description\n\n- Replace `incompleteInitTxProgram` with `incompleteInitializationTxProgram`,\n  which is the name exported from `src/initialization.ts`\n- Set the `description` field, which was a placeholder GitHub docs URL\n- Capitalise TypeScript",
-      "authorName": "Harun Mwangi",
-      "authorDate": "2026-07-09T18:47:31Z"
     }
   ],
   "contributors": [
@@ -330,12 +330,6 @@
       "title": "[spec] Resolve \"No mints\": unwritten rule, unenforced by validation, exposed by SDK",
       "html_url": "https://github.com/Anastasia-Labs/midgard/issues/459",
       "updated_at": "2026-07-09T16:13:08Z"
-    },
-    {
-      "number": 451,
-      "title": "Support Multi-Block Submissions",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/451",
-      "updated_at": "2026-06-02T19:55:40Z"
     }
   ],
   "releases": [],
@@ -470,7 +464,7 @@
     },
     {
       "week": 1772323200,
-      "total": 26
+      "total": 25
     },
     {
       "week": 1772928000,
@@ -490,7 +484,7 @@
     },
     {
       "week": 1775347200,
-      "total": 41
+      "total": 40
     },
     {
       "week": 1775952000,
@@ -498,7 +492,7 @@
     },
     {
       "week": 1776556800,
-      "total": 29
+      "total": 17
     },
     {
       "week": 1777161600,
@@ -526,7 +520,7 @@
     },
     {
       "week": 1780790400,
-      "total": 31
+      "total": 17
     },
     {
       "week": 1781395200,
@@ -546,7 +540,7 @@
     },
     {
       "week": 1783814400,
-      "total": 5
+      "total": 11
     }
   ]
 }
