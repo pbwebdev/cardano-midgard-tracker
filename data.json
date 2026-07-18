@@ -1,10 +1,10 @@
 {
-  "fetchedAt": "2026-07-17T08:18:14.339Z",
+  "fetchedAt": "2026-07-18T07:59:45.792Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 24,
     "forks_count": 9,
-    "open_issues_count": 99
+    "open_issues_count": 100
   },
   "languages": {
     "Aiken": 359544,
@@ -16,6 +16,13 @@
     "Perl": 37
   },
   "commits": [
+    {
+      "sha": "dd55869257b522870c612923ba6839af74517d20",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/dd55869257b522870c612923ba6839af74517d20",
+      "message": "docs: harden Midgard e2e acceptance runbook",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-07-17T18:45:03Z"
+    },
     {
       "sha": "55afdc546419e17d75e20298d752888d2a963ba0",
       "html_url": "https://github.com/Anastasia-Labs/midgard/commit/55afdc546419e17d75e20298d752888d2a963ba0",
@@ -113,13 +120,6 @@
       "message": "docs: Sync with new fault proofs, add tutorials, grow facts check\n\n- Document the non-existent-input fraud-proof family (prepare command,\n  four submit steps, fourth --fraud-category) across the fault-proofs pages\n- Add DA committee node required configuration to the libp2p runtime page\n- Add getting-the-code prerequisites and two tutorials: run a local stack,\n  submit a first L2 transaction\n- Lead validation and node overviews with the reader's task\n- Extend check-docs-facts.mjs from 3 to 6 derived facts: node CLI commands,\n  workspace members, L1 env variables\n- Drop the removed L1_PROVIDER_FAILOVER reference and one leftover\n  source-citation phrase\n- Move pnpm overrides to pnpm-workspace.yaml (pnpm 10 stopped reading\n  package.json overrides), drop unused tailwind-merge and lib/cn.ts",
       "authorName": "Harun Mwangi",
       "authorDate": "2026-07-10T13:15:40Z"
-    },
-    {
-      "sha": "17eddc7ee027362935864a3848e3d21d46b50dda",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/17eddc7ee027362935864a3848e3d21d46b50dda",
-      "message": "docs: Fix perspective errors and remove named-chain comparison",
-      "authorName": "Harun Mwangi",
-      "authorDate": "2026-07-10T12:52:25Z"
     }
   ],
   "contributors": [
@@ -340,11 +340,11 @@
     },
     {
       "week": 1753574400,
-      "total": 23
+      "total": 32
     },
     {
       "week": 1754179200,
-      "total": 8
+      "total": 63
     },
     {
       "week": 1754784000,
@@ -352,7 +352,7 @@
     },
     {
       "week": 1755388800,
-      "total": 18
+      "total": 23
     },
     {
       "week": 1755993600,
@@ -360,11 +360,11 @@
     },
     {
       "week": 1756598400,
-      "total": 4
+      "total": 5
     },
     {
       "week": 1757203200,
-      "total": 56
+      "total": 57
     },
     {
       "week": 1757808000,
@@ -408,15 +408,15 @@
     },
     {
       "week": 1763856000,
-      "total": 43
+      "total": 44
     },
     {
       "week": 1764460800,
-      "total": 8
+      "total": 17
     },
     {
       "week": 1765065600,
-      "total": 7
+      "total": 6
     },
     {
       "week": 1765670400,
@@ -480,11 +480,11 @@
     },
     {
       "week": 1774742400,
-      "total": 28
+      "total": 29
     },
     {
       "week": 1775347200,
-      "total": 38
+      "total": 41
     },
     {
       "week": 1775952000,
@@ -492,23 +492,23 @@
     },
     {
       "week": 1776556800,
-      "total": 28
+      "total": 29
     },
     {
       "week": 1777161600,
-      "total": 25
+      "total": 26
     },
     {
       "week": 1777766400,
-      "total": 32
+      "total": 33
     },
     {
       "week": 1778371200,
-      "total": 41
+      "total": 25
     },
     {
       "week": 1778976000,
-      "total": 12
+      "total": 10
     },
     {
       "week": 1779580800,
@@ -528,7 +528,7 @@
     },
     {
       "week": 1782000000,
-      "total": 7
+      "total": 10
     },
     {
       "week": 1782604800,
@@ -540,7 +540,7 @@
     },
     {
       "week": 1783814400,
-      "total": 13
+      "total": 14
     }
   ]
 }
