@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-07-18T07:59:45.792Z",
+  "fetchedAt": "2026-07-19T08:25:56.919Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 24,
@@ -59,13 +59,6 @@
       "authorDate": "2026-07-16T00:34:50Z"
     },
     {
-      "sha": "d90727bee7ed84784db5acea245455df246e50af",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d90727bee7ed84784db5acea245455df246e50af",
-      "message": "fix: make deposit submission crash-safe",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-07-15T19:20:38Z"
-    },
-    {
       "sha": "5826145d79e0cdc58930c58744b1747afe2b5182",
       "html_url": "https://github.com/Anastasia-Labs/midgard/commit/5826145d79e0cdc58930c58744b1747afe2b5182",
       "message": "feat: add safe reference-script pre-submit capture",
@@ -120,6 +113,13 @@
       "message": "docs: Sync with new fault proofs, add tutorials, grow facts check\n\n- Document the non-existent-input fraud-proof family (prepare command,\n  four submit steps, fourth --fraud-category) across the fault-proofs pages\n- Add DA committee node required configuration to the libp2p runtime page\n- Add getting-the-code prerequisites and two tutorials: run a local stack,\n  submit a first L2 transaction\n- Lead validation and node overviews with the reader's task\n- Extend check-docs-facts.mjs from 3 to 6 derived facts: node CLI commands,\n  workspace members, L1 env variables\n- Drop the removed L1_PROVIDER_FAILOVER reference and one leftover\n  source-citation phrase\n- Move pnpm overrides to pnpm-workspace.yaml (pnpm 10 stopped reading\n  package.json overrides), drop unused tailwind-merge and lib/cn.ts",
       "authorName": "Harun Mwangi",
       "authorDate": "2026-07-10T13:15:40Z"
+    },
+    {
+      "sha": "17eddc7ee027362935864a3848e3d21d46b50dda",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/17eddc7ee027362935864a3848e3d21d46b50dda",
+      "message": "docs: Fix perspective errors and remove named-chain comparison",
+      "authorName": "Harun Mwangi",
+      "authorDate": "2026-07-10T12:52:25Z"
     }
   ],
   "contributors": [
@@ -335,10 +335,6 @@
   "releases": [],
   "commitActivity": [
     {
-      "week": 1752969600,
-      "total": 27
-    },
-    {
       "week": 1753574400,
       "total": 32
     },
@@ -360,11 +356,11 @@
     },
     {
       "week": 1756598400,
-      "total": 5
+      "total": 4
     },
     {
       "week": 1757203200,
-      "total": 57
+      "total": 56
     },
     {
       "week": 1757808000,
@@ -508,11 +504,11 @@
     },
     {
       "week": 1778976000,
-      "total": 10
+      "total": 14
     },
     {
       "week": 1779580800,
-      "total": 1
+      "total": 2
     },
     {
       "week": 1780185600,
@@ -540,7 +536,11 @@
     },
     {
       "week": 1783814400,
-      "total": 14
+      "total": 13
+    },
+    {
+      "week": 1784419200,
+      "total": 0
     }
   ]
 }
