@@ -1,10 +1,10 @@
 {
-  "fetchedAt": "2026-07-21T08:36:16.080Z",
+  "fetchedAt": "2026-07-22T08:35:48.069Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 24,
-    "forks_count": 9,
-    "open_issues_count": 100
+    "forks_count": 10,
+    "open_issues_count": 101
   },
   "languages": {
     "Aiken": 359544,
@@ -16,6 +16,13 @@
     "Perl": 37
   },
   "commits": [
+    {
+      "sha": "c07936ff2b5331051631ae0af7e530a598b4aeb1",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/c07936ff2b5331051631ae0af7e530a598b4aeb1",
+      "message": "NO-REF-INPUT",
+      "authorName": "Drop-Table-Users",
+      "authorDate": "2026-07-21T11:16:38Z"
+    },
     {
       "sha": "889dedf261a7630b072b853ce4f6734e09fc1700",
       "html_url": "https://github.com/Anastasia-Labs/midgard/commit/889dedf261a7630b072b853ce4f6734e09fc1700",
@@ -113,13 +120,6 @@
       "message": "chore: use released lucid-evolution Ogmios support",
       "authorName": "Philip DiSarro",
       "authorDate": "2026-07-16T00:34:50Z"
-    },
-    {
-      "sha": "5826145d79e0cdc58930c58744b1747afe2b5182",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/5826145d79e0cdc58930c58744b1747afe2b5182",
-      "message": "feat: add safe reference-script pre-submit capture",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-07-15T18:03:50Z"
     }
   ],
   "contributors": [
@@ -384,11 +384,11 @@
     },
     {
       "week": 1760832000,
-      "total": 52
+      "total": 35
     },
     {
       "week": 1761436800,
-      "total": 114
+      "total": 48
     },
     {
       "week": 1762041600,
@@ -444,15 +444,15 @@
     },
     {
       "week": 1769904000,
-      "total": 46
+      "total": 45
     },
     {
       "week": 1770508800,
-      "total": 36
+      "total": 32
     },
     {
       "week": 1771113600,
-      "total": 14
+      "total": 10
     },
     {
       "week": 1771718400,
@@ -460,19 +460,19 @@
     },
     {
       "week": 1772323200,
-      "total": 26
+      "total": 16
     },
     {
       "week": 1772928000,
-      "total": 36
+      "total": 23
     },
     {
       "week": 1773532800,
-      "total": 29
+      "total": 25
     },
     {
       "week": 1774137600,
-      "total": 36
+      "total": 26
     },
     {
       "week": 1774742400,
@@ -480,7 +480,7 @@
     },
     {
       "week": 1775347200,
-      "total": 42
+      "total": 39
     },
     {
       "week": 1775952000,
@@ -500,11 +500,11 @@
     },
     {
       "week": 1778371200,
-      "total": 43
+      "total": 41
     },
     {
       "week": 1778976000,
-      "total": 16
+      "total": 13
     },
     {
       "week": 1779580800,
@@ -512,23 +512,23 @@
     },
     {
       "week": 1780185600,
-      "total": 26
+      "total": 22
     },
     {
       "week": 1780790400,
-      "total": 31
+      "total": 26
     },
     {
       "week": 1781395200,
-      "total": 21
+      "total": 19
     },
     {
       "week": 1782000000,
-      "total": 10
+      "total": 6
     },
     {
       "week": 1782604800,
-      "total": 5
+      "total": 1
     },
     {
       "week": 1783209600,
@@ -536,11 +536,11 @@
     },
     {
       "week": 1783814400,
-      "total": 9
+      "total": 10
     },
     {
       "week": 1784419200,
-      "total": 9
+      "total": 10
     }
   ]
 }
