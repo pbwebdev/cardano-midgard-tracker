@@ -1,10 +1,10 @@
 {
-  "fetchedAt": "2026-07-22T08:35:48.069Z",
+  "fetchedAt": "2026-07-23T08:37:34.823Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 24,
     "forks_count": 10,
-    "open_issues_count": 101
+    "open_issues_count": 78
   },
   "languages": {
     "Aiken": 359544,
@@ -17,11 +17,67 @@
   },
   "commits": [
     {
+      "sha": "448cfc61b68c6e8b62197fde2a6a63cf0ede9a4d",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/448cfc61b68c6e8b62197fde2a6a63cf0ede9a4d",
+      "message": "Merge pull request #461 from Anastasia-Labs/fp/zero-inputs\n\nAdd and harden zero-input fault proofs",
+      "authorName": "colll78",
+      "authorDate": "2026-07-23T00:56:33Z"
+    },
+    {
+      "sha": "67b38e4ea2f4f6f31076179260156c6faa292149",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/67b38e4ea2f4f6f31076179260156c6faa292149",
+      "message": "test(onchain): preserve zero-input script hash",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-07-22T22:56:29Z"
+    },
+    {
+      "sha": "886a1c58a54dce78d32fe26a64274bb6fc101a77",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/886a1c58a54dce78d32fe26a64274bb6fc101a77",
+      "message": "fix(fault-proofs): fail closed on zero-input roots",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-07-22T22:49:09Z"
+    },
+    {
+      "sha": "2f3382290b90d8b16a461e503e681f7d10919132",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/2f3382290b90d8b16a461e503e681f7d10919132",
+      "message": "fix(docs): remove generated blueprint dependency",
+      "authorName": "colll78",
+      "authorDate": "2026-07-22T18:34:40Z"
+    },
+    {
+      "sha": "7bb1c69a80aa68c9d4d59efae970a269f3a86344",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/7bb1c69a80aa68c9d4d59efae970a269f3a86344",
+      "message": "Merge tx-validation into fp/zero-inputs",
+      "authorName": "colll78",
+      "authorDate": "2026-07-22T18:28:55Z"
+    },
+    {
+      "sha": "c7641e58a5d3a55c8b8c0577c07ea648ae851178",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/c7641e58a5d3a55c8b8c0577c07ea648ae851178",
+      "message": "fix(fault-proofs): harden zero-input readiness",
+      "authorName": "colll78",
+      "authorDate": "2026-07-22T18:28:20Z"
+    },
+    {
+      "sha": "8ddd0ff885990710a7ec51253d30947790b397ac",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/8ddd0ff885990710a7ec51253d30947790b397ac",
+      "message": "docs: harden protocol documentation and governance",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-07-22T18:06:26Z"
+    },
+    {
       "sha": "c07936ff2b5331051631ae0af7e530a598b4aeb1",
       "html_url": "https://github.com/Anastasia-Labs/midgard/commit/c07936ff2b5331051631ae0af7e530a598b4aeb1",
       "message": "NO-REF-INPUT",
       "authorName": "Drop-Table-Users",
       "authorDate": "2026-07-21T11:16:38Z"
+    },
+    {
+      "sha": "2b1e61f42d9f3a4e6c86fdc7f50029844373725f",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/2b1e61f42d9f3a4e6c86fdc7f50029844373725f",
+      "message": "Merge pull request #468 from Anastasia-Labs/codex/tx-validation-meaningful-reconstruction\n\nDocument fault-proof coverage and harden validation tooling",
+      "authorName": "colll78",
+      "authorDate": "2026-07-21T02:57:36Z"
     },
     {
       "sha": "889dedf261a7630b072b853ce4f6734e09fc1700",
@@ -64,62 +120,6 @@
       "message": "docs: add fault-proof audit and execution plan",
       "authorName": "Philip DiSarro",
       "authorDate": "2026-07-20T13:39:26Z"
-    },
-    {
-      "sha": "1c5d952200c1d0d376fe157192bd2a2994b5e296",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/1c5d952200c1d0d376fe157192bd2a2994b5e296",
-      "message": "feat: add safe reference-script pre-submit capture",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-07-20T13:38:23Z"
-    },
-    {
-      "sha": "6c630c6bb6f38185b10c0acf0ecb758c067fefb0",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/6c630c6bb6f38185b10c0acf0ecb758c067fefb0",
-      "message": "Fix after rebase",
-      "authorName": "Drop-Table-Users",
-      "authorDate": "2026-07-20T12:38:32Z"
-    },
-    {
-      "sha": "8a415e0466826fb46ee51d2fee2ba091882d43f2",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/8a415e0466826fb46ee51d2fee2ba091882d43f2",
-      "message": "Squash FP zero inputs into 1 commit",
-      "authorName": "Drop-Table-Users",
-      "authorDate": "2026-07-20T11:59:19Z"
-    },
-    {
-      "sha": "dd55869257b522870c612923ba6839af74517d20",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/dd55869257b522870c612923ba6839af74517d20",
-      "message": "docs: harden Midgard e2e acceptance runbook",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-07-17T18:45:03Z"
-    },
-    {
-      "sha": "55afdc546419e17d75e20298d752888d2a963ba0",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/55afdc546419e17d75e20298d752888d2a963ba0",
-      "message": "Merge pull request #466 from Anastasia-Labs/lucid-evolution-0.6-integration\n\nfix: adopt Lucid Evolution 0.6 provider APIs",
-      "authorName": "colll78",
-      "authorDate": "2026-07-17T03:52:36Z"
-    },
-    {
-      "sha": "d051b07ab999ea4d2ecec09d6a77fa53bd3f1d08",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d051b07ab999ea4d2ecec09d6a77fa53bd3f1d08",
-      "message": "fix: adopt Lucid Evolution 0.6 provider APIs",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-07-17T00:15:46Z"
-    },
-    {
-      "sha": "3783cabd90cf22d4166b0f5dae91329afd96624f",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/3783cabd90cf22d4166b0f5dae91329afd96624f",
-      "message": "docs: note the docs-site CI contract in the root README",
-      "authorName": "Harun Mwangi",
-      "authorDate": "2026-07-16T07:59:41Z"
-    },
-    {
-      "sha": "4420ccf2111360d1b9594b8fdaa2ed006ef77ae9",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/4420ccf2111360d1b9594b8fdaa2ed006ef77ae9",
-      "message": "chore: use released lucid-evolution Ogmios support",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-07-16T00:34:50Z"
     }
   ],
   "contributors": [
@@ -326,10 +326,34 @@
   ],
   "issues": [
     {
-      "number": 459,
-      "title": "[spec] Resolve \"No mints\": unwritten rule, unenforced by validation, exposed by SDK",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/459",
-      "updated_at": "2026-07-09T16:13:08Z"
+      "number": 379,
+      "title": "Implement HTTP Endpoints in `midgard-node` for Submitting User Events",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/379",
+      "updated_at": "2026-07-23T01:17:20Z"
+    },
+    {
+      "number": 254,
+      "title": "Data Provider",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/254",
+      "updated_at": "2026-07-23T01:17:06Z"
+    },
+    {
+      "number": 442,
+      "title": "Add Aiken Tests",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/442",
+      "updated_at": "2026-07-23T01:14:07Z"
+    },
+    {
+      "number": 401,
+      "title": "Update the spec specifying the validity range limit parameter",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/401",
+      "updated_at": "2026-07-23T01:13:47Z"
+    },
+    {
+      "number": 297,
+      "title": "Operator Inactivity Timeout",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/297",
+      "updated_at": "2026-07-23T01:13:08Z"
     }
   ],
   "releases": [],
@@ -348,7 +372,7 @@
     },
     {
       "week": 1755388800,
-      "total": 23
+      "total": 18
     },
     {
       "week": 1755993600,
@@ -356,11 +380,11 @@
     },
     {
       "week": 1756598400,
-      "total": 4
+      "total": 5
     },
     {
       "week": 1757203200,
-      "total": 56
+      "total": 57
     },
     {
       "week": 1757808000,
@@ -384,11 +408,11 @@
     },
     {
       "week": 1760832000,
-      "total": 35
+      "total": 52
     },
     {
       "week": 1761436800,
-      "total": 48
+      "total": 114
     },
     {
       "week": 1762041600,
@@ -400,11 +424,11 @@
     },
     {
       "week": 1763251200,
-      "total": 32
+      "total": 23
     },
     {
       "week": 1763856000,
-      "total": 44
+      "total": 16
     },
     {
       "week": 1764460800,
@@ -412,7 +436,7 @@
     },
     {
       "week": 1765065600,
-      "total": 7
+      "total": 6
     },
     {
       "week": 1765670400,
@@ -444,15 +468,15 @@
     },
     {
       "week": 1769904000,
-      "total": 45
+      "total": 46
     },
     {
       "week": 1770508800,
-      "total": 32
+      "total": 36
     },
     {
       "week": 1771113600,
-      "total": 10
+      "total": 14
     },
     {
       "week": 1771718400,
@@ -460,19 +484,19 @@
     },
     {
       "week": 1772323200,
-      "total": 16
+      "total": 26
     },
     {
       "week": 1772928000,
-      "total": 23
+      "total": 36
     },
     {
       "week": 1773532800,
-      "total": 25
+      "total": 29
     },
     {
       "week": 1774137600,
-      "total": 26
+      "total": 36
     },
     {
       "week": 1774742400,
@@ -480,7 +504,7 @@
     },
     {
       "week": 1775347200,
-      "total": 39
+      "total": 42
     },
     {
       "week": 1775952000,
@@ -500,11 +524,11 @@
     },
     {
       "week": 1778371200,
-      "total": 41
+      "total": 43
     },
     {
       "week": 1778976000,
-      "total": 13
+      "total": 16
     },
     {
       "week": 1779580800,
@@ -512,23 +536,23 @@
     },
     {
       "week": 1780185600,
-      "total": 22
-    },
-    {
-      "week": 1780790400,
       "total": 26
     },
     {
+      "week": 1780790400,
+      "total": 30
+    },
+    {
       "week": 1781395200,
-      "total": 19
+      "total": 13
     },
     {
       "week": 1782000000,
-      "total": 6
+      "total": 10
     },
     {
       "week": 1782604800,
-      "total": 1
+      "total": 5
     },
     {
       "week": 1783209600,
@@ -536,11 +560,11 @@
     },
     {
       "week": 1783814400,
-      "total": 10
+      "total": 11
     },
     {
       "week": 1784419200,
-      "total": 10
+      "total": 18
     }
   ]
 }
