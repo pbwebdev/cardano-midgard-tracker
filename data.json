@@ -1,8 +1,8 @@
 {
-  "fetchedAt": "2026-07-24T08:33:36.917Z",
+  "fetchedAt": "2026-07-25T08:13:07.180Z",
   "scope": "all-branches",
   "repo": {
-    "stargazers_count": 24,
+    "stargazers_count": 25,
     "forks_count": 10,
     "open_issues_count": 78
   },
@@ -16,6 +16,27 @@
     "Perl": 37
   },
   "commits": [
+    {
+      "sha": "144258242d78dd392a3347e529aed8cd3f148e12",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/144258242d78dd392a3347e529aed8cd3f148e12",
+      "message": "Make docs-site pass",
+      "authorName": "Drop-Table-Users",
+      "authorDate": "2026-07-24T12:33:36Z"
+    },
+    {
+      "sha": "edb483b7ee636176bd0561434f9f35e4bda76eda",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/edb483b7ee636176bd0561434f9f35e4bda76eda",
+      "message": "Some missed parts",
+      "authorName": "Drop-Table-Users",
+      "authorDate": "2026-07-24T12:19:23Z"
+    },
+    {
+      "sha": "448cfc61b68c6e8b62197fde2a6a63cf0ede9a4d",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/448cfc61b68c6e8b62197fde2a6a63cf0ede9a4d",
+      "message": "Merge pull request #461 from Anastasia-Labs/fp/zero-inputs\n\nAdd and harden zero-input fault proofs",
+      "authorName": "colll78",
+      "authorDate": "2026-07-23T00:56:33Z"
+    },
     {
       "sha": "67b38e4ea2f4f6f31076179260156c6faa292149",
       "html_url": "https://github.com/Anastasia-Labs/midgard/commit/67b38e4ea2f4f6f31076179260156c6faa292149",
@@ -59,8 +80,8 @@
       "authorDate": "2026-07-22T18:06:26Z"
     },
     {
-      "sha": "c07936ff2b5331051631ae0af7e530a598b4aeb1",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/c07936ff2b5331051631ae0af7e530a598b4aeb1",
+      "sha": "3f741b7807049155e6566ab81fbcea339e60879f",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/3f741b7807049155e6566ab81fbcea339e60879f",
       "message": "NO-REF-INPUT",
       "authorName": "Drop-Table-Users",
       "authorDate": "2026-07-21T11:16:38Z"
@@ -99,27 +120,6 @@
       "message": "fix: harden diagnostic capture and audit docs",
       "authorName": "Philip DiSarro",
       "authorDate": "2026-07-20T16:06:16Z"
-    },
-    {
-      "sha": "40c1636de6efc44381165590cc059ef5ab674840",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/40c1636de6efc44381165590cc059ef5ab674840",
-      "message": "docs: retire completed implementation plans",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-07-20T13:40:36Z"
-    },
-    {
-      "sha": "1af4878525ced43ba615a87ecb1abcee31797275",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/1af4878525ced43ba615a87ecb1abcee31797275",
-      "message": "docs: add fault-proof audit and execution plan",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-07-20T13:39:26Z"
-    },
-    {
-      "sha": "1c5d952200c1d0d376fe157192bd2a2994b5e296",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/1c5d952200c1d0d376fe157192bd2a2994b5e296",
-      "message": "feat: add safe reference-script pre-submit capture",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-07-20T13:38:23Z"
     }
   ],
   "contributors": [
@@ -360,7 +360,7 @@
   "commitActivity": [
     {
       "week": 1753574400,
-      "total": 32
+      "total": 12
     },
     {
       "week": 1754179200,
@@ -380,11 +380,11 @@
     },
     {
       "week": 1756598400,
-      "total": 4
+      "total": 5
     },
     {
       "week": 1757203200,
-      "total": 56
+      "total": 57
     },
     {
       "week": 1757808000,
@@ -424,11 +424,11 @@
     },
     {
       "week": 1763251200,
-      "total": 32
+      "total": 23
     },
     {
       "week": 1763856000,
-      "total": 44
+      "total": 16
     },
     {
       "week": 1764460800,
@@ -484,7 +484,7 @@
     },
     {
       "week": 1772323200,
-      "total": 25
+      "total": 26
     },
     {
       "week": 1772928000,
@@ -524,7 +524,7 @@
     },
     {
       "week": 1778371200,
-      "total": 23
+      "total": 25
     },
     {
       "week": 1778976000,
@@ -544,7 +544,7 @@
     },
     {
       "week": 1781395200,
-      "total": 18
+      "total": 21
     },
     {
       "week": 1782000000,
@@ -560,11 +560,11 @@
     },
     {
       "week": 1783814400,
-      "total": 11
+      "total": 10
     },
     {
       "week": 1784419200,
-      "total": 17
+      "total": 20
     }
   ]
 }
