@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-07-25T08:13:07.180Z",
+  "fetchedAt": "2026-07-26T08:33:08.835Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 25,
@@ -29,13 +29,6 @@
       "message": "Some missed parts",
       "authorName": "Drop-Table-Users",
       "authorDate": "2026-07-24T12:19:23Z"
-    },
-    {
-      "sha": "448cfc61b68c6e8b62197fde2a6a63cf0ede9a4d",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/448cfc61b68c6e8b62197fde2a6a63cf0ede9a4d",
-      "message": "Merge pull request #461 from Anastasia-Labs/fp/zero-inputs\n\nAdd and harden zero-input fault proofs",
-      "authorName": "colll78",
-      "authorDate": "2026-07-23T00:56:33Z"
     },
     {
       "sha": "67b38e4ea2f4f6f31076179260156c6faa292149",
@@ -120,6 +113,13 @@
       "message": "fix: harden diagnostic capture and audit docs",
       "authorName": "Philip DiSarro",
       "authorDate": "2026-07-20T16:06:16Z"
+    },
+    {
+      "sha": "40c1636de6efc44381165590cc059ef5ab674840",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/40c1636de6efc44381165590cc059ef5ab674840",
+      "message": "docs: retire completed implementation plans",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-07-20T13:40:36Z"
     }
   ],
   "contributors": [
@@ -359,10 +359,6 @@
   "releases": [],
   "commitActivity": [
     {
-      "week": 1753574400,
-      "total": 12
-    },
-    {
       "week": 1754179200,
       "total": 63
     },
@@ -372,7 +368,7 @@
     },
     {
       "week": 1755388800,
-      "total": 23
+      "total": 18
     },
     {
       "week": 1755993600,
@@ -424,11 +420,11 @@
     },
     {
       "week": 1763251200,
-      "total": 23
+      "total": 32
     },
     {
       "week": 1763856000,
-      "total": 16
+      "total": 44
     },
     {
       "week": 1764460800,
@@ -528,11 +524,11 @@
     },
     {
       "week": 1778976000,
-      "total": 10
+      "total": 14
     },
     {
       "week": 1779580800,
-      "total": 1
+      "total": 2
     },
     {
       "week": 1780185600,
@@ -544,7 +540,7 @@
     },
     {
       "week": 1781395200,
-      "total": 21
+      "total": 13
     },
     {
       "week": 1782000000,
@@ -564,7 +560,11 @@
     },
     {
       "week": 1784419200,
-      "total": 20
+      "total": 19
+    },
+    {
+      "week": 1785024000,
+      "total": 0
     }
   ]
 }
