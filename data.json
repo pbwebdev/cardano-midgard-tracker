@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-07-26T08:33:08.835Z",
+  "fetchedAt": "2026-07-27T10:00:06.937Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 25,
@@ -17,18 +17,25 @@
   },
   "commits": [
     {
-      "sha": "144258242d78dd392a3347e529aed8cd3f148e12",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/144258242d78dd392a3347e529aed8cd3f148e12",
+      "sha": "d527aadc74f51b629820388863bf9dca44c3bab2",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d527aadc74f51b629820388863bf9dca44c3bab2",
       "message": "Make docs-site pass",
       "authorName": "Drop-Table-Users",
       "authorDate": "2026-07-24T12:33:36Z"
     },
     {
-      "sha": "edb483b7ee636176bd0561434f9f35e4bda76eda",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/edb483b7ee636176bd0561434f9f35e4bda76eda",
+      "sha": "cf83c7e8fbb94a49696efc35281b238687c008ab",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/cf83c7e8fbb94a49696efc35281b238687c008ab",
       "message": "Some missed parts",
       "authorName": "Drop-Table-Users",
       "authorDate": "2026-07-24T12:19:23Z"
+    },
+    {
+      "sha": "448cfc61b68c6e8b62197fde2a6a63cf0ede9a4d",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/448cfc61b68c6e8b62197fde2a6a63cf0ede9a4d",
+      "message": "Merge pull request #461 from Anastasia-Labs/fp/zero-inputs\n\nAdd and harden zero-input fault proofs",
+      "authorName": "colll78",
+      "authorDate": "2026-07-23T00:56:33Z"
     },
     {
       "sha": "67b38e4ea2f4f6f31076179260156c6faa292149",
@@ -73,8 +80,8 @@
       "authorDate": "2026-07-22T18:06:26Z"
     },
     {
-      "sha": "3f741b7807049155e6566ab81fbcea339e60879f",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/3f741b7807049155e6566ab81fbcea339e60879f",
+      "sha": "81c52d23ea552b9cde620d1f1212a3454c8efc9a",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/81c52d23ea552b9cde620d1f1212a3454c8efc9a",
       "message": "NO-REF-INPUT",
       "authorName": "Drop-Table-Users",
       "authorDate": "2026-07-21T11:16:38Z"
@@ -113,13 +120,6 @@
       "message": "fix: harden diagnostic capture and audit docs",
       "authorName": "Philip DiSarro",
       "authorDate": "2026-07-20T16:06:16Z"
-    },
-    {
-      "sha": "40c1636de6efc44381165590cc059ef5ab674840",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/40c1636de6efc44381165590cc059ef5ab674840",
-      "message": "docs: retire completed implementation plans",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-07-20T13:40:36Z"
     }
   ],
   "contributors": [
@@ -360,7 +360,7 @@
   "commitActivity": [
     {
       "week": 1754179200,
-      "total": 63
+      "total": 8
     },
     {
       "week": 1754784000,
@@ -376,11 +376,11 @@
     },
     {
       "week": 1756598400,
-      "total": 5
+      "total": 4
     },
     {
       "week": 1757203200,
-      "total": 57
+      "total": 56
     },
     {
       "week": 1757808000,
@@ -432,7 +432,7 @@
     },
     {
       "week": 1765065600,
-      "total": 6
+      "total": 7
     },
     {
       "week": 1765670400,
@@ -540,7 +540,7 @@
     },
     {
       "week": 1781395200,
-      "total": 13
+      "total": 21
     },
     {
       "week": 1782000000,
@@ -560,7 +560,7 @@
     },
     {
       "week": 1784419200,
-      "total": 19
+      "total": 20
     },
     {
       "week": 1785024000,
