@@ -1,10 +1,10 @@
 {
-  "fetchedAt": "2026-07-27T10:00:06.937Z",
+  "fetchedAt": "2026-07-28T08:42:25.721Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 25,
     "forks_count": 10,
-    "open_issues_count": 78
+    "open_issues_count": 77
   },
   "languages": {
     "Aiken": 359544,
@@ -16,6 +16,20 @@
     "Perl": 37
   },
   "commits": [
+    {
+      "sha": "de9a45704efa63fe1a70f96e36a648e7d304a129",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/de9a45704efa63fe1a70f96e36a648e7d304a129",
+      "message": "Other .mds",
+      "authorName": "Drop-Table-Users",
+      "authorDate": "2026-07-27T15:03:16Z"
+    },
+    {
+      "sha": "9a305e79dd678aadc72f6f5db0ab35fe675d9a2a",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/9a305e79dd678aadc72f6f5db0ab35fe675d9a2a",
+      "message": "Update catalogue status",
+      "authorName": "Drop-Table-Users",
+      "authorDate": "2026-07-27T14:47:51Z"
+    },
     {
       "sha": "d527aadc74f51b629820388863bf9dca44c3bab2",
       "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d527aadc74f51b629820388863bf9dca44c3bab2",
@@ -106,20 +120,6 @@
       "message": "fix: address tx-validation review feedback",
       "authorName": "Philip DiSarro",
       "authorDate": "2026-07-20T23:54:19Z"
-    },
-    {
-      "sha": "d1b79e3f4decc2f822fcf6706fd0a8fa785bf1e8",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d1b79e3f4decc2f822fcf6706fd0a8fa785bf1e8",
-      "message": "refactor: remove unconsumed pre-submit capture",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-07-20T21:40:45Z"
-    },
-    {
-      "sha": "e25295409a2d31553e2d42add336800b881f1121",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/e25295409a2d31553e2d42add336800b881f1121",
-      "message": "fix: harden diagnostic capture and audit docs",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-07-20T16:06:16Z"
     }
   ],
   "contributors": [
@@ -360,7 +360,7 @@
   "commitActivity": [
     {
       "week": 1754179200,
-      "total": 8
+      "total": 63
     },
     {
       "week": 1754784000,
@@ -368,7 +368,7 @@
     },
     {
       "week": 1755388800,
-      "total": 18
+      "total": 23
     },
     {
       "week": 1755993600,
@@ -376,11 +376,11 @@
     },
     {
       "week": 1756598400,
-      "total": 4
+      "total": 5
     },
     {
       "week": 1757203200,
-      "total": 56
+      "total": 57
     },
     {
       "week": 1757808000,
@@ -432,7 +432,7 @@
     },
     {
       "week": 1765065600,
-      "total": 7
+      "total": 6
     },
     {
       "week": 1765670400,
@@ -520,11 +520,11 @@
     },
     {
       "week": 1778371200,
-      "total": 25
+      "total": 43
     },
     {
       "week": 1778976000,
-      "total": 14
+      "total": 16
     },
     {
       "week": 1779580800,
@@ -540,7 +540,7 @@
     },
     {
       "week": 1781395200,
-      "total": 21
+      "total": 20
     },
     {
       "week": 1782000000,
@@ -564,7 +564,7 @@
     },
     {
       "week": 1785024000,
-      "total": 0
+      "total": 2
     }
   ]
 }
