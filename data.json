@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-07-30T08:35:13.131Z",
+  "fetchedAt": "2026-07-31T08:56:07.943Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 25,
@@ -17,109 +17,109 @@
   },
   "commits": [
     {
-      "sha": "6d0f493b1d3b04420709886bb80ccb283e508851",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/6d0f493b1d3b04420709886bb80ccb283e508851",
-      "message": "fix: harden watcher recovery and admission",
+      "sha": "c44afaf6043041701804bd409321276bc4a39ab6",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/c44afaf6043041701804bd409321276bc4a39ab6",
+      "message": "goal(vm): record three further production defects; fix one stale replay fixture\n\nVM-DEFECT-3 (total break): script-sources stage 7 is unsatisfiable on BOTH\nproof paths for even the most trivial state, so the machine can never reach\nCEK and NO fraud proof can be completed for any transaction. Unsatisfiability\nproven; offending conjunct not yet localized - no production edit until it is.\n\nVM-DEFECT-4/5: two sites reconstruct witness bytes with serialiseData while\nevery other check requires the canonical definite-length encoding, making\nstage-7 successors and stage-1-finish prefixes unsatisfiable. Isolation\nprobes green; anti-pattern bounded to exactly these two sites.\n\nT1 fixed and parent-verified: script_sources_replay_appends_script_credential_\nspend_purposes was a stale fixture (commit 3490a437 migrated replay to\nledger_output_commitment decoding; the hand-written tests kept raw output\nCBOR). T2 has the same fix applied but still fails on the script_ref case -\nleft corrected rather than restored to a provably wrong fixture.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-07-30T07:20:16Z"
+      "authorDate": "2026-07-31T03:16:00Z"
     },
     {
-      "sha": "0cecf53698be742669bbd0ed53ae61c6e2b78cc9",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/0cecf53698be742669bbd0ed53ae61c6e2b78cc9",
-      "message": "goal(node): schema/journal/e2e/architecture-g backlog slice with stale-fixture repairs\n\n- pending-block-finalization schema evolution (format_version, replay_kind,\n  validation-trace columns, mpf all-or-none constraints), forced-transaction\n  journal, foreign-tip reconciliation, e2e runner/supervisor/summary,\n  architecture-g artifact producers/verifiers, commit worker pipeline per\n  ledger F02-L/A/P rows\n- parent repairs during triage: database.test direct-insert fixture gained\n  the three new NOT NULL columns; node dist rebuilt (was 3 days stale);\n  vite transform caches cleared; disposable midgard_test reset onto the\n  current schema with the correct stamp\n- gates: full suite 96/108 executed across 144 files with exactly two\n  documented emulator failures ledgered as NODE-EMU-DA-SEED (DA-seed env\n  plumbing; backlog-pages phaseA rejection); database.test green; tsup\n  build clean",
+      "sha": "b72f441f4e0480f4d1d100005758790f17cbe42b",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/b72f441f4e0480f4d1d100005758790f17cbe42b",
+      "message": "goal(ledger): record the 7f74981f delivery checkpoint to PR #471",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-07-30T07:00:34Z"
+      "authorDate": "2026-07-31T02:47:14Z"
     },
     {
-      "sha": "ac0e8aa48af5efa59d1a1dc166337da893b9e7aa",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ac0e8aa48af5efa59d1a1dc166337da893b9e7aa",
-      "message": "fix(review): close recovery and admission findings",
+      "sha": "7f74981fbc6246e0b986f026589c06954da62563",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/7f74981fbc6246e0b986f026589c06954da62563",
+      "message": "merge: reconcile companion-lane recovery hardening (origin 6d0f493b)\n\nThree commits (watcher recovery/admission hardening, review findings,\nfinalized-rollback recovery). Five conflicts, all resolved as unions with\nno fail-closed check dropped from either side:\n\n- state-queue-indexer (5 hunks): kept the companion's digest-based prior\n  (verified[priorActiveIndex]) over positional index-1 — the digest lands on\n  the same entry whenever orphans exist and additionally proves the link,\n  while positional is wrong in the zero-orphan case; widened the rollback\n  action list to include rewind_and_replay (required by the new W13\n  post-finality recovery and already assumed by the sibling check 40 lines\n  above); kept BOTH snapshot predicates (digest-pinned target AND\n  still-retained history) since neither subsumes the other; W13 digest\n  bindings (nextStoreDigest, rollbackSourceExtends) intact\n- three TypeScript import-list conflicts resolved as unions\n- GOAL_PROGRESS: ours verbatim plus an attributed remote-session section\n\nGates: state-queue-indexer 22/22 (was 16, +6 recovery tests), full watcher\npackage 13/13 files 282/282 (was 242), watcher typecheck clean",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-07-30T05:19:05Z"
+      "authorDate": "2026-07-31T02:46:34Z"
     },
     {
-      "sha": "da65efebf556ed9998604fd5b03c458c11111b4f",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/da65efebf556ed9998604fd5b03c458c11111b4f",
-      "message": "fix(watcher): recover finalized rollbacks safely",
+      "sha": "5cfc30965af88e7aa24491c0d076ff2d9cd89634",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/5cfc30965af88e7aa24491c0d076ff2d9cd89634",
+      "message": "goal(ledger): definitive post-fix validation-machine verdict 110/126\n\n- first trustworthy full verdict for the module; all 7 VM-DEFECT-1/2\n  controls pass, validating both production fixes\n- 16 failures confined to script_sources (11) and CEK (5); every other\n  test green; earlier contended sweeps overstated at 22\n- contention artifacts identified and excluded (low-load per-test retries)",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-07-30T04:32:12Z"
+      "authorDate": "2026-07-31T02:34:53Z"
     },
     {
-      "sha": "2e52d2ef44dbfd0b8a0dead0902ce85d77378334",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/2e52d2ef44dbfd0b8a0dead0902ce85d77378334",
-      "message": "goal(onchain): consensus/state-queue/deposit backlog and five-stage decode pipeline\n\n- state-queue commit/merge/removal hardening with Q49 structural controls\n  (5/5 selectors), deposit mint-policy exact ten-asset/inclusion-time\n  controls (5/5), payout destination/underfunding controls (3/3),\n  settlement/ledger-state/transition-trace backlog per F02-L rows\n- five-stage canonical-decode item pipeline validators (source, semantic,\n  observe, settlement, proof-item) plus staging lib replace the chunk\n  validator (deleted) per the complete-item-first necessity program\n- ABI test modules (event/scheduler/validation-controls/tail-controls,\n  ledger-state) and the batching focused-check runner tracked\n- trailing whitespace normalized per the 86fd1d4b convention; compile clean",
+      "sha": "258c31f1693ed6aef4da9948041ea43710e01ae7",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/258c31f1693ed6aef4da9948041ea43710e01ae7",
+      "message": "goal(evidence): rebind artifacts after VM fixes and blueprint regeneration\n\n- capability reconciliation: validation-machine .ak/.ts and watcher\n  dependency-map hashes rebound; verifier passes (10 PASS/12 PARTIAL, CG2 open)\n- closure manifest: two-pass rebind (the capability artifact's own hash\n  changes when its sources rebind); verifier current-tree-valid at 31e1ed9d\n  via the GOAL_SPEC 0.2 descent rule; self-test 7/7",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-07-30T04:29:53Z"
+      "authorDate": "2026-07-31T01:59:56Z"
     },
     {
-      "sha": "b73cc6c09305571cf9d11527ad2ced440fd58f9b",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/b73cc6c09305571cf9d11527ad2ced440fd58f9b",
-      "message": "goal(harness): track the F40/F41 goal verification suite\n\n- all eight exact $13.1 goal:* entrypoints in demo/package.json plus the\n  serial runner, closure decoder/verifier (with $0.2 descent semantics),\n  capability/fault-proof/static-policy/plan verifiers, closure schema,\n  verification doc, fault-proof reconciliation artifact, and the 132-row\n  format registry - previously untracked while the committed closure\n  manifest bound their hashes\n- format-check scoped by .prettierignore to exclude generated trees\n- gates tonight: plan verifier PASS, closure current-tree-valid, capability\n  PASS, fault-proof 70 rows, registry 132 rows, self-test 7/7",
+      "sha": "31e1ed9d2600dba4a9114ff5966ae791e5c3c1a5",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/31e1ed9d2600dba4a9114ff5966ae791e5c3c1a5",
+      "message": "goal(ledger): IG1 blueprint regeneration and dependent-pin revalidation",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-07-30T04:18:27Z"
+      "authorDate": "2026-07-31T01:58:31Z"
     },
     {
-      "sha": "6e4b5ea0ef217fbb60e4c986a756d6189fa150cf",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/6e4b5ea0ef217fbb60e4c986a756d6189fa150cf",
-      "message": "goal(q00-q01): native counted-root port for eight families; proof-state safety suite\n\n- eight legacy-binding families moved to pass_native_tx_to_next_step with\n  the legacy PlutusData inclusion path deleted (zero references verified);\n  witness-encoding split fixed via verify_native_tx_witness_set;\n  withdrawn-reference-input rebinds under WithdrawalsRootDomain counted-root\n  membership; min-fee carries binding only (fee stub stays for Q20)\n- shared native-binding fixture drives every step-01 positive through the\n  real validator handler; forged-root negatives fail at counted-root unwrap\n- Q01: 41 selectors across common/computation-thread/catalogue covering\n  lifecycle, intra-tx duplicate-init, token coupling, catalogue immutability,\n  reference-input identity, shared-layer valid-block rejection; cross-tx\n  duplicate-init gap ledgered for Q53\n- trailing whitespace stripped per the normalized-formatter convention the\n  remote CI defines (86fd1d4b); compile clean post-strip\n- gates: parent batch replays 25/25 (14 modules) and 41/41 (3 modules)",
+      "sha": "dc74cfa3c9b3161832d9402be3d8e2dcf2c1e25d",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/dc74cfa3c9b3161832d9402be3d8e2dcf2c1e25d",
+      "message": "goal(ledger): VM-SCRIPT-SOURCES-CEK row - nine low-load-confirmed latent failures",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-07-30T04:17:51Z"
+      "authorDate": "2026-07-31T01:51:04Z"
     },
     {
-      "sha": "df29824aabd73c876af77b29fd8979a9cfdb1ad6",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/df29824aabd73c876af77b29fd8979a9cfdb1ad6",
-      "message": "goal(docs): propagate invariant 3-4 amendment; formatting normalization\n\n- architecture.md gains the proof-interaction classification section and\n  proof-completion.md restates single-party-first (transaction count is\n  orthogonal to interactivity) - the companion-lane propagation of the\n  owner-adopted spec amendment\n- checkpoint docs and registry verifier: prettier formatting only",
+      "sha": "d012905b56a89ff14986ef57a8f33a4a92360a55",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d012905b56a89ff14986ef57a8f33a4a92360a55",
+      "message": "goal(vm): fix two canonical-V1 validation-machine production defects\n\nVM-DEFECT-2 (soundness): delete the post.ledger_delta_root clearing clause\nfrom rejected_successor_is_exact. It contradicted immutable_context_matches,\nwhich pins that field pre==post, making every rejection one-step unprovable\nfrom any pre-state with a non-empty claimed delta - i.e. from every\nadversarial pre-state, since a real invalid transaction always claims one.\nThe challenger must exhibit a valid rejection successor to win, so the\ndishonest operator prevailed by default across all 80 call sites. The\n'rejecting terminal derives no operations' duty is discharged elsewhere\n(consensus-profile-v1 sec 8; encode_terminal_rejection_witness;\nvalidation-claim-v1 pre/post utxos_root; proof.ak unilateral no-op faults).\n\nVM-DEFECT-1: signatures handoff emitted control result=0 at stage 0 where\nthe binder requires the -1 'not yet evaluated' sentinel, making no phase-A\nstep provable after the handoff. TS reference emits -1; an Aiken\ntranscription slip, fixed at the emitter (not by relaxing the checker).\n\nControls added (7): a valid transition still cannot be proven rejected;\ncleared and rewritten claimed deltas both reject; stage-0 result 0 and 1\nboth reject; plus positive pairs. Six sites that masked defect 2 by using\nan empty claimed delta re-based onto realistic non-empty roots, retaining\none labelled empty case. All 126 original tests preserved (133 total).\n\nStatus docs corrected: InvalidOneStepTransition held at PARTIAL pending a\ndispute-level regression, coverage-matrix rows and profile field\nenumeration annotated. Decision memo: docs/exec-plans/evidence/\nvm-defect-decision-memo.md. Compile clean on the merged tree.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-07-30T04:15:37Z"
+      "authorDate": "2026-07-31T00:21:58Z"
     },
     {
-      "sha": "44433c6249184cd42363743de7da63fed30ef6b6",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/44433c6249184cd42363743de7da63fed30ef6b6",
-      "message": "goal(spec): owner-adopted invariant 3-4 amendment - single-party-first with interactive necessity\n\n- any violation provable by one prover from retained public evidence must\n  stay non-interactive; multi-step computation-thread decomposition allowed;\n  transaction count never justifies challenge/response; interactive families\n  owe executable necessity evidence for interactivity itself\n- spec now 1,505 lines at 30a12ec9; evidence artifacts and ledger rebound;\n  closure verifier current-tree-valid",
+      "sha": "3377d1ad0e2674a149f37076dc05587e963c9145",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/3377d1ad0e2674a149f37076dc05587e963c9145",
+      "message": "goal(vm): normative decision memo for both validation-machine defects\n\n- profile doc 268-271 decisive for defect 2; technical spec silent (recorded\n  as such, not inferred); line 2052 is redundant accumulator-era residue\n  whose removal restores capability, alternatives rejected with reasons\n- severity upgraded to SOUNDNESS break: challenger must exhibit a valid\n  rejection successor and cannot for any non-empty claimed delta, so a\n  dishonest operator wins by default across 80 call sites\n- defect 1 decisive from TS cross-language parity (transcription slip)\n- overstated status rows identified for correction",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-07-30T04:14:13Z"
+      "authorDate": "2026-07-30T22:30:21Z"
     },
     {
-      "sha": "c41ef5a5b3f2cda54abf0ddae5f9b3889513e0ed",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/c41ef5a5b3f2cda54abf0ddae5f9b3889513e0ed",
-      "message": "goal(validation): validation-machine remediation and boundary-suite backlog slice\n\n- field-order remediated validation-machine/data/wire sources and the\n  boundary/breadth/chunk suites; C26 investigation scaffold now imports the\n  production gate from midgard-core\n- gates tonight: complete-item 16/16, wire 2/2, data-breadth 2/2,\n  unary-depth 2/2, tsc clean; heavier retained-DA/journey coverage recorded\n  in the validation ledger (F40-RETAINED-DA, CP1-JOURNEY)",
+      "sha": "6add5509f7557e2e5e74563556755705ea580771",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/6add5509f7557e2e5e74563556755705ea580771",
+      "message": "goal(ledger): record two blocking canonical-V1 validation-machine production defects",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-07-30T03:55:10Z"
+      "authorDate": "2026-07-30T22:17:37Z"
     },
     {
-      "sha": "4a86528250a572d705986f1a6402a93eb445be42",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/4a86528250a572d705986f1a6402a93eb445be42",
-      "message": "goal(sdk): fraud-proof chain/dispute/state-queue backlog slice\n\n- validation-dispute boundary (42-constructor auxiliary schema), fraud-proof\n  contracts/transition-trace, reference-scripts, state-queue and operator\n  backlog per ledger rows F02-V10-V14/F02-L18/F02-A\n- gate: package suite 94/96; the two fault-proof.test.ts failures are the\n  documented mid-ABI-transition state (working-tree SDK expects the post-Q00\n  regenerated blueprint, 75 vs 61 semantic resolvers) and close at the IG1\n  blueprint rebuild with Q00-OFFCHAIN",
+      "sha": "cd040c9b6299be0ff6bc580e8aacc74d9cf0ee78",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/cd040c9b6299be0ff6bc580e8aacc74d9cf0ee78",
+      "message": "goal(vm): repair three stale test expectations exposed by the first full module sweep\n\n- canonical_v1_decode_...: fixture used item_count=0; the production\n  empty-decode check requires the not-yet-counted sentinel -1 (the other\n  five call sites already used -1)\n- phase_a_native_scripts_..._exact_no_op and script_sources_rejects_an_\n  unsigned_protected_pubkey_output: hand-built terminals omitted\n  ledger_delta_root=frontier_commitment(0,[]) required by\n  rejected_successor_is_exact; replaced with the exact_rejection_post helper\n- all 126 test declarations preserved, zero assertions removed or weakened;\n  compile clean\n- diagnosis of the remaining failures found TWO PRODUCTION defects, left\n  untouched and ledgered for a protocol decision",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-07-30T03:55:09Z"
+      "authorDate": "2026-07-30T22:16:11Z"
     },
     {
-      "sha": "4a4bc6605414e1dff84098ebce957b92c62aa6bf",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/4a4bc6605414e1dff84098ebce957b92c62aa6bf",
-      "message": "goal(core): five-stage envelope measurement block, CEK/DA/collection backlog slice\n\n- adopts the reviewed per-stage proof-item envelope family (publication cap\n  14,396 -> 15,256 signed / 1,128 margin, matching the independent single-tx\n  measurements; authentication 14,543; observation 15,872 as the direct-bound\n  limiter at item 8,273; 512-byte reliability reserve) plus its read-only\n  measurement driver script; basis naming/reconciliation with the 13,282\n  single-tx frontier remains C21-CORE-ENVELOPE\n- carries bounded-collection, cek-proof, consensus-validation, da-payload\n  envelope, da-transport, script-proof src+test backlog per ledger F02 rows\n- gates: full core suite 287/288 tonight (single pre-existing\n  deployment-manifest identity failure, separately ledgered), C26 suites\n  6/6+4/4+3/3, boundary 2/2",
+      "sha": "2faaedc9ee32cf00eee068b0f4b3e447ee3da0b7",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/2faaedc9ee32cf00eee068b0f4b3e447ee3da0b7",
+      "message": "goal(ledger): VM-MODULE-FAILURES bisect decisive - older latent debt, not merge or C20 damage",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-07-30T03:49:58Z"
+      "authorDate": "2026-07-30T21:41:08Z"
     },
     {
-      "sha": "d060a2c67e59354a9aa8f184f5b36234da891ba7",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d060a2c67e59354a9aa8f184f5b36234da891ba7",
-      "message": "goal(lucid): provider payload/types/convenience and partial-signing backlog slice\n\n- exact /protocol-info root+nested rejection (F02-P), provider payload\n  bindings, context/type backlog per ledger rows\n- gates: provider suites 49/49 (3 files), partial-signing 7/7 (parent runs)\n- known open item recorded as C20-LUCID: three committed native-codec\n  round-trip tests fail 145/148 against the remediated core field order\n  (script->6, vkey/address->7) until the lucid consumer is ported - the\n  expected state of the open C20-6/7 reconciliation, not this slice",
+      "sha": "47c5b4cb49bedbe57ee80c11162dcae2d25b4a4d",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/47c5b4cb49bedbe57ee80c11162dcae2d25b4a4d",
+      "message": "goal(ledger): VM-MODULE-FAILURES investigation row (first full 126-test sweep)",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-07-30T03:48:56Z"
+      "authorDate": "2026-07-30T21:40:40Z"
     },
     {
-      "sha": "e5573f9405c7c24ae17cb848fcd9b6e927f14469",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/e5573f9405c7c24ae17cb848fcd9b6e927f14469",
-      "message": "goal(da-committee): exact V1 store/protocol/config backlog slice\n\n- persisted payload/signature records (D19/D20), equivocation evidence\n  (D17), runtime-manifest parser binding (D18/A01), attestation\n  validationTracesRoot/count envelopes, provider and watcher hardening per\n  ledger rows F02-DS/F02-DS-B/F02-D06-D16\n- gate: full package suite 193 passed / 1 env-gated skip (parent run)",
+      "sha": "8d8f4f3323eccc75a1b15bd276a635297aa2745c",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/8d8f4f3323eccc75a1b15bd276a635297aa2745c",
+      "message": "goal(ledger): aiken pathology diagnosis, upstream reports 1389/1390/1377-comment",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-07-30T03:47:57Z"
+      "authorDate": "2026-07-30T20:14:43Z"
     },
     {
-      "sha": "d42d82630d1ff4a082b01abe2d7360621ee3d688",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d42d82630d1ff4a082b01abe2d7360621ee3d688",
-      "message": "goal(fault-proofs): validation-dispute reference-script sourcing and 5-field redeemer\n\n- submitValidationDisputeSemanticResolution resolves the published\n  canonical_decode_item_semantic_v1 reference script fail-fast (new\n  hash-checked resolvers, deployment entry validationTraceDisputeItemSemantic)\n  and submitStage reads from the reference UTxO instead of attaching the\n  ~27.7 KiB validator; standalone encoder pinned to the deployed 5-field ABI\n- measured: direct 11,274 B (margin 5,110), reference 2,693 B, zero embedded\n  scripts, every stage <= 16,384 with body-absence asserted\n- carries the lane's prior transition-trace/remove-block/corpus backlog\n- gates: validation-dispute-submit 9/9, aiken-blueprint-data 2/2 (parent\n  replays), emulator complete-item 2/2 (agent run, 457.75 s), tsc clean;\n  submit-init.test.ts 8/13 pre-existing failures documented for the SDK lane",
+      "sha": "9c5133cdc1ea572f890ca404ed1f0ecbbff92dc4",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/9c5133cdc1ea572f890ca404ed1f0ecbbff92dc4",
+      "message": "goal(ledger): post-merge battery entry, compiler finding, owner idle-wait rule",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-07-30T03:46:42Z"
+      "authorDate": "2026-07-30T18:39:22Z"
     }
   ],
   "contributors": [
@@ -412,19 +412,19 @@
     },
     {
       "week": 1762041600,
-      "total": 46
+      "total": 31
     },
     {
       "week": 1762646400,
-      "total": 14
+      "total": 0
     },
     {
       "week": 1763251200,
-      "total": 32
+      "total": 12
     },
     {
       "week": 1763856000,
-      "total": 44
+      "total": 9
     },
     {
       "week": 1764460800,
@@ -468,7 +468,7 @@
     },
     {
       "week": 1770508800,
-      "total": 36
+      "total": 34
     },
     {
       "week": 1771113600,
@@ -520,11 +520,11 @@
     },
     {
       "week": 1778371200,
-      "total": 43
+      "total": 41
     },
     {
       "week": 1778976000,
-      "total": 15
+      "total": 16
     },
     {
       "week": 1779580800,
@@ -536,7 +536,7 @@
     },
     {
       "week": 1780790400,
-      "total": 32
+      "total": 31
     },
     {
       "week": 1781395200,
@@ -564,7 +564,7 @@
     },
     {
       "week": 1785024000,
-      "total": 156
+      "total": 177
     }
   ]
 }
