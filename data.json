@@ -1,10 +1,10 @@
 {
-  "fetchedAt": "2026-07-31T08:56:07.943Z",
+  "fetchedAt": "2026-08-01T08:26:58.703Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 25,
     "forks_count": 10,
-    "open_issues_count": 80
+    "open_issues_count": 81
   },
   "languages": {
     "Aiken": 359544,
@@ -17,109 +17,109 @@
   },
   "commits": [
     {
-      "sha": "c44afaf6043041701804bd409321276bc4a39ab6",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/c44afaf6043041701804bd409321276bc4a39ab6",
-      "message": "goal(vm): record three further production defects; fix one stale replay fixture\n\nVM-DEFECT-3 (total break): script-sources stage 7 is unsatisfiable on BOTH\nproof paths for even the most trivial state, so the machine can never reach\nCEK and NO fraud proof can be completed for any transaction. Unsatisfiability\nproven; offending conjunct not yet localized - no production edit until it is.\n\nVM-DEFECT-4/5: two sites reconstruct witness bytes with serialiseData while\nevery other check requires the canonical definite-length encoding, making\nstage-7 successors and stage-1-finish prefixes unsatisfiable. Isolation\nprobes green; anti-pattern bounded to exactly these two sites.\n\nT1 fixed and parent-verified: script_sources_replay_appends_script_credential_\nspend_purposes was a stale fixture (commit 3490a437 migrated replay to\nledger_output_commitment decoding; the hand-written tests kept raw output\nCBOR). T2 has the same fix applied but still fails on the script_ref case -\nleft corrected rather than restored to a provably wrong fixture.",
+      "sha": "ba701b2ec0bc87a58fe6677ff2bc570d7d73fc70",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ba701b2ec0bc87a58fe6677ff2bc570d7d73fc70",
+      "message": "goal(ci): converge staged-tree identity and calibrate a first-run CI timeout\n\n- The authority resultContentTreeSha256 rebind in 25f15014 was computed\n  before the deployment-manifest pin edit was staged, so the committed\n  tree differed from the hashed tree. Recomputed at the exact final staged\n  state; the map is excluded from its own tree hash so this converges.\n  Verifier passes (8 dependency classes).\n\n- native-redeemer-deep-data depth-4,043 normalization measured 12.1 s on\n  the 2-core CI runner against the default 5 s budget (first-ever CI\n  execution of this suite; local 32-core calibration masked it). Budget\n  raised to 60 s; no assertion weakened.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-07-31T03:16:00Z"
+      "authorDate": "2026-08-01T08:22:20Z"
     },
     {
-      "sha": "b72f441f4e0480f4d1d100005758790f17cbe42b",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/b72f441f4e0480f4d1d100005758790f17cbe42b",
-      "message": "goal(ledger): record the 7f74981f delivery checkpoint to PR #471",
+      "sha": "25f15014aef65c249a221cf324c1426d68d2ed4f",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/25f15014aef65c249a221cf324c1426d68d2ed4f",
+      "message": "goal(ci): fix the three deeper failures unmasked by the lockfile repair\n\nWith installs working, CI reached three real drift defects:\n\n- Docs Site CI check:facts: the Q02 scaffold-family command (3e97cbf9) was\n  undocumented in docs-site fault-proofs overview and the command count\n  said 30; documented in a new Scaffold group row and count updated to 31.\n  Local check-docs-facts passes 10 fact groups.\n\n- Evidence Integrity CI: the watcher dependency map was stale against a\n  week of committed, ledgered work - 14 per-class source hashes (public-da\n  integration, VM fixes, Option A validation-machine.ts, fmt on\n  state-queue.ak, submit.ts remediations), the watcher package inventory\n  (missing public-da-client.ts + its test), the W00 scaffold-test and\n  W14/W15 indexer evidence hashes, and the authority staged-tree identity.\n  All rebound against clean-at-HEAD index bytes only. Verifier passes\n  (8 dependency classes), its node:test 19/19, format registry 132 rows in\n  incomplete mode.\n\n- Midgard Node CI: deployment-manifest-identity full-manifest pin predated\n  the committed 4a4bc660 consensus-profile change; rebound (suite 9/9).\n  This was the ledgered 'pre-existing 1/5 failure' - its earlier\n  stale-plutus.json attribution was wrong, the profile constant was the\n  cause.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-07-31T02:47:14Z"
+      "authorDate": "2026-08-01T07:53:22Z"
     },
     {
-      "sha": "7f74981fbc6246e0b986f026589c06954da62563",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/7f74981fbc6246e0b986f026589c06954da62563",
-      "message": "merge: reconcile companion-lane recovery hardening (origin 6d0f493b)\n\nThree commits (watcher recovery/admission hardening, review findings,\nfinalized-rollback recovery). Five conflicts, all resolved as unions with\nno fail-closed check dropped from either side:\n\n- state-queue-indexer (5 hunks): kept the companion's digest-based prior\n  (verified[priorActiveIndex]) over positional index-1 — the digest lands on\n  the same entry whenever orphans exist and additionally proves the link,\n  while positional is wrong in the zero-orphan case; widened the rollback\n  action list to include rewind_and_replay (required by the new W13\n  post-finality recovery and already assumed by the sibling check 40 lines\n  above); kept BOTH snapshot predicates (digest-pinned target AND\n  still-retained history) since neither subsumes the other; W13 digest\n  bindings (nextStoreDigest, rollbackSourceExtends) intact\n- three TypeScript import-list conflicts resolved as unions\n- GOAL_PROGRESS: ours verbatim plus an attributed remote-session section\n\nGates: state-queue-indexer 22/22 (was 16, +6 recovery tests), full watcher\npackage 13/13 files 282/282 (was 242), watcher typecheck clean",
+      "sha": "54a0d4967895ab1d172be2336028bda78ddcf5f0",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/54a0d4967895ab1d172be2336028bda78ddcf5f0",
+      "message": "goal(ledger): mergeability + C21-STAGE4 closure checkpoint\n\nSuperseding checkpoint section covering the 2026-08-01 owner-directed\nbatch: CI unblockers (lockfile, fmt), the committed-tree standalone-compile\nwithdrawal, VM-DEFECT-7 fix, C21-STAGE4 Option A implementation with B'\ndispositioned as structurally subsumed (owner review requested), removal\nreference-scripts completion, evidence repairs, IG1 regeneration\n(368 validators, ea4bceeb), and gate replays: journey regression 1/1\n(201.9s, fresh isolated DB), fault-proofs 215/216, validation suites green.\n\nRecords the OVERLAY-SEMANTICS finding (owner decision required): the sole\nfault-proofs failure is confirmed by A/B blueprint experiment to be a\nsemantic dependency of the TS dispute tooling on the protected source-task\nlib checkpoint - the committed tree compiles standalone but is not\nsemantically self-consistent, and Node CI stays red on exactly that named\ntest pending an ownership handoff.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-07-31T02:46:34Z"
+      "authorDate": "2026-08-01T07:18:41Z"
     },
     {
-      "sha": "5cfc30965af88e7aa24491c0d076ff2d9cd89634",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/5cfc30965af88e7aa24491c0d076ff2d9cd89634",
-      "message": "goal(ledger): definitive post-fix validation-machine verdict 110/126\n\n- first trustworthy full verdict for the module; all 7 VM-DEFECT-1/2\n  controls pass, validating both production fixes\n- 16 failures confined to script_sources (11) and CEK (5); every other\n  test green; earlier contended sweeps overstated at 22\n- contention artifacts identified and excluded (low-load per-test retries)",
+      "sha": "75736e4c4d2852780013a9f4194576d2734945ed",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/75736e4c4d2852780013a9f4194576d2734945ed",
+      "message": "goal(c21-stage4): update two validation-machine TS pins to the proof-only stage-4 witness\n\nThe package-wide sweep after b7cacd85 caught two stale pins the focused\ncomplete-item suites did not cover: the positional witness-kind pin in the\nbounded field-reveal replay, and the scriptSources output-item filter in\nthe >8 KiB aggregate-field case. Both now expect\ntransactionRedeemerItemBegin, with the outputs filter additionally pinning\ncollectionProof.fieldIndex === 2 because the stage-2 redeemer begin shares\nthe constructor. validation-machine.test.ts passes 24/24.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-07-31T02:34:53Z"
+      "authorDate": "2026-08-01T06:49:01Z"
     },
     {
-      "sha": "258c31f1693ed6aef4da9948041ea43710e01ae7",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/258c31f1693ed6aef4da9948041ea43710e01ae7",
-      "message": "goal(evidence): rebind artifacts after VM fixes and blueprint regeneration\n\n- capability reconciliation: validation-machine .ak/.ts and watcher\n  dependency-map hashes rebound; verifier passes (10 PASS/12 PARTIAL, CG2 open)\n- closure manifest: two-pass rebind (the capability artifact's own hash\n  changes when its sources rebind); verifier current-tree-valid at 31e1ed9d\n  via the GOAL_SPEC 0.2 descent rule; self-test 7/7",
+      "sha": "b7cacd8544e087aa3b965f72b812067968030845",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/b7cacd8544e087aa3b965f72b812067968030845",
+      "message": "goal(c21-stage4): close the soundness gap - stage-4 fold drops the item byte reveal (Option A)\n\nOwner decision 2026-08-01 (Decisions entry, c4f7fd52), executing option 1 of\ndocs/exec-plans/evidence/c21-stage4-analysis.md.\n\nscript_sources_stage_four consumed a TransactionFieldItemWitness carrying\nthe complete output bytes, so its one-step evidence grew with output size:\nunbuildable above a 14,774-byte single-output best case against the\n16,384-byte envelope, and practically bounded near 8,769 bytes by the\ndeployed direct-only carriage of semantic resolver 0. One-step resolution\nis challenger-only and a ReadyForOneStep timeout awards nobody, so a\ndishonest operator could finalize an invalid block by forging exactly that\nfold step for a legal large output (CONFIRMED soundness gap, ledger row\n2026-07-31).\n\nThe fold's successor consumes only the authenticated\n(field_index, item_index, item_length, item_commitment) tuple:\nbounded_collection_v1.verify_item binds that tuple (plus version) into the\noutputs_hash from verify_native_tx_proof_source_v1 and stage 4 pins\nfield_index/item_index/item_count, leaving exactly one admissible tuple.\nThe byte reveal only re-proved that an authenticated commitment has a\npreimage - which canonicalDecode (chunk + complete carriage) and the\nstage-5 LedgerOutputProof traversal already establish for every output.\n\nStage 4 now expects the existing proof-only tag-29\nTransactionRedeemerItemBeginWitness: no ABI change, no new constructor, no\nbounded fallback, no 3.2 necessity artifact (carriage removed, not added).\nStage-4 evidence is O(1) in output size.\n\nEvidence:\n- Aiken focused batch 5/5: honest fold accepts; forged item_commitment\n  rejects; forged item_length rejects with the successor held honest,\n  isolating verify_item as the sole failing conjunct; stage 4->5 finish\n  unchanged; canonical_decode control unaffected. The superseded\n  mismatched-bytes test is replaced by two strictly stronger forged-tuple\n  rejections.\n- TS complete-item-proof-fit 4/4: the previously unprovable 16,384-byte\n  maximum output builds a stage-4 argument (evidence < 2,048 bytes,\n  auxiliary size equal across 256/14,774/16,384-byte outputs within CBOR\n  integer width); carriage-policy + equivalence suites pass with the\n  emitter inventory updated; package tsc exit 0.\n- ledger-output-incremental-proof-v1.md residual-gap paragraph corrected\n  (it understated the gap on both axes); validator-hash change invalidates\n  all seven necessity artifacts - IG1 regeneration and re-measurement\n  cascade tracked in the ledger.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-07-31T01:59:56Z"
+      "authorDate": "2026-08-01T06:35:29Z"
     },
     {
-      "sha": "31e1ed9d2600dba4a9114ff5966ae791e5c3c1a5",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/31e1ed9d2600dba4a9114ff5966ae791e5c3c1a5",
-      "message": "goal(ledger): IG1 blueprint regeneration and dependent-pin revalidation",
+      "sha": "f9310109b8b5fcf84c3b1d938832f479610897be",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/f9310109b8b5fcf84c3b1d938832f479610897be",
+      "message": "goal(aiken): make the committed tree compile standalone - withdraw five protected-overlay dependents\n\nSince 636bb55f the committed tree could not compile without the\nUNCOMMITTED protected working-tree versions of cek-data-traverse-v1.ak and\nredeemer-item-proof-v1.ak: the four dormant stage-one executor validators\nand script-sources-redeemer-normalization-v1.test.ak reference\nprevalidated_*/stage_data_*/FinalizeFrameTransitionV1 symbols that only the\nprotected overlay exports. Every local gate ran with the overlay present,\nso this was invisible locally; Aiken CI failed at the fmt step before\nreaching aiken check, masking it there too. CI (clean checkout) would fail\nboth 'aiken check' and midgard-node-ci's 'aiken build --env testnet'.\n\nResolution: index-only removal of the five files (working bytes untouched\nand still hash-verified by the closure manifest) returning them to their\npre-636bb55f untracked protected-overlay status; they re-track in the same\ncommit that lands the source task's stage-one checkpoint. Constructor-aware\nexport scan shows no other committed file references overlay-only symbols.\n\nEvidence: isolated clean-worktree 'aiken check --skip-tests' now passes\nwith 0 errors (pinned aiken v1.1.22+39d6b04 under a pseudo-TTY; a detached\nrun reproduces the known silent-exit pathology and is not evidence).\nClosure manifest rebound for the five fmt-drifted protected-path hashes;\nverifier reports current-tree-valid.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-07-31T01:58:31Z"
+      "authorDate": "2026-08-01T06:34:39Z"
     },
     {
-      "sha": "dc74cfa3c9b3161832d9402be3d8e2dcf2c1e25d",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/dc74cfa3c9b3161832d9402be3d8e2dcf2c1e25d",
-      "message": "goal(ledger): VM-SCRIPT-SOURCES-CEK row - nine low-load-confirmed latent failures",
+      "sha": "681ca0b4cc45fc0b0c84d6d50aa6a45869f4059f",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/681ca0b4cc45fc0b0c84d6d50aa6a45869f4059f",
+      "message": "goal(aiken): fix formatter drift failing Aiken CI's normalized format check\n\nApplies the exact CI recipe (aiken fmt v1.1.22+39d6b04 excluding the two\nprotected pre-Goal lib files, then trailing-space normalization) to the 15\ntracked .ak files that had drifted — including validation-machine-v1.ak's\n21 pre-existing hunks (ledgered 2026-07-31 as related to 86fd1d4b),\nthe stage-one-redeemer executor validators from 636bb55f, and\nsettlement.ak. Formatting only; no semantic change. The two protected\nfiles (cek-data-traverse-v1.ak, redeemer-item-proof-v1.ak) are untouched\nand byte-identical to their recorded baseline hashes; the committed\nprotected-format checkpoint still matches.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-07-31T01:51:04Z"
+      "authorDate": "2026-08-01T06:15:37Z"
     },
     {
-      "sha": "d012905b56a89ff14986ef57a8f33a4a92360a55",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d012905b56a89ff14986ef57a8f33a4a92360a55",
-      "message": "goal(vm): fix two canonical-V1 validation-machine production defects\n\nVM-DEFECT-2 (soundness): delete the post.ledger_delta_root clearing clause\nfrom rejected_successor_is_exact. It contradicted immutable_context_matches,\nwhich pins that field pre==post, making every rejection one-step unprovable\nfrom any pre-state with a non-empty claimed delta - i.e. from every\nadversarial pre-state, since a real invalid transaction always claims one.\nThe challenger must exhibit a valid rejection successor to win, so the\ndishonest operator prevailed by default across all 80 call sites. The\n'rejecting terminal derives no operations' duty is discharged elsewhere\n(consensus-profile-v1 sec 8; encode_terminal_rejection_witness;\nvalidation-claim-v1 pre/post utxos_root; proof.ak unilateral no-op faults).\n\nVM-DEFECT-1: signatures handoff emitted control result=0 at stage 0 where\nthe binder requires the -1 'not yet evaluated' sentinel, making no phase-A\nstep provable after the handoff. TS reference emits -1; an Aiken\ntranscription slip, fixed at the emitter (not by relaxing the checker).\n\nControls added (7): a valid transition still cannot be proven rejected;\ncleared and rewritten claimed deltas both reject; stage-0 result 0 and 1\nboth reject; plus positive pairs. Six sites that masked defect 2 by using\nan empty claimed delta re-based onto realistic non-empty roots, retaining\none labelled empty case. All 126 original tests preserved (133 total).\n\nStatus docs corrected: InvalidOneStepTransition held at PARTIAL pending a\ndispute-level regression, coverage-matrix rows and profile field\nenumeration annotated. Decision memo: docs/exec-plans/evidence/\nvm-defect-decision-memo.md. Compile clean on the merged tree.",
+      "sha": "0f3b8538b27c8f192cc149f02d9717f634b78810",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/0f3b8538b27c8f192cc149f02d9717f634b78810",
+      "message": "goal(vm): fix VM-DEFECT-7 - replay successor carries the grown source count\n\nscript_sources_replay_item built its successor with next_sources.count\n(grown by replay_source_frontier when a resolved reference input carries a\nscript reference) but passed control.source_total_count unchanged, so\nencode_script_sources_witness tripped its own\n'expect source_total_count >= source_count' and the validator crashed on\nevery reachable replay step involving a reference script — the ordinary\nreference-script pattern. No claimed_successor could make the step verify:\na completeness/liveness break of the dispute game, fixture-independent and\nunfixable from the test side (full analysis: GOAL_PROGRESS.md 2026-07-31\nVM-DEFECT-7 row; found by the disposition lane, seventh production defect\nof this program).\n\nThe one-line fix passes next_sources.count at :8847, matching the\ncanonical TS reference model which advances both counters together\n(validation-machine.ts:2090). Stage-7-12 equality demands are now\nsatisfiable after reference-script replay.\n\nEvidence (pinned aiken v1.1.22+39d6b04, focused selectors):\n- script_sources_replay_appends_reference_scripts — the standing failing\n  witness left by the disposition lane — now collects 1/1 and PASSES.\n- script_sources_replay_appends_script_credential_spend_purposes and\n  script_sources_rescans_receive_sources_for_distinctness pass in the\n  same-tree batch.\n\nOwner-authorized 2026-08-01 (execution of recorded step 3); ledger row\nadded.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-07-31T00:21:58Z"
+      "authorDate": "2026-08-01T06:12:50Z"
     },
     {
-      "sha": "3377d1ad0e2674a149f37076dc05587e963c9145",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/3377d1ad0e2674a149f37076dc05587e963c9145",
-      "message": "goal(vm): normative decision memo for both validation-machine defects\n\n- profile doc 268-271 decisive for defect 2; technical spec silent (recorded\n  as such, not inferred); line 2052 is redundant accumulator-era residue\n  whose removal restores capability, alternatives rejected with reasons\n- severity upgraded to SOUNDNESS break: challenger must exhibit a valid\n  rejection successor and cannot for any non-empty claimed delta, so a\n  dishonest operator wins by default across 80 call sites\n- defect 1 decisive from TS cross-language parity (transcription slip)\n- overstated status rows identified for correction",
+      "sha": "3a6d9b1dafd9d41dba1974b9924312a975fbd777",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/3a6d9b1dafd9d41dba1974b9924312a975fbd777",
+      "message": "goal(ledger): repair damaged sections and correct stale AC-02 registry claim\n\n- 'Current next action' (line ~2358) was empty and 'Blockers' (~2380) was\n  truncated mid-sentence — both violating the AC-00 ledger-completeness\n  duty. Restored with the current action (C21-STAGE4 owner-decision\n  execution + mergeability slices + fresh-head review loop) and the\n  completed blocker inventory (no local blocker; P6 preflight gaps and\n  standing owner decisions carried forward as non-blockers).\n- AC-02 criterion row claimed F02 'passes its strict 132/132\n  canonical-format gate'; the watcher-checkpoint freeze had already\n  corrected this to 10 PASS / 122 UNVERIFIED with release mode failing\n  closed. The row now records the correction instead of the unsupported\n  claim.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-07-30T22:30:21Z"
+      "authorDate": "2026-08-01T06:12:14Z"
     },
     {
-      "sha": "6add5509f7557e2e5e74563556755705ea580771",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/6add5509f7557e2e5e74563556755705ea580771",
-      "message": "goal(ledger): record two blocking canonical-V1 validation-machine production defects",
+      "sha": "826f8e29749ba475334d906fe59c3b8e3e325371",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/826f8e29749ba475334d906fe59c3b8e3e325371",
+      "message": "goal(evidence): rebind four stale closure-manifest hashes to committed bytes\n\nPure evidence-path work (GOAL_SPEC $0.2). All four current bytes are clean\nat HEAD and owner-approved history:\n- GOAL_SPEC.md (owner-directed 1c93c06e orchestration de-prescription)\n- script-sources-redeemer-normalization-v1.{ak,test.ak} (owner-approved\n  VM-DEFECT-6 fix c89041f6)\n- canonical-v1-watcher-dependency-map-v1.json fixture binding (watcher\n  checkpoint updates)\n\nverify-canonical-v1-goal-closure.mjs now reports current-tree-valid\n(exit 0) and the closure self-test passes under pinned Node 22.22.2. The\n--release invocation stays fail-closed by design until Goal closure.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-07-30T22:17:37Z"
+      "authorDate": "2026-08-01T05:50:16Z"
     },
     {
-      "sha": "cd040c9b6299be0ff6bc580e8aacc74d9cf0ee78",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/cd040c9b6299be0ff6bc580e8aacc74d9cf0ee78",
-      "message": "goal(vm): repair three stale test expectations exposed by the first full module sweep\n\n- canonical_v1_decode_...: fixture used item_count=0; the production\n  empty-decode check requires the not-yet-counted sentinel -1 (the other\n  five call sites already used -1)\n- phase_a_native_scripts_..._exact_no_op and script_sources_rejects_an_\n  unsigned_protected_pubkey_output: hand-built terminals omitted\n  ledger_delta_root=frontier_commitment(0,[]) required by\n  rejected_successor_is_exact; replaced with the exact_rejection_post helper\n- all 126 test declarations preserved, zero assertions removed or weakened;\n  compile clean\n- diagnosis of the remaining failures found TWO PRODUCTION defects, left\n  untouched and ledgered for a protocol decision",
+      "sha": "c4f7fd5249a897eb2f3ceb9fc9beef0eb1775235",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/c4f7fd5249a897eb2f3ceb9fc9beef0eb1775235",
+      "message": "goal(decisions): record C21-STAGE4-GAP owner decision — Option A + B'\n\nOwner (Philip DiSarro, 2026-08-01) selected from the five ranked options in\ndocs/exec-plans/evidence/c21-stage4-analysis.md: (A) drop item_cbor from the\nscriptSources stage-4 fold as the complete closure (no new necessity\nartifact; accepts the seven-artifact invalidation and IG1 re-measurement\ncascade), plus (B') reference carriage for resolver 8 / semantic resolver 0\nregardless (partial, fixes the deployed CanonicalDecode-only inconsistency).\nOption 3 in reserve pending A's forged-triple rejection evidence; option 4\nrefuted by the capability floor; option 5 not a closure for a soundness\nbreak.\n\nTask-queue row C21-STAGE4-GAP updated: TODO -> IN_PROGRESS, stale\n(14,774, 16,384] interval replaced with the confirmed practical\n~(8,769, 16,384], owned paths bound for execution.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-07-30T22:16:11Z"
+      "authorDate": "2026-08-01T05:46:29Z"
     },
     {
-      "sha": "2faaedc9ee32cf00eee068b0f4b3e447ee3da0b7",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/2faaedc9ee32cf00eee068b0f4b3e447ee3da0b7",
-      "message": "goal(ledger): VM-MODULE-FAILURES bisect decisive - older latent debt, not merge or C20 damage",
+      "sha": "5bf18902bd9e89ac20ee97032e0d557b60ecc822",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/5bf18902bd9e89ac20ee97032e0d557b60ecc822",
+      "message": "goal(fault-proofs): source all six removal sites from published reference scripts\n\nCompletes the reference-script conversion started at the challenger-wins\nsite (a7bfe2db): buildProvedDoubleSpendFixture and the five main-describe\nremoval paths now publish the seven removal validators as reference-script\nUTxOs before the header clock is sampled, thread the published UTxOs into\ndeployment-manifest entries via a referenceName parameter, and flip all six\nledgered requireReferenceScripts: false sites (4501/5061/5358/5590/5918/6086\npre-edit numbering) to true. Zero requireReferenceScripts: false remain in\nthe file, closing the 'REMAINING EXPOSURE' recorded in the 2026-07-31\ninflated-limit audit decision (~37 KB inline-script removals).\n\nVerification: package tsc --noEmit exit 0; focused emulator runs\n'proves and removes a non-tail double-spend block by pruning successors\nfirst' 1/1 (4.0s) and 'proves and removes a tail invalid-range block end to\nend' 1/1 (2.1s) under pinned Node 22.22.2.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-07-30T21:41:08Z"
+      "authorDate": "2026-08-01T05:45:22Z"
     },
     {
-      "sha": "47c5b4cb49bedbe57ee80c11162dcae2d25b4a4d",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/47c5b4cb49bedbe57ee80c11162dcae2d25b4a4d",
-      "message": "goal(ledger): VM-MODULE-FAILURES investigation row (first full 126-test sweep)",
+      "sha": "333c87c9088fb908a3857a5485b98deec2827703",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/333c87c9088fb908a3857a5485b98deec2827703",
+      "message": "goal(ci): sync pnpm lockfile with midgard-watcher's midgard-core workspace dep\n\nThe e72df2c5 public-da-client integration added @al-ft/midgard-core as a\nworkspace dependency of demo/midgard-watcher without regenerating\ndemo/pnpm-lock.yaml. CI installs with --frozen-lockfile, so Docs Site CI,\nMidgard Node CI, and both Evidence Integrity CI runs failed with\nERR_PNPM_OUTDATED_LOCKFILE before running any check.\n\nRegenerated with the pinned pnpm 9.15.4 (packageManager) under Node 22.22.2\nin an isolated manifest-only tree; the diff is exactly the missing\nthree-line workspace link. pnpm install --frozen-lockfile --lockfile-only\npasses against the updated lockfile.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-07-30T21:40:40Z"
+      "authorDate": "2026-08-01T05:38:49Z"
     },
     {
-      "sha": "8d8f4f3323eccc75a1b15bd276a635297aa2745c",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/8d8f4f3323eccc75a1b15bd276a635297aa2745c",
-      "message": "goal(ledger): aiken pathology diagnosis, upstream reports 1389/1390/1377-comment",
+      "sha": "d64222b2def08cb0cc34f078954ba0f15b3ded0e",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d64222b2def08cb0cc34f078954ba0f15b3ded0e",
+      "message": "goal(analysis): C21-STAGE4-GAP confirmed as SOUNDNESS and wider than recorded\n\nThe row described (14,774, 16,384]. The practical gap is ~(8,769, 16,384].\n\n14,774 derives from the witness encoding against the envelope, not the fold:\nthe producer rejects at evidenceCbor.length >= 16,384, and PlutusData chunks\nbytestrings >64 bytes, giving E(N) = 2 + 66*floor(N/64) + pad(N mod 64).\nE(14,774)=15,238 and E(14,775)=15,239 - a step of exactly 1, which pins the\nfold's constant overhead uniquely at C=1,145.\n\nBut the binding bound is deployed carriage, not the producer guard. Stage 4\nmaps to semantic resolver 0 (validation-machine-data.ts:1014), which takes\nits auxiliary INLINE, while submit.ts gates the reference route on\nsemanticResolverIndex === 1 at :3198/:3639/:4036. So a stage-4 complete item\nmust be inlined in both the prepare and semantic transactions, against a\nmeasured direct frontier of 8,769. The pinned fixture is also a one-output\ntransaction, so the real frontier falls further as outputs grow.\n\nClass is SOUNDNESS, not liveness: one-step resolution is challenger-only and\nboth timeout paths require ChallengerWins, so an operator can include a ~12KB\noutput, forge the stage-4 fold, and the honest challenger cannot produce the\nevidence to win. The invalid block finalizes. An honest operator is never\nharmed. Reachable - the ledger admits outputs to exactly 16,384 and the\ncapability floor mandates it.\n\nAlso found: verify_script_sources_stage_four_semantics_v1 is referenced by no\nvalidator, only by tests - tested dead code.\n\nPre-existing protocol gap, not a regression from this Goal. Owner decision.\nThe lane ran nothing; every measured cell is marked MEASURE.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-07-30T20:14:43Z"
+      "authorDate": "2026-08-01T03:47:10Z"
     },
     {
-      "sha": "9c5133cdc1ea572f890ca404ed1f0ecbbff92dc4",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/9c5133cdc1ea572f890ca404ed1f0ecbbff92dc4",
-      "message": "goal(ledger): post-merge battery entry, compiler finding, owner idle-wait rule",
+      "sha": "e7b91208e6433b7195cef1f3eb200162728f5f97",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/e7b91208e6433b7195cef1f3eb200162728f5f97",
+      "message": "goal(node): NODE-ADMISSION-CLAIM is a TEST defect; production left untouched\n\nThe test asserted expect(claimedL2Transfers).toHaveLength(1) on the first\nattempt. The only production caller treats that exact state as an ordinary\ntick: tx-queue-processor.ts:553 returns processed:false, claimedCount:0 when\nclaimedLeases.length === 0 and re-claims next tick. The test was therefore\nasserting strictly more than the contract the node itself relies on.\n\nForensics on the retained failing database: tx_admissions n_tup_ins=9,\nn_tup_upd=0, xact_rollback=0 - the admit committed, nothing else touched the\nrow, the claim UPDATE matched zero rows. The passing run shows identical\nn_tup_ins=9 with n_tup_upd=2. Transient, not structural. Claim machinery\nindependently sound at HEAD (tx-admissions-claim-load 9/9).\n\nThe fix is non-masking: the claim step polls within a bounded 30s, and if the\nadmission never becomes claimable it still hard-fails while dumping durable\nrow state, so a real liveness defect cannot hide behind the retry.\n\nAlso acting on the lane's second finding: this file is pervasively load-flaky.\nTest 12 measured 236,718ms against a 240,000ms budget (1.4% headroom) and\n241,974ms - already over - in another run. Raised to 900,000ms. The sibling\n240,000ms budgets at :3353/3357/3361/3466/3564 remain unaudited, same class.\n\nThe mechanism is NOT proven: the instrumented probe never fired, so the cause\nis eliminated-by-exclusion rather than observed, and no all-green full-file\nrun was achieved.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-07-30T18:39:22Z"
+      "authorDate": "2026-08-01T03:40:40Z"
     }
   ],
   "contributors": [
@@ -348,12 +348,6 @@
       "title": "Update the spec specifying the validity range limit parameter",
       "html_url": "https://github.com/Anastasia-Labs/midgard/issues/401",
       "updated_at": "2026-07-23T01:13:47Z"
-    },
-    {
-      "number": 297,
-      "title": "Operator Inactivity Timeout",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/297",
-      "updated_at": "2026-07-23T01:13:08Z"
     }
   ],
   "releases": [],
@@ -368,7 +362,7 @@
     },
     {
       "week": 1755388800,
-      "total": 23
+      "total": 18
     },
     {
       "week": 1755993600,
@@ -412,27 +406,27 @@
     },
     {
       "week": 1762041600,
-      "total": 31
+      "total": 46
     },
     {
       "week": 1762646400,
-      "total": 0
+      "total": 14
     },
     {
       "week": 1763251200,
-      "total": 12
+      "total": 32
     },
     {
       "week": 1763856000,
-      "total": 9
+      "total": 43
     },
     {
       "week": 1764460800,
-      "total": 17
+      "total": 8
     },
     {
       "week": 1765065600,
-      "total": 7
+      "total": 6
     },
     {
       "week": 1765670400,
@@ -464,11 +458,11 @@
     },
     {
       "week": 1769904000,
-      "total": 45
+      "total": 46
     },
     {
       "week": 1770508800,
-      "total": 34
+      "total": 36
     },
     {
       "week": 1771113600,
@@ -476,7 +470,7 @@
     },
     {
       "week": 1771718400,
-      "total": 47
+      "total": 45
     },
     {
       "week": 1772323200,
@@ -500,27 +494,27 @@
     },
     {
       "week": 1775347200,
-      "total": 42
+      "total": 40
     },
     {
       "week": 1775952000,
-      "total": 32
+      "total": 28
     },
     {
       "week": 1776556800,
-      "total": 29
+      "total": 16
     },
     {
       "week": 1777161600,
-      "total": 26
+      "total": 10
     },
     {
       "week": 1777766400,
-      "total": 33
+      "total": 19
     },
     {
       "week": 1778371200,
-      "total": 41
+      "total": 42
     },
     {
       "week": 1778976000,
@@ -536,7 +530,7 @@
     },
     {
       "week": 1780790400,
-      "total": 31
+      "total": 32
     },
     {
       "week": 1781395200,
@@ -564,7 +558,7 @@
     },
     {
       "week": 1785024000,
-      "total": 177
+      "total": 216
     }
   ]
 }
