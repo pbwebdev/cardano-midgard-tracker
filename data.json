@@ -1,10 +1,10 @@
 {
-  "fetchedAt": "2026-08-05T08:42:51.974Z",
+  "fetchedAt": "2026-08-06T08:44:53.615Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 25,
     "forks_count": 10,
-    "open_issues_count": 92
+    "open_issues_count": 91
   },
   "languages": {
     "Aiken": 359544,
@@ -17,109 +17,109 @@
   },
   "commits": [
     {
-      "sha": "54bd00ca451ee91c6e36ecd3faa94ef9f3eec865",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/54bd00ca451ee91c6e36ecd3faa94ef9f3eec865",
-      "message": "docs(goal): ledger the #521 review, journey regression, and checkpoint\n\nRecords the chosen #521 remediation (rename + mandatory cross-compiler\nblueprint equality, not a stock-trustworthiness claim), the independent\nreview reproductions in both directions, the reproduced C28 re-pins, and\nthe passing .4 deposit -> L2 -> withdrawal journey regression for this\ncheckpoint batch. Excludes an unprovenanced uncommitted bulk promotion of\n246 ledger rows, documented in the entry.\n\nRefs #521\n\nCo-Authored-By: Claude Fable 5 <noreply@anthropic.com>",
+      "sha": "15f098c067183a2c291fa6745bc55f363cf8fbab",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/15f098c067183a2c291fa6745bc55f363cf8fbab",
+      "message": "docs(goal): ledger the git-authority provenance landing\n\nRefs #537\n\nCo-Authored-By: Claude Fable 5 <noreply@anthropic.com>",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-05T03:01:37Z"
+      "authorDate": "2026-08-06T07:22:42Z"
     },
     {
-      "sha": "c682cc6996304c78f15725721214fa0818fe51ce",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/c682cc6996304c78f15725721214fa0818fe51ce",
-      "message": "docs(evidence): re-pin C28 cek_v1 identities after the #521 renames\n\nThe duplicate-type-name renames change the compiled bytes of `cek_v1` (and\nof `scheduler.spend` and the six script-sources semantic validators), so the\nC28 necessity artifact's blueprint digest, `cek_v1` byte counts, and applied\n`cek_v1` hash are re-measured with the pinned `aiken v1.1.22+39d6b04` over\nthis tree. `compiler = \"v1.1.22\"` is unchanged and the C10-C13 hard gates are\nuntouched.\n\nMeasured with the released compiler over `84aa1ce3` + the renames:\n\n- disposable blueprint SHA-256\n  6b6422ee...46688f20 -> b1c79edc...8449937a\n- `cek_v1.main.spend` unapplied 156,006 -> 156,312 bytes\n- applied `cek_v1` (hub_oracle=11..11, catalogue=22..22)\n  156,161 bytes / 827fe0ad... -> 156,467 bytes / f5d6395c...\n\n`canonical_decode_item_semantic_v1.main.spend` (62501cfe...) and\n`proof_item_v1.main.else` (22c9a103...) are verified unchanged, as is the\nprotected checked-in blueprint's applied `cek_v1` (141,959 / 92c53d47...),\nwhich this change does not regenerate.\n\nRefs #521",
+      "sha": "0f47a760db3246d1e3100198863f5605aecc0670",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/0f47a760db3246d1e3100198863f5605aecc0670",
+      "message": "fix(evidence): bind the watcher map's provenance to git\n\nThe map's §0-integrity block held three commit SHAs compared only to\nhardcoded copies of themselves in the verifier, so the revisions did not\nhave to exist, be reachable, or contain anything; the six W13-W17/W23\n`independentAudit` strings had the same shape, and \"independent\" named no\nsecond party. Each claim is now asked of git: the published merge's exact\nordered parent list, ancestry to HEAD, byte-exact historical artifact\ndigests, and the pre-publication base tree; each review record binds the\nrevision its reviewed paths last changed at, with the summary treated as\nprose and never as evidence. An optional secondPartyAudit slot is\nvalidated structurally and is absent everywhere today. W25/W26 never\ncarried the field, so the manifest cites their runner-measured counts\ninstead. A behavioural self-test drives the real gate against 26 seeded\nprovenance and review-record defects with 4 accepted controls, and both\nworkflows that run the gate now fetch full history.\n\nRefs #537\n\nCo-Authored-By: Claude Fable 5 <noreply@anthropic.com>",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-05T01:16:57Z"
+      "authorDate": "2026-08-06T07:15:17Z"
     },
     {
-      "sha": "a954669fc92583c75efc3e4868f749a22151011c",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/a954669fc92583c75efc3e4868f749a22151011c",
-      "message": "fix(onchain): remove the duplicate-type-name decoder collision\n\nStock `aiken v1.1.22+39d6b04` -- the compiler that builds the shipped\nblueprint and every pinned evidence value -- keys generated expect-decoders\nas `__expect_{local_name}_{variant}`, with no module path. Two distinct\ntypes sharing a local name across modules therefore share ONE generated\ndecoder, whichever is requested first. Upstream fixed that in `cb6105cb`.\n\nTwo pairs collided live, mapping onto 8 byte-differing validators:\n`cek_builtin_v1.ValueWitnessV1` vs `cek_machine_v1.ValueWitnessV1` (builtin\nwon) and `cardano/transaction.Datum` vs `midgard/user_events/deposit.Datum`\n(stdlib won). Both pairs are arity-disjoint at every shared constructor tag,\nso the shared decoder was wrong in BOTH directions: it admitted malformed\nvalues and rejected well-formed ones, which means the shipped `cek_v1` CEK\nmachine-state decode and `scheduler.spend`'s `NeglectedDeposit` branch could\nnot succeed on honest input.\n\nRename the losing sides -- `cek_machine_v1.MachineValueWitnessV1` (which\nalso aligns with the SDK's existing `MachineValueWitnessV1Schema`) and\n`midgard/user_events/deposit.DepositDatum`. Constructor tags, indices, field\nnames, and field order are unchanged, so no CBOR encoding moves; only the\nblueprint definition titles do, and the one off-chain assertion that matches\nthose titles is updated.\n\nBoth compilers now emit byte-identical validators: 380 validators, 0\ndiffering `compiledCode`, identical `definitions` (measured; 16 entries --\n8 validators x spend/else -- differed before).\n\nAdd regression tests that force each formerly colliding pair of decoders\ninto ONE compiled program, which is the only shape in which `aiken check`\ncan observe the collision at all, since it compiles every test as its own\nprogram. Measured: both new tests fail under stock before the rename and\npass after, and pass under the patched compiler either way.\n\nAdd `scripts/verify-dual-compiler-blueprint-agreement.mjs` and wire it into\nAiken CI, so any future duplicate name reddens CI instead of shipping\nsilently. Verified in both directions: exit 1 naming the collision on the\npre-rename tree, exit 0 after.\n\nRefs #521",
+      "sha": "319abcbf3ad2e71f78dc88d0ef78ed58a42bcb0e",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/319abcbf3ad2e71f78dc88d0ef78ed58a42bcb0e",
+      "message": "docs(goal): ledger the #545 chunked-carriage wiring and C49 closure\n\nRecords the four-family wiring with the mpf-chunked-verify withdraw\nvalidator correction, the measured depth-invariance and Q1x re-decision,\nthe C49 selector closure with the new min-ada production formula, the\nfork-only test-execution owner rule, and the full validator-change\nverification (393-validator guard, journey 1/1).\n\nRefs #545\n\nCo-Authored-By: Claude Fable 5 <noreply@anthropic.com>",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-05T01:14:25Z"
+      "authorDate": "2026-08-06T06:56:49Z"
     },
     {
-      "sha": "84aa1ce3931ed67d241ca2ffd9e93671bc45d4c5",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/84aa1ce3931ed67d241ca2ffd9e93671bc45d4c5",
-      "message": "docs(goal): record the stock-compiler Q47 selector result\n\nThe Q47 selector measurement was recorded against the patched fork only.\nThe authoritative gate is the stock compiler; both were run and both\nreport 8 of 8 passing, so the evidence now names each explicitly.",
+      "sha": "28d90b84544f8347cde6f80d851caa04c2988449",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/28d90b84544f8347cde6f80d851caa04c2988449",
+      "message": "feat(onchain): close C49 with the four prescribed value/fee/mint selectors\n\nC49 (issue #540) contracted closure to add exactly four prescribed Aiken\nselectors to `midgard/validation_machine_v1.test`, which its focused command\nalready cites. Six existed and passed; the focused command exited 1 at 6/6.\nThis adds the four missing ones, taking the focused command to 10/10.\n\n`parameterized_min_fee_boundary_matches_target_snapshot` instantiates the\ncanonical parameterized minimum-fee rule -- `body.fee >= min_fee_a *\ncanonical_tx_size + min_fee_b`, evaluated by `static_rules_rejection` over\n`native_tx_canonical_size_v1` -- at the C70 target snapshot (minFeeA 44,\nminFeeB 155_381, from `PREPROD_EPOCH_303_BOUNDARY_PARAMETERS_V1`). It pins the\ntwo adjacent transactions at the boundary: the fee exactly at the floor\nadvances to InputSets, one lovelace below is an exact `E_MIN_FEE` rejection,\nand neither disposition is provable against the other's transaction. The two\ndiffer in exactly one lovelace of `body.fee`, and the fee's own CBOR width\nenters the canonical size, so the test also pins the fixed point.\n\n`parameterized_min_ada_boundary_matches_target_snapshot` pins the minimum-Ada\nfloor at the target snapshot `coinsPerUtxoByte = 4_310`. The row had no\nmin-Ada rule anywhere in `validation-machine-v1.ak`, so this adds the canonical\nparameterized formula -- `min_ada_lovelace_v1` and `output_meets_min_ada_v1`,\nthe target-network rule verbatim over the fixed 160-byte UTxO entry overhead --\nand pins it adjacently over a concrete serialized output, plus its linearity\nin the serialized size. That linearity is the row's \"no arbitrary sub-cap\"\nstatement: the floor carries no Midgard margin above the target-network limit.\nThe floor is not yet bound to a machine rejection code on the ValueAndMint\noutput-descriptor scan; that wiring is the remaining min-Ada duty, and it must\nconsume this formula.\n\n`parameterized_ada_and_multi_asset_conservation_matches_typescript` pins exact\nsigned multi-asset conservation, including the Ada rule, on the SAME numeric\nvector the TypeScript twin uses in `tests/value-accounting.test.ts` over\n`valuePreservationDelta`: inputs {lovelace 5, asset 2}, fee 1, mint +3, outputs\n{lovelace 4, asset 5}, and the burn twin inputs {5, 5}, fee 1, mint -2, outputs\n{4, 3}. Aiken reaches the same equation in two halves -- the mint step folds\nthe signed mint quantity into a delta already carrying inputs minus outputs\n(-3, then +2), which must land on zero and drop `nonzero_asset_count`, and\nstage five closes `lovelace_delta = 1` against the authenticated `body.fee =\n1`. Both perturbations of that vector (outputs 5 lovelace instead of 4, a +2\nmint instead of +3) are exact `E_VALUE_NOT_PRESERVED` rejections and are not\nprovable as advances.\n\n`mint_and_burn_authorization_rejects_unbacked_policy` pins that a mint step may\nonly move an asset delta for a policy the authenticated native mint frontier\ncommits to. Per the post-#532 standard this is not a bare `test ... fail`: each\nleg is a full one-step evaluation, the authorized policy mints and burns, and\nthe unbacked-policy legs differ in exactly one field of the auxiliary witness\nwith every other stage-four conjunct surviving the substitution. The last two\nconjuncts attribute the flip directly to frontier membership.\n\nVerification. Focused command 10/10 collected and passed under the fork\n(aiken-fork v1.1.23 as MIDGARD_AIKEN_BIN); whole-module fork sweep 164/164 with\n0 failures, exactly 160 + 4. `midgard/validation_machine_v1` is the aiken#1389\npathological module, so no test execution is run under stock aiken v1.1.22:\nstock's leg is `aiken check --skip-tests`, green, with stock/fork agreement\ncarried byte-for-byte by the dual-compiler blueprint-equality guard at\nintegration. `verify-normalized-format.mjs` PASS on both touched modules;\n`git diff --check` clean; manifest quality gate 0 defects with the self-test\ngreen.\n\nThe C49 manifest row's `expectedNonzeroCounts` moves from the forward contract\nto the measured state for the Aiken half, keeping the closure history and\nrecording that the four TypeScript parameter cases remain outstanding.\n\nCo-Authored-By: Claude Fable 5 <noreply@anthropic.com>",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-05T00:01:46Z"
+      "authorDate": "2026-08-06T06:36:16Z"
     },
     {
-      "sha": "d98cc9f31ee062ee372e5547b4b0fbc2d096c701",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d98cc9f31ee062ee372e5547b4b0fbc2d096c701",
-      "message": "test(fault-proofs): measure Q10-Q14 proof fit and bind outputs 6-9\n\nAdds the first threshold-enforcing proof-fit measurement for double-spend,\nno-input, invalid-range and zero-input: every transaction of the complete\ncorrection path (init, every step, every removal transaction) is measured\nfor bytes, execution memory and execution steps and asserted against the\nGOAL_SPEC.md 3.3 16,384-byte L1 envelope and the 20% execution reserve.\nNo test measured either quantity for these four families before.\n\nBinds 9.1 outputs 6 to 9 at LOCAL_PASS for all four families and reports\noutput 5 OPEN: the measured fixture is the minimal one, not the maximum\nadversarial one 9.1 asks for. The two adversarial axes that actually grow\nthese transactions are enumerated in the evidence rather than implied\nclosed, and the verifier refuses to publish output 5 as LOCAL_PASS while\nevery fixture is minimal.\n\nMeasured worst L1 byte margins: Q12 6000 at step-01, Q11 6103 at step-01,\nQ10 6115 at step-02, Q14 6364 at step-01. Focused gate: 12 vitest files /\n111 tests, 0 failures; stock aiken check --skip-tests 0 errors.",
+      "sha": "e1bd5eff768865d63a6422130428568ec6222b73",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/e1bd5eff768865d63a6422130428568ec6222b73",
+      "message": "docs(evidence): re-decide the Q1x output-5 cells per family\n\nOutput 5 was OPEN for all four families because the maximum fixture measured\nthat the L1 envelope is exhaustible. That measurement stands, is re-run, and\nfinding Q1X-F5 keeps it: what changed is that the exhaustible route is no\nlonger the only one.\n\nThe verifier now decides the cell per family instead of holding all four open\ntogether, and derives the decision rather than reading it. Each adversarial axis\nnames the families it affects; an axis counts as settled for a family only\nthrough a remediation block this gate has just re-derived, and only where that\nblock records a measurement for the family itself. `chunkedProofCarriage` is\nthat block: its stage margins are recomputed from its own bytes, its\ndepth-invariance claim is recomputed from the two depths it was measured at and\nrequired to be zero, its direct-route comparison is recomputed from the pinned\nmarginal cost, and its suite must pass every lifecycle it cites. A finding that\nclaims remediation must name the block carrying it and must still contain the\nmeasurement it was built on, so a remediated finding is restated and never\ndeleted.\n\nQ12 and Q14 become LOCAL_PASS: their maximum now fits, and neither carries the\nsecond adversarial axis at all. Q10 and Q11 stay OPEN on that axis alone —\nspend-input preimage cardinality is still unexercised for them, and the depth\nremediation says nothing about it.\n\nEvery measured number in the artifact is re-measured after the wiring: the\nminimal and maximum stage bytes, the depth bound's two step-01 measurements, the\nper-family ceilings and the carriage journeys. The manifest records the seam on\nthe Q00 shared-binding row, whose ownership it is, and the per-family selectors\nand commands on the four family rows.\n\nRefs #545",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-05T00:00:58Z"
+      "authorDate": "2026-08-06T06:28:12Z"
     },
     {
-      "sha": "c9dcb6d7f9cf553d94484133b187410033cbbdab",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/c9dcb6d7f9cf553d94484133b187410033cbbdab",
-      "message": "fix(validation): close the unverified incremental CEK material route\n\nThe IncrementalCekMaterial branch of verify_cek_material_route_for_selected_\nenvelope_v1 compared the redeemer's program_envelope_hash against a value\ncek_envelope_hash_v1 derives from the disputer's own selected envelope, so it\nwas the tautology f(x) == chosen with chosen := f(x). It touched neither\nreference_inputs nor cek_program_material_script_hash, letting a CEK\nfinalization mint its fraud proof with zero program material published on L1\nwhile the three complete routes each reconstruct the whole content-addressed\ngraph against the selected envelope.\n\nThe off-chain grammar it was specified against orders proofContinuation\ntransactions after the proofConsumption finalization that mints the proof, so\nit cannot be lifted on-chain as written. A sound route needs an authenticated\ncross-transaction traversal accumulator, which does not exist: material\npublications are permissionless, self-authenticating and unspendable with no\nminting policy and no aggregate completion commitment. The route therefore\nfails closed on L1 and the submitter refuses it explicitly instead of\nconstructing a finalization the resolver rejects. The ABI variant and the\nnecessity receipt-set machinery are retained as the follow-up lease's seam.\n\nPublication stays permissionless, so this is a liveness limit on oversized\nprograms, not a data-availability or soundness hole.",
+      "sha": "9435403f99480dfc20adf055b499108e96b47458",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/9435403f99480dfc20adf055b499108e96b47458",
+      "message": "test(fault-proofs): measure chunked carriage past the direct route's ceiling\n\n`submit-init-emulator-chunked-proof-carriage.test.ts` drives the real\nprepare/submit pipeline at forced branch level 22 — past the depth at which the\nredeemer-carried route exhausts the 16,384-byte envelope for every one of the\nfour families — end to end for zero-input and invalid-range: publication, init,\nboth steps and the block removal, every stage inside the 20% execution reserve.\n\nThe claim that makes it a remediation is measured rather than argued: the same\njourney at branch level 32, the depth a 2^128 adversary reaches, produces a\nstep-01 transaction of exactly the same 13,045 bytes. Ten further forced levels\ncost the step transaction nothing, where the direct route would charge\n10 * 276 = 2,760.\n\nThe depth is synthesised, and `synthetic-deep-proof-v1.ts` says why: a genuinely\ngrinded level-22 trie costs ~2^88 digests, which is the adversary's price and\nthe whole content of Q1X-F5, not something a fixture can pay. The proof is a\nreal MPF proof of a real trie shape, verified by the library's own `verify`, and\nthe challenged header is made to commit exactly the root it proves, so the\nstep's counted-root authentication is genuine. The grinded fixture in\n`submit-init-emulator-max-proof-fit.test.ts` remains the source of the cost\nbound; this one measures carriage.\n\nTwo pins move and are re-pinned rather than relaxed. The maximum fixture's\nper-family ceilings fall from 22/22/21/23 to 20/20/19/20 and its work floor from\n2^80 to 2^72: the marginal cost per level is unchanged at 276 bytes, and only\nthe constant moved, because every step that can open a trie now carries the\ncarriage dispatch. The input-no-idx canonical-proof pin drifts 0.4% in execution\nunits with an unchanged 7,771-byte layout, the same signature it has drifted\nunder before, because the shared binding recompiled.\n\nRefs #545",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-04T23:50:39Z"
+      "authorDate": "2026-08-06T06:27:41Z"
     },
     {
-      "sha": "fc71e2c9aff8bd255264ec6f834d473de1e5f579",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/fc71e2c9aff8bd255264ec6f834d473de1e5f579",
-      "message": "test(fault-proofs): close Q47 event-window structural disposition\n\nAdds the executable Q47 structural-N/A disposition for the omitted and\nout-of-window deposit/withdrawal/forced-event variants. The withdrawal\ndomain had zero selectors anywhere in the tree; this closes that gap plus\nadjacent in-window valid negatives and wrong-domain/wrong-event-id\ncontrols, so all six variants are reachable through the shared\ntransitionTrace lifecycle with no standalone family or category.\n\nMeasured: 8 of 8 Aiken selectors, 8 of 8 vitest twins, 5 of 5 inherited\nQ21 event-window selectors, 0 failures.",
+      "sha": "1a23d8b418376d1f09f1169f9a99b930b2ff3f86",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/1a23d8b418376d1f09f1169f9a99b930b2ff3f86",
+      "message": "feat(fault-proofs): publish and consume MPF proof chunks off-chain\n\n`publishProofChunksV1` splits a proof into the on-chain bound of 16 steps per\npublication UTxO and pays each as an inert, Ada-only, inline-datum output at\nthe prover's own address. Publication needs no validator: a chunk authorises\nnothing, is never mutated, and the step trusts its content rather than its\nprovenance.\n\nThe zero-input and invalid-range step-01 builders take those chunks and switch\ncarriage: the reference inputs gain them, the fee input is selected from wallet\nUTxOs with them removed so the step can never spend what it references, the\nchunk order is derived once from the ledger-canonical reference-input order and\nthen re-derived from the builder context to prove the two agree, and the\nmerkelized `mpf_chunked_verify` withdrawal replaces the `phas` membership one.\nThe proof never enters the step transaction. Every other family's builder is\nwrapped in the redeemer-carried arm and is otherwise untouched.\n\nThe SDK gains the carriage sums, the publication datum and the verifier's claim,\neach mirroring its aiken counterpart constructor for constructor.\n\nRefs #545",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-04T23:33:40Z"
+      "authorDate": "2026-08-06T06:27:15Z"
     },
     {
-      "sha": "7d01f2b712a04436d9fa9b1b5097b689f53e81c1",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/7d01f2b712a04436d9fa9b1b5097b689f53e81c1",
-      "message": "test(validation): verify canonical retained CBOR terminals\n\nClose C29 (#485). Adds four measured TypeScript cases to the exact\nvalidation-machine terminal and pins the legacy field-7 Aiken rejection.\n\n- Normal and forced maximum retained canonical sources fold back to one\n  byte-identical canonical-decode work transcript through complete-item-first\n  staging; only the authenticated source-kind discriminant separates the two\n  terminals.\n- Malformed, trailing, non-minimal, and indefinite-length top-level CBOR all\n  reject at the exact decoder, against a passing pristine control.\n- Count, ordering, substitution, trailing, and field-substitution mutations of\n  the authenticated complete items all reject.\n- The incremental CBOR scanner is confined to redeemer-item-proof-v1 and\n  ledger-output-scan-v1, each backed by a measured 3.2 necessity artifact; the\n  canonical-decode staging ladder and its five validators take no scanner.\n\ncanonical_decode_rejects_a_legacy_field_seven_script_proof was `test ... fail`\nover a four-conjunct `and {}`, so it went green as soon as any conjunct was\nfalse and could not distinguish a legacy field-7 substitution from a wholly\nunauthenticated proof. Measurement showed three of the four conjuncts false;\neach is now pinned to its own disposition in a non-`fail` test.",
+      "sha": "d0e94c89af6a1f4d5c16857fcbe25a86bcb82f12",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d0e94c89af6a1f4d5c16857fcbe25a86bcb82f12",
+      "message": "feat(onchain): wire the four proof families onto chunked MPF carriage\n\nThe four foundational families opened the challenged block's committed roots by\ncarrying the MPF proof in the step transaction. That route pays a measured 276\ncomplete-signed-transaction bytes per forced branch level, so an adversary\ngrinding sibling keys censors the honest prover once the 16,384-byte envelope\nruns out (finding Q1X-F5).\n\n`midgard/fraud_proofs/chunked_inclusion_v1` is the one seam through which every\nfamily reaches the published-chunk mechanism landed for #541. A step's opening\nbecomes a prover-chosen carriage: `NativeTxInclusionCarriage` and\n`NonMembershipCarriage` keep the redeemer-carried route byte for byte and add a\nroute whose proof was published beforehand and whose order the step names as\nindices into `tx.reference_inputs`. `verify_native_tx_in_state_queue_node_with`\nholds the codec precondition, hub identity, state-queue identity and\ncounted-root authentication in one place and delegates only the opening, so a\ncarriage cannot change what is proved — only where the proof's bytes travelled.\n\nThe walk itself is merkelized, not inlined. Compiled into every step that can\nopen a trie it added ~3,700 bytes of spending script, which the step\ntransaction carries on EITHER route: the redeemer-carried route's measured\nceiling fell from branch level 21..23 to 8..9. Remediating one route by\ndegrading the other is not a remediation, so `validators/mpf-chunked-verify.ak`\nhosts the walk for every family exactly as `phas.ak` and `pexcludes.ak` already\nhost the single-transaction ones. The residual cost to the direct route is the\ncarriage dispatch alone: ~700 bytes, two to three forced levels, re-pinned\nrather than relaxed.\n\n`ProofChallengeDatum` gains `challenged_root_domain`, authenticated at\ninitialization against the domain the counted-root commitment was reproduced\nunder. A redeemer is not retained by the ledger, so without it a reader of a\nfinalized challenge could not recover which of the header's seven roots was\nchallenged. Owner-directed deviation from the #541 brief.\n\nBoth compilers, identical counts on every touched module: double-spend\nstep-01 5, step-02 3; no-input step-01 5, step-03 5, step-04 4; invalid-range\nstep-01 8; zero-input step-01 5; chunked_inclusion_v1 15; mpf_chunked_verify 7;\ncommon 22; mpf_chunked_proof_v1 23; mpf_proof_v1 13; challenge 23.\n\nRefs #545",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-04T23:13:12Z"
+      "authorDate": "2026-08-06T06:26:54Z"
     },
     {
-      "sha": "81cad60fc548c9782c954eca9ab6941dd62c46fa",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/81cad60fc548c9782c954eca9ab6941dd62c46fa",
-      "message": "docs(goal): bind #484 carriage evidence and correct stale row texts\n\nRecord the #484 batch (`140f0a83`) with measured counts: C22 PASS (5 guarded\nAiken incl. the new maximum_nested_value_terminal_agrees_with_typescript, 2\nTypeScript), C23/C24/C25 PASS (12 guarded Aiken, 7 TypeScript) with the exact\n8,273 direct / 14,396 reference / 16,222-item / 18,122-publication / 1,738\novershoot boundary, C26 PARTIAL narrowed to the single field-8 unary redeemer\nmaximum, C21-AUDIT still IN_PROGRESS on residual 4 (fresh applied\nre-measurement) with the blueprint 277b6457 vs f5ae651e staleness recorded\nhonestly, and retainedDaExactVerifier PASS as a stale recorded string refreshed\nby measurement rather than a fixed defect. Also record the lane's two declared\nout-of-lease writes.\n\nCorrect four stale manifest row texts at TEXT level (8 changed lines, no\nreserialization): C23-C25 no longer prescribe proving the complete maximum Data\n\"fits direct and reference carriage\" — measurement refutes it, since the\n16,384-byte signed transaction bounds the item to ~16.2 KB, so the rows now\nprescribe measuring both complete routes first and then pinning the exact\novershoot that makes the bounded traversal necessity-driven; C21's fault-proof\ncontract 14 -> 21 tests (total 35 -> 42); C10 midgard-validation 15 -> 19 and\nfocused TypeScript inventory 23 -> 27; C26 TypeScript 4 -> 5 with the residual\nlist narrowed. Refresh the two stale capability-reconciliation freshChecks\nstrings for the same measurements.\n\nThe 7 PASS / 2 PARTIAL structuralAudit contract and the F21 PARTIAL bindings are\nleft untouched, and no verifier guard was loosened.",
+      "sha": "1ad92c731ebd283435720cc6b4f7245c7bbb2808",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/1ad92c731ebd283435720cc6b4f7245c7bbb2808",
+      "message": "docs(goal): resolve the owner decision round; promote C26 to PASS\n\nRecords the five owner decisions (2026-08-06), promotes C26 with its\nproducing evidence, moves F05's reconciled claim and the five dependent\nrows coherently, re-anchors the quality self-test's C26-premised seeds,\nand discards the unprovenanced live-verified working-tree promotion.\n\nRefs #509, #537\n\nCo-Authored-By: Claude Fable 5 <noreply@anthropic.com>",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-04T23:08:43Z"
+      "authorDate": "2026-08-06T06:20:40Z"
     },
     {
-      "sha": "140f0a836ad1b201677e46bd4c04b62015e88764",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/140f0a836ad1b201677e46bd4c04b62015e88764",
-      "message": "test(validation): close complete-item Value and Data carriage\n\nClose the prescribed C22-C26 carriage surfaces for issue #484 and re-verify\nthe C21 whole-carrier residuals against the final tree.\n\nC22: add the missing Aiken selector\n`maximum_nested_value_terminal_agrees_with_typescript`, which replays the\nproducer's own finalize transition over its exact 1,592-leaf asset frontier\nand pins root/cbor_length/memory (35df7dc7…/5,002/16,198); add the missing\ncomplete-Value carriage-fit case proving the 5,034-byte maximum-Value output\nitem fits direct carriage and a 16,384-byte-bounded publication before any\nincremental Value fallback.\n\nC23/C24/C25: add one complete-Data carriage-fit case per kind. Measured:\ndirect carriage admits complete items through exactly 8,273 bytes, reference\npublication through 14,396 bytes (16,238-byte signed publication), and the\ngenuine Cardano Data maximum (16,222-byte item) overshoots publication by\n1,738 bytes, so the bounded traversal is necessity-driven under the existing\ntransaction-field-chunk and ledger-output-incremental artifacts.\n\nC26: assert canonical maximum signed-byte and digest identity through both\nretained classifications instead of byte counts alone, and add focused\nmalformed/noncanonical controls at depth 4,043 (truncation, missing leaf,\ntrailing byte, extra break, two children, definite-length body, bytestring\nleaf) driven through the production well-formedness gate.\n\nC21: the two §3.2 necessity artifact families bound to the superseded\nblueprint pin are re-verified against the current 380-validator blueprint —\nboth bound script hashes are byte-identical, so the measurements stay bound.\n\nAlso update the two exact-count gates the new cases change so they keep\nfailing closed on drift.",
+      "sha": "daf79380a8ad7976335a06b70334fbdf6276c419",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/daf79380a8ad7976335a06b70334fbdf6276c419",
+      "message": "fix(evidence): re-measure the seven necessity artifacts under 605c8b8d\n\nThe seven §3.2 necessity artifacts cited blueprint f5ae651e... (the\n380-validator 823b2d16 epoch) as a current-tree fact. A fresh stock\n`aiken build --env testnet` of this tree measures the current blueprint at\n605c8b8dca1f01e2cde5219138a1f81e69214f9a182c10b73c20341187ddc2dc with 391\nvalidators (aiken v1.1.22+39d6b04), so every f5ae651e citation is now bound\nto its epoch and the pins beneath it were re-derived, not assumed.\n\nSix artifacts (transaction-field-chunk, ledger-output-incremental-proof,\nmint-fold-asset, native-script-traversal, redeemer-item-traversal,\nscript-source-hash-block) share one bullet. Measured current under\n605c8b8d...: unapplied canonical_decode_item_semantic_v1 62501cfe...,\nproof_item_v1 22c9a103..., and the applied 983051b4... that #484 only\ninferred. That applied identity is now gated instead of argued by a new\nselector in complete-item-proof-fit-emulator-v1.test.ts (suite 6/6).\n\ncek-program-material-v1.md: the f5ae651e line is genuine provenance and is\nkept, now stated as epoch-bound; the current-tree disposable blueprint\nb1c79edc... is superseded by 605c8b8d... (the protected/disposable split has\ncollapsed since C28 merged). Measured current: cek_v1 156,312 unapplied bytes\nwith 4 parameters, applied 156,467 bytes / f5d6395c.... Corrected: the\nauthenticated publication receipt drifted to 156,982 signed bytes, L1 margin\n-140,598 (from 156,676 / -140,292), reproduced on two runs with the applied\nbody unchanged, so the move is in the framing; producing suite 4/4. Recorded\nepoch-bound and not re-derivable: the 141,959-byte / 92c53d47... applied\ncek_v1 and the 142,474-byte protected publication receipt, whose blueprint no\nlonger exists in this tree. Recorded honestly: the applied-hash file's ungated\ncase now fails on unrelated script_source_resolvers fixture drift, so its\n\"2/2\" reading is corrected to 1/1 on the CEK-relevant gated case.\n\nGates: manifest quality 186/186 with 0 defects, quality self-test 13/13\nhostile mutations rejected, prettier and eslint clean on the touched test,\ngit diff --check clean.\n\nRefs #546",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-04T22:59:00Z"
+      "authorDate": "2026-08-06T05:44:35Z"
     },
     {
-      "sha": "6dae2cf6e971ce41bbd9d454d9258d96fdc1bcfe",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/6dae2cf6e971ce41bbd9d454d9258d96fdc1bcfe",
-      "message": "fix(goal): restore fault-proof reconciliation structural contract\n\nThe Q49 parent-integration commit promoted structuralAudit L298/L302 to\nPASS, which made verify-canonical-v1-fault-proof-reconciliation.mjs fail\nclosed: the 7 PASS / 2 PARTIAL contract is pinned in that verifier, the\nfirst-queue F21 ledger record, and the F21 manifest text, while\nverify-canonical-v1-goal-task-manifest-quality.mjs independently requires\nF21 to keep citing Q49-L298/Q49-L302 as PARTIAL bindings.\n\nRevert the disposition and summary only; keep the enriched\nexecutableEvidence selector citations, which are measured and true. The\npromotion needs one coordinated F20/F21-owned change. Loosening either\nguard to make the bookkeeping claim pass was rejected as the same\ngate-that-cannot-fail class as F20 (#518).\n\nVerified: reconciliation, Q49 handoff, and manifest-quality all exit 0.",
+      "sha": "28e9dfcecc3f7215300a0487f9f877f7d7564fe0",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/28e9dfcecc3f7215300a0487f9f877f7d7564fe0",
+      "message": "docs(watcher): record the consolidated WG1 and IG3 gate review\n\nPublish the single WG1 local-watcher-gate review the B33 scope asks\nfor, together with the IG3 watcher security-gate review, and a verifier\nthat keeps it honest.\n\nThe verifier does not decide that the watcher is locally ready; it\ndecides that the artifact tells the truth about what has been measured.\nIt rejects any WG1 condition marked PASS while a predecessor it depends\non is not measured PASS, any waiver, a gate status of PASS unless all\nfive predecessors and all six conditions are independently PASS, and a\nW44 binding whose digests or case counts do not reproduce from the\ntree. It also re-derives the W44 decomposition (17 total = 14 crash\npoints across 7 transitions + 1 + 1 + 1), the zero-defect invariants,\nand the deeper-than-finality-within-k depth binding.\n\nMeasured result: gateStatus BLOCKED, predecessors 1/5 PASS (only W44),\nWG1 conditions 0/6 PASS, IG3 security conditions 2/4 PASS (public-data\nindependence and defined finality/rollback hold; unprovable-gap\ncoverage and the maturity budget do not), 0 waivers, production\nreadiness false. W40-W43 have no executable surface in the index at\nall, and the verifier proves that claim by resolving each named\nmissing path against the index rather than accepting the assertion.\n\nRefs #509\n\nCo-Authored-By: Claude Fable 5 <noreply@anthropic.com>",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-04T22:35:49Z"
+      "authorDate": "2026-08-06T05:40:33Z"
     },
     {
-      "sha": "b30ee0c168e8d62be658be2fb66d9cb3d1e27d0a",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/b30ee0c168e8d62be658be2fb66d9cb3d1e27d0a",
-      "message": "docs(goal): bind Q49 structural parent-integration evidence\n\nApply the Q49 structural handoff's pendingEdits: coverage-matrix.md\nL298/L302 evidence cells now cite the executable no-input and\ninvalid-range selectors instead of a bare reference/unverified\ninference, and canonical-v1-fault-proof-reconciliation-v1.json's\nstructuralAudit promotes L298/L302 to PASS (9/9/0/0). Record #481\n(Q10-Q12/Q14/Q49) and #480 (C20-0,1,3,8) ledger rows with measured\ncounts, and the stabilize review dispositions/new leases (C28, W25,\nF20, #502 routing, unbacked-PASS provenance, Aiken lease hazard).",
+      "sha": "a860bd0911adc4fd7d5ba6d0f76c504625757c6c",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/a860bd0911adc4fd7d5ba6d0f76c504625757c6c",
+      "message": "test(watcher): prove the W44 crash and rollback matrix\n\nAdd the exact 17-case W44 matrix as executable evidence: 14 before/after\ncrash points across the 7 W32 durable lifecycle transitions (detect,\npersist evidence, init, steps, proof token, removal/slashing, terminal\nverification), 1 ordinary pre-finality L1 rollback, 1 rollback deeper\nthan the configured finality depth and within the fixed Cardano\nk = 2160, and 1 configured-source inconsistency.\n\nCrashes are injected at the real journal boundary — the durable atomic\nbackend's compare-and-swap — on both sides of the byte replacement, so\nthe post-commit case reproduces the ambiguous window where a caller\ncannot tell whether its transition landed. Recovery is always a\nre-invocation of the same deterministic driver against the same durable\nsnapshot: there is no manual-surgery step anywhere in the file. Each\ncase measures 0 double submits, 0 duplicate rewards, 0 lost evidence,\n0 false verified states and 0 unrecoverable workflows, plus the four\nIG3 security conditions (public data only, configured-source\nconsistency, maturity budget, enabled family), and asserts that\nreadiness is never true from a partially recovered state.\n\nW32 and W33 are NOT_STARTED and their modules do not exist, so the\nlifecycle sequencing is driven by an in-test driver over the real W03\ndurable record schema and the real W03 atomic journal boundary; the\nrollback and inconsistency cases drive the real W12/W13 production\nentry points with no substitution. That limit is published in the\nevidence artifact rather than implied away.\n\nCounts move coherently: crash-rollback-matrix.test.ts is a new pinned\nsuite at 17 and the watcher focused aggregate moves 599 -> 616 across\n20 files, updated in the dependency-map declaration and currentContents,\nthe focused-tests verifier expectedByFile map, cardinality literal, pin\ntable and total, the dependency-map verifier literals, the\nmanifest-quality gate aggregate literal, and every watcher-gate count\nclaim in the task manifest.\n\nRefs #509\n\nCo-Authored-By: Claude Fable 5 <noreply@anthropic.com>",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-04T22:33:27Z"
+      "authorDate": "2026-08-06T05:40:33Z"
     },
     {
-      "sha": "64edc21786648a4f6e21d94b59b58c1194c62e0b",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/64edc21786648a4f6e21d94b59b58c1194c62e0b",
-      "message": "docs(goal): bind Q49 structural handoff evidence\n\nF21 left two of its nine physical structural rows PARTIAL with prose-only\njustification, which GOAL_SPEC 9.1's closing rule forbids: physical L298\n(cross-block replay) only asserted a reduction to no-input, and physical L302\n(malformed validity interval) was recorded in the coverage matrix as an\n\"unverified inference\" needing a test. Both are now executable.\n\n- L298 is closed by the eight no-input step selectors, which prove the reduction\n  end to end: the challenged input is absent from the block's `prev_utxos_root`\n  and is produced by no transaction of that block, and both valid-block\n  negatives reject.\n- L302 is closed by the invalid-range step-01 inverted-interval binding and the\n  step-02 `InvalidRange` finalization.\n\nAdd canonical-v1-q49-structural-handoff-v1.json mapping all nine structural rows\nto their exact current matrix concern text and executable evidence, and\nverify-canonical-v1-q49-structural-handoff.mjs, which resolves every cited Aiken\nselector, vitest title, and absent-constructor claim against the final tree and\nfails any row that resolves zero executable checks. It passes with 9 rows, 31\nexecutable checks, and partial/open both 0.\n\nThe coverage matrix, catalogue status, and the F21 reconciliation\n`structuralAudit` dispositions stay parent-owned; the edits they need are\nenumerated in the artifact's `parentIntegration.pendingEdits`.\n\nSynchronize the Q10, Q11, Q12, Q14, and Q49 manifest count contracts and\nscheduling notes with the measured Aiken selector state, and record that Q10-Q12\nremain OPEN on their off-chain, proof-fit, deployment, and emulator outputs.",
+      "sha": "3af41f7ae62c1f3d15e04e8ef3fb20856abf9f82",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/3af41f7ae62c1f3d15e04e8ef3fb20856abf9f82",
+      "message": "docs(goal): ledger the 2026-08-06 acceleration amendment and 2026-08-20 delivery target",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-04T21:38:22Z"
+      "authorDate": "2026-08-06T05:21:33Z"
     },
     {
-      "sha": "c3a2fb342db183d36ba78657867b952e2221199f",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/c3a2fb342db183d36ba78657867b952e2221199f",
-      "message": "test(fraud-proofs): close foundational family proof selectors\n\ndouble-spend, no-input, and invalid-range had no family positive/valid-block\nnegative pair at all: all eight deployed double-spend and no-input step modules\ncarried zero `test` declarations, and invalid-range carried only three\nrange-normalization unit cases. GOAL_SPEC 9.1 output 4 was therefore unwritten\nfor the three families #481 owns, so nothing proved that a challenge assembled\nagainst a *valid* block is rejected.\n\nAdd exactly one positive and one valid-block-negative selector per step, each\ndriving the deployed `main.spend` handler on the shared native-V1 counted-root\nfixture rather than a hand-built state:\n\n- double-spend step-01..04 (8 selectors): the conflicting transaction binds only\n  under the header's counted `transactions_root`; the same committed transaction\n  named twice is rejected by the distinctness check; an unauthenticated\n  spend-inputs preimage is rejected by the bounded-collection commitment; and a\n  valid block's disjoint second input cannot finalize.\n- no-input step-01..04 (8 selectors): a forged raw transactions root cannot bind;\n  a substituted inputs preimage cannot be opened; and both delegated `pexcludes`\n  claims are pinned to the exact authenticated root and to the canonical\n  `MidgardTxInput` CBOR key / raw native tx id, so a non-membership claim for\n  another key or against an unrelated root is rejected.\n- invalid-range step-01..02 (4 new selectors, 7 total): step-01 binds both an\n  interval the block does not cover and an inverted interval, step-02 finalizes\n  on both, and a covered interval from a valid block cannot finalize.\n\nEvery negative fails at its intended assertion, not incidentally: the recorded\ntraces name the counted-root unwrap, `verified_tx1_id != tx2_id`, the\n`bounded_collection_v1.from_items` comparison, the `pexcludes` key/root\ncomparisons, the `double_spent_input` equality, and the interval-coverage `when`.\n\nThe mid-pipeline steps consume the same block fixture's real `prev_utxos_root`\nand authenticated raw transactions root instead of placeholder byte strings, so\nthe forwarded state is the state step-01 actually produces.\n\nzero-input already had its nine selectors; they are re-verified unchanged.",
+      "sha": "f35bf45c9f70d0d9627e3a1f20658bdfd316d7be",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/f35bf45c9f70d0d9627e3a1f20658bdfd316d7be",
+      "message": "docs(goal): ledger the Graphify dirty-checkout refresh amendment",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-04T21:38:11Z"
+      "authorDate": "2026-08-06T04:34:21Z"
     },
     {
-      "sha": "43190f586bcfb1e0acfdc0d33b7e0a84bf0ffcc7",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/43190f586bcfb1e0acfdc0d33b7e0a84bf0ffcc7",
-      "message": "docs(goal): bind C20 ordered field terminal evidence\n\nRecord C20-0, C20-1, C20-3, and C20-8 as PASS at ba238d6b with their exact\ngenuine maxima, adjacent rejections, cross-language terminal vectors, and\nreplay counts, and note that CG2 still requires C21-C26 and C29-C33.",
+      "sha": "29d74e52ec8a5fddfc1165756a23553a5504a329",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/29d74e52ec8a5fddfc1165756a23553a5504a329",
+      "message": "chore(dev): refresh the Graphify graph from a HEAD snapshot even on dirty checkouts\n\nThe hook no longer refuses dirty trees: the worker snapshots HEAD with\ngit archive (tracked bytes only) and extracts from the snapshot, so the\npublished graph still corresponds to exactly one commit while the\npermanent working-tree dirt (preserved unprovenanced ledger edit,\nuntracked GOAL_ASSIST.md) stops blocking every refresh. Post-commit\ndispatch is detached behind setsid+flock with an indexed-commit stamp\nthat collapses rapid commit bursts; make refresh-graphify-graph runs the\nsame worker in the foreground. Verified on the dirty tree: 41 s,\n29,255 nodes / 85,130 edges, indexed-commit stamped.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-04T21:09:05Z"
+      "authorDate": "2026-08-06T04:33:59Z"
     }
   ],
   "contributors": [
@@ -326,58 +326,40 @@
   ],
   "issues": [
     {
+      "number": 549,
+      "title": "[Canonical V1] Prove Q10/Q11 end-to-end on chunked carriage and measure the Q1X-F6 axis",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/549",
+      "updated_at": "2026-08-06T06:57:37Z"
+    },
+    {
+      "number": 548,
+      "title": "[Canonical V1] validation-resolver-v1.test.ak pins 9 stale script_source_resolvers applied hashes (SDK gate red when a blueprint is installed)",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/548",
+      "updated_at": "2026-08-06T05:51:27Z"
+    },
+    {
+      "number": 547,
+      "title": "[Canonical V1] Register the harvested fraud-proof families in the deployment identity (unblocks Q18/Q31/Q15 submit builders)",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/547",
+      "updated_at": "2026-08-06T05:28:17Z"
+    },
+    {
+      "number": 481,
+      "title": "[Canonical V1 Goal B13] Close foundational proof families",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/481",
+      "updated_at": "2026-08-05T21:17:30Z"
+    },
+    {
+      "number": 484,
+      "title": "[Canonical V1 Goal B05] Close complete-item and Data carriage",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/484",
+      "updated_at": "2026-08-05T20:48:10Z"
+    },
+    {
       "number": 520,
       "title": "[Canonical V1] Lease: authenticated cross-transaction CEK material-traversal accumulator",
       "html_url": "https://github.com/Anastasia-Labs/midgard/issues/520",
       "updated_at": "2026-08-04T23:52:31Z"
-    },
-    {
-      "number": 519,
-      "title": "[Canonical V1] Evidence-integrity sweep: 24 confirmed gates that cannot fail",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/519",
-      "updated_at": "2026-08-04T23:42:15Z"
-    },
-    {
-      "number": 518,
-      "title": "[Canonical V1 Goal F20] Replace self-fulfilling fault-proof reconciliation gate",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/518",
-      "updated_at": "2026-08-04T22:36:08Z"
-    },
-    {
-      "number": 517,
-      "title": "[Canonical V1 Goal W25] Close block-replay acceptance bindings",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/517",
-      "updated_at": "2026-08-04T22:26:11Z"
-    },
-    {
-      "number": 477,
-      "title": "[Canonical V1 Goal B03] Finish active content-addressed CEK material",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/477",
-      "updated_at": "2026-08-04T22:25:57Z"
-    },
-    {
-      "number": 503,
-      "title": "[Canonical V1 Goal B27] Close deterministic coverage and local correction gates",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/503",
-      "updated_at": "2026-08-04T16:10:36Z"
-    },
-    {
-      "number": 501,
-      "title": "[Canonical V1 Goal B25] Integrate proof catalogue, tooling, removal, and economics",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/501",
-      "updated_at": "2026-08-04T16:10:32Z"
-    },
-    {
-      "number": 478,
-      "title": "[Canonical V1 Goal B37] Prepare live acceptance infrastructure",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/478",
-      "updated_at": "2026-08-04T16:09:58Z"
-    },
-    {
-      "number": 476,
-      "title": "[Canonical V1 Goal B01] Restore executable coordination truth",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/476",
-      "updated_at": "2026-08-04T16:09:48Z"
     }
   ],
   "releases": [],
@@ -388,7 +370,7 @@
     },
     {
       "week": 1755388800,
-      "total": 23
+      "total": 18
     },
     {
       "week": 1755993600,
@@ -396,11 +378,11 @@
     },
     {
       "week": 1756598400,
-      "total": 4
+      "total": 5
     },
     {
       "week": 1757203200,
-      "total": 56
+      "total": 57
     },
     {
       "week": 1757808000,
@@ -444,15 +426,15 @@
     },
     {
       "week": 1763856000,
-      "total": 43
+      "total": 44
     },
     {
       "week": 1764460800,
-      "total": 8
+      "total": 17
     },
     {
       "week": 1765065600,
-      "total": 7
+      "total": 6
     },
     {
       "week": 1765670400,
@@ -492,7 +474,7 @@
     },
     {
       "week": 1771113600,
-      "total": 14
+      "total": 13
     },
     {
       "week": 1771718400,
@@ -516,15 +498,15 @@
     },
     {
       "week": 1774742400,
-      "total": 29
+      "total": 30
     },
     {
       "week": 1775347200,
-      "total": 41
+      "total": 42
     },
     {
       "week": 1775952000,
-      "total": 31
+      "total": 32
     },
     {
       "week": 1776556800,
@@ -540,19 +522,19 @@
     },
     {
       "week": 1778371200,
-      "total": 43
+      "total": 40
     },
     {
       "week": 1778976000,
-      "total": 11
+      "total": 16
     },
     {
       "week": 1779580800,
-      "total": 0
+      "total": 2
     },
     {
       "week": 1780185600,
-      "total": 25
+      "total": 26
     },
     {
       "week": 1780790400,
@@ -560,7 +542,7 @@
     },
     {
       "week": 1781395200,
-      "total": 13
+      "total": 21
     },
     {
       "week": 1782000000,
@@ -576,7 +558,7 @@
     },
     {
       "week": 1783814400,
-      "total": 9
+      "total": 10
     },
     {
       "week": 1784419200,
@@ -584,11 +566,11 @@
     },
     {
       "week": 1785024000,
-      "total": 287
+      "total": 234
     },
     {
       "week": 1785628800,
-      "total": 111
+      "total": 170
     }
   ]
 }
