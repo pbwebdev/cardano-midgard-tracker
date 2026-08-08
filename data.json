@@ -1,10 +1,10 @@
 {
-  "fetchedAt": "2026-08-07T07:23:22.162Z",
+  "fetchedAt": "2026-08-08T07:00:28.694Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 25,
     "forks_count": 10,
-    "open_issues_count": 92
+    "open_issues_count": 105
   },
   "languages": {
     "Aiken": 359544,
@@ -17,109 +17,109 @@
   },
   "commits": [
     {
-      "sha": "8c42c672ad19ff2d199068c0c3a2c2c6a6f03982",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/8c42c672ad19ff2d199068c0c3a2c2c6a6f03982",
-      "message": "docs: home the production-threshold and challenger-thread clarifications\n\nThe three owner clarifications of 2026-08-06 now live in their component\ndocuments, not only GOAL_SPEC §3.3: the challenger thread-ownership model\n(independent, self-selecting watchers; one honest challenger per fault;\nno cross-thread obligation) in fault-proofs/architecture.md §5 and the\nwatcher README; the maturity-fit binding to the production seven-day\nwindow in consensus-profile-v1.md §10; the economic-sufficiency binding\nto the F04 §2.1 production profile in fault-proofs/architecture.md §5.\n\nCo-Authored-By: Claude Fable 5 <noreply@anthropic.com>",
+      "sha": "ab97e571e51d41ae0981aee0ee8138c4a1fc9630",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ab97e571e51d41ae0981aee0ee8138c4a1fc9630",
+      "message": "docs(spec): Phase-0 review response — authority reconciliation, F05 acceptance re-scope, provenance corrections (#566)\n\nTwo review rounds against #566's six acceptance criteria, no blockers.\n\nAuthority layer\n- docs/DOCUMENTATION_POLICY.md source hierarchy admits docs/spec/ as the\n  implementation-normative layer over technical-spec/ on concrete detail;\n  docs/spec/README.md restates the identical scope so the two documents\n  express one rule.\n- GOAL_SPEC §3.1(2) no longer claims midgard-tx.md defines the resumable\n  walk, Value bookmark, or Canonical-Data Acceptor. midgard-tx.md §1\n  reserves §10 (#570) and §11 (#571) as deferred-by-design instead, so the\n  by-reference binding stays honest without pre-empting Phase 3.\n\nF05 manifest (AC6 re-scope half)\n- Q00, C21, W27 and the CG2 gate row carry the amended GOAL_SPEC acceptance\n  wording, each retaining its counted-scheme acceptance verbatim as\n  provenance per invariant 14. 186 rows, id sequence byte-identical to\n  b6e600f6, zero removals.\n\nProvenance and numeric corrections\n- §8.3 K basis and tier-1 bound re-sourced: the original text attributed\n  both to #556/#557 observations that do not exist. Restated against what\n  #556 actually measures, with a mandatory Phase-4 cross-check on K.\n- GOAL_SPEC §3.3 no longer claims no verdict flips under the 13.2M basis:\n  Q10 at 40 inputs (11,312,784) and Q11 at 41 (11,465,641) do sit in the\n  11.2M-13.2M band and flip. Mitigation stated — the headline Q1X-F6 result\n  at the admissible 296-input shape does not move.\n- Epoch provenance separated: the captured artifact is decision 0001's\n  Conway epoch-645 snapshot; epoch 648 is #552/#563 corroboration, not a\n  captured artifact.\n- decisions/0004 module counts re-derived against the tree (46 Aiken, 30 TS\n  — the drafted 15 was wrong) with reproducing commands cited.\n- §5.3 enumerates language_tag and purpose_tag admissible values against\n  both language twins; 496-vs-512 reserve arithmetic reworded; tier\n  vocabulary conversion completed across GOAL_SPEC.\n\nVerified green: manifest-quality (PASS 186/186, 0 defects), fault-proof\nreconciliation (70 rows/49 open), status-role control (PASS), CG4 gate\n(BLOCKED unchanged from baseline), prettier --check on all changed docs.\nScope fence honored: no plutus.json, catalogue/deployment registry,\nABI-freeze artifact, or blueprint regeneration — those are reserved for\n#579.\n\nCo-Authored-By: Claude Opus 5 <noreply@anthropic.com>",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-06T20:55:55Z"
+      "authorDate": "2026-08-08T06:58:03Z"
     },
     {
-      "sha": "e7bb5824064f294e2c0fbbcdbfa59e7546967a8f",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/e7bb5824064f294e2c0fbbcdbfa59e7546967a8f",
-      "message": "docs(goal): pin the §3.3 maturity and economics thresholds to production values\n\nOwner clarification (2026-08-06, in session): the maturity-fit threshold\nbinds against the production 7-day block maturity (F04 §1, half-maturity\n302,400,000 ms), never a scaled acceptance or drill window; correction-path\neconomic sufficiency binds against the production launch economics (F04\n§2.1, 75,000-ADA fraud_prover_reward), never the §2.2 drill profile.\n\nCo-Authored-By: Claude Fable 5 <noreply@anthropic.com>",
+      "sha": "df573d288466f698acec188d3f7b8d6f9202e26d",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/df573d288466f698acec188d3f7b8d6f9202e26d",
+      "message": "feat(spec): flat field-hash reversion Phase 0 — docs/spec authority, GOAL_SPEC amendment, decisions/0004\n\nPhase 0 of the compact-tx flat field-hash reversion (#566; spec #565;\ndecision trail: wayfinder map #552, twelve closed tickets).\n\nNew authority layer. docs/spec/README.md states the rule: a component\nspec wins over technical-spec/ on concrete detail, GOAL_SPEC binds it by\nreference at scheme altitude, decision records carry rationale only.\ndocs/spec/midgard-tx.md is its first document — the implementation-\nnormative format authority for the MidgardTx compact types and canonical\nencodings, the unchanged two-level tx-id derivation, the nine flat\nblake2b-256 field commitments (plain hashing with a positional-identity\ninvariant), the uniform enveloped preimage grammar (counts only in the\npreimage header; empty field = 80; per-item envelope now on all nine\nfields including the newly enveloped 5/6/8), the fixed 3-byte output\nindex giving 38-byte spend/reference-input items at stride 40 with\narithmetic access, the asserted 28-byte observer/signer items at stride\n30, the datum canonicity re-pin to serialiseData's image (#564), the\nnormative access invariants (authenticate-once, abort-never-clamp, count\nconsistency), and the three-tier carriage convention with\nFieldPreimageCertificateV1 and the frozen FieldCarriageV1/FieldViewV1\nwire types.\n\nProvisional pins, marked provisional-pending-Phase-4-measurement, with\nfalsification an amendment-level erratum by design: K = 15,900 bytes\n(the #556 case-3 measured two-chunk basis, 15,900 + 484 = 16,384) and\nthe tier-1 redeemer-carriage bound = 14,336 bytes (maxTxSize less a\n2,048-byte step-machinery allowance). Tier-3 worst case is 3 chunks at\nthe retained 32,768-byte aggregate cap.\n\nGOAL_SPEC amended at scheme altitude: §0 amendment note, §1 authority\nlist (new item 3; technical-spec 8 -> 9), §3.1(2), §3.2 ladder\nre-derived as the three named tiers, §3.3 basis note declaring the\nsingle 13,200,000-mem execution-budget basis (20% off live mainnet\nmaxTxExUnits 16,500,000, epoch 648), §8.2 preamble and C21/CG2, §9.1\noutput 3, §9.2 Q00, §10.3 W27, §12 (first-ever §12 edit, acknowledged\nin place), §13.2 pointer, §13.3. Deliberate non-edits stated: DA payload\nframing, MPF trie roots / mpf-chunked-verify, and the §3.3 thresholds.\n\nSuperseded-not-deleted per §3 invariant 14: 36 F05 manifest rows (Q00,\nQ10-Q22, Q31, C20-0..C20-8, C21-C26, C29-C33, W27) now lead sourceAnchors\nwith a COUNTED-SCHEME SURFACE SUPERSEDED note, superseded text retained\nverbatim as provenance. The Q1x Q10/Q11 output-5 cells are deliberately\nNOT superseded — they stay OPEN until the Phase-7 re-measurement, since\nthe artifact is the honest gate.\n\nVerification (all rerun after the manifest edit, per F05's\nself-invalidation trigger): manifest quality gate 186/186 rows 0 defects;\nfault-proof reconciliation 70 rows / 49 open; status-role control PASS;\nCG4 gate exit 0; capability reconciliation 22 P2 tasks, 17 pass, 115/115\nmanifest-declared Aiken selectors across 12 modules under the pinned\naiken fork, 0 excluded. No gate state moved, as expected for a\ndocs-and-manifest-only change. Pre-existing red, unchanged on the\npristine tree and ticketed to the F40/F41 lane: the manifest quality\ngate's self-test fails its seeded F41-drop assertion.\n\nRefs #566, #565, #552, #561, #563",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-06T20:46:30Z"
+      "authorDate": "2026-08-08T05:38:10Z"
     },
     {
-      "sha": "ac4e75799fe17331f56f5d52f5fefcbf101e7727",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ac4e75799fe17331f56f5d52f5fefcbf101e7727",
-      "message": "docs(goal): record the ABI quiesce and commit the reversion research basis\n\nQuiesce per map #552 (#553 revert-now, #554 flat): the execution policy now\ncarries the lane pause and the invariant-14 in-flight inventory (zero\nuncommitted lane state; every impl/* commit integrated or ledgered as\nsuperseded). The l2-tx-commitment survey the decisions cite moves from\nuntracked to committed.\n\nCo-Authored-By: Claude Fable 5 <noreply@anthropic.com>",
+      "sha": "b6e600f685381c34961017bb52caa76ec0ca9d1a",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/b6e600f685381c34961017bb52caa76ec0ca9d1a",
+      "message": "docs(goal): close the quiesce wave — DA-safety cluster complete, identity batch green\n\nQ62 and all three Q63 clauses closed with measured gates; DA-INIT\ncompliance landed with the floors at the datum-writing seam; blueprint\nregenerated (393 validators, dual-compiler byte-identical, sha256\n70da64a3…9444); identity suites re-derive clean; deposit-flow 14/14\nincluding the §4.4 journey against the new governor. The parent's\nfive invalid red runs (uncreated databases) are recorded as a\nmethodology defect with the checklist correction.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-06T19:59:24Z"
+      "authorDate": "2026-08-07T11:22:39Z"
     },
     {
-      "sha": "2e51e6ada728f7f2a4ee6eef25de8aa176fa8185",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/2e51e6ada728f7f2a4ee6eef25de8aa176fa8185",
-      "message": "docs(goal): ledger the tail wave and the measured F6 defect\n\nRecords the resolver-pin re-derivation, the F20 inventory recapture with\nits repaired derivation, the Q10/Q11 chunked lifecycles, and the measured\nQ1X-F6 spend-input-cardinality defect (#551).\n\nRefs #548, #549, #550\n\nCo-Authored-By: Claude Fable 5 <noreply@anthropic.com>",
+      "sha": "7172db0d4710f0f41893972412b0f4a0f5da92c0",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/7172db0d4710f0f41893972412b0f4a0f5da92c0",
+      "message": "fix(node): scope DA governance floors to initialization, not config load\n\n84bdbf2a enforced the Q63 governed floors inside `NodeConfig` loading.\nThat was the wrong seam. `DA_COMMITTEE_HEX`, `DA_OWNERS_HEX` and\n`DA_THRESHOLD` are read by exactly one consumer — the bootstrap in\n`deriveOperatorDaParams` — but `NodeConfig` is loaded by every subsystem,\nso a stale deployment value failed config load for the whole process.\n\nA checkout carrying the pre-Q63 `DA_THRESHOLD=1` in its `.env` therefore\ncould not load config at all, and the failure surfaced as an opaque\nEffect ConfigError inside tests and subsystems that never touch DA:\n\n  Invalid data at : \"DA_THRESHOLD must be at least 2 to satisfy the\n  governed threshold floor, received 1\"\n\nConfig load now validates only what is malformed regardless of policy —\nnon-hex, ragged element widths, and out-of-order or duplicate entries in\na packed set, which the governor's `sorted_unique_*` walkers reject\noutright. The governed floors stay fail-closed in `deriveOperatorDaParams`,\nthe one place a governor-invalid datum would actually be written, where\nthe real committee length is known even when it is derived from local\nsigners rather than configured — a case config load could never see.\n\nNo backdoor: a below-floor threshold, a one-member committee, and a lone\nowner are all still refused, and are now pinned by an explicit regression\nfor the pre-Q63 `DA_THRESHOLD=1` shape. `tests/da-config-load.test.ts`\npins the other half — that those legacy values load without bricking\nunrelated subsystems.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-06T19:22:01Z"
+      "authorDate": "2026-08-07T10:13:35Z"
     },
     {
-      "sha": "d5375a702b5897e3f609491413ce1f1d945b6373",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d5375a702b5897e3f609491413ce1f1d945b6373",
-      "message": "docs(evidence): settle the Q1x second adversarial axis on measurement\n\nThe Q1x artifact decided output 5 per family on two axes: membership-proof\ndepth, remediated by published-chunk carriage, and spend-input preimage\ncardinality, which was recorded as \"still unexercised\" with an expectation\nattached about where it would bind. Both halves move here.\n\nThe carriage block gains Q10 and Q11, so `unmeasuredFamilies` is empty for the\nfirst time: the depth axis is now settled for all four families by a\nremediation the gate re-derives and that is measured end to end for each of\nthem. The block records what makes those two journeys different — their trie\nopenings share one root, and Q11's second opening is an ABSENCE — because a\nreader who assumed the zero-input shape would not be able to reproduce them.\n\n`spendInputCardinalityBound` is the new block, and it settles the second axis\nthe only honest way available: by measuring it and finding that it does not\nfit. The gate re-derives every number in it. The admissible cardinality must be\nthe SMALLEST of the constraints the block lists, so naming a larger one cannot\nunderstate what a proof has to survive. The 862 the field-bytes bound admits is\nrecomputed from the bytes. The reserve ceiling is recomputed from the ledger's\ncap and the same 20% this artifact applies everywhere, and the cap must be\nbelow the consensus profile's capability floor so the boundary is conservative.\nEach family's boundary must be an adjacent PAIR whose lower member measures\ninside the reserve and whose upper member measures outside it AND inside the\nledger's hard cap — a number above the cap would prove nothing about the\nreserve. The verdict is then recomputed from those measurements rather than\nread, and the finding must carry the cardinalities it was built on.\n\n`axisIsSettledFor` no longer consults the depth bound for every axis. Each axis\nnames the bound block that decides it, an unknown bound is a hard failure, and\nan axis whose own bound records that the worst admissible instance does not fit\nis unsettled however thoroughly it was measured. Under that rule Q12 and Q14\nstay LOCAL_PASS and Q10 and Q11 stay OPEN — the same two cells as before, now\nfor a measured reason rather than an unexamined one.\n\nSeeded mutations of the new block are rejected with their own diagnostics:\nflipping the verdict without moving the numbers, claiming carriage remediates\nthe axis, raising the measured ceiling to the admissible shape, dropping the\n20% reserve from the ceiling, downgrading the finding's severity, and removing\na family from the carriage-measured set. The gate's existing vitest self-tests\nand its positive control are unchanged and still pass.\n\nThe Q10 and Q11 manifest rows replace their stale \"the emulator journey still\ndrives the redeemer-carried route\" anchor with the measured stage lists, add\nthe cardinality derivation and its verdict, and cite both suites.\n\nRefs #549",
+      "sha": "a1053973068a6c7a7e3943ded36b25d9efb48e44",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/a1053973068a6c7a7e3943ded36b25d9efb48e44",
+      "message": "fix(da): adapt apply-flow consumers to the governed-params reference and close the Q63 gate\n\nQ62's ApplyToStateQueue now carries da_params_ref_input_index and the\nSDK apply builder requires the governed params; the node apply program,\nthe da-committee-node coordinator builder/submitter, and the watcher\nindexer fixture adopt it in lockstep. The Q63 gate's three open-group\nself-test fixtures re-point to strike their target group wherever it\nlives (groups or openGroups) so none can no-op now that the rescue\ngroups closed; gate exits 0 with all nine groups measured (29 checks)\nand the self-test still rejects every seed. Q62 manifest counts\nrestated against the published vocabulary; quality 186/186.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-06T11:13:09Z"
+      "authorDate": "2026-08-07T10:10:10Z"
     },
     {
-      "sha": "a57426485eabb999c237d6b0073078b9ea9c9ab3",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/a57426485eabb999c237d6b0073078b9ea9c9ab3",
-      "message": "fix(evidence): recapture the F20 category and directory inventories\n\nThe #510 ABI-freeze gate measured two drift findings against the F20\nreconciliation: `bindingInventory.registeredCategoryNames` recorded 8\ncategories where the frozen catalogue order carries 11 after #547, and\n`deployedValidatorDirectories` recorded 14 where the index carries 16\nafter #545 added `mpf-chunked-proof` and the `reference-input-no-idx`\nharvest landed. Both inventories are re-derived here by the gate's own\nproducing derivations — the SDK catalogue's\n`FRAUD_PROOF_CATALOGUE_CATEGORY_ORDER` literals and a directory read of\n`onchain/aiken/validators/fraud-proofs` — never hand-edited, so the\nrecapture measures the tree rather than restating it.\n\nRe-running those derivations exposed two adjacent inventories the same\ntwo changes had moved. `unregisteredValidatorDirectories` drops\n`invalid-signature` and `no-reference-input`, which #547 registered, and\ngains `mpf-chunked-proof`, which is shared chunked carriage rather than a\nfamily: six residues become five. `nativeV1Families` gains\n`reference-input-no-idx` as the twelfth transaction-proof chain, so the\nstandalone-family count is 13.\n\nThe native-V1 derivation is repaired rather than merely re-run. #545\nintroduced `pass_native_tx_to_next_step_carried`, the carriage seam that\ntakes the membership opening by whichever route the prover chose and\nfunnels the redeemer-carried one straight back into\n`pass_native_tx_to_next_step`. The old call regex could not see the\nsuffixed identifier, so re-running it as it stood would have published a\n9-family inventory that silently dropped `double-spend`,\n`invalid-range`, `no-input` and `zero-input` — four families that are\nstill native V1. The regex now accepts either spelling, the carriage seam\ngets its own exactly-one-definition pin beside the helper's, and the\n\"exactly one transition per step-01\" measurement survives the reroute.\n\nWith the inventories recaptured the ABI freeze measures no drift at all,\nso `driftFindings` is the empty array that claims nothing drifted and the\ncompleted F20 recapture leaves `nextActions`. No waiver is involved:\n`waivers` stays empty and `freezeStatus` stays BLOCKED, because IG2 still\nmeasures 11 integrated families without valid-block rejection, maximum\nproof-fit or correction evidence. The freeze self-test's drift mutation\nis inverted to match — with 0 findings measured there is nothing to\ndelete, so the seeded defect is now an artifact that invents a finding\nthe tree does not support, which the same equality rejects.\n\nCG4 binds the freeze by digest and drift count, so its binding is\nre-measured, and the CG4 row's count contract carries the 0 the gate now\nreports.\n\nMeasured: reconciliation 70 rows / 49 open, exit 0; ABI freeze exit 0\nwith 11 catalogue categories, 16 validator directories, 0 relation\nviolations, 0 drift findings, 0 waivers; freeze self-test 2 controls / 23\nmutations; CG4 gate exit 0 and its self-test 2 controls / 18 mutations;\nmanifest quality 186 tasks / 0 defects.\n\nRefs #550\n\nCo-Authored-By: Claude Fable 5 <noreply@anthropic.com>",
+      "sha": "b6a41431075581296926eacc6d7b02804a361aa3",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/b6a41431075581296926eacc6d7b02804a361aa3",
+      "message": "feat(da): non-retroactive committee rotation and partial-attestation rescue (Q62 + Q63c)",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-06T11:12:03Z"
+      "authorDate": "2026-08-07T10:01:36Z"
     },
     {
-      "sha": "297fae4cc88e7760145fb2f27fc148a8e862b413",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/297fae4cc88e7760145fb2f27fc148a8e862b413",
-      "message": "fix(onchain): rebind the drifted script-source resolver pins\n\n`validation-resolver-v1.test.ak` pinned applied semantic-resolver hashes\nthat predate the script-sources validator work, so the SDK cross-language\ngate `demo/midgard-sdk/tests/validation-resolver-applied-hashes.test.ts`\nfailed 1 of its 2 cases against the committed-tree blueprint (SHA-256\n`2b5973fe2832bac0…`, 393 validators).\n\nTwelve of the 29 `script_source_resolvers` entries had moved — indices 0,\n2, 3, 10, 11, 12, 15, 17, 19, 21, 22 and 28 — not the 9 the issue\nrecorded, because the #545 wiring recompiled every applied step after the\nissue was filed. Each replacement is the value the production\n`buildFaultProofContracts` builder derives from that blueprint, read out\nof the builder programmatically and substituted positionally; none was\nderived by hand. The other 17 entries and the whole\n`phase_a_script_precondition_resolvers` pair were already current and are\nuntouched, which is the signature of a change confined to the\nscript-sources validators rather than a wholesale regeneration. Group\ncardinality is unchanged, so the Aiken guards\n`script_sources_semantic_resolver_count = 28` and\n`phase_a_script_preconditions_semantic_resolver_count = 2` still hold.\n\nThe CEK program-material necessity evidence recorded the pre-fix reading\n(1/1 on the gated case, the ungated case failing on this drift); it now\nalso carries the post-fix 2/2 measurement.\n\nMeasured: the SDK applied-hash file replays 2/2 both with\n`MIDGARD_REAL_BLUEPRINT_PATH` unset and set to that blueprint;\n`midgard/validation_resolver_v1.test` runs 18/18 with 0 failures under\nthe fork (`aiken v1.1.23+6d14ab2`), and the manifest's 8-selector C12\nsubset 8/8, each collecting that module only; stock\n`aiken check --skip-tests` (`v1.1.22+39d6b04`) exits 0; normalized Aiken\nformat passes 1/1 under both binaries; the goal task-manifest quality\ngate passes 186/186 rows with 0 defects.\n\nRefs #548\n\nCo-Authored-By: Claude Fable 5 <noreply@anthropic.com>",
+      "sha": "f729cdf10d5d0c81d798df5b347d236a5542fda9",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/f729cdf10d5d0c81d798df5b347d236a5542fda9",
+      "message": "fix(node): require floor-compliant DA governance at bootstrap\n\nQ63 (F04 §4) gave the DA params governor threshold floors —\n`da_threshold >= max(2, ceil(2*committee_len/3))` and\n`update_threshold >= max(2, ceil(2*owner_len/3))` — which make a 1-of-1\ncommittee and a lone owner unrepresentable. The node's bootstrap still\nbuilt exactly that forbidden shape: a single-key committee, a single\nowner, and both thresholds hardcoded to one.\n\nBootstrap now emits at least two committee members and two owners, with\nboth thresholds defaulted to the governed floor. All bound arithmetic is\ndelegated to the SDK twins (`governedThresholdFloor`,\n`daParamsFloorViolations`) so it cannot drift from the validator, and\nboth sets are emitted sorted-unique to match the governor's\n`sorted_unique_*` walkers.\n\nThe second key is explicit configuration, never invented:\n`DA_COMMITTEE_HEX`/`DA_OWNERS_HEX` name a real committee and owner set in\na deployment, while `DA_COSIGNER_SEED_PHRASE` gives dev and emulator\nbootstrap a locally held second key so one process can reach a genuine\n2-of-2. With neither present, initialization fails closed rather than\nfalling back to the shape the governor rejects. The same floors are\nenforced at config load so a bad value is reported where it can be read.\n\nAttestation signing follows: the hardcoded single witness at index 0 is\nreplaced by one genuine Ed25519 signature per locally held key, with the\nsigner index looked up in the on-chain committee rather than assumed.\n\nFixtures pinning 1-of-1 are lifted to floor-compliant shapes, including\nthe Scalus suite that evaluates a real AddSignatures body through the\nactual Plutus validator — now a true two-signature attestation.\n\nThe blueprint is deliberately not regenerated here; this lands green\nagainst the old committed governor, which accepts >=2-of-N too.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-06T11:06:00Z"
+      "authorDate": "2026-08-07T09:46:58Z"
     },
     {
-      "sha": "a0e2058ca6b5ecea3d1aa9d5cd9d3aed015159d7",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/a0e2058ca6b5ecea3d1aa9d5cd9d3aed015159d7",
-      "message": "docs(goal): ledger the ABI freeze and CG4 gate landing\n\nRefs #510\n\nCo-Authored-By: Claude Fable 5 <noreply@anthropic.com>",
+      "sha": "32577390ff541b4d669d1903ca94d2e4714dde09",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/32577390ff541b4d669d1903ca94d2e4714dde09",
+      "message": "docs(goal): ledger the Q63 remediation rounds and restate the manifest counts",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-06T10:51:45Z"
+      "authorDate": "2026-08-07T08:56:17Z"
     },
     {
-      "sha": "5b3e749eb8d0ddf8339f5165c8508c02d61177ab",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/5b3e749eb8d0ddf8339f5165c8508c02d61177ab",
-      "message": "style(validation): format the unary-depth helper and suite\n\nPre-existing format-check failures at 1a94c00a, flagged by the #510 lane.\n\nCo-Authored-By: Claude Fable 5 <noreply@anthropic.com>",
+      "sha": "9b3cca8dba603485ab24575bb334c3a712c299f5",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/9b3cca8dba603485ab24575bb334c3a712c299f5",
+      "message": "fix(da): pin the governor mint seam and correct the Q63 evidence wording\n\nSecond remediation round on the Q63 DA-governor work, closing the residuals the\nadversarial review left open on 9cf8817e.\n\nMINT SEAM (load-bearing). The spend seam got a differential pair last round;\nthe mint path's own `valid_datum` call, in `params_output_datum_at_script`, did\nnot. That is the call the parent handoff's claim rests on when it says the\nnode's single-key DA defaults are now unmintable, and deleting its `expect`\nleft all 12 selectors green. It now has the same differential pair: an\ninitialisation transaction whose minted datum sits on the F04 floor is\naccepted, and the identical transaction - same `init_ref` input, same single\nminted NFT, same script output - differing only in a bare-majority\n`da_threshold` of 3 over the 6-member committee is rejected. The control\npassing is what establishes every other check in the handler is satisfied, so\nthe minted datum's governed floor is the only bound left to fail.\nMutation-confirmed: with that `expect` removed, exactly 1 of 14 fails; before\nthis round, 0 of 12 did.\n\nCOMPILER PIN. The gate now resolves the compiler from MIDGARD_AIKEN_BIN then\nMIDGARD_FORK_AIKEN_BIN - the precedence the Q60 verifier and the\ncapability-reconciliation gate use, since CI pins only the latter - and fails\nclosed with ERR_AIKEN_BINARY_UNPINNED only when neither is set. Whichever\nresolves must report an `aiken v1.1.23` version or the run fails closed with\nERR_AIKEN_COMPILER_MISMATCH, so the stock v1.1.22 build cannot execute these\ntests under the fork's name. Neither claim is left as an assurance: both are\nseeded self-tests that spawn this gate's real main path, one with both\nvariables stripped and one against a stub binary reporting a v1.1.22 version.\nThe measured version is persisted into the artifact summary as\n`aikenCompiler`, recomputed from the binary on every run.\n\nHONEST WORDING. No full-table on-chain claim survives, because no full-table\nAiken sweep exists. The on-chain pins are widened to a genuinely adversarial\nsample - the clamp boundary at 3 and 4, and the top of the range at 100, 255\nand `max_indexed_signer_count` - and every description now says what it is:\nfull-table off-chain (digest over 0..256), sample-pinned on-chain. The SDK\ndocstring that claimed cross-language agreement over the whole range is\ncorrected to distinguish the two depths. The drain section comment claimed all\nthree owner bounds reject `test_params(6, 4, 1, 1)`; `update_threshold <=\nowner_len` is in fact satisfied there, so it now states the two that reject and\nexplains why picking a different threshold only trades one violation for\nanother. The `no_threshold_satisfies_floor` docstring no longer asserts its\ninequalities are `valid_datum`'s - it is arithmetic that mirrors their shape.\n`floorTable.note` now says the digest's authority is the verifier's independent\nrecomputation and that `expression` is free-text documentation. The prose-only\n\"hash byte-identical\" assurance is replaced by `reviewRemediationByteIdentity`,\nwhich records the method (temp-directory A/B builds that never write the\nrepository's plutus.json), the observed hash and length, and states plainly\nthat this gate does not re-derive it and the parent must re-verify at the\nidentity batch.\n\nHARDENING. A cited Vitest title that is a substring of another cited title is\nnow rejected (ERR_AMBIGUOUS_VITEST_CITATION): the runner match is\nsubstring-tolerant by design, so one executed test could otherwise satisfy two\ncitations. A group id declared twice within `groups` or within `openGroups` is\nrejected (ERR_DUPLICATE_GROUP_ID) instead of being silently deduped last-wins,\nwhich would have left the earlier declaration's cardinality unchecked. Group\ntotals are published per language rather than collapsed to the first, so a\ndivergence between the two measured sides cannot hide behind one figure.\n\nBoth new guards carry their own seeds. The gate now runs 22 negative self-test\nseeds and 3 positive controls, all spawning itself and observing its real exit\ncode.\n\nThe governor's validator code remains unchanged. The only non-test,\nnon-comment edits to da-params-governor.ak across both rounds are the\n`transaction.{NoDatum, placeholder}` imports the test fixtures need; the\ncompiled `da_params_governor` mint/spend/else hash is byte-identical to\n98975333 (f00f70a2a4a2de25ae2c52a5919195386067d3c1f2b3799965ef8352, 4448\nchars), re-measured on this tree by A/B build.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-06T10:50:41Z"
+      "authorDate": "2026-08-07T08:54:08Z"
     },
     {
-      "sha": "585bbcd1fd0f311e5ddad61715b567dde9d87a59",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/585bbcd1fd0f311e5ddad61715b567dde9d87a59",
-      "message": "test(fault-proofs): measure the spend-input cardinality axis for Q10 and Q11\n\nThe Q1x artifact has carried a second adversarial axis since issue #482 with\nnothing but an expectation attached to it: spend-input preimage cardinality,\naffecting Q10 and Q11, \"expected to bind on the spend-inputs WITNESS\npublication transaction and on execution units rather than on the step\ntransaction itself\". That expectation is now measured through the real\nprepare/submit pipeline, and half of it is wrong.\n\nThe admissible cardinality is derived from three protocol constraints and the\nsmallest is taken: `maxSpendInputCount` 16,384, which its own source calls a\none-byte-per-item encoding floor; `maxSpendInputsPreimageBytes` 32,768, which\nat 38 bytes per canonical `TransactionInput` admits 862; and the 296-input\nCardano script-spend shape already pinned as\n`maximum_cardano_spend_redeemer_count` and already treated by family Q13 as the\nshape a proof must handle.\n\nMeasured against the 20% execution reserve over Cardano's own 14,000,000-unit\nmemory cap — below the consensus profile's 16,500,000 floor, so conservatively:\n\n| family | largest fitting | first over reserve | binding stage |\n| ------ | --------------- | ------------------ | ------------- |\n| Q10    | 39              | 40                 | step-04       |\n| Q11    | 40              | 41                 | step-02       |\n\nAt 39 inputs Q10's step-04 measures 11,049,259 memory against an 11,200,000\nceiling; at 40 it measures 11,312,784, over the reserve and still under the\nledger's hard cap. Q11's step-02 measures 11,170,542 at 40 and 11,465,641 at 41.\nAt the admissible 296 neither family's proof can be evaluated at all: both\nexceed the ledger's own memory cap, which the suite asserts by driving them.\n\nWhat was expected to bind does not. The witness publication transaction is\n1,862 bytes at Q10's boundary with 14,522 bytes of margin, and the steps that\nreference it are within five bytes of their minimal-fixture size, because the\npreimage is a reference input's datum. Q11 is not shaped that way at all: its\nstep-02 carries `inputs_preimage` in the STEP REDEEMER, so the axis does reach\nthat transaction's bytes — and still does not bind, with 10,684 bytes of margin\nat the boundary. Execution MEMORY binds, in both families, an order of magnitude\nbelow the admissible shape, because a step must re-hash the whole authenticated\nbounded collection before it may select one item from it.\n\nThat cost is not carriage. Published-chunk carriage remediated Q1X-F5 by moving\nbytes out of the step transaction; there is nothing to move here.\n\nThe two family fixtures take an optional `spendInputCardinality`, placing the\nselected input last so both the collection re-hash and the selection walk are\nat their worst.\n\nRefs #549",
+      "sha": "09395f1ef3451f7db83e0165684602e5b09cffd0",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/09395f1ef3451f7db83e0165684602e5b09cffd0",
+      "message": "docs(goal): flip Q60 to PASS on the measured mutant kill and reconcile the manifest\n\nThe remediation landed the strictly-inside-window fixtures with a\nthree-arm measured experiment (21/21 mutant-survives before, 2/23\nmutant-killed after, 23/23 real rule). Parent patch applies the late\nreview residuals (prettier, splice guard, two artifact wordings, an\nhonest translation-invariance docstring) and reconciles the F05/F40\nstale F41 blockers the quality gate caught. Gates: Q60 PASS, quality\n186/186 with 0 defects, selector 23/23, format 1/1.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-06T10:49:23Z"
+      "authorDate": "2026-08-07T08:51:13Z"
     },
     {
-      "sha": "1321052af559e9104c05ea890482e1c855c4342d",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/1321052af559e9104c05ea890482e1c855c4342d",
-      "message": "docs(evidence): rebind the CG4 row to the measured freeze and gate\n\nThe CG4 manifest row named two prescribed surfaces that did not exist and\ncarried a count contract written before either of them was built. It now\nleases the four gate scripts and two artifacts that were delivered, and\nits evidence outputs and count contract carry the numbers the gates\nactually measure rather than the numbers the row expected.\n\nThe measured citations: 9 C60–C68 rows reconciled with 0 PASS, 6 rows\ncarrying an absent prescribed surface, 9 rows dependency-blocked, QG1\nunmeasured because its own verifier is absent from the index, 7\ncross-package ABI identities re-derived and agreeing, 6 derived relations\nwith 0 violations, 11 catalogue categories bound onto 16 validator\ndirectories, 393 blueprint validators, 16 IG2 families with 0 integrable\nand 11 violations, 2 measured drift findings against the F20 inventory,\nand self-tests rejecting 18 and 23 seeded defects against 2 control runs\neach.\n\nThe row's invalidation triggers gain the ABI surface: because the freeze\nre-derives all seven identities from source on every run, any change to\nthem, to the catalogue-to-validator-tree bijection, to the pinned\ncompiler or to the blueprint validator set re-opens the IG1 half.\n`blockedBecause` is unchanged — CG4 remains blocked on exactly the same\nnon-PASS queue rows.\n\nRefs #510\n\nCo-Authored-By: Claude Fable 5 <noreply@anthropic.com>",
+      "sha": "b02b25cd1aedf04f3f472fd2e7b0f46081532898",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/b02b25cd1aedf04f3f472fd2e7b0f46081532898",
+      "message": "test(state-queue): kill the interval-membership mutant and true up the Q60 evidence\n\nThe Q60 family claimed to prove that a committed header's `end_time` must EQUAL\nthe commit transaction's inclusive upper bound, \"not merely be a member of the\ninterval\". Measured, it proved no such thing: all 21 of its fixtures placed\n`end_time` AT the bound or beyond it, so replacing the rule's equality with\ninterval membership (`lower <= end_time <= upper`) passed every one of them.\nThree published boundaryClasses claims asserted an exclusion the family did not\nhave.\n\n`commit_bound_header_time_is_valid` is correct and is NOT touched here. This\nchanges tests and evidence only.\n\nMeasured mutation experiment (patched fork aiken v1.1.23+2a78108; two scratch\ncopies of onchain/aiken outside the worktree, identical but for the predicate):\n\n  pre-remediation family + mutant    collected 21, passed 21, failed 0\n  remediated family + mutant         collected 23, passed 21, failed 2\n  remediated family + real rule      collected 23, passed 23, failed 0\n\nThe two failures under the mutant are exactly the two tests added here.\n\nOn-chain fixtures added (onchain/aiken/lib/midgard/state-queue.test.ak):\n- state_queue_commit_end_time_rejects_an_end_strictly_inside_the_commit_window\n  end_time 1_700_000_479_000 in window [1_700_000_000_000, 1_700_000_480_000]:\n  satisfies `lower <= end_time <= upper` and must still be rejected.\n- state_queue_commit_end_time_never_accepts_any_value_inside_the_window\n  interior sweep at lower+1, the midpoint, and upper-1.\n\nOff-chain (demo/midgard-node/tests/commit-block-header-state-queue-tail.test.ts):\nevery prior case used validTo-1, validTo+1 or far-future, all of which a `<=`\nmutant of `headerEndTime === BigInt(validTo - 1)` also satisfies. Added a\nstrictly-below case (1_700_000_479_000) and an interior sweep. 10 tests -> 12.\n\nConjuncts removed, and why each proved nothing:\n\nstate_queue_commit_end_time_maximum_accepted_keeps_queue_and_merge_live\n  - `1_700_605_280_000 >= 1_700_000_480_000 + block_maturity_duration_v1`\n  - `!(1_700_605_279_999 >= 1_700_000_480_000 + block_maturity_duration_v1)`\n  - `2_015_360_480_000 + block_maturity_duration_v1 > 1_700_605_280_000`\n  The preceding conjunct pins `block_maturity_duration_v1` to 604_800_000, and\n  that constant is the only symbol in all three. Once the pin holds, each is a\n  comparison between two closed-form integers -- the first is literally `x >= x`\n  -- so none can fail unless the pin already failed. Replaced with a second real\n  call to `commit_bound_header_time_is_valid` over the next consecutive window,\n  so the \"queue keeps advancing\" claim is asserted against something that moves.\n\nstate_queue_commit_end_time_bound_keeps_a_future_deposit_not_due\n  - `commit_bound_header_time_is_valid(1_700_000_000_000, 1_700_000_480_000, ...)`\n    byte-identical to\n    state_queue_commit_end_time_maximum_accepted_is_the_inclusive_upper_bound\n  - `!commit_bound_header_time_is_valid(1_700_000_000_000, 2_015_360_480_000, ...)`\n    byte-identical to state_queue_commit_end_time_rejects_a_far_future_end\n\nstate_queue_commit_end_time_bound_keeps_a_future_withdrawal_not_due\nstate_queue_commit_end_time_bound_keeps_a_future_forced_event_not_due\n  - the same far-future rejection call, byte-identical to\n    state_queue_commit_end_time_rejects_a_far_future_end\n\n  A duplicated call on an identical fixture adds no failure mode the original\n  does not already have. No coverage is lost: every removed disposition is still\n  asserted once, against the real predicate, by the named dedicated test.\n\nThe three due-event tests now execute only their mirror conjuncts, and their doc\ncomments and artifact claims state plainly that they document the D-S12 harm\nmodel over LOCAL MIRRORS of module-private predicates and do NOT execute\nproof.ak.\n\nEvidence artifact:\n- the three membership-asserting claims now name the witness selector rather\n  than asserting the exclusion themselves, and carry membershipExclusionWitness\n- new strictlyInsideWindowRejection boundary class and\n  vector.strictlyInsideHeaderEndTimeMs\n- new mutationExperiment block recording both arms plus the pre-remediation arm\n- blueprintImpact.verifiedBy no longer cites `git diff --stat` over\n  onchain/aiken/plutus.json, which is gitignored (onchain/aiken/.gitignore:8)\n  and untracked, so no diff could ever have witnessed it. It now states the\n  honest basis: the code-bearing diff over validators/, lib/, env/ and\n  aiken.toml excluding *.test.ak is empty (measured), nothing imports\n  state_queue.test, and the blueprint is an untracked build artifact.\n\nVerifier: REQUIRED_AIKEN_SELECTORS and REQUIRED_VITEST_TITLES are named in the\ngate rather than read out of the artifact, so the killing fixtures cannot be\ndropped later without failing it. Added ERR_Q60_NO_INTERIOR_CASE, the\nmutationExperiment shape assertions (two arms, mutant fails, real passes, counts\ntotal), and three new seeded self-test defects.\n\nVerification: state_queue selector 23/23 collected/passed (was 21/21); vitest\n12/12 (was 10/10); Q60 gate PASS with 17/17 Aiken selectors and 12/12 Vitest\ntests; self-test 8/8 seeded defects rejected with their specific diagnostics;\n`tsc --noEmit` clean; normalized Aiken format PASS; stock `aiken check\n--skip-tests` 0 errors.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-06T10:48:29Z"
+      "authorDate": "2026-08-07T08:41:36Z"
     },
     {
-      "sha": "517f2e09e993f6dcc0f1fb78bfd174fa1e65c204",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/517f2e09e993f6dcc0f1fb78bfd174fa1e65c204",
-      "message": "ci(evidence): run the ABI freeze and CG4 gates\n\nAn uninvoked gate and a gate that cannot fail are the same defect, so\nboth new gates and both self-tests are wired into the two places the\nrepository already enforces evidence integrity from.\n\nIn Evidence Integrity CI the split follows what each gate needs. The CG4\ngate is pure-node and joins the `verify` job, whose unfiltered\npull_request trigger means every change to the task manifest, the\nreconciliation or the ABI freeze is gated. The ABI freeze needs a real\n`aiken build`, which `verify` has no compiler for, so it joins the\n`header-v1-abi` job that already installs the pinned v1.1.22 compiler and\nbuilds the SDK; the gate fails closed when the blueprint is absent rather\nthan skipping the check.\n\nIn the Goal verification plan the ABI freeze runs at the end of the\n`capability` phase, which is the phase that produces the blueprint, and\nthe CG4 gate runs in `evidence` alongside the strict format registry.\nPlacing the freeze in `evidence` would have left a standalone\n`goal:verify:evidence` run without a blueprint to measure.\n\nThe freeze's blueprint leg pins the validator set and the compiler rather\nthan the blueprint bytes. `plutus.json` is a gitignored build output whose\nbytes depend on the selected aiken environment — measured at 393\nvalidators and an identical title digest under both `--env testnet` and\nthe default env, with differing file digests — so pinning the bytes would\nfail CI on a legitimate build that chose a different env. The digest is\nstill recorded, and must be a real one, for attribution.\n\nRefs #510\n\nCo-Authored-By: Claude Fable 5 <noreply@anthropic.com>",
+      "sha": "640bf05290248edfd1956deb49bfd7a62621b73f",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/640bf05290248edfd1956deb49bfd7a62621b73f",
+      "message": "docs(goal): ledger the wave-1 quiesce lanes and the held identity batch",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-06T10:45:15Z"
+      "authorDate": "2026-08-07T08:40:47Z"
     },
     {
-      "sha": "872b0e62eeeda6fd8977c0dd014239d3867645fa",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/872b0e62eeeda6fd8977c0dd014239d3867645fa",
-      "message": "feat(evidence): add the CG4 fund-safety and classification gate\n\nGOAL_SPEC §8.4 CG4 requires no missing or partial fund-safety or\nclassification row for canonical V1, and the B34 acceptance criteria ask\nfor C60–C68 and QG1 to close it with one consolidated ABI/fund-safety\nreview. That review did not exist: the nine classification rows were\ntracked only in the task manifest, and nothing measured whether their\nprescribed surfaces were actually in the tree.\n\nFollowing the WG1/IG3 inversion, this gate does not decide that fund\nsafety is closed. It decides that the published artifact tells the truth\nabout what has and has not been measured. Each row's acceptance,\ndependency set and prescribed surfaces are re-derived from the F05\nmanifest, so a row cannot restate its own contract; its missing surfaces\nare measured against the git index, so a row can neither hide a surface\nit lacks nor invent one it already has; and no row may be PASS while a\nprescribed surface is absent or a declared dependency is unmet.\n\nQG1 gets the same treatment. Its own local-coverage verifier does not\nexist in the tree, so QG1 is UNMEASURED rather than merely open, and the\ngate refuses to let it be promoted regardless of what the artifact says.\nThe consolidated ABI half is bound by digest to the IG1/IG2 freeze, since\nCG4's acceptance is a joint review rather than two separate ones.\n\nThe gate is local-only by construction: it rejects an artifact that\ncreates a C70 trusted snapshot, that publishes any live or readiness\nclaim, or that cites a testnet artifact at all.\n\nCurrent measurement refuses PASS. All nine rows are dependency-blocked in\nthe manifest, six are missing at least one prescribed surface, QG1 is\nunmeasured against a reconciliation carrying 49 open rows, and the bound\nABI freeze is BLOCKED with 11 IG2 violations. What is closed here is\nCG4's own deliverable — the exact one-to-one reconciliation and the\nzero-debt report. The C60–C68 implementations belong to the\nforced-execution semantics and coverage rows that block them and are\ndeliberately not attempted.\n\nThe self-test drives the real gate against 18 seeded promotions and two\ncontrol runs.\n\nRefs #510\n\nCo-Authored-By: Claude Fable 5 <noreply@anthropic.com>",
+      "sha": "535e2e83688c0c6d1b48a4b74cffdd5560167b04",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/535e2e83688c0c6d1b48a4b74cffdd5560167b04",
+      "message": "fix(da): pin the governor spend seam and harden the Q63 evidence gate\n\nCloses the ten findings from the independent review of the Q63 DA-governor\nwork (98975333). Each was checked against source before being fixed, and the\ntwo that turned on a claim about dead code were settled by mutation rather\nthan by reading.\n\nE1 (evidence integrity). The gate's incompleteness signal was self-declared:\n`evidence.openGroups` alone drove the non-zero exit, so deleting the two OPEN\nentries turned it green with zero rescue paths measured. The verifier now\nholds REQUIRED_GROUPS - the acceptance group set, each group's cardinality,\nand the languages it must be carried in - and asserts every required id\nappears in groups union openGroups with its expected count. A clause may be\nrecorded OPEN with its blocker; it may not be dropped, shrunk, duplicated, or\nreplaced by an invented one.\n\nD1 (coverage). All eight tests called the private `valid_datum` directly, so\ndropping `expect valid_datum(...)` from `params_output_datum_at_address` left\nevery one of them green. Two new tests drive the real `spend` handler through\na built Transaction: a quorum-signed continuing output below the floor\nrejects, and its control - the same transaction differing in exactly one\nfield, `da_threshold` 5 instead of 3 - is accepted. Because the control\npasses, every other check in the handler is satisfied, so the negative can\nonly be failing on the continuing output's governed floor. Mutation-confirmed:\nwith the `expect` removed, exactly 1 of 12 fails; before, 0 of 8 did.\n\nE3 (arithmetic provenance). Quoting F04 proved the record still said what Q63\ncited, not that anything computed it. The verifier now recomputes\n`max(2, ceil(2n/3))` from a quotient-and-remainder integer ceiling -\ndeliberately not the `(2n+2)/3` form both implementations share - sweeps\n0..max_indexed_signer_count, hashes the table, and asserts a digest published\nin the artifact. A new Vitest check hashes the table produced by the SDK's\n`governedThresholdFloor` and asserts the same digest, and reads\n`max_indexed_signer_count` out of the Aiken source rather than restating it.\nThree independently written computations now have to agree.\n\nE2 (measurement). `vitestChecksExecuted` summed declared title counts and\nnever read the outcomes map. It is now derived from the titles the runner\nreported as executed and passing, and a title cited twice is rejected so one\nexecuted test cannot be counted for two claims.\n\nD2/D3 (dead line). DECISION: keep `expect owner_len >= min_owner_count`, with\ncorrected comments and a renamed test. The review is right that it is\nredundant, and mutation confirms it - removing the line leaves all 12 tests\ngreen, because a one-owner set already fails `update_threshold >= floor(1)\n== 2` against `update_threshold <= owner_len == 1`. It is kept because that\nredundancy is an artifact of the current arithmetic, not a property of the\ngovernor: F04 section 4's two-thirds term is an economic parameter, and if it\nwere ever weakened (say to `ceil(set_len/2)`, whose value at 1 is 1) a\none-owner set naming `update_threshold == 1` would become representable and\nsingle-key governance capture would return. The line blocks that whatever the\nfloor becomes, which is worth more than deleting it. What was actually wrong\nwas the prose: the comments now say redundant-today defense in depth instead\nof presenting it as THE drain protection, the false \"each rejection pins\nexactly one disposition\" section comment is corrected, and the drain test is\nrenamed `..._rejects_owner_set_drained_to_one_by_overlapping_bounds` because\nthe overlap is not removable - every `update_threshold` a one-owner set could\nname is either below the floor or above the owner count.\n\nD4/D5 (overclaiming comments). The invariant docstrings now say they pin the\nfloor arithmetic and name what pins the datum wiring instead; \"agree on every\nset size\" now reads \"every representable set size\".\n\nD6 (twin drift). The SDK mirrors the on-chain split: MIN_DA_GOVERNED_THRESHOLD\nclamps the threshold, MIN_DA_OWNER_COUNT bounds the owner set.\n\nE7 (compiler identity). The gate fails closed with ERR_AIKEN_BINARY_UNPINNED\nwhen MIDGARD_AIKEN_BIN is unset - test execution is fork-only - spawns that\nbinary explicitly instead of the env default, and publishes its self-reported\nversion in its output.\n\nI2 (consequence). A one-member DA committee is unrepresentable at any\nthreshold. Recorded in the artifact and pinned by two single-disposition Aiken\ntests: an exhaustive non-`fail` search over every representable threshold\n(preferred over `fail` across a conjunction), and one `fail` datum whose only\nviolable bound is `da_threshold <= committee_len`.\n\nE5 (self-comparison). `summary` is rebuilt from measured runner results;\n`acceptanceComplete` is derived from the required-group table rather than from\n`openGroups.length`; genuinely declarative fields moved under `declared` and\nare published as declarations checked against verifier-side constants.\n\nEvery new guard carries a hostile seed that proves it rejects: 19 negative\nself-test seeds (9 pre-existing runner seeds, 9 new artifact-mutation seeds\nincluding the exact dropped-OPEN-group defect, and the unpinned-compiler seed)\nplus 3 positive controls, all spawning this gate and observing its real exit\ncode.\n\nThe governor's validator code is unchanged. The only non-test, non-comment\nedit to da-params-governor.ak is importing `transaction.placeholder` for the\ntest fixtures; the compiled `da_params_governor` mint/spend/else hash is\nbyte-identical before and after\n(f00f70a2a4a2de25ae2c52a5919195386067d3c1f2b3799965ef8352, 4448 chars), so\nplutus.json does not move again on this commit.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-06T10:45:15Z"
+      "authorDate": "2026-08-07T08:39:49Z"
     },
     {
-      "sha": "de45528cb2ec4232df293c7b398c284ddfdd812e",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/de45528cb2ec4232df293c7b398c284ddfdd812e",
-      "message": "feat(evidence): bind the canonical V1 ABI freeze across packages\n\nGOAL_SPEC §11 IG1/IG2 asks for one ABI freeze covering every encoder,\ndecoder, parser, constructor, resolver index and catalogue order, and for\na proof-family gate that refuses to integrate a family missing any of its\nsix evidence dimensions. The program already pins each surface\nindividually — F02 owns the 132-row format registry, the HeaderV1 gate\nowns the three-way HeaderV1 contract, sdk-abi-fixtures owns the 86 golden\nencodings — so this is a binding layer over those pins rather than a\nsecond copy of their numbers.\n\nIt closes two holes a per-package pin cannot see. First, the deployment\nABI identity is declared three times: midgard-core, midgard-node and\nmidgard-sdk each carry their own copy of the 55-entry contract vector,\nthe 11-entry catalogue order, the 37-role reference-script map, the\n38-role auth-token map, the 18 manifest root keys, the 6 step names and\nthe 12 transaction-order contracts, and nothing anywhere compared the\ncopies. The #547 registration could have landed in one package and not\nanother. Second, the frozen catalogue order was never bound to the\nvalidator tree that implements it, so a family directory could be added\nor renamed without any gate noticing the catalogue no longer covered it.\n\nEvery number the artifact publishes is re-derived from source on each\nrun: identity vectors are read out of the committed bytes with a scanner\nthat understands strings and comments, the catalogue-to-tree bijection is\nchecked both ways against `git ls-files`, and the blueprint identity is\nmeasured from the build the pinned compiler produced. A `record` identity\nis compared as a mapping rather than as an ordered list, because every\nconsumer reads it by key — but the declaration order is measured and\npublished anyway, which is how ABI-04 now records that core and the SDK\nlist the same 38 roles in different orders.\n\nCurrent measurement is deliberately not clean. IG1's structural half\nholds: 7 identities agree, 6 derived relations report 0 violations, 11\ncatalogue categories map one-to-one onto the validator tree's 16\ndirectories, and the 393-validator blueprint came from the v1.1.22\ncompiler aiken.toml declares. IG2 is BLOCKED: 11 families are registered\nin the frozen catalogue while none of them carries valid-block rejection,\nmaximum proof-fit or correction evidence. Two drift findings against the\nF20 inventory are measured by the gate rather than asserted in the file,\nso they cannot be closed by editing the artifact.\n\nThe self-test drives the real gate against 23 seeded mutations and two\ncontrol runs. Two of the mutations seed exactly one package's identity\nsource and leave the others real, so the cross-package comparison cannot\nbe satisfied by the artifact alone.\n\nRefs #510\n\nCo-Authored-By: Claude Fable 5 <noreply@anthropic.com>",
+      "sha": "7dd4036ff7086ab4a84908f1a5887ed64c05ab86",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/7dd4036ff7086ab4a84908f1a5887ed64c05ab86",
+      "message": "docs(fault-proofs): reconcile the category inventory prose to the eleven registered categories\n\nThe #547 registration moved the catalogue from eight categories to\neleven (ids through 0000000a) and #550 recaptured the unregistered\nresidue at five; four prose sites still said eight. The CLI value list\nis verified against bin.ts (eleven values). The two reconciliation\ndocumentationAnchors pinning the stale prose move with it; verifier\ngreen (70 rows, 49 open).",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-06T10:45:15Z"
+      "authorDate": "2026-08-07T08:38:12Z"
     },
     {
-      "sha": "27b56d3c8d60284b2b73abe32f1fa571f9cf422b",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/27b56d3c8d60284b2b73abe32f1fa571f9cf422b",
-      "message": "feat(fault-proofs): carry Q10 and Q11 openings on published chunks\n\nIssue #545 wired all four foundational families onto published-chunk carriage\non-chain and measured the route end to end for zero-input and invalid-range.\nDouble-spend and no-input were left on the redeemer-carried route off-chain:\ntheir step builders had the new carriage sum's redeemer arm and nothing else,\nso the two families the second adversarial axis affects had no measured chunked\nlifecycle at all.\n\n`submit-step-01`, `submit-step-02`, `ne-submit-step-01` and `ne-submit-step-04`\ngain the same prover-chosen carriage the other two already had — the chunked\narm references the publication UTxOs, names their order as indices into\n`tx.reference_inputs`, and swaps the delegated `phas`/`pexcludes` withdrawal\nfor the merkelized `mpf_chunked_verify` one. `ne-submit-step-04` is the first\nABSENCE opening to take the route, so `chunkedNonMembershipClaimRedeemer`\ncarries the pinned absent-value digest rather than a hash of a value.\n\nThe carriage helpers move to `proof-chunk-carriage.ts`. They were in\n`publish-proof-chunks.ts`, which selects a fee input through\n`submit-step-01.ts`; a step builder importing them back would have closed a\nmodule cycle. `publish-proof-chunks.ts` re-exports the module unchanged, so\nevery existing importer is untouched.\n\nBoth families are then driven end to end at forced branch level 22 — past every\nfamily's direct-route envelope ceiling — in\n`submit-init-emulator-chunked-proof-carriage.test.ts`. Neither family opens the\nchallenged block's transactions trie only once, which is what made this more\nthan a copy of the zero-input journey: double-spend opens it twice for\nmembership (tx1 at step-01, tx2 at step-02) and no-input opens it once for\nmembership and once for absence (the phantom input's producing transaction, at\nstep-04). Two independent synthetic ladders cannot serve, because each ladder\ndetermines its own root and every step re-authenticates against the one root\nthe challenged header commits. `syntheticDeepSharedRootProofsV1` builds what a\nreal trie would hold instead: one shared branch node whose child slots carry the\nsub-trie digests of the individual ladders, with each opening's top-level\nneighbours read out of that same node. The library's own `Proof.verify` is what\nconfirms every opening reconstructs the one root.\n\nMeasured, every stage inside the envelope and the 20% execution reserve:\ndouble-spend publish 3402, init 7862, step-01 13098, publish 3402, step-02\n13135, step-03 4244, step-04 9295, remove 1868; no-input publish 3402, init\n7862, step-01 13187, step-02 4212, step-03 3929, publish 3402, step-04 13594,\nremove 1868. The zero-input and invalid-range journeys re-run byte for byte.\n\nRefs #549",
+      "sha": "ae9103eb46d77cbec2124b4e73b80159bee80e04",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ae9103eb46d77cbec2124b4e73b80159bee80e04",
+      "message": "style(q60): apply prettier to the commit end_time bound gate\n\ndemo/scripts/*.mjs follow prettier in this tree; the new Q60 gate did not.\nFormatting only — the gate still reports 15/15 Aiken selectors, 10/10 Vitest\ntests and rejects all five seeded defects under --self-test.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-06T10:35:03Z"
+      "authorDate": "2026-08-07T08:12:32Z"
     }
   ],
   "contributors": [
@@ -326,58 +326,58 @@
   ],
   "issues": [
     {
-      "number": 560,
-      "title": "Disposition each necessity artifact under the flat format",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/560",
-      "updated_at": "2026-08-07T07:23:06Z"
+      "number": 581,
+      "title": "Flat reversion P8 — full regression + gate re-derivation",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/581",
+      "updated_at": "2026-08-08T04:58:53Z"
     },
     {
-      "number": 552,
-      "title": "Wayfinder map: compact-tx flat field-hash reversion",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/552",
-      "updated_at": "2026-08-07T07:21:19Z"
+      "number": 580,
+      "title": "Flat reversion P7 — confirm-and-publish re-measurement",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/580",
+      "updated_at": "2026-08-08T04:58:52Z"
     },
     {
-      "number": 563,
-      "title": "Sequence the identity cascade and re-measurement",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/563",
-      "updated_at": "2026-08-07T06:39:43Z"
+      "number": 579,
+      "title": "Flat reversion P6 — single identity re-derivation batch",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/579",
+      "updated_at": "2026-08-08T04:58:50Z"
     },
     {
-      "number": 486,
-      "title": "[Canonical V1 Goal B07] Close retained reconstruction and CG2",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/486",
-      "updated_at": "2026-08-06T19:59:44Z"
+      "number": 578,
+      "title": "Flat reversion P5 — family rebind lane D",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/578",
+      "updated_at": "2026-08-08T04:58:49Z"
     },
     {
-      "number": 485,
-      "title": "[Canonical V1 Goal B06] Verify canonical retained CBOR",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/485",
-      "updated_at": "2026-08-06T19:59:43Z"
+      "number": 577,
+      "title": "Flat reversion P5 — family rebind lane C",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/577",
+      "updated_at": "2026-08-08T04:58:48Z"
     },
     {
-      "number": 493,
-      "title": "[Canonical V1 Goal B17] Close signer and native-script proof families",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/493",
-      "updated_at": "2026-08-06T19:59:42Z"
+      "number": 576,
+      "title": "Flat reversion P5 — family rebind lane B",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/576",
+      "updated_at": "2026-08-08T04:58:47Z"
     },
     {
-      "number": 492,
-      "title": "[Canonical V1 Goal B16] Close input and reference proof families",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/492",
-      "updated_at": "2026-08-06T19:59:41Z"
+      "number": 575,
+      "title": "Flat reversion P5 — Q1x family rebind (first wave) + provisional Q1X-F6 signal",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/575",
+      "updated_at": "2026-08-08T04:58:46Z"
     },
     {
-      "number": 482,
-      "title": "[Canonical V1 Goal B14] Close public-event proof families",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/482",
-      "updated_at": "2026-08-06T19:59:40Z"
+      "number": 574,
+      "title": "Flat reversion P4b — publish/heal tooling + carriage exit measurements",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/574",
+      "updated_at": "2026-08-08T04:58:45Z"
     },
     {
-      "number": 561,
-      "title": "Scope the GOAL_SPEC amendment and format decision record",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/561",
-      "updated_at": "2026-08-06T19:23:05Z"
+      "number": 573,
+      "title": "Flat reversion P4a — permissionless chunk-certificate validator + fixed-K chunking",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/573",
+      "updated_at": "2026-08-08T04:58:43Z"
     }
   ],
   "releases": [],
@@ -388,7 +388,7 @@
     },
     {
       "week": 1755388800,
-      "total": 23
+      "total": 18
     },
     {
       "week": 1755993600,
@@ -396,11 +396,11 @@
     },
     {
       "week": 1756598400,
-      "total": 4
+      "total": 5
     },
     {
       "week": 1757203200,
-      "total": 56
+      "total": 57
     },
     {
       "week": 1757808000,
@@ -440,7 +440,7 @@
     },
     {
       "week": 1763251200,
-      "total": 31
+      "total": 32
     },
     {
       "week": 1763856000,
@@ -452,7 +452,7 @@
     },
     {
       "week": 1765065600,
-      "total": 6
+      "total": 7
     },
     {
       "week": 1765670400,
@@ -492,7 +492,7 @@
     },
     {
       "week": 1771113600,
-      "total": 14
+      "total": 13
     },
     {
       "week": 1771718400,
@@ -516,7 +516,7 @@
     },
     {
       "week": 1774742400,
-      "total": 30
+      "total": 29
     },
     {
       "week": 1775347200,
@@ -524,7 +524,7 @@
     },
     {
       "week": 1775952000,
-      "total": 32
+      "total": 31
     },
     {
       "week": 1776556800,
@@ -540,27 +540,27 @@
     },
     {
       "week": 1778371200,
-      "total": 23
+      "total": 43
     },
     {
       "week": 1778976000,
-      "total": 13
+      "total": 16
     },
     {
       "week": 1779580800,
-      "total": 1
+      "total": 2
     },
     {
       "week": 1780185600,
-      "total": 25
+      "total": 26
     },
     {
       "week": 1780790400,
-      "total": 32
+      "total": 30
     },
     {
       "week": 1781395200,
-      "total": 21
+      "total": 13
     },
     {
       "week": 1782000000,
@@ -580,15 +580,15 @@
     },
     {
       "week": 1784419200,
-      "total": 20
+      "total": 47
     },
     {
       "week": 1785024000,
-      "total": 164
+      "total": 202
     },
     {
       "week": 1785628800,
-      "total": 190
+      "total": 200
     }
   ]
 }
