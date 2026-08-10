@@ -1,10 +1,10 @@
 {
-  "fetchedAt": "2026-08-09T07:03:19.862Z",
+  "fetchedAt": "2026-08-10T07:49:38.112Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 25,
     "forks_count": 10,
-    "open_issues_count": 101
+    "open_issues_count": 99
   },
   "languages": {
     "Aiken": 359544,
@@ -16,6 +16,55 @@
     "Perl": 37
   },
   "commits": [
+    {
+      "sha": "f0fa48e472fee1989993e4f533e1e0c234e5b02c",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/f0fa48e472fee1989993e4f533e1e0c234e5b02c",
+      "message": "refactor(onchain,sdk): single-anchor multi-field opening; retire committed-source transaction_commitment (#584)\n\nPhase-5 follow-up, first of the two compiled-surface blockers ahead of\n#579's single blueprint regeneration.\n\nSingle-anchor opening: field-opening-v1.ak gains an opaque\nAnchoredNativeTxV1 handle (anchored_native_tx pays the tx-id derivation\nand witness_set_hash check once) with anchored_field_view /\nanchored_field_walk opening N fields against one anchor. Every opening\nre-runs both guards - carriage_reaches_the_anchor and the §2.5\nbody/witness pairing - as separate expects so a refusal names its guard.\nresolved_sources is deleted; opened_field_view/walk are thin wrappers, so\nthe guards have one spelling. The handle deliberately exposes no\nwitness_set_hash accessor (the #575 forgery class), and the validity-code\naccessor is named unanchored_validity_code_of because that is what it is.\ntransition-trace's validate_l2_transaction_transition builds one handle\nfor its three body fields: Q21 L2 row 2,760,481 -> 2,334,205 mem (8%\nunder the 2,533,821 AC ceiling), forced-order row 3,034,025 -> 2,538,180.\nQ31/Q1x single-field rows rose +7,117/+7,580 mem per opening (routing\nthrough the handle + the guard split); re-measured, cause recorded in all\nthree exec ledgers, under 0.06% of the §3.3 basis.\n\nCommitted-source retirement: transaction_commitment leaves\nL2TransactionSourceV1 and ForcedInclusionTxV1 (leaf value was always a\npure function of source; the L1 mint-time derivation check in\nmaterial_directory still pins TxOrderPayloadV1's copy, and\nvalidation-claim-v1 re-anchors NormalValidationSource by deriving\nsource_proof_commitment directly - same value, same binding, one\nderivation per claim as before). SDK twin and ~25 producer/reader sites\nmove in step; goldens regenerated on both language sides\n(transaction-root-v1 fixture pair, transition-trace-abi.json,\nValidationSourceMembershipV1 corpus bf590321 -> 5cba4fd7, tx-order CBOR\nvectors); format-registry arity pins 4 -> 3; tex/consensus-profile docs\nupdated. TxOrderPayloadV1 / TxFieldPreimageV1 / TxFieldReceiptV1 keep\ntheir copies by design.\n\nVerification: field_opening_v1 27/27 (three new second-open tier-guard\nrows), transition-trace proof 38/38, full Aiken suite byte-identical 34\npre-existing failures vs HEAD, q21/q31/q1x/carriage exec-ledger\nverifiers pass without --update, sdk-aiken-schema-parity 32/32 against a\nscratch-built blueprint, TS suites green across sdk/node/watcher/\nda-committee/fault-proofs. plutus.json untouched\n(c52589df225145ad74c8f444d500dfe5): ten tests (six emulator, four\nschema-parity rows) are red against the stale in-tree blueprint until\n#579 regenerates it - the accepted price of the ordering, with the exact\nset recorded at the blueprint load sites for #579's implementer.\nThree review rounds (1 major + 9 minors, then 1 major + 5 minors, then\nCLEAN); parent-only surfaces untouched.\n\nCo-Authored-By: Claude <noreply@anthropic.com>",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-08-10T04:52:34Z"
+    },
+    {
+      "sha": "bdaf46e10764e3c9297982fb736fc983e7456a6a",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/bdaf46e10764e3c9297982fb736fc983e7456a6a",
+      "message": "docs(core,sdk): name the counted-scheme residual at the nine-field consumer call sites (#578)\n\nPhase-5 lane D: the anticipated family-directory claim was empty - the\nfield-6 native-script family is Q17 missing-native-script-tx, which #575\ntook inside its Q10-Q19 block, and an audit of all sixteen directories\nunder validators/fraud-proofs/ (independently re-verified in review) found\nno unclaimed directory left on counted-scheme access (Q20 min-fee already\nreads through the door; Q44 da-hash-preimage frames the compact tx, not\nper-field items; mpf-chunked-proof is clean).\n\nLane D therefore claimed the one surface the wave flagged repeatedly and\nno lane took: the nine-field TypeScript consumer path. The flat swap was\nattempted for real and measured - four lines changed, dists rebuilt,\nevery package diffed against its own baseline: 58 new failures across\nfour packages, rooted in two structural blockers (the counted per-item\npublication receipt chain in consensus-validation-v1.ts with live\nconsumers in midgard-node/midgard-sdk, and the §5.3/§5.6 item grammar\nnever re-pointed in the TS producers). The swap was reverted as\nworse-than-either-end and the work re-homed to #585, which now blocks\n#579 via a native tracker edge (alongside #584, whose missing edge was\nalso recorded).\n\nWhat lands in-tree is the honest residual: docstring annotations at\nderiveNativeTxBodyCompact / deriveNativeTxWitnessSetCompact and the\nzero-input fraud-proof builder naming the counted/flat gap at the call\nsites, with one authoritative note (native-body.ts) and pointers from the\nsiblings, plus a durable test title asserting the counted-scheme empty\nspend-inputs hash. Semantic inertness proven by AST comment-strip: three\nfiles byte-identical after stripping, the fourth differs only in the\nit() title.\n\n#578's issue body carries a Deviation section with an AC-applicability\ntable: AC1 met (claim recorded, disjoint, audit confirmed), AC2 re-homed\nto #585, AC3 provably N/A (no .ak change, no execution row owed), AC4\nrestated as no-regression (fork full check 1707/34 = HEAD's identical\nfailure set; the ten red Aiken tests are #585's exit criteria, pinned by\nname there).\n\nVerification: midgard-core 460/460; midgard-sdk 237/238 (single\npre-existing blueprint-drift failure owned by #579); tsc/eslint/prettier\nclean; core+sdk dists rebuilt; stock v1.1.22 compile exit 0; zero .ak\nfiles touched so the fork baseline holds by construction. Two review\nrounds (2 majors + 8 minors, then LAND with 5 prose minors); parent-only\nsurfaces untouched.\n\nCo-Authored-By: Claude <noreply@anthropic.com>",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-08-09T22:34:19Z"
+    },
+    {
+      "sha": "d09accb7a0f4798df52773b51f1f83ec76ccb378",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d09accb7a0f4798df52773b51f1f83ec76ccb378",
+      "message": "refactor(onchain): rebind Q21 transition-trace onto the authenticated field door (#577)\n\nPhase-5 lane C: the transition-trace family (Q21) now consumes body fields\nexclusively through the §8.8 authenticated_field_view door via the #575\nFieldOpeningV1 bridge (opened_field_walk + fold_opened_field with\nBodyFieldOpening/BodyAnchor{tx_id}). The inherited WIP's direct\nopen_field_walk call with a hand-rolled unread witness set is gone; both\nrebound sites sit behind carriage_reaches_the_anchor and the §2.5 pairing.\nCounted-scheme codec twins and the proof-step witness idiom\n(verify_native_tx_proof_source_v1 / native_tx_proof_commitment_v1) are\ndeleted from the claimed directory; the door's §5.4 aggregate byte cap is\ngained in the exchange. Two redundant transaction_commitment comparisons\nwere dropped only after proving their value pinned elsewhere (MPF membership\non the L2 side, tx-order NFT reference input on the forced side).\n\nDisjoint single-writer lane: claimed only Q21 transition-trace, disjoint\nfrom #575 (Q1x) and #576 (Q31); claim recorded on the issue before work.\n\nNew Q21 exec ledger at the 13.2M basis: forced-order path -5.0%\n(3,194,009 -> 3,034,025 mem), L2 path +8.9% (2,533,821 -> 2,760,481 mem).\nThe regression's cause is exact and disclosed - first script in the wave to\nopen two fields, so the tx id is re-derived three times; the multi-field\nopening that fixes it is filed as #584, blocking #579. Neutralisation set\nre-derived by mutation: 5 selectors / 4 mutations, each with a distinct red\nset.\n\nLedger tooling consolidated: new shared exec-ledger-within-basis-v1 checker\n(exported GOAL_SPEC_EXECUTION_BASIS_V1 constant, zero-row refusal, named\nshape errors, 12-case self-test) consumed by the Q21 and migrated Q31\nverifiers; q1x/carriage verifiers keep their derived-row shape but now take\nthe basis from the shared constant and refuse zero-row runs - all guards\nnegatively probed. All four ledgers get uniform CI pin steps, the two\ncompile-free self-tests are hoisted above every fallible step, and the\npre-existing normalized-fmt drift is fixed at root cause (9 files from\nlanded tickets; reformat byte-identical under stock v1.1.22 and fork\nv1.1.23+2a78108, fixed point under both, all four ledgers re-verified to\nthe unit afterwards). Epoch-645 basis provenance corrected in three ledgers\nper GOAL_SPEC §3.3.\n\nFork-runner: family suite 38/38 (+3 new vectors); full check 2301 checks /\n34 errors = HEAD's identical failure set, none in transition_trace. Stock\nv1.1.22 compiles clean; normalized fmt clean. Survived three review rounds\n(1 major + 9 minor, then 3 major + 6 minor, then LAND with 7 pre-existing\nor cosmetic minors); parent-only surfaces untouched, deferred exactly to\n#584 -> #579.\n\nCo-Authored-By: Claude <noreply@anthropic.com>",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-08-09T20:57:15Z"
+    },
+    {
+      "sha": "b824ad6ea31ce83060d78470f1470f1bd0ed1568",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/b824ad6ea31ce83060d78470f1470f1bd0ed1568",
+      "message": "refactor(onchain): rebind Q31 reference-input-no-idx onto the authenticated field door (#576)\n\nPhase-5 lane B: the reference-input-no-idx family (Q31) now threads the\ndisputed transaction's id instead of its field commitments, opening field 1\n(reference inputs) and field 2 (outputs) through the §10 authenticated_field_view\ndoor via the #575 FieldOpeningV1 idiom. Steps 01→02 thread verified_tx_id and\n03→04 thread producing_tx_id; step-02 opens field 1 with spend_input_at (field 1\nshares field 0's 38-byte stride), step-04 reads field 2 via field_item_count.\nBoth are body fields (0-5), so BodyAnchor{tx_id} covers them — the family\ntouches no witness field, so no WitnessAnchor and no tier-3 Certified exposure.\nCounted-scheme field access (bounded_collection_v1 / bounded_item_v1 /\nfield_commitment_from_items) and the proof-source idiom are gone from the\nfamily's directories.\n\nDisjoint single-writer lane: claimed only Q31, leaving the shared\ntransition-trace / validation-machine surface and the TS consumer path for\nother lanes.\n\nNew Q31 exec ledger at the 13.2M basis (step-02 1,849,702 mem, step-04\n1,832,278 mem — both ~14%, basisFit:\"within\"); no new unbounded walk, so no\n\"exceeds\" row. Verifier's --update absorbs measurement drift but fails on\nstructural failure (mutation-verified).\n\nFork-runner: family suites 10/10; full check 2298 checks / 34 errors = HEAD\nbaseline, zero new failures, none in the family. Stock v1.1.22 compiles clean;\nnormalized-format clean on all six authored files. The prepare-reference-input-no-idx\noff-chain builder stays on the counted-era ABI, deferred to #579's blueprint\nregeneration exactly as #575 left its input-no-idx twin.\n\nCo-Authored-By: Claude <noreply@anthropic.com>",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-08-09T17:22:08Z"
+    },
+    {
+      "sha": "2fec6b0fbe3442cd35e8bb7c8d7053d36d3a251f",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/2fec6b0fbe3442cd35e8bb7c8d7053d36d3a251f",
+      "message": "refactor(onchain): rebind Q1x fraud-proof families onto the authenticated field door (#575)\n\nPhase-5 first wave: the ten Q1x families (Q10-Q19) now thread the disputed\ntransaction's id — not one of its nine field commitments — and re-derive the\ntx-id-verified compact structures at each step, opening every field through\nthe §10 authenticated_field_view door. New field-opening-v1 idiom makes §2.5's\nbody/witness split structural (BodyFieldOpening 0-5 / WitnessFieldOpening 6-8)\nand constructs the unread witness set internally so no prover-fillable argument\nexists for a field the door won't read. Deletes the last free-standing-hash\nconsumer (double-spend/input-witness.ak) and retires common.ak's now-dead\nverify_native_tx_witness_set.\n\nSecurity: fields 6-8 (witness set) are not covered by §3's tx-id preimage, so\nthe rebind threads a NativeTxAnchorV1 (BodyAnchor{tx_id} | WitnessAnchor{tx_id,\nwitness_set_hash}) from the MPF-anchored step-01 and checks the door-derived\nwitness_set_hash against it — closing a slashing-forgery path where a prover\ncould bind an honest transaction's witness field to a fabricated preimage.\nTier-3 Certified carriage is refused for fields 6-8 (carriage_reaches_the_anchor)\nbecause the §8.6 certificate binds content to the uncommitted trailing hash;\nthe durable wire fix (fold the field commitment into the asset name) is assigned\nto #579. Both closures carry both-direction neutralisation vectors. §8.3\nerratum E2 records the completeness limit this trades for.\n\nAC ledger: new Q1x exec ledger at the 13.2M basis (16 rows / 8 derived),\ncovering both unbounded walks the rebind introduces (Q17 step-06 field 6, Q16\nstep-04 field 7) as loud basisFit:\"exceeds\" rows requiring an infeasibility\nstring + E2 cross-ref, neither --update-rewritable; both exec-ledger verifiers\nhardened so --update absorbs measurement drift but never structural failure.\nQ1X-F6 measured under flat and posted provisional-expected-resolved to #551\n(not reopened). Per-lifecycle-step re-measurement is Phase-7's against the\nPhase-6 blueprint.\n\nFork-runner: full check 1702 tests / 34 failures — zero new vs the 1677/41\nHEAD baseline; 7 retired counted-scheme tests removed with their machinery.\nBoth exec ledgers pass. Off-chain builders knowingly stale against the new step\nABI (redeemer/datum shapes + certificate policy param) and deferred to #579's\nblueprint regeneration, marked at every live route.\n\nCo-Authored-By: Claude <noreply@anthropic.com>",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-08-09T15:59:21Z"
+    },
+    {
+      "sha": "3bee91ec8e6ad2bcaa636056b82418bd0c0e8c99",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/3bee91ec8e6ad2bcaa636056b82418bd0c0e8c99",
+      "message": "feat(core,sdk,onchain): publish/heal tooling + carriage exit measurements (#574)\n\nPublish/heal tooling for §8 carriage: planner/healer/lay-out in midgard-core\n(tier a total function of length, invisible to consumers), publication/\ncertification/retirement builders in midgard-sdk, end-to-end emulator suite —\nincluding heal by a second unrelated wallet with the original certificate, a\nhostile wrong-bytes publication, a full-K chunk yank, and a certificate really\nminted on the ledger. TS twin for the frozen §8.6 mint redeemer + a third\ncross-language golden channel (10 positive vectors incl. 63/64/65-byte Plutus\nData boundary cases, 17 negative vectors; Aiken side decodes AND re-serialises;\nCI-gated).\n\nHeadline: §8.3 erratum E1 — K = 15,900 is falsified by signed-tx framing. A\nfull chunk publishes as 16,648 B against maxTxSize 16,384 (+264). Measured\nfrontiers at 1-byte resolution: 15,644 exact / 15,148 with the 512 B reserve;\noutage window (15,148, 32,768] — tier 3 is inoperative on L1 until #565\nre-pins K (serialized surface; constant deliberately unchanged, divergence\nstated). Tooling now fails closed by default: byte-exact cost model\n(245 B fixed + datum head + Plutus-Data payload encoding, pinned against real\nsigned transactions), publishability guard, refusing builder. Like-for-like\ncapacity vs the counted era corrected to +155 B at both frontiers. Tier-1\nwire-cost caution (14,786 B for a 14,336 B preimage) recorded. §8.10 ledgers\nthe carriage measurements; its 13 execution figures are pinned by a new\nCI-wired exec ledger (neutralisation selectors required non-empty). §9 records\nthat Lucid's Data.from is not fail-closed on trailing bytes.\n\nAC-1's full-cap half is explicitly deferred to #565 (E1 \"What #574 discharges,\nand what it defers\"); everything else discharged with executable evidence.\n\nFork-runner green: carriage 34, wire-golden 42, handlers 32, field-access 127;\nTS: core 460/460, sdk 237/238, validation 253/255 (3 pre-existing failures:\n2 stale plutus.json awaiting #579, 1 #571 scanner-consumer gap). Exec-ledger\ngate green (13 rows, 9 derived, binding axis cpu).\n\nCo-Authored-By: Claude <noreply@anthropic.com>",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-08-09T11:05:55Z"
+    },
+    {
+      "sha": "8440330ece59c3da46a1f52dd9ce41a9d88af44f",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/8440330ece59c3da46a1f52dd9ce41a9d88af44f",
+      "message": "feat(onchain): permissionless chunk-certificate validator + fixed-K chunking (#573)\n\nProducer half of the §8 carriage ladder: native-tx-carriage-v1 with\ndeterministic fixed-K split (K = 15,900, aggregate cap 32,768, reproducible\nfrom bytes alone — pinned against the cross-language straddle golden vector),\nchunk digests, producer certificate twin, and the §8.6 content predicate that\nre-derives the binding tx id via §3 (never trusts the redeemer). New\nfield-preimage-certificate validator: permissionless mint (Certify/Retire) +\nspend, token name = content address, single-asset single-pair output at the\nscript address with inline datum, no stake credential, no reference script;\nburn stated over outputs (double-satisfaction-proof); healable by an unrelated\nparty (handler-level test). §8.6 freezes the mint-redeemer wire format for\n#574's off-chain twin, records the certificate output shape, and adds the\nwiring constraint that certificate_policy_id must be a compile-time validator\nparameter. Comment-only note in native-tx-field-access-v1 documents the\nchunk-shape divergence; consolidation deferred to the #565 serialized patch.\n\nFork-runner green: carriage 25/25, handlers 24/24; full native_tx machine lane\nre-verified (field-access 105+22+62, machine-walk 46, intra-item 52,\nfault-statement 48, script-pushdown 32). Stock v1.1.22 compile clean;\nplutus.json deliberately stale by one script — identity cascade lands in #579.\nTier-boundary and reorder guards neutralisation-pinned (each turns exactly its\nnamed vector red).\n\nCo-Authored-By: Claude <noreply@anthropic.com>",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-08-09T08:00:44Z"
+    },
     {
       "sha": "9a992b47fa793011acdcc736deb0c1791ae87df7",
       "html_url": "https://github.com/Anastasia-Labs/midgard/commit/9a992b47fa793011acdcc736deb0c1791ae87df7",
@@ -71,55 +120,6 @@
       "message": "docs(spec): Phase-0 review response — authority reconciliation, F05 acceptance re-scope, provenance corrections (#566)\n\nTwo review rounds against #566's six acceptance criteria, no blockers.\n\nAuthority layer\n- docs/DOCUMENTATION_POLICY.md source hierarchy admits docs/spec/ as the\n  implementation-normative layer over technical-spec/ on concrete detail;\n  docs/spec/README.md restates the identical scope so the two documents\n  express one rule.\n- GOAL_SPEC §3.1(2) no longer claims midgard-tx.md defines the resumable\n  walk, Value bookmark, or Canonical-Data Acceptor. midgard-tx.md §1\n  reserves §10 (#570) and §11 (#571) as deferred-by-design instead, so the\n  by-reference binding stays honest without pre-empting Phase 3.\n\nF05 manifest (AC6 re-scope half)\n- Q00, C21, W27 and the CG2 gate row carry the amended GOAL_SPEC acceptance\n  wording, each retaining its counted-scheme acceptance verbatim as\n  provenance per invariant 14. 186 rows, id sequence byte-identical to\n  b6e600f6, zero removals.\n\nProvenance and numeric corrections\n- §8.3 K basis and tier-1 bound re-sourced: the original text attributed\n  both to #556/#557 observations that do not exist. Restated against what\n  #556 actually measures, with a mandatory Phase-4 cross-check on K.\n- GOAL_SPEC §3.3 no longer claims no verdict flips under the 13.2M basis:\n  Q10 at 40 inputs (11,312,784) and Q11 at 41 (11,465,641) do sit in the\n  11.2M-13.2M band and flip. Mitigation stated — the headline Q1X-F6 result\n  at the admissible 296-input shape does not move.\n- Epoch provenance separated: the captured artifact is decision 0001's\n  Conway epoch-645 snapshot; epoch 648 is #552/#563 corroboration, not a\n  captured artifact.\n- decisions/0004 module counts re-derived against the tree (46 Aiken, 30 TS\n  — the drafted 15 was wrong) with reproducing commands cited.\n- §5.3 enumerates language_tag and purpose_tag admissible values against\n  both language twins; 496-vs-512 reserve arithmetic reworded; tier\n  vocabulary conversion completed across GOAL_SPEC.\n\nVerified green: manifest-quality (PASS 186/186, 0 defects), fault-proof\nreconciliation (70 rows/49 open), status-role control (PASS), CG4 gate\n(BLOCKED unchanged from baseline), prettier --check on all changed docs.\nScope fence honored: no plutus.json, catalogue/deployment registry,\nABI-freeze artifact, or blueprint regeneration — those are reserved for\n#579.\n\nCo-Authored-By: Claude Opus 5 <noreply@anthropic.com>",
       "authorName": "Philip DiSarro",
       "authorDate": "2026-08-08T06:58:03Z"
-    },
-    {
-      "sha": "df573d288466f698acec188d3f7b8d6f9202e26d",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/df573d288466f698acec188d3f7b8d6f9202e26d",
-      "message": "feat(spec): flat field-hash reversion Phase 0 — docs/spec authority, GOAL_SPEC amendment, decisions/0004\n\nPhase 0 of the compact-tx flat field-hash reversion (#566; spec #565;\ndecision trail: wayfinder map #552, twelve closed tickets).\n\nNew authority layer. docs/spec/README.md states the rule: a component\nspec wins over technical-spec/ on concrete detail, GOAL_SPEC binds it by\nreference at scheme altitude, decision records carry rationale only.\ndocs/spec/midgard-tx.md is its first document — the implementation-\nnormative format authority for the MidgardTx compact types and canonical\nencodings, the unchanged two-level tx-id derivation, the nine flat\nblake2b-256 field commitments (plain hashing with a positional-identity\ninvariant), the uniform enveloped preimage grammar (counts only in the\npreimage header; empty field = 80; per-item envelope now on all nine\nfields including the newly enveloped 5/6/8), the fixed 3-byte output\nindex giving 38-byte spend/reference-input items at stride 40 with\narithmetic access, the asserted 28-byte observer/signer items at stride\n30, the datum canonicity re-pin to serialiseData's image (#564), the\nnormative access invariants (authenticate-once, abort-never-clamp, count\nconsistency), and the three-tier carriage convention with\nFieldPreimageCertificateV1 and the frozen FieldCarriageV1/FieldViewV1\nwire types.\n\nProvisional pins, marked provisional-pending-Phase-4-measurement, with\nfalsification an amendment-level erratum by design: K = 15,900 bytes\n(the #556 case-3 measured two-chunk basis, 15,900 + 484 = 16,384) and\nthe tier-1 redeemer-carriage bound = 14,336 bytes (maxTxSize less a\n2,048-byte step-machinery allowance). Tier-3 worst case is 3 chunks at\nthe retained 32,768-byte aggregate cap.\n\nGOAL_SPEC amended at scheme altitude: §0 amendment note, §1 authority\nlist (new item 3; technical-spec 8 -> 9), §3.1(2), §3.2 ladder\nre-derived as the three named tiers, §3.3 basis note declaring the\nsingle 13,200,000-mem execution-budget basis (20% off live mainnet\nmaxTxExUnits 16,500,000, epoch 648), §8.2 preamble and C21/CG2, §9.1\noutput 3, §9.2 Q00, §10.3 W27, §12 (first-ever §12 edit, acknowledged\nin place), §13.2 pointer, §13.3. Deliberate non-edits stated: DA payload\nframing, MPF trie roots / mpf-chunked-verify, and the §3.3 thresholds.\n\nSuperseded-not-deleted per §3 invariant 14: 36 F05 manifest rows (Q00,\nQ10-Q22, Q31, C20-0..C20-8, C21-C26, C29-C33, W27) now lead sourceAnchors\nwith a COUNTED-SCHEME SURFACE SUPERSEDED note, superseded text retained\nverbatim as provenance. The Q1x Q10/Q11 output-5 cells are deliberately\nNOT superseded — they stay OPEN until the Phase-7 re-measurement, since\nthe artifact is the honest gate.\n\nVerification (all rerun after the manifest edit, per F05's\nself-invalidation trigger): manifest quality gate 186/186 rows 0 defects;\nfault-proof reconciliation 70 rows / 49 open; status-role control PASS;\nCG4 gate exit 0; capability reconciliation 22 P2 tasks, 17 pass, 115/115\nmanifest-declared Aiken selectors across 12 modules under the pinned\naiken fork, 0 excluded. No gate state moved, as expected for a\ndocs-and-manifest-only change. Pre-existing red, unchanged on the\npristine tree and ticketed to the F40/F41 lane: the manifest quality\ngate's self-test fails its seeded F41-drop assertion.\n\nRefs #566, #565, #552, #561, #563",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-08T05:38:10Z"
-    },
-    {
-      "sha": "b6e600f685381c34961017bb52caa76ec0ca9d1a",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/b6e600f685381c34961017bb52caa76ec0ca9d1a",
-      "message": "docs(goal): close the quiesce wave — DA-safety cluster complete, identity batch green\n\nQ62 and all three Q63 clauses closed with measured gates; DA-INIT\ncompliance landed with the floors at the datum-writing seam; blueprint\nregenerated (393 validators, dual-compiler byte-identical, sha256\n70da64a3…9444); identity suites re-derive clean; deposit-flow 14/14\nincluding the §4.4 journey against the new governor. The parent's\nfive invalid red runs (uncreated databases) are recorded as a\nmethodology defect with the checklist correction.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-07T11:22:39Z"
-    },
-    {
-      "sha": "7172db0d4710f0f41893972412b0f4a0f5da92c0",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/7172db0d4710f0f41893972412b0f4a0f5da92c0",
-      "message": "fix(node): scope DA governance floors to initialization, not config load\n\n84bdbf2a enforced the Q63 governed floors inside `NodeConfig` loading.\nThat was the wrong seam. `DA_COMMITTEE_HEX`, `DA_OWNERS_HEX` and\n`DA_THRESHOLD` are read by exactly one consumer — the bootstrap in\n`deriveOperatorDaParams` — but `NodeConfig` is loaded by every subsystem,\nso a stale deployment value failed config load for the whole process.\n\nA checkout carrying the pre-Q63 `DA_THRESHOLD=1` in its `.env` therefore\ncould not load config at all, and the failure surfaced as an opaque\nEffect ConfigError inside tests and subsystems that never touch DA:\n\n  Invalid data at : \"DA_THRESHOLD must be at least 2 to satisfy the\n  governed threshold floor, received 1\"\n\nConfig load now validates only what is malformed regardless of policy —\nnon-hex, ragged element widths, and out-of-order or duplicate entries in\na packed set, which the governor's `sorted_unique_*` walkers reject\noutright. The governed floors stay fail-closed in `deriveOperatorDaParams`,\nthe one place a governor-invalid datum would actually be written, where\nthe real committee length is known even when it is derived from local\nsigners rather than configured — a case config load could never see.\n\nNo backdoor: a below-floor threshold, a one-member committee, and a lone\nowner are all still refused, and are now pinned by an explicit regression\nfor the pre-Q63 `DA_THRESHOLD=1` shape. `tests/da-config-load.test.ts`\npins the other half — that those legacy values load without bricking\nunrelated subsystems.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-07T10:13:35Z"
-    },
-    {
-      "sha": "a1053973068a6c7a7e3943ded36b25d9efb48e44",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/a1053973068a6c7a7e3943ded36b25d9efb48e44",
-      "message": "fix(da): adapt apply-flow consumers to the governed-params reference and close the Q63 gate\n\nQ62's ApplyToStateQueue now carries da_params_ref_input_index and the\nSDK apply builder requires the governed params; the node apply program,\nthe da-committee-node coordinator builder/submitter, and the watcher\nindexer fixture adopt it in lockstep. The Q63 gate's three open-group\nself-test fixtures re-point to strike their target group wherever it\nlives (groups or openGroups) so none can no-op now that the rescue\ngroups closed; gate exits 0 with all nine groups measured (29 checks)\nand the self-test still rejects every seed. Q62 manifest counts\nrestated against the published vocabulary; quality 186/186.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-07T10:10:10Z"
-    },
-    {
-      "sha": "b6a41431075581296926eacc6d7b02804a361aa3",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/b6a41431075581296926eacc6d7b02804a361aa3",
-      "message": "feat(da): non-retroactive committee rotation and partial-attestation rescue (Q62 + Q63c)",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-07T10:01:36Z"
-    },
-    {
-      "sha": "f729cdf10d5d0c81d798df5b347d236a5542fda9",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/f729cdf10d5d0c81d798df5b347d236a5542fda9",
-      "message": "fix(node): require floor-compliant DA governance at bootstrap\n\nQ63 (F04 §4) gave the DA params governor threshold floors —\n`da_threshold >= max(2, ceil(2*committee_len/3))` and\n`update_threshold >= max(2, ceil(2*owner_len/3))` — which make a 1-of-1\ncommittee and a lone owner unrepresentable. The node's bootstrap still\nbuilt exactly that forbidden shape: a single-key committee, a single\nowner, and both thresholds hardcoded to one.\n\nBootstrap now emits at least two committee members and two owners, with\nboth thresholds defaulted to the governed floor. All bound arithmetic is\ndelegated to the SDK twins (`governedThresholdFloor`,\n`daParamsFloorViolations`) so it cannot drift from the validator, and\nboth sets are emitted sorted-unique to match the governor's\n`sorted_unique_*` walkers.\n\nThe second key is explicit configuration, never invented:\n`DA_COMMITTEE_HEX`/`DA_OWNERS_HEX` name a real committee and owner set in\na deployment, while `DA_COSIGNER_SEED_PHRASE` gives dev and emulator\nbootstrap a locally held second key so one process can reach a genuine\n2-of-2. With neither present, initialization fails closed rather than\nfalling back to the shape the governor rejects. The same floors are\nenforced at config load so a bad value is reported where it can be read.\n\nAttestation signing follows: the hardcoded single witness at index 0 is\nreplaced by one genuine Ed25519 signature per locally held key, with the\nsigner index looked up in the on-chain committee rather than assumed.\n\nFixtures pinning 1-of-1 are lifted to floor-compliant shapes, including\nthe Scalus suite that evaluates a real AddSignatures body through the\nactual Plutus validator — now a true two-signature attestation.\n\nThe blueprint is deliberately not regenerated here; this lands green\nagainst the old committed governor, which accepts >=2-of-N too.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-07T09:46:58Z"
-    },
-    {
-      "sha": "32577390ff541b4d669d1903ca94d2e4714dde09",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/32577390ff541b4d669d1903ca94d2e4714dde09",
-      "message": "docs(goal): ledger the Q63 remediation rounds and restate the manifest counts",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-07T08:56:17Z"
     }
   ],
   "contributors": [
@@ -326,6 +326,36 @@
   ],
   "issues": [
     {
+      "number": 585,
+      "title": "Flat reversion P5 follow-up — the nine-field TypeScript consumer swap (grammar + derivation + counted publication chain)",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/585",
+      "updated_at": "2026-08-10T05:26:20Z"
+    },
+    {
+      "number": 588,
+      "title": "Flat reversion P5 blocker — five fixture seeds behind #585's ten Aiken tests have no generator, so AC3 and AC5 cannot both hold",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/588",
+      "updated_at": "2026-08-10T05:24:34Z"
+    },
+    {
+      "number": 587,
+      "title": "Flat reversion P5 blocker — retiring the counted publication receipt chain is coupled to the on-chain tx-field-receipt-v1 validator, not a TypeScript re-point",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/587",
+      "updated_at": "2026-08-10T05:24:08Z"
+    },
+    {
+      "number": 586,
+      "title": "Flat reversion P5 blocker — the ledger MPF trie key moved to the §5.3 fixed-index item on-chain and TypeScript never followed",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/586",
+      "updated_at": "2026-08-10T05:23:42Z"
+    },
+    {
+      "number": 579,
+      "title": "Flat reversion P6 — single identity re-derivation batch",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/579",
+      "updated_at": "2026-08-09T20:59:35Z"
+    },
+    {
       "number": 583,
       "title": "Flat reversion: tx-field-receipt chain rebind is unowned",
       "html_url": "https://github.com/Anastasia-Labs/midgard/issues/583",
@@ -338,30 +368,6 @@
       "updated_at": "2026-08-08T17:25:28Z"
     },
     {
-      "number": 578,
-      "title": "Flat reversion P5 — family rebind lane D",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/578",
-      "updated_at": "2026-08-08T17:05:57Z"
-    },
-    {
-      "number": 577,
-      "title": "Flat reversion P5 — family rebind lane C",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/577",
-      "updated_at": "2026-08-08T17:05:50Z"
-    },
-    {
-      "number": 576,
-      "title": "Flat reversion P5 — family rebind lane B",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/576",
-      "updated_at": "2026-08-08T17:05:44Z"
-    },
-    {
-      "number": 575,
-      "title": "Flat reversion P5 — Q1x family rebind (first wave) + provisional Q1X-F6 signal",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/575",
-      "updated_at": "2026-08-08T17:05:38Z"
-    },
-    {
       "number": 581,
       "title": "Flat reversion P8 — full regression + gate re-derivation",
       "html_url": "https://github.com/Anastasia-Labs/midgard/issues/581",
@@ -372,12 +378,6 @@
       "title": "Flat reversion P7 — confirm-and-publish re-measurement",
       "html_url": "https://github.com/Anastasia-Labs/midgard/issues/580",
       "updated_at": "2026-08-08T04:58:52Z"
-    },
-    {
-      "number": 579,
-      "title": "Flat reversion P6 — single identity re-derivation batch",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/579",
-      "updated_at": "2026-08-08T04:58:50Z"
     }
   ],
   "releases": [],
@@ -392,11 +392,11 @@
     },
     {
       "week": 1756598400,
-      "total": 5
+      "total": 4
     },
     {
       "week": 1757203200,
-      "total": 57
+      "total": 56
     },
     {
       "week": 1757808000,
@@ -436,11 +436,11 @@
     },
     {
       "week": 1763251200,
-      "total": 23
+      "total": 32
     },
     {
       "week": 1763856000,
-      "total": 15
+      "total": 43
     },
     {
       "week": 1764460800,
@@ -480,15 +480,15 @@
     },
     {
       "week": 1769904000,
-      "total": 45
+      "total": 46
     },
     {
       "week": 1770508800,
-      "total": 34
+      "total": 36
     },
     {
       "week": 1771113600,
-      "total": 14
+      "total": 13
     },
     {
       "week": 1771718400,
@@ -496,7 +496,7 @@
     },
     {
       "week": 1772323200,
-      "total": 26
+      "total": 25
     },
     {
       "week": 1772928000,
@@ -512,19 +512,19 @@
     },
     {
       "week": 1774742400,
-      "total": 30
+      "total": 29
     },
     {
       "week": 1775347200,
-      "total": 40
+      "total": 41
     },
     {
       "week": 1775952000,
-      "total": 32
+      "total": 31
     },
     {
       "week": 1776556800,
-      "total": 17
+      "total": 29
     },
     {
       "week": 1777161600,
@@ -536,15 +536,15 @@
     },
     {
       "week": 1778371200,
-      "total": 43
+      "total": 25
     },
     {
       "week": 1778976000,
-      "total": 16
+      "total": 10
     },
     {
       "week": 1779580800,
-      "total": 2
+      "total": 1
     },
     {
       "week": 1780185600,
@@ -552,7 +552,7 @@
     },
     {
       "week": 1780790400,
-      "total": 31
+      "total": 30
     },
     {
       "week": 1781395200,
@@ -572,7 +572,7 @@
     },
     {
       "week": 1783814400,
-      "total": 10
+      "total": 9
     },
     {
       "week": 1784419200,
@@ -580,15 +580,15 @@
     },
     {
       "week": 1785024000,
-      "total": 201
+      "total": 202
     },
     {
       "week": 1785628800,
-      "total": 200
+      "total": 192
     },
     {
       "week": 1786233600,
-      "total": 2
+      "total": 9
     }
   ]
 }
