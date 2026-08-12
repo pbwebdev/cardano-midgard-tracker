@@ -1,10 +1,10 @@
 {
-  "fetchedAt": "2026-08-11T07:15:01.096Z",
+  "fetchedAt": "2026-08-12T07:39:18.516Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 25,
     "forks_count": 10,
-    "open_issues_count": 99
+    "open_issues_count": 100
   },
   "languages": {
     "Aiken": 359544,
@@ -16,6 +16,27 @@
     "Perl": 37
   },
   "commits": [
+    {
+      "sha": "6213867a80581cb90c46560417c1deb52e5ba456",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/6213867a80581cb90c46560417c1deb52e5ba456",
+      "message": "fix(onchain): unpin the retired 36-byte out-ref key from the InputSets machine phase (#592)\n\nLanded while #592's rebind was measured indivisible and re-homed to\n#593 for rulings: the InputSets phase pinned the retired 36-byte\nout-ref key at two sites (encode_input_sets_scan_witness's domain\nassertion and input_sets_control_is_bound) while verify_input_sets_item\nreads previous_key off the §5.3 item it decodes - 38 bytes since #586 -\nso the phase crashed inside its own witness encoder on any step that\nhad read one input. Both sites now name\nnative_tx_field_access_v1.spend_input_item_bytes; the two affected\nbaseline rows move from \"program failed\" aborts to a clean False on the\ncounted conjunct, so all 22 owned rows now fail for exactly the one\n#592 cause. Plus the countedMachineFieldTraceV1 docstring gains the\nmeasured both-halves size and the #593 pointer.\n\nVerification: fork-runner full check 1686 / 22 failed, byte-identical\nby name to #585's baseline; isolated stock builds (v1.1.22+39d6b04,\nenv -u MIDGARD_AIKEN_BIN) show exactly 4 changed entries / 2 named\nvalidators (input_sets_empty_semantic_v1, input_sets_item_semantic_v1)\n- recorded on #592 for #579's applied-hash cascade; in-tree plutus.json\nbyte-identical (c52589df225145ad74c8f444d500dfe5); exec ledgers pass\nwithout --update (no measured row exercises InputSets); stock-fmt CI\nsim idempotent on the edited .ak; tsc/prettier clean;\nvalidation-machine source-text suites 11/11.\n\n#592 remains open: the rebind is one indivisible unit (15 sites, 8\nphases, one TransactionFieldChunkWitness constructor) blocked on #593's\ntwo rulings (which §8 tiers a machine step may name - tier-1's 14,336 B\nbound vs the 16,225 B measured maximum field-2 preimage inside erratum\nE1's window - and how an ungrammatical committed preimage is rejected\nrather than aborted under the §4 door).\n\nCo-Authored-By: Claude <noreply@anthropic.com>",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-08-11T22:28:11Z"
+    },
+    {
+      "sha": "b075d4e9a4071a7e99a31d786d1394b4c5a6e61f",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/b075d4e9a4071a7e99a31d786d1394b4c5a6e61f",
+      "message": "feat(core,sdk,validation,lucid,node,watcher): the nine-field consumer swap onto flat commitments (#585)\n\nThe flat-reversion centerpiece: the counted scheme dies TypeScript-side.\nThe first attempt (#578's measurement) was reverse-applied as\nworse-than-either-end; this landing follows the three blockers it\nsurfaced - #586 (ledger out-ref unification), #587 (receipt chain\nretirement), #588 (producer machinery) - so the swap ships as one\ncoherent unit.\n\nmidgard-core: all nine field derivations in native-body.ts /\nnative-witness.ts move to midgardFieldCommitmentV1 over §5.1 preimage\nbytes; validateMidgardNativeTxCanonicalV1 is the §5.1 fail-closed\ngrammar walk at the encoder, canonical decoder and materialisation;\nnative-field-items.ts deleted (§5.1 collapses its three-way split);\nverifyMidgardV1TxFieldPreimage flat; the counted per-item publication\nsurface (deriveMidgardV1TxFieldChunks/Evidence, verify chunk/item,\nreconstruct-from-chunks, both evidence types) deleted; fields 5/6/8\ninto the §5.1 envelope; sortMidgardMintItemsV1 gives §5.6's two-level\nsort one spelling; the §5.3 hash-28 and address-witness item encoders\nare now the producers' format authority for fields 3/4/7.\n\nProducers and consumers move together: lucid-midgard (mint -> §5.6\nitems, enveloped redeemers, one §5.1 byte-list encoder), midgard-\nvalidation ledger-tx codec + redeemers (retired dual-spelling decode\ngone), sdk EMPTY_SPEND_INPUTS_HASH eb25ed4a -> 45b0cfc2 =\nblake2b_256(#\"80\") with the gap assertion flipped to convergence, four\nsdk fraud-proof commitment helpers, fault-proofs hashSpendInputCbors +\ntransition-trace detect, node ingestion (reconstructMidgardTransaction-\nV1 binding moved with the swap), and the node test fixtures that still\nhand-built counted shapes (79/79, 20/20, 20/20 after migration to the\nproduction encoders; transaction-root-v1 golden regenerated from its\nproducer, rf031 Aiken rows 10/10). The machine's remaining counted\ntrace in validation-machine.ts is fenced and documented as\nself-referential (never compared to a §4 field hash in TS), owned by\n#592.\n\nEvery cross-language vector regenerated from producers - never by hand:\nthe #588 generator chains, a fourth producing suite added to the\nboundary generator (blob-chunk-boundary-v1 now publishes on the write\nchannel; its max-inline-datum Aiken twin had silently pinned retired\ncounted commitments and stayed green because counted-vs-counted is\nself-consistent - exactly the divergence class this program repairs),\nand the da-hash-preimage validator pair re-derived from the same\nchannel.\n\nFork-runner full check, by name: 30 -> 22. The ten #585 acceptance rows\ngo green (six native_tx_v1 C20/n02-n09 rows, high-cardinality /\nsize-balanced / ordinary-golden decodes, the max-redeemers terminal\ncommitment, and the one-step decode row). Two terminal-fold rows arrive\nred: verify_canonical_decode_chunk checks a counted Merkle opening\nagainst transaction_field_commitment() - §4 flat since #567 -\nunsatisfiable by construction once TypeScript stops declaring counted\nroots. That is mask-removal, not new breakage: the same machine-rebind\nfamily as the 20 accepted validation_machine_v1 rows. Recorded as\nDeviation 2 on the issue; owned by #592 (blocked_by #585, blocking\n#579 - it lands before the single blueprint regeneration).\n\nVerification: producer --check gates all green and failable; exec\nledgers pass without --update (no measured row moved; stock builds of\nboth trees byte-identical - aiken v1.1.22+39d6b04, env -u\nMIDGARD_AIKEN_BIN, md5 329cfe5697afc95984762a1b13273a84 - proving no\ncompiled-code change); stock-fmt CI sim zero drift on all ten touched\n.ak; suites core 505/505, lucid 179/179, validation 269/271, sdk\n235/236, da-committee 274, watcher 616/617 (timeout flake class),\nfault-proofs 327/343 (16 rows all frozen-blueprint/applied-hash\nclasses, byte-identical across rounds), node repaired files green with\nresiduals only in the documented #579-owned classes. plutus.json\nbyte-identical (c52589df225145ad74c8f444d500dfe5); no parent-only\nsurface touched. Two review rounds + two fix rounds (63 masked node\nfailures repaired; 2 majors - both stale-green cross-language mirrors -\nre-mirrored through producers; 12 minors fixed), then a CLEAN\nconfirmation pass.\n\nCo-Authored-By: Claude <noreply@anthropic.com>",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-08-11T21:17:54Z"
+    },
+    {
+      "sha": "a66f8ef70366fcbb572ac10a1eda1e75b7c2a198",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/a66f8ef70366fcbb572ac10a1eda1e75b7c2a198",
+      "message": "feat(core,sdk,validation,lucid): producers for every hand-mirrored fixture seed family (#588)\n\nExecutes the 2026-08-10 owner ruling: write all generators first, no\nhand-transcription exemptions, so #585's AC3 (ten named Aiken tests\ngreen) and AC5 (vectors regenerate from producers, never hand-edited)\nbecome jointly satisfiable. The point of this ticket is the machinery -\nfamilies whose TypeScript side moves in #585 regenerate again there.\n\nNew producers and seeds:\n- native-size-balanced: the opaque 15.5k fullTxCborHex blob (no producer\n  anywhere in the repo) is replaced by a declared construction -\n  SIZE_BALANCED_PARAMETERS builds the transaction from stated\n  parameters, emitting §5.3 38-byte out-refs; the old blob is gone from\n  the tree and the fixture identity moved with the capability corpus\n  row re-derived through its sanctioned --update gate.\n- native-ordinary: golden_core_native_full_tx_cbor (the hand-maintained\n  near-miss seed) gains a producer, so the ordinaryAikenPath branch has\n  no hand-maintained seed left.\n- native-high-cardinality: #586's sync writer verified against the\n  ruling (idempotent, referenced).\n- generate-native-tx-vector-v1-goldens.mjs (midgard-core): the n02-n09\n  exact-vector family, emitted from the TS tests that compute them.\n- generate-ordered-collection-boundary-aiken-goldens.mjs\n  (midgard-validation) + aiken-vector-channel.ts: the C20-6, C20-7 and\n  max-redeemers boundary-constant families.\n- golden-channel.mjs gains name-keyed rebindAikenConstants (output must\n  survive stock aiken fmt - CI's authority; the fork formatter is what\n  agents must not run) and distinguishes missing constants from\n  unrecognized literal forms; generate-native-compact-aiken-goldens.mjs\n  rewritten with a freshness gate that re-derives every consumed facet\n  (preimages, sizes, mint order, redeemer pointers) from fullTxCborHex,\n  proven failable per facet class.\n\nEvidence the machinery equals the transcription: first-run zero-value\ndiffs for n02-n09 and max-redeemers; the C20-6/C20-7 family had four\nsilently-stale constants (canonical byte counts 16685->16687 and\n16871->16873, the compact CBOR and the field-preimage-lengths CBOR -\nfield 0 goes 0x1827->0x1829, the +2 of #586's fixed-index out-ref) which\nthe generator corrected; two undeclared duplicate seeds closed. All six\ngenerators idempotent (second run byte-identical), all --check modes\nclean and proven failable, each .ak module banners its seed/writer/\nrebinder, each fixture JSON names its producer, two new CI gates invoke\nthe checks. docs/spec/midgard-tx.md §9 records the standard, scoped to\nthe named families with the terminal-fold structures tracked by #590\n(new, blocked_by #588, does not block the trunk; its body carries the\nper-site publish-channel inventory - four of six terminal-fold suites\nneed write channels first).\n\nVerification: fork-runner full check 1686 / 30 failed, identical BY NAME\nto #587's baseline - the predicted greening of the two size-balanced\nrows does not happen because both carry second causes owned by #585\n(counted mint map, counted commitments), recorded on the issue; CI fmt\npipeline (stock v1.1.22) zero drift on all touched .ak; exec ledgers\npass without --update (note: verifiers must run under\nMIDGARD_AIKEN_BIN=<fork> - bare PATH measures stock and reports sub-ppm\ncpu drift); suites lucid-midgard 179/179, core 505/505, validation\n269/271 (baseline), sdk 235/236 (baseline), da-committee 274/274;\nplutus.json byte-identical (c52589df225145ad74c8f444d500dfe5); no\nparent-only surface touched. Two review rounds (1 blocker - an\n89-column line that stock fmt reflows, breaking CI's diff gate - plus 4\nmajors + 6 minors, all fixed; round 2 CLEAN).\n\nCo-Authored-By: Claude <noreply@anthropic.com>",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-08-11T12:37:11Z"
+    },
     {
       "sha": "df53dc6a7fd6592066edac1fea9520e940eff90b",
       "html_url": "https://github.com/Anastasia-Labs/midgard/commit/df53dc6a7fd6592066edac1fea9520e940eff90b",
@@ -99,27 +120,6 @@
       "message": "feat(onchain): intra-item package — Value bookmark, Canonical-Data Acceptor, native-script pushdown (#571)\n\nThe Phase-3b intra-item access package, worked as one unit in the machine\nlane, plus §11 written into docs/spec/midgard-tx.md — the section #566\nreserved and #570 deliberately did not encroach on.\n\nCase A — Value bookmark (native-tx-intra-item-v1.ak). Ordered intra-item\naccess into a multiasset value without materialising the output. 64 lookups\nover 8 policies x 8 assets cost 12.22M mem against the 13,200,000-mem\nGOAL_SPEC §3.3 basis; the materialising control costs 20.15M and does not\nfit. The two are pinned to the same 64 answers, so the comparison means\nsomething. The gap decomposes as 6.10M fixed plus 1.83M marginal — recorded\nthat way rather than as a single headline, because the fixed decode dominates\nand `decode_canonical_output` also decides datum and script_ref, which the\nbookmark never inspects.\n\nCase B — Canonical-Data Acceptor. Datum interior access at 0.93M and 4.87M,\nboth far inside the basis. Reported honestly: the `cbor.deserialise` controls\nare cheaper (0.18M / 1.07M) with no crossover at width, since deserialise is\na builtin and the acceptor is interpreted. Case B is a capability case, not a\ncost case, and §11.4 says so — an earlier \"materialisation is priced by the\nwhole item\" claim was removed because the measurement refutes it for datums.\n\nThe capability is real, and it closes #567's residual. #567 screened\ntop-level bignum-headed datums with a head-byte check and documented that\nnested bignums — canonical at any depth — still aborted the script, deferring\nthe fix here. Under PV11 `ConstrData` takes a Word64, and Aiken stdlib's\n`cbor.deserialise` computes `ix = tag - 121` with no range guard, so any CBOR\ntag below 121 aborts. The recursive acceptor now declines instead, verified\nfor a bignum as a map key, first-in-list, mid-list, at depth 5, and inside\ntag-102. `is_canonical_plutus_data_v1`'s verdict is provably unchanged, so\nL1 parity and #567's AC4 hold: canonical and materialisable stay separate\nquestions.\n\nCase C — native-script checkpointable pushdown. Traversal 1.42M, checkpoint\nand resume 1.79M, recursive-checker control 1.26M. The cursor is 87 bytes,\nconstant across scripts, `pub opaque` with a private decoder and only the\ncommitment-taking resume exported — #570's §10.6 shape preserved.\n\nTwo consensus divergences from the definitional checker, both caught by\nreview and both fixed\n- The depth bound counted frames where `native_script_v1` counts nodes with a\n  leaf at depth 1, so the pushdown admitted depth 17 while the checker refused\n  it. On 16 nested `all` around one signature the checker returned None and\n  the pushdown returned Some(True). Fixed with an explicit\n  `max_native_script_frames = max_native_script_depth - 1`, and the agreement\n  test now spans depths 1, 2, 15 and 16 rather than stopping at 3, with the\n  other side pinned so the fix cannot over-refuse.\n- `required` carried an upper bound the definition does not have, so\n  `at_least(33, [signature])` — which the checker evaluates to Some(False) —\n  aborted instead. A script the definition calls invalid could not be\n  adjudicated at all. `required` is now capped rather than bounded: anything\n  above the node count maps onto `unsatisfiable_required`, which preserves the\n  verdict because `satisfied` can never reach it, while keeping the frame's\n  wire scalar three bytes wide.\n\nGuard coverage follows §9.5's discipline. §11.5 enumerates 36 refusals — 29\nisolated, 7 backstops — reconciled against the 71 `expect` sites in the new\nmodules, with every backstop proven by neutralisation rather than argued. The\nfirst recount said 15; auditing found 21 more, including one whose stated\n\"checked one step earlier\" rebuttal was simply false.\n\nAlso fixed in review: the cursor's array header spelled `88` over seven\nelements, so the wire form was not decodable CBOR — now `87`, with a test\nthat decodes it; the resume test could not detect a restart-from-zero, now\nbudgeted at exactly the remaining work and pinned both ways;\n`datum_alternative_at_v1` aborted where §11 promises None, now guarded like\nits two siblings; and the §5.6 citations for an output-value name cap were\nre-pointed to §5.5, which now states the basis it was missing.\n\nNote for future neutralisation work: deleting a guard whose constrained value\nhas no other consumer makes Aiken erase the whole computation, which reddens\nmany tests for the wrong reason. Weaken the predicate instead.\n\nVerification: fork suite 2112 checks / 47 errors from a 2028/47 baseline\nestablished by a detached worktree at 92fcffda, with the failing-NAME set\nbyte-identical — none of the 47 cleared, none added. Stock aiken check\n--skip-tests: 0 errors. All seven touched .ak files are aiken fmt clean;\n#570's modules were not touched.\n\nCo-Authored-By: Claude Opus 5 <noreply@anthropic.com>",
       "authorName": "Philip DiSarro",
       "authorDate": "2026-08-09T01:33:51Z"
-    },
-    {
-      "sha": "92fcffdafd2dfe1998f7583733183424fa274e90",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/92fcffdafd2dfe1998f7583733183424fa274e90",
-      "message": "feat(onchain): machine walk core — authenticate-once, walk-derived item access, resumable checkpoints (#570)\n\nThe Phase-3a machine walk. Lazy per-field authenticate-once against the flat\nhash, then three-tier offset-and-slice item access with no offset table: every\nread is walk-derived from the authenticated bytes themselves, so there is no\nsecond data structure to trust or dispute. Resumable checkpoints carry\npositions, never bytes.\n\nNew lib/midgard/native-tx-machine-walk-v1.ak, plus §10 written into\ndocs/spec/midgard-tx.md (§10.1–§10.8), which #566 reserved for this ticket.\n\nMeasured, not asserted\n- Authenticate-once (AC1): one open serving 64 reads costs 8,782,831 mem;\n  re-opening the door per item costs 13,275,371 — over the 13,200,000-mem\n  GOAL_SPEC §3.3 basis. Authenticate-once is what puts a 64-item field walk\n  inside a transaction, with 33% headroom. Holding relocation constant and\n  varying only door-opens gives 9,790,000 vs 13,275,371, so the verdict is not\n  a fixture artifact; the 4.49M gap decomposes as ~3.48M door-opens plus\n  ~1.01M access pattern, and all four rows now ship as tests so §10.7's\n  re-take is reproducible from the suite.\n- Arithmetic slice (AC3): spend_input_at at index 0 costs 7,827,953 mem and at\n  index 295 costs 7,828,553 — 600 units across 295 positions, assertion\n  residue. The variable-width control costs 59,704 mem per index step, about\n  29,400x.\n\nResume carries positions only (AC2). A walk pauses at item 7 of 20 and resumes\nin a follow-on transaction under a different carriage tier with a budget of\nexactly the 13 remaining items, so a walk that restarted at zero would run\nshort; the both-ways pin confirms one fewer fails. Two preimages with the same\nwidths and disjoint content walked to the same position produce byte-identical\n53-byte checkpoints.\n\nA redeemer-controlled position hole, closed structurally\n- resume_field_walk originally took a plain checkpoint argument, letting a\n  caller supply a prover-chosen position — and a variable-width position is\n  not recomputable, so nothing downstream could catch it. Making that function\n  private was not enough: FieldWalkCheckpointV1 was a plain pub type, so its\n  constructor was exported and walk_next/walk_skip/walk_fold accepted any\n  checkpoint. A probe using only the public API built a literal checkpoint at\n  offset 5 and read bytes from inside an item's payload with no commitment\n  check at all.\n- The type is now pub opaque and the decoder is private, so a position can only\n  be derived, advanced, or returned by the commitment-checked resume. The probe\n  no longer compiles. §10.6 and the module header now state exactly what the\n  type system enforces, and separately what a library cannot enforce — where\n  the caller's committed digest comes from, which stays normative on dispute\n  entry points.\n\nGuard coverage is now a property, not a claim\n- Six guards documented in §10 had zero coverage: their negative vectors were\n  tripping a deeper guard first, so the named guard could have been deleted\n  with CI still green. Every refusal was audited by neutralising it one at a\n  time and requiring exactly one test to go red.\n- §10.8 enumerates all 23 refusals: 16 with isolating vectors, 7 as backstops\n  that are unreachable-as-refusers, each naming the earlier check that makes it\n  so. §9.5 admits exactly those two categories — uncovered is not one.\n- Related: seven fail vectors were first written as `let _x = guard(...)`,\n  which Aiken erases entirely, so none of them ran. Every negative now consumes\n  its guard's result.\n- v1_c20_script_item_does_not_open_as_field_7 was green for the wrong reason —\n  a 34-byte item can never satisfy field 7's stride, so it was refused by the\n  wrapper check rather than by the field hash. Rebuilt from a structurally\n  valid 101-byte item so only the hash comparison can refuse it; neutralising\n  that comparison now turns both directions red.\n\nScope\n- 34 of the 37 counted-opening reds are deferred with cause: the 27\n  validation-machine failures are control-type redesigns across 15 verify_item\n  and 20 verify_chunk sites whose datums thread item_count/item_index/\n  chunk_index/frontier into successor encodings (the machine lane, #572 AC4),\n  and the 7 input-no-idx failures are Q13 (#575 AC1). Neither is a call-site\n  swap. The 3 user_events/tx_order_v1 reds are owned by no ticket and are\n  raised separately rather than deferred again.\n\nVerification: fork suite 2028 checks / 47 errors from a 1983/48 baseline. The\nfailing-NAME set was diffed against a rebuilt HEAD state, not just counted:\nexactly one cleared (the intended C20 rebind) and zero added. Stock aiken check\n--skip-tests: 0 errors. §11 correctly absent — it is #571's.\n\nCo-Authored-By: Claude Opus 5 <noreply@anthropic.com>",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-08T21:40:27Z"
-    },
-    {
-      "sha": "80e3b1ee7cd3b7171a6c8bbbf5adfb76adf95113",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/80e3b1ee7cd3b7171a6c8bbbf5adfb76adf95113",
-      "message": "test(core,onchain): per-field cross-language golden vectors for all nine fields (#569)\n\nThe Phase-2 tail: per-field golden-vector suites over the sum-type twins,\nextending #568's channel rather than reinventing it.\n\nNew surface\n- demo/midgard-core/src/codec/native-tx-field-items-v1.ts — the nine per-field\n  §5.3 item encoders and §5.1 per-field preimage producers, TS twins of\n  preimages.ak / components.ak. Fields 2 and 6 reuse the existing canonical\n  encoders rather than re-spelling them.\n- A second generated channel (generator + vector definitions + JSON fixture +\n  a 62-test Aiken module), wired to package scripts and the CI gate exactly as\n  #568's is, with the shared tail factored into scripts/golden-channel.mjs.\n\nCoverage: each field gets envelope, §4 commitment, header, extents and reads,\nplus a producer round-trip — the only cross-language proof available for\nfields 2 and 5, whose items are whole records. Boundaries: fixed indices\n0/23/24/255/256/65535, the two-byte header at 24 items, the MidgardV1 tag\n18 80, all seven purpose tags, mint ordering including burns, and §6.2\nbignum/constr-128 datums pinned as bytes — never deserialised, since under\nPV11 they are canonical but not materialisable.\n\nThe straddle vector was pinning an unreachable configuration\n- It used 400 field-0 items, but §5.4 caps field 0 at 296 spend inputs, so its\n  largest admissible preimage is 11,843 bytes — under the 14,336 tier-1 bound.\n  Field 0 can never reach tier 3, so the headline straddle proved nothing.\n- Moved to field 1 (same stride-40 encoder, byte-derived bound 819). At 400\n  items the preimage is 16,003 bytes, and item 397 spans [15,885, 15,923)\n  across K = 15,900 while neighbours 396 and 398 sit wholly inside one chunk.\n- Reachability is now asserted by the generator rather than left to prose:\n  three guards refuse an unreachable field, a non-straddling item index, and a\n  repeat count that drops the preimage under K. All three were proven to bite.\n\n§5.6 ordering was enforced on one twin only\n- preimages.ak now enforces asset-name and policy-id ordering on the producer\n  side, carrying previous_* through the walk as the decoders already do. Four\n  generated Aiken fail negatives twin the TS ones — both levels, both modes.\n\nScope\n- Two goldens cleared: golden_midgard_core_native_preimage_cbor_decoders and\n  canonical_redeemer_bridge_golden_vector_is_stable, both hand-written grammar\n  vectors recomputed from the new producers rather than hand-edited.\n- The remaining cross-language reds are NOT vector regeneration. They are red\n  because the TS production path still emits minimal output indices and\n  counted commitments; swapping deriveMidgardNativeFieldCollectionV1 /\n  deriveNativeTxBodyCompact changes preimage bytes, field hashes and tx-ids\n  across ~20 consumer files. That is the Phase-5 family rebind (#575–#578),\n  and a scope note naming the TS entry points now sits on those tickets so the\n  work is not orphaned. The v1_c20_6/7 pair additionally needs re-derived\n  measured Cardano boundaries — a measurement, not a vector.\n- EMPTY_SPEND_INPUTS_HASH stays counted. It is derived, not literal, so it\n  flips when the consumer path swaps; and the gitignored plutus.json the\n  fault-proof emulator executes cannot be settled without the blueprint\n  regeneration fenced to #579. The tripwire test still bites at the swap.\n\nVerification\n- Fork suite 1983 checks / 48 errors, against a re-established 1921/50\n  baseline at 129a95c2. Failing-name diff: exactly two removals, zero\n  additions — #570's 37 machine-lane failures fully intact.\n- Stock aiken check --skip-tests: 0 errors. midgard-core 441, midgard-sdk 185;\n  typecheck and eslint --max-warnings=0 clean on both.\n- The channel is closed on both sides: regenerating from a deliberately\n  drifted producer makes --check pass but turns Aiken red, so the Aiken suite\n  is an independent check rather than a mirror. #568's channel was re-verified\n  to still pass and still bite after the shared-tail extraction.\n\nCo-Authored-By: Claude Opus 5 <noreply@anthropic.com>",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-08T17:55:32Z"
-    },
-    {
-      "sha": "129a95c22cfc0767aee006fa18aee2ea5060fe13",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/129a95c22cfc0767aee006fa18aee2ea5060fe13",
-      "message": "fix(onchain): enforce the pexcludes non-membership proof\n\n`validators/pexcludes.ak` bound `mpf.insert` with `let _excluded`. Aiken fully\nignores unused let-bindings, so the call -- and the `expect excluding(key,\nproof) == self.root` inside it, which IS the non-membership proof -- was\ncompiled away. The `exclusion` validator fell through to `True` for any\n`[root, key, proof]` redeemer of the right shape, so a prover could forge a\nnon-existent-input fraud proof against a valid block and slash an honest\noperator.\n\nBind with `expect`, the form already used at\n`lib/midgard/fraud-proofs/transition-trace/proof.ak:671`.\n\nThe compiled withdraw script goes from 374 to 2977 bytes: the proof walk\npreviously occupied zero bytes on chain. Measured against a pristine build of\nthe same commit with the same compiler, exactly five validators move --\n`pexcludes.exclusion` plus the four steps that embed its hash constant\n(`no_input/step_03`, `no_input/step_04`, `no_reference_input/step_03`,\n`no_reference_input/step_04`).\n\n  pexcludes.exclusion  5a06db38b22c52ca7d1789f16c1819da03b15171efe245ef18ad7af6\n                    -> a9ec251d6476217b1abccd5f035dec1272a4b04f640f503fca9e734d\n\n`plutarch_pexcludes*` locates the withdraw redeemer *by* that constant, so the\npin move is required for the fix to take effect. Both `env/default.ak` and\n`env/testnet.ak` are updated and re-verified against real builds of each env.\n\nAdds the first tests this validator has ever had: a bogus proof against an\nunproven root must be rejected (this test fails on the unfixed validator), and\na genuine non-membership witness must still be accepted. The defect survived\nbecause the delegating steps only field-match the redeemer -- all cryptography\nlived here, and nothing exercised it.\n\nGates: full typecheck clean; dual-compiler blueprint agreement clean (393\nvalidators byte-identical across stock v1.1.22 and fork v1.1.23); pexcludes and\nboth delegating families pass. The §4.4 journey regression has NOT been run.\n\nPre-existing defect from dbfa7426; unrelated to #567.\n\nCo-Authored-By: Claude Opus 5 <noreply@anthropic.com>",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-08T17:02:46Z"
     }
   ],
   "contributors": [
@@ -326,28 +326,40 @@
   ],
   "issues": [
     {
-      "number": 588,
-      "title": "Flat reversion P5 blocker — five fixture seeds behind #585's ten Aiken tests have no generator, so AC3 and AC5 cannot both hold",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/588",
-      "updated_at": "2026-08-11T00:52:02Z"
+      "number": 592,
+      "title": "Flat reversion: the validation machine still verifies counted per-item openings against §4 flat field commitments",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/592",
+      "updated_at": "2026-08-12T06:43:34Z"
+    },
+    {
+      "number": 579,
+      "title": "Flat reversion P6 — single identity re-derivation batch",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/579",
+      "updated_at": "2026-08-12T06:41:35Z"
+    },
+    {
+      "number": 596,
+      "title": "Canonical-decodability fault family — §12 fault kind for a non-§5.1 committed field preimage (#593 Ruling 2)",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/596",
+      "updated_at": "2026-08-12T05:01:53Z"
     },
     {
       "number": 590,
       "title": "Flat reversion follow-up — the boundary terminal-fold proof structures are still hand-mirrored (struct literals the name-keyed rebinder cannot reach)",
       "html_url": "https://github.com/Anastasia-Labs/midgard/issues/590",
-      "updated_at": "2026-08-11T00:44:54Z"
+      "updated_at": "2026-08-12T05:01:52Z"
     },
     {
-      "number": 589,
-      "title": "Flat reversion P5 follow-up — the §8-native L1 forced-order availability re-expression needs a durable-carriage decision and a deployed §8.6 certificate",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/589",
-      "updated_at": "2026-08-10T22:03:47Z"
+      "number": 597,
+      "title": "Flat reversion follow-up — the TypeScript twin of #592's machine wire change (four auxiliary constructors, the proof-item datum, twelve emission sites)",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/597",
+      "updated_at": "2026-08-12T04:56:24Z"
     },
     {
-      "number": 585,
-      "title": "Flat reversion P5 follow-up — the nine-field TypeScript consumer swap (grammar + derivation + counted publication chain)",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/585",
-      "updated_at": "2026-08-10T12:13:10Z"
+      "number": 594,
+      "title": "Forced-order material carriage: re-express verify_order_material on the field-access door; retire the receipt family (#589/#583 rulings)",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/594",
+      "updated_at": "2026-08-12T01:43:19Z"
     },
     {
       "number": 565,
@@ -356,35 +368,17 @@
       "updated_at": "2026-08-10T12:12:52Z"
     },
     {
-      "number": 579,
-      "title": "Flat reversion P6 — single identity re-derivation batch",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/579",
-      "updated_at": "2026-08-09T20:59:35Z"
-    },
-    {
-      "number": 583,
-      "title": "Flat reversion: tx-field-receipt chain rebind is unowned",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/583",
-      "updated_at": "2026-08-08T21:41:41Z"
-    },
-    {
       "number": 582,
       "title": "no-input step-03/step-04 fixtures carry empty pexcludes non-membership proofs",
       "html_url": "https://github.com/Anastasia-Labs/midgard/issues/582",
       "updated_at": "2026-08-08T17:25:28Z"
-    },
-    {
-      "number": 581,
-      "title": "Flat reversion P8 — full regression + gate re-derivation",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/581",
-      "updated_at": "2026-08-08T04:58:53Z"
     }
   ],
   "releases": [],
   "commitActivity": [
     {
       "week": 1755388800,
-      "total": 23
+      "total": 18
     },
     {
       "week": 1755993600,
@@ -436,11 +430,11 @@
     },
     {
       "week": 1763251200,
-      "total": 32
+      "total": 23
     },
     {
       "week": 1763856000,
-      "total": 43
+      "total": 15
     },
     {
       "week": 1764460800,
@@ -488,15 +482,15 @@
     },
     {
       "week": 1771113600,
-      "total": 14
+      "total": 13
     },
     {
       "week": 1771718400,
-      "total": 45
+      "total": 47
     },
     {
       "week": 1772323200,
-      "total": 26
+      "total": 25
     },
     {
       "week": 1772928000,
@@ -516,7 +510,7 @@
     },
     {
       "week": 1775347200,
-      "total": 40
+      "total": 42
     },
     {
       "week": 1775952000,
@@ -524,7 +518,7 @@
     },
     {
       "week": 1776556800,
-      "total": 17
+      "total": 29
     },
     {
       "week": 1777161600,
@@ -536,27 +530,27 @@
     },
     {
       "week": 1778371200,
-      "total": 43
-    },
-    {
-      "week": 1778976000,
-      "total": 11
-    },
-    {
-      "week": 1779580800,
-      "total": 0
-    },
-    {
-      "week": 1780185600,
       "total": 25
     },
     {
+      "week": 1778976000,
+      "total": 10
+    },
+    {
+      "week": 1779580800,
+      "total": 1
+    },
+    {
+      "week": 1780185600,
+      "total": 26
+    },
+    {
       "week": 1780790400,
-      "total": 31
+      "total": 32
     },
     {
       "week": 1781395200,
-      "total": 20
+      "total": 13
     },
     {
       "week": 1782000000,
@@ -572,7 +566,7 @@
     },
     {
       "week": 1783814400,
-      "total": 10
+      "total": 9
     },
     {
       "week": 1784419200,
@@ -580,15 +574,15 @@
     },
     {
       "week": 1785024000,
-      "total": 201
+      "total": 202
     },
     {
       "week": 1785628800,
-      "total": 190
+      "total": 187
     },
     {
       "week": 1786233600,
-      "total": 12
+      "total": 15
     }
   ]
 }
