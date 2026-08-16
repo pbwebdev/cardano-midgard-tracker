@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-08-15T06:45:39.971Z",
+  "fetchedAt": "2026-08-16T06:47:15.229Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 25,
@@ -16,6 +16,34 @@
     "Perl": 37
   },
   "commits": [
+    {
+      "sha": "7b731f2c036eba202235a8e4b38dd4b02c317a50",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/7b731f2c036eba202235a8e4b38dd4b02c317a50",
+      "message": "feat(fault-proofs,validation,onchain,docs): P7 confirm-and-publish re-measurement - ceilings measured, K confirmed, evidence re-pinned (#580)\n\n- adjudication ceilings measured for the first time (net-mem method,\n  boundary pairs landed as permanent .ak selectors): canonical-decodability\n  1,077 (first-over 1,078), committed-field-shape 1,075 (first-over 1,076)\n  at the 13.2M basis; #601's declined reconciliation is now two readings -\n  the families genuinely differ by two items\n- K=15,148 NOT falsified (redeemer 15,148 -> tx 15,872 exact); publication\n  frontiers 15,570/15,073 confirmed with +1 probes; tier-1 bound 14,336\n  measured at the evidence layer and not falsified - #557's M2 narrowed,\n  not closed (a signed step tx at the cap is still unmeasured)\n- 64-byte overhang dispositioned: real, correct, not a capability gap -\n  the (14,332, 14,396] band selects tier 2; assertion unchanged as the\n  anti-conflation guard\n- the 5 measurement-movement reds re-taken with cause notes: Q10 depth\n  20->15 (step-04 grew by the inlined tier-1 preimage), Q14 20->19;\n  cardinality re-pinned onto the byte axis: Q10 39/40 -> 75/76, Q11\n  40/41 -> 196/197; Q1X-F6's execution-memory wall measured GONE\n  (constant in N through 296; the binding axis is now tier-1 carriage\n  bytes, ~41.2 B per input)\n- necessity artifacts re-pinned onto post-cascade identities (#560 second\n  half): blueprint sha256 605c8b8d -> 91861fac / md5 b20c9a14, semantic\n  applied 983051b4 -> 0a42b4c7; cek_v1 re-pinned under STAND: 4 -> 5\n  params, applied f5d6395c/156,467 B -> 58af0675/162,082 B - a FALSIFIED\n  #560 expectation (+5,615 B growth, recorded, not smoothed); dissolved\n  artifacts retired-in-place (invariant 14)\n- q1x artifact: enforcedBy gate repair only (the #609 dedup had moved\n  expectProofFitV1; the verifier now reaches its runner stage and fails\n  solely on the #608 owner-accepted red); the Q10/Q11 output-5 cells stay\n  OPEN under the derived-cell rules until #606 unblocks the verifier\n- new evidence index canonical-v1-p7-remeasurement-v1.json: every number,\n  its producing command, provisional -> confirmed deltas\n- blueprint reproduction note recorded: b20c9a14 is the --env testnet\n  build; the default-env build differs solely in scheduler.spend\n  (shift_duration 30 vs 3,600,000)\n\nVerification: fault-proofs 346 passed / 9 failed - exactly the #608\naccepted map minus the 5 re-taken measurement reds, no new signal; sdk\n308/308; demo typecheck exit 0; fork check 2,493 checks 0 errors\n(v1.1.23+2a78108); all 7 exec-ledger verifiers PASS zero drift;\nplutus.json byte-identical at b20c9a14a8fe445cdddbe5305b3857c1\n(398 validators).",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-08-16T04:36:48Z"
+    },
+    {
+      "sha": "ac54d01a17163f7ef3600035f077ae1832b38f2c",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ac54d01a17163f7ef3600035f077ae1832b38f2c",
+      "message": "fix(sdk,node,fault-proofs,onchain): apply the declared third cert-policy parameter to the ten under-applied semantic resolvers; blueprint-arity guard on every script application (#609)\n\n- midgard-sdk fraud-proof/contracts.ts: the ten semantic resolvers\n  (5, 7, 8, 11, 24, 25, 32, 37, 47, 57) deployed under-applied\n  (always-succeeds) get their declared third\n  fieldPreimageCertificatePolicyId argument; parameter application is\n  re-keyed by the blueprint's own declared parameter names, byte-identical\n  for the 65 already-correct resolvers (shape census: 64x(award,thread) +\n  1x(source_binder,thread,proof_item) + 10x(award,thread,certificate))\n- structural antidote: applyBlueprintParams/getUnappliedScript are now the\n  only door to applyParamsToScript in midgard-sdk and midgard-node; the\n  helper reads validator.parameters.length from the blueprint and refuses\n  declared != applied in both directions, mutation-verified fail-closed\n- audit: all 31 distinct cert-parameter validators censused in\n  docs/fault-proofs/parameter-application-audit-609.md - zero additional\n  under-applied validators among the ~19 previously unaudited; 8 declared\n  but deployed by nobody (unreachable families)\n- validation-resolver-applied-hashes re-derived against the corrected\n  hashes; the pin now refuses the two-param regression (re-pinning a\n  broken deployment against itself cannot green it); the formerly dormant\n  CEK leg runs by default\n- cascade (applied-hash layer only, owner-authorized): 44 identity slots\n  across 19 validators moved - ten semantic applied hashes, the five\n  affected PREPARE embedded hash lists and applied hashes, dispute opener\n  156d1b0a -> 9f3fa57d, Q13 catalogue root 173cabdb -> 61f11db3; zero\n  stale pins remain (repo-wide scan); 6 .ak test-fixture hashes re-pinned\n- predicted-but-unmoved identities recorded with measured cause: the\n  ABI-01/02/03/04/07 digests cover declared name vectors and the\n  deployment-manifest id derives over a synthetic placeholder - none\n  reach the applied-hash layer; ABI-freeze evidence artifacts\n  byte-unmodified, verifier 7/7 and self-test green\n- carried (disclosed): shared-helper dedup across 8 submit-init-emulator\n  suites + 2 support files (expectProofFitV1/printProofFitV1/\n  setupFraudulentBlockV1, harness preamble) - behavior-preserving, it()\n  counts identical, the 15 relocated expects live in the shared helper\n\nVerification: anchored submit-init-emulator-soundness 3/3 green with the\ntest byte-unmodified (md5 43d16aea = the #605-recorded value); zz605\narity gate 7/7 including three mutation fail-closed legs; fault-proofs\n341 passed / 14 failed - exactly the #604 accepted map minus the #605\nsoundness red, now green; sdk 308/308; demo typecheck exit 0; fork check\n2483 checks 0 errors (v1.1.23+2a78108); plutus.json byte-identical at\nb20c9a14a8fe445cdddbe5305b3857c1 (398 validators).",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-08-15T19:25:09Z"
+    },
+    {
+      "sha": "620fa2c068f0291cb6ef4cd94872931413aae330",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/620fa2c068f0291cb6ef4cd94872931413aae330",
+      "message": "chore(node,watcher,docs): 2026-08 deslop — ledger pruning, exec-plan archival, shared-helper dedup\n\n- GOAL_PROGRESS.md: prune the superseded superseding-chain narratives and\n  the merged remote-ledger preservation copies (-2,802 lines; owner-directed;\n  content recoverable verbatim from git history per the file's \"Ledger\n  pruning (2026-08-15)\" note; task queue, criterion ledger, decisions,\n  validation ledger, and dated wave entries untouched)\n- docs/exec-plans: retire 27 completed 2026-07 checkpoint and throughput\n  exec-plans (19 checkpoints + 8 throughput); still-live content\n  consolidated into archive-extracts-2026-08.md; the phase-2\n  validation-gates runbook re-points at the archive\n- midgard-node: extract shared sha256/sleep/percentile/exact-record/\n  exact-object-keys helpers and dedupe their inline copies across commands,\n  database, workers, and stress tooling\n- midgard-watcher: extract shared test-support fixtures (canonical-json,\n  deployment-authority, tls-transport); refresh @lucid-evolution/lucid\n  0.6.0 -> 0.6.2 fixture pins left stale by the workspace bumps\n  (f76d7fca, 3e7a9e89)\n\nVerification (deslop-only tree, the in-flight #609 work stashed aside):\nmidgard-node and midgard-watcher typecheck clean; midgard-core and\nmidgard-sdk dists rebuild; touched watcher suites 118/118 (one 5s-timeout\nflake, green on isolated rerun); mpf architecture-g gate-config and\ncandidate-summary tests green; foreign-tip-reconciliation 19/19 against\nPostgres; the section 4.4 deposit-flow emulator journey green on this\ntree; status-role-control PASS (decorated rows Q24/Q25/Q44 intact after\nthe pruning); manifest-quality reports exactly the 12 enumerated accepted\ndefects with a byte-identical signature at HEAD; the fault-proof\nreconciliation and CG4 gate failures reproduce identically at HEAD\n(pre-existing: the two #607 scaffold reds; the stale abiFreezeBinding\nrow) and are unchanged by this commit.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-08-15T17:12:05Z"
+    },
+    {
+      "sha": "f0d6565d7f43828bf15d6d6c24c0caeb2f5e9e83",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/f0d6565d7f43828bf15d6d6c24c0caeb2f5e9e83",
+      "message": "test(fault-proofs): semantic-resolver arity audit — permanent gate for the under-applied always-succeeds class (#605)\n\n#605's adversarial bisection classified the symmetric-soundness failure\nas (b1) a genuine, exploitable, production-path soundness defect: ten\nfraud-proof semantic-resolution validators are deployed one parameter\nshort (missing field_preimage_certificate_policy_id, added in #592), and\nunder Plutus V3 an under-applied validator evaluates to a lambda value —\nwhich the ledger reads as success — so those ten validators are\nunconditional always-succeeds scripts and the correct Aiken guard never\nexecutes. A challenger can steer any dispute into a compromised phase\ngroup and defeat any honest operator's valid block.\n\nThis lands the durable gate: zz605-semantic-resolver-arity reads the\nSDK's own resolver title table and plutus.json's declared parameter\ncounts and fails on any declared != applied mismatch — the coverage the\nexisting validation-resolver-applied-hashes pin cannot provide (it pins\nthe under-applied hashes, so it verifies the broken deployment against\nitself: the program's sixth gate-that-cannot-fail). The anchored\nsubmit-init-emulator-soundness test covers only the InputSets item\nresolver; this audit covers all ten and the full 75-resolver group.\n\nThe fix (point application + an applyParamsToScript arity-check antidote\n+ full audit of all cert-parameter validators, with its applied-hash\nidentity cascade) is #609, owner-authorized, blocking #581. The\ncompiled blueprint is correct: plutus.json is untouched at\nb20c9a14a8fe445cdddbe5305b3857c1 and no regeneration is spent. The\nanchored soundness test is byte-unmodified.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-08-15T11:17:50Z"
+    },
     {
       "sha": "dd5329d567861b12f466d5f71cc448cd963a01dd",
       "html_url": "https://github.com/Anastasia-Labs/midgard/commit/dd5329d567861b12f466d5f71cc448cd963a01dd",
@@ -80,13 +108,6 @@
       "authorDate": "2026-08-13T16:40:36Z"
     },
     {
-      "sha": "aea6e8ab9cbed98b4027d3964149be8bfaba2129",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/aea6e8ab9cbed98b4027d3964149be8bfaba2129",
-      "message": "WIP",
-      "authorName": "Drop-Table-Users",
-      "authorDate": "2026-08-13T15:21:11Z"
-    },
-    {
       "sha": "4c1154153cdc40871ed32fc0c0b6268065171fa8",
       "html_url": "https://github.com/Anastasia-Labs/midgard/commit/4c1154153cdc40871ed32fc0c0b6268065171fa8",
       "message": "feat(node): source forced-order §8 carriage from a node-local Ogmios chain-sync read (#599)\n\nEnds the #594 refusal: the node's forced-order ingestion can now supply\nthe carriage its authenticator demands. Per the owner's 2026-08-13 ruling\nthe source is node-local and Ogmios+Kupo only — no watcher dependency:\nKupo's match gives the order's created_at {slot_no, header_hash}; an\nOgmios chain-sync session (findIntersection at an ancestor checkpoint,\nnextBlock to the matching header) yields the creating transaction's mint\nredeemer; reference-input carriage resolves through Kupo's v2.9.0-shaped\nMatch (datum_hash/datum_type) plus GET /datums/{hash} — deliberately not\nthe ≥2.10.0 ?resolve_hashes contract, so the reader speaks what the\npinned deployment serves. Every observed byte still terminates in\nreconstructTxOrderMaterialV1's three-tier §4 hash door; corruption,\noutage, and rollback all fail closed (delay, never mis-ingest). The read\nis skipped for canonically-empty orders (commitment-derived, so a\nmaterial-bearing order can never take the skip path).\n\nTests: a local Ogmios (real RFC6455 WebSocket) + Kupo (real HTTP) harness\nover real signed emulator transactions; all three §8 tiers ingest\nend-to-end from the observation, including a DB-backed reconciler pass;\ncorruption negatives pin the fail-closed door. The refusal path and the\nKupmios-surface docstring section are removed, not reworded. Operator\nconstraints documented: --match \"*\", no --prune-utxo (§8.7 reclaim vs\n§8.11 normative history), v2.x /datums contract.\n\nCo-Authored-By: Claude <noreply@anthropic.com>",
@@ -99,27 +120,6 @@
       "message": "feat(sdk,validation,fault-proofs,node): the TypeScript wire twin of #592's machine move — carriage-borne auxiliary witnesses and the preimage proof-item datum (#597)\n\nEnds the frozen-blueprint silent divergence for #592's moved machine wire\ntypes on the TypeScript side. The four auxiliary witness constructors\n(indices 1, 2, 29, 30) and ValidationProofItemDatumV1 now carry\nFieldCarriageV1 / field_preimage exactly as the Aiken source declares\n(validation-machine-v1.ak:119,127,303,313,421), plus the moved\nCanonicalDecodeItemObservationV1 shape; the encoder gains fieldCarriageData\n(Inline 0 / RawUtxo 1 / Certified 2); verifyMachineFieldItemV1 retires\nwith its seven mutation rows; thirteen emission sites (the issue's\n\"twelve\" is a miscount against its own enumeration) route through one\nfieldCarriage closure.\n\nTier policy per orchestrator Ruling 1 (option C): the trace producer\nderives the tier from §8.4's selectMidgardFieldCarriageTierV1, emits\nInline only when admitted (≤ 14,336 B), and refuses above the cap with\nthe named ValidationMachineCarriageTierUnsupportedErrorV1 — never a\ncarriage §8.4 does not admit, never fabricated reference-input indices.\nThe tiers-2/3 producer path is #600 (blocked_by #597, blocks #579).\nPer Ruling 2 the C21 proof-fit probes re-pin the real tier-1 property —\nauxiliary ≤ preimage + CBOR segment framing, no per-item proof material —\nwith the above-cap probes pinned to the named refusal; #600 restores the\nO(1) form.\n\nRecorded for #579: the parity suite cannot see this wire change even\nafter regeneration (ValidationAuxiliaryWitnessV1 hits a recursive ABI\ndefinition; ValidationProofItemDatumV1 never reaches a declared ABI\nsurface) — coverage is the cross-language producer vector instead.\nplutus.json byte-identical (c52589df225145ad74c8f444d500dfe5); the two\ntouched .ak files are generator-owned and producer-emitted.\n\nCo-Authored-By: Claude <noreply@anthropic.com>",
       "authorName": "Philip DiSarro",
       "authorDate": "2026-08-13T05:17:30Z"
-    },
-    {
-      "sha": "4424127ae4450f55e3fd3ae8d70c588547256e9e",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/4424127ae4450f55e3fd3ae8d70c588547256e9e",
-      "message": "feat(onchain,sdk,spec): canonical-decodability fault family — the §12.7 decoder-free step family on the da-hash-preimage pattern (#596)\n\nCloses the operator escape hatch #593's owner Ruling 2 named: under §4 the\noperator commits blake2b_256(arbitrary bytes) per field, and the §8.8 door\ncorrectly aborts on committed bytes that are not a §5.1 envelope — so no\nCanonicalDecode step was producible by anyone and the dispute stalled. The\nnew family convicts \"the committed preimage of field i is not a §5.1\nenvelope\" directly: the prover supplies the committed bytes, hash-checked\nagainst the commitment via the new non-aborting\nauthenticated_committed_preimage reader (never reachable through either\ndoor entry point — the door's abort semantics are byte-identical), and a\ntwo-step validator family renders the grammar verdict and convicts.\n\n- docs/spec/midgard-tx.md §12.7: the fault kind, its adjudication, the\n  disjointness boundary against §12.3's fault_item_predicate\n  (reject_field_preimage_size / reject_invalid_field_type stay\n  CanonicalDecode's), and the named residue recorded for the owner.\n- Aiken: canonical-decodability rule + steps 01/02 (80 selectors, 15\n  guard refusals — 13 isolated, 2 backstops, mutation-verified), producer\n  fixtures, exec ledger with verifier wired into CI.\n- TypeScript: canonical-decodability-v1 builder/verifier twins with\n  producer-emitted cross-language vectors (both artifacts checked).\n- Identity movement recorded for #579 rider 6: 390 → 394 validators,\n  purely additive; plutus.json byte-identical\n  (c52589df225145ad74c8f444d500dfe5); parity handoff set 14 → 16.\n\nCo-Authored-By: Claude <noreply@anthropic.com>",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-13T03:16:39Z"
-    },
-    {
-      "sha": "04aaae57a702fd4668937ccde4138eaa879d3d9d",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/04aaae57a702fd4668937ccde4138eaa879d3d9d",
-      "message": "feat(onchain,sdk,node,watcher): forced-order material carriage on the field-access door (#594)\n\nExecutes the 2026-08-11 owner ruling (supersedes #589/#583): forced\norders carry their material as prover-chosen per-field FieldCarriageV1\nin the tx-order mint redeemer, authenticated at mint against the\ncompact's nine §4 commitments.\n\nOn-chain: verify_order_material walks §2.5's nine slots and opens the\n§8.8 door at each non-empty commitment - the all-empty clause and its\n\"cannot be wired from this lane\" note are gone. The vector is\npositional over non-empty slots with exhaustion refused in both\ndirections, declared-length-vs-authenticated-length bound, the\nempty-slot declared_length == 1 rule enforced, and burns carrying no\nvector. TxOrderPayloadV1 unchanged (§8.7: carriage is identified by\ndigests, never OutputReference). The mint wraps the shared user-events\nredeemer and gains field_preimage_certificate_policy_id (the same §8.6\ndeployment role as #592's machine parameter; churn recorded for #579).\nThe door entry point is the whole-materialising one - mutation-proven\nload-bearing: the lazy tier-3 view never hashes the chunk bytes this\nmint would otherwise vouch for, and spec §8.11 now says so normatively.\nTests 8 -> 35 in the module: positive + negative per tier, wrong-bytes\nper constructor (same-stride so the hash is the sole falsifier,\nmutation-verified), plus the empty-slot and burn refuters.\n\nSpec: new §8.11 (durable availability = L1 history + digest addressing;\nprover-chosen carriage at the order mint; creator payment-key custody,\nunconditional reclaim, script credentials refused; the empty-slot and\nburn rules; §8.7 citation corrected from the ruling text's §8.5).\n\nOff-chain: the watcher decodes the wrapped redeemer for the tx-order\npolicy (bare enum for the other three) with an old-shape negative; the\nnode ingestion walk opens the TS door per non-empty slot re-deriving\nthe mint's exhaustion rule, Inline carriage live end-to-end\n(material-chain 12/12 incl. a Certified row); order-creation planning\nchooses inline vs predeploy-and-reference per field, publications\ntarget the creator's wallet, tier-3-without-policy-id throws. AC5's\nRawUtxo/Certified ingestion remainder is deviation-recorded and\nre-homed to #599 (blocked_by this ticket; the Kupmios provider surface\n- 14 methods, none returning a tx body - cannot supply the creation\ntx's redeemer; premise independently verified twice). Receipt-family\nretirement (AC3) proven already satisfied by #587 with grep evidence.\n\nMeasurement: new tx-order-mint exec ledger (4 rows, worst admissible\nshape, neutralisation selectors mutation-verified, CI-wired) pins\n§8.11's cost claim per the gate-that-cannot-fail doctrine; the four\nexisting ledgers pass without --update (the mint is not on any\nmeasured path). Applied-hash delta for #579: head 887f814f -> work\n56af1ae7, 2 changed entries = tx_order_v1.mint (params\n[hub_oracle] -> [hub_oracle, field_preimage_certificate_policy_id]),\nrecorded on #579 superseding #587's one-parameter note. Also recorded:\nthe F05 27-path/17-unleased enumeration, two stale evidence citations,\nand the fork-binary provenance discrepancy (CI pin 6d14ab2 vs rider 1's\n2a78108) for owner reconciliation at the compiler switch.\n\nVerification: fork full check 2,308 / 0 errors (+27 attributed);\nadversarial review round 1 (5 majors + 12 minors, all fixed or\nevidence-rebutted - deposit-flow-emulator independently re-run 14/14\ngreen with the lane applied, the 13/1 observation matching a\nforeign-stamped shared-Postgres signature) + CLEAN confirmation round\nwith an independent whole_view mutation check; watcher 62/62 with tsc\nclean; parity 8/22 (30) and the emulator-shared handoff comment at\nFOURTEEN, both run-verified; both formatters idempotent on touched .ak;\nplutus.json byte-identical (c52589df225145ad74c8f444d500dfe5); no\nparent-only surface touched. Orchestrator ruling this iteration: #599's\nedge re-pointed to blocked_by #594 per the #587/#589 precedent (the\nremainder is a node feature, not blueprint-identity work), so this\nticket closes under its recorded Deviation.\n\nCo-Authored-By: Claude <noreply@anthropic.com>",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-12T21:16:31Z"
-    },
-    {
-      "sha": "55f9c91dcc203756ce2e638d129e74a729b11ba6",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/55f9c91dcc203756ce2e638d129e74a729b11ba6",
-      "message": "feat(onchain,validation): rebind the validation machine onto the authenticated field door; repair E1 (#592)\n\nThe last compiled-code unit before #579's single blueprint regeneration:\nevery counted per-item opening in the validation machine moves onto the\nauthenticated flat field door, executing #593's owner rulings (tiers\n1-3 for machine-step evidence; committed-garbage aborts stay with\n#596's fault family; E1 repaired in this lane).\n\nThe rebind. All fifteen counted opening sites across eight machine\nphases (CanonicalDecode, InputSets, Signatures, PhaseANativeScripts,\nPhaseAScriptPreconditions, ScriptSources stages 0/1/4/mint/7, Cek) -\nreached through four ValidationAuxiliaryWitnessV1 constructors, one\nmore than the ticket's measured table - are gone:\nbounded_collection_v1.verify_item occurrences in validation-machine-v1\ndrop 41 -> 2 (a bare constant). New lib\nvalidation-machine-field-door-v1.ak (MachineFieldDoorV1 carrying\nreference_inputs + certificate_policy_id, open_machine_field_item{,_at},\nmachine_field_count, derived readers - every byte returned only via\nfield_read_range over an authenticated view) plus\nnative_tx_field_access_v1.authenticated_whole_field_view, the\nmaterializing tier-3 view the count-consuming phases need (one\nblake2b_256 over the whole preimage against the §4 commitment; the\nshared prologue is factored so the §2.5 pairing has one spelling).\nValidationProofItemDatumV1 carries the whole §5.1 field_preimage\n(wrapped as Inline inside the validator - no prover-named tier);\nCanonicalDecodeItemObservationV1 reshaped and its predicate renamed\n_is_consistent to say what it proves. Twelve validation-trace\nvalidators gain field_preimage_certificate_policy_id (last position);\ncanonical_decode_item_semantic_v1 moves for a redeemer reshape. A\nlatent defect fixed en route: transaction_field_item_encoded_length was\nstale since #567 and one negative was accepting the wrong successor it\nclaimed to reject.\n\nThe E1 repair (in scope per the binding ruling). chunk_bytes_k and\nMIDGARD_CHUNK_BYTES_K_V1 move 15,900 -> 15,148, closing §8.3 erratum\nE1's unpublishable window as a property of the repair (drift guard: a\nliteral K - MAX_PUBLISHABLE == 0). Everything K touches re-derived from\nproducers: the #569 straddle vector ([15,148, 855], straddling item\n378), the #568 goldens, the §8.10 corner ([15,148, 15,148, 2,467]),\n~30 spec rows, the §12.5 tier-2 fixtures, the carriage exec ledger\n(re-taken; binding axis flips CPU -> memory at 83.54%), and the\ncarriage-fit emulator (16/16). The 16,225 B measured-maximum field-2\npreimage now splits [15,148, 1,077] - both chunks publishable - and the\nmax-inline-datum row greens via a real tier-3 Certified manifest\nasserting exactly that admissibility, not a tier-1 evidence shape no\nprover could construct. #598 closed as absorbed (it had been filed on\nthe authority of a retracted comment).\n\nVerification. Fork-runner full check 2,281 checks / 0 errors / 7\nwarnings - the 22-row #592 family greens and the Aiken side of the\nrepo is fully green for the first time in the program; the +1 test is\na new negative making item_count == active_total_count a real\nfalsifier. Adversarial soundness review CLEAN: all 15 sites verified\nguard-for-guard, negatives mutation-tested, no reader returns\nunauthenticated bytes (the #575 forgery class), no tier smuggling\nthrough the datum wrap. Exec ledgers pass without --update with\naccuracy-audited cause notes (two distinct per-opening amounts: body\n+2,224/+682,801, witness +2,124/+666,801; the q21 two-body-opening\ntotal 4,248 = 2x the witness figure is published as measured, no false\nderivation; carriage figures labeled cumulative vs round-4-only).\nIsolated stock-build delta reproduced twice: 390 entries both trees, 73\nchanged entries across 36 distinct validators, head 0ad09746 / work\n887f814f - what #579's applied-hash cascade inherits, with the\ncert-parameter arity churn recorded on #579 (rider 2), never edited.\nplutus.json byte-identical (c52589df225145ad74c8f444d500dfe5); no\nparent-only surface touched; both formatters idempotent on all touched\n.ak; producer --check chains clean; scanner-doc (#571) reconciliation\nproven neutral. Follow-up #597 (the TS wire twin of the four moved\nconstructors + datum, indivisible across four packages, currently a\nsilent divergence because parity reads the frozen blueprint) is filed,\nblocked_by this ticket, blocking #579.\n\nCo-Authored-By: Claude <noreply@anthropic.com>",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-12T07:52:21Z"
     }
   ],
   "contributors": [
@@ -326,28 +326,40 @@
   ],
   "issues": [
     {
-      "number": 605,
-      "title": "Potential soundness: forged validation dispute against an honest operator is ACCEPTED in the symmetric-soundness emulator test (post-#579; classify after #604)",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/605",
-      "updated_at": "2026-08-14T20:06:57Z"
+      "number": 612,
+      "title": "Legacy no-input/double-spend step builders skip tier selection — inline-only carriage caps Q11 at 196 and Q10 at 75 of 296 admissible inputs",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/612",
+      "updated_at": "2026-08-16T04:37:40Z"
     },
     {
-      "number": 608,
-      "title": "no-input step-03 pexcludes non-membership Withdraw crashes post-#604 — classify (pre-existing vs residue); three named reds",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/608",
-      "updated_at": "2026-08-14T19:30:19Z"
+      "number": 611,
+      "title": "Measure a complete signed tier-1 step transaction at the 14,336 B preimage cap (#557 M2 closure)",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/611",
+      "updated_at": "2026-08-16T04:37:38Z"
+    },
+    {
+      "number": 582,
+      "title": "no-input step-03/step-04 fixtures carry empty pexcludes non-membership proofs",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/582",
+      "updated_at": "2026-08-16T02:01:33Z"
+    },
+    {
+      "number": 606,
+      "title": "Pre-launch: §8.3 E2 limit-3 repair — fold the field commitment into the §8.6 certificate asset name (second regeneration; deferred from #604 by owner ruling)",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/606",
+      "updated_at": "2026-08-16T02:01:32Z"
+    },
+    {
+      "number": 610,
+      "title": "phas-membership deploys membership.withdraw bare from compiledCode — outside the #609 arity door (zero-declared-params today)",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/610",
+      "updated_at": "2026-08-15T20:20:58Z"
     },
     {
       "number": 607,
       "title": "Q02 family-scaffold generator emits retired pre-#575 Aiken shapes (out of #604's builder scope by ruling; tooling lane)",
       "html_url": "https://github.com/Anastasia-Labs/midgard/issues/607",
       "updated_at": "2026-08-14T18:47:25Z"
-    },
-    {
-      "number": 606,
-      "title": "Pre-launch: §8.3 E2 limit-3 repair — fold the field commitment into the §8.6 certificate asset name (second regeneration; deferred from #604 by owner ruling)",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/606",
-      "updated_at": "2026-08-14T16:54:09Z"
     },
     {
       "number": 483,
@@ -360,26 +372,10 @@
       "title": "[Canonical V1 Goal B26] Complete availability and attestation-timeout correction",
       "html_url": "https://github.com/Anastasia-Labs/midgard/issues/502",
       "updated_at": "2026-08-13T21:17:08Z"
-    },
-    {
-      "number": 580,
-      "title": "Flat reversion P7 — confirm-and-publish re-measurement",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/580",
-      "updated_at": "2026-08-13T12:27:41Z"
-    },
-    {
-      "number": 565,
-      "title": "Spec: compact-tx flat field-hash reversion",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/565",
-      "updated_at": "2026-08-13T05:19:14Z"
     }
   ],
   "releases": [],
   "commitActivity": [
-    {
-      "week": 1755388800,
-      "total": 23
-    },
     {
       "week": 1755993600,
       "total": 24
@@ -430,15 +426,15 @@
     },
     {
       "week": 1763251200,
-      "total": 23
+      "total": 32
     },
     {
       "week": 1763856000,
-      "total": 16
+      "total": 43
     },
     {
       "week": 1764460800,
-      "total": 17
+      "total": 8
     },
     {
       "week": 1765065600,
@@ -530,7 +526,7 @@
     },
     {
       "week": 1778371200,
-      "total": 43
+      "total": 41
     },
     {
       "week": 1778976000,
@@ -546,7 +542,7 @@
     },
     {
       "week": 1780790400,
-      "total": 32
+      "total": 31
     },
     {
       "week": 1781395200,
@@ -578,11 +574,15 @@
     },
     {
       "week": 1785628800,
-      "total": 189
+      "total": 191
     },
     {
       "week": 1786233600,
-      "total": 31
+      "total": 32
+    },
+    {
+      "week": 1786838400,
+      "total": 1
     }
   ]
 }
