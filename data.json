@@ -1,10 +1,10 @@
 {
-  "fetchedAt": "2026-08-18T06:51:02.963Z",
+  "fetchedAt": "2026-08-19T06:51:45.463Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 25,
     "forks_count": 10,
-    "open_issues_count": 100
+    "open_issues_count": 102
   },
   "languages": {
     "Aiken": 359544,
@@ -17,109 +17,109 @@
   },
   "commits": [
     {
-      "sha": "48ae95ae0e76e791c134816277e971b01cbfeff7",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/48ae95ae0e76e791c134816277e971b01cbfeff7",
-      "message": "docs(evidence): reconcile the C10-C13/CG1 manifest rows and the capability-reconciliation CG1 claim onto the measured 2026-08-17/18 basis (#479)\n\nRe-derive the five §8.1 control-plane rows on measured output (v1.1.23\nliterals, measured counts with 2026-08-05 contracts retained as\nsuperseded provenance, blocked chains converted to measured readiness),\nanchor CG1's row to its now-built gate, and decorate the 2026-08-04 bare\nCG1 PASS with dated provenance. Records the newly surfaced, attributed,\nCI-unwired capability-reconciliation verifier red (stale per-task\ncitation pins) for the follow-up re-pin.",
+      "sha": "f900b7173c911e1e3205df42982afb42a04eb126",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/f900b7173c911e1e3205df42982afb42a04eb126",
+      "message": "feat(onchain,sdk,fault-proofs): build the Q40 fabricated-withdrawal family complete to the blueprint boundary (#482)",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-18T06:15:43Z"
+      "authorDate": "2026-08-19T00:15:46Z"
     },
     {
-      "sha": "5ec92326a9a23e9414e0cc068255accf684ed6f2",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/5ec92326a9a23e9414e0cc068255accf684ed6f2",
-      "message": "ci(evidence): scope the CG1 stale-blueprint-pin mutations to checkouts that carry the gitignored blueprint (#479)",
+      "sha": "75341de2d155ccde13cdafbf0163991f6365666b",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/75341de2d155ccde13cdafbf0163991f6365666b",
+      "message": "docs(evidence,scripts): land the Q39 per-family closure surfaces and close output 10 in the same pass (#482)",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-18T05:32:26Z"
+      "authorDate": "2026-08-19T00:13:46Z"
     },
     {
-      "sha": "ced7258da878c8bfb762b1db1fa944fd10d3a4a6",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ced7258da878c8bfb762b1db1fa944fd10d3a4a6",
-      "message": "ci(evidence): make the CG1 self-test mirror the CI blueprint-optional invocation when the gitignored blueprint is absent (#479)",
+      "sha": "5dadd5d1181f66f9d43e27a30821c3a724d8ddc0",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/5dadd5d1181f66f9d43e27a30821c3a724d8ddc0",
+      "message": "feat(fault-proofs): add the Q39 fabricated-deposit prepare/submit surfaces and family suite to the blueprint boundary (#482)",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-18T05:31:33Z"
+      "authorDate": "2026-08-18T22:50:13Z"
     },
     {
-      "sha": "4051704c5881208505e30fa495d332344357fefb",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/4051704c5881208505e30fa495d332344357fefb",
-      "message": "ci(evidence): wire the CG1 fit gate and self-test, with a blueprint-optional mode for the gitignored-blueprint checkout (#479)",
+      "sha": "8fe3052e58f56beba45470506a97e6bf60f29dca",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/8fe3052e58f56beba45470506a97e6bf60f29dca",
+      "message": "feat(fault-proofs): source the observe door from a published item-observe reference script (#617 item 1, #597 ruling a)\n\nAdd the validationTraceDisputeItemObserve deployment-info role, mirroring\nvalidationTraceDisputeItemSemantic exactly: a plain reference-script\npublication with no auth token and no manifest-identity surface, so the\ndeployment manifestId does not move. submitValidationDisputeSemanticResolution\nresolves the entry up front beside the item-semantic one and the observe\nstage - the SS8.8 door, the stage whose envelope the carriage bytes need -\nsources canonical_decode_item_observe_v1 by reference instead of embedding\nthe 9,108-byte applied body.\n\nMeasured precondition (#617 first step): the applied observe body publishes\nas a real signed 9,384-byte transaction, 7,000 bytes under the 16,384-byte\nenvelope.\n\nEmulator suites publish the observe reference script beside the item-semantic\none and pin the observation transaction script-free with the applied body\nabsent from its CBOR; the stage reference-input pattern moves to\n[1, 0, 1, 0, 0] on the direct route and [0, 2, 0, 2, 0, 0] on the reference\nroute. buildRemovalDeploymentInfo gains the observe slot ahead of\nremovalReferenceScripts, with every positional call site widened.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-18T05:30:35Z"
+      "authorDate": "2026-08-18T22:16:34Z"
     },
     {
-      "sha": "38c566f6086d142ab004462ffde0ab610e8b4d10",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/38c566f6086d142ab004462ffde0ab610e8b4d10",
-      "message": "feat(demo,evidence): build the CG1 aggregate control-publication fit gate — 34-validator roster measured under the 16,384-byte envelope (#479)\n\nThe gate CG1's manifest row always named but never received: a verifier\nthat recomputes the hub/control publication roster from\nnodeRuntimeReferenceScriptTargets and fails closed on drift, a pinned\nevidence artifact carrying per-validator applied hash, script bytes,\ncomplete signed publication transaction bytes, fee, and margin (all 34\nfit; largest 13,317 bytes), the oversized CEK direct resolver as the one\ncited exclusion tracked by P1, a PRE_FREEZE hash basis naming #510's\nregeneration as the re-pin trigger, and a self-test rejecting 25 hostile\nmutations.",
+      "sha": "f4c418182c7cae725e503d49a645cd22aafdb8eb",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/f4c418182c7cae725e503d49a645cd22aafdb8eb",
+      "message": "feat(onchain,sdk): build the Q39 fabricated-deposit family selectors and byte twins (#482)",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-18T05:28:22Z"
+      "authorDate": "2026-08-18T22:15:35Z"
     },
     {
-      "sha": "1ec5e12552ec0c558c7a006279cef896d03d8a52",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/1ec5e12552ec0c558c7a006279cef896d03d8a52",
-      "message": "docs(ledger): record the first direct #479 measurement — C10-C13 PASS, CG1 blocked on its never-built aggregate verifier (#479)",
+      "sha": "35ff7d5829a088b43dd691a3095c508cb614c513",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/35ff7d5829a088b43dd691a3095c508cb614c513",
+      "message": "docs(evidence,fault-proofs): land the Q14 output-10 parent integration and register the queue row (#481)",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-18T04:45:00Z"
+      "authorDate": "2026-08-18T20:39:44Z"
     },
     {
-      "sha": "9f1337307e907dc8fbe512049a45ff163bf0f470",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/9f1337307e907dc8fbe512049a45ff163bf0f470",
-      "message": "docs(ledger): record the static-policy PASS under the declared compiler, closing #476 criterion 5 (#476)",
+      "sha": "3d00322a1934087fee51fa94c071faa1894dbc96",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/3d00322a1934087fee51fa94c071faa1894dbc96",
+      "message": "docs(evidence,scripts): build the Q14 per-family closure surfaces and supersede the stale manifest census (#481)",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-18T04:27:02Z"
+      "authorDate": "2026-08-18T20:34:33Z"
     },
     {
-      "sha": "ccce10f6148eb02975fd52ec375ba6033607ccd5",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ccce10f6148eb02975fd52ec375ba6033607ccd5",
-      "message": "docs(evidence,demo): retire the nine C20 citation defects onto the #587 gate and ledger the #477 all-PASS measurement (#476, #477, #587)\n\nThe nine C20-0..C20-8 rows cited a focused module that was never written\nbecause #587 retired its subject; re-point them to the named replacement\ngate, re-derive their contracts from measured runs, empty the standing\naccepted-defect enumeration with dated retirement records, and teach the\nquality gate's --accepted-defects loader that an empty enumeration is\nvalid and allowlists nothing. Ledger the #477 (C28) acceptance\nre-measurement (all five criteria PASS at e1e65629, sole red the accepted\n#597 carriage-selection gap) and supersede the stale C28 row in place.",
+      "sha": "f16cb4a4f0f0e4e287a32dd96cd75e0852977eaf",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/f16cb4a4f0f0e4e287a32dd96cd75e0852977eaf",
+      "message": "docs(evidence,fault-proofs): close the Q49 structural partials and re-derive the reconciliation audit to 9 PASS (#481)\n\nExecute the Q49 handoff artifact's remaining pendingEdits: the\nreconciliation structuralAudit moves L298 (cross-block replay) and\nL302 (malformed validity interval) from PARTIAL to PASS with\nremainingTask cleared, empties taskResidues.openStructural, and\nrecounts the summary to 9 PASS / 0 PARTIAL / 0 OPEN - the executable\nevidence was already recorded on both rows and is measured green by\nthe Q49 gate's 31 runner-executed checks under the pinned fork\ncompiler.\n\nRe-pin the reconciliation verifier's deliberate exact pins in the\nsame edit set (summary deep-equal, disposition filters, the\nstructuralContract row pins, the PASS-row allowlist, and the\nfirst-queue F21 regex, which now requires both the retained 7/2\nprovenance and the closure supersede), supersede the ledger F21 queue\nrow in place, and fix coverage-matrix L298's evidence cell to cite\nthe two #582 witness-faithful step-03 selectors, clearing the\npre-#582 name drift deferred by the Q10/Q11/Q12 passes.\n\nMeasured after the edits: Q49 gate PASS exit 0; quality gate PASS\n186/186 with 0 defects; the reconciliation verifier executes every\nre-pinned assert green and exits 1 solely on the accepted Q02\npermissive-dispatch scanner baseline, the same red it carries at\nHEAD.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-18T04:26:22Z"
+      "authorDate": "2026-08-18T19:29:43Z"
     },
     {
-      "sha": "e1e65629972bc4b1bee403b7e0adcad809fe6325",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/e1e65629972bc4b1bee403b7e0adcad809fe6325",
-      "message": "fix(demo): move the goldens Golden type onto the post-#606 certificate shape\n\n16c375c0a's #606 off-chain repair updated the generator, the fixture, and\nthe two certificate test blocks to the constant asset name and the\nmint-welded fieldHashHex, but left the test file's Golden type declaring\nthe retired per-certificate plural asset-name class - breaking\nmidgard-core's tsc --noEmit while the suite itself stayed green (vitest\ndoes not typecheck). The type now matches what the generator emits:\nsingular constant certificateAssetName and tier3Certificate.fieldHashHex.\nType-only; goldens suite 11/11, full midgard-core 507/507, tsc clean.",
+      "sha": "fe0798ad51d1a0050466d1cbe7d899fdca468341",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/fe0798ad51d1a0050466d1cbe7d899fdca468341",
+      "message": "docs(evidence,fault-proofs): land the Q12 output-10 parent integration and register the queue row (#481)\n\nExecute the Q12 artifact's parentIntegration.pendingEdits: the two\nmatrix Status cells (coverage-matrix L137, catalogue-status L21) now\nrecord the pinned Q13-form local closure, the artifact re-derives\noutput 10 LOCAL_PASS from the re-measured cells (10 LOCAL_PASS / 0\nOPEN, the original derivation retained under whyPreviouslyOpen), and\nthe gate re-measures PASS exit 0 under the pinned fork compiler.\n\nAdd the Q12 PASS queue row to GOAL_PROGRESS (outputs 1-10 LOCAL_PASS\nwith measured counts; the output-9 gaps stay owned as Q12-F4/F5;\nLIVE_PASS explicitly not claimed), and pre-empt the\nstaleBlockedOnPass defects: Q50/Q51/Q55/QG1 blockedOn arrays no\nlonger name Q12, with the four rows' prose re-scoped to Q14 as the\nremaining non-PASS first-queue family. Quality gate: PASS 186/186, 0\ndefects, first-queue IDs 121 -> 122.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-18T03:50:37Z"
+      "authorDate": "2026-08-18T19:17:57Z"
     },
     {
-      "sha": "6e1f05e491ba86608d9a99457ca9afc83910b4d7",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/6e1f05e491ba86608d9a99457ca9afc83910b4d7",
-      "message": "docs(onchain): record the sentinel-repair decision on the residual notes\n\nThe empty-trie sentinel translation for the published-chunk route was\nowner-approved on 2026-08-17 to execute inside #510's single freeze-event\nregeneration, including the insert_root fold-in. The three surfaces that\nrecorded the residual as undecided move onto the decision: mpf-proof-v1's\ndoes_not_have doc-comment no longer says a follow-up ticket is awaited,\nchunked-inclusion-v1's module header drops the self-referential claim\nthat #582 gates the repair, and the readiness prerequisite names the\napproval instead of a pending ticket. Comment/doc changes only — no\ncompiled code moves.",
+      "sha": "11739a532333564c890f3d005af96774ae00bffc",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/11739a532333564c890f3d005af96774ae00bffc",
+      "message": "docs(evidence,scripts): build the Q12 per-family closure surfaces and supersede the stale manifest census (#481)\n\nAdd canonical-v1-proof-family-q12-v1.json gated by\nverify-canonical-v1-proof-family-q12.mjs: 9 LOCAL_PASS / 1 OPEN / 0\nN/A under the pinned fork compiler. Outputs 1-4 and 9 measured\nfamily-locally (10/10 selectors across the two step modules with a\nstep-scoped-positive floor per module so the three normalizer unit\nhelpers cannot stand in for deleted proof-step positives; 72 vitest\ntests over 4 suites; 4 shared-suite emulator lifecycles, 1 this\nfamily's), output 3 LOCAL_PASS as a measured committed-field absence\nbound to the spec tables, outputs 5-8 delegated to the shared Q1x\nartifact with the spend-input cardinality axis gated bidirectionally\nout of scope, output 10 OPEN on the parent-owned matrix rows with the\npending edits pinned. 10 negative self-tests and 3 positive controls\nrun in-gate.\n\nSupersede the manifest Q12 row in place: the exactly-7 / 8-of-8\ncensus pins were mutually inconsistent and both wrong (10 measured),\nthe step-02-has-ZERO-tests anchor is measured false (2 selectors),\nand the step_01 focused command cited\ninvalid_range_step_01_rejects_a_missing_verifier_invocation, which\nexists only in no-input/step-03 - the command ran one test short\nwhile exiting 0; re-pinned onto the three existing chunk selectors.\nQuality gate: PASS 186/186, 0 defects.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-18T03:29:55Z"
+      "authorDate": "2026-08-18T19:10:54Z"
     },
     {
-      "sha": "0c6700bc595d03f654a18c53c841410e3d92057e",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/0c6700bc595d03f654a18c53c841410e3d92057e",
-      "message": "fix(demo): model the deployed post-#597 shapes in the proof-item envelope measurement script\n\nThe producer behind the superseded 8,273 selector basis still built the\nretired 5-field proof-item datum (collectionProof embedded) and passed a\n2-field tag-30 auxiliary as the direct Verify action's fourth field. Move\nboth to the deployed ABI (4-field ValidationProofItemDatumV1; Inline\nFieldCarriageV1 as the action's own carriage field) and drop the dead\ncollection-proof scaffolding. Fresh run against the current blueprint:\npublication frontier 15,569 exact / 15,072 reliable (was 14,892/14,396),\nby-reference frontier 15,172 exact / 14,676 reliable (was 14,494/13,998),\nreference route byte-identical as the internal control. No parameter or\npin moves: the 8,273 direct-route bound stays where it is pending the\nopen owner decision, and P7's retired-shape pins remain as history. The\nconsensus-profile suite's stale 13,998 comment now carries both readings;\nsuite green 7/7.",
+      "sha": "01cd0b814d7e159883ff52bc401a9fd9f6f3dfe7",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/01cd0b814d7e159883ff52bc401a9fd9f6f3dfe7",
+      "message": "docs(evidence,fault-proofs): land the Q10/Q11 output-10 parent integration and reconcile the stale blocked-on rows (#481)\n\nExecute both family artifacts' parentIntegration.pendingEdits: the four\nmatrix Status cells (coverage-matrix L96/L94, catalogue-status L19/L20)\nnow record the pinned LOCAL_PASS form, both artifacts re-derive output\n10 LOCAL_PASS from the re-measured cells (10 LOCAL_PASS / 0 OPEN, the\noriginal derivation retained under whyPreviouslyOpen, F1 gap superseded\nto observation), and both gates re-measure PASS exit 0 under the pinned\nfork compiler with the output-10 print suffix now derived instead of\nhardcoded.\n\nRe-pin the manifest Q10 row's focusedCommand that cited\ndouble_spend_step_01_rejects_a_missing_verifier_invocation - measured\nabsent from the entire double-spend family (never existed in any\ncommitted tree); the re-pinned three-selector command measures exit 0.\n\nAdd the Q10/Q11 PASS queue rows to GOAL_PROGRESS (LIVE_PASS explicitly\nnot claimed; live evidence remains Q57/QG3), and reconcile the eight\nstaleBlockedOnPass defects that surfaced: Q50/Q51/Q55/QG1 blockedOn\narrays no longer name the pair, with prose re-scoped. Manifest quality\ngate: PASS 186/186, 0 defects, first-queue IDs 119 -> 121.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-18T03:08:36Z"
+      "authorDate": "2026-08-18T18:36:02Z"
     },
     {
-      "sha": "823212f5bc92d96e518f3831298ac086120a83e6",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/823212f5bc92d96e518f3831298ac086120a83e6",
-      "message": "docs(evidence): re-derive four more necessity artifacts onto the flat FieldCarriageV1 scheme (#580)\n\nApply the transaction-field-chunk template to redeemer-item-traversal,\nmint-fold-asset, native-script-traversal, and ledger-output-incremental-\nproof: new flat-scheme measurement sections sourced from eight producing\nsuites (42/42 green against the digest-verified blueprint), counted-era\ncontent retained verbatim under invariant-14 SUPERSEDED headings, known\n#606/#611 movements cited by reference rather than re-pinned, and every\nnecessity conclusion re-derived same-direction on each family's own\npost-authentication structural axis. script-source-hash-block-v1.md is\ndeliberately untouched: its dissolution notice contradicts live tree\nstate (ScriptSourceHashBlockWitness machinery present continuously since\n2d7151d38, in the current blueprint, actively produced) — escalated for\nowner adjudication rather than edited. Ledger entry records the campaign\nclosure and the escalation.",
+      "sha": "3870f467920bfd96cbac96cb687f59c761d521e2",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/3870f467920bfd96cbac96cb687f59c761d521e2",
+      "message": "docs(evidence,scripts): build the prescribed Q11 per-family closure surfaces and re-pin the row's broken focused command (#481)",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-18T03:02:58Z"
+      "authorDate": "2026-08-18T18:17:48Z"
     },
     {
-      "sha": "6c2482e87b7d3b245f6c928195a8255ac86317cf",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/6c2482e87b7d3b245f6c928195a8255ac86317cf",
-      "message": "docs(evidence): re-derive the transaction-field-chunk necessity artifact onto the flat FieldCarriageV1 scheme (#580)\n\nReplace the counted-era TransactionFieldChunkWitness analysis with a\nflat-scheme re-derivation measured against the four producing suites\n(all green this pass): tier-1 Inline with the #611 signed-transaction\nfalsification carried in both postures, tier-2 RawUtxo at the unmoved\nK=15,148/15,644 frontier, the 64-byte overhang per P7's ruling, and\ntier-3 Certified with the post-#606 combined lower bound (16,613 B,\n210-B certificate datum, 2,064,490 lovelace min-Ada) reported against\nthe stale P7 pins rather than averaged. The counted-era sections are\nretained verbatim under a SUPERSEDED notice per GOAL_SPEC invariant 14.\nConclusion re-derived same-direction: preimages above K still require\ntier-3 carriage; the internal bounded chunk walk survives as machine-\ntrace structure plus tier-3's real K-byte boundary.",
+      "sha": "c4817febadd3f600fa68a947f69acde53f86398d",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/c4817febadd3f600fa68a947f69acde53f86398d",
+      "message": "fix(scripts): fail the Q49 handoff gate closed on an unpinned or non-fork aiken binary (#481)",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-18T02:34:15Z"
+      "authorDate": "2026-08-18T17:48:07Z"
     },
     {
-      "sha": "39073054270700af5c96777fa15aaf9cf0c66903",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/39073054270700af5c96777fa15aaf9cf0c66903",
-      "message": "docs(evidence,ledger): re-take the owed CEK direct-resolver publication receipt on the cleared selector (#580 residual)\n\nThe #597 staging-lane repair restored the producing selector, so the\nreceipt superseded since #580 is measured again: 162,660 signed bytes,\nL1 margin -146,276, against the f49cae22 blueprint whose identity is\npinned by 5010a2bf's commit message and reproduced byte-identically by\na scratch fork build from HEAD. Framing is unchanged at 515 bytes; the\nmovement is entirely the resolver body. Also sharpens the ledger's\nacceptance record: the four dispute-submit reds were owner-accepted in\n#608's red map, so 9f191e9a retired an accepted red class.",
+      "sha": "f2790f4523d5783c88bd1ac66040796df3ca7bf6",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/f2790f4523d5783c88bd1ac66040796df3ca7bf6",
+      "message": "docs(evidence,scripts): build the prescribed Q10 per-family closure surfaces and gate outputs 1-10 (#481)",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-18T02:08:55Z"
+      "authorDate": "2026-08-18T17:41:00Z"
     },
     {
-      "sha": "185ffa2cce51eb61b7873eaaf3188c9354a9f2db",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/185ffa2cce51eb61b7873eaaf3188c9354a9f2db",
-      "message": "docs(evidence,ledger): reconcile the C21 row and ledger onto the flat-scheme measured tree (#597)\n\nRe-pin the C21 manifest contract from the 2026-08-17 re-measure at\n9f191e9a (6 Aiken + 11 validation + 5 SDK + 21 fault-proofs = 43, 42\npassing, one attributed owner-gated red) with the superseded 2026-08-05\ncontract retained verbatim, and re-measure all five sourceAnchors.\nAppend the dated ledger entry recording the equivalence-audit and\nselector reconciliations, the #597 wire-twin gap attribution and fix,\nthe open observe-stage reference-script liveness decision, and the\npre-existing Q02 scanner red.",
+      "sha": "55395699ed5db2bfb060ee4ceff2dcc1b7d5dfd4",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/55395699ed5db2bfb060ee4ceff2dcc1b7d5dfd4",
+      "message": "docs(evidence): re-cite the Q49 step-03 pins onto #582's witness-faithful exclusion arms (#481)\n\nThe handoff verifier was red on ERR_AIKEN_SELECTOR_NOT_COLLECTED: two\npins still cited no_input_step_03_excludes_the_input_from_the_initial_\nledger, which #582 replaced with genesis and populated witness-faithful\npositive arms (valid-block negative unchanged, citation strictly\nwidened). Re-pin the L298 selector list, the recomputed runner command,\nexecutedChecks 30->31, and the reconciliation row's prose citation.\n\nMeasured: Q49 structural handoff PASS (9 rows, 31 runner-executed\nchecks, 0 partial, 0 open); fp-reconciliation reds solely on the\naccepted Q02 scanner baseline, unchanged.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-18T01:46:05Z"
+      "authorDate": "2026-08-18T16:21:37Z"
     }
   ],
   "contributors": [
@@ -326,58 +326,58 @@
   ],
   "issues": [
     {
+      "number": 482,
+      "title": "[Canonical V1 Goal B14] Close public-event proof families",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/482",
+      "updated_at": "2026-08-19T00:16:35Z"
+    },
+    {
+      "number": 617,
+      "title": "Post-freeze ABI regeneration wave — single batched cascade (owner-authorized 2026-08-18)",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/617",
+      "updated_at": "2026-08-18T21:23:37Z"
+    },
+    {
       "number": 479,
       "title": "[Canonical V1 Goal B02] Close parameterized control publication",
       "html_url": "https://github.com/Anastasia-Labs/midgard/issues/479",
-      "updated_at": "2026-08-18T05:33:04Z"
+      "updated_at": "2026-08-18T21:23:36Z"
     },
     {
-      "number": 476,
-      "title": "[Canonical V1 Goal B01] Restore executable coordination truth",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/476",
-      "updated_at": "2026-08-18T04:27:53Z"
-    },
-    {
-      "number": 477,
-      "title": "[Canonical V1 Goal B03] Finish active content-addressed CEK material",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/477",
-      "updated_at": "2026-08-18T04:03:30Z"
-    },
-    {
-      "number": 614,
-      "title": "Restore CI to green from the accepted 7b731f2c baseline (4 red workflows, enumerated in canonical-v1-p8-regression-v1.json)",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/614",
-      "updated_at": "2026-08-18T00:19:55Z"
+      "number": 486,
+      "title": "[Canonical V1 Goal B07] Close retained reconstruction and CG2",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/486",
+      "updated_at": "2026-08-18T21:23:35Z"
     },
     {
       "number": 607,
       "title": "Q02 family-scaffold generator emits retired pre-#575 Aiken shapes (out of #604's builder scope by ruling; tooling lane)",
       "html_url": "https://github.com/Anastasia-Labs/midgard/issues/607",
-      "updated_at": "2026-08-18T00:01:42Z"
+      "updated_at": "2026-08-18T21:23:34Z"
     },
     {
-      "number": 590,
-      "title": "Flat reversion follow-up — the boundary terminal-fold proof structures are still hand-mirrored (struct literals the name-keyed rebinder cannot reach)",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/590",
-      "updated_at": "2026-08-17T23:43:04Z"
+      "number": 611,
+      "title": "Measure a complete signed tier-1 step transaction at the 14,336 B preimage cap (#557 M2 closure)",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/611",
+      "updated_at": "2026-08-18T21:23:32Z"
+    },
+    {
+      "number": 614,
+      "title": "Restore CI to green from the accepted 7b731f2c baseline (4 red workflows, enumerated in canonical-v1-p8-regression-v1.json)",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/614",
+      "updated_at": "2026-08-18T21:23:31Z"
     },
     {
       "number": 610,
       "title": "phas-membership deploys membership.withdraw bare from compiledCode — outside the #609 arity door (zero-declared-params today)",
       "html_url": "https://github.com/Anastasia-Labs/midgard/issues/610",
-      "updated_at": "2026-08-17T23:35:51Z"
+      "updated_at": "2026-08-18T21:23:30Z"
     },
     {
-      "number": 612,
-      "title": "Legacy no-input/double-spend step builders skip tier selection — inline-only carriage caps Q11 at 196 and Q10 at 75 of 296 admissible inputs",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/612",
-      "updated_at": "2026-08-17T23:07:46Z"
-    },
-    {
-      "number": 582,
-      "title": "no-input step-03/step-04 fixtures carry empty pexcludes non-membership proofs",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/582",
-      "updated_at": "2026-08-17T21:44:33Z"
+      "number": 618,
+      "title": "Wire the min-Ada floor to a rejection code (E_MIN_ADA) and close D-S4 (owner rulings 2026-08-18)",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/618",
+      "updated_at": "2026-08-18T21:22:41Z"
     }
   ],
   "releases": [],
@@ -432,15 +432,15 @@
     },
     {
       "week": 1763251200,
-      "total": 32
+      "total": 23
     },
     {
       "week": 1763856000,
-      "total": 44
+      "total": 15
     },
     {
       "week": 1764460800,
-      "total": 17
+      "total": 8
     },
     {
       "week": 1765065600,
@@ -484,23 +484,23 @@
     },
     {
       "week": 1771113600,
-      "total": 14
+      "total": 13
     },
     {
       "week": 1771718400,
-      "total": 45
+      "total": 47
     },
     {
       "week": 1772323200,
-      "total": 24
+      "total": 26
     },
     {
       "week": 1772928000,
-      "total": 35
+      "total": 36
     },
     {
       "week": 1773532800,
-      "total": 28
+      "total": 29
     },
     {
       "week": 1774137600,
@@ -512,7 +512,7 @@
     },
     {
       "week": 1775347200,
-      "total": 42
+      "total": 40
     },
     {
       "week": 1775952000,
@@ -520,7 +520,7 @@
     },
     {
       "week": 1776556800,
-      "total": 29
+      "total": 17
     },
     {
       "week": 1777161600,
@@ -532,11 +532,11 @@
     },
     {
       "week": 1778371200,
-      "total": 41
+      "total": 25
     },
     {
       "week": 1778976000,
-      "total": 12
+      "total": 10
     },
     {
       "week": 1779580800,
@@ -548,7 +548,7 @@
     },
     {
       "week": 1780790400,
-      "total": 18
+      "total": 31
     },
     {
       "week": 1781395200,
@@ -580,7 +580,7 @@
     },
     {
       "week": 1785628800,
-      "total": 109
+      "total": 80
     },
     {
       "week": 1786233600,
@@ -588,7 +588,7 @@
     },
     {
       "week": 1786838400,
-      "total": 61
+      "total": 90
     }
   ]
 }
