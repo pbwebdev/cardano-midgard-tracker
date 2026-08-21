@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-08-20T06:53:39.404Z",
+  "fetchedAt": "2026-08-21T06:54:42.158Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 25,
@@ -16,6 +16,62 @@
     "Perl": 37
   },
   "commits": [
+    {
+      "sha": "11fca446d5ce06924e6d6e77919662a7123a9c92",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/11fca446d5ce06924e6d6e77919662a7123a9c92",
+      "message": "test(validation): regenerate the C53 resolver sweep fixture for the reference-script wirings and the 12,810 rebind (#614)\n\nThe committed sweep artifact predated 8fe3052e/016682e7/b4b6c488, so CI's\ndeterminism check correctly measured it stale. Exactly four rows move, all\nstill accepted with the 95-row unfit pin byte-identical: the\ncanonical_decode_v1 topLevel/prepare pair and semantic canonical-decode item\nrow flip to direct carriage under the 12,810 frontier (item inline, larger\ntx, margins 5,975/5,187), and the observe stage row shrinks 11,036 -> 10,463\nunder its published reference script. Locally 4/4 including the\nbyte-identical regeneration check.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-08-20T22:30:55Z"
+    },
+    {
+      "sha": "25a396364ca6f5c6e81de2f0912f7b0ade07f85a",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/25a396364ca6f5c6e81de2f0912f7b0ade07f85a",
+      "message": "wip",
+      "authorName": "Drop-Table-Users",
+      "authorDate": "2026-08-20T14:48:36Z"
+    },
+    {
+      "sha": "ac1b630e1817f8b45fc84690e1fa621a5a07fed8",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ac1b630e1817f8b45fc84690e1fa621a5a07fed8",
+      "message": "test(fault-proofs): raise the deployment-resolution budget to the 420 s contention precedent (#616)\n\nThe V1 validation-dispute resolution row timed out at its 60,000 ms budget\nin 2 of the last 4 Midgard Node CI runs and passed in the other 2, on a\nstep that itself runs ~46 minutes on shared runners. Locally the row\nmeasures ~22 s, so the budget was only ~2.7x the real cost — close enough\nthat contention alone crosses it. This is a flake, not a slowdown, and it\nis in no accepted-red map.\n\nThe budget now follows midgard-node's 420 s precedent for\ncontention-exposed steps rather than the watcher fix's 60 s, which is the\nbudget that just proved too tight. 420 s also sits inside this suite's\nexisting per-test range, whose emulator rows already use 120 s to 900 s.\n\nTimeout only — no assertion, fixture, or resolution behaviour changes. Per\n#616, a further timeout at this budget is a diagnosis, not another raise.\n\nSuite: 14/14, the affected row at 20,997 ms; typecheck, eslint, prettier\nclean.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-08-20T05:10:10Z"
+    },
+    {
+      "sha": "ece5a360fb9277946d41bcd1c42bb050aefaea85",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ece5a360fb9277946d41bcd1c42bb050aefaea85",
+      "message": "test(fault-proofs): narrow the Q02 permissive-dispatch scanner onto three benign shapes (#607)\n\nThe scanner produced four findings against shipped artifacts, and all four\nare default-accept in shape but not in effect (owner-adjudicated\n2026-08-18). The shipped code is correct, so the scanner is what moves.\n\n`native-binding-fixture-v1.ak:500` is a wildcard arm whose block opens with\n`expect field_index == 8`: fields 6 and 7 are explicit arms and the arm\nrefuses everything that is not 8. That is enumerate-and-refuse, so\n`ak_catch_all_arm` now accepts a wildcard whose *first* statement is an\n`expect` of a *condition*. Both qualifiers are load-bearing: a binding\n`expect x = decode(d)` destructures without refusing, `expect True` refuses\nnothing, and an `expect` reached after other statements does not gate the\narm.\n\nThe three `ts_dynamic_registry_dispatch` findings split in two.\n`MIDGARD_*_VERDICT_NAMES_V1[verdict] ?? \"unknown\"` supplies a diagnostic\nlabel, never a verdict, so the rule now accepts a quoted-string fallback\nbound to a `*Name`-shaped key — both halves required, so a fallback feeding\na verdict or a handler still fires. `(utxo.assets[unit] ?? 0n) === 1n`\ndefaults an absent quantity to zero under a non-zero equality test, so\nabsence can only ever fail; the rule accepts that direction only, and a\nwidening `?? 1n` or a self-satisfying `?? 0n) === 0n` still fires.\n\nEach guard names the shape it excludes rather than loosening its pattern,\nand both carry hostile negative controls: an unguarded arm, an arm whose\n`expect` is a binding, vacuous, discarding, or preceded by other work, a\nfallback that feeds a verdict or a handler, a label key with a computed\nfallback, a string fallback on a non-label key, and defaults that widen\nacceptance. The four shipped sites are untouched.\n\nSuite: 47/47 (was 44 passed / 1 failed, the scanner row); typecheck,\neslint, prettier clean.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-08-20T05:06:57Z"
+    },
+    {
+      "sha": "b4b6c488c16bbb96057ebd01084de1ce5d8d4ec3",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/b4b6c488c16bbb96057ebd01084de1ce5d8d4ec3",
+      "message": "feat(core,validation,evidence): rebind the direct complete-item frontier to the owner-signed 12,810 reserve measurement (#597 ruling b, #617)\n\nThe #617 reference-script wave (dce643b0 observe door, 0a074421\ncanonical-decode prepare resolver) un-bound the stages that carried\nvalidator bodies inside the transaction, and the owner signed the\nre-measured direct-route frontier on the production five-stage\nsubmitter: exact 13,294 / reserve 12,810 under the 512-byte\nreliability reserve, binder authenticate, sitting exactly on the\n15,872-byte budget at the reserve frontier. Adjacent-item ledger:\n12,810 -> 15,872, 12,811 -> 15,873, 13,294 -> 16,371, 13,295\nbuilder-refused at estimate 16,385.\n\n- consensus-profile-v1: maxExactDirectCompleteItemBytes 8,769 ->\n  13,294; maxReliableDirectCompleteItemBytes 8,273 -> 12,810; the\n  per-transaction evidence rows re-pin to the measured production\n  stage table at the reserve frontier (authenticate 15,872 = budget,\n  observation 15,138; proof row unchanged at 15,872 as the largest\n  stage), retiring the 14,543 embedded-variant authentication basis,\n  which cannot fit the envelope at the new frontier.\n- consensus-profile-v1.test: both carriage directions re-pinned at\n  12,810/12,811; the binder structure flips to authenticate-governs\n  (max(auth, obs) = proof row = budget still holds); slack 484 within\n  the 512-byte reserve; the 13,282/13,998 by-reference guards stay in\n  the reference region.\n- complete-item-proof-fit-emulator-v1.test: the staged-reliability\n  boundary row and the dual-carriage terminal row migrate from the\n  retired embedded-validator basis to the deployed by-reference basis\n  (15,820 signed bytes measured at item 12,810, 52 under budget);\n  reference-script parking extracted into a shared helper.\n- measure-validation-proof-item-envelope.mjs basis warning and the\n  data-breadth-boundary prose track the authenticate-binder basis.\n- C21 manifest row: the accepted #597 red is retired; fresh contract\n  6 Aiken (carried, no on-chain change) + 11 validation + 5 SDK + 23\n  fault-proofs = 45 passing with 0 failures; the 2026-08-17 contract\n  retained verbatim as provenance.\n\nGates: midgard-core 507/507; proof-fit emulator 6/6; proof-fit\nnon-emulator 5/5; nested-value + data-breadth 9/9;\nsubmit-init-emulator-validation-dispute 4/4 (the direct case flips\ngreen from the accepted red, fixture item 8,277 <= 12,810);\nvalidation-dispute-submit 19/19; submit-init 14/14; SDK\nvalidation-proof-item 5/5; typecheck and lint clean in core,\nvalidation, fault-proofs; manifest quality verifier PASS 186/186,\n0 defects.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-08-20T04:54:42Z"
+    },
+    {
+      "sha": "d0337c0c7e4b447fbbabb96999ea97c30229bab3",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d0337c0c7e4b447fbbabb96999ea97c30229bab3",
+      "message": "wip",
+      "authorName": "Drop-Table-Users",
+      "authorDate": "2026-08-19T22:26:18Z"
+    },
+    {
+      "sha": "04da1b444dcec093acaffc24884c20761317dc4c",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/04da1b444dcec093acaffc24884c20761317dc4c",
+      "message": "WIP checkpoint",
+      "authorName": "Drop-Table-Users",
+      "authorDate": "2026-08-19T08:47:17Z"
+    },
+    {
+      "sha": "016682e7831f83005f5ae96f4222be5d441c7c28",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/016682e7831f83005f5ae96f4222be5d441c7c28",
+      "message": "feat(fault-proofs): source the prepare-selected step from a published canonical-decode prepare reference script (#617 follow-up, #597 ruling a)\n\nThe prepare-selected step transaction commits the one-step argument; on\nthe direct route its redeemer carries the whole tier-1 SS5.1 preimage, and\nthe measured decomposition at the post-wiring frontier (item 8,663; signed\n16,372) showed the inline-attached applied canonical_decode_v1 prepare\nresolver body consuming 5,606 of the 7,429 item-independent bytes - the\nbinding share of the 16,384-byte L1 envelope. Publish that validator as a\nreference script under the new plain deployment-info entry\n\"validationTraceDisputeCanonicalDecodePrepare\" (mirroring the\nitem-semantic/item-observe roles; joins no identity roster, so the\ndeployment manifestId is unmoved) and source it via readFrom for the\ncomplete-canonical-item flow, keeping the inline attach for every other\nresolver. The emulator harness publishes the body beside the item-semantic\nand item-observe ones and pins it absent from the captured step\ntransaction (zero Plutus script witnesses, one reference input).\n\nmaxReliableDirectCompleteItemBytes stays untouched (owner-gated); the\ndirect-route frontier numbers for the rebind travel with the measurement\nreport.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-08-19T04:28:17Z"
+    },
     {
       "sha": "f900b7173c911e1e3205df42982afb42a04eb126",
       "html_url": "https://github.com/Anastasia-Labs/midgard/commit/f900b7173c911e1e3205df42982afb42a04eb126",
@@ -64,62 +120,6 @@
       "message": "docs(evidence,scripts): build the Q14 per-family closure surfaces and supersede the stale manifest census (#481)",
       "authorName": "Philip DiSarro",
       "authorDate": "2026-08-18T20:34:33Z"
-    },
-    {
-      "sha": "f16cb4a4f0f0e4e287a32dd96cd75e0852977eaf",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/f16cb4a4f0f0e4e287a32dd96cd75e0852977eaf",
-      "message": "docs(evidence,fault-proofs): close the Q49 structural partials and re-derive the reconciliation audit to 9 PASS (#481)\n\nExecute the Q49 handoff artifact's remaining pendingEdits: the\nreconciliation structuralAudit moves L298 (cross-block replay) and\nL302 (malformed validity interval) from PARTIAL to PASS with\nremainingTask cleared, empties taskResidues.openStructural, and\nrecounts the summary to 9 PASS / 0 PARTIAL / 0 OPEN - the executable\nevidence was already recorded on both rows and is measured green by\nthe Q49 gate's 31 runner-executed checks under the pinned fork\ncompiler.\n\nRe-pin the reconciliation verifier's deliberate exact pins in the\nsame edit set (summary deep-equal, disposition filters, the\nstructuralContract row pins, the PASS-row allowlist, and the\nfirst-queue F21 regex, which now requires both the retained 7/2\nprovenance and the closure supersede), supersede the ledger F21 queue\nrow in place, and fix coverage-matrix L298's evidence cell to cite\nthe two #582 witness-faithful step-03 selectors, clearing the\npre-#582 name drift deferred by the Q10/Q11/Q12 passes.\n\nMeasured after the edits: Q49 gate PASS exit 0; quality gate PASS\n186/186 with 0 defects; the reconciliation verifier executes every\nre-pinned assert green and exits 1 solely on the accepted Q02\npermissive-dispatch scanner baseline, the same red it carries at\nHEAD.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-18T19:29:43Z"
-    },
-    {
-      "sha": "fe0798ad51d1a0050466d1cbe7d899fdca468341",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/fe0798ad51d1a0050466d1cbe7d899fdca468341",
-      "message": "docs(evidence,fault-proofs): land the Q12 output-10 parent integration and register the queue row (#481)\n\nExecute the Q12 artifact's parentIntegration.pendingEdits: the two\nmatrix Status cells (coverage-matrix L137, catalogue-status L21) now\nrecord the pinned Q13-form local closure, the artifact re-derives\noutput 10 LOCAL_PASS from the re-measured cells (10 LOCAL_PASS / 0\nOPEN, the original derivation retained under whyPreviouslyOpen), and\nthe gate re-measures PASS exit 0 under the pinned fork compiler.\n\nAdd the Q12 PASS queue row to GOAL_PROGRESS (outputs 1-10 LOCAL_PASS\nwith measured counts; the output-9 gaps stay owned as Q12-F4/F5;\nLIVE_PASS explicitly not claimed), and pre-empt the\nstaleBlockedOnPass defects: Q50/Q51/Q55/QG1 blockedOn arrays no\nlonger name Q12, with the four rows' prose re-scoped to Q14 as the\nremaining non-PASS first-queue family. Quality gate: PASS 186/186, 0\ndefects, first-queue IDs 121 -> 122.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-18T19:17:57Z"
-    },
-    {
-      "sha": "11739a532333564c890f3d005af96774ae00bffc",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/11739a532333564c890f3d005af96774ae00bffc",
-      "message": "docs(evidence,scripts): build the Q12 per-family closure surfaces and supersede the stale manifest census (#481)\n\nAdd canonical-v1-proof-family-q12-v1.json gated by\nverify-canonical-v1-proof-family-q12.mjs: 9 LOCAL_PASS / 1 OPEN / 0\nN/A under the pinned fork compiler. Outputs 1-4 and 9 measured\nfamily-locally (10/10 selectors across the two step modules with a\nstep-scoped-positive floor per module so the three normalizer unit\nhelpers cannot stand in for deleted proof-step positives; 72 vitest\ntests over 4 suites; 4 shared-suite emulator lifecycles, 1 this\nfamily's), output 3 LOCAL_PASS as a measured committed-field absence\nbound to the spec tables, outputs 5-8 delegated to the shared Q1x\nartifact with the spend-input cardinality axis gated bidirectionally\nout of scope, output 10 OPEN on the parent-owned matrix rows with the\npending edits pinned. 10 negative self-tests and 3 positive controls\nrun in-gate.\n\nSupersede the manifest Q12 row in place: the exactly-7 / 8-of-8\ncensus pins were mutually inconsistent and both wrong (10 measured),\nthe step-02-has-ZERO-tests anchor is measured false (2 selectors),\nand the step_01 focused command cited\ninvalid_range_step_01_rejects_a_missing_verifier_invocation, which\nexists only in no-input/step-03 - the command ran one test short\nwhile exiting 0; re-pinned onto the three existing chunk selectors.\nQuality gate: PASS 186/186, 0 defects.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-18T19:10:54Z"
-    },
-    {
-      "sha": "01cd0b814d7e159883ff52bc401a9fd9f6f3dfe7",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/01cd0b814d7e159883ff52bc401a9fd9f6f3dfe7",
-      "message": "docs(evidence,fault-proofs): land the Q10/Q11 output-10 parent integration and reconcile the stale blocked-on rows (#481)\n\nExecute both family artifacts' parentIntegration.pendingEdits: the four\nmatrix Status cells (coverage-matrix L96/L94, catalogue-status L19/L20)\nnow record the pinned LOCAL_PASS form, both artifacts re-derive output\n10 LOCAL_PASS from the re-measured cells (10 LOCAL_PASS / 0 OPEN, the\noriginal derivation retained under whyPreviouslyOpen, F1 gap superseded\nto observation), and both gates re-measure PASS exit 0 under the pinned\nfork compiler with the output-10 print suffix now derived instead of\nhardcoded.\n\nRe-pin the manifest Q10 row's focusedCommand that cited\ndouble_spend_step_01_rejects_a_missing_verifier_invocation - measured\nabsent from the entire double-spend family (never existed in any\ncommitted tree); the re-pinned three-selector command measures exit 0.\n\nAdd the Q10/Q11 PASS queue rows to GOAL_PROGRESS (LIVE_PASS explicitly\nnot claimed; live evidence remains Q57/QG3), and reconcile the eight\nstaleBlockedOnPass defects that surfaced: Q50/Q51/Q55/QG1 blockedOn\narrays no longer name the pair, with prose re-scoped. Manifest quality\ngate: PASS 186/186, 0 defects, first-queue IDs 119 -> 121.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-18T18:36:02Z"
-    },
-    {
-      "sha": "3870f467920bfd96cbac96cb687f59c761d521e2",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/3870f467920bfd96cbac96cb687f59c761d521e2",
-      "message": "docs(evidence,scripts): build the prescribed Q11 per-family closure surfaces and re-pin the row's broken focused command (#481)",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-18T18:17:48Z"
-    },
-    {
-      "sha": "c4817febadd3f600fa68a947f69acde53f86398d",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/c4817febadd3f600fa68a947f69acde53f86398d",
-      "message": "fix(scripts): fail the Q49 handoff gate closed on an unpinned or non-fork aiken binary (#481)",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-18T17:48:07Z"
-    },
-    {
-      "sha": "f2790f4523d5783c88bd1ac66040796df3ca7bf6",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/f2790f4523d5783c88bd1ac66040796df3ca7bf6",
-      "message": "docs(evidence,scripts): build the prescribed Q10 per-family closure surfaces and gate outputs 1-10 (#481)",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-18T17:41:00Z"
-    },
-    {
-      "sha": "55395699ed5db2bfb060ee4ceff2dcc1b7d5dfd4",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/55395699ed5db2bfb060ee4ceff2dcc1b7d5dfd4",
-      "message": "docs(evidence): re-cite the Q49 step-03 pins onto #582's witness-faithful exclusion arms (#481)\n\nThe handoff verifier was red on ERR_AIKEN_SELECTOR_NOT_COLLECTED: two\npins still cited no_input_step_03_excludes_the_input_from_the_initial_\nledger, which #582 replaced with genesis and populated witness-faithful\npositive arms (valid-block negative unchanged, citation strictly\nwidened). Re-pin the L298 selector list, the recomputed runner command,\nexecutedChecks 30->31, and the reconciliation row's prose citation.\n\nMeasured: Q49 structural handoff PASS (9 rows, 31 runner-executed\nchecks, 0 partial, 0 open); fp-reconciliation reds solely on the\naccepted Q02 scanner baseline, unchanged.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-18T16:21:37Z"
     }
   ],
   "contributors": [
@@ -329,7 +329,7 @@
       "number": 614,
       "title": "Restore CI to green from the accepted 7b731f2c baseline (4 red workflows, enumerated in canonical-v1-p8-regression-v1.json)",
       "html_url": "https://github.com/Anastasia-Labs/midgard/issues/614",
-      "updated_at": "2026-08-20T05:12:34Z"
+      "updated_at": "2026-08-20T23:51:35Z"
     },
     {
       "number": 616,
@@ -430,11 +430,11 @@
     },
     {
       "week": 1763856000,
-      "total": 43
+      "total": 44
     },
     {
       "week": 1764460800,
-      "total": 8
+      "total": 17
     },
     {
       "week": 1765065600,
@@ -482,11 +482,11 @@
     },
     {
       "week": 1771718400,
-      "total": 45
+      "total": 47
     },
     {
       "week": 1772323200,
-      "total": 25
+      "total": 26
     },
     {
       "week": 1772928000,
@@ -502,19 +502,19 @@
     },
     {
       "week": 1774742400,
-      "total": 29
+      "total": 30
     },
     {
       "week": 1775347200,
-      "total": 41
+      "total": 40
     },
     {
       "week": 1775952000,
-      "total": 31
+      "total": 32
     },
     {
       "week": 1776556800,
-      "total": 29
+      "total": 17
     },
     {
       "week": 1777161600,
@@ -526,15 +526,15 @@
     },
     {
       "week": 1778371200,
-      "total": 25
+      "total": 23
     },
     {
       "week": 1778976000,
-      "total": 14
+      "total": 10
     },
     {
       "week": 1779580800,
-      "total": 2
+      "total": 1
     },
     {
       "week": 1780185600,
@@ -542,7 +542,7 @@
     },
     {
       "week": 1780790400,
-      "total": 31
+      "total": 30
     },
     {
       "week": 1781395200,
@@ -562,7 +562,7 @@
     },
     {
       "week": 1783814400,
-      "total": 9
+      "total": 11
     },
     {
       "week": 1784419200,
@@ -574,15 +574,15 @@
     },
     {
       "week": 1785628800,
-      "total": 79
+      "total": 184
     },
     {
       "week": 1786233600,
-      "total": 32
+      "total": 34
     },
     {
       "week": 1786838400,
-      "total": 90
+      "total": 100
     }
   ]
 }
