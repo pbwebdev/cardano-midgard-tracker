@@ -1,10 +1,10 @@
 {
-  "fetchedAt": "2026-08-21T06:54:42.158Z",
+  "fetchedAt": "2026-08-22T06:47:57.323Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 25,
     "forks_count": 10,
-    "open_issues_count": 102
+    "open_issues_count": 105
   },
   "languages": {
     "Aiken": 359544,
@@ -17,6 +17,97 @@
   },
   "commits": [
     {
+      "sha": "b312ba1ce6f761c0c13640e39c4bd5f64fe21316",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/b312ba1ce6f761c0c13640e39c4bd5f64fe21316",
+      "message": "docs(sdk,validation): retire the carriage-committed-evidence framing from the seam comments\n\nReview findings 2-3 on the #620 implementation, plus one site the review\nmissed (validation-machine.ts): comments and two error messages still\ndescribed the auxiliary as hashed into the committed evidence_hash at\nprepare and referenced the deleted VerifyReference route. Under the\ntransition-only commitment (#619) the tier is a build-time delivery\ndecision the observe-stage door verifies by content, and the reference\nwrap happens at ObserveReference. No behavior change; carriage-seam and\nproof-fit suites 11/11, typecheck+lint green in both packages.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-08-22T02:17:38Z"
+    },
+    {
+      "sha": "fc3817ff37cefb96cba8d15d45bec9f539687658",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/fc3817ff37cefb96cba8d15d45bec9f539687658",
+      "message": "feat(sdk,fault-proofs,validation): retire the by-hash and carriage staged wires in the TypeScript twins (#620)\n\nThe canonical-decode prepare schema collapses to the single four-field\ntransition-only arm and the item-semantic encoder to the generic\nthree-field Verify: the by-evidence-hash arm, the carriage redeemer\nfield, the VerifyReference reference-input route, and the staged\npipeline's proof-item forks are deleted rather than bypassed, and the\nstaged resolver-0 commitment hashes NoAuxiliaryWitness whatever carriage\nthe auxiliary names. A chunk-shaped auxiliary now refuses fail-closed at\nredeemer construction: the retired four-field wire was the only shape it\ncould ever have ridden. The shared five-field PrepareSelected schema for\nthe other eleven phases and the direct-resolve route are untouched.\n\nTests pin the new wires raw (the committed blueprint moves once, in the\nwave's regeneration): the proof-fit fit measurement moves to the observe\nstage's inline Observe arm, which now carries the preimage; the\ncarriage-policy row pins the transition-only source text and the\nobserve routes; the emulator proof-fit harness deliberately keeps\nspeaking the deployed wire until the regeneration flips it.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-08-22T01:45:10Z"
+    },
+    {
+      "sha": "a3e18f7c5e685f5f64e942beff160c0aad8720e7",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/a3e18f7c5e685f5f64e942beff160c0aad8720e7",
+      "message": "test(validation): pin the transition-only item commitment in the cross-language one-step fixture (#620)\n\nThe generator now derives the item-path vector three ways and refuses to\nemit on any disagreement: the TypeScript transition-only hash must equal\nthe base evidence hash (the commitment is over (transition,\nNoAuxiliaryWitness)), the retired carriage-committed preimage must\ndiffer from it, and the emitted Aiken test re-checks both equalities on\nthe other side of the language boundary. The base vectors are\nbyte-identical to the previous emission, so the producer did not drift.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-08-22T01:44:58Z"
+    },
+    {
+      "sha": "337ab21bdb933f5b337602ba7a77c7e439f8f3c0",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/337ab21bdb933f5b337602ba7a77c7e439f8f3c0",
+      "message": "test(fraud-proofs): prove every transition-only guard can fail across the staged item pipeline (#620)\n\nThirteen positives walk a genuine field-6 item journey through prepare,\nauthenticate, and observe under the narrowed commitment; twenty-three\nhostile negatives were each run bare (fail markers stripped) against the\nfull suite to prove the guard they target actually fires: retired-wire\ndecode refusals for both prepare arms and both semantic arms, swapped\nwork witnesses and successors, the retired carriage-committed hash, a\nsubstituted certified chunk, flipped carriage bytes on every observe\nroute, and the deleted observe conjunct's control. Constructor indices\nare pinned after the arm retirement with golden wire-layout vectors.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-08-22T01:44:51Z"
+    },
+    {
+      "sha": "7da3eba061d78ee83d507d49c19c5133be24b6bd",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/7da3eba061d78ee83d507d49c19c5133be24b6bd",
+      "message": "feat(fraud-proofs): narrow the canonical-decode complete-item evidence commitment to the transition alone (#620)\n\nOption B, scoped (spec #619): the prepare stage commits to\nhash_one_step_evidence(transition, NoAuxiliaryWitness), computed on-chain;\nthe by-hash prepare arm and the authenticate stage's carriage argument,\nreference-delivery arm, publication-reconstruction helper, and proof-item\nparameter are retired; the observe stage keeps both delivery arms and drops\nthe frozen-hash equality, leaving the section-8.8 field door as the sole\ncontent gate. No shared-library changes. Scratch ABI diff against the fork\nbaseline moves exactly the three validators (prepare 1788df9b->155131d4,\nitem-semantic a8d8f3ac->dc88d18e with params 3->2, observe\ndf695946->146db088); 408 other handler entries unchanged.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-08-22T00:39:12Z"
+    },
+    {
+      "sha": "26daa9a9a49b7548a738bdd347fec14ca7164ceb",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/26daa9a9a49b7548a738bdd347fec14ca7164ceb",
+      "message": "docs(evidence): re-pin the accepted CI baseline to the fd941f40 green — empty suite map, Evidence Integrity sole workflow red (#614)\n\nFirst fully green Midgard Node CI run (32518045121 on fd941f40): all 34\nsubstantive steps passed, including the first-ever executions of the\noffline throughput gates and the retained multi-peer DA paths steps.\naddendum20260821 records the measurement and re-pins downward under the\nE-4 structure: the accepted-red suite map hands forward EMPTY (both\nremaining buckets retired as delivered — validationDisputeAccepted by\nthe wave wirings/rebind, scaffold_issues607_571 by the #607 scanner\nnarrowing), and the four-red workflow baseline re-pins to one:\nEvidence Integrity CI, riding #617's IG1 cascade and re-freeze. No\n7b731f2c-bound number was re-taken.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-08-21T21:55:25Z"
+    },
+    {
+      "sha": "fd941f406cf805a21229a33639b46d806e275490",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/fd941f406cf805a21229a33639b46d806e275490",
+      "message": "test(node): key the signature-bridge pre-state by the §5.3 fixed-index item form\n\nPhase B resolves inputs against the Midgard-native spend-input item\nencoding (fixed uint16 index, 19 XXXX), not CML's minimal\nTransactionInput bytes. The converted-fixture acceptance test predated\nthat contract and keyed its pre-state with the CML encoding, so the\nlookup missed and the accepted-path assertion failed with\nE_INPUT_NOT_FOUND. Key it with encodeMidgardSpendInputItemV1 instead.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-08-21T19:20:38Z"
+    },
+    {
+      "sha": "b91eb852911a18fc608f32e3e5d17f5eea4894e8",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/b91eb852911a18fc608f32e3e5d17f5eea4894e8",
+      "message": "test(node): give the raw DA runtime-manifest fixtures the required public_retained_da block (#614)\n\nparseDaLibp2pRuntimeManifest has required a dedicated public retained-DA\nidentity since the retained-retrieval plane landed (e1cc85092), but the two\ntests that build raw manifest objects predate it and were never re-measured\nbecause Node CI had not reached the node-test step until tonight. Measured:\nda-payload-libp2p-producer 19/19 (was 10 failed on CI), reconciler e2e 1/1\nunder MIDGARD_RUN_DA_PHASE5_JOINED_E2E=1.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-08-21T18:15:03Z"
+    },
+    {
+      "sha": "827cecc397beac9926cf00701d0ce4bf98167b49",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/827cecc397beac9926cf00701d0ce4bf98167b49",
+      "message": "docs(evidence): retire the accepted #597 red from the C13/C53/C30/C31 pins and promote C30-C32 to PASS (#486 ruling, #617)\n\nThe accepted issue #597 \"direct\"-carriage red is gone at this HEAD: the two\nobserve-stage reference-script wirings (8fe3052e item-observe/item-semantic,\n016682e7 canonical-decode prepare; #597 ruling a on the #617 wave) and the\nowner-signed direct complete-item frontier rebind to 12,810 reliable / 13,294\nexact (b4b6c488, #597 ruling b) landed, and the submit-init emulator suite now\nruns 4/4 green with 0 failures (346.9 s, genuine localUPLCEval + sign + submit\n+ awaitTx lifecycles). Four manifest rows still narrated the retired red and\ntwo of them still pinned pre-wiring counts.\n\nManifest re-pins, each preceded by a full replay of the row's focusedCommands\nand written in the rows' established SUPERSEDED/ADDENDUM style with the prior\ncontract text retained verbatim:\n\n- C13 expectedNonzeroCounts: TypeScript subtotal 37 collected / 36 passing /\n  1 accepted red -> 39 collected / 39 passing / 0 failures (validation 11/11,\n  SDK 5/5, fault-proofs 21 -> 23 collected). Aiken legs re-measure unchanged\n  (format 2/2, ABI selectors 18/18, compiler pin 1/1 at v1.1.23, skip-tests\n  check 0 errors, typecheck and lint exit 0). Its two stale\n  invalidationTriggers, readyBecause and schedulingNote drop the \"modulo the\n  accepted #597 red\" qualifier; the #597-resolution trigger is re-pinned to\n  the conditions that would re-open the question now that it has fired.\n- C53 expectedNonzeroCounts and blockedBecause: the \"3 passing plus exactly 1\n  attributed red\" and \"sole accepted #597 red\" clauses are superseded by a\n  dated addendum recording submit-init 4/4 and closure at exactly 19 running\n  tests with 0 accepted reds. The residual is fixture reachability alone (the\n  95 honestly-unmeasured sweep rows) plus the owner-pinned chain.\n- C30/C31 readyBecause: C21's two owner rulings are recorded as landed (the\n  8,273 carriage-selector reading superseded by the owner-signed 12,810 /\n  13,294, and the observe-stage reference-script convention on the #617 wave)\n  while noting C21's queue row is still non-PASS, so it stays in blockedOn.\n  Adds the 11fca446 replay of both rows' focusedCommands.\n\nCapability reconciliation, per the 2026-08-18 owner ruling on issue #486\nauthorizing the C30-C33 promotion on the recorded measurements (C33 was\nalready PASS):\n\n- p2Tasks C30, C31, C32 PARTIAL -> PASS with their witnesses declared\n  (C30/C31 the retained-DA capability and boundary suites, C32 its eight\n  measured files) and the two new witness commands added, so each promotion\n  is derived from a spawned runner report rather than asserted.\n- p2Summary pass 19 -> 22, partial 3 -> 0; the verifier's cross-checked\n  literal moves with it, which is the mechanism the artifact's own\n  updateContract prescribes for a promotion. CG2 stays OPEN on its own owner\n  pin, not on the PARTIAL count.\n- p2PerTaskAikenCoverage re-pinned to the measured 119/119 selectors across\n  14 modules and 20 tasks (byTask gains C32: 43, modules gain the two\n  max_cardano test modules).\n\nGate results at 11fca446: manifest quality gate FAIL with exactly the 9\npre-existing unaccepted defects and none added (1 blockedOnClaimMismatch F05,\n8 plannedFocusedCommandModuleExists Q39/Q40); capability reconciliation PASS\n(22 tasks, 22 pass from 19 Vitest reports, 119/119 selectors under aiken\nv1.1.23+2a78108, 86.2 s batched); status-role control PASS; C53 replay\nsweep 4/4 with byte-identical regeneration, emulator proof-fit 6/6,\nnon-emulator proof-fit 5/5, data-breadth 7/7; C13 replay 18/18 Aiken plus\n39/39 TypeScript; C30/C31 replays green.\n\nLeft untouched deliberately: the referenceCompleteItem* evidence rows in\ndemo/midgard-core/src/consensus-profile-v1.ts (no gate produces a labelled\nreference-route proof/authentication/observation table at this HEAD, the\nintroducing driver disclaims that basis in its own header, and a partial\nre-pin would leave the block self-inconsistent against the coupled 8,275\nquote in docs/exec-plans/evidence/necessity/cek-program-material-v1.md), and\nthe CG1 row, whose focusedCommands do not run green here: its published\nblueprint basis is still the 398-validator PRE_FREEZE identity against a\nmeasured 414, so no CG1 number can be pinned to an executed result yet.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-08-21T16:17:50Z"
+    },
+    {
+      "sha": "355a18ca9f7c2ff9250bb94b7502b99d992fa491",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/355a18ca9f7c2ff9250bb94b7502b99d992fa491",
+      "message": "test(fault-proofs): drop the prose-only fabricated-family allowlist rows retired by the real lifecycles (#610, #482)\n\nThe zz605 confinement scan allowlisted both boundary files for naming\ncompiledCode in their skip-reason prose; the real-lifecycle rewrites removed\nthe mention, so the exact set-equality flagged the rows stale. Measured on\nthe integrated tree: 20/20 across zz605/zz610.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-08-21T15:33:33Z"
+    },
+    {
+      "sha": "d44ce660d42ce6c49326104ba4c4e4c131a665e3",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d44ce660d42ce6c49326104ba4c4e4c131a665e3",
+      "message": "test(fault-proofs): retire the fabricated-deposit/withdrawal blueprint-boundary tripwires into real emulator lifecycles (#482, #614)\n\nThe #614 blueprint regeneration landed all eight step-validator titles for\nthe Q39/Q40 fabricated families, tripping the designed absence assertions.\nBoth boundary files are retired into genuine lifecycles driven through the\nLucid emulator with the production submitters: init -> step-01..04 ->\npermanent fraud-proof token, plus the valid-block negative on both planes\n(off-chain fail-closed classifier and on-chain step-01 MPF membership\nrejection).\n\n- midgard-sdk: parameterized fabricated-deposit/withdrawal chain builders\n  (back-to-front, via the #609 applyBlueprintParams arity guard) and the\n  families' eight blueprint titles.\n- emulator harness: realFabricatedDeposit/realFabricatedWithdrawal contract\n  options, extra catalogue categories layered over the canonical eleven\n  (byte-identical root and proofs when unused), and a test-support init\n  submitter mirroring the generic tail of src/submit-init.ts while the\n  production category union remains parent-owned.\n- challenged-block headers satisfy header_v1_is_valid's transition\n  commitments (total_event_count identity plus non-empty trace roots).",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-08-21T15:27:22Z"
+    },
+    {
+      "sha": "456d1a43efe6aa60cfb71ad757da77d59d862275",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/456d1a43efe6aa60cfb71ad757da77d59d862275",
+      "message": "test(validation,spec,evidence): bind the min-Ada twins on absolute vectors and close D-S4 (#618)\n\nThe minimum-Ada floor `coins_per_utxo_byte * (160 + serialized output bytes)`\nlanded in C49 as two hand-written copies that nothing forced to agree:\n`min_ada_lovelace_v1`/`output_meets_min_ada_v1` in\nonchain/aiken/lib/midgard/validation-machine-v1.ak and\n`minAdaLovelaceV1`/`outputMeetsMinAdaV1` in\ndemo/midgard-validation/src/value-accounting.ts. Both sides' existing boundary\ntests recomputed the expected floor with the formula under test and took the\nserialized size from their own encoder, so a slope, intercept, or comparison\nchange on one side alone kept both suites green.\n\ntests/min-ada-twin-cross-check-v1.test.ts closes that by pinning absolute\nlovelace values. Seven vectors carry their floor as a literal, each checked\nthree ways -- the TypeScript twin, the Aiken twin evaluated from its\nchecked-in source text through a strict mini-parser that refuses any syntax\nthe twin is not written in, and the literal itself -- with the\nexactly-at-the-floor accept and one-lovelace-below reject legs pinned as\nliterals too. Two canonical output fixtures are shared with the Aiken side by\nabsolute CBOR: 41 bytes -> 866_310 and 196 bytes -> 1_534_360 at the C70\nsnapshot rate, measured byte-identical under `encode_midgard_tx_output` and\n`encodeMidgardTxOutput`. Four hostile controls prove the pins are\nload-bearing: a moved intercept, a moved slope or added margin, `>=` weakened\nto `>`, and a reshaped or absent declaration all fail.\n\nThe spec's minimum-UTxO-value rule carried a `\\todo` where the ratified\nformula belongs (D-S4). It now defines `min_ada_value`, records that the rate\nis read from the pinned target-parameter snapshot rather than hard-coded, that\nthere is no sub-cap and no Midgard margin at any size, that MIN-ADA-TX and\nMIN-ADA-UTXO evaluate the same function so both shapes are convictable, and\nthat the two implementations are held together by the cross-check above.\n\nThe C42 manifest row measured green against its pinned 6/6 and 20/20 counts\nwhile its third prescribed evidenceOutput -- the output-scan rejection codes\nQ25/Q27/Q35/Q36 bind to -- is absent from the tree: the validation machine\ncarries 18 distinct reject_* codes, none of them min-Ada, and no E_MIN_ADA\nanywhere. The row now says so, names E_MIN_ADA with its five required\nconsequences, and records that the counts cover the commitment/proof/descriptor\nsurface only. Q27 records that it covers both violation shapes, and its planned\nprescription grows by the two post-block-UTxO selectors, re-pinned from 7 to 9.\n\nThe E_MIN_ADA wiring itself, the Aiken-side absolute pins, and the stale\n`CML.min_ada_required` comment on the Aiken twin batch into the regeneration\nwave (#617).",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-08-21T14:57:44Z"
+    },
+    {
+      "sha": "9d84bf5521e85b3456719da85ce3ddf62a9e77bc",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/9d84bf5521e85b3456719da85ce3ddf62a9e77bc",
+      "message": "feat(fault-proofs): refuse an arity mismatch at both compiled-script loading boundaries (#610 ruling)\n\nThe #610 ruling (2026-08-18) kept the issue open for the completion its #608\naddendum named: the zz605 only-door scan reached only `demo/midgard-sdk/src`\nand `demo/midgard-node/src`, so the two fault-proofs loaders stayed outside the\ndoor, and neither of them consulted a validator's declared parameter list.\n\nBoth now refuse a mismatch at the load boundary, in the f2629293 shape:\n\n- `src/runtime.ts` `getCompiledScript` deploys `compiledCode` bare for every\n  caller, so it refuses any validator that declares parameters, naming the\n  count and the declared names. The four titles it loads today\n  (`phas.membership.withdraw`, `pexcludes.exclusion.withdraw`,\n  `mpf_chunked_verify.verify.withdraw`, `fraud_proof_catalogue.spend.else`)\n  declare none, so behaviour is unchanged.\n- `tests/support/submit-init-emulator-shared.ts` `getCompiledScript` gets the\n  same bare-door refusal, and gains `applyCompiledScript` — an arity-checking\n  applying door that refuses too few AND too many terms. The harness's eight\n  `applyParamsToScript(getCompiledScript(...), [...])` sites move onto it, so\n  it is now the harness's only caller of the unchecked primitive.\n\nUntil this landing an arity mismatch surfaced only as an opaque `→ undefined`\nevaluation failure a few hundred milliseconds into a submission: applying too\nfew terms leaves the remaining `validator main(...)` parameters as lambdas, the\nledger's single script-context application reduces to a lambda VALUE, and \"no\nerror\" is read as SUCCESS — an always-succeeds script standing where an\nauthenticated one belongs, which in the emulator is a test that cannot fail.\n\nThe scan is extended to `demo/midgard-fault-proofs/src` and\n`demo/midgard-fault-proofs/tests` with all six new readers allowlisted and\njustified, and each root's yield is now MEASURED and asserted nonzero — a scan\nroot that collects nothing would leave the set equality passing vacuously.\nMeasured: 76/2, 228/2, 84/1, 52/5 sources/readers. The bare-door source pin now\ncovers all three zero-arity doors, and the harness file joins the call-site\ncount row with `applyCompiledScript` as its helper.\n\n`tests/zz610-compiled-script-arity.test.ts` measures the boundary itself\nagainst the real blueprint. It pins no hash and no parameter count: the\nparameterized title used for the positive controls is discovered in the\nblueprint at run time. Neutering the three conditions turns exactly its six\nrefusal rows red and leaves the pass-through rows green.\n\nNo .ak or ABI movement; this runs independently of the #617 wave.\n\nGates (foreground, this tree):\n- zz610-compiled-script-arity 12/12; neutered positive control 6 failed / 6 passed\n- zz605-semantic-resolver-arity 8/8\n- submit-init-emulator-validation-dispute 4/4 in 338s\n- typecheck, eslint --max-warnings=0, prettier --check clean",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-08-21T14:35:58Z"
+    },
+    {
       "sha": "11fca446d5ce06924e6d6e77919662a7123a9c92",
       "html_url": "https://github.com/Anastasia-Labs/midgard/commit/11fca446d5ce06924e6d6e77919662a7123a9c92",
       "message": "test(validation): regenerate the C53 resolver sweep fixture for the reference-script wirings and the 12,810 rebind (#614)\n\nThe committed sweep artifact predated 8fe3052e/016682e7/b4b6c488, so CI's\ndeterminism check correctly measured it stale. Exactly four rows move, all\nstill accepted with the 95-row unfit pin byte-identical: the\ncanonical_decode_v1 topLevel/prepare pair and semantic canonical-decode item\nrow flip to direct carriage under the 12,810 frontier (item inline, larger\ntx, margins 5,975/5,187), and the observe stage row shrinks 11,036 -> 10,463\nunder its published reference script. Locally 4/4 including the\nbyte-identical regeneration check.",
@@ -24,102 +115,11 @@
       "authorDate": "2026-08-20T22:30:55Z"
     },
     {
-      "sha": "25a396364ca6f5c6e81de2f0912f7b0ade07f85a",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/25a396364ca6f5c6e81de2f0912f7b0ade07f85a",
-      "message": "wip",
-      "authorName": "Drop-Table-Users",
-      "authorDate": "2026-08-20T14:48:36Z"
-    },
-    {
       "sha": "ac1b630e1817f8b45fc84690e1fa621a5a07fed8",
       "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ac1b630e1817f8b45fc84690e1fa621a5a07fed8",
       "message": "test(fault-proofs): raise the deployment-resolution budget to the 420 s contention precedent (#616)\n\nThe V1 validation-dispute resolution row timed out at its 60,000 ms budget\nin 2 of the last 4 Midgard Node CI runs and passed in the other 2, on a\nstep that itself runs ~46 minutes on shared runners. Locally the row\nmeasures ~22 s, so the budget was only ~2.7x the real cost — close enough\nthat contention alone crosses it. This is a flake, not a slowdown, and it\nis in no accepted-red map.\n\nThe budget now follows midgard-node's 420 s precedent for\ncontention-exposed steps rather than the watcher fix's 60 s, which is the\nbudget that just proved too tight. 420 s also sits inside this suite's\nexisting per-test range, whose emulator rows already use 120 s to 900 s.\n\nTimeout only — no assertion, fixture, or resolution behaviour changes. Per\n#616, a further timeout at this budget is a diagnosis, not another raise.\n\nSuite: 14/14, the affected row at 20,997 ms; typecheck, eslint, prettier\nclean.",
       "authorName": "Philip DiSarro",
       "authorDate": "2026-08-20T05:10:10Z"
-    },
-    {
-      "sha": "ece5a360fb9277946d41bcd1c42bb050aefaea85",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ece5a360fb9277946d41bcd1c42bb050aefaea85",
-      "message": "test(fault-proofs): narrow the Q02 permissive-dispatch scanner onto three benign shapes (#607)\n\nThe scanner produced four findings against shipped artifacts, and all four\nare default-accept in shape but not in effect (owner-adjudicated\n2026-08-18). The shipped code is correct, so the scanner is what moves.\n\n`native-binding-fixture-v1.ak:500` is a wildcard arm whose block opens with\n`expect field_index == 8`: fields 6 and 7 are explicit arms and the arm\nrefuses everything that is not 8. That is enumerate-and-refuse, so\n`ak_catch_all_arm` now accepts a wildcard whose *first* statement is an\n`expect` of a *condition*. Both qualifiers are load-bearing: a binding\n`expect x = decode(d)` destructures without refusing, `expect True` refuses\nnothing, and an `expect` reached after other statements does not gate the\narm.\n\nThe three `ts_dynamic_registry_dispatch` findings split in two.\n`MIDGARD_*_VERDICT_NAMES_V1[verdict] ?? \"unknown\"` supplies a diagnostic\nlabel, never a verdict, so the rule now accepts a quoted-string fallback\nbound to a `*Name`-shaped key — both halves required, so a fallback feeding\na verdict or a handler still fires. `(utxo.assets[unit] ?? 0n) === 1n`\ndefaults an absent quantity to zero under a non-zero equality test, so\nabsence can only ever fail; the rule accepts that direction only, and a\nwidening `?? 1n` or a self-satisfying `?? 0n) === 0n` still fires.\n\nEach guard names the shape it excludes rather than loosening its pattern,\nand both carry hostile negative controls: an unguarded arm, an arm whose\n`expect` is a binding, vacuous, discarding, or preceded by other work, a\nfallback that feeds a verdict or a handler, a label key with a computed\nfallback, a string fallback on a non-label key, and defaults that widen\nacceptance. The four shipped sites are untouched.\n\nSuite: 47/47 (was 44 passed / 1 failed, the scanner row); typecheck,\neslint, prettier clean.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-20T05:06:57Z"
-    },
-    {
-      "sha": "b4b6c488c16bbb96057ebd01084de1ce5d8d4ec3",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/b4b6c488c16bbb96057ebd01084de1ce5d8d4ec3",
-      "message": "feat(core,validation,evidence): rebind the direct complete-item frontier to the owner-signed 12,810 reserve measurement (#597 ruling b, #617)\n\nThe #617 reference-script wave (dce643b0 observe door, 0a074421\ncanonical-decode prepare resolver) un-bound the stages that carried\nvalidator bodies inside the transaction, and the owner signed the\nre-measured direct-route frontier on the production five-stage\nsubmitter: exact 13,294 / reserve 12,810 under the 512-byte\nreliability reserve, binder authenticate, sitting exactly on the\n15,872-byte budget at the reserve frontier. Adjacent-item ledger:\n12,810 -> 15,872, 12,811 -> 15,873, 13,294 -> 16,371, 13,295\nbuilder-refused at estimate 16,385.\n\n- consensus-profile-v1: maxExactDirectCompleteItemBytes 8,769 ->\n  13,294; maxReliableDirectCompleteItemBytes 8,273 -> 12,810; the\n  per-transaction evidence rows re-pin to the measured production\n  stage table at the reserve frontier (authenticate 15,872 = budget,\n  observation 15,138; proof row unchanged at 15,872 as the largest\n  stage), retiring the 14,543 embedded-variant authentication basis,\n  which cannot fit the envelope at the new frontier.\n- consensus-profile-v1.test: both carriage directions re-pinned at\n  12,810/12,811; the binder structure flips to authenticate-governs\n  (max(auth, obs) = proof row = budget still holds); slack 484 within\n  the 512-byte reserve; the 13,282/13,998 by-reference guards stay in\n  the reference region.\n- complete-item-proof-fit-emulator-v1.test: the staged-reliability\n  boundary row and the dual-carriage terminal row migrate from the\n  retired embedded-validator basis to the deployed by-reference basis\n  (15,820 signed bytes measured at item 12,810, 52 under budget);\n  reference-script parking extracted into a shared helper.\n- measure-validation-proof-item-envelope.mjs basis warning and the\n  data-breadth-boundary prose track the authenticate-binder basis.\n- C21 manifest row: the accepted #597 red is retired; fresh contract\n  6 Aiken (carried, no on-chain change) + 11 validation + 5 SDK + 23\n  fault-proofs = 45 passing with 0 failures; the 2026-08-17 contract\n  retained verbatim as provenance.\n\nGates: midgard-core 507/507; proof-fit emulator 6/6; proof-fit\nnon-emulator 5/5; nested-value + data-breadth 9/9;\nsubmit-init-emulator-validation-dispute 4/4 (the direct case flips\ngreen from the accepted red, fixture item 8,277 <= 12,810);\nvalidation-dispute-submit 19/19; submit-init 14/14; SDK\nvalidation-proof-item 5/5; typecheck and lint clean in core,\nvalidation, fault-proofs; manifest quality verifier PASS 186/186,\n0 defects.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-20T04:54:42Z"
-    },
-    {
-      "sha": "d0337c0c7e4b447fbbabb96999ea97c30229bab3",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d0337c0c7e4b447fbbabb96999ea97c30229bab3",
-      "message": "wip",
-      "authorName": "Drop-Table-Users",
-      "authorDate": "2026-08-19T22:26:18Z"
-    },
-    {
-      "sha": "04da1b444dcec093acaffc24884c20761317dc4c",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/04da1b444dcec093acaffc24884c20761317dc4c",
-      "message": "WIP checkpoint",
-      "authorName": "Drop-Table-Users",
-      "authorDate": "2026-08-19T08:47:17Z"
-    },
-    {
-      "sha": "016682e7831f83005f5ae96f4222be5d441c7c28",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/016682e7831f83005f5ae96f4222be5d441c7c28",
-      "message": "feat(fault-proofs): source the prepare-selected step from a published canonical-decode prepare reference script (#617 follow-up, #597 ruling a)\n\nThe prepare-selected step transaction commits the one-step argument; on\nthe direct route its redeemer carries the whole tier-1 SS5.1 preimage, and\nthe measured decomposition at the post-wiring frontier (item 8,663; signed\n16,372) showed the inline-attached applied canonical_decode_v1 prepare\nresolver body consuming 5,606 of the 7,429 item-independent bytes - the\nbinding share of the 16,384-byte L1 envelope. Publish that validator as a\nreference script under the new plain deployment-info entry\n\"validationTraceDisputeCanonicalDecodePrepare\" (mirroring the\nitem-semantic/item-observe roles; joins no identity roster, so the\ndeployment manifestId is unmoved) and source it via readFrom for the\ncomplete-canonical-item flow, keeping the inline attach for every other\nresolver. The emulator harness publishes the body beside the item-semantic\nand item-observe ones and pins it absent from the captured step\ntransaction (zero Plutus script witnesses, one reference input).\n\nmaxReliableDirectCompleteItemBytes stays untouched (owner-gated); the\ndirect-route frontier numbers for the rebind travel with the measurement\nreport.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-19T04:28:17Z"
-    },
-    {
-      "sha": "f900b7173c911e1e3205df42982afb42a04eb126",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/f900b7173c911e1e3205df42982afb42a04eb126",
-      "message": "feat(onchain,sdk,fault-proofs): build the Q40 fabricated-withdrawal family complete to the blueprint boundary (#482)",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-19T00:15:46Z"
-    },
-    {
-      "sha": "75341de2d155ccde13cdafbf0163991f6365666b",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/75341de2d155ccde13cdafbf0163991f6365666b",
-      "message": "docs(evidence,scripts): land the Q39 per-family closure surfaces and close output 10 in the same pass (#482)",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-19T00:13:46Z"
-    },
-    {
-      "sha": "5dadd5d1181f66f9d43e27a30821c3a724d8ddc0",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/5dadd5d1181f66f9d43e27a30821c3a724d8ddc0",
-      "message": "feat(fault-proofs): add the Q39 fabricated-deposit prepare/submit surfaces and family suite to the blueprint boundary (#482)",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-18T22:50:13Z"
-    },
-    {
-      "sha": "8fe3052e58f56beba45470506a97e6bf60f29dca",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/8fe3052e58f56beba45470506a97e6bf60f29dca",
-      "message": "feat(fault-proofs): source the observe door from a published item-observe reference script (#617 item 1, #597 ruling a)\n\nAdd the validationTraceDisputeItemObserve deployment-info role, mirroring\nvalidationTraceDisputeItemSemantic exactly: a plain reference-script\npublication with no auth token and no manifest-identity surface, so the\ndeployment manifestId does not move. submitValidationDisputeSemanticResolution\nresolves the entry up front beside the item-semantic one and the observe\nstage - the SS8.8 door, the stage whose envelope the carriage bytes need -\nsources canonical_decode_item_observe_v1 by reference instead of embedding\nthe 9,108-byte applied body.\n\nMeasured precondition (#617 first step): the applied observe body publishes\nas a real signed 9,384-byte transaction, 7,000 bytes under the 16,384-byte\nenvelope.\n\nEmulator suites publish the observe reference script beside the item-semantic\none and pin the observation transaction script-free with the applied body\nabsent from its CBOR; the stage reference-input pattern moves to\n[1, 0, 1, 0, 0] on the direct route and [0, 2, 0, 2, 0, 0] on the reference\nroute. buildRemovalDeploymentInfo gains the observe slot ahead of\nremovalReferenceScripts, with every positional call site widened.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-18T22:16:34Z"
-    },
-    {
-      "sha": "f4c418182c7cae725e503d49a645cd22aafdb8eb",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/f4c418182c7cae725e503d49a645cd22aafdb8eb",
-      "message": "feat(onchain,sdk): build the Q39 fabricated-deposit family selectors and byte twins (#482)",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-18T22:15:35Z"
-    },
-    {
-      "sha": "35ff7d5829a088b43dd691a3095c508cb614c513",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/35ff7d5829a088b43dd691a3095c508cb614c513",
-      "message": "docs(evidence,fault-proofs): land the Q14 output-10 parent integration and register the queue row (#481)",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-18T20:39:44Z"
-    },
-    {
-      "sha": "3d00322a1934087fee51fa94c071faa1894dbc96",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/3d00322a1934087fee51fa94c071faa1894dbc96",
-      "message": "docs(evidence,scripts): build the Q14 per-family closure surfaces and supersede the stale manifest census (#481)",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-18T20:34:33Z"
     }
   ],
   "contributors": [
@@ -326,10 +326,34 @@
   ],
   "issues": [
     {
-      "number": 614,
-      "title": "Restore CI to green from the accepted 7b731f2c baseline (4 red workflows, enumerated in canonical-v1-p8-regression-v1.json)",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/614",
-      "updated_at": "2026-08-20T23:51:35Z"
+      "number": 617,
+      "title": "Post-freeze ABI regeneration wave — single batched cascade (owner-authorized 2026-08-18)",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/617",
+      "updated_at": "2026-08-22T05:49:40Z"
+    },
+    {
+      "number": 620,
+      "title": "Option B (1/3): transition-only evidence commitment — canonical-decode validator subtraction + cross-language twins",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/620",
+      "updated_at": "2026-08-22T05:49:38Z"
+    },
+    {
+      "number": 622,
+      "title": "Option B (3/3): post-change frontier and ExUnits measurement campaign + owner sign-off table",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/622",
+      "updated_at": "2026-08-21T23:53:55Z"
+    },
+    {
+      "number": 621,
+      "title": "Option B (2/3): build-time delivery routing in the dispute builder + the adversarial route-freedom test matrix",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/621",
+      "updated_at": "2026-08-21T23:53:38Z"
+    },
+    {
+      "number": 619,
+      "title": "Option B specification: content-only evidence commitment / late delivery binding for validation-dispute evidence",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/619",
+      "updated_at": "2026-08-21T20:41:55Z"
     },
     {
       "number": 616,
@@ -344,34 +368,10 @@
       "updated_at": "2026-08-20T05:12:32Z"
     },
     {
-      "number": 617,
-      "title": "Post-freeze ABI regeneration wave — single batched cascade (owner-authorized 2026-08-18)",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/617",
-      "updated_at": "2026-08-20T04:57:05Z"
-    },
-    {
       "number": 482,
       "title": "[Canonical V1 Goal B14] Close public-event proof families",
       "html_url": "https://github.com/Anastasia-Labs/midgard/issues/482",
       "updated_at": "2026-08-19T00:16:35Z"
-    },
-    {
-      "number": 479,
-      "title": "[Canonical V1 Goal B02] Close parameterized control publication",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/479",
-      "updated_at": "2026-08-18T21:23:36Z"
-    },
-    {
-      "number": 486,
-      "title": "[Canonical V1 Goal B07] Close retained reconstruction and CG2",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/486",
-      "updated_at": "2026-08-18T21:23:35Z"
-    },
-    {
-      "number": 611,
-      "title": "Measure a complete signed tier-1 step transaction at the 14,336 B preimage cap (#557 M2 closure)",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/611",
-      "updated_at": "2026-08-18T21:23:32Z"
     }
   ],
   "releases": [],
@@ -382,11 +382,11 @@
     },
     {
       "week": 1756598400,
-      "total": 5
+      "total": 4
     },
     {
       "week": 1757203200,
-      "total": 57
+      "total": 56
     },
     {
       "week": 1757808000,
@@ -506,7 +506,7 @@
     },
     {
       "week": 1775347200,
-      "total": 40
+      "total": 42
     },
     {
       "week": 1775952000,
@@ -514,7 +514,7 @@
     },
     {
       "week": 1776556800,
-      "total": 17
+      "total": 29
     },
     {
       "week": 1777161600,
@@ -526,15 +526,15 @@
     },
     {
       "week": 1778371200,
-      "total": 23
+      "total": 43
     },
     {
       "week": 1778976000,
-      "total": 10
+      "total": 15
     },
     {
       "week": 1779580800,
-      "total": 1
+      "total": 2
     },
     {
       "week": 1780185600,
@@ -542,7 +542,7 @@
     },
     {
       "week": 1780790400,
-      "total": 30
+      "total": 32
     },
     {
       "week": 1781395200,
@@ -574,15 +574,15 @@
     },
     {
       "week": 1785628800,
-      "total": 184
+      "total": 62
     },
     {
       "week": 1786233600,
-      "total": 34
+      "total": 32
     },
     {
       "week": 1786838400,
-      "total": 100
+      "total": 108
     }
   ]
 }
