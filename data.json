@@ -1,10 +1,10 @@
 {
-  "fetchedAt": "2026-08-24T07:07:10.482Z",
+  "fetchedAt": "2026-08-25T06:55:38.037Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 25,
     "forks_count": 10,
-    "open_issues_count": 111
+    "open_issues_count": 113
   },
   "languages": {
     "Aiken": 359544,
@@ -326,6 +326,18 @@
   ],
   "issues": [
     {
+      "number": 641,
+      "title": "onchain: document the forced-order door's stall-exclusion coverage + ExecutionNativeScript* reachability (evidence for #640, non-gating)",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/641",
+      "updated_at": "2026-08-24T23:28:27Z"
+    },
+    {
+      "number": 640,
+      "title": "onchain: format-revision wave — forced-inclusion operator verdict with enumerated rejection reasons (OperatorVerdictV1 / RejectionReasonV1)",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/640",
+      "updated_at": "2026-08-24T23:28:09Z"
+    },
+    {
       "number": 617,
       "title": "Post-freeze ABI regeneration wave — single batched cascade (owner-authorized 2026-08-18)",
       "html_url": "https://github.com/Anastasia-Labs/midgard/issues/617",
@@ -366,18 +378,6 @@
       "title": "Reference challenger cannot prove any fraud in a transaction carrying an output item its codec refuses",
       "html_url": "https://github.com/Anastasia-Labs/midgard/issues/635",
       "updated_at": "2026-08-23T20:07:09Z"
-    },
-    {
-      "number": 632,
-      "title": "No standing gate binds SDK Data.Object field order to blueprint Args field order",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/632",
-      "updated_at": "2026-08-23T15:58:40Z"
-    },
-    {
-      "number": 631,
-      "title": "Operator-declared min_fee_a / min_fee_b carry only a >= 0 guard: an unbounded per-block dial over forced-inclusion traces",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/631",
-      "updated_at": "2026-08-23T15:24:19Z"
     }
   ],
   "releases": [],
@@ -432,11 +432,11 @@
     },
     {
       "week": 1763856000,
-      "total": 44
+      "total": 43
     },
     {
       "week": 1764460800,
-      "total": 17
+      "total": 8
     },
     {
       "week": 1765065600,
@@ -528,11 +528,11 @@
     },
     {
       "week": 1778371200,
-      "total": 25
+      "total": 43
     },
     {
       "week": 1778976000,
-      "total": 14
+      "total": 16
     },
     {
       "week": 1779580800,
@@ -544,11 +544,11 @@
     },
     {
       "week": 1780790400,
-      "total": 31
+      "total": 32
     },
     {
       "week": 1781395200,
-      "total": 18
+      "total": 20
     },
     {
       "week": 1782000000,
@@ -564,7 +564,7 @@
     },
     {
       "week": 1783814400,
-      "total": 9
+      "total": 10
     },
     {
       "week": 1784419200,
@@ -576,15 +576,15 @@
     },
     {
       "week": 1785628800,
-      "total": 183
+      "total": 2
     },
     {
       "week": 1786233600,
-      "total": 29
+      "total": 18
     },
     {
       "week": 1786838400,
-      "total": 138
+      "total": 132
     },
     {
       "week": 1787443200,
