@@ -1,10 +1,10 @@
 {
-  "fetchedAt": "2026-08-25T06:55:38.037Z",
+  "fetchedAt": "2026-08-26T06:56:17.768Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 25,
     "forks_count": 10,
-    "open_issues_count": 113
+    "open_issues_count": 114
   },
   "languages": {
     "Aiken": 359544,
@@ -17,109 +17,109 @@
   },
   "commits": [
     {
-      "sha": "a6ae7ceef86426fce0f4f9f5d0ab834b826d8503",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/a6ae7ceef86426fce0f4f9f5d0ab834b826d8503",
-      "message": "docs(evidence,ledger): seal the #617 wave — p8 addendum20260823 and the wave-seal GOAL_PROGRESS rows (#617, #623, #628, #633)",
+      "sha": "ca9aa382734eab2719c6072ed35f657a3a21d135",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ca9aa382734eab2719c6072ed35f657a3a21d135",
+      "message": "docs(evidence): record the owner ruling approving the §7.2 three-face superset (#633, #635)",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-24T03:20:28Z"
+      "authorDate": "2026-08-25T22:57:19Z"
     },
     {
-      "sha": "f1c8f32117bab93b0294db2d9d64f1f3dd7ccc0b",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/f1c8f32117bab93b0294db2d9d64f1f3dd7ccc0b",
-      "message": "docs(evidence): name the axis on the l2_datum width claim and the pattern-source branch (#628, #617)\n\nThe ledger note and the one-byte rung's infeasibility both said the wider\nrungs add 'under 720K mem' without naming which axis that is. It holds on\nthe marginal axis (717,375 across the 1-byte to 256-byte rungs); the\nwhole-test span across the same rungs is +1,533,414 because fixture growth\nis charged to the row. Both sentences now say so.\n\nThe verifier header cited verify-native-script-scan-exec-ledger-v1.mjs as\nits pattern source, which reads as an in-tree sibling but exists only on\nthe unmerged wave/lane-l branch pending the owner's #633 ruling. Cite the\nbranch instead.",
+      "sha": "6c14523d0deeb8b843543473c15292d59ddda740",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/6c14523d0deeb8b843543473c15292d59ddda740",
+      "message": "Merge wave/decoding-72-closing-arm: the #633 §7.2 BindOutOfDomain closing arm\n\nStep-03 gains the direction-B out-of-domain bind-time close (three\nfaces, disclosed strict superset of the decision text — owner ruling\nrequested in GOAL_PROGRESS), with the lib wire twin appended at tag 3,\n8 selectors (family 85/85), two new exec-ledger rows + a third\nneutralisation selector (verify pass, 23 rows), design-doc §3.2/§7.6\namendments, and the sweep-digest re-stamp after a green byte-identical\n--check under the rebuilt blueprint (only the step-03 pair moves,\n24,862 -> 25,767 B, 452 validators unchanged).",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-24T02:59:14Z"
+      "authorDate": "2026-08-25T22:33:53Z"
     },
     {
-      "sha": "766b8c56657255c8a6cfe10c8f0afe7c860597ac",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/766b8c56657255c8a6cfe10c8f0afe7c860597ac",
-      "message": "docs(evidence): append the C53 version-3 re-take addendum to the goal-task manifest row (#617 checklist item d, #622)\n\nThe C53 row's expectedNonzeroCounts and blockedBecause still narrated the\nversion-2 sweep (exactly 105 rows, 95 honestly-unmeasured) after the\nversion-3 artifact re-take (d9ae0db7, regenerated blueprint) and the\nconsumer re-pin (cea97ad6). Per the row's own append-only convention the\nstale clauses are retained verbatim and a dated addendum records the\n122-row registry (14+90+14+4; 17 additions, 0 removals, measured set\nunchanged at 10), the 112-row unfit pin, and the 4/4 suite result with\nbyte-identical --check regeneration. Manifest quality verifier output is\nbyte-identical to the pre-edit baseline (186/186 tasks, the same 9\npre-existing defects), verified against the unedited parent manifest.",
+      "sha": "073f6dd36ace30609f0ef515de4083026b17cbb1",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/073f6dd36ace30609f0ef515de4083026b17cbb1",
+      "message": "evidence(decoding,ledger): pin the closing arm's frontier face and repair the wave entry after review\n\nReview findings applied: the exec ledger's out-of-domain row was not the\narm's worst case — the reference-field face measures 2,388,802 mem /\n1,018,687,200 cpu against the pinned spend face's 2,382,579 /\n1,016,343,454 — so closes_an_out_of_domain_reference_ordinal is now\npinned too (verify pass, 23 rows; both within the 13.2M basis). The\nGOAL_PROGRESS entry gains the exact evidence commands, the blueprint\nmove (24,862 -> 25,767 B, 452 count unchanged), the sweep-check +\ndigest re-stamp record it omitted, and an explicit owner-ruling request\non the strict-superset faces: they convict on the committed reason's\nencoding alone, and the machine-never-emits-them premise is asserted\nfrom the machine's shape, not enforced by any range check on the\nemitter.\n\nDeclined (recorded here): extracting a shared subject_field_view helper\nand reordering the BindOutOfDomain when-clause to match tag order —\nboth were verified to move step-03's compiled bytes (clause order is\nload-bearing for the compiled when-chain), and consensus-byte churn for\na legibility preference fails the tradeoff order. The tier-1-only\ncarriage coverage on the count face matches BindOutpoint's existing\nprecedent.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-24T02:50:40Z"
+      "authorDate": "2026-08-25T22:33:39Z"
     },
     {
-      "sha": "cea97ad619213945cbf263848a40cdee6dd5a68e",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/cea97ad619213945cbf263848a40cdee6dd5a68e",
-      "message": "test(validation): re-pin the C53 sweep consumer onto the version-3 artifact re-take (#617 checklist item d, #622)\n\nCause: the version-3 re-take of the sweep artifact at d9ae0db7 re-measured\nthe registry against the regenerated blueprint and picked up the\nValueAndMint and LedgerDelta resolver splits. The artifact is\ngenerator-current -- its `--check` re-derivation is byte-identical at this\nHEAD -- but the consumer still pinned the pre-re-take shape, so the suite\nwas red on counts alone.\n\nVerified delta against the previous committed artifact (11fca446), by\nrow identity: exactly 17 additions -- prepare[12], prepare[13], and\nsemantic[75..89] -- exactly 0 removals, and the measured set unchanged at\n10 rows (same ten category/index keys, all still genuinely\nharness-accepted). Eight surviving slots carry re-assigned identities from\nthe same split (prepare[11] and semantic[67..74] now name the cek and\nvalue_and_mint families), and the ten measured rows carry re-measured\nExUnits and signed bytes from the regenerated blueprint; both are folded\nin by taking the pin from the artifact wholesale.\n\nEXPECTED_ROW_COUNT 105 -> 122 via SEMANTIC_RESOLVER_COUNT_V1 75 -> 90 and\nPREPARE_RESOLVER_COUNT_V1 12 -> 14 (top-level 14 and the 4\ncanonical-decode item stages are unchanged), matching the artifact's own\ncategoryCounts. The unfit pin is not hand-edited: every entry, including\neach reason string, is projected verbatim out of the generator-produced\nartifact's `unfit[]`, and the projection is byte-stable across two runs.\nunfitCount 95 -> 112; sourceVersion stays 3.\n\nSuite green 4/4 in 439.23 s, the 438.9 s determinism test included -- it\nre-derives the whole sweep through the real emulator lifecycle and\ncompares byte-for-byte against the committed artifact.",
+      "sha": "97acc461f4dde2b79fb6192c1ed0e87ea2197e76",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/97acc461f4dde2b79fb6192c1ed0e87ea2197e76",
+      "message": "docs(fault-proofs,ledger): record the §7.2 closing arm in the design doc and GOAL_PROGRESS\n\nDesign doc: §3.2 gains the BindOutOfDomain arm (four Continue arms) with\nthe strict-superset reasoning spelled out; §7.6 gains the out-of-domain\naccusation-subjects edge case, including the one-way soundness argument\nand the pinned neutralisation selector. GOAL_PROGRESS records the wave\n(branch wave/decoding-72-closing-arm off checkpoint 0e248f41), the\nstrict-superset disclosure, the exec-ledger movements, and the vacuous\naiken -m filter finding.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-24T02:47:11Z"
+      "authorDate": "2026-08-25T22:22:12Z"
     },
     {
-      "sha": "0f271d37cac6dcabff43460d48b385d7340474cf",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/0f271d37cac6dcabff43460d48b385d7340474cf",
-      "message": "core(consensus): restore the #622 caveat characters the re-pin transliterated (#617 checklist item a, #622)\n\nThe checklist requires the two review-mandated caveats VERBATIM from the\n#622 owner sign-off table; the re-pin comment reproduced them word for\nword but ASCII-folded six characters — the en-dash in 1,926-1,927, two\nem-dashes, the minus in +16/-4, the <= before 16-byte, and the bold\nmarkers around \"no in-family item signs at exactly 16,384\". Re-fetched\nthe sign-off text and restored the exact characters. Comment only; no\nvalue, assertion, or code moved.",
+      "sha": "fa9eeb41c5d4273496451ea11932faa14b229d6b",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/fa9eeb41c5d4273496451ea11932faa14b229d6b",
+      "message": "feat(onchain/decoding): add the #633 §7.2 BindOutOfDomain closing arm to step-03\n\nExecutes the offchain plan's §7.2 decision (delegated 2026-08-25): a\nforced leaf whose verbatim accusation pair names a subject BindOutpoint\ncan only abort on (§7.3 abort-never-clamp) is no longer unprovable —\ndirection B closes it at bind with the class-0 contradiction marker on\nthe still-unbound state, which step-04's direction-B gate consumes\nunchanged. The wire twin appends BindOutOfDomain LAST, so the\nBindOutpoint/Scan/Verdict redeemer tags are unmoved.\n\nStrict-superset disclosure: the decision text names one face\n(outpoint_cursor >= |field|, proven via the §8.8 door's authenticated\nitem count). The landed arm closes three — that face, a negative\nordinal, and source_kind outside {0, 1} — because the rejection-reason\narms carry source_kind as an unvalidated Int and step-02's ruled\nverbatim copy forwards it, making the extra faces the same unprovable\ncorner and the same fault statement (the accusation names a subject the\nmachine could never have resolved). The two extra faces close with no\nfield opening; the canonical redeemer carries None there. Soundness runs\none way: the machine only emits in-domain pairs, so the arm can never\nclose against an honest operator's leaf. Step-02's verbatim copy stays\nunguarded by design and now says so.\n\nSelectors: 4 positive (spend-field count face, reference-field count\nface, negative ordinal, source_kind naming no field) and 4 refusals\n(in-domain ordinal, direction A, post-bind re-close, non-canonical\nopening on the negative face). Family suite 85/85 under the fork\n(v1.1.23+6801f62).\n\nExec ledger: new step_03 row closes_an_out_of_domain_ordinal (2,382,579\nmem / 1,016,343,454 cpu, within the 13.2M basis) and a third\nneutralisation selector (rejects_an_in_domain_ordinal_close — were the\ncount comparison neutralised, a prover could convict an operator whose\ncorrect in-domain rejection was never disproven). The five pre-existing\nstep_03 rows moved by the new arm's dispatch cost (+0.6-1.5K mem) and\nare re-pinned here per the ledger's move-in-the-same-commit rule;\nverify green, 22 rows.\n\nBlueprint: only the step-03 spend/else pair moves (24,862 -> 25,767 B\ncompiled; still over the 16,384 inline envelope, so the plan's Q3\nreference-scripts answer stands); 452 validators unchanged. Resolver\nsweep --check byte-identical under the rebuilt blueprint (the decoding\nvalidators are unregistered), so the inputs digest is re-stamped after\nthat green check per the sanctioned flow.\n\nAlso found: 'aiken check -m native_script_decoding' matches ZERO tests\n(a bare -m string is a test-name filter; module filters need a '/' or\n'.{..}') — prior green runs under that filter were vacuous. Working\nfilters: -m 'native_script_decoding/' or -m decoding_step_03.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-24T02:37:31Z"
+      "authorDate": "2026-08-25T22:22:12Z"
     },
     {
-      "sha": "4d42a1edba781fa67497dc680659ab33dee967ec",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/4d42a1edba781fa67497dc680659ab33dee967ec",
-      "message": "docs(onchain): correct the neutralisation-selector count in the descriptor frontier module (#628, #617)",
+      "sha": "0e248f4113ccacecaef86bba9f48e486f41b22ed",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/0e248f4113ccacecaef86bba9f48e486f41b22ed",
+      "message": "Merge fix/642-fail-surface: the #642 fail-surface wave\n\nAll five findings of consolidated issue #642 implemented: zz605 doc-\ncomment trip reworded (never allowlisted), complete-item-proof-fit\nre-pinned onto #640 with measured dual-blueprint attribution, the native\narchitecture-g-owner built in node global-setup (throw on compile\nregression, loud skip only without cargo), min-Ada-compliant fixtures for\nthe two phase-B parallelization tests, the resolver proof-fit sweep\nre-pinned with the first inputs-digest stamp, and the scan bench\nrestructured to subprocess-per-measurement around the uplc wasm ceiling.\nThe scan-ledger bootstrap itself remains owner-gated and is not\nperformed. Full three-lane suite at the branch tip: only the\npre-existing expected reds (watcher 15, fault-proofs 1, sdk 1, node 3).",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-24T02:12:15Z"
+      "authorDate": "2026-08-25T21:45:55Z"
     },
     {
-      "sha": "1b5f21ee0d41ed84910186b3c41790c4dd4e943f",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/1b5f21ee0d41ed84910186b3c41790c4dd4e943f",
-      "message": "test(fault-proofs): track the route-freedom flip premise to the re-pinned direct frontier (#617, #622 ruling (b))\n\nThe inline-flip journey staged a 12,900-byte payload, sized to sit just\nover the retired 12,810-byte heuristic. With the frontier re-pinned to\n13,522 that item no longer clears the fixture's selection predicate and\nthe journey failed to stage at all. Stage 13,100 instead: the item lands\njust over 13,522 and well inside the contiguous 14,004-byte inline fit,\nso the test still measures a routing flip rather than an envelope\naccident. Narration in the reference-frontier suite tracks the same\nrebind. No assertion or pin moved.",
+      "sha": "038ef752229f016a738c1e7d7fa177da4e74e510",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/038ef752229f016a738c1e7d7fa177da4e74e510",
+      "message": "docs(ledger): record the #642 fail-surface wave",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-24T01:38:16Z"
+      "authorDate": "2026-08-25T21:45:44Z"
     },
     {
-      "sha": "7d72b400581c9ffa76b185f349e87ce9dd086bdb",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/7d72b400581c9ffa76b185f349e87ce9dd086bdb",
-      "message": "test(validation): narrate the data-breadth direct-carriage boundary at the re-pinned frontier (#617, #622 ruling (b))\n\nThe comment still named the retired 12,810-byte heuristic while the\nassertion reads the profile, which now pins 13,522. Prose only; no\nassertion moved.",
+      "sha": "4307375e757d82640a29125c876a01a37f6d08c7",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/4307375e757d82640a29125c876a01a37f6d08c7",
+      "message": "test(node,fault-proofs): close the #642 review findings\n\n- global-setup: a native architecture-g-owner build failure with cargo\n  AVAILABLE now throws — that is a compile regression in the crate, and\n  degrading seven real assertions into skips would hide it. Only a\n  genuinely missing toolchain (no cargo, or MIDGARD_SKIP_NATIVE_BUILD=1)\n  keeps the loud-skip path. The build goes through the package script\n  (native:mpf-owner:build) so the argv lives in one place.\n- tests/helpers/native-owner-binary.ts: single owner of the binary path,\n  presence probe, and skip warning; global-setup and both mpf consumer\n  files now share it instead of carrying three copies.\n- validation-parallelization: the PHASE_B_COMPLIANT_LOVELACE comment now\n  says why 5M rather than the 849,070 floor (headroom — these tests are\n  about conflicts/intervals, not the floor's boundary).\n- zz605: the allowlist comment records that the gate matches FILE TEXT,\n  comments included — a prose compiledCode mention trips it exactly like\n  a real read, deliberately; reword doc comments, never allowlist.\n\nmpf-differential 1/1, mpf-native-owner-service 6/6,\nvalidation-parallelization 7/7, zz605 8/8; node typecheck clean; eslint\nclean on every touched file.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-24T01:31:44Z"
+      "authorDate": "2026-08-25T21:45:38Z"
     },
     {
-      "sha": "89663a0db27c597baf0a6e851dfbe0621fc6614c",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/89663a0db27c597baf0a6e851dfbe0621fc6614c",
-      "message": "evidence(transition-trace,descriptor): gate the #628 ExUnits frontier and measure both crossings (#628, #617)\n\nThe #628 frontier evidence could not answer the question it was written for.\nAiken reports whole-test execution units, so every transition-trace row charged\nits own MPF-root and CBOR fixture construction to the reading, and the basis\ncrossing for descriptor derivation was interpolated between two golden vectors\nof different shape rather than measured. Both defects put a sign-off figure\nbeyond re-checking.\n\nReplace the ungated artifact with a gated exec ledger on the lane-l pattern,\nplus the two things it needs to be evidence:\n\n* Programmatic sweep vectors in two new test modules -- payloads built by a\n  doubling builder, never as source literals -- pairing every measured arm row\n  with a fixture-only twin built by the same builder. The verifier recomputes\n  each difference, so a marginal cost is arithmetic over pinned rows rather\n  than prose.\n* A lane verifier that judges basisFit in both directions, requires an\n  infeasibility and a ruling on every over-basis row, recomputes every marginal\n  figure and every crossing bracket, refuses a crossing that is not adjacent\n  and refuses an interpolation on a dimension a measurement already covers.\n  It imports the basis and the reading path from the shared modules and leaves\n  exec-ledger-within-basis-v1.mjs untouched.\n\nThe measurements change two published claims. Descriptor derivation crosses the\nbasis between 2,687 and 2,753 output bytes, not the ~1,680 the interpolation\ngave: that slope folded the rich vector's asset and reference-script cost into\nits size cost. And net of fixture cost neither repointed arm is over the basis\n-- the L2 no-op arm's 15.2M whole-test reading is 5,759,035 marginal mem, 43.6%\nof the basis, and the deposit arm's widest rung is 8,102,746.\n\nOne rung could not be built: an output whose inline datum is the empty byte\nstring has no descriptor at all. Pinned as an assertion, raised as an open\nquestion, left unfixed -- this lane changes no validator code.",
+      "sha": "9e879e1e823872328b7331616161731b02866aa2",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/9e879e1e823872328b7331616161731b02866aa2",
+      "message": "evidence(validation): isolate scan-bench measurements per process (#642 item 5)\n\nThe single-process ExUnits benchmark cannot complete a full curve:\n@lucid-evolution/uplc leaks wasm linear memory per evaluation, wasm32\nnever shrinks, and the run traps with an opaque 'unreachable' at exactly\ndeep-65 native:finalize — reproduced identically before and after the\napplyParamsToScript memoization, so the leak is the measured evaluations\nthemselves and only a process boundary isolates it (vitest isolates per\nFILE, not per test).\n\nscripts/run-scan-bench-evidence-v1.mjs orchestrates the benchmark file\nthrough three env modes it now understands:\n  list    — resolve curve points (incl. maxfit) + selected step labels\n  measure — one fresh process per (shape, nodes, label): one evaluation\n            on a fresh wasm heap; positivity asserted, ledger NOT judged\n            (a narrowed child judging is the truncated-pin shape\n            checkScanBenchLedgerV1 exists to refuse)\n  check   — judge the orchestrator-merged readings against the committed\n            ledger, with the CALLER's own filter env restored verbatim so\n            the truncated-bootstrap refusal still sees it; UPDATE reaches\n            this child only.\nPoint-level fields must agree across a point's children (build\ndeterminism) or the merge refuses loudly; any child failure aborts before\njudgement. test:evidence(:update) now front the bench with the\norchestrator.\n\nVerified: deep-5 narrowed run — 10/10 measure children green in fresh\nprocesses, merge consistent, check child red with exactly the honest\n'no committed artifact' structural failure (the bootstrap stays with the\nowner), orchestrator exit mirroring it. Package typecheck clean.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-24T01:30:47Z"
+      "authorDate": "2026-08-25T21:36:56Z"
     },
     {
-      "sha": "563b84d056b6536dcc52080e8cda2c237f21791f",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/563b84d056b6536dcc52080e8cda2c237f21791f",
-      "message": "test(fault-proofs): point the route-freedom and #622 frontier narration at the executed rebind (#617, #622)\n\nDoc-comment only, no assertion moves: four suites narrated the heuristic\nthreshold as the pre-Option-B 12,810 and the #622 pins as \"not rebound here,\nstill with the owner\". The owner ruled (b) on 2026-08-22 and the rebind to\n13,522 / 14,004 executed at this wave's sign-off, so the narration points at\nthe executed rebind instead of the open question. Every one of these files\nalready read the constant rather than a literal, which is why no expectation\nmoved.",
+      "sha": "aff13ec687456f96a88ee912d6bb76c575609d93",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/aff13ec687456f96a88ee912d6bb76c575609d93",
+      "message": "evidence(validation): re-pin the resolver proof-fit sweep onto #640 and establish the first inputs-digest stamp (#642)\n\nThe 'not byte-identical' regen red was not nondeterminism: two independent\nregenerations produced byte-identical artifacts, both differing from the\ncommitted fixture in exactly eight scriptHash lines — the #640\nda-hash-preimage moved-hash class (28db415e... among them, the same move\nitem 2 re-pinned). No ExUnits, byte, or fit field moved. The fixture is the\nregenerated artifact; the sanctioned flow then went green end-to-end:\ngenerate --check byte-identical, digest --stamp, gate PASS, sweep file 4/4.\n\nThis is the digest gate's FIRST stamp ('currency has never been established'\nwas the default lane's honest red). The declared closure includes the\ngitignored onchain/aiken/plutus.json, so the stamp binds the blueprint built\nfrom THIS tree's onchain source (452 validators, md5\n78540c1d34b10d205942372882487a00, aiken v1.1.23+6801f62) — the gate reads\ncurrent only where that exact blueprint is staged, which is the closure's\ndeliberate fail-closed design.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-24T01:24:55Z"
+      "authorDate": "2026-08-25T21:21:22Z"
     },
     {
-      "sha": "7ada926bc8f6b3e87ea1c17eec41474c630bf1af",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/7ada926bc8f6b3e87ea1c17eec41474c630bf1af",
-      "message": "docs(evidence): re-pin the C42 counts the min-Ada repair deliberately left stale (#617 R5, #618, #627)\n\nThe C42 row named two counts as known stale so the wave's single post-merge\nre-pin would be mechanical. Re-measured on the regenerated blueprint under the\npinned fork (v1.1.23+2a78108):\n\n  midgard/validation_machine_v1.test      190 tests | 190 passed | 0 failed\n                                          identical under --env testnet and\n                                          --env default; whole-package summary\n                                          2,736 checks / 0 errors in both\n  min-ada-twin-cross-check-v1.test.ts     23 -> 26 tests, 0 failures\n  midgard/ledger_output_proof_v1.test     8 tests | 8 passed (selector batch\n                                          unchanged, re-confirmed in the run)\n\nThe row's \"778 to 784 checks in that module\" figure is recorded as SUPERSEDED\nrather than re-pinned: it reproduces under neither env — aiken reports 190\ntests for that module and 2,736 checks for the whole package — so its basis is\nunrecoverable, and the row now pins aiken's own per-module test count, which\nis reproducible from the summary block of a full check.\n\nManifest quality verifier unchanged by this edit: 186/186 tasks, 9 defects\n(1 blockedOnClaimMismatch F05, 8 plannedFocusedCommandModuleExists Q39/Q40),\nbyte-for-byte the same result as the base tree.",
+      "sha": "6325cbd011d8b2c92e04c74b47827ef4199ebcca",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/6325cbd011d8b2c92e04c74b47827ef4199ebcca",
+      "message": "fix(node): min-Ada-compliant fixtures for the two phase-B parallelization tests (#642)\n\nRoot cause found by probing the rejection codes: both reds were E_MIN_ADA\n(output[0] 10 < 849,070 for 37 serialized bytes) — the fixtures' 10-lovelace\noutputs predate the #618 min-Ada floor (R8 of decision 0005), so every\ncandidate was rejected before conflict detection or interval evaluation was\nreached. Raising the fixture amounts to 5,000,000 lovelace restores the\nbehaviours under test: bucket conflict resolution (A accepted, B double-spend\nrejected, C accepted) and both validity-interval polarities, including the\nexact '120 > 119' rejection detail. The failures were fully deterministic and\nin-memory — the earlier database-state correlation was a misattribution.\nFile 7/7.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-24T01:22:45Z"
+      "authorDate": "2026-08-25T21:14:37Z"
     },
     {
-      "sha": "6ddb95956bcb3fa4120c0fc410f24e3fcd796c23",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/6ddb95956bcb3fa4120c0fc410f24e3fcd796c23",
-      "message": "docs(necessity): re-derive the §3.2 tier-1 ladder on the post-Option-B route (#617, #622)\n\nThe wave's §3.2 necessity re-derivation, run against the regenerated\nblueprint. Every §3.2 artifact carried the #611 tier-1 reading — \"falsified at\nthe signed-transaction layer above a 13,357-byte item / 13,361-byte preimage,\nescalated to owner authority\" — which measured the authenticate route the\ncomplete item no longer uses. Option B (#620) moved the item to the observe\ndoor and #622 re-measured the deployed route end-to-end, so the ladder's\ntier-1 rung is re-derived:\n\n  signed inline fit ends at a 14,004-byte item (16,369 B signed, margin 15)\n  item 14,005 refused PRE-SIGN at a projected 16,385 B, auto-demoted\n  the 14,336-byte cap itself stages by reference (publication 15,135 B,\n    by-reference observe 1,959 B); 14,337 refuses as tier-2\n\nSuperseded figures are retained beside the new ones, as this artifact family\ndoes for every movement it records. Tiers 2 and 3 are untouched: `K` = 15,148\nreliable / 15,644 exact and the 16,613-byte tier-3 combined lower bound are\nunmoved by Option B, which changed no publication and no certificate.\n\nFiles: transaction-field-chunk-v1.md (the tier table, the exact-limiting-\nconstraint paragraph, the no-simpler-representation paragraph and the\npreserved-path paragraph), ledger-output-incremental-proof-v1.md,\nnative-script-traversal-v1.md, redeemer-item-traversal-v1.md,\nmint-fold-asset-v1.md.\n\nC74 is not re-measured because it has never been measured: its runner\n(demo/midgard-fault-proofs/scripts/measure-release-applied-validator-paths-v1.mjs),\nits strict verifier test and both c73/c74 evidence JSONs are absent from the\ntree — the row's own manifest entry records them as prescribed missing\nsurfaces and the row as non-PASS. There is nothing to re-derive against the\nregenerated blueprint.",
+      "sha": "3e2c712ca4c7642a09cbc75f4f336a915470bfd6",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/3e2c712ca4c7642a09cbc75f4f336a915470bfd6",
+      "message": "fix(node): build the native architecture-g-owner in global-setup; loud skip when absent (#642)\n\nThe dedicated scripts (test:mpf:differential, test:mpf-native-owner) always\nbuilt the binary, but the plain test run never did, so a fresh worktree failed\nmpf-differential and mpf-native-owner-service on a missing artifact. Global\nsetup now runs cargo build --release --locked (sub-second when warm,\nMIDGARD_SKIP_NATIVE_BUILD=1 opts out, missing cargo degrades gracefully), and\nboth consumer files skip LOUDLY — console warning naming the path and the\nbuild command — when the binary is still absent. Never a silent pass: the\nskip is visible per-file in the vitest summary. Both polarities verified:\n7/7 pass with the binary; 7 loud skips without it.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-24T01:06:17Z"
+      "authorDate": "2026-08-25T21:12:03Z"
     },
     {
-      "sha": "34791fcaad4c75fb825c89791af149b1569b04bf",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/34791fcaad4c75fb825c89791af149b1569b04bf",
-      "message": "test(validation): retire the frozen pre-#620 blueprint pins now the wave's regeneration has landed (#617, #620)\n\nTwo of the wave-transition reds recorded on #617 (comment 5379054218, rows 1\nand 3) are the committed-fixture/pin skew, not a defect: both suites pinned\nthe pre-Option-B `plutus.json` shape and named the single regeneration as the\nflip. The regeneration has landed, so they re-pin to the regenerated shape.\n\n- complete-item-carriage-policy-v1: the item-semantic `ActionV1` arm list is\n  the one-arm `[\"Verify\"]` with the transition-only field list; the retired\n  `VerifyReference` arm and the fourth `carriage` field are gone.\n- complete-item-proof-fit-v1: the frozen four-field pin becomes an exact\n  parse of the emitted semantic redeemer against the regenerated\n  `SpendRedeemer` definition — the stronger check the deferral stood in for —\n  plus the same one-arm/three-field assertions.\n\n11 tests green across the two files; the wider dependent run (carriage\npolicy, proof fit, nested-value boundary, data-breadth boundary) is 20/20.",
+      "sha": "6e4304e739cce6640d8ad645ffa6ffa69d61719b",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/6e4304e739cce6640d8ad645ffa6ffa69d61719b",
+      "message": "fix(validation): re-pin the §3.2 necessity identities onto the #640 deployment (#642)\n\nThe #640 merge's da-hash-preimage/rule.ak fix recompiled the fraud-proof\nvalidators that fold that rule, moving resolver[1]'s applied hash\n81b42c84... -> 28db415e.... Measured through loadContracts() — the same\nproducer the row asserts on — under both the base 0df64631 blueprint (444\nvalidators) and the current tree's (452): identical triples, so the move is\nentirely #640's and the #635 wave's appended validators touch none of the\nidentities. COUNT (91) and the proof-item hash are unchanged. File 6/6.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-24T01:00:13Z"
+      "authorDate": "2026-08-25T21:08:27Z"
     },
     {
-      "sha": "28e9f457636669680afb42a7e687b0513540b413",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/28e9f457636669680afb42a7e687b0513540b413",
-      "message": "core(consensus): re-pin the direct and reference complete-item frontiers from the #622 measured table (#617, #622 rulings (a)+(b), #624)\n\nOwner rulings 2026-08-22 on the #622 sign-off table, executed at the #617\nwave sign-off point (checklist items 1 and 2):\n\n  maxExactDirectCompleteItemBytes                            13,294 -> 14,004\n  maxReliableDirectCompleteItemBytes                         12,810 -> 13,522\n  maxReliableDirectCompleteItemProofTransactionBytes         15,872 (unchanged)\n  maxReliableDirectCompleteItemAuthenticationTransactionBytes 15,872 -> 2,656\n  maxReliableDirectCompleteItemObservationTransactionBytes    15,138 -> 15,872\n  referenceCompleteItemProofTransactionBytes                  8,275 -> 1,959\n  referenceCompleteItemAuthenticationTransactionBytes         5,967 -> 2,656\n  referenceCompleteItemObservationTransactionBytes            7,296 -> 1,959\n  referenceCompleteItemProofReferenceInputCount                   1 -> 2\n\nBoth #622 caveats ride the pins verbatim in the adjacent comment\n(framing-relative; quantization ladder / contiguous frontier).\n\nEnvelope re-derivation precondition, verified before any re-pin: the\nnon-observe stages are byte-identical across every measured item from 8,277\nto 14,336, re-measured on the regenerated blueprint by the three\nsubmit-init-emulator-option-b-*-v1 suites (7/7 green, 1,114s):\n\n  stage             bytes    items measured\n  prepare-selected  1,864    8,277 / 13,522 / 13,523 / 14,004 / 14,005 / 14,336\n  authenticate      2,656    same\n  source            7,895    same\n  proof             5,701    same\n  settle            5,064    same\n\nSince Option B (#620) the item exists on L1 only in the observe redeemer or\nin the publication, so the rebind changes routing only inside the\ncomplete-item lane.\n\nRow semantics: the `...ProofTransaction` rows keep their established reading\n(the transaction of that route's proof journey the row was measuring), which\npost-Option-B is the observe door on both routes; the reference row's two\nreference inputs are its own reference script plus the published proof item,\nmeasured [0, 1, 0, 2, 0, 0] across the six-transaction reference leg.\n\nDependents moved with the pins:\n- demo/midgard-core/tests/consensus-profile-v1.test.ts: the binder direction\n  assertion flips to observation > authentication (the item left the\n  authenticate redeemer), the frontier pins re-pin, and the retired\n  single-transaction bases 13,282 / 13,998 now straddle the frontier rather\n  than sitting above it.\n- demo/midgard-fault-proofs/tests/validation-proof-item-delivery-route-v1.test.ts:\n  the hard-coded 12,810 heuristic pin re-pins to 13,522.\n- docs/exec-plans/evidence/necessity/cek-program-material-v1.md: order 1's\n  stale `<= 8,769` fit rule and order 3's 8,275-byte/one-reference-input\n  measurement re-pin (checklist item 2's named row).\n- docs/spec/midgard-tx.md §8.3 + the §8.11 erratum: the FALSIFIED\n  maxTier1RedeemerPreimageBytes annotation resolves into the R6 split reading\n  the owner signed as #622 question (a) — mooted on the complete-item direct\n  path, retained general-phase as exactly the measured reference-route\n  stageability boundary (14,336 stages, 14,337 refuses).\n\nmidgard-core: 46 files, 508 tests green.",
+      "sha": "b9d4cb266e3ab77cd85e532c1e62e6d814f093c4",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/b9d4cb266e3ab77cd85e532c1e62e6d814f093c4",
+      "message": "fix(fault-proofs): reword a doc comment that tripped the zz605 compiledCode allowlist gate (#642)\n\n165db5ca's ValueAndMint deployment-size comment in validation-dispute/submit.ts\nmentioned the literal token the zz605 scan confines to allowlisted loaders.\nThe file performs no bare read — rewording the comment keeps the gate precise\ninstead of allowlisting a comment-only file, which would mask any future real\nbare read added there. zz605 back to 8/8.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-24T00:54:24Z"
+      "authorDate": "2026-08-25T21:05:33Z"
     },
     {
-      "sha": "c67394f8eeb7df7cd5f0467e1d394bace60d3436",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/c67394f8eeb7df7cd5f0467e1d394bace60d3436",
-      "message": "test(validation): flip the proof-fit emulator harness onto the Option B observe door (#617, #620)\n\nOption B (#620) made the canonical-decode item semantic transition-only, so the\nauthenticate stage this harness measured no longer carries the item and no\nlonger varies with item size. The suite's rows were measuring a stage that had\nstopped being the frontier, which is why they were red after the regeneration.\n\nDrive the full authenticate -> source -> observe journey (both validators from\nparked reference scripts, per submit.ts's production shape) and measure the\nobserve door instead:\n\n- the applied observe door at the staged reliability boundary, asserted\n  relationally rather than by byte equality: #622 caveat 1 makes 13,522/14,004\n  framing-relative to the production journey fixture family, so the exact byte\n  table stays pinned only in the #622 fault-proofs suites;\n- the complete signed tier-1 step transaction at the 14,336-byte preimage cap\n  (#557 M2 overflow + bisect), now on observe;\n- inline and reference delivery of the same item reaching identical observed\n  state;\n- the substituted / trailing-byte rejection row at the observe reference door,\n  previously vacuous, now with an honest-publication positive control.\n\n6 passed (6) in 41.99s.",
+      "sha": "5a745068e44a933aacafe10fb521486dfdc64041",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/5a745068e44a933aacafe10fb521486dfdc64041",
+      "message": "Merge perf/offchain-test-suites (5d062e89) into the #635-extended checkpoint",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-24T00:43:34Z"
+      "authorDate": "2026-08-25T20:53:59Z"
     }
   ],
   "contributors": [
@@ -326,6 +326,12 @@
   ],
   "issues": [
     {
+      "number": 642,
+      "title": "Checkpoint 5a745068 fail-surface: five pre-existing/inherited reds surfaced by the full test pass",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/642",
+      "updated_at": "2026-08-25T21:46:13Z"
+    },
+    {
       "number": 641,
       "title": "onchain: document the forced-order door's stall-exclusion coverage + ExecutionNativeScript* reachability (evidence for #640, non-gating)",
       "html_url": "https://github.com/Anastasia-Labs/midgard/issues/641",
@@ -366,18 +372,6 @@
       "title": "Cross-language divergence: tag-0 native reference-script bytes are opaque on-chain but structurally parsed off-chain",
       "html_url": "https://github.com/Anastasia-Labs/midgard/issues/633",
       "updated_at": "2026-08-24T00:19:03Z"
-    },
-    {
-      "number": 636,
-      "title": "docs(onchain): build_v1 doc claims off-chain-encoder parity the tag-0 arm does not have",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/636",
-      "updated_at": "2026-08-24T00:18:26Z"
-    },
-    {
-      "number": 635,
-      "title": "Reference challenger cannot prove any fraud in a transaction carrying an output item its codec refuses",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/635",
-      "updated_at": "2026-08-23T20:07:09Z"
     }
   ],
   "releases": [],
@@ -432,15 +426,15 @@
     },
     {
       "week": 1763856000,
-      "total": 43
+      "total": 44
     },
     {
       "week": 1764460800,
-      "total": 8
+      "total": 17
     },
     {
       "week": 1765065600,
-      "total": 7
+      "total": 6
     },
     {
       "week": 1765670400,
@@ -484,19 +478,19 @@
     },
     {
       "week": 1771718400,
-      "total": 47
+      "total": 45
     },
     {
       "week": 1772323200,
-      "total": 26
+      "total": 24
     },
     {
       "week": 1772928000,
-      "total": 36
+      "total": 35
     },
     {
       "week": 1773532800,
-      "total": 29
+      "total": 28
     },
     {
       "week": 1774137600,
@@ -504,15 +498,15 @@
     },
     {
       "week": 1774742400,
-      "total": 29
+      "total": 30
     },
     {
       "week": 1775347200,
-      "total": 41
+      "total": 42
     },
     {
       "week": 1775952000,
-      "total": 31
+      "total": 32
     },
     {
       "week": 1776556800,
@@ -532,11 +526,11 @@
     },
     {
       "week": 1778976000,
-      "total": 16
+      "total": 12
     },
     {
       "week": 1779580800,
-      "total": 2
+      "total": 1
     },
     {
       "week": 1780185600,
@@ -544,11 +538,11 @@
     },
     {
       "week": 1780790400,
-      "total": 32
+      "total": 31
     },
     {
       "week": 1781395200,
-      "total": 20
+      "total": 21
     },
     {
       "week": 1782000000,
@@ -576,19 +570,19 @@
     },
     {
       "week": 1785628800,
-      "total": 2
+      "total": 82
     },
     {
       "week": 1786233600,
-      "total": 18
+      "total": 32
     },
     {
       "week": 1786838400,
-      "total": 132
+      "total": 138
     },
     {
       "week": 1787443200,
-      "total": 50
+      "total": 107
     }
   ]
 }
