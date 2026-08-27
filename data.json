@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-08-26T06:56:17.768Z",
+  "fetchedAt": "2026-08-27T17:30:01.534Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 25,
@@ -17,109 +17,109 @@
   },
   "commits": [
     {
-      "sha": "ca9aa382734eab2719c6072ed35f657a3a21d135",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ca9aa382734eab2719c6072ed35f657a3a21d135",
-      "message": "docs(evidence): record the owner ruling approving the §7.2 three-face superset (#633, #635)",
+      "sha": "41c2b679164ce1a9178e10e47d1e2deaf7677ddf",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/41c2b679164ce1a9178e10e47d1e2deaf7677ddf",
+      "message": "feat(fault-proofs): register canonical catalogue families",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-25T22:57:19Z"
+      "authorDate": "2026-08-27T03:35:11Z"
     },
     {
-      "sha": "6c14523d0deeb8b843543473c15292d59ddda740",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/6c14523d0deeb8b843543473c15292d59ddda740",
-      "message": "Merge wave/decoding-72-closing-arm: the #633 §7.2 BindOutOfDomain closing arm\n\nStep-03 gains the direction-B out-of-domain bind-time close (three\nfaces, disclosed strict superset of the decision text — owner ruling\nrequested in GOAL_PROGRESS), with the lib wire twin appended at tag 3,\n8 selectors (family 85/85), two new exec-ledger rows + a third\nneutralisation selector (verify pass, 23 rows), design-doc §3.2/§7.6\namendments, and the sweep-digest re-stamp after a green byte-identical\n--check under the rebuilt blueprint (only the step-03 pair moves,\n24,862 -> 25,767 B, 452 validators unchanged).",
+      "sha": "ff84b1cc9cb97e9ff31500001888f5ab6989de67",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ff84b1cc9cb97e9ff31500001888f5ab6989de67",
+      "message": "Merge transition-trace completion tooling\n\n# Conflicts:\n#\tdemo/midgard-fault-proofs/src/index.ts\n#\tdocs/fault-proofs/README.md\n#\tdocs/fault-proofs/catalogue-status.md\n#\tdocs/fault-proofs/offchain-reference.md\n#\tdocs/fault-proofs/onchain-reference.md\n#\tdocs/fault-proofs/testing-status.md",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-25T22:33:53Z"
+      "authorDate": "2026-08-27T02:14:54Z"
     },
     {
-      "sha": "073f6dd36ace30609f0ef515de4083026b17cbb1",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/073f6dd36ace30609f0ef515de4083026b17cbb1",
-      "message": "evidence(decoding,ledger): pin the closing arm's frontier face and repair the wave entry after review\n\nReview findings applied: the exec ledger's out-of-domain row was not the\narm's worst case — the reference-field face measures 2,388,802 mem /\n1,018,687,200 cpu against the pinned spend face's 2,382,579 /\n1,016,343,454 — so closes_an_out_of_domain_reference_ordinal is now\npinned too (verify pass, 23 rows; both within the 13.2M basis). The\nGOAL_PROGRESS entry gains the exact evidence commands, the blueprint\nmove (24,862 -> 25,767 B, 452 count unchanged), the sweep-check +\ndigest re-stamp record it omitted, and an explicit owner-ruling request\non the strict-superset faces: they convict on the committed reason's\nencoding alone, and the machine-never-emits-them premise is asserted\nfrom the machine's shape, not enforced by any range check on the\nemitter.\n\nDeclined (recorded here): extracting a shared subject_field_view helper\nand reordering the BindOutOfDomain when-clause to match tag order —\nboth were verified to move step-03's compiled bytes (clause order is\nload-bearing for the compiled when-chain), and consensus-byte churn for\na legibility preference fails the tradeoff order. The tier-1-only\ncarriage coverage on the count face matches BindOutpoint's existing\nprecedent.",
+      "sha": "bf8c455cdaa7328bc5f841b0e7b2777fea6cfce6",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/bf8c455cdaa7328bc5f841b0e7b2777fea6cfce6",
+      "message": "Merge withdrawal-mistag fault proof lifecycle\n\n# Conflicts:\n#\tdemo/midgard-fault-proofs/src/index.ts\n#\tdemo/midgard-fault-proofs/tests/support/emulator/contracts.ts\n#\tdemo/midgard-fault-proofs/tests/support/emulator/harness.ts\n#\tdemo/midgard-fault-proofs/tests/support/emulator/removal-deployment.ts\n#\tdemo/midgard-sdk/src/fraud-proof/index.ts\n#\tdocs/fault-proofs/catalogue-status.md\n#\tdocs/fault-proofs/execution-plan.md",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-25T22:33:39Z"
+      "authorDate": "2026-08-27T02:13:12Z"
     },
     {
-      "sha": "97acc461f4dde2b79fb6192c1ed0e87ea2197e76",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/97acc461f4dde2b79fb6192c1ed0e87ea2197e76",
-      "message": "docs(fault-proofs,ledger): record the §7.2 closing arm in the design doc and GOAL_PROGRESS\n\nDesign doc: §3.2 gains the BindOutOfDomain arm (four Continue arms) with\nthe strict-superset reasoning spelled out; §7.6 gains the out-of-domain\naccusation-subjects edge case, including the one-way soundness argument\nand the pinned neutralisation selector. GOAL_PROGRESS records the wave\n(branch wave/decoding-72-closing-arm off checkpoint 0e248f41), the\nstrict-superset disclosure, the exec-ledger movements, and the vacuous\naiken -m filter finding.",
+      "sha": "9322dc6f7e6e45abffdb1740e3fe714f7d7f491b",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/9322dc6f7e6e45abffdb1740e3fe714f7d7f491b",
+      "message": "Merge withdrawn-input fault proof lifecycle\n\n# Conflicts:\n#\tdemo/midgard-fault-proofs/src/index.ts\n#\tdemo/midgard-fault-proofs/tests/support/emulator/contracts.ts\n#\tdemo/midgard-fault-proofs/tests/support/emulator/harness.ts\n#\tdemo/midgard-fault-proofs/tests/support/emulator/removal-deployment.ts\n#\tdemo/midgard-sdk/src/fraud-proof/index.ts\n#\tdocs/fault-proofs/catalogue-status.md\n#\tdocs/fault-proofs/coverage-matrix.md",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-25T22:22:12Z"
+      "authorDate": "2026-08-27T02:11:21Z"
     },
     {
-      "sha": "fa9eeb41c5d4273496451ea11932faa14b229d6b",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/fa9eeb41c5d4273496451ea11932faa14b229d6b",
-      "message": "feat(onchain/decoding): add the #633 §7.2 BindOutOfDomain closing arm to step-03\n\nExecutes the offchain plan's §7.2 decision (delegated 2026-08-25): a\nforced leaf whose verbatim accusation pair names a subject BindOutpoint\ncan only abort on (§7.3 abort-never-clamp) is no longer unprovable —\ndirection B closes it at bind with the class-0 contradiction marker on\nthe still-unbound state, which step-04's direction-B gate consumes\nunchanged. The wire twin appends BindOutOfDomain LAST, so the\nBindOutpoint/Scan/Verdict redeemer tags are unmoved.\n\nStrict-superset disclosure: the decision text names one face\n(outpoint_cursor >= |field|, proven via the §8.8 door's authenticated\nitem count). The landed arm closes three — that face, a negative\nordinal, and source_kind outside {0, 1} — because the rejection-reason\narms carry source_kind as an unvalidated Int and step-02's ruled\nverbatim copy forwards it, making the extra faces the same unprovable\ncorner and the same fault statement (the accusation names a subject the\nmachine could never have resolved). The two extra faces close with no\nfield opening; the canonical redeemer carries None there. Soundness runs\none way: the machine only emits in-domain pairs, so the arm can never\nclose against an honest operator's leaf. Step-02's verbatim copy stays\nunguarded by design and now says so.\n\nSelectors: 4 positive (spend-field count face, reference-field count\nface, negative ordinal, source_kind naming no field) and 4 refusals\n(in-domain ordinal, direction A, post-bind re-close, non-canonical\nopening on the negative face). Family suite 85/85 under the fork\n(v1.1.23+6801f62).\n\nExec ledger: new step_03 row closes_an_out_of_domain_ordinal (2,382,579\nmem / 1,016,343,454 cpu, within the 13.2M basis) and a third\nneutralisation selector (rejects_an_in_domain_ordinal_close — were the\ncount comparison neutralised, a prover could convict an operator whose\ncorrect in-domain rejection was never disproven). The five pre-existing\nstep_03 rows moved by the new arm's dispatch cost (+0.6-1.5K mem) and\nare re-pinned here per the ledger's move-in-the-same-commit rule;\nverify green, 22 rows.\n\nBlueprint: only the step-03 spend/else pair moves (24,862 -> 25,767 B\ncompiled; still over the 16,384 inline envelope, so the plan's Q3\nreference-scripts answer stands); 452 validators unchanged. Resolver\nsweep --check byte-identical under the rebuilt blueprint (the decoding\nvalidators are unregistered), so the inputs digest is re-stamped after\nthat green check per the sanctioned flow.\n\nAlso found: 'aiken check -m native_script_decoding' matches ZERO tests\n(a bare -m string is a test-name filter; module filters need a '/' or\n'.{..}') — prior green runs under that filter were vacuous. Working\nfilters: -m 'native_script_decoding/' or -m decoding_step_03.",
+      "sha": "da5aa70f467b2000736fe2aac9f2a4e42eeabdef",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/da5aa70f467b2000736fe2aac9f2a4e42eeabdef",
+      "message": "Merge l2-transaction-mistag fault proof lifecycle\n\n# Conflicts:\n#\tdemo/midgard-fault-proofs/src/index.ts\n#\tdemo/midgard-fault-proofs/tests/support/emulator/contracts.ts\n#\tdemo/midgard-fault-proofs/tests/support/emulator/harness.ts\n#\tdemo/midgard-fault-proofs/tests/support/emulator/removal-deployment.ts\n#\tdocs/fault-proofs/catalogue-status.md",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-25T22:22:12Z"
+      "authorDate": "2026-08-27T02:08:55Z"
     },
     {
-      "sha": "0e248f4113ccacecaef86bba9f48e486f41b22ed",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/0e248f4113ccacecaef86bba9f48e486f41b22ed",
-      "message": "Merge fix/642-fail-surface: the #642 fail-surface wave\n\nAll five findings of consolidated issue #642 implemented: zz605 doc-\ncomment trip reworded (never allowlisted), complete-item-proof-fit\nre-pinned onto #640 with measured dual-blueprint attribution, the native\narchitecture-g-owner built in node global-setup (throw on compile\nregression, loud skip only without cargo), min-Ada-compliant fixtures for\nthe two phase-B parallelization tests, the resolver proof-fit sweep\nre-pinned with the first inputs-digest stamp, and the scan bench\nrestructured to subprocess-per-measurement around the uplc wasm ceiling.\nThe scan-ledger bootstrap itself remains owner-gated and is not\nperformed. Full three-lane suite at the branch tip: only the\npre-existing expected reds (watcher 15, fault-proofs 1, sdk 1, node 3).",
+      "sha": "c8fb03876769706ee6cc8e9670270ea5aca5cd0c",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/c8fb03876769706ee6cc8e9670270ea5aca5cd0c",
+      "message": "Merge cross-block-duplicate-event fault proof lifecycle\n\n# Conflicts:\n#\tdemo/midgard-fault-proofs/src/index.ts\n#\tdemo/midgard-fault-proofs/tests/support/emulator/contracts.ts\n#\tdemo/midgard-fault-proofs/tests/support/emulator/harness.ts\n#\tdemo/midgard-fault-proofs/tests/support/emulator/removal-deployment.ts\n#\tdocs/fault-proofs/catalogue-status.md",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-25T21:45:55Z"
+      "authorDate": "2026-08-27T02:07:04Z"
     },
     {
-      "sha": "038ef752229f016a738c1e7d7fa177da4e74e510",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/038ef752229f016a738c1e7d7fa177da4e74e510",
-      "message": "docs(ledger): record the #642 fail-surface wave",
+      "sha": "15f5dba707e8b8f4b105c8a5945aa731507a5c3e",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/15f5dba707e8b8f4b105c8a5945aa731507a5c3e",
+      "message": "Merge double-withdraw fault proof lifecycle\n\n# Conflicts:\n#\tdemo/midgard-fault-proofs/tests/support/emulator/contracts.ts\n#\tdemo/midgard-fault-proofs/tests/support/emulator/harness.ts\n#\tdemo/midgard-fault-proofs/tests/support/emulator/removal-deployment.ts\n#\tdocs/fault-proofs/catalogue-status.md",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-25T21:45:44Z"
+      "authorDate": "2026-08-27T02:05:44Z"
     },
     {
-      "sha": "4307375e757d82640a29125c876a01a37f6d08c7",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/4307375e757d82640a29125c876a01a37f6d08c7",
-      "message": "test(node,fault-proofs): close the #642 review findings\n\n- global-setup: a native architecture-g-owner build failure with cargo\n  AVAILABLE now throws — that is a compile regression in the crate, and\n  degrading seven real assertions into skips would hide it. Only a\n  genuinely missing toolchain (no cargo, or MIDGARD_SKIP_NATIVE_BUILD=1)\n  keeps the loud-skip path. The build goes through the package script\n  (native:mpf-owner:build) so the argv lives in one place.\n- tests/helpers/native-owner-binary.ts: single owner of the binary path,\n  presence probe, and skip warning; global-setup and both mpf consumer\n  files now share it instead of carrying three copies.\n- validation-parallelization: the PHASE_B_COMPLIANT_LOVELACE comment now\n  says why 5M rather than the 849,070 floor (headroom — these tests are\n  about conflicts/intervals, not the floor's boundary).\n- zz605: the allowlist comment records that the gate matches FILE TEXT,\n  comments included — a prose compiledCode mention trips it exactly like\n  a real read, deliberately; reword doc comments, never allowlist.\n\nmpf-differential 1/1, mpf-native-owner-service 6/6,\nvalidation-parallelization 7/7, zz605 8/8; node typecheck clean; eslint\nclean on every touched file.",
+      "sha": "52ec137537f190f54eb6aeead24b32246d0a2026",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/52ec137537f190f54eb6aeead24b32246d0a2026",
+      "message": "Merge minimum-fee fault proof lifecycle\n\n# Conflicts:\n#\tdemo/midgard-fault-proofs/src/index.ts\n#\tdemo/midgard-fault-proofs/tests/support/emulator/contracts.ts\n#\tdemo/midgard-fault-proofs/tests/support/emulator/harness.ts\n#\tdemo/midgard-fault-proofs/tests/support/emulator/removal-deployment.ts\n#\tdemo/midgard-sdk/src/fraud-proof/index.ts\n#\tdocs/fault-proofs/catalogue-status.md",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-25T21:45:38Z"
+      "authorDate": "2026-08-27T02:04:04Z"
     },
     {
-      "sha": "9e879e1e823872328b7331616161731b02866aa2",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/9e879e1e823872328b7331616161731b02866aa2",
-      "message": "evidence(validation): isolate scan-bench measurements per process (#642 item 5)\n\nThe single-process ExUnits benchmark cannot complete a full curve:\n@lucid-evolution/uplc leaks wasm linear memory per evaluation, wasm32\nnever shrinks, and the run traps with an opaque 'unreachable' at exactly\ndeep-65 native:finalize — reproduced identically before and after the\napplyParamsToScript memoization, so the leak is the measured evaluations\nthemselves and only a process boundary isolates it (vitest isolates per\nFILE, not per test).\n\nscripts/run-scan-bench-evidence-v1.mjs orchestrates the benchmark file\nthrough three env modes it now understands:\n  list    — resolve curve points (incl. maxfit) + selected step labels\n  measure — one fresh process per (shape, nodes, label): one evaluation\n            on a fresh wasm heap; positivity asserted, ledger NOT judged\n            (a narrowed child judging is the truncated-pin shape\n            checkScanBenchLedgerV1 exists to refuse)\n  check   — judge the orchestrator-merged readings against the committed\n            ledger, with the CALLER's own filter env restored verbatim so\n            the truncated-bootstrap refusal still sees it; UPDATE reaches\n            this child only.\nPoint-level fields must agree across a point's children (build\ndeterminism) or the merge refuses loudly; any child failure aborts before\njudgement. test:evidence(:update) now front the bench with the\norchestrator.\n\nVerified: deep-5 narrowed run — 10/10 measure children green in fresh\nprocesses, merge consistent, check child red with exactly the honest\n'no committed artifact' structural failure (the bootstrap stays with the\nowner), orchestrator exit mirroring it. Package typecheck clean.",
+      "sha": "6e39b70f15125fbeef144bc32c7d47a8d58a9e37",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/6e39b70f15125fbeef144bc32c7d47a8d58a9e37",
+      "message": "Merge withdrawn-reference-input fault proof lifecycle\n\n# Conflicts:\n#\tdemo/midgard-fault-proofs/tests/support/emulator/contracts.ts\n#\tdemo/midgard-fault-proofs/tests/support/emulator/harness.ts\n#\tdemo/midgard-fault-proofs/tests/support/emulator/removal-deployment.ts\n#\tdocs/fault-proofs/catalogue-status.md",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-25T21:36:56Z"
+      "authorDate": "2026-08-27T02:02:34Z"
     },
     {
-      "sha": "aff13ec687456f96a88ee912d6bb76c575609d93",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/aff13ec687456f96a88ee912d6bb76c575609d93",
-      "message": "evidence(validation): re-pin the resolver proof-fit sweep onto #640 and establish the first inputs-digest stamp (#642)\n\nThe 'not byte-identical' regen red was not nondeterminism: two independent\nregenerations produced byte-identical artifacts, both differing from the\ncommitted fixture in exactly eight scriptHash lines — the #640\nda-hash-preimage moved-hash class (28db415e... among them, the same move\nitem 2 re-pinned). No ExUnits, byte, or fit field moved. The fixture is the\nregenerated artifact; the sanctioned flow then went green end-to-end:\ngenerate --check byte-identical, digest --stamp, gate PASS, sweep file 4/4.\n\nThis is the digest gate's FIRST stamp ('currency has never been established'\nwas the default lane's honest red). The declared closure includes the\ngitignored onchain/aiken/plutus.json, so the stamp binds the blueprint built\nfrom THIS tree's onchain source (452 validators, md5\n78540c1d34b10d205942372882487a00, aiken v1.1.23+6801f62) — the gate reads\ncurrent only where that exact blueprint is staged, which is the closure's\ndeliberate fail-closed design.",
+      "sha": "8a38e01f41f215c2ab9f2e0ed7bd5d1f01268586",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/8a38e01f41f215c2ab9f2e0ed7bd5d1f01268586",
+      "message": "Merge committed-field-shape fault proof lifecycle\n\n# Conflicts:\n#\tdemo/midgard-fault-proofs/src/index.ts\n#\tdemo/midgard-fault-proofs/tests/support/emulator/contracts.ts\n#\tdemo/midgard-fault-proofs/tests/support/emulator/harness.ts\n#\tdemo/midgard-fault-proofs/tests/support/emulator/removal-deployment.ts\n#\tdocs/fault-proofs/catalogue-status.md",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-25T21:21:22Z"
+      "authorDate": "2026-08-27T02:01:09Z"
     },
     {
-      "sha": "6325cbd011d8b2c92e04c74b47827ef4199ebcca",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/6325cbd011d8b2c92e04c74b47827ef4199ebcca",
-      "message": "fix(node): min-Ada-compliant fixtures for the two phase-B parallelization tests (#642)\n\nRoot cause found by probing the rejection codes: both reds were E_MIN_ADA\n(output[0] 10 < 849,070 for 37 serialized bytes) — the fixtures' 10-lovelace\noutputs predate the #618 min-Ada floor (R8 of decision 0005), so every\ncandidate was rejected before conflict detection or interval evaluation was\nreached. Raising the fixture amounts to 5,000,000 lovelace restores the\nbehaviours under test: bucket conflict resolution (A accepted, B double-spend\nrejected, C accepted) and both validity-interval polarities, including the\nexact '120 > 119' rejection detail. The failures were fully deterministic and\nin-memory — the earlier database-state correlation was a misattribution.\nFile 7/7.",
+      "sha": "86bc118b6d66e587d75348767f58a2d74697cb6a",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/86bc118b6d66e587d75348767f58a2d74697cb6a",
+      "message": "Merge canonical-decodability fault proof lifecycle\n\n# Conflicts:\n#\tdemo/midgard-fault-proofs/tests/support/emulator/contracts.ts\n#\tdemo/midgard-fault-proofs/tests/support/emulator/harness.ts\n#\tdemo/midgard-fault-proofs/tests/support/emulator/removal-deployment.ts\n#\tdocs/fault-proofs/catalogue-status.md",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-25T21:14:37Z"
+      "authorDate": "2026-08-27T01:59:42Z"
     },
     {
-      "sha": "3e2c712ca4c7642a09cbc75f4f336a915470bfd6",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/3e2c712ca4c7642a09cbc75f4f336a915470bfd6",
-      "message": "fix(node): build the native architecture-g-owner in global-setup; loud skip when absent (#642)\n\nThe dedicated scripts (test:mpf:differential, test:mpf-native-owner) always\nbuilt the binary, but the plain test run never did, so a fresh worktree failed\nmpf-differential and mpf-native-owner-service on a missing artifact. Global\nsetup now runs cargo build --release --locked (sub-second when warm,\nMIDGARD_SKIP_NATIVE_BUILD=1 opts out, missing cargo degrades gracefully), and\nboth consumer files skip LOUDLY — console warning naming the path and the\nbuild command — when the binary is still absent. Never a silent pass: the\nskip is visible per-file in the vitest summary. Both polarities verified:\n7/7 pass with the binary; 7 loud skips without it.",
+      "sha": "58b4a13d539c6d483f7aa459ed185577ad77ebe4",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/58b4a13d539c6d483f7aa459ed185577ad77ebe4",
+      "message": "Merge missing-native-script fault proof lifecycle\n\n# Conflicts:\n#\tdemo/midgard-fault-proofs/src/index.ts\n#\tdemo/midgard-fault-proofs/tests/support/emulator/contracts.ts\n#\tdemo/midgard-fault-proofs/tests/support/emulator/harness.ts\n#\tdemo/midgard-fault-proofs/tests/support/emulator/native-tx.ts\n#\tdemo/midgard-fault-proofs/tests/support/emulator/removal-deployment.ts\n#\tdemo/midgard-sdk/src/fraud-proof/index.ts\n#\tdocs/fault-proofs/catalogue-status.md\n#\tdocs/fault-proofs/coverage-matrix.md",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-25T21:12:03Z"
+      "authorDate": "2026-08-27T01:57:21Z"
     },
     {
-      "sha": "6e4304e739cce6640d8ad645ffa6ffa69d61719b",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/6e4304e739cce6640d8ad645ffa6ffa69d61719b",
-      "message": "fix(validation): re-pin the §3.2 necessity identities onto the #640 deployment (#642)\n\nThe #640 merge's da-hash-preimage/rule.ak fix recompiled the fraud-proof\nvalidators that fold that rule, moving resolver[1]'s applied hash\n81b42c84... -> 28db415e.... Measured through loadContracts() — the same\nproducer the row asserts on — under both the base 0df64631 blueprint (444\nvalidators) and the current tree's (452): identical triples, so the move is\nentirely #640's and the #635 wave's appended validators touch none of the\nidentities. COUNT (91) and the proof-item hash are unchanged. File 6/6.",
+      "sha": "eec2b12c87b3657ef94d68a49854388e3bd07893",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/eec2b12c87b3657ef94d68a49854388e3bd07893",
+      "message": "Merge missing-signature fault proof lifecycle",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-25T21:08:27Z"
+      "authorDate": "2026-08-27T01:52:34Z"
     },
     {
-      "sha": "b9d4cb266e3ab77cd85e532c1e62e6d814f093c4",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/b9d4cb266e3ab77cd85e532c1e62e6d814f093c4",
-      "message": "fix(fault-proofs): reword a doc comment that tripped the zz605 compiledCode allowlist gate (#642)\n\n165db5ca's ValueAndMint deployment-size comment in validation-dispute/submit.ts\nmentioned the literal token the zz605 scan confines to allowlisted loaders.\nThe file performs no bare read — rewording the comment keeps the gate precise\ninstead of allowlisting a comment-only file, which would mask any future real\nbare read added there. zz605 back to 8/8.",
+      "sha": "65c2daa6489711c15e496d983ec32ed523cab604",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/65c2daa6489711c15e496d983ec32ed523cab604",
+      "message": "feat(fault-proofs): add double withdraw proof",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-25T21:05:33Z"
+      "authorDate": "2026-08-27T01:52:13Z"
     },
     {
-      "sha": "5a745068e44a933aacafe10fb521486dfdc64041",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/5a745068e44a933aacafe10fb521486dfdc64041",
-      "message": "Merge perf/offchain-test-suites (5d062e89) into the #635-extended checkpoint",
+      "sha": "18b6cb6fb326934737bfb3b4c0ea0b27e3979125",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/18b6cb6fb326934737bfb3b4c0ea0b27e3979125",
+      "message": "feat(fault-proofs): add withdrawal mistag proof",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-25T20:53:59Z"
+      "authorDate": "2026-08-27T01:52:12Z"
     }
   ],
   "contributors": [
@@ -378,11 +378,11 @@
   "commitActivity": [
     {
       "week": 1756598400,
-      "total": 5
+      "total": 4
     },
     {
       "week": 1757203200,
-      "total": 57
+      "total": 56
     },
     {
       "week": 1757808000,
@@ -478,19 +478,19 @@
     },
     {
       "week": 1771718400,
-      "total": 45
+      "total": 47
     },
     {
       "week": 1772323200,
-      "total": 24
+      "total": 26
     },
     {
       "week": 1772928000,
-      "total": 35
+      "total": 36
     },
     {
       "week": 1773532800,
-      "total": 28
+      "total": 29
     },
     {
       "week": 1774137600,
@@ -522,15 +522,15 @@
     },
     {
       "week": 1778371200,
-      "total": 43
+      "total": 25
     },
     {
       "week": 1778976000,
-      "total": 12
+      "total": 14
     },
     {
       "week": 1779580800,
-      "total": 1
+      "total": 2
     },
     {
       "week": 1780185600,
@@ -538,7 +538,7 @@
     },
     {
       "week": 1780790400,
-      "total": 31
+      "total": 32
     },
     {
       "week": 1781395200,
@@ -570,19 +570,19 @@
     },
     {
       "week": 1785628800,
-      "total": 82
+      "total": 0
     },
     {
       "week": 1786233600,
-      "total": 32
+      "total": 21
     },
     {
       "week": 1786838400,
-      "total": 138
+      "total": 132
     },
     {
       "week": 1787443200,
-      "total": 107
+      "total": 146
     }
   ]
 }
