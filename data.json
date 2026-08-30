@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-08-29T12:31:56.388Z",
+  "fetchedAt": "2026-08-30T11:37:40.341Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 25,
@@ -16,6 +16,69 @@
     "Perl": 37
   },
   "commits": [
+    {
+      "sha": "88b7354945e6aaf331a893481d00387c1561302e",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/88b7354945e6aaf331a893481d00387c1561302e",
+      "message": "chore(goal): retire progress-tracker verification machinery",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-08-29T23:06:28Z"
+    },
+    {
+      "sha": "117b7915758a359143d630b2e045ca156af2bcec",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/117b7915758a359143d630b2e045ca156af2bcec",
+      "message": "merge: integrate fault-proof reference-script resolution\n\n# Conflicts:\n#\tdemo/midgard-fault-proofs/tests/submit-init-emulator-native-script-decoding-adversarial.test.ts\n#\tdemo/midgard-fault-proofs/tests/support/native-script-decoding-emulator-v1.ts",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-08-29T19:55:46Z"
+    },
+    {
+      "sha": "d3df3323ec31d37ca079aa10512340d7c3363612",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d3df3323ec31d37ca079aa10512340d7c3363612",
+      "message": "refactor(fault-proofs): require published reference scripts",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-08-29T19:08:47Z"
+    },
+    {
+      "sha": "b04f5046967e5e0d528326bea1c52e0d2840425a",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/b04f5046967e5e0d528326bea1c52e0d2840425a",
+      "message": "merge: integrate fault-proof emulator lifecycle work\n\n# Conflicts:\n#\tdemo/midgard-fault-proofs/src/submit-invalid-signature-step-01.ts\n#\tdemo/midgard-fault-proofs/src/submit-invalid-signature-step-02.ts\n#\tdemo/midgard-fault-proofs/src/submit-no-reference-input-step-01.ts\n#\tdemo/midgard-fault-proofs/src/submit-no-reference-input-step-02.ts\n#\tdemo/midgard-fault-proofs/src/submit-no-reference-input-step-03.ts\n#\tdemo/midgard-fault-proofs/src/submit-no-reference-input-step-04.ts\n#\tdemo/midgard-fault-proofs/src/submit-reference-input-no-idx-step-01.ts\n#\tdemo/midgard-fault-proofs/src/submit-reference-input-no-idx-step-02.ts\n#\tdemo/midgard-fault-proofs/src/submit-reference-input-no-idx-step-03.ts\n#\tdemo/midgard-fault-proofs/src/submit-reference-input-no-idx-step-04.ts",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-08-29T16:40:00Z"
+    },
+    {
+      "sha": "67ae83004db875897f92aa59e13ee49a167080e6",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/67ae83004db875897f92aa59e13ee49a167080e6",
+      "message": "merge: integrate fault-proof reference-script carriage work\n\n# Conflicts:\n#\tdemo/midgard-fault-proofs/src/native-script-decoding/submit-native-script-decoding-step-04.ts",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-08-29T16:34:44Z"
+    },
+    {
+      "sha": "d40e98ce7c3c2b9979d256dfd8a2b72492d71d79",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d40e98ce7c3c2b9979d256dfd8a2b72492d71d79",
+      "message": "test(fault-proofs): add remaining emulator lifecycles",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-08-29T16:33:58Z"
+    },
+    {
+      "sha": "f6959c2647e005886eefc167229af578cea73104",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/f6959c2647e005886eefc167229af578cea73104",
+      "message": "refactor(fault-proofs): use published reference-script carriages",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-08-29T16:33:45Z"
+    },
+    {
+      "sha": "2c9fee3d07209f62bb2f9fe2386a20927202084b",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/2c9fee3d07209f62bb2f9fe2386a20927202084b",
+      "message": "refactor(fault-proofs): split native script decoding step 03",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-08-29T16:33:26Z"
+    },
+    {
+      "sha": "5e5bf70db5cee5e103587674eb00e414bb0fc66a",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/5e5bf70db5cee5e103587674eb00e414bb0fc66a",
+      "message": "wip: double-spend vertical slice reference-script conversion",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-08-29T12:40:41Z"
+    },
     {
       "sha": "26de7e2ff21a5cff762ff8cd5c5402689a30be66",
       "html_url": "https://github.com/Anastasia-Labs/midgard/commit/26de7e2ff21a5cff762ff8cd5c5402689a30be66",
@@ -57,69 +120,6 @@
       "message": "test(fault-proofs): size-selected tier-2 outputs journey for input-no-idx\n\nWire the §8 carriage ladder into step-04's outputs opening — publish\nwhen the plan says so, reference the publication, and never spend a\nUTxO the transaction must read — and expose the tier the ladder\npicked. The fixture now commits every producing output (it previously\ndropped all but the first, which no caller past one output had\nnoticed) and wraps the payment byte so large output counts stay\ncanonical. The new journey commits a 340-output producer (14,623-byte\nfield-2 preimage): step-02's one-item field stays Inline while\nstep-04's oversized field routes to RawUtxo, both decided by size\nalone, and the conviction lands through the published preimage.",
       "authorName": "Philip DiSarro",
       "authorDate": "2026-08-29T00:10:36Z"
-    },
-    {
-      "sha": "79227f16dbb7f8bf5d1abf3dc376777aea833f1c",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/79227f16dbb7f8bf5d1abf3dc376777aea833f1c",
-      "message": "test(fault-proofs): size-selected tier-2 journey for missing-native-script-tx\n\nGrow the bad transaction's committed spend-input set past §8.4's\ntier-1 bound (363 fabricated decoys beside the accused pair, a\n14,603-byte field-0 preimage) so the carriage ladder selects RawUtxo\non size alone, and drive the full six-step conviction through the\npublished preimage. The fixture sorts the enlarged input set\ncanonically and reports where the accused input landed; step-02's\nresult now exposes the tier the ladder actually picked.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-29T00:05:01Z"
-    },
-    {
-      "sha": "9d1a1dfd502829a4058b9f2ccae229de3a738d80",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/9d1a1dfd502829a4058b9f2ccae229de3a738d80",
-      "message": "test(fault-proofs): size-selected tier-2 row for the cardinality families\n\nAdd a cardinality journey at 365 spend inputs (14,603-byte field-0\npreimage) where no flag is passed and §8.4's partition alone picks\nRawUtxo for no-input step-02 and double-spend steps 03/04, with\nproof-fit and execution-ceiling assertions on every routed stage.\n\nRe-key the journey helpers' publication accounting on the tier the\nladder actually recorded rather than the caller's publishCarriage\nflag, so size-selected and flag-demoted routings both count their\ncarriage submission. The 296-input routed row keeps its explicit\nflag deliberately: it measures the routing-band closure where the\npreimage is under the tier-1 bound but the inline transaction misses\nthe L1 envelope, and re-partitioning on transaction size is a §8.4\nspec question.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-29T00:00:56Z"
-    },
-    {
-      "sha": "06ca7d81ce7bc0dbd747201a0184db534799d02d",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/06ca7d81ce7bc0dbd747201a0184db534799d02d",
-      "message": "test(fault-proofs): size-selected tier-2 coverage for both withdrawal families\n\nwithdrawn-input's step-02 already planned, published and read §8.4\ncarriage; its fixture just never committed a field big enough to leave\ntier 1. The fixture now takes a decoy spend-input count (decoys are never\nin the withdrawals set, so the withdrawn input stays the fault) and a new\nsuite buries the withdrawn input among 364 decoys — a 14,603-byte field-0\npreimage the ladder routes to RawUtxo on size alone — asserts the\npublication really sits at the prover's address, and convicts through it.\n\nwithdrawn-reference-input's step-02 had no carriage plumbing at all: it\nopened field 1 inline unconditionally and read only the step's reference\nscript. It now publishes whatever the ladder demands, threads the\ntransaction's complete reference-input set through the opening's\npositional resolution, reads publications alongside the step script,\nexcludes everything it reads from fee-input selection, and reports the\npicked tier. The scenario builder takes a decoy reference-input count and\na mirror suite drives the same 365-item shape through the door.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-28T23:53:41Z"
-    },
-    {
-      "sha": "596756abd0cc083592508fe718ad29d48bddf8f4",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/596756abd0cc083592508fe718ad29d48bddf8f4",
-      "message": "test(fault-proofs): drive min-fee tier-2 carriage with an oversized committed field\n\nmin-fee's step-02 has carried the §8.4 tier plumbing since it landed, but\nno test ever pushed a preimage past the tier-1 bound. The new journey\ncommits 365 spend inputs (a 14,603-byte field-0 preimage), asserts the\nladder routes exactly that field to RawUtxo while the other eight ride\ninline, verifies the publication really sits at the prover's address, and\nconvicts through it.\n\nDriving that path exposed a latent hazard: fee-input selection sorted the\nprover's wallet by descending lovelace without excluding the publication\njust funded, so the ~60-ADA carriage UTxO topped the sort and the step\ntransaction would spend the very output it must reference. Fee candidates\nnow exclude everything the transaction reads.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-28T23:47:26Z"
-    },
-    {
-      "sha": "894e94fae6e90d27fc398dc7fd733706a3314f3a",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/894e94fae6e90d27fc398dc7fd733706a3314f3a",
-      "message": "test(fault-proofs): select tier-2 carriage by size, not by flag\n\nConvert the two emulator suites that forced RawUtxo carriage with\npublishCarriage: true into scenarios whose committed data genuinely\nexceeds the §8.4 tier-1 redeemer bound, so the ladder itself routes the\nopening:\n\n- input-no-idx: the raw-carriage journey now commits 365 spend inputs\n  (a 14,603-byte field-0 preimage) instead of demoting a one-input field.\n- missing-signature: the fat-field journey now commits 142 decoy address\n  witnesses (a 14,628-byte field-7 preimage spanning five 32-item step-04\n  scan batches) instead of demoting a 32-witness one; the direct-driver\n  journey keeps its small subject and is retitled as the tier-1 leg.\n\nBoth suites assert the preimage size lands inside the single-publication\nwindow (14,336, 15,148] so a shrunk fixture fails loudly rather than\nsilently falling back to inline carriage.\n\nThe spend-input-cardinality measurement suite still sets the flag\ndeliberately: at the 296-input admissible Cardano spend shape the\npreimage is under the tier-1 bound while the inline transaction misses\nthe L1 envelope, and that #612 routing-band closure is the thing it\nmeasures.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-28T23:44:00Z"
-    },
-    {
-      "sha": "60f3eba1e5dec4bef53f982a5885f25fc6dc9e58",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/60f3eba1e5dec4bef53f982a5885f25fc6dc9e58",
-      "message": "feat(fault-proofs): exercise input-set-uniqueness tier-2 carriage in the emulator\n\nWire the size-partitioned §8.4 carriage tiers through the step-02 submitter:\nplan the three field openings, publish any over-bound preimage as a RawUtxo\ninline datum at the prover's address (content-addressed reuse), thread the\ntransaction's complete reference-input set into every carriage resolution,\nand read the publications alongside the step's reference script. Fee-input\nselection now skips datum-bearing UTxOs so a fresh publication is never\nspent by the very transaction that references it.\n\nNew emulator suite drives a 365-input commitment whose 14,603-byte field-0\npreimage exceeds the 14,336-byte tier-1 redeemer bound — the size alone\nselects tier 2. Journey 1 convicts through the published preimage and\nasserts the publication UTxO really carried the bytes; journey 2 publishes\na byte-flipped twin, names it as the RawUtxo carriage via a test-only\ninjection hook, is refused on-chain at the door's field_commitment re-hash,\nthen convicts through the honest publication on the same thread.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-28T23:34:52Z"
-    },
-    {
-      "sha": "25e5de7f27bcf4296e1f871f84b7e59f8a9d0ee6",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/25e5de7f27bcf4296e1f871f84b7e59f8a9d0ee6",
-      "message": "docs(fault-proofs): reconcile registration surfaces for the tier-2 landing\n\n- catalogue-status.md: §1 now covers twenty-nine compiled directories;\n  rows 26-28 describe the three pre-registration families (reserved ids,\n  emulator coverage, overall status — value-not-preserved and\n  mint-authorization 🟠, input-set-uniqueness 🔶 with two green suites);\n  §6 marks the three identifiers IMPLEMENTED (PRE-REGISTRATION).\n- coverage-matrix.md: the three owed-family rows note the families are\n  built (input-set-uniqueness emulator-proven) pre-registration.\n- abi-freeze gate + artifact: uncategorised-directory set and\n  family-offchain-module map extended to the three families; artifact\n  regenerated via --print-bootstrap (blueprint identity 502 validator\n  titles, refreshed digest/sha, measuredEnv corrected to the default\n  aiken environment CI builds; ig2ProofFamilies carries the three\n  non-integrated entries; violations unchanged at 25). Self-test\n  literals follow (29 directories, 501/502 mutation).\n- cg4 artifact: abiFreezeBinding shas re-recorded from the index.\n- GOAL_PROGRESS.md: 2026-08-28 tier-2 landing entry (mechanics,\n  per-family content, explicit-removal completion, honest gaps:\n  value-not-preserved/mint-authorization emulator suites owed, tier-2\n  override tests owed, registration deferred to its own wave, D-C1 and\n  D-S3 readings owner-review-owed).",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-28T21:51:33Z"
-    },
-    {
-      "sha": "e2942eb6933848eab8fad0ea033b50ae2a9885de",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/e2942eb6933848eab8fad0ea033b50ae2a9885de",
-      "message": "feat(fault-proofs): land tier-2 wave — value-not-preserved, input-set-uniqueness, mint-authorization\n\nThree pre-registration single-party families (reserved category ids\n00000019/0000001a/0000001b; FRAUD_PROOF_CATALOGUE_CATEGORY_ORDER stays\nat 25 — registration is its own wave):\n\n- value-not-preserved: 4-step onchain chain + lib modules, offchain\n  init/step/cancel submitters, prover, evidence, finding, schemas, and\n  plan (records the owner-mandated D-C1 single-asset-claim resolution).\n  Promotes decode_mint_policy_item_cbor, ledger_trie and\n  verify_ledger_membership to pub so the family folds mint items and\n  fetches spent-input descriptors through the canonical decoders.\n- input-set-uniqueness: 2-step onchain chain, SDK schema module,\n  scan + submitters, emulator support (extra-categories catalogue trie,\n  removal deployment entry) and both-polarity emulator suites. Completes\n  the explicit-category removal path the family's suites drive:\n  buildExplicitRemovalContracts resolves a pre-registration category\n  from caller-supplied facts while keeping every fail-closed cross-check\n  (fraud-proof pair vs fraudProofMint/fraudProofSpend, step-01 hash vs\n  the named entry, category id vs all canonical registered ids). Both\n  suites green 5/5 including the removal leg.\n- mint-authorization: 5-step onchain chain + engine (engine.test.ak),\n  offchain submitters, prover, evidence, SDK schema module, and plan\n  (adopts a reading of open D-S3; offchain lane marked WIP). Emulator\n  suites for this family and value-not-preserved remain owed under the\n  2026-08-25 both-polarity directive.\n\nfamily-scaffold Q02 gains an exact-exception branch for the\ninput-set-uniqueness step-02 terminal (closed three-constructor sum,\none arm per uniqueness violation, standard positional/mint prefix kept),\nmirroring the missing-signature/step-04 exception.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-28T21:48:18Z"
-    },
-    {
-      "sha": "079a97c212d1973a80cd9e796f7bcf58945f31d5",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/079a97c212d1973a80cd9e796f7bcf58945f31d5",
-      "message": "chore(goal): retire the canonical-v1 evidence-artifact program\n\nOwner ruling 2026-08-28: the per-question evidence artifacts and their\nverifier gates are deleted outright — the six proof-family JSONs\n(q10/q11/q12/q14/q1x/q39), q47, q49, q60, q62, q63, measured-diff,\nwatcher-local-gate, p7/p8, parent-surface-touches, feature-inventory,\ncatalogue-order-reconcile, d3-d4 reward routing, tx-order\nreceipt-identity and the testnet w44 matrix, plus their 17 gates and the\nevidence:measured-diff pnpm scripts (38 files). GOAL_SPEC §9.1\nper-family closure surfaces are superseded; a family's local\nverification is its Aiken selector suites, emulator lifecycle and CLI\nwiring in-repo. No CI workflow ran any deleted gate, so workflows are\nuntouched.\n\nFallout fixed in the same change: the abi-freeze artifact re-cites its\nfabricated-deposit valid_block_rejection cell onto the surviving\nreconciliation inventory and records fabricated-withdrawal\nmatrix_evidence as the tree now measures it; the CG4 abiFreezeBinding\nand qg1Route summary are re-recorded from the index and its self-test\nliteral follows the 48 open rows; the Q63 floor-provenance SDK test\nrecomputes ceil(2n/3) inline over all 257 set sizes instead of\ncomparing a digest published in a deleted artifact; both fault-proof\nmatrices cite the in-repo suites instead of artifact filenames; four\nstale comments stop naming deleted files. Ruling and execution recorded\nin GOAL_PROGRESS.\n\nVerified post-deletion: abi-freeze, CG4, capability reconciliation,\ngoal-closure schema and all their self-tests green; fault-proofs suite\n583 passed / 1 skipped; SDK tests, tsc, eslint, git diff --check clean.\nPre-existing reds (manifest-quality, format-registry,\nwatcher-dependency-map, CG1, reconciliation row-153 glyph) are\nbyte-identical before and after.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-28T20:48:01Z"
     }
   ],
   "contributors": [
@@ -377,10 +377,6 @@
   "releases": [],
   "commitActivity": [
     {
-      "week": 1756598400,
-      "total": 5
-    },
-    {
       "week": 1757203200,
       "total": 57
     },
@@ -434,7 +430,7 @@
     },
     {
       "week": 1765065600,
-      "total": 6
+      "total": 7
     },
     {
       "week": 1765670400,
@@ -478,7 +474,7 @@
     },
     {
       "week": 1771718400,
-      "total": 45
+      "total": 47
     },
     {
       "week": 1772323200,
@@ -498,15 +494,15 @@
     },
     {
       "week": 1774742400,
-      "total": 30
+      "total": 29
     },
     {
       "week": 1775347200,
-      "total": 42
+      "total": 41
     },
     {
       "week": 1775952000,
-      "total": 32
+      "total": 31
     },
     {
       "week": 1776556800,
@@ -538,11 +534,11 @@
     },
     {
       "week": 1780790400,
-      "total": 31
+      "total": 30
     },
     {
       "week": 1781395200,
-      "total": 21
+      "total": 18
     },
     {
       "week": 1782000000,
@@ -558,7 +554,7 @@
     },
     {
       "week": 1783814400,
-      "total": 11
+      "total": 10
     },
     {
       "week": 1784419200,
@@ -570,11 +566,11 @@
     },
     {
       "week": 1785628800,
-      "total": 192
+      "total": 102
     },
     {
       "week": 1786233600,
-      "total": 30
+      "total": 21
     },
     {
       "week": 1786838400,
@@ -582,7 +578,11 @@
     },
     {
       "week": 1787443200,
-      "total": 164
+      "total": 172
+    },
+    {
+      "week": 1788048000,
+      "total": 0
     }
   ]
 }
