@@ -1,10 +1,10 @@
 {
-  "fetchedAt": "2026-08-30T11:37:40.341Z",
+  "fetchedAt": "2026-08-31T13:13:36.271Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 25,
     "forks_count": 10,
-    "open_issues_count": 114
+    "open_issues_count": 124
   },
   "languages": {
     "Aiken": 359544,
@@ -16,6 +16,55 @@
     "Perl": 37
   },
   "commits": [
+    {
+      "sha": "1efa9157f6d5edec8a32dfa3f771d393f01c489a",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/1efa9157f6d5edec8a32dfa3f771d393f01c489a",
+      "message": "docs: fault-proof plan updates, catalogue re-audit, readiness and skills refresh\n\nFault-proof family plans and the fraud-proof catalogue status re-audit,\npublic testnet readiness updates, and agent skill/runbook refreshes.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-08-31T12:47:38Z"
+    },
+    {
+      "sha": "e28ec762ae2bf2e18868bf5321ea6bfcccf59b79",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/e28ec762ae2bf2e18868bf5321ea6bfcccf59b79",
+      "message": "feat(da-committee): StateQueueStatusV1 scanner, nullable ref-script outRefs, domain-tagged attestations\n\nScanner consumes the StateQueueStatusV1 sum (legitimate markers now scan as\nattested — see #645); reference-script outRefs become nullable with\nreconciliation; attestation signing is domain-tagged. The republish-optin\nwatcher polarity is skipped pending #646; suite 295 passed / 3 skipped.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-08-31T12:47:26Z"
+    },
+    {
+      "sha": "216be592778b470dad8af7c5790ef7ad8c2faef9",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/216be592778b470dad8af7c5790ef7ad8c2faef9",
+      "message": "feat(watcher,node): production watcher runtime, native chain sync, state-correction flows, watcher CI\n\nWatcher: production L1-source runtime with fail-closed deployment-identity\nverification on every evaluator call, native chain-sync integration (Go\nbinary is built locally and gitignored), state-correction flows, funding\nseam, and the migrated test fixtures for the availability-challenge manifest\nroot (canonical response geometry, 28-byte deployment identities). Full\nsuite: 49 files, 768/768.\n\nNode: workspace integration updates for the new watcher runtime plus the\ndedicated watcher CI workflow, flake, and lockfile updates; l1-services\ncompose alignment. Deployment-manifest roster extended to the wave shape\n(163 contract names / 156 reference-script roles / 157 auth token names)\nwith count pins re-derived; correction-lock construction takes the\navailability-challenge policy; daPayloadTerminalOutcomes release authority\nno longer null-trips on the manifest's new singular availabilityChallenge\nroot field (the plural fail-closed guard is retained). Operator fixtures\nfund the exact required bond (900,000,000 lovelace, the env-derived\nslashing penalty plus prover reward, which registered-operators now checks\nwith equality). Emulator suites blocked by the state_queue.mint envelope\nregression run under a raised emulator maxTxSize documented against #649;\nthe scratch-cg1 publication-fit gate is skipped citing #649 and its\nun-skip is the acceptance proof for the fix. The harmonic-uplc hub-oracle\ncase is skipped on an upstream plutus-machine bytestring-ordering defect\n(#651) and the same policy stays covered by the real evaluator in the\ninitialization emulator suite.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-08-31T12:47:09Z"
+    },
+    {
+      "sha": "2e7417cea019c19a389004e9362786032f7a36cc",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/2e7417cea019c19a389004e9362786032f7a36cc",
+      "message": "feat(fault-proofs,validation): production workflow runtime and new family offchain\n\nFault-proofs: production workflow runtime with published reference-script\nresolution (reference scripts required, inline attach removed), offchain\nsupport for the min-ada, missing-native-script-utxo, native-script-invalid,\nand network-id families, and emulator lifecycle coverage in both polarities.\nThe emulator harness applies the wave's re-parameterized correction-lock and\nstate-queue scripts (availability-challenge policy threaded through) and\npublishes the now-oversized state_queue.mint through the documented\noversized reference-script escape — its 16,835-byte compiled size exceeds\nthe 16,384-byte L1 envelope, tracked as #649.\n\nClaim-registry carriage completed across the offchain: computation-thread's\nmint now mandates a claim-registry input in all three arms, so every\nsubmitter and raw emulator driver that mints or burns the thread token\ncarries a prepared claim-registry mutation (family contracts self-prepare\nthe deployment-bound mutation; an optional prepared-mutation override and a\nwitness-roster reference-UTxO door are kept). Measured pins that the\nmutation's reference input joins were re-derived, not modeled. A second\nclaim against a non-empty registry still needs the MPF proof deriver wired\ninto emulator journeys (#652); the Option B frontier pins shifted and await\na re-measurement campaign (#650).\n\nValidation: network-id rejection wiring and machine updates matching the\nonchain families; resolver proof-fit sweep artifact regenerated and\nre-stamped against the wave's declared input closure.\n\nThe sweep's generation worker was migrated onto the current harness shape:\noperator-lifecycle and witness reference-script rosters published before the\nheader clock is sampled, parties seeded at both base and enterprise\naddresses, the authenticated validation-dispute control roster staged\nthrough the shared helper, and the per-fixture prepare/semantic resolvers\nplus canonical-decode item stage validators published as reference scripts\n(dispute-scenario precedent throughout). The applied-identity pin for\nresolver[1] (canonical_decode_item_semantic_v1.main.spend) moved with the\nrecompiled fraud-proof validator set and is re-pinned to the value the\nregenerated sweep measures independently; the proof-item identity is\nmeasured unchanged.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-08-31T12:46:49Z"
+    },
+    {
+      "sha": "8921fa1e579b3fe0bb7be82f9f20aec7c5fb717e",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/8921fa1e579b3fe0bb7be82f9f20aec7c5fb717e",
+      "message": "feat(core,sdk): ProvisionalWhole field view, availability-challenge surfaces, regenerated goldens\n\nCore: FieldViewV1 ProvisionalWhole decoding chain with regenerated goldens;\ndeployment-manifest identity verification gains two semantics-preserving\ncaches (script-hash derivation LRU and a verified-finalized manifestId memo\nkeyed by the content-binding manifestId) — the identity re-hash still runs\nuncached on every call, so any mutation either fails identity or misses the\nmemo. This removes the pathological repeated deep verification that made\nfail-closed watcher evaluators re-derive ~163 script hashes per call.\n\nSDK: availability-challenge v1 schemas (28-byte deployment_identity, 32-byte\nda_bond_asset_name), canonical response geometry constraints\n(tranche in [65536, 64MiB], chunk <= 15148, tranche-count coverage bound),\nclaim-registry and correction-lock tx builders, state-queue\nMergeToConfirmedStateV1 support; the reference-script token roster gains\nthe availability-challenge spending/minting names. Known follow-ons:\ninitialization funds the correction lock at min-ada (#648); the emulator\nclaim-registry MPF proof deriver wiring (#652).",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-08-31T12:46:38Z"
+    },
+    {
+      "sha": "3e3090aa1bcde2b922c9011447b97c80d4f32727",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/3e3090aa1bcde2b922c9011447b97c80d4f32727",
+      "message": "feat(onchain): StateQueueStatusV1, claim registry, correction lock, availability challenge, new fault-proof families\n\nStateQueueStatusV1 sum replaces the ByteArray attestation marker;\nstate_queue MintRedeemer gains MergeToConfirmedStateV1 at constructor 6 and\nthe 12-param mint / 3-param spend re-parameterization (claim registry,\ncomputation thread, availability challenge). New validators: claim-registry,\ncorrection-lock, availability-challenge. New fraud-proof families: min-ada,\nmissing-native-script-utxo, native-script-invalid, network-id;\nmissing-native-script-tx steps 07/08 plus the staged walk; validation\nmachine network-id rejection. Availability-challenge economics set in both\ndefault and testnet envs.\n\nscheduler.mint and fraud_proof_catalogue.mint drop the hub-policy singleton\ncheck for quantity_of == 1 (== -1 on Deinit): hub_oracle.mint now enforces\nthe exact three-asset hub mint set (hub oracle + claim registry + correction\nlock), so any validator requiring the hub policy to mint exactly one asset\nname in the same transaction made atomic init unsatisfiable in every tx\ntopology, including the production sdk initialization builder. The\nquantity_of form is the pattern state-queue and operator-directory already\nuse for the same purpose; the exact-mint-set invariant is owned by\nhub_oracle.mint itself.\n\nBattery: 2864/2864 aiken tests green.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-08-31T12:46:18Z"
+    },
+    {
+      "sha": "46f7892a236265ffd8386f5270f39feab8a65962",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/46f7892a236265ffd8386f5270f39feab8a65962",
+      "message": "chore: stop tracking vitest cache artifacts under node_modules\n\nExtend .gitignore and drop the accidentally tracked\nnode_modules/.vite/vitest results file.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-08-31T12:46:09Z"
+    },
     {
       "sha": "88b7354945e6aaf331a893481d00387c1561302e",
       "html_url": "https://github.com/Anastasia-Labs/midgard/commit/88b7354945e6aaf331a893481d00387c1561302e",
@@ -71,55 +120,6 @@
       "message": "refactor(fault-proofs): split native script decoding step 03",
       "authorName": "Philip DiSarro",
       "authorDate": "2026-08-29T16:33:26Z"
-    },
-    {
-      "sha": "5e5bf70db5cee5e103587674eb00e414bb0fc66a",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/5e5bf70db5cee5e103587674eb00e414bb0fc66a",
-      "message": "wip: double-spend vertical slice reference-script conversion",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-29T12:40:41Z"
-    },
-    {
-      "sha": "26de7e2ff21a5cff762ff8cd5c5402689a30be66",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/26de7e2ff21a5cff762ff8cd5c5402689a30be66",
-      "message": "feat(fault-proofs): register value-not-preserved, input-set-uniqueness, and mint-authorization catalogue families\n\nAppend the three families to the canonical catalogue at their reserved\nids 00000019/0000001a/0000001b (ORDER 25 -> 28), now that each meets the\nregistration bar (onchain + offchain + both-polarity T1/T2 emulator\ncoverage). The emulator harness flips from bespoke pre-registration\nrecords to SDK canonical builders, removal legs resolve by canonical\ncategory name (explicit-category helpers deleted; the fail-closed id\ncollision guard now rejects them by design), and the node deployment\nmanifest gains the 11 step contracts (canonical manifestId re-pinned).\nQ13 catalogue root re-pinned for the 28-entry fold. Matrices and ledger\nupdated; initialization-emulator's pre-existing nsd step-03 oversized\npublication red recorded, not fixed.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-29T04:57:31Z"
-    },
-    {
-      "sha": "fc635c8f9bef311d6f32d91b955415c317a3a5ca",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/fc635c8f9bef311d6f32d91b955415c317a3a5ca",
-      "message": "fix(fault-proofs): resolve carriage chunk indices against the complete reference-input set\n\nThe native-script-decoding step-03 bind arms built their §8.8 field openings\nfrom the carriage UTxOs alone, while the submitted transaction also\nreferences the step's reference-script UTxO. The opening's positional\nref_input_index values resolve against the transaction's canonically sorted\ncomplete reference-input set, so whenever the publication outref sorted\nafter the step reference the recorded index named the wrong UTxO and the\ndoor crashed — a per-run coin flip on emulator transaction hashes that the\nnew size-selected tier-2 bind surfaced.\n\nResolve the step reference before constructing the opening in both the\nBindOutpoint and BindOutOfDomain arms and pass the complete set, and thread\nthe same set through the raw test builder's opening.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-29T00:42:46Z"
-    },
-    {
-      "sha": "c1a692d3562362e9e4f8a2bf5873afb7bc624476",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/c1a692d3562362e9e4f8a2bf5873afb7bc624476",
-      "message": "feat(fault-proofs): mint-authorization emulator lifecycle with size-driven carriage tiers\n\nComplete the mint-authorization family to the registration bar: an emulator\nsupport module (subject builder over canonical field-1/5/6/7 preimages,\nharness wiring under the reserved test category 0000001b, five-step\nreference-script publisher, removal-category record, size-growing fixtures,\nand a raw tampered-carriage builder), plus both-polarity suites — direction-A\nwitness-absence and direction-B unsatisfied-script lifecycles through the\nremoval leg, four adversarial refusals (rejected leaf, false absence, false\nunsatisfied, tampered tier-2 publication refused at the on-chain\nfield-commitment re-hash), and size-forced RawUtxo journeys for the field-5\nmint and field-7 address-witness doors where the preimage alone crosses the\ntier-1 bound.\n\nStep-02/03/04 submitters ride the generic §8 carriage pipeline with no\npublish or override knobs; the tier is decided solely by preimage byte\nlength. A prover-only cancel submitter completes the family surface.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-29T00:41:48Z"
-    },
-    {
-      "sha": "2c25a81963932971d5145d746bce5891a76dc249",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/2c25a81963932971d5145d746bce5891a76dc249",
-      "message": "test(fault-proofs): value-not-preserved both-polarity emulator suites with size-driven carriage tiers\n\nComplete the value-not-preserved family to the registration bar:\n\n- step-03 submitter gains genuine tier-2 plumbing: openings planned via\n  planFaultProofFieldOpeningV1, over-cap preimages published through\n  publishFaultProofFieldCarriageV1 (content-addressed reuse), one shared\n  reference-input array feeding every faultProofFieldCarriageV1 call and\n  the single readFrom; tiers are selected purely by preimage size, no\n  override exists. Fee/preset wallet candidates exclude datum-bearing\n  UTxOs so a fresh publication can never be spent as fees. A doc-commented\n  test-only unsafeSpendFieldRawUtxoForTest option names an injected\n  publication positionally (tampered-preimage refusal scenarios only).\n- shared support module: canonical outputs/mint fixtures with genuine\n  pre-state ledger MPF descriptors; the scenario setup commits an anchor\n  block carrying the ledger root as utxos_root and the fraudulent block\n  as its successor, because the state-queue commit chains prev_utxos_root\n  exactly; raw bind/finalize builders reach the validators own refusals.\n- four suites: tier-1 token lifecycle + removal leg; size-forced tier-2\n  ADA lifecycle (14,800-byte outputs preimage in the (14,336, 15,148]\n  RawUtxo window) + removal leg; adversarial balanced-fold and\n  tampered-tier-2-publication refusals with honest conviction on the same\n  thread; rejected-leaf and forged-step-02-witness negatives.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-29T00:25:07Z"
-    },
-    {
-      "sha": "70a41d608d71dbb6790774d6cc3c8fcada147832",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/70a41d608d71dbb6790774d6cc3c8fcada147832",
-      "message": "test(fault-proofs): size-selected tier-2 bind for native-script-decoding\n\nLet the decoding scenario commit fabricated decoy outpoints beside\nthe accused one, sorted canonically with the accused's post-sort\nordinal reported, so a subject field can grow past §8.4's tier-1\nbound. The new journey buries the accused outpoint among 364 decoys\n(a 14,603-byte subject-field preimage), the finding names the sorted\nordinal, the bind's opening routes to RawUtxo on size alone through\nstep-03's existing ladder plumbing, and the direction-A conviction\nstill lands through the published preimage.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-29T00:15:30Z"
-    },
-    {
-      "sha": "dc54d97044bb72ebb474a24bd2ddb309daf7785b",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/dc54d97044bb72ebb474a24bd2ddb309daf7785b",
-      "message": "test(fault-proofs): size-selected tier-2 outputs journey for input-no-idx\n\nWire the §8 carriage ladder into step-04's outputs opening — publish\nwhen the plan says so, reference the publication, and never spend a\nUTxO the transaction must read — and expose the tier the ladder\npicked. The fixture now commits every producing output (it previously\ndropped all but the first, which no caller past one output had\nnoticed) and wraps the payment byte so large output counts stay\ncanonical. The new journey commits a 340-output producer (14,623-byte\nfield-2 preimage): step-02's one-item field stays Inline while\nstep-04's oversized field routes to RawUtxo, both decided by size\nalone, and the conviction lands through the published preimage.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-29T00:10:36Z"
     }
   ],
   "contributors": [
@@ -326,59 +326,65 @@
   ],
   "issues": [
     {
-      "number": 642,
-      "title": "Checkpoint 5a745068 fail-surface: five pre-existing/inherited reds surfaced by the full test pass",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/642",
-      "updated_at": "2026-08-25T21:46:13Z"
+      "number": 648,
+      "title": "sdk initialization funds the correction lock at min-ada; first Idle→Locked correction breaks exact value conservation",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/648",
+      "updated_at": "2026-08-31T11:25:11Z"
     },
     {
-      "number": 641,
-      "title": "onchain: document the forced-order door's stall-exclusion coverage + ExecutionNativeScript* reachability (evidence for #640, non-gating)",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/641",
-      "updated_at": "2026-08-24T23:28:27Z"
+      "number": 652,
+      "title": "Wire the claim-registry MPF proof deriver into emulator journeys so a second claim can open against a non-empty registry",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/652",
+      "updated_at": "2026-08-31T10:32:56Z"
     },
     {
-      "number": 640,
-      "title": "onchain: format-revision wave — forced-inclusion operator verdict with enumerated rejection reasons (OperatorVerdictV1 / RejectionReasonV1)",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/640",
-      "updated_at": "2026-08-24T23:28:09Z"
+      "number": 651,
+      "title": "@harmoniclabs/plutus-machine lessThanByteString orders by length, breaking hub-oracle eval in harmonic-uplc-contract-eval",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/651",
+      "updated_at": "2026-08-31T10:07:32Z"
     },
     {
-      "number": 617,
-      "title": "Post-freeze ABI regeneration wave — single batched cascade (owner-authorized 2026-08-18)",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/617",
-      "updated_at": "2026-08-24T03:21:20Z"
+      "number": 649,
+      "title": "state_queue.mint no longer fits the 16,384-byte L1 transaction envelope (16,835 bytes unapplied)",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/649",
+      "updated_at": "2026-08-31T10:07:18Z"
     },
     {
-      "number": 639,
-      "title": "test(sdk): fault-proof real-blueprint semantic-resolver expectation predates the #617 roster — env-gated red invisible to CI",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/639",
-      "updated_at": "2026-08-24T03:13:43Z"
+      "number": 650,
+      "title": "Option B frontier pins shifted by canonical-v1 wave: re-measurement campaign needed",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/650",
+      "updated_at": "2026-08-31T09:05:24Z"
     },
     {
-      "number": 638,
-      "title": "onchain: empty inline datum (#\"40\") is refused by cbor.deserialise but admitted off-chain — one-sided descriptor divergence",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/638",
-      "updated_at": "2026-08-24T02:58:49Z"
+      "number": 647,
+      "title": "Make @harmoniclabs/cbor 2.0.1 resolution work for applyParamsToScript (da-committee-node, midgard-core)",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/647",
+      "updated_at": "2026-08-30T15:08:30Z"
     },
     {
-      "number": 637,
-      "title": "test(fault-proofs): evidence infrastructure to drive the tiers-2/3 field-carriage encoder for the #617 evidence row",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/637",
-      "updated_at": "2026-08-24T02:58:39Z"
+      "number": 646,
+      "title": "Design call: DA signature republish after payload retention pruning",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/646",
+      "updated_at": "2026-08-30T15:08:29Z"
     },
     {
-      "number": 633,
-      "title": "Cross-language divergence: tag-0 native reference-script bytes are opaque on-chain but structurally parsed off-chain",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/633",
-      "updated_at": "2026-08-24T00:19:03Z"
+      "number": 645,
+      "title": "Replacement adversarial coverage for StateQueueStatusV1 attestation-status disagreement in da-committee-node",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/645",
+      "updated_at": "2026-08-30T15:08:12Z"
+    },
+    {
+      "number": 644,
+      "title": "Both-polarity emulator suites for missing-native-script-utxo, native-script-invalid, and min-ada fraud-proof families",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/644",
+      "updated_at": "2026-08-31T10:07:21Z"
     }
   ],
   "releases": [],
   "commitActivity": [
     {
       "week": 1757203200,
-      "total": 57
+      "total": 56
     },
     {
       "week": 1757808000,
@@ -418,15 +424,15 @@
     },
     {
       "week": 1763251200,
-      "total": 32
+      "total": 23
     },
     {
       "week": 1763856000,
-      "total": 44
+      "total": 15
     },
     {
       "week": 1764460800,
-      "total": 17
+      "total": 8
     },
     {
       "week": 1765065600,
@@ -470,7 +476,7 @@
     },
     {
       "week": 1771113600,
-      "total": 14
+      "total": 13
     },
     {
       "week": 1771718400,
@@ -478,7 +484,7 @@
     },
     {
       "week": 1772323200,
-      "total": 26
+      "total": 25
     },
     {
       "week": 1772928000,
@@ -518,11 +524,11 @@
     },
     {
       "week": 1778371200,
-      "total": 43
+      "total": 25
     },
     {
       "week": 1778976000,
-      "total": 16
+      "total": 14
     },
     {
       "week": 1779580800,
@@ -534,11 +540,11 @@
     },
     {
       "week": 1780790400,
-      "total": 30
+      "total": 32
     },
     {
       "week": 1781395200,
-      "total": 18
+      "total": 13
     },
     {
       "week": 1782000000,
@@ -566,23 +572,23 @@
     },
     {
       "week": 1785628800,
-      "total": 102
+      "total": 92
     },
     {
       "week": 1786233600,
-      "total": 21
+      "total": 9
     },
     {
       "week": 1786838400,
-      "total": 132
+      "total": 21
     },
     {
       "week": 1787443200,
-      "total": 172
+      "total": 173
     },
     {
       "week": 1788048000,
-      "total": 0
+      "total": 7
     }
   ]
 }
