@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-08-31T13:13:36.271Z",
+  "fetchedAt": "2026-09-01T11:24:43.071Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 25,
@@ -16,6 +16,48 @@
     "Perl": 37
   },
   "commits": [
+    {
+      "sha": "612b396f3e8b92fb2406d2f02de7cdbf984466d2",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/612b396f3e8b92fb2406d2f02de7cdbf984466d2",
+      "message": "Squash commits of Checkpoint #1",
+      "authorName": "Drop-Table-Users",
+      "authorDate": "2026-09-01T10:19:23Z"
+    },
+    {
+      "sha": "67df7c8831210ca33febb67cbb0107a569f2f448",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/67df7c8831210ca33febb67cbb0107a569f2f448",
+      "message": "A backup of non-contract-related changes made for the E2E test (branch can be deleted after the contracts are merged)",
+      "authorName": "Drop-Table-Users",
+      "authorDate": "2026-09-01T10:04:58Z"
+    },
+    {
+      "sha": "7e489e8f5747c3e6263b430dc385dac06aaade7b",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/7e489e8f5747c3e6263b430dc385dac06aaade7b",
+      "message": "Working checkpoint",
+      "authorName": "Drop-Table-Users",
+      "authorDate": "2026-09-01T10:00:44Z"
+    },
+    {
+      "sha": "b93726aa444dd0f2d6a323b266cbf21ca7d63b5d",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/b93726aa444dd0f2d6a323b266cbf21ca7d63b5d",
+      "message": "chore(lint): enable recommended type-aware ESLint rules",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-09-01T02:42:46Z"
+    },
+    {
+      "sha": "eb1080c94a38001cad9ddbe92289297a78543966",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/eb1080c94a38001cad9ddbe92289297a78543966",
+      "message": "refactor(protocol): remove claim registry from canonical V1\n\nRemove obsolete claim-registry plumbing and low-value identity pins, refresh measured deployment evidence, and reuse authenticated emulator deployment state across operator lifecycle scenarios. Stabilize the integrated runner around measured resource contention.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-09-01T00:52:57Z"
+    },
+    {
+      "sha": "38ef102b30a198e1a26ce4de7de2c4b750a7c0c5",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/38ef102b30a198e1a26ce4de7de2c4b750a7c0c5",
+      "message": "fix(node): unwrap retained DA payload before attestation decode",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-08-31T15:37:30Z"
+    },
     {
       "sha": "1efa9157f6d5edec8a32dfa3f771d393f01c489a",
       "html_url": "https://github.com/Anastasia-Labs/midgard/commit/1efa9157f6d5edec8a32dfa3f771d393f01c489a",
@@ -78,48 +120,6 @@
       "message": "merge: integrate fault-proof reference-script resolution\n\n# Conflicts:\n#\tdemo/midgard-fault-proofs/tests/submit-init-emulator-native-script-decoding-adversarial.test.ts\n#\tdemo/midgard-fault-proofs/tests/support/native-script-decoding-emulator-v1.ts",
       "authorName": "Philip DiSarro",
       "authorDate": "2026-08-29T19:55:46Z"
-    },
-    {
-      "sha": "d3df3323ec31d37ca079aa10512340d7c3363612",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d3df3323ec31d37ca079aa10512340d7c3363612",
-      "message": "refactor(fault-proofs): require published reference scripts",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-29T19:08:47Z"
-    },
-    {
-      "sha": "b04f5046967e5e0d528326bea1c52e0d2840425a",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/b04f5046967e5e0d528326bea1c52e0d2840425a",
-      "message": "merge: integrate fault-proof emulator lifecycle work\n\n# Conflicts:\n#\tdemo/midgard-fault-proofs/src/submit-invalid-signature-step-01.ts\n#\tdemo/midgard-fault-proofs/src/submit-invalid-signature-step-02.ts\n#\tdemo/midgard-fault-proofs/src/submit-no-reference-input-step-01.ts\n#\tdemo/midgard-fault-proofs/src/submit-no-reference-input-step-02.ts\n#\tdemo/midgard-fault-proofs/src/submit-no-reference-input-step-03.ts\n#\tdemo/midgard-fault-proofs/src/submit-no-reference-input-step-04.ts\n#\tdemo/midgard-fault-proofs/src/submit-reference-input-no-idx-step-01.ts\n#\tdemo/midgard-fault-proofs/src/submit-reference-input-no-idx-step-02.ts\n#\tdemo/midgard-fault-proofs/src/submit-reference-input-no-idx-step-03.ts\n#\tdemo/midgard-fault-proofs/src/submit-reference-input-no-idx-step-04.ts",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-29T16:40:00Z"
-    },
-    {
-      "sha": "67ae83004db875897f92aa59e13ee49a167080e6",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/67ae83004db875897f92aa59e13ee49a167080e6",
-      "message": "merge: integrate fault-proof reference-script carriage work\n\n# Conflicts:\n#\tdemo/midgard-fault-proofs/src/native-script-decoding/submit-native-script-decoding-step-04.ts",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-29T16:34:44Z"
-    },
-    {
-      "sha": "d40e98ce7c3c2b9979d256dfd8a2b72492d71d79",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d40e98ce7c3c2b9979d256dfd8a2b72492d71d79",
-      "message": "test(fault-proofs): add remaining emulator lifecycles",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-29T16:33:58Z"
-    },
-    {
-      "sha": "f6959c2647e005886eefc167229af578cea73104",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/f6959c2647e005886eefc167229af578cea73104",
-      "message": "refactor(fault-proofs): use published reference-script carriages",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-29T16:33:45Z"
-    },
-    {
-      "sha": "2c9fee3d07209f62bb2f9fe2386a20927202084b",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/2c9fee3d07209f62bb2f9fe2386a20927202084b",
-      "message": "refactor(fault-proofs): split native script decoding step 03",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-29T16:33:26Z"
     }
   ],
   "contributors": [
@@ -344,6 +344,12 @@
       "updated_at": "2026-08-31T10:07:32Z"
     },
     {
+      "number": 644,
+      "title": "Both-polarity emulator suites for missing-native-script-utxo, native-script-invalid, and min-ada fraud-proof families",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/644",
+      "updated_at": "2026-08-31T10:07:21Z"
+    },
+    {
       "number": 649,
       "title": "state_queue.mint no longer fits the 16,384-byte L1 transaction envelope (16,835 bytes unapplied)",
       "html_url": "https://github.com/Anastasia-Labs/midgard/issues/649",
@@ -366,25 +372,13 @@
       "title": "Design call: DA signature republish after payload retention pruning",
       "html_url": "https://github.com/Anastasia-Labs/midgard/issues/646",
       "updated_at": "2026-08-30T15:08:29Z"
-    },
-    {
-      "number": 645,
-      "title": "Replacement adversarial coverage for StateQueueStatusV1 attestation-status disagreement in da-committee-node",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/645",
-      "updated_at": "2026-08-30T15:08:12Z"
-    },
-    {
-      "number": 644,
-      "title": "Both-polarity emulator suites for missing-native-script-utxo, native-script-invalid, and min-ada fraud-proof families",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/644",
-      "updated_at": "2026-08-31T10:07:21Z"
     }
   ],
   "releases": [],
   "commitActivity": [
     {
       "week": 1757203200,
-      "total": 56
+      "total": 57
     },
     {
       "week": 1757808000,
@@ -424,15 +418,15 @@
     },
     {
       "week": 1763251200,
-      "total": 23
+      "total": 32
     },
     {
       "week": 1763856000,
-      "total": 15
+      "total": 44
     },
     {
       "week": 1764460800,
-      "total": 8
+      "total": 17
     },
     {
       "week": 1765065600,
@@ -476,7 +470,7 @@
     },
     {
       "week": 1771113600,
-      "total": 13
+      "total": 14
     },
     {
       "week": 1771718400,
@@ -484,7 +478,7 @@
     },
     {
       "week": 1772323200,
-      "total": 25
+      "total": 26
     },
     {
       "week": 1772928000,
@@ -500,15 +494,15 @@
     },
     {
       "week": 1774742400,
-      "total": 29
+      "total": 30
     },
     {
       "week": 1775347200,
-      "total": 41
+      "total": 42
     },
     {
       "week": 1775952000,
-      "total": 31
+      "total": 32
     },
     {
       "week": 1776556800,
@@ -524,11 +518,11 @@
     },
     {
       "week": 1778371200,
-      "total": 25
+      "total": 43
     },
     {
       "week": 1778976000,
-      "total": 14
+      "total": 16
     },
     {
       "week": 1779580800,
@@ -540,11 +534,11 @@
     },
     {
       "week": 1780790400,
-      "total": 32
+      "total": 31
     },
     {
       "week": 1781395200,
-      "total": 13
+      "total": 21
     },
     {
       "week": 1782000000,
@@ -572,15 +566,15 @@
     },
     {
       "week": 1785628800,
-      "total": 92
+      "total": 190
     },
     {
       "week": 1786233600,
-      "total": 9
+      "total": 30
     },
     {
       "week": 1786838400,
-      "total": 21
+      "total": 132
     },
     {
       "week": 1787443200,
@@ -588,7 +582,7 @@
     },
     {
       "week": 1788048000,
-      "total": 7
+      "total": 13
     }
   ]
 }
