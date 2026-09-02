@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-09-01T11:24:43.071Z",
+  "fetchedAt": "2026-09-02T10:58:14.145Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 25,
@@ -17,25 +17,18 @@
   },
   "commits": [
     {
+      "sha": "1afa5c99f020cd6622a1c88806a2b454cbb34a73",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/1afa5c99f020cd6622a1c88806a2b454cbb34a73",
+      "message": "feat(fraud-proofs): complete production correction workflows",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-09-01T18:14:53Z"
+    },
+    {
       "sha": "612b396f3e8b92fb2406d2f02de7cdbf984466d2",
       "html_url": "https://github.com/Anastasia-Labs/midgard/commit/612b396f3e8b92fb2406d2f02de7cdbf984466d2",
       "message": "Squash commits of Checkpoint #1",
       "authorName": "Drop-Table-Users",
       "authorDate": "2026-09-01T10:19:23Z"
-    },
-    {
-      "sha": "67df7c8831210ca33febb67cbb0107a569f2f448",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/67df7c8831210ca33febb67cbb0107a569f2f448",
-      "message": "A backup of non-contract-related changes made for the E2E test (branch can be deleted after the contracts are merged)",
-      "authorName": "Drop-Table-Users",
-      "authorDate": "2026-09-01T10:04:58Z"
-    },
-    {
-      "sha": "7e489e8f5747c3e6263b430dc385dac06aaade7b",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/7e489e8f5747c3e6263b430dc385dac06aaade7b",
-      "message": "Working checkpoint",
-      "authorName": "Drop-Table-Users",
-      "authorDate": "2026-09-01T10:00:44Z"
     },
     {
       "sha": "b93726aa444dd0f2d6a323b266cbf21ca7d63b5d",
@@ -120,6 +113,13 @@
       "message": "merge: integrate fault-proof reference-script resolution\n\n# Conflicts:\n#\tdemo/midgard-fault-proofs/tests/submit-init-emulator-native-script-decoding-adversarial.test.ts\n#\tdemo/midgard-fault-proofs/tests/support/native-script-decoding-emulator-v1.ts",
       "authorName": "Philip DiSarro",
       "authorDate": "2026-08-29T19:55:46Z"
+    },
+    {
+      "sha": "d3df3323ec31d37ca079aa10512340d7c3363612",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d3df3323ec31d37ca079aa10512340d7c3363612",
+      "message": "refactor(fault-proofs): require published reference scripts",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-08-29T19:08:47Z"
     }
   ],
   "contributors": [
@@ -410,23 +410,23 @@
     },
     {
       "week": 1762041600,
-      "total": 46
+      "total": 31
     },
     {
       "week": 1762646400,
-      "total": 14
+      "total": 0
     },
     {
       "week": 1763251200,
-      "total": 32
+      "total": 12
     },
     {
       "week": 1763856000,
-      "total": 44
+      "total": 8
     },
     {
       "week": 1764460800,
-      "total": 17
+      "total": 8
     },
     {
       "week": 1765065600,
@@ -474,19 +474,19 @@
     },
     {
       "week": 1771718400,
-      "total": 47
+      "total": 45
     },
     {
       "week": 1772323200,
-      "total": 26
+      "total": 24
     },
     {
       "week": 1772928000,
-      "total": 36
+      "total": 35
     },
     {
       "week": 1773532800,
-      "total": 29
+      "total": 28
     },
     {
       "week": 1774137600,
@@ -518,7 +518,7 @@
     },
     {
       "week": 1778371200,
-      "total": 43
+      "total": 42
     },
     {
       "week": 1778976000,
@@ -534,11 +534,11 @@
     },
     {
       "week": 1780790400,
-      "total": 31
+      "total": 32
     },
     {
       "week": 1781395200,
-      "total": 21
+      "total": 13
     },
     {
       "week": 1782000000,
@@ -554,7 +554,7 @@
     },
     {
       "week": 1783814400,
-      "total": 10
+      "total": 9
     },
     {
       "week": 1784419200,
@@ -566,23 +566,23 @@
     },
     {
       "week": 1785628800,
-      "total": 190
+      "total": 102
     },
     {
       "week": 1786233600,
-      "total": 30
+      "total": 0
     },
     {
       "week": 1786838400,
-      "total": 132
+      "total": 53
     },
     {
       "week": 1787443200,
-      "total": 173
+      "total": 172
     },
     {
       "week": 1788048000,
-      "total": 13
+      "total": 12
     }
   ]
 }
