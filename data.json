@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-09-02T10:58:14.145Z",
+  "fetchedAt": "2026-09-03T10:57:34.031Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 25,
@@ -17,6 +17,27 @@
   },
   "commits": [
     {
+      "sha": "e7a789f17c1cafd9705967352a2e3927b71e8de4",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/e7a789f17c1cafd9705967352a2e3927b71e8de4",
+      "message": "feat(fraud-proofs): advance non-interactive proof threads",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-09-02T23:54:05Z"
+    },
+    {
+      "sha": "2d80ecc13f3effaf752f9896b7051156c6031aca",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/2d80ecc13f3effaf752f9896b7051156c6031aca",
+      "message": "build(workspace): enforce package boundaries and resolve workspace packages from source\n\nCross-package relative imports (../../<package>/src and dist) bypassed each\npackage's exports map and dependency declaration and were the direct cause of\nthe stale-dist phantom suite failures: vitest resolved @al-ft/midgard-core to a\ngitignored dist while sibling files reached the same modules through src.\n\n- ESLint no-restricted-imports bans ../<package>/src and ../<package>/dist for\n  every workspace package (all file types), and bans the @/ alias inside\n  midgard-sdk/src.\n- Every package's exports map gains a `midgard-source` condition listed first,\n  pointing at the TypeScript source. tsc (customConditions), typescript-eslint\n  (via tsconfig) and vitest (resolve.conditions) resolve it, so typecheck, lint\n  and test suites read sibling source and never need a prior build. Node at\n  runtime ignores the condition and keeps resolving dist.\n- midgard-core exports the two subpaths consumers had been reaching through\n  src (retention-window-v1, codec/native-constants) and builds the former.\n- midgard-sdk, midgard-fault-proofs and midgard-watcher gain root exports;\n  da-committee-node gains subpath exports (and build entries) for the modules\n  midgard-node's DA integration tests use.\n- midgard-sdk/src drops the @/ tsconfig alias in favour of relative\n  specifiers so consumers can compile it from source.\n- Test-only workspace devDependencies replace the remaining relative reaches:\n  midgard-validation -> midgard-fault-proofs, midgard-node -> da-committee-node,\n  da-committee-node -> midgard-watcher.\n- The 10k DA multi-process test bundles its helper through tsup's API with the\n  same condition and all workspace packages inlined (plus a createRequire\n  banner for CJS-only dependencies), so the child Node process never runs\n  against a stale or missing dist either.\n- midgard-sdk's @types/node range is aligned with the rest of the workspace\n  (^22.17.0): consumers now compile midgard-core's zstd source under the\n  sdk's own type set.\n\nVerified with every dist directory deleted: workspace lint (error set\nidentical to HEAD: six pre-existing only-throw-error hits in midgard-manager),\ntypecheck for every package (da-committee-node's four pre-existing SDK-ABI\nerrors unchanged), and the sdk, validation, watcher, lucid-midgard,\nda-committee-node suites plus the three midgard-node DA files. Every\nremaining red was re-run at HEAD in the same worktree and reproduced\nidentically there. A full build still succeeds afterwards.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-09-02T21:42:25Z"
+    },
+    {
+      "sha": "815b703a99c26161cb735ab2f298bf0cbce4524d",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/815b703a99c26161cb735ab2f298bf0cbce4524d",
+      "message": "fix(ci): retire stale evidence gates and repair suites",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-09-01T21:05:20Z"
+    },
+    {
       "sha": "1afa5c99f020cd6622a1c88806a2b454cbb34a73",
       "html_url": "https://github.com/Anastasia-Labs/midgard/commit/1afa5c99f020cd6622a1c88806a2b454cbb34a73",
       "message": "feat(fraud-proofs): complete production correction workflows",
@@ -29,6 +50,20 @@
       "message": "Squash commits of Checkpoint #1",
       "authorName": "Drop-Table-Users",
       "authorDate": "2026-09-01T10:19:23Z"
+    },
+    {
+      "sha": "67df7c8831210ca33febb67cbb0107a569f2f448",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/67df7c8831210ca33febb67cbb0107a569f2f448",
+      "message": "A backup of non-contract-related changes made for the E2E test (branch can be deleted after the contracts are merged)",
+      "authorName": "Drop-Table-Users",
+      "authorDate": "2026-09-01T10:04:58Z"
+    },
+    {
+      "sha": "7e489e8f5747c3e6263b430dc385dac06aaade7b",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/7e489e8f5747c3e6263b430dc385dac06aaade7b",
+      "message": "Working checkpoint",
+      "authorName": "Drop-Table-Users",
+      "authorDate": "2026-09-01T10:00:44Z"
     },
     {
       "sha": "b93726aa444dd0f2d6a323b266cbf21ca7d63b5d",
@@ -85,41 +120,6 @@
       "message": "feat(core,sdk): ProvisionalWhole field view, availability-challenge surfaces, regenerated goldens\n\nCore: FieldViewV1 ProvisionalWhole decoding chain with regenerated goldens;\ndeployment-manifest identity verification gains two semantics-preserving\ncaches (script-hash derivation LRU and a verified-finalized manifestId memo\nkeyed by the content-binding manifestId) — the identity re-hash still runs\nuncached on every call, so any mutation either fails identity or misses the\nmemo. This removes the pathological repeated deep verification that made\nfail-closed watcher evaluators re-derive ~163 script hashes per call.\n\nSDK: availability-challenge v1 schemas (28-byte deployment_identity, 32-byte\nda_bond_asset_name), canonical response geometry constraints\n(tranche in [65536, 64MiB], chunk <= 15148, tranche-count coverage bound),\nclaim-registry and correction-lock tx builders, state-queue\nMergeToConfirmedStateV1 support; the reference-script token roster gains\nthe availability-challenge spending/minting names. Known follow-ons:\ninitialization funds the correction lock at min-ada (#648); the emulator\nclaim-registry MPF proof deriver wiring (#652).",
       "authorName": "Philip DiSarro",
       "authorDate": "2026-08-31T12:46:38Z"
-    },
-    {
-      "sha": "3e3090aa1bcde2b922c9011447b97c80d4f32727",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/3e3090aa1bcde2b922c9011447b97c80d4f32727",
-      "message": "feat(onchain): StateQueueStatusV1, claim registry, correction lock, availability challenge, new fault-proof families\n\nStateQueueStatusV1 sum replaces the ByteArray attestation marker;\nstate_queue MintRedeemer gains MergeToConfirmedStateV1 at constructor 6 and\nthe 12-param mint / 3-param spend re-parameterization (claim registry,\ncomputation thread, availability challenge). New validators: claim-registry,\ncorrection-lock, availability-challenge. New fraud-proof families: min-ada,\nmissing-native-script-utxo, native-script-invalid, network-id;\nmissing-native-script-tx steps 07/08 plus the staged walk; validation\nmachine network-id rejection. Availability-challenge economics set in both\ndefault and testnet envs.\n\nscheduler.mint and fraud_proof_catalogue.mint drop the hub-policy singleton\ncheck for quantity_of == 1 (== -1 on Deinit): hub_oracle.mint now enforces\nthe exact three-asset hub mint set (hub oracle + claim registry + correction\nlock), so any validator requiring the hub policy to mint exactly one asset\nname in the same transaction made atomic init unsatisfiable in every tx\ntopology, including the production sdk initialization builder. The\nquantity_of form is the pattern state-queue and operator-directory already\nuse for the same purpose; the exact-mint-set invariant is owned by\nhub_oracle.mint itself.\n\nBattery: 2864/2864 aiken tests green.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-31T12:46:18Z"
-    },
-    {
-      "sha": "46f7892a236265ffd8386f5270f39feab8a65962",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/46f7892a236265ffd8386f5270f39feab8a65962",
-      "message": "chore: stop tracking vitest cache artifacts under node_modules\n\nExtend .gitignore and drop the accidentally tracked\nnode_modules/.vite/vitest results file.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-31T12:46:09Z"
-    },
-    {
-      "sha": "88b7354945e6aaf331a893481d00387c1561302e",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/88b7354945e6aaf331a893481d00387c1561302e",
-      "message": "chore(goal): retire progress-tracker verification machinery",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-29T23:06:28Z"
-    },
-    {
-      "sha": "117b7915758a359143d630b2e045ca156af2bcec",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/117b7915758a359143d630b2e045ca156af2bcec",
-      "message": "merge: integrate fault-proof reference-script resolution\n\n# Conflicts:\n#\tdemo/midgard-fault-proofs/tests/submit-init-emulator-native-script-decoding-adversarial.test.ts\n#\tdemo/midgard-fault-proofs/tests/support/native-script-decoding-emulator-v1.ts",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-29T19:55:46Z"
-    },
-    {
-      "sha": "d3df3323ec31d37ca079aa10512340d7c3363612",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d3df3323ec31d37ca079aa10512340d7c3363612",
-      "message": "refactor(fault-proofs): require published reference scripts",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-08-29T19:08:47Z"
     }
   ],
   "contributors": [
@@ -410,23 +410,23 @@
     },
     {
       "week": 1762041600,
-      "total": 31
+      "total": 46
     },
     {
       "week": 1762646400,
-      "total": 0
+      "total": 14
     },
     {
       "week": 1763251200,
-      "total": 12
+      "total": 23
     },
     {
       "week": 1763856000,
-      "total": 8
+      "total": 16
     },
     {
       "week": 1764460800,
-      "total": 8
+      "total": 17
     },
     {
       "week": 1765065600,
@@ -474,19 +474,19 @@
     },
     {
       "week": 1771718400,
-      "total": 45
+      "total": 47
     },
     {
       "week": 1772323200,
-      "total": 24
+      "total": 25
     },
     {
       "week": 1772928000,
-      "total": 35
+      "total": 36
     },
     {
       "week": 1773532800,
-      "total": 28
+      "total": 29
     },
     {
       "week": 1774137600,
@@ -518,15 +518,15 @@
     },
     {
       "week": 1778371200,
-      "total": 42
+      "total": 41
     },
     {
       "week": 1778976000,
-      "total": 16
+      "total": 12
     },
     {
       "week": 1779580800,
-      "total": 2
+      "total": 1
     },
     {
       "week": 1780185600,
@@ -534,7 +534,7 @@
     },
     {
       "week": 1780790400,
-      "total": 32
+      "total": 30
     },
     {
       "week": 1781395200,
@@ -554,7 +554,7 @@
     },
     {
       "week": 1783814400,
-      "total": 9
+      "total": 10
     },
     {
       "week": 1784419200,
@@ -566,23 +566,23 @@
     },
     {
       "week": 1785628800,
-      "total": 102
+      "total": 90
     },
     {
       "week": 1786233600,
-      "total": 0
+      "total": 30
     },
     {
       "week": 1786838400,
-      "total": 53
+      "total": 132
     },
     {
       "week": 1787443200,
-      "total": 172
+      "total": 173
     },
     {
       "week": 1788048000,
-      "total": 12
+      "total": 17
     }
   ]
 }
