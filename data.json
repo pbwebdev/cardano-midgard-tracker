@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-09-04T10:57:18.992Z",
+  "fetchedAt": "2026-09-05T10:18:27.777Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 25,
@@ -16,6 +16,20 @@
     "Perl": 37
   },
   "commits": [
+    {
+      "sha": "a0a56e28013af3759525d20ee7da54d75dacc5e8",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/a0a56e28013af3759525d20ee7da54d75dacc5e8",
+      "message": "test(fault-proofs): drop the wasm heap guard now that both leaks are fixed\n\ntests/support/uplc-heap-guard.ts existed for two leaks in the pinned\nlucid-evolution packages: a forced garbage collection after each test to\nrelease finalizer-managed CML objects, and a wasm32-ceiling check for the\nuplc allocator that never reclaimed linear memory. lucid 0.6.4 and uplc\n0.2.23 fix both upstream, so the guard, its setup-file entry, and the\n--expose-gc flag in the shared fork pool go. Per-file process isolation\nstays: wasm linear memory never shrinks, and a fresh process per file is\nwhat hands it back.\n\nThe test files that justified their one-journey-per-file split with the\nleak now record that the leak is fixed and the split is kept for that\nisolation; no files were merged. Full suite on the new packages: 219 s,\nsame failure set as before the change.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-09-04T12:58:09Z"
+    },
+    {
+      "sha": "0a8190e3ac95fce34bb8bc7a5bf464371928c395",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/0a8190e3ac95fce34bb8bc7a5bf464371928c395",
+      "message": "build(demo): bump lucid-evolution to lucid 0.6.4 and uplc 0.2.23\n\nlucid 0.6.4 (with core-utils 0.1.17, utils 0.1.74, plutus 0.1.36,\nprovider 0.2.3, wallet 0.2.2) frees cardano-multiplatform-lib objects\nexplicitly instead of leaving them to wasm-bindgen's finalizer, and uplc\n0.2.23 drops the wee_alloc allocator that never reused a freed block.\nTogether they remove the two wasm memory leaks that made the emulator\nsuites' last tests spend minutes in garbage collection.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-09-04T12:58:08Z"
+    },
     {
       "sha": "cf46e1aa193679a81a1128b46a96d23292bae13f",
       "html_url": "https://github.com/Anastasia-Labs/midgard/commit/cf46e1aa193679a81a1128b46a96d23292bae13f",
@@ -106,20 +120,6 @@
       "message": "docs(agents): adopt the naming and versioning policy\n\nRecord the rules the rename applied so they outlive it:\n\n- names carry no version; wire, storage, and manifest values do;\n- the seam appears when a second version ships, on both sides;\n- production is the default, so the exception carries the marker\n  (`authenticated-`, `demo-`, `bench-`, `emulator-`, `test-`);\n- ticket and goal identifiers live in doc comments, never in names;\n- evidence artifacts and plan documents keep the names their verifiers pin.\n\nAGENTS.md carries the one-line always-on rule and points here;\n`docs/agents/README.md` lists the file.",
       "authorName": "Philip DiSarro",
       "authorDate": "2026-09-03T06:34:18Z"
-    },
-    {
-      "sha": "b52b8c195b5016d73d4a56e0bc03ade0579fdfb9",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/b52b8c195b5016d73d4a56e0bc03ade0579fdfb9",
-      "message": "refactor(demo): rename files to match the naming policy\n\nRename 949 TypeScript files so their names carry no version suffix,\n`production-` prefix, or ticket id: `rule-bundle-v1.ts` is `rule-bundle.ts`,\n`production-fault-proof-application-v1.ts` is `fault-proof-application.ts`,\n`zz605-semantic-resolver-arity.test.ts` is\n`semantic-resolver-arity-gate.test.ts`, and the watcher's W15/W16/W25\nfixture modules are named for the user-event, settlement, and replay\nauthorities they build. Where a family keeps a runner that reconstructs its\nevidence from authenticated sources beside one that accepts caller-supplied\nevidence, the pair is `authenticated-workflow.ts`/`workflow.ts` (likewise\n`authenticated-replay`), and the SDK's state-queue transaction programs\nlive in `state-queue-transactions.ts`.\n\nImport specifiers are rewritten in both directions; package `exports` keys\nand dist paths follow (`@al-ft/midgard-core/consensus-profile-v1` is now\n`@al-ft/midgard-core/consensus-profile`), as do bare subpath imports, tsup\nentries, CI path filters, verifier scan lists, evidence path pins, and\ndocumentation links. Plan documents, evidence artifacts, migrations, and\nverifier scripts keep their artifact names.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-03T06:34:01Z"
-    },
-    {
-      "sha": "11e1cb6ef5de4f2b9fc4c40fb61abc3263db3255",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/11e1cb6ef5de4f2b9fc4c40fb61abc3263db3255",
-      "message": "refactor(demo): drop V1, Production, and ticket-id noise from identifiers\n\nApply the naming policy across the TypeScript workspace: a version suffix on\nan identifier carries no information while no second version exists, and\nproduction is the default behaviour rather than a prefix. About 7,500\ndeclared names lose their `V1`/`_V1` suffix or `Production`/`production`\nprefix; ticket ids in identifiers become the concept they stood for\n(`W15` user-event, `W16` settlement, `W25` replay, `W44` lifecycle). Every\nreference follows, including namespace-qualified access through barrels\nand dynamic imports, `vi.mock`/`vi.spyOn` keys, and the identifier pins in\nthe format-registry evidence, the repository scripts, and reference docs.\n\nWhat deliberately keeps its name:\n\n- wire and storage values: schema-version strings, CBOR domain tags,\n  blueprint titles, and database migrations are data, not identifiers;\n- property keys, so JSON, HTTP, and database field names are untouched;\n- Cardano and library names (`PlutusV2`, `CostModelPlutusV1`, ...);\n- the fourteen names whose unsuffixed sibling already exists as a distinct\n  shape in the same module (`TransitionStepV1`/`TransitionStep`,\n  `BodyFieldClaimV1`/`BodyFieldClaim`, ...), the two the watcher barrel\n  exports beside a different unsuffixed type, and the two submit entry\n  points whose unsuffixed names are the retired unauthenticated routes the\n  RF-043 boundary test forbids; those are real seams;\n- hand-written JavaScript fixture modules and their declarations.\n\nWhere a production variant coexists with a caller-supplied one, the\nproduction side is now `Authenticated*` (its evidence comes exclusively\nfrom authenticated L1 and retained DA) and the plain name is the default.\n\nEvery package typechecks and lints; the four da-committee-node type errors\nreproduce at the base commit.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-03T06:03:40Z"
     }
   ],
   "contributors": [
@@ -378,7 +378,7 @@
   "commitActivity": [
     {
       "week": 1757203200,
-      "total": 56
+      "total": 57
     },
     {
       "week": 1757808000,
@@ -494,15 +494,15 @@
     },
     {
       "week": 1774742400,
-      "total": 29
+      "total": 30
     },
     {
       "week": 1775347200,
-      "total": 41
+      "total": 42
     },
     {
       "week": 1775952000,
-      "total": 31
+      "total": 32
     },
     {
       "week": 1776556800,
@@ -518,11 +518,11 @@
     },
     {
       "week": 1778371200,
-      "total": 43
+      "total": 25
     },
     {
       "week": 1778976000,
-      "total": 16
+      "total": 14
     },
     {
       "week": 1779580800,
@@ -538,7 +538,7 @@
     },
     {
       "week": 1781395200,
-      "total": 20
+      "total": 21
     },
     {
       "week": 1782000000,
@@ -554,7 +554,7 @@
     },
     {
       "week": 1783814400,
-      "total": 9
+      "total": 10
     },
     {
       "week": 1784419200,
@@ -566,11 +566,11 @@
     },
     {
       "week": 1785628800,
-      "total": 102
+      "total": 189
     },
     {
       "week": 1786233600,
-      "total": 21
+      "total": 30
     },
     {
       "week": 1786838400,
@@ -578,11 +578,11 @@
     },
     {
       "week": 1787443200,
-      "total": 172
+      "total": 173
     },
     {
       "week": 1788048000,
-      "total": 37
+      "total": 42
     }
   ]
 }
