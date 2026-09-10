@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-09-09T11:01:56.321Z",
+  "fetchedAt": "2026-09-10T10:58:32.874Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 25,
@@ -17,109 +17,109 @@
   },
   "commits": [
     {
-      "sha": "a0a56e28013af3759525d20ee7da54d75dacc5e8",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/a0a56e28013af3759525d20ee7da54d75dacc5e8",
-      "message": "test(fault-proofs): drop the wasm heap guard now that both leaks are fixed\n\ntests/support/uplc-heap-guard.ts existed for two leaks in the pinned\nlucid-evolution packages: a forced garbage collection after each test to\nrelease finalizer-managed CML objects, and a wasm32-ceiling check for the\nuplc allocator that never reclaimed linear memory. lucid 0.6.4 and uplc\n0.2.23 fix both upstream, so the guard, its setup-file entry, and the\n--expose-gc flag in the shared fork pool go. Per-file process isolation\nstays: wasm linear memory never shrinks, and a fresh process per file is\nwhat hands it back.\n\nThe test files that justified their one-journey-per-file split with the\nleak now record that the leak is fixed and the split is kept for that\nisolation; no files were merged. Full suite on the new packages: 219 s,\nsame failure set as before the change.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-04T12:58:09Z"
+      "sha": "24ccfcbab66f47076b970f39b349178a0f4185a1",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/24ccfcbab66f47076b970f39b349178a0f4185a1",
+      "message": "Checkpoint 2 wip",
+      "authorName": "Drop-Table-Users",
+      "authorDate": "2026-09-10T09:12:33Z"
     },
     {
-      "sha": "0a8190e3ac95fce34bb8bc7a5bf464371928c395",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/0a8190e3ac95fce34bb8bc7a5bf464371928c395",
-      "message": "build(demo): bump lucid-evolution to lucid 0.6.4 and uplc 0.2.23\n\nlucid 0.6.4 (with core-utils 0.1.17, utils 0.1.74, plutus 0.1.36,\nprovider 0.2.3, wallet 0.2.2) frees cardano-multiplatform-lib objects\nexplicitly instead of leaving them to wasm-bindgen's finalizer, and uplc\n0.2.23 drops the wee_alloc allocator that never reused a freed block.\nTogether they remove the two wasm memory leaks that made the emulator\nsuites' last tests spend minutes in garbage collection.",
+      "sha": "f69a0ddb2027606d516a8fc7fb471cd47d2c39c3",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/f69a0ddb2027606d516a8fc7fb471cd47d2c39c3",
+      "message": "Integrate watcher persistence and current protocol work\n\nInclude all current contract, runtime, SDK, test, documentation, and tooling changes.\n\nWatcher validation: local installed journey passed through proof, correction, and healthy successor; focused persistence and recovery checks passed. Three existing mixed replay fixture failures remain unchanged. Broader workspace validation is not asserted by this commit.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-04T12:58:08Z"
+      "authorDate": "2026-09-10T04:32:40Z"
     },
     {
-      "sha": "cf46e1aa193679a81a1128b46a96d23292bae13f",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/cf46e1aa193679a81a1128b46a96d23292bae13f",
-      "message": "fix(cek): make map conversions agree across builder, verifiers and core\n\n`mapData`/`unMapData` (builtin tags 38/43) disagreed between the trace\nbuilder, the TypeScript step verifier and the core program-material\nverifier, so the golden channel could only pin the four map-conversion\narms from a ~9 KB script context.\n\nThe L1 rule (PlutusCore.Data and builtinCostModelC) is the reference:\nboth builtins are constant-cost and total for any width including the\nempty map, `unMapData` fails only on a non-Map, and Data maps are\nCBOR-encoded with a definite map header.\n\n- midgard-core `cek-proof.ts` committed and verified Data map nodes with\n  the list CBOR-length rule (indefinite `2 + payload`) instead of the\n  definite map header, so any program carrying an inline map constant\n  failed material verification (\"CEK Data map summary is invalid\").\n  Aiken `map_cbor_length` and validation's `cek-data-tree.ts` already\n  applied the map rule.\n- `verifyMapConversionStart` only accepted `semanticConstant` witnesses,\n  while Aiken `semantic_constant_parts_v1` accepts an inline\n  `ConstantValue` too, so every result at or below the inline bound was\n  refused. It now resolves both endpoints through `constantParts` like\n  the other semantic arms.\n- The builder routes tags 38/43 through the map-conversion micro-machine\n  for inline and semantic sources alike; `unMapData` on a non-map inline\n  constant takes the semantic-failure arm like tags 42 and 44-46.\n\nGolden channel: four new programs (narrow, empty, inline-constant and\ninline wrong-variant map conversions); 26 programs, 403 steps, 132 Aiken\ntests, `--check` byte-stable.",
+      "sha": "233285f8887ad902e13c706ede187d18a9709ca1",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/233285f8887ad902e13c706ede187d18a9709ca1",
+      "message": "Merge the validation-trace challenger workflow",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-04T02:53:42Z"
+      "authorDate": "2026-09-07T18:44:36Z"
     },
     {
-      "sha": "dc19ab2d8aebc61b55cdefedd1aa71e35786ce99",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/dc19ab2d8aebc61b55cdefedd1aa71e35786ce99",
-      "message": "test(cek): add the V1 core-step cross-language golden channel\n\nThe Aiken CEK verifier and the TypeScript CEK trace builder and step verifier\nwere pinned against each other by nine mode tags, eight error tags, and one\nhand-pasted CBOR vector; nothing proved that a step the TypeScript builder\nemits is a step verify_core_step_v1 accepts.\n\nAdd a generator on the existing golden-channel pattern that executes\ntwenty-two curated programs through the TypeScript builder and emits, per\nprogram, the script bytes, context CBOR, envelope and application roots, the\ninitial and terminal state hashes, every step's CoreStepEvidenceV1 CBOR with\nits pre/post state hashes, the stop reason, and two negative twists. The\nvitest suite replays every step through the TypeScript verifier and the\ngenerated Aiken module deserialises each pinned CBOR, re-serialises it\nbyte-for-byte, recomputes both state hashes, and runs verify_core_step_v1,\nwith the twists pinned as refusals. All forty-one witness arms are reached\nand both consumers fail if that coverage shrinks. The `--check` script joins\nthe CI job beside the sibling fixture checks so an edited producer plus a\n`:sync` cannot re-green both suites unnoticed.",
+      "sha": "5a48a7fffa4c9faaed35cc8d294db543cd268589",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/5a48a7fffa4c9faaed35cc8d294db543cd268589",
+      "message": "Keep validation resolver publications within the reserved size limit",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-04T01:54:16Z"
+      "authorDate": "2026-09-07T18:25:50Z"
     },
     {
-      "sha": "d452692b6940355a0e6c4c00879634233eb762c9",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d452692b6940355a0e6c4c00879634233eb762c9",
-      "message": "refactor(da): hoist the libp2p identity loader into midgard-core\n\nmidgard-node and da-committee-node each carried their own copy of the\nDA_LIBP2P_PRIVATE_KEY_SOURCE loader (seed:, hex:, and file: schemes), and\nthe two had drifted in validation and error wording, so a source accepted by\none side of the DA transport could be rejected by the other. Move it to\n@al-ft/midgard-core/da-libp2p-identity with one definition of the grammar,\nhex validation through the core hexToBytes helper, and a test that pins seed\nspelling invariance, the hex:/file: round-trip of the protobuf key, and the\nrejections, then point both packages and their tests at the shared module.",
+      "sha": "4c343fbb31b3574dfce092b543d7f8aa33fb6c16",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/4c343fbb31b3574dfce092b543d7f8aa33fb6c16",
+      "message": "Prove the installed validationTraceDispute watcher journeys\n\nCover the honest-response, operator-stall timeout, and cold-restart resume\nlines through the production runner, refuse a forged move at its exact\ncheck, and record the installation receipt.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-04T01:54:09Z"
+      "authorDate": "2026-09-07T12:44:31Z"
     },
     {
-      "sha": "5f2111285fae94aa85797fc73c24e2b9b7e9b0ef",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/5f2111285fae94aa85797fc73c24e2b9b7e9b0ef",
-      "message": "build(watcher): declare @noble/hashes instead of reaching into midgard-core's node_modules\n\nEight watcher modules imported blake2b through a relative\n`../../../midgard-core/node_modules/@noble/hashes` path, which only resolved\nbecause pnpm happened to lay the sibling package's store out next door and\nwould break on any hoisting or install-layout change. Add @noble/hashes to\nthe watcher's own dependencies and import it by package name.",
+      "sha": "d0c18d8e8c2f390f6e0086b12d254dae3d6f20c6",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d0c18d8e8c2f390f6e0086b12d254dae3d6f20c6",
+      "message": "Close the LOP and CEK context receipts against the rebuilt blueprint\n\nRe-pin every ledger this wave touched to the fresh `aiken build --env testnet`\nblueprint (sha256 7e478b66f681ed47d4bf63a9043641e7a1c47d02b9168ed71c183975cf9ed0e9,\ncompiler v1.1.23+5adf783), all with zero negative margins:\n\n- CEK context: 2,927 entries, 24 distinct lifecycle shapes, worst execution\n  3,541,587 mem / 1,645,575,835 cpu, worst signed transaction 15,108 bytes;\n- CEK context publication: 36 entries, re-pinned from a pre-restructure\n  `420a8327…` that was failing the live-blueprint check, worst signed\n  publication 12,981 bytes;\n- ScriptSources item maximum: 2,019 entries, worst execution 3,898,959 mem /\n  1,854,545,673 cpu, worst signed transaction 15,108 bytes;\n- ledger-output-proof publication: 34 entries, worst signed publication\n  14,954 bytes.\n\nThe CEK context receipt records the stage-0 shared-item root cause — the\nexecutor side, not the builder, was wrong — and confirms no semantic predicate\nwas weakened: `outer_fields_are_well_formed` already enforced the same\n`mode == 0 || mode == 1` domain inside the canonical machine, and the\nsuccessor equality that carries the semantics is untouched.\n\nThe LOP receipt gains a §8 reconciliation: the three pre-existing\n>15,000-byte validation-trace semantics re-measured across the whole 91-entry\nresolver roster (two exceed the 15,872 signed-publication gate and are\nescalated with numbers); the program doc §7 oversized checkpoint reconciled\nagainst the fresh blueprint, where only three `availability_challenge` entries\nremain above 16,384 and every oversized validation-dispute and\ntransition-trace body is gone; and a sweep of the fault-proof test surface for\nraised transaction size, raised ExUnits, oversized publication and disabled\nevaluation, with a disposition for each route.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-04T01:53:42Z"
+      "authorDate": "2026-09-07T12:13:08Z"
     },
     {
-      "sha": "bf89254c139bc305f2d0234691116a1c5ddc05ed",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/bf89254c139bc305f2d0234691116a1c5ddc05ed",
-      "message": "fix(watcher): route every canonical-JSON digest through the hardened durable-store walk\n\nThe settlement indexer carried its own canonical-JSON walk with no number\nbranch, so any number reaching it serialized as `{}` before sha256 and\nbefore the `same()` equality the indexer uses at thirty-six sites: two\nstates differing only in a numeric field hashed and compared as identical.\nThe state-queue and proof-thread indexers, the L1 adapter, the funding\noverlay, and three test files each carried a further private copy of the\nwalk with their own divergent handling.\n\nDelete all of them and alias the indexers' sha256Canonical/same helpers and\nthe encoders onto watcherCanonicalJson, watcherSha256CanonicalJson, and\nwatcherSameCanonicalJson from durable-store, whose walk carries safe\nintegers verbatim, rejects unsafe numbers, sparse arrays, non-plain records,\naccessors, and cycles, and sorts keys in the same code-unit order the removed\ncopies used, so every existing digest is byte-stable. The test support module\nnow wraps the production walk instead of restating it, and the settlement\nsuite pins that the state and result encoders emit the durable-store bytes\nand that numerically distinct values no longer collapse to one digest.",
+      "sha": "307a45ff26ed3054a38abc5019b4bc82a42fb632",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/307a45ff26ed3054a38abc5019b4bc82a42fb632",
+      "message": "Pin both polarities of the widened shared open-executor mode selector\n\n`open_header` / `open_tail` now admit `mode_descriptor || mode_data`, which is\nthe full legal domain, so nothing in the previous fix pins that the selector\nstill refuses anything. Add the negative polarity at the exact clause: an\nout-of-domain mode (2) is refused at both executors, with every other part of\neach fixture the genuine canonical pair so the mode is the only thing that can\nrefuse. The selector is an `expect`, so its refusal traps rather than returning\n`False` — hence `fail` tests.\n\nThis is coverage only; no predicate changed and the blueprint is byte-identical\nat sha256 7e478b66f681ed47d4bf63a9043641e7a1c47d02b9168ed71c183975cf9ed0e9.\nFull `aiken check --env testnet`: 4,014 tests, 4,014 passed, 0 failed.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-04T01:53:34Z"
+      "authorDate": "2026-09-07T12:12:54Z"
     },
     {
-      "sha": "0c1adbd33084c62749190bfebb560e2f28bb1ae0",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/0c1adbd33084c62749190bfebb560e2f28bb1ae0",
-      "message": "refactor(demo): share test support, ratchet no-unsafe lint, and dedupe environment reads\n\nAdd the private @al-ft/midgard-test-support workspace package so the\nvitest config helpers (isolated forks pool, midgard-source SSR resolution,\nraw SQL loader), the temp-file helpers previously copied between midgard-node\nand midgard-node-tools, and the h28/h32/ordinalHex fixture helpers that every\nsuite restated live in one place.\n\nAdd midgard-core narrowing, lucid-data, and canonical-json modules and a\nplutus-data-narrowing module in midgard-validation, then turn the\n@typescript-eslint no-unsafe-* rules back on for midgard-core and\nmidgard-validation. The `Schema as unknown as Type` Lucid data casts across\nmidgard-sdk, midgard-fault-proofs, midgard-watcher, and midgard-node become\nasDataType<Type>(Schema), which states the one honest cast once.\n\nGive midgard-node and midgard-node-tools an environment module that holds\nthe single definition of each directly read variable (the DA availability\nblock, deployment manifest and blueprint overrides, bond-owner credential,\neconomics profile), replacing the near-copies scattered through commands,\nfibers, and blueprint loaders. Drop the node's prebuild script, which\nrebuilt sibling packages the workspace already builds.\n\nWire the network-id forced step into the SDK chain builder and carry it on\nthe fault-proofs emulator scaffold, teach the reference-script publisher the\nchains whose contract names are not Step{n+1} so a lettered or appended step\ncan no longer publish one family member's script under another's role, parse\nthe state-queue yield validators and withdraw purpose in the DA committee\ndeployment reader, memoize the watcher's positional contract script hashes,\nand extend the fault-proofs heap guard to reclaim the CML arena between\nemulator journeys.",
+      "sha": "a08687fda49507484bb65bf2b26958484d7dd585",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/a08687fda49507484bb65bf2b26958484d7dd585",
+      "message": "Bring the resolve-inputs step dispatcher under the execution basis\n\nThe advance-integer positive measured 14,226,253 mem against the 13,200,000\nbasis; per-redeemer attribution put the dispatcher spend ~1.5M above its\nScriptSources sibling. Two sanctioned narrow-decode changes close it with no\nsemantic predicate change:\n\n- decode the pending descriptor once and feed both carrier predicates\n  (control_raw_is_bound_with_descriptor /\n  control_raw_lop_is_pinned_with_descriptor; the old names remain as exact\n  wrappers for the finalize dispatcher), saving ~1.07M mem;\n- derive the successor work witness with splice_pending_successor_v1 (the\n  membership-step plan's \"successor by splice\"), which replaces the two\n  verified encoding tails instead of re-walking encode_control_raw and\n  encode_pending; a fuzz test proves the splice byte-identical to the\n  whole-record re-encode, and a tampered proof tail is refused.\n\nThe lifecycle now measures 13,100,448 mem / 4,378,032,009 cpu (99,552 mem\nunder basis); the dispatcher is 11,062 raw bytes. The advance-integer\npositive is un-skipped with the standard basis assertion, leaving the\nledger-output-proof emulator suite at 20/20 with zero skips.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-04T01:52:37Z"
+      "authorDate": "2026-09-07T10:31:44Z"
     },
     {
-      "sha": "d210d12bf63f78984cef2605795d0d4ab4af0b10",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d210d12bf63f78984cef2605795d0d4ab4af0b10",
-      "message": "fix(onchain): derive the CEK program-material bound from the 447-byte V1 DA framing\n\nThe TypeScript twin has pinned MIDGARD_CEK_PROGRAM_MATERIAL_DA_FIXED_BYTES at\n447 since the sdk da-payload suite started measuring the framing against the\ncanonical encoder, while cek-proof-v1.ak still derived\nmax_program_material_byte_length from 446 and so admitted 67108418 material\nbytes where the consensus profile allows 67108417.\n\nAlign the Aiken constant and the two suites that pin hashes derived from it,\nrepublish the consensus profile document and its digest, the format registry\nentry, and the DA committee deployment fixture, and make the core profile\ntests read the bound from MIDGARD_CONSENSUS_LIMITS instead of restating the\nstale literal.",
+      "sha": "5bb95460d72c2f5d73a97fc530d721bdfdff40b7",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/5bb95460d72c2f5d73a97fc530d721bdfdff40b7",
+      "message": "Accept both item modes in the shared open-header/open-tail executors\n\nThe CEK context binds descriptor-mode selection items into the shared\nredeemer-item chain (cek-context-item-bind requires mode_descriptor at\ncontext stage 0), but the open-header/open-tail executor semantics gated on\nmode_data only, leaving every stage-0 shared item bindable yet unprovable.\nWiden the two gates to the full step_v1 header/tail domain; the canonical\nprevalidated_open_header/open_tail successor equality is unchanged and pins\nthe mode-dependent shape itself. invalid_header/invalid_tail deliberately\nstay data-mode only. Both polarities covered for the descriptor mode.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-04T01:50:17Z"
+      "authorDate": "2026-09-07T10:31:31Z"
     },
     {
-      "sha": "d47be7eba1ce4dd37af29c86515471f1973c6c86",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d47be7eba1ce4dd37af29c86515471f1973c6c86",
-      "message": "refactor(fault-proofs): remove the family-scaffold generator\n\nThe scaffold-family command and its src/family-scaffold generator were a\none-shot boilerplate tool that no shipped fault-proof family was produced\nby or depends on. Every family in the tree was written by hand against the\nshipped shapes, and the generator had already drifted from them once\n(f3b03c91d re-derived it onto the post-#575 vocabularies after it emitted\nthree retired ones), so keeping it meant maintaining a second copy of the\nfamily layout that nothing exercised. The per-family duplication it papered\nover is being removed separately by making family steps table-driven, so\nthe generator, its layout-enforcing test, and its example spec go first.\n\nRemoved: src/family-scaffold/ (spec, emit, generate, permissive-dispatch),\ntests/family-scaffold.test.ts, the templates/ example spec, the\nscaffold-family verb with its --scaffold-spec/--repo-root/--dry-run flags\nand usage line in bin.ts, and the package-root re-export. The docs-site\nCLI overview drops the Scaffold group and its command count follows the\nusage template; the Aiken native-binding fixture keeps its enumerated-arm\ncomments without the generator-rule attribution.\n\nGOAL_SPEC Q02 no longer names the generator; it now states the three\nproperties that survive the deletion: each family declares its step datum\nand redeemer schemas as concrete typed values in its own module, dispatch\nis a typed map over a closed category union with no default arm, and each\nfamily has its own emulator-driven test.",
+      "sha": "c9c223db1e0d71258155222781307983daf871c4",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/c9c223db1e0d71258155222781307983daf871c4",
+      "message": "Reconcile registry pins with the completed 54-category workflow roster",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-03T22:03:58Z"
+      "authorDate": "2026-09-07T06:50:08Z"
     },
     {
-      "sha": "fcad0054c5fef25551c766f9162247e19eebda3f",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/fcad0054c5fef25551c766f9162247e19eebda3f",
-      "message": "chore(repo): restore the offchain Haskell operator-directory library\n\n`offchain/` is the Haskell/Cabal package that builds the operator-directory\ntransactions (active, registered, and retired operator lists, the scheduler,\nand initialisation) with its own specs. It was retired in 81a511e15 as a\ndormant scaffold; it is a working library, so it comes back exactly as it was,\nwith its docs-site page, navigation entry, and repository-map row.\n\nThe root `.pre-commit-config.yaml` symlink stays: it is the git-hooks.nix\nconfig this tree's flake shell generates.",
+      "sha": "0fce6e5cc140c24a3f56f1aabd38cf520c886e4d",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/0fce6e5cc140c24a3f56f1aabd38cf520c886e4d",
+      "message": "Record the mixed-width permutation receipt and re-pin the shared ledgers\n\nThe mixed-width mint ordering closure gains its measured receipt: selector\ncoverage at both the stage-8 mint item and the output value fold, the\nproducer proof-material pins, the registered 1,304-asset emulator\nlifecycles in both polarities, and the measured envelope (worst execution\n3,063,924 mem / 1,181,325,013 steps, worst signed transaction 15,108\nbytes) against the fresh testnet blueprint. The ledger-output-proof\npublication and ScriptSources item-max fit ledgers are regenerated against\nthat same blueprint. The consolidated CEK context lifecycle ledger keeps\nits earlier pin: its regeneration is blocked by the pre-existing stage-0\nshared item lifecycle red, which reproduces at the commit that installed\nthe stage graph and is independent of the permutation work.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-03T15:34:21Z"
+      "authorDate": "2026-09-07T06:46:44Z"
     },
     {
-      "sha": "389eb49acaaf37b0e6823c769f478a9d1819bdf5",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/389eb49acaaf37b0e6823c769f478a9d1819bdf5",
-      "message": "fix(onchain): restore the carriage-wire golden test's on-chain type names\n\nThe generator re-run during the validation-machine split wrote this golden\nwith `FieldCarriage`/`FieldView`/`FieldPreimageCertificate*` in place of\nthe on-chain `…V1` type names, and the split commit carried that copy.\nRestore the committed bytes; the generator's `--check` and the module's\nAiken tests pass against them.",
+      "sha": "341bf058d4e833ed8d22670c1e461926e68024b0",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/341bf058d4e833ed8d22670c1e461926e68024b0",
+      "message": "Wire the validationTraceDispute runner into the watcher application registry",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-03T07:14:09Z"
+      "authorDate": "2026-09-07T06:44:47Z"
     },
     {
-      "sha": "21760c5f1b24b072d90d125d2550afa56fc1aa4a",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/21760c5f1b24b072d90d125d2550afa56fc1aa4a",
-      "message": "refactor(onchain): split validation-machine-v1.ak by machine phase\n\n`lib/midgard/validation-machine-v1.ak` was 19,151 lines and 543 top-level\nitems. It is now `lib/midgard/validation-machine/`, layered so the modules\nform a DAG:\n\n- `machine-types`: every witness, control, proof, and evidence type.\n- `witness`: witness and control encoders, decoders, well-formedness and\n  boundness checks, empties, and hashes.\n- `shared`: the validation context, min-ADA rule, structural transition and\n  successor helpers, size constants, and the signer-set helpers.\n- one module per phase: `canonical-decode`, `input-sets`, `static-rules`,\n  `signatures`, `phase-a-native-scripts`, `phase-a-script-preconditions`,\n  `resolve-inputs`, `script-sources` (with `-early-stages`,\n  `-middle-stages`, `-late-stages` for stages 0-12), `native-scripts`,\n  `script-integrity`, `cek`, `value-and-mint`, `ledger-delta`.\n- `one-step`: the per-phase one-step and semantics entry points.\n\nItem text is unchanged; 118 private items became `pub` because a phase now\nreaches them across a module boundary. The 148 consumer modules import the\nnew modules under `vm_<module>` aliases. Blueprint identity: every one of\nthe 805 validators' `compiledCode` is byte-identical to the previous build\n(reordering and re-homing functions does not move a single hash); only the\n22 `definitions` keys of the machine's types follow the defining module,\nand the three tests, one fixture generator, and evidence pins that name\nthose keys are updated. `aiken check` passes 3,198 of 3,198 tests on the\nsplit tree; the build's 57 warnings are the pre-existing set.",
+      "sha": "d66a7d3d16a44b797287729a1d097743d0a01401",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d66a7d3d16a44b797287729a1d097743d0a01401",
+      "message": "Install the validationTraceDispute production workflow surface and runner\n\nThe manifest-bound workflow admits only a freshly rebuilt validation-trace\nchallenge, binds every family reference script by manifest name, re-derives\nthe dispute cursor exclusively from live chain state on each invocation, and\njournals a locally evaluated pre-submit intent before every transaction. The\nadmitted runner factory joins WORKFLOW_RUNNER_FACTORIES under the same\nadapter surface as the other production families.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-03T07:08:40Z"
+      "authorDate": "2026-09-07T06:25:25Z"
     },
     {
-      "sha": "75f2d6580c6ea2ce5c9106d8679cd66a185e33f2",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/75f2d6580c6ea2ce5c9106d8679cd66a185e33f2",
-      "message": "build(hooks): track the git hooks as executable\n\n`.githooks/install`, `pre-commit`, and `post-commit` were tracked with\nmode 100644; on a clone (or after any checkout that rewrites them) git\nignores them as non-executable and every commit skips the formatter and\nlinter the hook exists to run. Track them as 100755.",
+      "sha": "8fca3644eafccdefc7e392e0c99f2b960969b59a",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/8fca3644eafccdefc7e392e0c99f2b960969b59a",
+      "message": "Derive the validation-trace deployed step count from one asserted constant",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-03T06:34:44Z"
+      "authorDate": "2026-09-07T06:17:44Z"
     },
     {
-      "sha": "04bd361e38442e9cb8d8901fe483e5996b3b5832",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/04bd361e38442e9cb8d8901fe483e5996b3b5832",
-      "message": "docs(agents): adopt the naming and versioning policy\n\nRecord the rules the rename applied so they outlive it:\n\n- names carry no version; wire, storage, and manifest values do;\n- the seam appears when a second version ships, on both sides;\n- production is the default, so the exception carries the marker\n  (`authenticated-`, `demo-`, `bench-`, `emulator-`, `test-`);\n- ticket and goal identifiers live in doc comments, never in names;\n- evidence artifacts and plan documents keep the names their verifiers pin.\n\nAGENTS.md carries the one-line always-on rule and points here;\n`docs/agents/README.md` lists the file.",
+      "sha": "f58e9022eef6cc94f1361e2d4e413523e80cb8ce",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/f58e9022eef6cc94f1361e2d4e413523e80cb8ce",
+      "message": "Plan and actuate every validationTraceDispute workflow move",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-03T06:34:18Z"
+      "authorDate": "2026-09-07T06:03:05Z"
     }
   ],
   "contributors": [
@@ -418,15 +418,15 @@
     },
     {
       "week": 1763856000,
-      "total": 15
+      "total": 16
     },
     {
       "week": 1764460800,
-      "total": 8
+      "total": 17
     },
     {
       "week": 1765065600,
-      "total": 6
+      "total": 7
     },
     {
       "week": 1765670400,
@@ -466,7 +466,7 @@
     },
     {
       "week": 1771113600,
-      "total": 14
+      "total": 13
     },
     {
       "week": 1771718400,
@@ -474,7 +474,7 @@
     },
     {
       "week": 1772323200,
-      "total": 25
+      "total": 26
     },
     {
       "week": 1772928000,
@@ -514,11 +514,11 @@
     },
     {
       "week": 1778371200,
-      "total": 43
+      "total": 25
     },
     {
       "week": 1778976000,
-      "total": 12
+      "total": 10
     },
     {
       "week": 1779580800,
@@ -530,7 +530,7 @@
     },
     {
       "week": 1780790400,
-      "total": 31
+      "total": 30
     },
     {
       "week": 1781395200,
@@ -550,7 +550,7 @@
     },
     {
       "week": 1783814400,
-      "total": 9
+      "total": 10
     },
     {
       "week": 1784419200,
@@ -562,27 +562,27 @@
     },
     {
       "week": 1785628800,
-      "total": 100
+      "total": 101
     },
     {
       "week": 1786233600,
-      "total": 21
+      "total": 0
     },
     {
       "week": 1786838400,
-      "total": 96
+      "total": 0
     },
     {
       "week": 1787443200,
-      "total": 172
+      "total": 88
     },
     {
       "week": 1788048000,
-      "total": 39
+      "total": 82
     },
     {
       "week": 1788652800,
-      "total": 0
+      "total": 130
     }
   ]
 }
