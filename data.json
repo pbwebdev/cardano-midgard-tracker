@@ -1,9 +1,9 @@
 {
-  "fetchedAt": "2026-09-10T10:58:32.874Z",
+  "fetchedAt": "2026-09-11T10:56:55.241Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 25,
-    "forks_count": 10,
+    "forks_count": 11,
     "open_issues_count": 124
   },
   "languages": {
@@ -17,11 +17,25 @@
   },
   "commits": [
     {
-      "sha": "24ccfcbab66f47076b970f39b349178a0f4185a1",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/24ccfcbab66f47076b970f39b349178a0f4185a1",
-      "message": "Checkpoint 2 wip",
-      "authorName": "Drop-Table-Users",
-      "authorDate": "2026-09-10T09:12:33Z"
+      "sha": "9797ce41ce5d436e309eca07e2020ee29c395859",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/9797ce41ce5d436e309eca07e2020ee29c395859",
+      "message": "Add the trusted-head authority child-process fixture the watcher journeys import\n\nwatcher-installed-journey.test.ts already imported\ntests/support/trusted-head-process-fixture.js, but the fixture, its forked\nentry module, and its own runtime test had not been committed, so a clean\ncheckout could not typecheck the watcher package. The fixture bundles the\ncurrent authority source with esbuild and forks it onto its own event loop,\nthe way the deployed sidecar runs.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-09-10T15:22:24Z"
+    },
+    {
+      "sha": "7d50e2aa0a4e76fa7280896356d582c2ff4419ee",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/7d50e2aa0a4e76fa7280896356d582c2ff4419ee",
+      "message": "Stop reading necessity artifacts from the scanner-confinement gate\n\nThe gate that confines `canonical_cbor_scan_v1` to its reviewed on-chain\nconsumers also parsed three Markdown necessity artifacts under\ndocs/exec-plans/evidence/necessity and failed whenever their pinned blueprint\nidentity drifted from the live build. Those documents are not test inputs:\nthe consumer set is now an explicit list in the test, and the on-chain\nsource scan, the complete-item staging checks, and the predicate negative\ncontrols stay exactly as they were.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-09-10T15:19:53Z"
+    },
+    {
+      "sha": "e734064fc57757dd942c2ab0107b08750248d53c",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/e734064fc57757dd942c2ab0107b08750248d53c",
+      "message": "Restore the local full-pass entrypoint and make the test Postgres durable\n\nThe workspace typecheck was reproducibly red: midgard-node and\nmidgard-node-tools prefixed `tsc --noEmit` with builds of lucid-midgard and\nmidgard-sdk, and under `--workspace-concurrency=4` those two prebuild chains\nraced on `tsup --clean` of the same midgard-core dist (ENOENT on unlink), which\naborted run-test-lanes-v1.mjs before any lane started. The prefix has been\ndead since every package resolved its siblings from source through the\n`midgard-source` export condition, so typecheck is now `tsc --noEmit` alone.\n\nThe prefix did have one live side effect: midgard-node's crash-probe child\nprocesses and midgard-node-tools' `node --test` files run under plain node,\nwhich resolves the workspace packages to `dist/`. That build now belongs to a\n`pretest` in those two packages, which lane B runs serially, so there is a\nsingle dist builder at a time and `pnpm test` works from a clean checkout.\n\nscripts/start-test-postgres.sh starts the 127.0.0.1:5433 test server the node\nsuites need with the settings they assert (synchronous_commit=on server-wide,\nno unix socket, 200 connections), initialising a persistent data directory on\nfirst use and leaving any server already on the port untouched.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-09-10T13:54:45Z"
     },
     {
       "sha": "f69a0ddb2027606d516a8fc7fb471cd47d2c39c3",
@@ -106,20 +120,6 @@
       "message": "Install the validationTraceDispute production workflow surface and runner\n\nThe manifest-bound workflow admits only a freshly rebuilt validation-trace\nchallenge, binds every family reference script by manifest name, re-derives\nthe dispute cursor exclusively from live chain state on each invocation, and\njournals a locally evaluated pre-submit intent before every transaction. The\nadmitted runner factory joins WORKFLOW_RUNNER_FACTORIES under the same\nadapter surface as the other production families.",
       "authorName": "Philip DiSarro",
       "authorDate": "2026-09-07T06:25:25Z"
-    },
-    {
-      "sha": "8fca3644eafccdefc7e392e0c99f2b960969b59a",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/8fca3644eafccdefc7e392e0c99f2b960969b59a",
-      "message": "Derive the validation-trace deployed step count from one asserted constant",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-07T06:17:44Z"
-    },
-    {
-      "sha": "f58e9022eef6cc94f1361e2d4e413523e80cb8ce",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/f58e9022eef6cc94f1361e2d4e413523e80cb8ce",
-      "message": "Plan and actuate every validationTraceDispute workflow move",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-07T06:03:05Z"
     }
   ],
   "contributors": [
@@ -414,11 +414,11 @@
     },
     {
       "week": 1763251200,
-      "total": 23
+      "total": 32
     },
     {
       "week": 1763856000,
-      "total": 16
+      "total": 44
     },
     {
       "week": 1764460800,
@@ -426,7 +426,7 @@
     },
     {
       "week": 1765065600,
-      "total": 7
+      "total": 6
     },
     {
       "week": 1765670400,
@@ -466,23 +466,23 @@
     },
     {
       "week": 1771113600,
-      "total": 13
+      "total": 14
     },
     {
       "week": 1771718400,
-      "total": 47
+      "total": 43
     },
     {
       "week": 1772323200,
-      "total": 26
+      "total": 23
     },
     {
       "week": 1772928000,
-      "total": 36
+      "total": 35
     },
     {
       "week": 1773532800,
-      "total": 29
+      "total": 28
     },
     {
       "week": 1774137600,
@@ -494,7 +494,7 @@
     },
     {
       "week": 1775347200,
-      "total": 39
+      "total": 41
     },
     {
       "week": 1775952000,
@@ -502,7 +502,7 @@
     },
     {
       "week": 1776556800,
-      "total": 17
+      "total": 29
     },
     {
       "week": 1777161600,
@@ -534,7 +534,7 @@
     },
     {
       "week": 1781395200,
-      "total": 13
+      "total": 20
     },
     {
       "week": 1782000000,
@@ -550,7 +550,7 @@
     },
     {
       "week": 1783814400,
-      "total": 10
+      "total": 9
     },
     {
       "week": 1784419200,
@@ -562,11 +562,11 @@
     },
     {
       "week": 1785628800,
-      "total": 101
+      "total": 88
     },
     {
       "week": 1786233600,
-      "total": 0
+      "total": 9
     },
     {
       "week": 1786838400,
@@ -574,15 +574,15 @@
     },
     {
       "week": 1787443200,
-      "total": 88
+      "total": 1
     },
     {
       "week": 1788048000,
-      "total": 82
+      "total": 70
     },
     {
       "week": 1788652800,
-      "total": 130
+      "total": 132
     }
   ]
 }
