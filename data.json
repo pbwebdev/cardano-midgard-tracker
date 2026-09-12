@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-09-11T10:56:55.241Z",
+  "fetchedAt": "2026-09-12T10:24:22.759Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 25,
@@ -16,6 +16,90 @@
     "Perl": 37
   },
   "commits": [
+    {
+      "sha": "9c0810c154597557d05d486364e30c7841c24f6a",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/9c0810c154597557d05d486364e30c7841c24f6a",
+      "message": "Locally verify the withdrawn-input journey families over staged L1 events\n\nStage real deposit and withdrawal events on an isolated emulator deployment\nof the frozen blueprint, using the same request builders the live journeys\npublish with, then run an event-bearing retained block through the\nunmodified installed selector bound to the real deployment identity. Both\npolarities are asserted for withdrawnInput and withdrawnReferenceInput,\nplus exact proof preparation that refuses the honest control, so the two\nfixtures move from candidates into the registered history fixtures.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-09-12T06:50:32Z"
+    },
+    {
+      "sha": "81cf04e146435635fa6e849f112f5f2b6cac6c99",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/81cf04e146435635fa6e849f112f5f2b6cac6c99",
+      "message": "Sign withdrawal bodies over their Aiken serialisation\n\nThe SDK signed blake2b(domain || Lucid-encoded body), while the on-chain\nrule withdrawal_signature_is_valid_v1 and the fault-proof detectors verify\nover cbor.serialise(body), which renders definite asset maps. Every honest\nwithdrawal published through the SDK therefore carried a signature the\nprotocol reads as invalid and was detected as a withdrawal mistag. The\nsigning preimage now uses the Aiken serialisation, and the validation\ndispute replay compares the committed withdrawal leaf in its canonical\ncommitted encoding instead of the plain Lucid encoding, which refused every\nwithdrawal-bearing block.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-09-12T06:50:32Z"
+    },
+    {
+      "sha": "92e46f8b51ed2a8ffe16de4dfa791fcc46dfd843",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/92e46f8b51ed2a8ffe16de4dfa791fcc46dfd843",
+      "message": "Repair the hermetic user-event-origin fixture and use the workspace test Postgres port\n\nThe user-event-origin fixture stubs fetch and WebSocket itself, so its red\nwas never a missing Kupo: its stub returned a quoted ETag that the source\nrejects as a malformed checkpoint header, and its socket close never\ndispatched the close event, so the Ogmios session close timed out. Both now\nmatch the local-historical-capture fixture. The public retained DA store\nsuite defaulted POSTGRES_PORT to 5432 while the workspace test server runs\non 5433.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-09-12T06:25:40Z"
+    },
+    {
+      "sha": "41d6e421fb366de40b1316037272cff4a5e22db8",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/41d6e421fb366de40b1316037272cff4a5e22db8",
+      "message": "Record the publication encoding in journaled field-carriage actions\n\nJournal-only recovery re-derived every publication digest as a §8.5\nnothing-but-bytes datum, but structured-data-preimage requirements publish\nthe structured Data itself and address it over the datum CBOR. Reconcile\ntherefore reported a conflict for those publications and the\nwithdrawal-mistag and structured-data-preimage lifecycles failed. The\npublication action now records its encoding next to the digest, and\nrecovery validates the encoding before re-deriving the content address.\n\nThe catalogue retained-classification fixture with an accepted descriptor\nand a rejected terminal is now proved as an invalid one-step transition\ninstead of throwing a malformed-payload error, so the test asserts the\nbuildable fault.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-09-12T06:25:40Z"
+    },
+    {
+      "sha": "e3fdf62a4a72e3f08c39ecc40894a4773c9ed4b6",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/e3fdf62a4a72e3f08c39ecc40894a4773c9ed4b6",
+      "message": "Dispatch the startup-prepared fault target once workflow recovery finishes\n\nStartup classification prepares its target without dispatching so journal\nrecovery can resume existing executions first, but finalized blocks that\nleave the state queue untouched never re-enter dispatch. A fault selected\nat startup on a quiet chain therefore sat with an empty proof queue until\nthe next queue movement, which is what stalled the installed-journey\nemulator test at proof construction. Schedule the prepared target as its\nown startup stage right after recovery.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-09-12T05:52:38Z"
+    },
+    {
+      "sha": "b904477bd5cc8b29755f509451dabbff5043c44f",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/b904477bd5cc8b29755f509451dabbff5043c44f",
+      "message": "Docs: agent guides, forced-inclusion verdict plan and size-plan ledger",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-09-12T00:41:03Z"
+    },
+    {
+      "sha": "fe2711f42b2d39138227257ee6d72ea5ccfc00c8",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/fe2711f42b2d39138227257ee6d72ea5ccfc00c8",
+      "message": "Node and DA committee: published deployment journal and retained listener\n\nThe published-workflow deployment helper journals into a fresh directory and\ntakes the chain clock from the emulator, so a frozen emulator time never\ntrips the initialization validity check. The DA committee public retained\nlistener and its libp2p runtime test follow the transport changes.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-09-12T00:40:52Z"
+    },
+    {
+      "sha": "cc95303729c5425b1642cf45439de726a2a4c39b",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/cc95303729c5425b1642cf45439de726a2a4c39b",
+      "message": "Devnet watcher journeys harness\n\nAdd the devnet watcher-journeys harness: fixture catalogue and readiness\nreports, transaction, forced, source, script and history cases against a\nretained real deposit, the transition-trace journey runner with its timing\nplan and coverage ring, retained DA and native-chain capture checks, and the\npreprod run scripts.\n\nmintItemNonCanonical joins the raw-source cases: the operator accepts a\ntransaction whose mint field carries a zero-quantity item, and the full\ninstalled catalogue selects the family.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-09-12T00:40:44Z"
+    },
+    {
+      "sha": "e398eb75565edcd1901718279e7ff417c98c8e69",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/e398eb75565edcd1901718279e7ff417c98c8e69",
+      "message": "Fault proofs: replay prerequisites, field carriage and journal handoffs\n\nRoute unresolved replay conditions through typed prerequisites that the\ncomplete-replay union can discharge, thread the field-carriage prerequisite\nport through the affected families, and carry the central-journal and\nauthenticated-workflow updates for the families touched this cycle.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-09-12T00:40:32Z"
+    },
+    {
+      "sha": "359320b190339ef54aca98dc475359174d8f168b",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/359320b190339ef54aca98dc475359174d8f168b",
+      "message": "Watcher: local historical capture, deposit trace and finality fixtures\n\nCarry the native chain-sync sidecar changes, the Kupo resolve_hashes script\nshape and unquoted ETag handling in the local Kupmios source, the Ogmios\nsession close that waits for the physical socket, and the proof supervisor\nand decision-bridge work.\n\nTest fixtures follow: the boundary socket stub emits its close event, the\nuser-event-origin fixture renders resolved scripts as Kupo objects, the\nfinality chronology test expects the height-refined confirmation boundary,\nand the published deposit trace uses the configured provider.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-09-12T00:40:15Z"
+    },
+    {
+      "sha": "29ecaaae432e15c2a34a4d1078b69d857b477d4a",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/29ecaaae432e15c2a34a4d1078b69d857b477d4a",
+      "message": "Add the mintItemNonCanonical fraud-proof family\n\nRegister category 00000036 end to end: the four Aiken step validators and\ntheir library modules, the SDK contract bindings and catalogue entry, the\nfault-proofs family (scan, evidence, central journal, submit steps and\nworkflow), the node/DA-committee deployment identity for 55 installed\ncategories, and the regenerated DA contract deployment fixture.\n\nSibling replayers that decode field 5 now yield a representable_field_shape\nprerequisite when the mint-item scanner owns the transaction, so the\ncomplete-replay union discharges it with the direct finding instead of\nfailing on the malformed item.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-09-12T00:39:58Z"
+    },
+    {
+      "sha": "c6f0475f827d164d484278fc69e0d63bcb7982c3",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/c6f0475f827d164d484278fc69e0d63bcb7982c3",
+      "message": "Checkpoint 2",
+      "authorName": "Drop-Table-Users",
+      "authorDate": "2026-09-11T14:00:57Z"
+    },
     {
       "sha": "9797ce41ce5d436e309eca07e2020ee29c395859",
       "html_url": "https://github.com/Anastasia-Labs/midgard/commit/9797ce41ce5d436e309eca07e2020ee29c395859",
@@ -36,90 +120,6 @@
       "message": "Restore the local full-pass entrypoint and make the test Postgres durable\n\nThe workspace typecheck was reproducibly red: midgard-node and\nmidgard-node-tools prefixed `tsc --noEmit` with builds of lucid-midgard and\nmidgard-sdk, and under `--workspace-concurrency=4` those two prebuild chains\nraced on `tsup --clean` of the same midgard-core dist (ENOENT on unlink), which\naborted run-test-lanes-v1.mjs before any lane started. The prefix has been\ndead since every package resolved its siblings from source through the\n`midgard-source` export condition, so typecheck is now `tsc --noEmit` alone.\n\nThe prefix did have one live side effect: midgard-node's crash-probe child\nprocesses and midgard-node-tools' `node --test` files run under plain node,\nwhich resolves the workspace packages to `dist/`. That build now belongs to a\n`pretest` in those two packages, which lane B runs serially, so there is a\nsingle dist builder at a time and `pnpm test` works from a clean checkout.\n\nscripts/start-test-postgres.sh starts the 127.0.0.1:5433 test server the node\nsuites need with the settings they assert (synchronous_commit=on server-wide,\nno unix socket, 200 connections), initialising a persistent data directory on\nfirst use and leaving any server already on the port untouched.",
       "authorName": "Philip DiSarro",
       "authorDate": "2026-09-10T13:54:45Z"
-    },
-    {
-      "sha": "f69a0ddb2027606d516a8fc7fb471cd47d2c39c3",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/f69a0ddb2027606d516a8fc7fb471cd47d2c39c3",
-      "message": "Integrate watcher persistence and current protocol work\n\nInclude all current contract, runtime, SDK, test, documentation, and tooling changes.\n\nWatcher validation: local installed journey passed through proof, correction, and healthy successor; focused persistence and recovery checks passed. Three existing mixed replay fixture failures remain unchanged. Broader workspace validation is not asserted by this commit.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-10T04:32:40Z"
-    },
-    {
-      "sha": "233285f8887ad902e13c706ede187d18a9709ca1",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/233285f8887ad902e13c706ede187d18a9709ca1",
-      "message": "Merge the validation-trace challenger workflow",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-07T18:44:36Z"
-    },
-    {
-      "sha": "5a48a7fffa4c9faaed35cc8d294db543cd268589",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/5a48a7fffa4c9faaed35cc8d294db543cd268589",
-      "message": "Keep validation resolver publications within the reserved size limit",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-07T18:25:50Z"
-    },
-    {
-      "sha": "4c343fbb31b3574dfce092b543d7f8aa33fb6c16",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/4c343fbb31b3574dfce092b543d7f8aa33fb6c16",
-      "message": "Prove the installed validationTraceDispute watcher journeys\n\nCover the honest-response, operator-stall timeout, and cold-restart resume\nlines through the production runner, refuse a forged move at its exact\ncheck, and record the installation receipt.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-07T12:44:31Z"
-    },
-    {
-      "sha": "d0c18d8e8c2f390f6e0086b12d254dae3d6f20c6",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d0c18d8e8c2f390f6e0086b12d254dae3d6f20c6",
-      "message": "Close the LOP and CEK context receipts against the rebuilt blueprint\n\nRe-pin every ledger this wave touched to the fresh `aiken build --env testnet`\nblueprint (sha256 7e478b66f681ed47d4bf63a9043641e7a1c47d02b9168ed71c183975cf9ed0e9,\ncompiler v1.1.23+5adf783), all with zero negative margins:\n\n- CEK context: 2,927 entries, 24 distinct lifecycle shapes, worst execution\n  3,541,587 mem / 1,645,575,835 cpu, worst signed transaction 15,108 bytes;\n- CEK context publication: 36 entries, re-pinned from a pre-restructure\n  `420a8327…` that was failing the live-blueprint check, worst signed\n  publication 12,981 bytes;\n- ScriptSources item maximum: 2,019 entries, worst execution 3,898,959 mem /\n  1,854,545,673 cpu, worst signed transaction 15,108 bytes;\n- ledger-output-proof publication: 34 entries, worst signed publication\n  14,954 bytes.\n\nThe CEK context receipt records the stage-0 shared-item root cause — the\nexecutor side, not the builder, was wrong — and confirms no semantic predicate\nwas weakened: `outer_fields_are_well_formed` already enforced the same\n`mode == 0 || mode == 1` domain inside the canonical machine, and the\nsuccessor equality that carries the semantics is untouched.\n\nThe LOP receipt gains a §8 reconciliation: the three pre-existing\n>15,000-byte validation-trace semantics re-measured across the whole 91-entry\nresolver roster (two exceed the 15,872 signed-publication gate and are\nescalated with numbers); the program doc §7 oversized checkpoint reconciled\nagainst the fresh blueprint, where only three `availability_challenge` entries\nremain above 16,384 and every oversized validation-dispute and\ntransition-trace body is gone; and a sweep of the fault-proof test surface for\nraised transaction size, raised ExUnits, oversized publication and disabled\nevaluation, with a disposition for each route.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-07T12:13:08Z"
-    },
-    {
-      "sha": "307a45ff26ed3054a38abc5019b4bc82a42fb632",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/307a45ff26ed3054a38abc5019b4bc82a42fb632",
-      "message": "Pin both polarities of the widened shared open-executor mode selector\n\n`open_header` / `open_tail` now admit `mode_descriptor || mode_data`, which is\nthe full legal domain, so nothing in the previous fix pins that the selector\nstill refuses anything. Add the negative polarity at the exact clause: an\nout-of-domain mode (2) is refused at both executors, with every other part of\neach fixture the genuine canonical pair so the mode is the only thing that can\nrefuse. The selector is an `expect`, so its refusal traps rather than returning\n`False` — hence `fail` tests.\n\nThis is coverage only; no predicate changed and the blueprint is byte-identical\nat sha256 7e478b66f681ed47d4bf63a9043641e7a1c47d02b9168ed71c183975cf9ed0e9.\nFull `aiken check --env testnet`: 4,014 tests, 4,014 passed, 0 failed.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-07T12:12:54Z"
-    },
-    {
-      "sha": "a08687fda49507484bb65bf2b26958484d7dd585",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/a08687fda49507484bb65bf2b26958484d7dd585",
-      "message": "Bring the resolve-inputs step dispatcher under the execution basis\n\nThe advance-integer positive measured 14,226,253 mem against the 13,200,000\nbasis; per-redeemer attribution put the dispatcher spend ~1.5M above its\nScriptSources sibling. Two sanctioned narrow-decode changes close it with no\nsemantic predicate change:\n\n- decode the pending descriptor once and feed both carrier predicates\n  (control_raw_is_bound_with_descriptor /\n  control_raw_lop_is_pinned_with_descriptor; the old names remain as exact\n  wrappers for the finalize dispatcher), saving ~1.07M mem;\n- derive the successor work witness with splice_pending_successor_v1 (the\n  membership-step plan's \"successor by splice\"), which replaces the two\n  verified encoding tails instead of re-walking encode_control_raw and\n  encode_pending; a fuzz test proves the splice byte-identical to the\n  whole-record re-encode, and a tampered proof tail is refused.\n\nThe lifecycle now measures 13,100,448 mem / 4,378,032,009 cpu (99,552 mem\nunder basis); the dispatcher is 11,062 raw bytes. The advance-integer\npositive is un-skipped with the standard basis assertion, leaving the\nledger-output-proof emulator suite at 20/20 with zero skips.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-07T10:31:44Z"
-    },
-    {
-      "sha": "5bb95460d72c2f5d73a97fc530d721bdfdff40b7",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/5bb95460d72c2f5d73a97fc530d721bdfdff40b7",
-      "message": "Accept both item modes in the shared open-header/open-tail executors\n\nThe CEK context binds descriptor-mode selection items into the shared\nredeemer-item chain (cek-context-item-bind requires mode_descriptor at\ncontext stage 0), but the open-header/open-tail executor semantics gated on\nmode_data only, leaving every stage-0 shared item bindable yet unprovable.\nWiden the two gates to the full step_v1 header/tail domain; the canonical\nprevalidated_open_header/open_tail successor equality is unchanged and pins\nthe mode-dependent shape itself. invalid_header/invalid_tail deliberately\nstay data-mode only. Both polarities covered for the descriptor mode.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-07T10:31:31Z"
-    },
-    {
-      "sha": "c9c223db1e0d71258155222781307983daf871c4",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/c9c223db1e0d71258155222781307983daf871c4",
-      "message": "Reconcile registry pins with the completed 54-category workflow roster",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-07T06:50:08Z"
-    },
-    {
-      "sha": "0fce6e5cc140c24a3f56f1aabd38cf520c886e4d",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/0fce6e5cc140c24a3f56f1aabd38cf520c886e4d",
-      "message": "Record the mixed-width permutation receipt and re-pin the shared ledgers\n\nThe mixed-width mint ordering closure gains its measured receipt: selector\ncoverage at both the stage-8 mint item and the output value fold, the\nproducer proof-material pins, the registered 1,304-asset emulator\nlifecycles in both polarities, and the measured envelope (worst execution\n3,063,924 mem / 1,181,325,013 steps, worst signed transaction 15,108\nbytes) against the fresh testnet blueprint. The ledger-output-proof\npublication and ScriptSources item-max fit ledgers are regenerated against\nthat same blueprint. The consolidated CEK context lifecycle ledger keeps\nits earlier pin: its regeneration is blocked by the pre-existing stage-0\nshared item lifecycle red, which reproduces at the commit that installed\nthe stage graph and is independent of the permutation work.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-07T06:46:44Z"
-    },
-    {
-      "sha": "341bf058d4e833ed8d22670c1e461926e68024b0",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/341bf058d4e833ed8d22670c1e461926e68024b0",
-      "message": "Wire the validationTraceDispute runner into the watcher application registry",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-07T06:44:47Z"
-    },
-    {
-      "sha": "d66a7d3d16a44b797287729a1d097743d0a01401",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d66a7d3d16a44b797287729a1d097743d0a01401",
-      "message": "Install the validationTraceDispute production workflow surface and runner\n\nThe manifest-bound workflow admits only a freshly rebuilt validation-trace\nchallenge, binds every family reference script by manifest name, re-derives\nthe dispute cursor exclusively from live chain state on each invocation, and\njournals a locally evaluated pre-submit intent before every transaction. The\nadmitted runner factory joins WORKFLOW_RUNNER_FACTORIES under the same\nadapter surface as the other production families.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-07T06:25:25Z"
     }
   ],
   "contributors": [
@@ -426,7 +426,7 @@
     },
     {
       "week": 1765065600,
-      "total": 6
+      "total": 7
     },
     {
       "week": 1765670400,
@@ -470,19 +470,19 @@
     },
     {
       "week": 1771718400,
-      "total": 43
+      "total": 47
     },
     {
       "week": 1772323200,
-      "total": 23
+      "total": 25
     },
     {
       "week": 1772928000,
-      "total": 35
+      "total": 36
     },
     {
       "week": 1773532800,
-      "total": 28
+      "total": 29
     },
     {
       "week": 1774137600,
@@ -514,11 +514,11 @@
     },
     {
       "week": 1778371200,
-      "total": 25
+      "total": 43
     },
     {
       "week": 1778976000,
-      "total": 10
+      "total": 12
     },
     {
       "week": 1779580800,
@@ -530,11 +530,11 @@
     },
     {
       "week": 1780790400,
-      "total": 30
+      "total": 31
     },
     {
       "week": 1781395200,
-      "total": 20
+      "total": 21
     },
     {
       "week": 1782000000,
@@ -550,7 +550,7 @@
     },
     {
       "week": 1783814400,
-      "total": 9
+      "total": 11
     },
     {
       "week": 1784419200,
@@ -562,27 +562,27 @@
     },
     {
       "week": 1785628800,
-      "total": 88
+      "total": 101
     },
     {
       "week": 1786233600,
-      "total": 9
+      "total": 21
     },
     {
       "week": 1786838400,
-      "total": 0
+      "total": 132
     },
     {
       "week": 1787443200,
-      "total": 1
+      "total": 47
     },
     {
       "week": 1788048000,
-      "total": 70
+      "total": 67
     },
     {
       "week": 1788652800,
-      "total": 132
+      "total": 144
     }
   ]
 }
