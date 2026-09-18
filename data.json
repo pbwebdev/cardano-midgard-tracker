@@ -1,10 +1,10 @@
 {
-  "fetchedAt": "2026-09-17T11:20:58.258Z",
+  "fetchedAt": "2026-09-18T10:54:44.806Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 25,
     "forks_count": 11,
-    "open_issues_count": 129
+    "open_issues_count": 125
   },
   "languages": {
     "Aiken": 359544,
@@ -16,6 +16,62 @@
     "Perl": 37
   },
   "commits": [
+    {
+      "sha": "4cb2f23366cc9151662a9584da97814ed30c9acb",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/4cb2f23366cc9151662a9584da97814ed30c9acb",
+      "message": "Return typed finalized deployment manifests from core\n\nMove the complete structural manifest type into core and return it from\nfinalized verification. Migrate node, fault-proofs, watcher, DA, and tooling\nconsumers while preserving verification rules and object ownership.\n\nAdd direct verifier rejection and ownership coverage. Correct the watcher\ntimeout expectation and synchronize the supervisor deadline test with actual\nrunner entry, retaining production timeout and deadline enforcement.\n\nValidation: workspace pnpm test (all lanes green), full DA suite, built core\nexports, changed-file ESLint/Prettier, and standards/spec reviews.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-09-17T22:33:59Z"
+    },
+    {
+      "sha": "348477771472da6550e652a8462be4de1da6d4b7",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/348477771472da6550e652a8462be4de1da6d4b7",
+      "message": "Complete shared assembly migration for remaining cursor families",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-09-17T19:38:44Z"
+    },
+    {
+      "sha": "a4e78bc9ef3062ffa34cc9bfd34fe5085feb695f",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/a4e78bc9ef3062ffa34cc9bfd34fe5085feb695f",
+      "message": "Fix funding-wallet authority in emulator reference publication",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-09-17T19:38:14Z"
+    },
+    {
+      "sha": "7fbd02d7fd6aa06ab4f97917c0b76460c14ebc3b",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/7fbd02d7fd6aa06ab4f97917c0b76460c14ebc3b",
+      "message": "Derive workflow runner factories from total linear family definitions\n\nRemove crossBlockDuplicateEvent from the linear spec because its production\nworkflow uses the cursor adapter. Require a definition for every linear\ncategory and delete the temporary migration allow-list.\n\nDerive all 18 linear runner factories from the definitions table, retaining\nmodule-private admission and the dedicated DA hash preimage launch route.\nRemove the repeated exported constructors and update registration source\npaths without changing statuses or reasons. Watcher imports those removed\nconstructors, so switch its call sites to the corresponding factory rows.\n\nValidation (Node 22.23.1, pnpm 9.15.4):\n- Rebuilt gitignored plutus.json with aiken v1.1.23+5adf783 build --env testnet\n  before checks; 1149 entries, cross-block parameter lists match source.\n- Typecheck: fault-proofs, watcher, node, node-tools.\n- Lint: fault-proofs and the changed watcher file; changed-file formatting.\n- Vitest: manifest-bound-family-assembly, workflow, workflow-runtime,\n  linear-family-state, cursor-family-state, cursor-family-adapter,\n  da-hash-preimage: 7 files / 520 tests passed.\n- Additional cross-block-installed-lifecycle and\n  submit-init-emulator-da-hash-preimage: 8 failures. All 8 also fail on the\n  pre-change a1cc6a5de checkout with the freshly rebuilt blueprint; the\n  underlying error is Invalid native script witness. A fresh blueprint\n  alone does not resolve this emulator baseline failure in this environment.\n- Admission loop and public generic-constructor rejection unchanged.\n\nRefs #659, #657",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-09-17T17:07:04Z"
+    },
+    {
+      "sha": "a1cc6a5de27830e7fee8cc2bcc0afe8e70f497e2",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/a1cc6a5de27830e7fee8cc2bcc0afe8e70f497e2",
+      "message": "Migrate the remaining linear families to the family assembly\n\nCommitted-field-shape, da-hash-preimage, double-withdraw, l2-tx-mistag,\nwithdrawn-reference-input and native-inclusion-two-step each declare a\nfamily definition and reduce their constructor to the manifest-bound\nassembly. Native-inclusion-two-step yields the invalidRange and zeroInput\ndefinitions over one shared transaction port; both keep their constructor\nnames.\n\nThe linear definitions table now holds eighteen of the nineteen linear\ncategories. The allow-list shrinks to crossBlockDuplicateEvent, whose spec\nrow is linear but whose live workflow runs on the cursor adapter; moving it\nonto the cursor arm or out of the linear spec is a separate decision.\n\nThe table test's certificate case now checks what the flag controls: the\ncertificate mint reference binding and the manifest refusal. Two of the\nmigrated ports read the certificate policy id into a step verdict without\nbinding the minting script, exactly as before the migration.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-09-17T15:00:18Z"
+    },
+    {
+      "sha": "a089207c8b0c87f7d3aade3efa4c263e18799621",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/a089207c8b0c87f7d3aade3efa4c263e18799621",
+      "message": "Assemble the receive-purpose-language cursor family from a family definition\n\nGeneralise the family definition so one definition type serves both adapter\narms: the linear arm keeps taking its step contract names and chain shape\nfrom the linear family spec, while the cursor arm carries the cursor spec,\nits step contract names, the optional action refiner and the cursor\ntransaction port. A fourth StepCount parameter, inferred from the cursor\nspec's literal step count, sizes the cursor arm's step tuples the way the\nlinear spec's tuple sizes a linear arm's. Every Linear* name stays as an\nalias over the family-wide type with the same parameters.\n\nThe assembly builds the cursor adapter from that arm with\ncreateCursorFamilyWorkflowAdapter instead of throwing, and checks that a\ncursor arm's spec agrees with its category and step contract names.\n\nMove receive-purpose-language onto the assembly: the family's constructor\nbecomes a check of its callback-free config and decision digest followed by\nthe assembly, `extend` supplies the actuator, lucid instance and state-queue\nlease coordinator the family's runner needs, and the constructor attaches\nthe invocation-bound decision digest. A sibling CURSOR_FAMILY_DEFINITIONS\ntable and a combined FAMILY_DEFINITIONS table sit beside the untouched linear\ntable, and the table-driven assembly test now covers both arms generically.\n\nRefs #658",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-09-17T03:17:08Z"
+    },
+    {
+      "sha": "487e6330d8f7bc49d5a5d84883cda7d31de50da4",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/487e6330d8f7bc49d5a5d84883cda7d31de50da4",
+      "message": "Migrate the witness and fee linear families onto the family assembly\n\nCanonical-decodability, invalid-signature, min-fee and\ninput-set-uniqueness are reduced to their transaction port plus a frozen\nfamily definition; the per-family constructor and run-or-resume names\nremain as aliases over the assembly, and the config, workflow and\nreference-script type names remain as aliases over the generic types.\nEvery field-carriage and proof-chunk callback moves verbatim, including\nthe forced-artifact branches that skip the membership proof and route\nthe forced field openings to steps 03 and 04. Input-set-uniqueness\ndeclares two field-carriage requirements, spend plan then reference\nplan, which the assembly applies in that order; min-fee declares its\nnine per-field requirements from field 0 upward; all four declare the\nfield-preimage certificate.\n\nCanonical-decodability's transaction port resolves the authenticated\nfield carriage itself before it builds step 01, so the definition builds\nthe port a second stateless instance from the same requirement callback\nthe assembly decorates the adapter with.\n\nSurface changes that ride along, none of which alters a submitted\ntransaction: canonical-decodability's prerequisites now follow the\nassembly's fixed order, field carriage inside proof chunks, where the\nhand-written body wrapped them the other way round, so its two step-01\npublications swap order; the four proof-chunk ports now receive the\nprotocol maximum transaction size the assembly passes, so the direct\nroute's capacity fallback can engage; the configs accept the optional\nreplay context; the per-family \"manifest omitted required contracts\"\nchecks run when the transaction port is built, after reference binding,\nand a missing certificate now fails with the assembly's message. The\ninput-set-uniqueness forced test's infrastructure-only key set gains the\nreplay context accordingly.\n\nThe definitions table gains the four entries in spec order, the\nallow-list drops them, and the four workflow modules' census rows list\nthe assembly module.\n\nRefs #656",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-09-17T03:08:59Z"
+    },
+    {
+      "sha": "177ca76a80f2b2ef3114b7ead12cc6aae7026e41",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/177ca76a80f2b2ef3114b7ead12cc6aae7026e41",
+      "message": "Migrate the input-position linear families to the family assembly\n\nNon-existent-input, input-no-idx, reference-input-no-idx and\nwithdrawn-input are reduced to their transaction port plus a frozen\nfamily definition; the manifest-bound family assembly builds their\nworkflows. Each module keeps its constructor and type names as aliases\nover the generic ones, so the runtime and the watcher import the same\nsurface as before. The field-carriage and proof-chunk callbacks move\ninto the definitions verbatim, including non-existent-input's forced\nartifact branch, and the definitions table gains the four entries in\nspec order while the allow-list of unmigrated families shrinks to twelve.\n\nThree deliberate surface changes ride along, none of which changes any\nsubmitted transaction. Input-no-idx, reference-input-no-idx and\nwithdrawn-input now hand the manifest's maxTxSize to the proof-chunk\nprerequisite, as non-existent-input already did; without it the\ndirect-capacity classifier refused every fallback to chunked\npublication. Their configs accept the optional replay context the\ngeneric config carries. Withdrawn-input's \"deployment chain is\nincomplete\" check runs when the transaction port is built, after\nreference binding, instead of directly after the signer check.\n\nRefs #655",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-09-17T03:05:06Z"
+    },
     {
       "sha": "1242b95a4246e07341777f8ac4984e187d3f145f",
       "html_url": "https://github.com/Anastasia-Labs/midgard/commit/1242b95a4246e07341777f8ac4984e187d3f145f",
@@ -64,62 +120,6 @@
       "message": "Bind the complete-replay historical corpus to the block, not one object\n\nThe header classifier admits the historical native-script corpus against\nthe evidence it routed, but a family workflow that reuses that admitted\ncontext re-fetches the same challenged block from retained DA. The corpus\ncheck compared the two evidence objects by identity and refused the live\nmintAuthorization workflow with 'historical corpus was not admitted for\nthis challenged header'. Compare the header hash and payload digests\ninstead, as the predecessor authority already does.",
       "authorName": "Philip DiSarro",
       "authorDate": "2026-09-13T07:35:20Z"
-    },
-    {
-      "sha": "efe09ca758de084a42aa19c9c72e989886f0d9a3",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/efe09ca758de084a42aa19c9c72e989886f0d9a3",
-      "message": "Rebuild an elapsed staged fault before its journey commit\n\nA journey resumed from a checkpoint that was staged by an earlier attempt\nstill carries that attempt's fault block. Its header end time bounds the\ncommit's validity interval, so once it has elapsed the commit fails local\nevaluation instead of expiring unminted. Rebuild the fault when its\ninterval has passed and nothing was signed or referenced.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-13T07:09:53Z"
-    },
-    {
-      "sha": "40c02a29176957c4925be210bf665eae28758d85",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/40c02a29176957c4925be210bf665eae28758d85",
-      "message": "Re-onboard the journey operator when a resumed fault finds its active node slashed\n\nA confirmed slashing correction from an earlier journey spends the\npublisher's active-operator node. A staging checkpoint whose predecessor is\nstill the tail resumed without onboarding and then failed to commit its\nfault against the missing node. The actor now reports whether the node is\npublished and the resumed path onboards again when it is not.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-13T06:57:53Z"
-    },
-    {
-      "sha": "4bcb8c597a5b0e302f2e57cf863e1d855669265a",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/4bcb8c597a5b0e302f2e57cf863e1d855669265a",
-      "message": "Bind the network-id removal action to the slash funding authority by its shared out-ref names\n\nThe production funding reservation permit matches a slashing removal\nagainst the action's nextRemovalOutRef and fraudProofOutRef, while the\nnetwork-id adapter issued its removal action under its own field names and\nwithout a stage field, so every live network-id removal was refused. The\nadapter now emits the shared names, the permit reads the action kind the\nsame way everywhere else (actionKind or stage) instead of also demanding a\nstage field, and a refusal names the checks that differ.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-13T06:29:39Z"
-    },
-    {
-      "sha": "c7aa53f543ef1aad8199670c5c4719c6d7516161",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/c7aa53f543ef1aad8199670c5c4719c6d7516161",
-      "message": "Anchor the local user-event history before its retained closure reaches the publish bound\n\nEvery retained entry pins its own durable-store snapshot, so the retained\nclosure grows with the store as well as with the entry count. The runtime\nonly rotated at 128 entries, which let the 128 MiB publish bound refuse\nfirst on a long-lived deployment and stall the watcher. The history view\nnow reports the retained closure and whether an anchor is due (more than\nthe 64-entry suffix retained and either the active bound reached or any\nclosure dimension at half its bound); the runtime rotates on that flag and\nends a round early once it becomes due.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-13T06:16:51Z"
-    },
-    {
-      "sha": "2a488cf197b884b327efe55739923461be0062af",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/2a488cf197b884b327efe55739923461be0062af",
-      "message": "Resolve unconfirmed network-id submissions through signed-transaction recovery\n\nThe network-id reconcile answered not_found the moment a submitted\ntransaction was not yet visible on chain, which made the watcher abandon\nits funding transition and rebuild an identical handoff that then collided\nwith the abandoned one. Route the unconfirmed path through the shared\nsigned-transaction recovery so a pending or unknown submission keeps the\naction waiting, expiry alone yields not_found, and conflicts fail the\nmutation lease.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-13T04:36:18Z"
-    },
-    {
-      "sha": "096bb81770fc693ec70850dfeee60a5a63f786cc",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/096bb81770fc693ec70850dfeee60a5a63f786cc",
-      "message": "Pin the captured signed transaction on the network-id and double-spend preflights\n\nDrive each adapter's real preflight with the submit module stubbed to\nhand the pre-submit boundary a reference-script-only signed body, and\nassert the returned preflight resolves that body through\nworkflowPreflightTransaction. Both tests fail without the binding.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-13T04:25:10Z"
-    },
-    {
-      "sha": "cffe057cf488b0a7a01aa18852957631646b9df8",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/cffe057cf488b0a7a01aa18852957631646b9df8",
-      "message": "Bind the captured signed transaction to the network-id and double-spend preflights\n\nThe production funding reservation permit reconciles the reserved inputs\na proof transaction actually spends by reading the signed body back from\nthe in-memory preflight. Every other adapter binds that body through\nbindWorkflowPreflightTransaction; network-id and double-spend returned\nbare preflight views, so the live watcher stalled at funding reservation\nwith \"production preflight omitted its captured signed transaction\".\nBind the capture in both adapters.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-13T04:17:38Z"
-    },
-    {
-      "sha": "76f31101f8db8005b5c9ecf6b90e4647eee28d99",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/76f31101f8db8005b5c9ecf6b90e4647eee28d99",
-      "message": "Label network-id workflow actions with the stable actionKind the funding permit reads\n\nThe production funding reservation permit derives every reservation's\naction label from the action input's actionKind (or stage) and refuses\nan action that carries neither. The network-id adapter was the only\nfamily labelling its actions with a private kind field, so the live\nwatcher stalled at the init preflight with \"production workflow action\nomitted its stable action kind\". Emit actionKind alongside kind and pin\nit in the chain-state action selection test.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-13T04:05:19Z"
     }
   ],
   "contributors": [
@@ -332,30 +332,6 @@
       "updated_at": "2026-09-17T02:26:53Z"
     },
     {
-      "number": 660,
-      "title": "Family assembly: integrate and verify against the baseline",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/660",
-      "updated_at": "2026-09-16T23:30:43Z"
-    },
-    {
-      "number": 659,
-      "title": "Family assembly: derive the runtime factory table, delete the runner stanzas",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/659",
-      "updated_at": "2026-09-16T23:30:42Z"
-    },
-    {
-      "number": 657,
-      "title": "Family assembly: migrate the single- and no-prerequisite linear families",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/657",
-      "updated_at": "2026-09-16T23:30:39Z"
-    },
-    {
-      "number": 653,
-      "title": "One manifest-bound family assembly for the fault-proof workflow",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/653",
-      "updated_at": "2026-09-16T22:52:49Z"
-    },
-    {
       "number": 648,
       "title": "sdk initialization funds the correction lock at min-ada; first Idle→Locked correction breaks exact value conservation",
       "html_url": "https://github.com/Anastasia-Labs/midgard/issues/648",
@@ -372,6 +348,30 @@
       "title": "@harmoniclabs/plutus-machine lessThanByteString orders by length, breaking hub-oracle eval in harmonic-uplc-contract-eval",
       "html_url": "https://github.com/Anastasia-Labs/midgard/issues/651",
       "updated_at": "2026-08-31T10:07:32Z"
+    },
+    {
+      "number": 644,
+      "title": "Both-polarity emulator suites for missing-native-script-utxo, native-script-invalid, and min-ada fraud-proof families",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/644",
+      "updated_at": "2026-08-31T10:07:21Z"
+    },
+    {
+      "number": 649,
+      "title": "state_queue.mint no longer fits the 16,384-byte L1 transaction envelope (16,835 bytes unapplied)",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/649",
+      "updated_at": "2026-08-31T10:07:18Z"
+    },
+    {
+      "number": 650,
+      "title": "Option B frontier pins shifted by canonical-v1 wave: re-measurement campaign needed",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/650",
+      "updated_at": "2026-08-31T09:05:24Z"
+    },
+    {
+      "number": 647,
+      "title": "Make @harmoniclabs/cbor 2.0.1 resolution work for applyParamsToScript (da-committee-node, midgard-core)",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/647",
+      "updated_at": "2026-08-30T15:08:30Z"
     }
   ],
   "releases": [],
@@ -422,7 +422,7 @@
     },
     {
       "week": 1765065600,
-      "total": 6
+      "total": 7
     },
     {
       "week": 1765670400,
@@ -510,11 +510,11 @@
     },
     {
       "week": 1778371200,
-      "total": 23
+      "total": 43
     },
     {
       "week": 1778976000,
-      "total": 10
+      "total": 12
     },
     {
       "week": 1779580800,
@@ -526,7 +526,7 @@
     },
     {
       "week": 1780790400,
-      "total": 30
+      "total": 32
     },
     {
       "week": 1781395200,
@@ -546,7 +546,7 @@
     },
     {
       "week": 1783814400,
-      "total": 9
+      "total": 10
     },
     {
       "week": 1784419200,
@@ -554,11 +554,11 @@
     },
     {
       "week": 1785024000,
-      "total": 202
+      "total": 201
     },
     {
       "week": 1785628800,
-      "total": 1
+      "total": 0
     },
     {
       "week": 1786233600,
@@ -566,23 +566,23 @@
     },
     {
       "week": 1786838400,
-      "total": 53
+      "total": 0
     },
     {
       "week": 1787443200,
-      "total": 47
+      "total": 0
     },
     {
       "week": 1788048000,
-      "total": 66
+      "total": 0
     },
     {
       "week": 1788652800,
-      "total": 189
+      "total": 176
     },
     {
       "week": 1789257600,
-      "total": 16
+      "total": 24
     }
   ]
 }
