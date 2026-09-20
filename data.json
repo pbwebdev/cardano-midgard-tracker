@@ -1,10 +1,10 @@
 {
-  "fetchedAt": "2026-09-19T10:37:41.824Z",
+  "fetchedAt": "2026-09-20T11:00:59.626Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 25,
     "forks_count": 11,
-    "open_issues_count": 125
+    "open_issues_count": 135
   },
   "languages": {
     "Aiken": 359544,
@@ -16,6 +16,69 @@
     "Perl": 37
   },
   "commits": [
+    {
+      "sha": "88c51b17662b8cc6b26a6759345245821063462f",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/88c51b17662b8cc6b26a6759345245821063462f",
+      "message": "Consolidate production contract construction in shared SDK builders",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-09-20T00:46:22Z"
+    },
+    {
+      "sha": "2bc9bdbcdc2104e79996df05657daffd56724be8",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/2bc9bdbcdc2104e79996df05657daffd56724be8",
+      "message": "Observe real database completion in admission tests (#667)",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-09-19T18:52:30Z"
+    },
+    {
+      "sha": "d0f60b6e49480ae2b4d278278f4d1305eef9d664",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d0f60b6e49480ae2b4d278278f4d1305eef9d664",
+      "message": "Build bundled node workers before running tests (#667)",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-09-19T17:35:49Z"
+    },
+    {
+      "sha": "56ff47e050adb4976c56d895fe3c8e5ad3e545dd",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/56ff47e050adb4976c56d895fe3c8e5ad3e545dd",
+      "message": "Fix integrated harness references and documentation facts (#667)",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-09-19T16:50:02Z"
+    },
+    {
+      "sha": "fff2737b9d37f0497a40886dd6602f75e25bf23e",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/fff2737b9d37f0497a40886dd6602f75e25bf23e",
+      "message": "Complete production builder cleanup and package verification (#667)",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-09-19T16:46:50Z"
+    },
+    {
+      "sha": "7473a113424479419b6753a4c1004e4d97245c6c",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/7473a113424479419b6753a4c1004e4d97245c6c",
+      "message": "test: use production builders in fault-proof envelopes (#664)",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-09-19T16:37:17Z"
+    },
+    {
+      "sha": "e6ba534247c350ada4e3141a1aaaa24d6b07f980",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/e6ba534247c350ada4e3141a1aaaa24d6b07f980",
+      "message": "Share canonical terminal witness encoding with fixtures (#666)",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-09-19T16:36:44Z"
+    },
+    {
+      "sha": "e0be13fb4d8e9ff67d4c3e07e3d46622d853b0d8",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/e0be13fb4d8e9ff67d4c3e07e3d46622d853b0d8",
+      "message": "Share state-queue and correction-lock deployment recipes (#665)",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-09-19T16:34:43Z"
+    },
+    {
+      "sha": "027e293e5798d5ec1418683fbffdddfb2e4124bb",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/027e293e5798d5ec1418683fbffdddfb2e4124bb",
+      "message": "refactor: share strict blueprint and validator identities (#663)",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-09-19T16:30:09Z"
+    },
     {
       "sha": "4cb2f23366cc9151662a9584da97814ed30c9acb",
       "html_url": "https://github.com/Anastasia-Labs/midgard/commit/4cb2f23366cc9151662a9584da97814ed30c9acb",
@@ -57,69 +120,6 @@
       "message": "Assemble the receive-purpose-language cursor family from a family definition\n\nGeneralise the family definition so one definition type serves both adapter\narms: the linear arm keeps taking its step contract names and chain shape\nfrom the linear family spec, while the cursor arm carries the cursor spec,\nits step contract names, the optional action refiner and the cursor\ntransaction port. A fourth StepCount parameter, inferred from the cursor\nspec's literal step count, sizes the cursor arm's step tuples the way the\nlinear spec's tuple sizes a linear arm's. Every Linear* name stays as an\nalias over the family-wide type with the same parameters.\n\nThe assembly builds the cursor adapter from that arm with\ncreateCursorFamilyWorkflowAdapter instead of throwing, and checks that a\ncursor arm's spec agrees with its category and step contract names.\n\nMove receive-purpose-language onto the assembly: the family's constructor\nbecomes a check of its callback-free config and decision digest followed by\nthe assembly, `extend` supplies the actuator, lucid instance and state-queue\nlease coordinator the family's runner needs, and the constructor attaches\nthe invocation-bound decision digest. A sibling CURSOR_FAMILY_DEFINITIONS\ntable and a combined FAMILY_DEFINITIONS table sit beside the untouched linear\ntable, and the table-driven assembly test now covers both arms generically.\n\nRefs #658",
       "authorName": "Philip DiSarro",
       "authorDate": "2026-09-17T03:17:08Z"
-    },
-    {
-      "sha": "487e6330d8f7bc49d5a5d84883cda7d31de50da4",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/487e6330d8f7bc49d5a5d84883cda7d31de50da4",
-      "message": "Migrate the witness and fee linear families onto the family assembly\n\nCanonical-decodability, invalid-signature, min-fee and\ninput-set-uniqueness are reduced to their transaction port plus a frozen\nfamily definition; the per-family constructor and run-or-resume names\nremain as aliases over the assembly, and the config, workflow and\nreference-script type names remain as aliases over the generic types.\nEvery field-carriage and proof-chunk callback moves verbatim, including\nthe forced-artifact branches that skip the membership proof and route\nthe forced field openings to steps 03 and 04. Input-set-uniqueness\ndeclares two field-carriage requirements, spend plan then reference\nplan, which the assembly applies in that order; min-fee declares its\nnine per-field requirements from field 0 upward; all four declare the\nfield-preimage certificate.\n\nCanonical-decodability's transaction port resolves the authenticated\nfield carriage itself before it builds step 01, so the definition builds\nthe port a second stateless instance from the same requirement callback\nthe assembly decorates the adapter with.\n\nSurface changes that ride along, none of which alters a submitted\ntransaction: canonical-decodability's prerequisites now follow the\nassembly's fixed order, field carriage inside proof chunks, where the\nhand-written body wrapped them the other way round, so its two step-01\npublications swap order; the four proof-chunk ports now receive the\nprotocol maximum transaction size the assembly passes, so the direct\nroute's capacity fallback can engage; the configs accept the optional\nreplay context; the per-family \"manifest omitted required contracts\"\nchecks run when the transaction port is built, after reference binding,\nand a missing certificate now fails with the assembly's message. The\ninput-set-uniqueness forced test's infrastructure-only key set gains the\nreplay context accordingly.\n\nThe definitions table gains the four entries in spec order, the\nallow-list drops them, and the four workflow modules' census rows list\nthe assembly module.\n\nRefs #656",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-17T03:08:59Z"
-    },
-    {
-      "sha": "177ca76a80f2b2ef3114b7ead12cc6aae7026e41",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/177ca76a80f2b2ef3114b7ead12cc6aae7026e41",
-      "message": "Migrate the input-position linear families to the family assembly\n\nNon-existent-input, input-no-idx, reference-input-no-idx and\nwithdrawn-input are reduced to their transaction port plus a frozen\nfamily definition; the manifest-bound family assembly builds their\nworkflows. Each module keeps its constructor and type names as aliases\nover the generic ones, so the runtime and the watcher import the same\nsurface as before. The field-carriage and proof-chunk callbacks move\ninto the definitions verbatim, including non-existent-input's forced\nartifact branch, and the definitions table gains the four entries in\nspec order while the allow-list of unmigrated families shrinks to twelve.\n\nThree deliberate surface changes ride along, none of which changes any\nsubmitted transaction. Input-no-idx, reference-input-no-idx and\nwithdrawn-input now hand the manifest's maxTxSize to the proof-chunk\nprerequisite, as non-existent-input already did; without it the\ndirect-capacity classifier refused every fallback to chunked\npublication. Their configs accept the optional replay context the\ngeneric config carries. Withdrawn-input's \"deployment chain is\nincomplete\" check runs when the transaction port is built, after\nreference binding, instead of directly after the signer check.\n\nRefs #655",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-17T03:05:06Z"
-    },
-    {
-      "sha": "1242b95a4246e07341777f8ac4984e187d3f145f",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/1242b95a4246e07341777f8ac4984e187d3f145f",
-      "message": "Refuse activate-operator before the activation time instead of waiting\n\nAn activation attempted before the operator's activation time now fails\nat once with a one-line refusal naming the activation time and the chain\ntime, in the shape the other operator entry verbs use, rather than\nsleeping until the time arrives. Registering and activating in one verb\nkeeps its wait, since a fresh registration can never have reached its\ntime yet. Emulator tests cover the refusal and the activation once the\nchain time is reached.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-17T02:32:51Z"
-    },
-    {
-      "sha": "967b1698b9ecfec9ffb792a116ed846a43e30365",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/967b1698b9ecfec9ffb792a116ed846a43e30365",
-      "message": "Bump lucid-evolution to 0.6.5 and test that a registration cannot prove its own duplication\n\nlucid 0.6.5 (provider 0.2.4) makes the emulator apply the ledger's rule\nthat a transaction's reference inputs are disjoint from its inputs when a\nPlutusV3 script runs, so the emulator now refuses a duplicate-operator\nslash whose proof is the node being removed, exactly as the ledger does.\nThe operator-exit emulator suite asserts that refusal.\n\nThe workspace patch on lucid moves to the 0.6.5 key; it applies\nunchanged. The nine packages that pin lucid move together.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-17T01:50:40Z"
-    },
-    {
-      "sha": "05f6325f3c7978ed15e372a651b9701d9b74dbb0",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/05f6325f3c7978ed15e372a651b9701d9b74dbb0",
-      "message": "Assemble manifest-bound linear family workflows from one definition table\n\nOne assembly module now builds a linear family's manifest-bound workflow\nfrom a frozen family definition: bind the verified manifest, check the\nsigner, bind every spec step and declared witness reference script (and\nthe field-preimage certificate mint when declared), start the L1\nobservation port, build the family's transaction port and adapter, then\napply the declared prerequisites in a fixed order, field carriage before\nproof chunks. A generic run-or-resume hands the workflow's replayer,\nsingle-category launch scope, terminal verifier and release-finality\nauthority to the retained-DA runner.\n\nThe definition is separate from the linear family spec and keyed by\ncategory; step contract names come from the spec and are never\nre-declared. It carries step datum schemas, witness roles, the\nreplayer, the adapter arm (linear implemented, cursor typed but not yet\nassembled), one or more field-carriage requirement callbacks, an\noptional proof-chunk callback and an optional extend hook. Spec steps\nare now tuple-typed so a family's step count is visible to the\nreference-script types.\n\nFabricated deposit, fabricated withdrawal and no-reference-input are\nreduced to their transaction port plus definition; their constructor and\ntype names remain as aliases over the generic ones. Two deliberate\nsurface changes ride along: the fabricated families' configs now accept\nthe optional replay context the generic config carries, and their\n\"manifest omitted required contracts\" check runs when the transaction\nport is built, after reference binding, instead of directly after the\nsigner check. Neither changes any submitted transaction. The definitions\ntable carries a satisfies guard against the linear category list behind\nan explicit allow-list of the sixteen families still to migrate.\n\nA table-driven test replaces the two-family fabricated reference-binding\ntest: fake deployment binding, exact reference binding before provider\nstartup, missing/moved/forged refusals, declared-prerequisite chain\norder and the retained-DA runner hand-off, for every migrated family.\nGlossary gains \"family definition\" and \"manifest-bound family assembly\".\n\nRefs #654",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-17T00:54:33Z"
-    },
-    {
-      "sha": "32d4a2c484427abc2b8b7f8fc0c585a5fc66ce6e",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/32d4a2c484427abc2b8b7f8fc0c585a5fc66ce6e",
-      "message": "Operator exit, watchdog and status, with in-flight watcher and fault-proof work\n\nOperator lifecycle (node, SDK, docs): voluntary and forced retirement,\nduplicate-registration slashing, bond recovery, scheduler rewind onto\nthe surviving tail, inactivity strikes with the strike-cap refusal, the\noperator watchdog fiber (on by default, OPERATOR_WATCHDOG_ENABLED and\nOPERATOR_WATCHDOG_PATIENCE_MS, slot-aware deferral, manifest verified\nat start), GET /operator/status with nextPatienceTakeoverTime, the\nfunding preflight, exact-fee construction with the three-coin collateral\ncap, and lucid-evolution emulator suites in both polarities.\n\nA lone registration cannot prove its own duplication: the proof is a\nreference input and the removed node is an input, and the ledger keeps\nthe two disjoint. The validator, node and docs now state that rule as\nthe guarantee. The emulator-side negative test lands with the lucid pin\nbump that carries the emulator fix.\n\nAlso included: the finalizer Q56/Q58 local readiness gates removed per\nthe release-plumbing simplicity ruling, and the in-flight watcher,\nfault-proof, node-tools, da-committee-node and core changes from the\nparallel sessions. All packages typecheck; the seven operator suites\npass; the other packages' suites were not rerun for this commit.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-16T22:39:37Z"
-    },
-    {
-      "sha": "249660816946a8b656f2b065eba64f4a3ac74691",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/249660816946a8b656f2b065eba64f4a3ac74691",
-      "message": "Record the five families with completed live watcher journeys",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-13T09:58:51Z"
-    },
-    {
-      "sha": "0ca0ad74adec87f11c5ed4845b4a358961d1c4ec",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/0ca0ad74adec87f11c5ed4845b4a358961d1c4ec",
-      "message": "Requeue a fault-proof job whose run failed before its journal\n\nThe supervisor marked every run finished in the queue journal, including\none that threw before writing a single workflow record. The next process\nthen computed the same job identity, read the durable finish, and never\nran the proof again while the watcher reported ready. Leave a failed\nrun's registration active so the next process requeues it, and reopen a\nfinished registration whose workflow directory holds no execution.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-13T08:06:11Z"
-    },
-    {
-      "sha": "de892d752e1e3e6fb1de1615e0b01f77c86a0cb9",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/de892d752e1e3e6fb1de1615e0b01f77c86a0cb9",
-      "message": "Bind the complete-replay historical corpus to the block, not one object\n\nThe header classifier admits the historical native-script corpus against\nthe evidence it routed, but a family workflow that reuses that admitted\ncontext re-fetches the same challenged block from retained DA. The corpus\ncheck compared the two evidence objects by identity and refused the live\nmintAuthorization workflow with 'historical corpus was not admitted for\nthis challenged header'. Compare the header hash and payload digests\ninstead, as the predecessor authority already does.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-13T07:35:20Z"
     }
   ],
   "contributors": [
@@ -326,60 +326,62 @@
   ],
   "issues": [
     {
-      "number": 661,
-      "title": "node: neglected user-event operator strike path (selection, CLI option, watchdog hook)",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/661",
-      "updated_at": "2026-09-17T02:26:53Z"
+      "number": 669,
+      "title": "Family registry 1/8: Registry foundation, linear derivation and doubleSpend tracer",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/669",
+      "updated_at": "2026-09-20T05:12:51Z"
     },
     {
-      "number": 648,
-      "title": "sdk initialization funds the correction lock at min-ada; first Idle→Locked correction breaks exact value conservation",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/648",
-      "updated_at": "2026-08-31T11:25:11Z"
+      "number": 668,
+      "title": "One family application registry for the fault-proof workflow",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/668",
+      "updated_at": "2026-09-20T05:12:38Z"
     },
     {
-      "number": 652,
-      "title": "Wire the claim-registry MPF proof deriver into emulator journeys so a second claim can open against a non-empty registry",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/652",
-      "updated_at": "2026-08-31T10:32:56Z"
+      "number": 676,
+      "title": "Family registry 8/8: Integrated verification against baseline and documentation for the registry",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/676",
+      "updated_at": "2026-09-20T00:32:03Z"
     },
     {
-      "number": 651,
-      "title": "@harmoniclabs/plutus-machine lessThanByteString orders by length, breaking hub-oracle eval in harmonic-uplc-contract-eval",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/651",
-      "updated_at": "2026-08-31T10:07:32Z"
+      "number": 675,
+      "title": "Family registry 7/8: Watcher fault-proof application as one loop over the registry",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/675",
+      "updated_at": "2026-09-20T00:32:02Z"
     },
     {
-      "number": 644,
-      "title": "Both-polarity emulator suites for missing-native-script-utxo, native-script-invalid, and min-ada fraud-proof families",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/644",
-      "updated_at": "2026-08-31T10:07:21Z"
+      "number": 674,
+      "title": "Family registry 6/8: Runner factory table derived from the family application registry",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/674",
+      "updated_at": "2026-09-20T00:32:00Z"
     },
     {
-      "number": 649,
-      "title": "state_queue.mint no longer fits the 16,384-byte L1 transaction envelope (16,835 bytes unapplied)",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/649",
-      "updated_at": "2026-08-31T10:07:18Z"
+      "number": 673,
+      "title": "Family registry 5/8: Bespoke records: missingSignature, networkId, valueNotPreserved, validationTraceDispute",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/673",
+      "updated_at": "2026-09-20T00:31:59Z"
     },
     {
-      "number": 650,
-      "title": "Option B frontier pins shifted by canonical-v1 wave: re-measurement campaign needed",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/650",
-      "updated_at": "2026-08-31T09:05:24Z"
+      "number": 672,
+      "title": "Family registry 4/8: Cursor families without a decision digest: plain, replay-context and historical-authority shapes",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/672",
+      "updated_at": "2026-09-20T00:31:57Z"
     },
     {
-      "number": 647,
-      "title": "Make @harmoniclabs/cbor 2.0.1 resolution work for applyParamsToScript (da-committee-node, midgard-core)",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/647",
-      "updated_at": "2026-08-30T15:08:30Z"
+      "number": 671,
+      "title": "Family registry 3/8: Decision-digest families on the authenticated certificate shape",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/671",
+      "updated_at": "2026-09-20T00:31:56Z"
+    },
+    {
+      "number": 670,
+      "title": "Family registry 2/8: Decision-digest families on the state-queue-removal witness set",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/670",
+      "updated_at": "2026-09-20T00:31:54Z"
     }
   ],
   "releases": [],
   "commitActivity": [
-    {
-      "week": 1758412800,
-      "total": 34
-    },
     {
       "week": 1759017600,
       "total": 20
@@ -410,11 +412,11 @@
     },
     {
       "week": 1763251200,
-      "total": 23
+      "total": 32
     },
     {
       "week": 1763856000,
-      "total": 15
+      "total": 43
     },
     {
       "week": 1764460800,
@@ -486,15 +488,15 @@
     },
     {
       "week": 1774742400,
-      "total": 29
+      "total": 30
     },
     {
       "week": 1775347200,
-      "total": 41
+      "total": 42
     },
     {
       "week": 1775952000,
-      "total": 31
+      "total": 32
     },
     {
       "week": 1776556800,
@@ -510,11 +512,11 @@
     },
     {
       "week": 1778371200,
-      "total": 25
+      "total": 43
     },
     {
       "week": 1778976000,
-      "total": 10
+      "total": 12
     },
     {
       "week": 1779580800,
@@ -526,11 +528,11 @@
     },
     {
       "week": 1780790400,
-      "total": 31
+      "total": 16
     },
     {
       "week": 1781395200,
-      "total": 20
+      "total": 17
     },
     {
       "week": 1782000000,
@@ -558,31 +560,35 @@
     },
     {
       "week": 1785628800,
-      "total": 2
+      "total": 190
     },
     {
       "week": 1786233600,
-      "total": 0
+      "total": 30
     },
     {
       "week": 1786838400,
-      "total": 53
+      "total": 132
     },
     {
       "week": 1787443200,
-      "total": 47
+      "total": 48
     },
     {
       "week": 1788048000,
-      "total": 1
+      "total": 69
     },
     {
       "week": 1788652800,
-      "total": 177
+      "total": 190
     },
     {
       "week": 1789257600,
-      "total": 24
+      "total": 32
+    },
+    {
+      "week": 1789862400,
+      "total": 1
     }
   ]
 }
