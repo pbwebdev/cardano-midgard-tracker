@@ -1,10 +1,10 @@
 {
-  "fetchedAt": "2026-09-23T11:10:15.907Z",
+  "fetchedAt": "2026-09-24T11:26:06.798Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 25,
     "forks_count": 11,
-    "open_issues_count": 135
+    "open_issues_count": 137
   },
   "languages": {
     "Aiken": 359544,
@@ -16,6 +16,48 @@
     "Perl": 37
   },
   "commits": [
+    {
+      "sha": "fb4161d4ca864258de6a2dc5b3c18f08cbe51a28",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/fb4161d4ca864258de6a2dc5b3c18f08cbe51a28",
+      "message": "Verify authenticated event-history delivery checkpoints\n\nAdd absent-ID, honest-challenge refusal and combined maximum-shape acceptance fixtures. Verify the actual production owner at the proposed retention profile, preserve measurement provenance, and record the remaining live prerequisites. Local checkpoints 1–3 pass; the prepared live campaign remains blocked before deployment. Full protocol acceptance and deferred recovery remain open.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-09-24T08:02:43Z"
+    },
+    {
+      "sha": "89427ff467736dc02c9084199920a5998fb0717f",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/89427ff467736dc02c9084199920a5998fb0717f",
+      "message": "Integrate authenticated event-history delivery checkpoint\n\nConsolidate the contract, SDK, proof, watcher and production-owner work with\nthe completed cleanup in the original checkout. Preserve authenticated sorted\nUTxO history, signed intent, retained membership and the bounded dependent\nrollback repair; document the remaining acceptance gates.\n\nVerified production deposit/withdrawal journeys, current observed recovery,\nrequired node (125) and emulator (64) cases, 195 Aiken history tests, 13 installed\ntransition lifecycle cases, and 1,340 independently decoded signed receipts.\nRegenerate the transition fit ledger with prior evidence retained locally.\n\nThis is an integration checkpoint, not full acceptance or an ABI freeze.\nReference-input fixture, broader recovery/crash coverage, remaining proof/ABI\nacceptance, existing-state migration and live deployment gates remain open.\nSee docs/fault-proofs/event-history-delivery-checkpoint.md for scope and evidence.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-09-24T06:44:56Z"
+    },
+    {
+      "sha": "1f3280f93cfc903c2532bb7d041f5a7ff4cdb7aa",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/1f3280f93cfc903c2532bb7d041f5a7ff4cdb7aa",
+      "message": "Fix pre-push review findings and apply the skipped format and lint pass\n\n- Node CI: the compose render step copies .env.example to .env, since\n  every node stack requires an operator .env beside it and a fresh checkout\n  has none; the step failed on every run.\n- Node retention: test that a terminal transition shallower than the\n  manifest's finality depth is refused, the only database-side guard\n  before a removed header's payload becomes prunable.\n- Watcher: drop two comments describing the deleted node admin key.\n- Run the prettier and eslint pass the pre-commit hook would have run on\n  the preceding commits (import order, one test fixture); keep the\n  committee's late-assigned interval and API server as let, since the tick\n  runner's fatal exit closes over them before they exist.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-09-24T00:41:04Z"
+    },
+    {
+      "sha": "b8fbbcddfe3b2c2ff37fd802a8d4c1c27992b8df",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/b8fbbcddfe3b2c2ff37fd802a8d4c1c27992b8df",
+      "message": "Rename the DA watcher to the committee node, coordinate locally, and bound DA retention\n\nRename the da-committee-node's watcher service and stores to committee\nterms (committee-service.ts, CommitteeStore, the \"committee\" DA transport\ntarget and libp2p runtime manifest host) across the node, core, node-tools\nand docs.\n\nMake the operator launch path work from a fresh clone:\n- delete the never-executed l1-services compose; the midgard-node Kupmios\n  overlay is the L1 stack, with Kupo pinned by digest and run without\n  --prune-utxo, one cardano-node default, and the mithril client moved to\n  its maintained image;\n- delete the dead node .dockerignore and da-libp2p overlay, fix the\n  benchmark overlay, interpolate PORT in ports and healthchecks;\n- render every node compose combination and the phase-4 devnet compose in\n  node CI, build the node image and smoke its CLI; install pnpm from each\n  package.json in the docs-site and pages workflows;\n- point the docs-site L1 backend, local stack and committee pages at the\n  overlay and drop the removed release-evidence digest gate.\n\nState-queue mutation coordination (D8):\n- The watcher and fault-proof removal paths use one local retry-until-\n  confirmed coordinator; the node URL, admin key and lease TTL leave the\n  watcher process config, the fault-proof CLI flags and the journey harness\n  lease server. A journal recorded under a node-URL source is refused.\n- The node's HTTP state-queue mutation lease endpoint, its resolver, routes\n  and tests are deleted; the internal lease and its status field stay.\n\nWatcher startup (D11): the readiness header hash is a fixed constant and\njournals live under readiness/<category> and bindings/<category>.\n\nWatcher packaging (D9): watcher-process.example.json and\nauthority.example.json templates with parse tests, .env.example, a\ntwo-service compose (authority + watcher) rendered in CI with the pinned\nimage check, and a README section for running it.\n\nDA retention (D7): one core prune decision (confirmed head and live queue\nretain, removed or past the required window prunes, otherwise retain) is\nshared by the node and the committee. Both read the confirmed head and live\nqueue from authenticated L1 only, retry while the view is unavailable and\nexit once L1_VIEW_FATAL_MS passes. RETENTION_DAYS=0 no longer disables\npayload pruning; the node prunes in one DELETE; the SDK retention-evidence\nmodule and the committee's availability retention source are deleted.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-09-23T23:55:51Z"
+    },
+    {
+      "sha": "090436fc3ca20d197ad6885e9b98c3ae8879bc9c",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/090436fc3ca20d197ad6885e9b98c3ae8879bc9c",
+      "message": "Add authenticated event history and the completed-fraud queue marker (in progress)\n\nWork in progress from the event-history program; ABI not frozen and no gap\nclosure claimed. See docs/fault-proofs/event-history-progress.md.\n\n- Aiken: event-history library (admission, funding, horizon, mutation,\n  ordering, output claims, proof evidence, retained data, retirement) and\n  the user-events history, history-data and history-retirement validators;\n  fabricated-deposit and fabricated-withdrawal steps 01-04 read the paired\n  history; state-queue nodes carry a proven_fraud marker.\n- SDK: event-history capture, funding, payload, proof, query and build\n  helpers; fabricated-family contracts take history parameters.\n- Fault proofs: fabricated history witness, completed-fraud and proof\n  validity modules; fabricated-family preparation and submission read the\n  history; emulator coverage for capture, list, output claims, retention,\n  preparation and the completed-fraud marker.\n- Core, node and watcher fixtures: deployment identity requires\n  event-history bounds; manifests, contract registration and merge readiness\n  follow the proven_fraud marker.\n\nKnown incomplete: the watcher's createCatalogueCompleteCanonicalReplay call\ndoes not yet pass the new history input.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-09-23T23:54:50Z"
+    },
+    {
+      "sha": "409dfdaa6181941b32b1e833adfd630cc5580c67",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/409dfdaa6181941b32b1e833adfd630cc5580c67",
+      "message": "Pin Ogmios v7.0.0 and cardano-node 11.1.0 at every L1 stack site\n\nThe three L1 stacks disagreed: l1-services ran Ogmios v6.11.0 against\ncardano-node 10.6.3, the kupmios compose defaulted Ogmios to the floating\n`latest` tag next to node 11.0.1, and only the devnet pinned v7.0.0 by\ndigest with node 11.1.0. All three now use the devnet's digests.\n\n- l1-services: Ogmios v7.0.0 by digest; the node image example moves to\n  11.1.0 by digest, which is what v7.0.0 is built against.\n- kupmios compose and env example: the Ogmios default is the digest-pinned\n  v7.0.0 tag instead of `latest`. The node tag stays a plain `11.1.0`\n  because the Mithril bootstrap script parses it as a version to compare\n  against the certified snapshot's node version.\n- Docs table and the local L1 observation helper's fidelity note updated\n  to match. The v6 to v7 transaction schema change only drops empty\n  `validityInterval` and `outputs`; the shapes the helper asserts are\n  unchanged, and the renamed reference-script parameter is already\n  normalised by the manifest reader and the pinned Kupmios provider.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-09-22T15:51:02Z"
+    },
     {
       "sha": "1b53eafd8c0c88c36232869b23eb8aaf48f7f8c2",
       "html_url": "https://github.com/Anastasia-Labs/midgard/commit/1b53eafd8c0c88c36232869b23eb8aaf48f7f8c2",
@@ -78,48 +120,6 @@
       "message": "Verify the family registry program against its baseline and review the glossary (#676)\n\nFull fault-proofs and watcher suites re-run once against a fresh blueprint\n(byte-identical to the one on disk) and reconciled with the ticket-1\nbaseline; the watcher journey suite and node-tools typecheck are green.\nThe glossary entries for the family application registry and the family\nrecord are reviewed against the landed code: the allow-list is gone, the\nregistry's key set is the installed set, a record carries the\ndecision-digest flag and refuses a missing required part unless a\nreconciliation-only permit is held, and hand-written rows declare their\ntype arguments.",
       "authorName": "Philip DiSarro",
       "authorDate": "2026-09-21T21:12:01Z"
-    },
-    {
-      "sha": "566d46d7d55f24f2578d0dd343c80a58f22be3d0",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/566d46d7d55f24f2578d0dd343c80a58f22be3d0",
-      "message": "Derive the watcher's installed set from the registry and take secrets off readiness (#675)\n\nThe watcher application no longer names a family. Its installed set is the\nfamily application registry's keys read in the SDK catalogue's presentation\norder, so every launch-scope comparison (classifier, supervisor, decision\nbridge, journal) still sees the one order it compared against before; the\nmissing set is the catalogue's complement of the registry and stays empty.\nThe decision-time predecessor check reads the records' `requires` through\n`WATCHER_PREDECESSOR_AUTHORITY_CATEGORIES`, widening the refusal from the\ntwo hand-listed families to the five that require the replay context at load\ntime, as #668 asks, so the two lists can no longer disagree.\n\nStartup readiness now runs on a readiness-only path. The shared loader body\nis split into `bindWatcherDeploymentAuthority` (local-node authority,\nmanifest/blueprint/deployment info, manifest-vs-config finality, Lucid and\nthe roster resolver; no secret) and the acting `buildCommonInfrastructure`\non top of it (prover wallet, node admin key, signer, lease coordinator,\noptional parts). Readiness admits its runtime configuration through the new\n`readAdmittedWatcherRuntimeConfig`, shared with the workflow loader so both\nrefuse a non-canonical path or a foreign deployment in the same words, and\nthen only resolves the family's roster. It therefore reads neither secret,\nopens no retained-DA transport and acquires no lease; the prover wallet and\nadmin key are proven present by the trusted-head startup phase. A closed\napplication refuses readiness through the same admitted-set the other\nmethods already consult.\n\nTests follow #668's third seam: readiness lists exactly the registry roster\nand reads no secret (file-backed key sources whose read would throw); the\nacting loader still fails closed on a missing secret; a family whose record\nrequires the replay context the classifier never captured refuses through\nthe watcher-built infrastructure with the shared error, for all five such\nfamilies, before the resolver is asked for anything, while a family requiring\nonly what the watcher always supplies is applied against exactly its roster.\nThe test-only application exposes its runtime loader for that purpose\n(`unsafeExposeRuntimeLoaderForTest`, refused for an executing application),\nbecause exercising an installed runner needs a classifier-issued actuation\npermit for each family. No live `runOrResume` test covers the three newly\nrefused families at decision time; that needs a classifier fixture per\nfamily and is left to the integrated verification in #676.\n\nDocs name the registry as the installed-category source (watcher README,\ncatalogue-status, offchain-reference, the dispute workflow page), and the\ndispute page no longer claims readiness asserts move-completeness.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-21T19:16:12Z"
-    },
-    {
-      "sha": "145269c6f7ee1004c5ab75c034445edcf185ff7d",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/145269c6f7ee1004c5ab75c034445edcf185ff7d",
-      "message": "Move the workflow loader boundary up to common infrastructure\n\nThe compiled runtime loader used to hand each family runner an\nalready-bound family config, so every host had to know how to lay out\n55 config shapes: the watcher carried a tagged config union, a\n57-overload layout function, a tag-unwrapping loader per family, a\nconstructor switch, an out-ref flattener and a hand-written runner\ntable, and the runtime had to erase the loader's config to `unknown`\nat the host boundary.\n\nThe loader now returns the one shape every family draws from: the\ncommon infrastructure, the reference-script resolver, the public\nretained-DA transports and a disposer. The generic run-or-resume body\napplies the family application record itself (resolve the roster, bind\nthe config, construct, assert the identity), so a family is applied to\nan invocation in exactly one place and no caller ever names a family's\nconfig. The body refuses loaded infrastructure whose header or decision\ndigest differs from the invocation, exempts missing required parts only\nunder reconciliation-only authority, and still demands the adapter\nrecovery surface before resuming a recorded workflow.\n\nThe watcher builds common infrastructure once, implements the\nvalidation-challenge port over its capture map, installs the registry's\nrunner factories in a loop, and reports startup readiness by resolving\nthe registry roster without constructing a workflow. The\n`constructWorkflow` dependency seam and the per-family loader surfaces\nare deleted (6,114 -> ~1,700 lines). Readiness out-refs are keyed by\nroster role, as the registry defines them; the watcher application test\nnow derives the expected roster from the registry instead of a\ntranscription.\n\nEnforcing the records' requirements at load time exposed that the\nvalueNotPreserved record demanded the predecessor replay context, which\nthe watcher had only ever bound optionally and which the workflow proves\nwithout: the record now binds the context when the host supplies it and\nrequires nothing, keeping the replay-context requirement on the five\nfamilies the spec names.\n\nRefs #668 #674 #675",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-21T18:46:49Z"
-    },
-    {
-      "sha": "6e375aa0bd8cc8799b7d02e22b69f07041b9ecb1",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/6e375aa0bd8cc8799b7d02e22b69f07041b9ecb1",
-      "message": "Derive the runner factory table from the family application registry (#674)\n\nWORKFLOW_RUNNER_FACTORIES is now one map over FAMILY_APPLICATION_REGISTRY\nthrough the module-private admission and the generic run-or-resume body.\nThe linear-definition derivation loop, the explicit doubleSpend constructor\nand the 36 explicit record rows are gone: registering a record is what adds\na family's row. The registry's RegisteredFamilyCategory /\nREGISTERED_FAMILY_CATEGORIES aliases, pure copies of the catalogue since\n#673, are deleted with them.\n\nThe table's factories take the runtime loader at `unknown`: the registry\nstates every record at one erased shape, so the table cannot relate a\nhost's loaded config to the family's config type. The watcher's per-family\nloaders (the one live caller) previously had that check at compile time and\nnow meet it at runtime in constructWorkflow; #675 replaces those loaders\nwith the records' own bindConfig, which restores the pairing by\nconstruction. Flagged on the ticket as an owner call.\n\nRefusal behaviour of the generic body is tested once, one test per check\n(category mismatch, missing disposer, unsupported schema, non-public DA\nsource, identity mismatch, digest mismatch when flagged), plus one\ntable-wide test that every row exposes only the shared drive surface and\none that every row refuses a foreign category naming its own. The eleven\nper-surface copies in family test files are deleted; their non-runner\nassertions stay. Consumers of the deleted doubleSpend constructor (three\nfault-proofs tests, the watcher application and two watcher tests) use the\ntable row.\n\nGates: fault-proofs typecheck + lint green; 18 focused fault-proofs files\n588 tests green; watcher, node and node-tools typecheck green; watcher\nfunding/retained-DA tests green. Full fault-proofs suite running in the\nbackground per the 2026-09-21 owner rule.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-21T17:30:29Z"
-    },
-    {
-      "sha": "a4c43f137358337776fe3c6137cbc6111d22d41a",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/a4c43f137358337776fe3c6137cbc6111d22d41a",
-      "message": "Register the four bespoke families and empty the allow-list (#673)\n\nHand-written records for missingSignature, networkId, valueNotPreserved\nand validationTraceDispute complete the family application registry:\nevery one of the 55 catalogue categories now has a record, the\nNOT_YET_REGISTERED_FAMILY_CATEGORIES allow-list is gone, and the registry\nis typed as one mapped row per catalogue category (an explicit erased\nFamilyApplicationRegistryEntry annotation: with all 55 rows present tsc\ncan no longer serialize the inferred type, TS7056).\n\nvalidationTraceDispute is the only record with requires.validationChallenge.\nIts bindConfig obtains the challenge from the host's port, so the record\ncontract now allows bindConfig to return Config | Promise<Config> and the\nshared loop awaits it. The validation-dispute runner surface is deleted;\nits canonical-block currency check moves into\nassertValidationTraceDisputeChallengeCurrent, run by the uniform\nrunOrResumeManifestBoundValidationTraceDisputeWorkflow({workflow, sources,\njournal}) entry the record executes. This runs the check inside the\ngeneric runner's execute step, i.e. after the reconciliation-only and\npending-continuation gates rather than before them.\n\nThe four explicit runtime constructors and their watcher rows become\nrecord-derived rows through familyApplicationWorkflowRunnerFactory;\nadapters cite the records as their existing surface.\n\nDeviation from the ticket text: networkId's roster carries no state-queue\nremoval set. ManifestBoundNetworkIdWorkflowConfig has no place for one\n(its removal field takes only the lease coordinator and validity window;\nthe adapter resolves the removal scripts from deployment info), and the\nwatcher's own networkId roster never had one either.\n\nRegistry table test generalized over the new shapes (top-level network-id\nlayout, forced/union/control groups, step-free roster), pinned sets\nextended, allow-list assertion replaced by whole-catalogue coverage, a\nsentinel challenge port proves the port's answer lands under `challenge`.\nShared-loop test covers refusal without the port and binding with it. The\ninstalled dispute lifecycle test drives executeManifestBound... directly;\na new test covers the currency check in both polarities.\n\nFault-proofs typecheck: 24.5/24.1 s before this slice, 19.1/19.0 s after\n(ticket 1 measured 17.8 s -> 18.8 s). Gates green: fault-proofs typecheck\nand lint, registry/loop/runtime/dispute tests, watcher, node and\nnode-tools typecheck.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-21T16:33:39Z"
-    },
-    {
-      "sha": "d57966c227d729c79eea0a2ae2fa5355ce0c644f",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d57966c227d729c79eea0a2ae2fa5355ce0c644f",
-      "message": "Register the twelve no-digest cursor families on their own shapes (#672)\n\nDerive the records of the twelve cursor families whose config carries no\ndecision digest: the plain nativeScriptInvalid; nativeScriptDecoding,\nmintAuthorization and withdrawalMistag, which require the predecessor\nreplay context; and the eight historical families (minAda,\nmissingNativeScriptTx, missingNativeScriptUtxo, transitionTrace,\ncrossBlockDuplicateEvent, resolvedOutputNonCanonical,\nspendInputSignerMissing, executionNativeScriptInvalid), which require the\nhistorical native-script authority and lay its history source and\ncheckpoint store into the config under the field names each family reads.\n\nA record declares the infrastructure it requires beside its roster; the\nbuilders refuse at import a historical flag without a layout or a layout\nwithout the flag, and an auxiliary-script key without a declaration or the\nreverse. The shared bundle builder covers nine families, the authenticated\ncertificate builder now takes requirements for the two certificate-shape\nhistorical families, and transitionTrace lays the derived roster into its\ncontract-name-keyed map by hand. The allow-list shrinks from sixteen to\nfour.\n\nThe three remaining family-local runner surfaces are deleted along with\nthe twelve explicit runtime constructors; every row is derived from its\nrecord and the watcher launches through WORKFLOW_RUNNER_FACTORIES. The\nexecution native-script run takes the uniform {workflow, sources, journal}\ninput and reads the admitted digest from the journal, which the generic\nrunner binds from the invocation, so the equality check it replaced holds\nby construction.\n\nTable tests cover the twelve with no per-family additions: bound\nreferences are checked as a multiset against the roster whatever the\nshape, the digest-binding set and both requirement sets are pinned, and\nevery record is checked to bind exactly the optional infrastructure it\nrequires. The shared loop test covers both requirements in both\npolarities.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-21T15:57:32Z"
-    },
-    {
-      "sha": "faf3bec1e2f6825143474fc85ad1be2f0fb65c92",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/faf3bec1e2f6825143474fc85ad1be2f0fb65c92",
-      "message": "Register the eight decision-digest families on the certificate shape (#671)\n\nRegister fieldItemWidthIllegal, fieldPreimageLengthMismatch,\nmintItemNonCanonical, outputReferenceScriptDecoding,\nprotectedOutputSignerMissing, transactionOutputNonCanonical,\nwitnessScriptDecoding and unusedScriptWitness in the family application\nregistry, shrinking the not-yet-registered allow-list by eight.\n\nSix records are derived by a new builder for the authenticated certificate\nshape: the roster is the definition's chain steps, witness roles and\ncertificate, and bindConfig lays each step under the config key its\nmanifest-contracts map names, so fieldPreimageLengthMismatch keeps its\nstep02Accepted/step02Forced keys without restating them. The builder refuses\na definition without a certificate or with auxiliary reference scripts, and\nrefuses an invocation without the admitted decision digest. unusedScriptWitness\nis derived by the existing removal-set builder, which now shares the same\ndigest refusal. mintItemNonCanonical has no definition and is the one\nhand-written record, laid out on the same certificate shape with its step keys\nand witness roles read from its manifest-contracts map. The common\ninfrastructure fields every bound config copies are now laid in by one shared\nhelper. Every row names its exact config and workflow types.\n\nfieldPreimageLengthMismatch previously ran on an explicit row that skipped\nthe decision-digest identity check; its record sets the flag, since its\nconfig and workflow already carry the digest the invocation admits.\n\nThe seven family-local runner surfaces and their Loaded/Load types are\ndeleted; the runtime's runner table derives their rows from the records, and\nthe watcher launches them through that table. unusedScriptWitness consumes\nthe shared removal-set constant instead of restating the nine names. The\ntests that imported a surface by name are retargeted to the derived runner,\nand the registry table tests cover the eight, accepting both the bundle and\nthe flat certificate shape, without per-family additions.\n\nDeleting the surfaces also drops dead imports from the family modules, which\nchanges module evaluation order. The transition-trace installed lifecycle\ntest relied on that order: its module mock of the local L1 observation port\ndid not reach the transition-trace event authority once the modules\nevaluated differently, and the test failed on an empty source. It now\ninjects the recorder's raw authority through the existing test-only entry\npoint instead of depending on the mock reaching that caller.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-21T00:37:29Z"
     }
   ],
   "contributors": [
@@ -326,6 +326,18 @@
   ],
   "issues": [
     {
+      "number": 681,
+      "title": "Availability-challenge discovery repeatedly fails when the canonical chain point changes during discovery",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/681",
+      "updated_at": "2026-09-23T12:18:00Z"
+    },
+    {
+      "number": 680,
+      "title": "DA watchers remain unready after ordinary attested blocks merge: missing retention evidence",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/680",
+      "updated_at": "2026-09-23T12:16:49Z"
+    },
+    {
       "number": 679,
       "title": "Private-testnet integration: deployment and runtime issues found across three attempts",
       "html_url": "https://github.com/Anastasia-Labs/midgard/issues/679",
@@ -360,18 +372,6 @@
       "title": "Family registry 5/8: Bespoke records: missingSignature, networkId, valueNotPreserved, validationTraceDispute",
       "html_url": "https://github.com/Anastasia-Labs/midgard/issues/673",
       "updated_at": "2026-09-21T16:34:04Z"
-    },
-    {
-      "number": 669,
-      "title": "Family registry 1/8: Registry foundation, linear derivation and doubleSpend tracer",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/669",
-      "updated_at": "2026-09-20T05:12:51Z"
-    },
-    {
-      "number": 672,
-      "title": "Family registry 4/8: Cursor families without a decision digest: plain, replay-context and historical-authority shapes",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/672",
-      "updated_at": "2026-09-20T00:31:57Z"
     }
   ],
   "releases": [],
@@ -394,23 +394,23 @@
     },
     {
       "week": 1761436800,
-      "total": 98
+      "total": 114
     },
     {
       "week": 1762041600,
-      "total": 31
+      "total": 46
     },
     {
       "week": 1762646400,
-      "total": 0
+      "total": 14
     },
     {
       "week": 1763251200,
-      "total": 12
+      "total": 23
     },
     {
       "week": 1763856000,
-      "total": 9
+      "total": 16
     },
     {
       "week": 1764460800,
@@ -450,7 +450,7 @@
     },
     {
       "week": 1769904000,
-      "total": 46
+      "total": 45
     },
     {
       "week": 1770508800,
@@ -458,23 +458,23 @@
     },
     {
       "week": 1771113600,
-      "total": 14
+      "total": 13
     },
     {
       "week": 1771718400,
-      "total": 45
+      "total": 47
     },
     {
       "week": 1772323200,
-      "total": 23
+      "total": 26
     },
     {
       "week": 1772928000,
-      "total": 35
+      "total": 36
     },
     {
       "week": 1773532800,
-      "total": 28
+      "total": 29
     },
     {
       "week": 1774137600,
@@ -482,15 +482,15 @@
     },
     {
       "week": 1774742400,
-      "total": 30
+      "total": 29
     },
     {
       "week": 1775347200,
-      "total": 42
+      "total": 41
     },
     {
       "week": 1775952000,
-      "total": 32
+      "total": 31
     },
     {
       "week": 1776556800,
@@ -510,7 +510,7 @@
     },
     {
       "week": 1778976000,
-      "total": 13
+      "total": 10
     },
     {
       "week": 1779580800,
@@ -518,15 +518,15 @@
     },
     {
       "week": 1780185600,
-      "total": 25
+      "total": 26
     },
     {
       "week": 1780790400,
-      "total": 17
+      "total": 30
     },
     {
       "week": 1781395200,
-      "total": 18
+      "total": 13
     },
     {
       "week": 1782000000,
@@ -542,7 +542,7 @@
     },
     {
       "week": 1783814400,
-      "total": 11
+      "total": 9
     },
     {
       "week": 1784419200,
@@ -554,7 +554,7 @@
     },
     {
       "week": 1785628800,
-      "total": 2
+      "total": 100
     },
     {
       "week": 1786233600,
@@ -570,11 +570,11 @@
     },
     {
       "week": 1788048000,
-      "total": 65
+      "total": 0
     },
     {
       "week": 1788652800,
-      "total": 185
+      "total": 144
     },
     {
       "week": 1789257600,
@@ -582,7 +582,7 @@
     },
     {
       "week": 1789862400,
-      "total": 18
+      "total": 24
     }
   ]
 }
