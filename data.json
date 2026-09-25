@@ -1,10 +1,10 @@
 {
-  "fetchedAt": "2026-09-24T11:26:06.798Z",
+  "fetchedAt": "2026-09-25T11:31:52.512Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 25,
     "forks_count": 11,
-    "open_issues_count": 137
+    "open_issues_count": 135
   },
   "languages": {
     "Aiken": 359544,
@@ -16,6 +16,20 @@
     "Perl": 37
   },
   "commits": [
+    {
+      "sha": "ba03d9c21abeb2845cd372334452cf685694afe8",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ba03d9c21abeb2845cd372334452cf685694afe8",
+      "message": "Trace missing DA signer to unpersisted key generation",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-09-24T16:07:08Z"
+    },
+    {
+      "sha": "b9170766e7a7069fb62e8991d3c12f65707fa084",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/b9170766e7a7069fb62e8991d3c12f65707fa084",
+      "message": "Record repaired live providers and remaining DA quorum gate",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-09-24T15:15:07Z"
+    },
     {
       "sha": "fb4161d4ca864258de6a2dc5b3c18f08cbe51a28",
       "html_url": "https://github.com/Anastasia-Labs/midgard/commit/fb4161d4ca864258de6a2dc5b3c18f08cbe51a28",
@@ -106,20 +120,6 @@
       "message": "Add the authenticated event-history architecture proposal for NIFP-01 to 03\n\nA design document proposing a cumulative authenticated event dictionary\nwith deterministic shards and immutable checkpoints, its security\nproperties, alternatives, retention, batched-admission fallback, cost\nmodel and acceptance criteria, plus a research note recording the current\nfabricated-event, watcher retention and transition-trace boundaries it\nstarts from. Status is Proposed; remaining-gaps.md now points at it and\nrecords that the gaps stay open until it is accepted and implemented.",
       "authorName": "Philip DiSarro",
       "authorDate": "2026-09-21T21:47:45Z"
-    },
-    {
-      "sha": "4fcd62cc75b9b63d213d5314948ebbacf0ddde5a",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/4fcd62cc75b9b63d213d5314948ebbacf0ddde5a",
-      "message": "Drop the prose facts and voice checks and enforce lint and format in CI\n\nThe docs-site facts check restated source inventories in a script and the\nvoice check pattern-matched wording; both went red on ordinary source drift\nwithout proving a documentation claim, and their trigger lists had to\nmirror every source they read. They are removed with their CI steps and\npath triggers; the link check stays. The documentation policy and the\ncatalogue-status table now say plainly that prose counts are verified by\nreading the source. The demo workspace lint and format-check that the\npre-commit hook applies locally are now enforced in midgard-node-ci.yml,\nwhich the hook's header cites instead of the retired gate names. The cg1\ncontrol-publication gate no longer verifies the exclusion's prose citation\nagainst the necessity memo; the exclusion itself is still checked for\ngenuine absence and for being a real role.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-21T21:47:45Z"
-    },
-    {
-      "sha": "43d36379f08a1847a1919dc2d09219acdca5ac63",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/43d36379f08a1847a1919dc2d09219acdca5ac63",
-      "message": "Verify the family registry program against its baseline and review the glossary (#676)\n\nFull fault-proofs and watcher suites re-run once against a fresh blueprint\n(byte-identical to the one on disk) and reconciled with the ticket-1\nbaseline; the watcher journey suite and node-tools typecheck are green.\nThe glossary entries for the family application registry and the family\nrecord are reviewed against the landed code: the allow-list is gone, the\nregistry's key set is the installed set, a record carries the\ndecision-digest flag and refuses a missing required part unless a\nreconciliation-only permit is held, and hand-written rows declare their\ntype arguments.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-21T21:12:01Z"
     }
   ],
   "contributors": [
@@ -326,6 +326,12 @@
   ],
   "issues": [
     {
+      "number": 682,
+      "title": "Spec: bounded in-memory reference-script publication chaining",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/682",
+      "updated_at": "2026-09-25T00:27:30Z"
+    },
+    {
       "number": 681,
       "title": "Availability-challenge discovery repeatedly fails when the canonical chain point changes during discovery",
       "html_url": "https://github.com/Anastasia-Labs/midgard/issues/681",
@@ -366,12 +372,6 @@
       "title": "Family registry 6/8: Runner factory table derived from the family application registry",
       "html_url": "https://github.com/Anastasia-Labs/midgard/issues/674",
       "updated_at": "2026-09-21T18:47:18Z"
-    },
-    {
-      "number": 673,
-      "title": "Family registry 5/8: Bespoke records: missingSignature, networkId, valueNotPreserved, validationTraceDispute",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/673",
-      "updated_at": "2026-09-21T16:34:04Z"
     }
   ],
   "releases": [],
@@ -450,7 +450,7 @@
     },
     {
       "week": 1769904000,
-      "total": 45
+      "total": 46
     },
     {
       "week": 1770508800,
@@ -458,7 +458,7 @@
     },
     {
       "week": 1771113600,
-      "total": 13
+      "total": 14
     },
     {
       "week": 1771718400,
@@ -466,7 +466,7 @@
     },
     {
       "week": 1772323200,
-      "total": 26
+      "total": 25
     },
     {
       "week": 1772928000,
@@ -510,11 +510,11 @@
     },
     {
       "week": 1778976000,
-      "total": 10
+      "total": 14
     },
     {
       "week": 1779580800,
-      "total": 1
+      "total": 2
     },
     {
       "week": 1780185600,
@@ -574,7 +574,7 @@
     },
     {
       "week": 1788652800,
-      "total": 144
+      "total": 142
     },
     {
       "week": 1789257600,
@@ -582,7 +582,7 @@
     },
     {
       "week": 1789862400,
-      "total": 24
+      "total": 26
     }
   ]
 }
