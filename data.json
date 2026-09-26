@@ -1,10 +1,10 @@
 {
-  "fetchedAt": "2026-09-25T11:31:52.512Z",
+  "fetchedAt": "2026-09-26T11:06:51.245Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 25,
     "forks_count": 11,
-    "open_issues_count": 135
+    "open_issues_count": 137
   },
   "languages": {
     "Aiken": 359544,
@@ -17,109 +17,109 @@
   },
   "commits": [
     {
-      "sha": "ba03d9c21abeb2845cd372334452cf685694afe8",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ba03d9c21abeb2845cd372334452cf685694afe8",
-      "message": "Trace missing DA signer to unpersisted key generation",
+      "sha": "56f52da5a41d3f011783899e724de47a3df8f0e2",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/56f52da5a41d3f011783899e724de47a3df8f0e2",
+      "message": "Deploy the watcher image from the install step's pnpm store\n\nAs in the node image: without the store, deploy re-prepares the git-hosted\nmerkle-patricia-forestry package and fails for want of its dev tooling.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-24T16:07:08Z"
+      "authorDate": "2026-09-26T08:45:39Z"
     },
     {
-      "sha": "b9170766e7a7069fb62e8991d3c12f65707fa084",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/b9170766e7a7069fb62e8991d3c12f65707fa084",
-      "message": "Record repaired live providers and remaining DA quorum gate",
+      "sha": "355b58689c55ca969ce195edd651967c670c2d38",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/355b58689c55ca969ce195edd651967c670c2d38",
+      "message": "Build only the watcher's production chain in its image\n\nWith every manifest present, `--filter midgard-watcher...` also selected the\ndev-only midgard-node chain, whose sources the image does not copy.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-24T15:15:07Z"
+      "authorDate": "2026-09-26T08:39:07Z"
     },
     {
-      "sha": "fb4161d4ca864258de6a2dc5b3c18f08cbe51a28",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/fb4161d4ca864258de6a2dc5b3c18f08cbe51a28",
-      "message": "Verify authenticated event-history delivery checkpoints\n\nAdd absent-ID, honest-challenge refusal and combined maximum-shape acceptance fixtures. Verify the actual production owner at the proposed retention profile, preserve measurement provenance, and record the remaining live prerequisites. Local checkpoints 1–3 pass; the prepared live campaign remains blocked before deployment. Full protocol acceptance and deferred recovery remain open.",
+      "sha": "8eeda7e5f1eed8993a7318c549b50e21a8000dc6",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/8eeda7e5f1eed8993a7318c549b50e21a8000dc6",
+      "message": "Build every runtime dependency in the node image and copy all manifests\n\nThe node image relied on a midgard-node prebuild that 0c1adbd33 removed, so\nit shipped without lucid-midgard, core or sdk dist and the smoke run could not\nload the sdk. The watcher image's deploy resolves its midgard-node workspace\nedge, so it needs every workspace manifest, as the node image already has.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-24T08:02:43Z"
+      "authorDate": "2026-09-26T08:30:26Z"
     },
     {
-      "sha": "89427ff467736dc02c9084199920a5998fb0717f",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/89427ff467736dc02c9084199920a5998fb0717f",
-      "message": "Integrate authenticated event-history delivery checkpoint\n\nConsolidate the contract, SDK, proof, watcher and production-owner work with\nthe completed cleanup in the original checkout. Preserve authenticated sorted\nUTxO history, signed intent, retained membership and the bounded dependent\nrollback repair; document the remaining acceptance gates.\n\nVerified production deposit/withdrawal journeys, current observed recovery,\nrequired node (125) and emulator (64) cases, 195 Aiken history tests, 13 installed\ntransition lifecycle cases, and 1,340 independently decoded signed receipts.\nRegenerate the transition fit ledger with prior evidence retained locally.\n\nThis is an integration checkpoint, not full acceptance or an ABI freeze.\nReference-input fixture, broader recovery/crash coverage, remaining proof/ABI\nacceptance, existing-state migration and live deployment gates remain open.\nSee docs/fault-proofs/event-history-delivery-checkpoint.md for scope and evidence.",
+      "sha": "8f8b391f88c73385d317c9d69e45e230c1828ee8",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/8f8b391f88c73385d317c9d69e45e230c1828ee8",
+      "message": "Give both images the test-support manifest and the Go test fixture\n\nEvery package lists @al-ft/midgard-test-support as a dev dependency, so the\nfrozen install and `pnpm deploy` need its manifest in the image. The\nwatcher's Go tests read tests/support/conway-block.hex from outside the\nnative-chain-sync directory, which the build stage never copied.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-24T06:44:56Z"
+      "authorDate": "2026-09-26T06:59:58Z"
     },
     {
-      "sha": "1f3280f93cfc903c2532bb7d041f5a7ff4cdb7aa",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/1f3280f93cfc903c2532bb7d041f5a7ff4cdb7aa",
-      "message": "Fix pre-push review findings and apply the skipped format and lint pass\n\n- Node CI: the compose render step copies .env.example to .env, since\n  every node stack requires an operator .env beside it and a fresh checkout\n  has none; the step failed on every run.\n- Node retention: test that a terminal transition shallower than the\n  manifest's finality depth is refused, the only database-side guard\n  before a removed header's payload becomes prunable.\n- Watcher: drop two comments describing the deleted node admin key.\n- Run the prettier and eslint pass the pre-commit hook would have run on\n  the preceding commits (import order, one test fixture); keep the\n  committee's late-assigned interval and API server as let, since the tick\n  runner's fatal exit closes over them before they exist.",
+      "sha": "6705ce632bfd5505f628aa5edacfd5c1e9cc3285",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/6705ce632bfd5505f628aa5edacfd5c1e9cc3285",
+      "message": "Fix the first CI run: script modes, the vendored uplc tarball, the MPF prebuild\n\n- build-aiken-fork.sh and start-test-postgres.sh were committed as 100644\n  (core.fileMode=false hides it), so the fork build exited 126. A test now\n  reads the index modes of every script a workflow runs by path and of every\n  hook.\n- demo/.dockerignore dropped every .tgz, and neither image copied vendor/,\n  so pnpm could not resolve the vendored uplc override in either image.\n- The throughput gates import lucid-midgard's dist; their job now builds it.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-24T00:41:04Z"
+      "authorDate": "2026-09-26T05:52:56Z"
     },
     {
-      "sha": "b8fbbcddfe3b2c2ff37fd802a8d4c1c27992b8df",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/b8fbbcddfe3b2c2ff37fd802a8d4c1c27992b8df",
-      "message": "Rename the DA watcher to the committee node, coordinate locally, and bound DA retention\n\nRename the da-committee-node's watcher service and stores to committee\nterms (committee-service.ts, CommitteeStore, the \"committee\" DA transport\ntarget and libp2p runtime manifest host) across the node, core, node-tools\nand docs.\n\nMake the operator launch path work from a fresh clone:\n- delete the never-executed l1-services compose; the midgard-node Kupmios\n  overlay is the L1 stack, with Kupo pinned by digest and run without\n  --prune-utxo, one cardano-node default, and the mithril client moved to\n  its maintained image;\n- delete the dead node .dockerignore and da-libp2p overlay, fix the\n  benchmark overlay, interpolate PORT in ports and healthchecks;\n- render every node compose combination and the phase-4 devnet compose in\n  node CI, build the node image and smoke its CLI; install pnpm from each\n  package.json in the docs-site and pages workflows;\n- point the docs-site L1 backend, local stack and committee pages at the\n  overlay and drop the removed release-evidence digest gate.\n\nState-queue mutation coordination (D8):\n- The watcher and fault-proof removal paths use one local retry-until-\n  confirmed coordinator; the node URL, admin key and lease TTL leave the\n  watcher process config, the fault-proof CLI flags and the journey harness\n  lease server. A journal recorded under a node-URL source is refused.\n- The node's HTTP state-queue mutation lease endpoint, its resolver, routes\n  and tests are deleted; the internal lease and its status field stay.\n\nWatcher startup (D11): the readiness header hash is a fixed constant and\njournals live under readiness/<category> and bindings/<category>.\n\nWatcher packaging (D9): watcher-process.example.json and\nauthority.example.json templates with parse tests, .env.example, a\ntwo-service compose (authority + watcher) rendered in CI with the pinned\nimage check, and a README section for running it.\n\nDA retention (D7): one core prune decision (confirmed head and live queue\nretain, removed or past the required window prunes, otherwise retain) is\nshared by the node and the committee. Both read the confirmed head and live\nqueue from authenticated L1 only, retry while the view is unavailable and\nexit once L1_VIEW_FATAL_MS passes. RETENTION_DAYS=0 no longer disables\npayload pruning; the node prunes in one DELETE; the SDK retention-evidence\nmodule and the committee's availability retention source are deleted.",
+      "sha": "ee8429f0a3cb941cebcad07053a8e4600fc00295",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ee8429f0a3cb941cebcad07053a8e4600fc00295",
+      "message": "Merge the Wave 1 CI hardening into the agent-hardening branch\n\nIntegration on top of the merge:\n- Repo Tools CI also runs the generated required-checks check and the three\n  agent-documentation checks, so the rules they guard carry [ci: ...] tags.\n- Preflight drops its pending-sibling list now that the workflow lint and\n  trigger test have landed; the registry test requires every script to exist.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-23T23:55:51Z"
+      "authorDate": "2026-09-26T05:44:37Z"
     },
     {
-      "sha": "090436fc3ca20d197ad6885e9b98c3ae8879bc9c",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/090436fc3ca20d197ad6885e9b98c3ae8879bc9c",
-      "message": "Add authenticated event history and the completed-fraud queue marker (in progress)\n\nWork in progress from the event-history program; ABI not frozen and no gap\nclosure claimed. See docs/fault-proofs/event-history-progress.md.\n\n- Aiken: event-history library (admission, funding, horizon, mutation,\n  ordering, output claims, proof evidence, retained data, retirement) and\n  the user-events history, history-data and history-retirement validators;\n  fabricated-deposit and fabricated-withdrawal steps 01-04 read the paired\n  history; state-queue nodes carry a proven_fraud marker.\n- SDK: event-history capture, funding, payload, proof, query and build\n  helpers; fabricated-family contracts take history parameters.\n- Fault proofs: fabricated history witness, completed-fraud and proof\n  validity modules; fabricated-family preparation and submission read the\n  history; emulator coverage for capture, list, output claims, retention,\n  preparation and the completed-fraud marker.\n- Core, node and watcher fixtures: deployment identity requires\n  event-history bounds; manifests, contract registration and merge readiness\n  follow the proven_fraud marker.\n\nKnown incomplete: the watcher's createCatalogueCompleteCanonicalReplay call\ndoes not yet pass the new history input.",
+      "sha": "ef6cc3cad13b03491912b0450bc641eb6a4c0046",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ef6cc3cad13b03491912b0450bc641eb6a4c0046",
+      "message": "Record Wave 1 CI progress in the hardening plan\n\nTick W1.2 to W1.7 and W2.14 with where each landed, and record the local\nrun of the split Node CI under W1.1, which stays open: the remaining reds\ncome from the selected deployment profile, not from CI.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-23T23:54:50Z"
+      "authorDate": "2026-09-26T05:38:27Z"
     },
     {
-      "sha": "409dfdaa6181941b32b1e833adfd630cc5580c67",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/409dfdaa6181941b32b1e833adfd630cc5580c67",
-      "message": "Pin Ogmios v7.0.0 and cardano-node 11.1.0 at every L1 stack site\n\nThe three L1 stacks disagreed: l1-services ran Ogmios v6.11.0 against\ncardano-node 10.6.3, the kupmios compose defaulted Ogmios to the floating\n`latest` tag next to node 11.0.1, and only the devnet pinned v7.0.0 by\ndigest with node 11.1.0. All three now use the devnet's digests.\n\n- l1-services: Ogmios v7.0.0 by digest; the node image example moves to\n  11.1.0 by digest, which is what v7.0.0 is built against.\n- kupmios compose and env example: the Ogmios default is the digest-pinned\n  v7.0.0 tag instead of `latest`. The node tag stays a plain `11.1.0`\n  because the Mithril bootstrap script parses it as a version to compare\n  against the certified snapshot's node version.\n- Docs table and the local L1 observation helper's fidelity note updated\n  to match. The v6 to v7 transaction schema change only drops empty\n  `validityInterval` and `outputs`; the shapes the helper asserts are\n  unchanged, and the renamed reference-script parameter is already\n  normalised by the manifest reader and the pinned Kupmios provider.",
+      "sha": "cb3961d73ccd8b6d719843c3ed0616abfe59b824",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/cb3961d73ccd8b6d719843c3ed0616abfe59b824",
+      "message": "Format the three files the workspace format check rejects\n\npnpm --dir demo format-check failed at 71e605e46 on three files from that\ncheckpoint. This is prettier --write output only.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-22T15:51:02Z"
+      "authorDate": "2026-09-26T05:06:43Z"
     },
     {
-      "sha": "1b53eafd8c0c88c36232869b23eb8aaf48f7f8c2",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/1b53eafd8c0c88c36232869b23eb8aaf48f7f8c2",
-      "message": "Single-source the classifier's replay requirements and gate on the predecessor ledger\n\nThe header classifier carried three literal category lists: the families\nwhose fault proof opens prev_utxos_root and therefore need the\nauthenticated predecessor ledger, and (twice) the families whose\ndetection replays the historical native-script corpus. The watcher\nkept its own copy of the first list and gated fault decisions on\n`replayContext === undefined`. That gate was vacuous in production:\nthe launch scope always includes crossBlockDuplicateEvent, whose\nsettlement capture attaches a context to every decision, so a\npredecessor-family decision that omitted the predecessor passed.\n\nBoth sets now live in workflow/replay-requirements.ts as\nPREDECESSOR_LEDGER_PROOF_CATEGORIES and\nHISTORICAL_CORPUS_REPLAY_CATEGORIES with a `launchScopeRequires`\nhelper; the classifier and the watcher derive from them. The doc\ncomments record that these are not the registry's `requires` sets:\n`replayContext` there means the artifact re-derives from the admitted\ncontext object, which is a different fact enforced at load time.\n\nThe watcher's decision-time gate now checks the invariant the\nclassifier actually establishes: a fault decision in a predecessor\nfamily on a header that commits a non-empty previous ledger must carry\n`replayContext.predecessor`. A genesis-ledger header is admitted\nwithout one. Families that only need the context object are admitted\nat decision time and refused by their application record at load,\nwhich the tests pin per family. Disabling the gate fails exactly the\neight refusal cases.\n\nNew tests pin both sets against the catalogue and the registry: the\ncorpus set is a strict subset of the historicalNativeScriptAuthority\nfamilies, and the ledger set intersects the registry's replayContext\nfamilies in exactly noReferenceInput and nonExistentInput.\n\nCloses #677.",
+      "sha": "2d9ee1b3630624a050ce63d503050f90d994dacb",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/2d9ee1b3630624a050ce63d503050f90d994dacb",
+      "message": "Sort imports and exports that demo lint rejects",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-22T01:04:28Z"
+      "authorDate": "2026-09-26T04:58:32Z"
     },
     {
-      "sha": "ea76366e18512ed6aba0f1839eecb0115043cb4f",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ea76366e18512ed6aba0f1839eecb0115043cb4f",
-      "message": "Speed up the watcher and fault-proof test suites\n\nThe fault-proof suite drops from about 43 to about 20 minutes at eight\nforks and the watcher suite from about 26 minutes at two forks to about\nfour at eight, with every test still isolated per file. The savings come\nfrom removing repeated work rather than from adding forks:\n\n- core validation-merkle: memoize the membership index per leaf array so\n  proofs for a 1,304-asset value no longer rebuild the frontier per leaf.\n- sdk blueprint: apply blueprint parameters with the aiken uplc wasm\n  applier (byte-identical to the JavaScript applier over every\n  parameterised validator, roughly ten times faster) and key the applied\n  script cache by the raw inputs instead of hashing the compiled code on\n  every lookup. Adds @lucid-evolution/uplc as a direct sdk dependency at\n  the pin lucid already uses.\n- fault-proofs journal: fold the workflow incrementally instead of\n  revalidating the whole journal on every append and load.\n- fault-proofs runtime: memoize the seed-derived signer per Lucid\n  instance instead of re-deriving the BIP32 key on every step.\n- mint-authorization: index the batch generator by encoded state instead\n  of replaying from the first batch on every evaluate step, and memoize\n  artifact admission by digest.\n- transition-trace: memoize the MPF trie per root object.\n- watcher catalogue fixture: emit definite-length CBOR for positional\n  script bytes; the indefinite heads made cbor-x decode pathologically.\n- watcher user-event-history test: compare byte stores by content rather\n  than through deep equality on large typed arrays.\n- watcher vitest: derive the fork count from the host with an override\n  through MIDGARD_WATCHER_FORKS.\n- fault-proofs vitest: rank the longest emulator files first on cold\n  runs, record the measured suite shape, and pick the evaluator per\n  harness. Scalus stays the default for mint authorization because two\n  size-at-maximum cases pass under it while the aiken evaluator reports\n  them a few thousand memory units over the limit; that disagreement is\n  an open question and is documented at the harness option. Lifecycles\n  away from the limit opt into the faster aiken evaluator.",
+      "sha": "349a7bea4c30c16b13bd252561a937be79b163c7",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/349a7bea4c30c16b13bd252561a937be79b163c7",
+      "message": "Let ESLint type-check the fault-proofs Vitest config\n\nThe config sits outside the package tsconfig and was missing from the\ndefault-project list, so demo lint failed to parse it.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-22T00:48:31Z"
+      "authorDate": "2026-09-26T04:54:31Z"
     },
     {
-      "sha": "00c96e46490b7d7ad8b80a347474d3e59db607a0",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/00c96e46490b7d7ad8b80a347474d3e59db607a0",
-      "message": "Document that the retained-DA transport starts locally and is not retried in process\n\nThe shared retained-DA transport does not dial a peer when it starts: it\nbuilds the local libp2p node with inbound gated and no listen address, and\npeers are dialed per retrieval request under a lease. A start failure is\ntherefore local and deterministic. The classification that first needs the\ntransport fails closed, the process exits 70 with the error in its\nfailed_closed record, and a restart owns a fresh transport, so the sticky\nfailed status needs no in-process retry with backoff.\n\nSay so in the owner's status comment, the README readiness section, and the\nchallenger runbook, and name the two tests after the start failure they\nexercise instead of a dial.",
+      "sha": "39180b9887a17b25c5326d71d8cfc268325934e5",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/39180b9887a17b25c5326d71d8cfc268325934e5",
+      "message": "Point the verification guide at preflight instead of a hand-kept table\n\nThe required-checks table in verification.md is replaced by preflight and the\nlist it generates. Preflight gains the agent-config check and the e2e runbook\nvalidator; the five rows it cannot run yet stay in a short hand-kept table.\nRules that a hook, the doctor or the runbook validator now enforce carry that\ntag instead of [review].",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-22T00:37:43Z"
+      "authorDate": "2026-09-26T04:51:15Z"
     },
     {
-      "sha": "ff111a3e8d06b05482c1bdc273ea20f5e1b6d753",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ff111a3e8d06b05482c1bdc273ea20f5e1b6d753",
-      "message": "Test the watcher's decision-time predecessor-authority gate per family\n\nThe gate in the fault-proof application's classifyHeader entry refuses a\nfault decision for a family whose record requires the predecessor replay\ncontext when the classifier retained none. Until now only the set was\npinned; the check itself, its refusal, and what the runner later sees were\nuntested for the three families #675 widened it to. The new table-driven\ntest drives the real entry with the classifier module as a double: every\npredecessor family is refused at the exact message and leaves no replay\ncontext for its runner, whose record then refuses at its own requires\ngate; every predecessor family with a retained context is admitted and the\nloader hands that context to the record, which resolves exactly its\nroster; every other installed family is admitted without one. Disabling\nthe gate fails exactly the five refusal cases.",
+      "sha": "e07088d64aab3d5d58885e8c6e8121b2552f441d",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/e07088d64aab3d5d58885e8c6e8121b2552f441d",
+      "message": "Wire the landed agent-doc checks into preflight and exempt its generated list\n\nThe enforcement-tag checker now skips docs/agents/required-checks.md: it is\ngenerated from the preflight registry, which is itself the enforcement, so\nits rules need no tags and its length no budget. The misses log is marked as\na future path for the doc-link check, and preflight no longer treats the\nagent-doc scripts as pending siblings.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-21T23:42:40Z"
+      "authorDate": "2026-09-26T04:49:18Z"
     },
     {
-      "sha": "2873ba0838c4a1a24a60824ad1ba3a21859cd0cc",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/2873ba0838c4a1a24a60824ad1ba3a21859cd0cc",
-      "message": "Report the shared retained-DA transport in operations status\n\nStartup readiness stopped opening the retained-DA transport in #675, so\nits health needs a live home. The retained-DA runtime owner now exposes\nthe state of its one shared transport (idle until the first workflow\nlaunch, opening, open, failed with the dial error, closed); the fault-proof\napplication delegates to it and operations status carries it, adding the\nretained_da_transport_failed readiness reason when a dial has failed.\nClosing an owner whose dial failed no longer re-throws the dial error.\nThe watcher README states what startup readiness proves versus what\noperations status reports.",
+      "sha": "12da39f8581a2aa54ebdeb8986a2abd523d3e848",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/12da39f8581a2aa54ebdeb8986a2abd523d3e848",
+      "message": "Merge enforcement-tagged rules, doc checks and per-worktree isolation\n\n# Conflicts:\n#\tdocs/exec-plans/agent-contribution-hardening.md",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-21T21:47:45Z"
+      "authorDate": "2026-09-26T04:46:30Z"
     },
     {
-      "sha": "a878940a8a53ededef0249c1aece1db01d2b104e",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/a878940a8a53ededef0249c1aece1db01d2b104e",
-      "message": "Re-measure the transition-trace workflow fit ledger against the current blueprint\n\nThe committed ledger was bound to blueprint 11593a4e; the installed\nlifecycle test re-derives it from the blueprint in use and has rewritten it\nin every session since. Same 486 entries, re-measured against 04790ae6\nunder the same compiler.",
+      "sha": "00677c22fb248e73a5f894d76fc1addde709f893",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/00677c22fb248e73a5f894d76fc1addde709f893",
+      "message": "Record Wave 2 rule and worktree progress in the hardening plan\n\nTicks the Wave 2 items that are now in the tree and notes what remains\nof the partial ones: the operator compose files still fix their ports,\nthe event-history artifacts still sit in the tree, the core dist\nassertion waits for the preflight, and fast-check is kept for W6.3.\nThe plan's citations of another repository's files and of future\ndeliverables carry doc-links markers.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-21T21:47:45Z"
+      "authorDate": "2026-09-26T04:45:34Z"
     },
     {
-      "sha": "a7e66d71cfb8fd40a24146b4800e32190ac866cc",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/a7e66d71cfb8fd40a24146b4800e32190ac866cc",
-      "message": "Add the authenticated event-history architecture proposal for NIFP-01 to 03\n\nA design document proposing a cumulative authenticated event dictionary\nwith deterministic shards and immutable checkpoints, its security\nproperties, alternatives, retention, batched-admission fallback, cost\nmodel and acceptance criteria, plus a research note recording the current\nfabricated-event, watcher retention and transition-trace boundaries it\nstarts from. Status is Proposed; remaining-gaps.md now points at it and\nrecords that the gaps stay open until it is accepted and implemented.",
+      "sha": "48d059ad9cc6e0480b2865f9a14d4232dcabc818",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/48d059ad9cc6e0480b2865f9a14d4232dcabc818",
+      "message": "Keep CLAUDE.md a pointer and shared agent settings narrow\n\nCLAUDE.md is loaded by one agent and AGENTS.md by the rest, so a rule\nwritten only in CLAUDE.md is a second source that drifts. The lint\nrequires every tracked CLAUDE.md to be a symlink to AGENTS.md or a short\npage that links it, states no rule, carries no enforcement tag, and\npoints each paragraph at a tracked path.\n\nA tracked .claude/settings.json applies to everyone who opens the\nrepository. The lint allows only a schema, SessionStart hooks that run\none tracked script without shell composition, deny and ask permission\nlists, and includeCoAuthoredBy false; allow lists, defaultMode,\nadditionalDirectories, env and every other key fail, as does a tracked\nsettings.local.json. No settings file is tracked today; the fixture\ntests show each widening is caught.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-21T21:47:45Z"
+      "authorDate": "2026-09-26T04:45:28Z"
     }
   ],
   "contributors": [
@@ -326,6 +326,12 @@
   ],
   "issues": [
     {
+      "number": 683,
+      "title": "RemoveFraudulentBlocksLink can slash any operator: restore the descendant-operator check",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/683",
+      "updated_at": "2026-09-26T05:41:36Z"
+    },
+    {
       "number": 682,
       "title": "Spec: bounded in-memory reference-script publication chaining",
       "html_url": "https://github.com/Anastasia-Labs/midgard/issues/682",
@@ -360,18 +366,6 @@
       "title": "Family registry 7/8: Watcher fault-proof application as one loop over the registry",
       "html_url": "https://github.com/Anastasia-Labs/midgard/issues/675",
       "updated_at": "2026-09-22T00:37:56Z"
-    },
-    {
-      "number": 676,
-      "title": "Family registry 8/8: Integrated verification against baseline and documentation for the registry",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/676",
-      "updated_at": "2026-09-21T21:12:33Z"
-    },
-    {
-      "number": 674,
-      "title": "Family registry 6/8: Runner factory table derived from the family application registry",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/674",
-      "updated_at": "2026-09-21T18:47:18Z"
     }
   ],
   "releases": [],
@@ -410,11 +404,11 @@
     },
     {
       "week": 1763856000,
-      "total": 16
+      "total": 15
     },
     {
       "week": 1764460800,
-      "total": 17
+      "total": 8
     },
     {
       "week": 1765065600,
@@ -458,7 +452,7 @@
     },
     {
       "week": 1771113600,
-      "total": 14
+      "total": 13
     },
     {
       "week": 1771718400,
@@ -466,7 +460,7 @@
     },
     {
       "week": 1772323200,
-      "total": 25
+      "total": 26
     },
     {
       "week": 1772928000,
@@ -482,15 +476,15 @@
     },
     {
       "week": 1774742400,
-      "total": 29
+      "total": 30
     },
     {
       "week": 1775347200,
-      "total": 41
+      "total": 42
     },
     {
       "week": 1775952000,
-      "total": 31
+      "total": 32
     },
     {
       "week": 1776556800,
@@ -510,11 +504,11 @@
     },
     {
       "week": 1778976000,
-      "total": 14
+      "total": 10
     },
     {
       "week": 1779580800,
-      "total": 2
+      "total": 1
     },
     {
       "week": 1780185600,
@@ -554,15 +548,15 @@
     },
     {
       "week": 1785628800,
-      "total": 100
+      "total": 0
     },
     {
       "week": 1786233600,
-      "total": 21
+      "total": 0
     },
     {
       "week": 1786838400,
-      "total": 79
+      "total": 0
     },
     {
       "week": 1787443200,
@@ -574,7 +568,7 @@
     },
     {
       "week": 1788652800,
-      "total": 142
+      "total": 85
     },
     {
       "week": 1789257600,
@@ -582,7 +576,7 @@
     },
     {
       "week": 1789862400,
-      "total": 26
+      "total": 123
     }
   ]
 }
