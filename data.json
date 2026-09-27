@@ -1,10 +1,10 @@
 {
-  "fetchedAt": "2026-09-26T11:06:51.245Z",
+  "fetchedAt": "2026-09-27T11:45:21.731Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 25,
     "forks_count": 11,
-    "open_issues_count": 137
+    "open_issues_count": 136
   },
   "languages": {
     "Aiken": 359544,
@@ -17,109 +17,109 @@
   },
   "commits": [
     {
-      "sha": "56f52da5a41d3f011783899e724de47a3df8f0e2",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/56f52da5a41d3f011783899e724de47a3df8f0e2",
-      "message": "Deploy the watcher image from the install step's pnpm store\n\nAs in the node image: without the store, deploy re-prepares the git-hosted\nmerkle-patricia-forestry package and fails for want of its dev tooling.",
+      "sha": "a0bfebb040b175ab20b72f3dd20ab14b87f71f57",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/a0bfebb040b175ab20b72f3dd20ab14b87f71f57",
+      "message": "Merge the latest end-to-end commits into colll78/canonical-v1-watcher-l1-source-checkpoint",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-26T08:45:39Z"
+      "authorDate": "2026-09-26T19:15:46Z"
     },
     {
-      "sha": "355b58689c55ca969ce195edd651967c670c2d38",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/355b58689c55ca969ce195edd651967c670c2d38",
-      "message": "Build only the watcher's production chain in its image\n\nWith every manifest present, `--filter midgard-watcher...` also selected the\ndev-only midgard-node chain, whose sources the image does not copy.",
+      "sha": "e68a727fb4f043dd1171824e92743a8c6598fbc8",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/e68a727fb4f043dd1171824e92743a8c6598fbc8",
+      "message": "Mark the delivered lint rules, obligation tests, test-environment skill and compose derivation in the hardening plan",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-26T08:39:07Z"
+      "authorDate": "2026-09-26T19:15:35Z"
     },
     {
-      "sha": "8eeda7e5f1eed8993a7318c549b50e21a8000dc6",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/8eeda7e5f1eed8993a7318c549b50e21a8000dc6",
-      "message": "Build every runtime dependency in the node image and copy all manifests\n\nThe node image relied on a midgard-node prebuild that 0c1adbd33 removed, so\nit shipped without lucid-midgard, core or sdk dist and the smoke run could not\nload the sdk. The watcher image's deploy resolves its midgard-node workspace\nedge, so it needs every workspace manifest, as the node image already has.",
+      "sha": "c8ab76c79af74957affe8411abf5afe28db2d004",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/c8ab76c79af74957affe8411abf5afe28db2d004",
+      "message": "Give exact-point recovery captures the ledger-scan deadline\n\nOgmios has no address index, so the state-queue capture that the expired\nintent release and the signed-header recovery take at the history\ncheckpoint walks the whole UTxO set. Both ran under the 30 s per-request\nsource timeout. On preprod one such scan takes about 13 s alone and about\n36 s when three clients of the same node scan at once, as happens when\nthe DA members and the node start together, so the capture timed out and\nthe history owner never became ready.\n\nBoth captures now use the same scan deadline as the first-start capture,\nmoved next to the snapshot reader. The history lease keeps renewing from\nthe follower's heartbeats while a recovery capture runs. The capture\nfailure now carries its cause in the message; the log previously showed\nonly \"capture failed\".",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-26T08:30:26Z"
+      "authorDate": "2026-09-26T19:15:19Z"
     },
     {
-      "sha": "8f8b391f88c73385d317c9d69e45e230c1828ee8",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/8f8b391f88c73385d317c9d69e45e230c1828ee8",
-      "message": "Give both images the test-support manifest and the Go test fixture\n\nEvery package lists @al-ft/midgard-test-support as a dev dependency, so the\nfrozen install and `pnpm deploy` need its manifest in the image. The\nwatcher's Go tests read tests/support/conway-block.hex from outside the\nnative-chain-sync directory, which the build stage never copied.",
+      "sha": "afcb4e4a363c78f5e50158928061535c90582e87",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/afcb4e4a363c78f5e50158928061535c90582e87",
+      "message": "Merge branch 'colll78/ah-obligations' into colll78/canonical-v1-watcher-l1-source-checkpoint",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-26T06:59:58Z"
+      "authorDate": "2026-09-26T19:10:26Z"
     },
     {
-      "sha": "6705ce632bfd5505f628aa5edacfd5c1e9cc3285",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/6705ce632bfd5505f628aa5edacfd5c1e9cc3285",
-      "message": "Fix the first CI run: script modes, the vendored uplc tarball, the MPF prebuild\n\n- build-aiken-fork.sh and start-test-postgres.sh were committed as 100644\n  (core.fileMode=false hides it), so the fork build exited 126. A test now\n  reads the index modes of every script a workflow runs by path and of every\n  hook.\n- demo/.dockerignore dropped every .tgz, and neither image copied vendor/,\n  so pnpm could not resolve the vendored uplc override in either image.\n- The throughput gates import lucid-midgard's dist; their job now builds it.",
+      "sha": "44d754093121fb25855928019907d0ff9d636082",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/44d754093121fb25855928019907d0ff9d636082",
+      "message": "Merge branch 'colll78/ah-env' into colll78/canonical-v1-watcher-l1-source-checkpoint",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-26T05:52:56Z"
+      "authorDate": "2026-09-26T19:10:26Z"
     },
     {
-      "sha": "ee8429f0a3cb941cebcad07053a8e4600fc00295",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ee8429f0a3cb941cebcad07053a8e4600fc00295",
-      "message": "Merge the Wave 1 CI hardening into the agent-hardening branch\n\nIntegration on top of the merge:\n- Repo Tools CI also runs the generated required-checks check and the three\n  agent-documentation checks, so the rules they guard carry [ci: ...] tags.\n- Preflight drops its pending-sibling list now that the workflow lint and\n  trigger test have landed; the registry test requires every script to exist.",
+      "sha": "d65594ac8252415180840955a652b6f39b9a42a2",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d65594ac8252415180840955a652b6f39b9a42a2",
+      "message": "Merge branch 'colll78/ah-lint' into colll78/canonical-v1-watcher-l1-source-checkpoint",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-26T05:44:37Z"
+      "authorDate": "2026-09-26T19:10:26Z"
     },
     {
-      "sha": "ef6cc3cad13b03491912b0450bc641eb6a4c0046",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ef6cc3cad13b03491912b0450bc641eb6a4c0046",
-      "message": "Record Wave 1 CI progress in the hardening plan\n\nTick W1.2 to W1.7 and W2.14 with where each landed, and record the local\nrun of the split Node CI under W1.1, which stays open: the remaining reds\ncome from the selected deployment profile, not from CI.",
+      "sha": "3a05c36e47d798c0112e848f45b519da91cffe6c",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/3a05c36e47d798c0112e848f45b519da91cffe6c",
+      "message": "Document the Midgard lint rules and tag the rules they enforce\n\ndocs/agents/lint-rules.md lists each rule with the ruling behind it, its\nblind spots and the baseline workflow. The localUPLCEval, validity-window,\nexact-fee and command-placement rules in the agent docs now carry the\neslint tags, and the enforcement-tag check knows the new rules, so a\n[review] tag on a rule they enforce is reported as an under-claim.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-26T05:38:27Z"
+      "authorDate": "2026-09-26T19:06:06Z"
     },
     {
-      "sha": "cb3961d73ccd8b6d719843c3ed0616abfe59b824",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/cb3961d73ccd8b6d719843c3ed0616abfe59b824",
-      "message": "Format the three files the workspace format check rejects\n\npnpm --dir demo format-check failed at 71e605e46 on three files from that\ncheckpoint. This is prettier --write output only.",
+      "sha": "0d8bb8d8f58cb6bcf6ec8f1c9140cf8a99807064",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/0d8bb8d8f58cb6bcf6ec8f1c9140cf8a99807064",
+      "message": "Leave localUPLCEval to the workspace lint rule in the fault-proof limit scan\n\nThe limit-escape scan checked localUPLCEval in midgard-fault-proofs only.\nThe midgard/local-uplc-eval lint rule now checks it in every package with\nthe same markers, so the scan drops that kind and keeps the publication\nand transaction-limit checks.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-26T05:06:43Z"
+      "authorDate": "2026-09-26T19:06:06Z"
     },
     {
-      "sha": "2d9ee1b3630624a050ce63d503050f90d994dacb",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/2d9ee1b3630624a050ce63d503050f90d994dacb",
-      "message": "Sort imports and exports that demo lint rejects",
+      "sha": "99fcffd7b79a7783326c1300721759295939991e",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/99fcffd7b79a7783326c1300721759295939991e",
+      "message": "Check owner rulings with a local ESLint plugin and a shrink-only baseline\n\nThe demo workspace's ESLint config now loads eslint-plugin-midgard from\ndemo/scripts/lib, with eight rules that each end their message with how\nto fix the violation:\n\n- locale-compare-explicit-locale: localeCompare without a locale\n- local-uplc-eval: localUPLCEval set to anything but the literal true,\n  outside the unpublishable-diagnostic markers\n- fault-proof-reference-scripts-only: inline attach in the fault-proof\n  source trees\n- apply-params-through-blueprint: raw parameter application outside the\n  blueprint shape guard, and renamed imports of it\n- exact-fee-no-change-output: setMinFee without a completion in the same\n  function that turns coin selection off\n- scoped-utxo-override: an overrideUTxOs pin with no later\n  clearUTxOOverride on the same receiver\n- valid-from-wall-clock-margin: a validity lower bound from the wall\n  clock without a 30-second margin\n- node-cli-operator-commands-only: test, demo or bench commands in the\n  operator binary\n\nViolations that predate a rule are listed in baseline.json by rule, file\nand line text, each file entry with a reason, and do not fail the lint.\nA listed line that no longer occurs fails it, and prune-baseline.mjs only\nremoves sites. The plugin's test lints each rule's fixtures and requires\nthe reported lines to equal the ruleid lines, fails a rule without\nruleid and ok cases, checks every rule is an error in the config, and\nrefuses baseline entries without a reason or for missing rules or files.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-26T04:58:32Z"
+      "authorDate": "2026-09-26T19:06:06Z"
     },
     {
-      "sha": "349a7bea4c30c16b13bd252561a937be79b163c7",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/349a7bea4c30c16b13bd252561a937be79b163c7",
-      "message": "Let ESLint type-check the fault-proofs Vitest config\n\nThe config sits outside the package tsconfig and was missing from the\ndefault-project list, so demo lint failed to parse it.",
+      "sha": "c300c33d5507ba70218963b64a1240a41bb84e4c",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/c300c33d5507ba70218963b64a1240a41bb84e4c",
+      "message": "Map each validator and fault-proof family to its passing and failing emulator scenarios",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-26T04:54:31Z"
+      "authorDate": "2026-09-26T19:04:08Z"
     },
     {
-      "sha": "39180b9887a17b25c5326d71d8cfc268325934e5",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/39180b9887a17b25c5326d71d8cfc268325934e5",
-      "message": "Point the verification guide at preflight instead of a hand-kept table\n\nThe required-checks table in verification.md is replaced by preflight and the\nlist it generates. Preflight gains the agent-config check and the e2e runbook\nvalidator; the five rows it cannot run yet stay in a short hand-kept table.\nRules that a hook, the doctor or the runbook validator now enforce carry that\ntag instead of [review].",
+      "sha": "c2f8e1d8c5990332498886bd6993fa0ba0969e0c",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/c2f8e1d8c5990332498886bd6993fa0ba0969e0c",
+      "message": "Replace a missed signed commit and reconcile to whichever commit lands\n\nA signed commit and its replacement both spend the same state-queue tail\nnode, and the state queue appends only onto a node with an empty next, so\nat most one of them can land. The node no longer holds a missed commit\nuntil a coverage proof shows it can never land. Once the authenticated\nhead reaches the commit's exclusive TTL with the tail's next still empty,\nor another header has taken the tail, the history owner abandons the\njournal under a replacement digest, reopens its members, removes its\nlocal finalization job, releases the lease and moves the native root and\nSQL marker back to the base. The commit worker then builds a new commit\non the same tail.\n\nIf a rollback shows an earlier replaced commit landed after all, the owner\nrevives that journal, abandons the active replacement, re-takes the\nrevived journal's members and restores the candidate root. Only journals\nabandoned by replacement are ever revived; blocks removed by a state-queue\ncorrection are not. Reviving over a replacement that has already been\nlocally finalized is a fatal integrity error raised before anything is\nwritten. When the tail node itself has been removed by a correction, the\ncorrection path owns the journal and the release defers to it. The\nconfirmation workers defer every signed intent to the history owner\ninstead of refusing replacement.\n\nThe coverage proof requirement and the intent retention hold are removed.\n\nAlso included are the rewind review fixes: a rejected transaction is fully\nreversed when a correction re-includes a block (admission, address history\nand ledger receipts), the rollback check runs before a revoke and its\nintegrity error is fatal, a payload of an abandoned or removed block is no\nlonger owed to the DA committee, blocked pending reconciliation backs off\nand warns periodically, and the SQL marker update is a compare-and-swap.\n\nKnown open items: a tail spent and then merged away is treated as removed\nby a correction (defer) and a commit that landed and was merged before the\nowner saw it waits; both can wedge a multi-operator deployment. A\nreplacement also terminally rejects pending transactions that spend the\nreplaced block's deposit outputs.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-26T04:51:15Z"
+      "authorDate": "2026-09-26T19:01:10Z"
     },
     {
-      "sha": "e07088d64aab3d5d58885e8c6e8121b2552f441d",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/e07088d64aab3d5d58885e8c6e8121b2552f441d",
-      "message": "Wire the landed agent-doc checks into preflight and exempt its generated list\n\nThe enforcement-tag checker now skips docs/agents/required-checks.md: it is\ngenerated from the preflight registry, which is itself the enforcement, so\nits rules need no tags and its length no budget. The misses log is marked as\na future path for the doc-link check, and preflight no longer treats the\nagent-doc scripts as pending siblings.",
+      "sha": "6910ecc4c13eb3830a045d80d7d2875b99fa514e",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/6910ecc4c13eb3830a045d80d7d2875b99fa514e",
+      "message": "Check every fraud-proof category id written in the repository against the catalogue",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-26T04:49:18Z"
+      "authorDate": "2026-09-26T18:54:14Z"
     },
     {
-      "sha": "12da39f8581a2aa54ebdeb8986a2abd523d3e848",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/12da39f8581a2aa54ebdeb8986a2abd523d3e848",
-      "message": "Merge enforcement-tagged rules, doc checks and per-worktree isolation\n\n# Conflicts:\n#\tdocs/exec-plans/agent-contribution-hardening.md",
+      "sha": "3dc883da61abf2b1aac5b08f56fdaa04e1047191",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/3dc883da61abf2b1aac5b08f56fdaa04e1047191",
+      "message": "Add a local-test-environment skill\n\nWhat a checkout needs before its suites can run, verified against the tree:\nthe shared test Postgres on 127.0.0.1:5433 from scripts/start-test-postgres.sh\nwith synchronous_commit on, the per-worktree test-database prefix and\nMIDGARD_TEST_DATABASE_PREFIX, which packages' pretest builds dist and why\n(plain node resolves the workspace packages to dist, vitest to src), the\nblueprint stamp guard and its rebuild command, and running the operator\ncompose stack from a linked worktree. scripts/doctor.mjs is its entry point.\n\ndocs/agents/verification.md now points at the skill instead of repeating the\nPostgres and test-database notes, and the skill gets a line budget.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-26T04:46:30Z"
+      "authorDate": "2026-09-26T18:53:33Z"
     },
     {
-      "sha": "00677c22fb248e73a5f894d76fc1addde709f893",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/00677c22fb248e73a5f894d76fc1addde709f893",
-      "message": "Record Wave 2 rule and worktree progress in the hardening plan\n\nTicks the Wave 2 items that are now in the tree and notes what remains\nof the partial ones: the operator compose files still fix their ports,\nthe event-history artifacts still sit in the tree, the core dist\nassertion waits for the preflight, and fast-check is kept for W6.3.\nThe plan's citations of another repository's files and of future\ndeliverables carry doc-links markers.",
+      "sha": "8f010f74eb17b8dac9921a721efd2be740644735",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/8f010f74eb17b8dac9921a721efd2be740644735",
+      "message": "Give each worktree's operator compose stack its own project and ports\n\nThe operator compose files in demo/midgard-node took their project name from\nthe directory and published fixed host ports and fixed container names\n(prometheus, loki, promtail, grafana), so a second checkout's stack took over\nthe first one's containers or failed on its ports.\n\nEvery host port is now a variable whose default is today's value, and the\ncontainer names take an optional prefix. scripts/operator-compose.sh runs\ndocker compose with values derived from scripts/lib/worktree-identity.mjs: the\nmain checkout gets nothing, so its project, container names and ports stay\nexactly as before; a linked worktree gets project midgard-node-<hash>,\nprefixed container names and its own block of 100 host ports from\n20000 + 100 * slot. A block rather than phase 4's single offset, because these\ndefaults differ by multiples of 10 (12788/12798, 3100/3200) and one offset per\nworktree would land one worktree's port on another's. A value already set in\nthe environment or the env file compose reads, or -p, wins.\n\nThe four host-port lines in .env.example are commented out: set there, a copy\nin a worktree would pin the historical ports and defeat the derivation. No\ncode reads them inside the container.\n\noperator-compose.test.mjs renders the real compose files and proves the main\ncheckout keeps today's names and ports, two linked worktrees get different\nprojects and disjoint ports, and an explicit setting wins; midgard-node-ci runs\nit in the operator compose job.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-26T04:45:34Z"
+      "authorDate": "2026-09-26T18:53:02Z"
     },
     {
-      "sha": "48d059ad9cc6e0480b2865f9a14d4232dcabc818",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/48d059ad9cc6e0480b2865f9a14d4232dcabc818",
-      "message": "Keep CLAUDE.md a pointer and shared agent settings narrow\n\nCLAUDE.md is loaded by one agent and AGENTS.md by the rest, so a rule\nwritten only in CLAUDE.md is a second source that drifts. The lint\nrequires every tracked CLAUDE.md to be a symlink to AGENTS.md or a short\npage that links it, states no rule, carries no enforcement tag, and\npoints each paragraph at a tracked path.\n\nA tracked .claude/settings.json applies to everyone who opens the\nrepository. The lint allows only a schema, SessionStart hooks that run\none tracked script without shell composition, deny and ask permission\nlists, and includeCoAuthoredBy false; allow lists, defaultMode,\nadditionalDirectories, env and every other key fail, as does a tracked\nsettings.local.json. No settings file is tracked today; the fixture\ntests show each widening is caught.",
+      "sha": "2de35de93f31164ab4b4fe7f8d7d5aca2b0d890f",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/2de35de93f31164ab4b4fe7f8d7d5aca2b0d890f",
+      "message": "Run CI's full Aiken suite through the fail-closed guard and lint for a bare aiken check",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-26T04:45:28Z"
+      "authorDate": "2026-09-26T18:48:56Z"
     }
   ],
   "contributors": [
@@ -366,14 +366,16 @@
       "title": "Family registry 7/8: Watcher fault-proof application as one loop over the registry",
       "html_url": "https://github.com/Anastasia-Labs/midgard/issues/675",
       "updated_at": "2026-09-22T00:37:56Z"
+    },
+    {
+      "number": 676,
+      "title": "Family registry 8/8: Integrated verification against baseline and documentation for the registry",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/676",
+      "updated_at": "2026-09-21T21:12:33Z"
     }
   ],
   "releases": [],
   "commitActivity": [
-    {
-      "week": 1759017600,
-      "total": 20
-    },
     {
       "week": 1759622400,
       "total": 15
@@ -404,11 +406,11 @@
     },
     {
       "week": 1763856000,
-      "total": 15
+      "total": 16
     },
     {
       "week": 1764460800,
-      "total": 8
+      "total": 17
     },
     {
       "week": 1765065600,
@@ -452,7 +454,7 @@
     },
     {
       "week": 1771113600,
-      "total": 13
+      "total": 14
     },
     {
       "week": 1771718400,
@@ -460,7 +462,7 @@
     },
     {
       "week": 1772323200,
-      "total": 26
+      "total": 25
     },
     {
       "week": 1772928000,
@@ -476,15 +478,15 @@
     },
     {
       "week": 1774742400,
-      "total": 30
+      "total": 29
     },
     {
       "week": 1775347200,
-      "total": 42
+      "total": 41
     },
     {
       "week": 1775952000,
-      "total": 32
+      "total": 31
     },
     {
       "week": 1776556800,
@@ -500,15 +502,15 @@
     },
     {
       "week": 1778371200,
-      "total": 23
+      "total": 25
     },
     {
       "week": 1778976000,
-      "total": 10
+      "total": 14
     },
     {
       "week": 1779580800,
-      "total": 1
+      "total": 2
     },
     {
       "week": 1780185600,
@@ -516,11 +518,11 @@
     },
     {
       "week": 1780790400,
-      "total": 30
+      "total": 31
     },
     {
       "week": 1781395200,
-      "total": 13
+      "total": 21
     },
     {
       "week": 1782000000,
@@ -548,15 +550,15 @@
     },
     {
       "week": 1785628800,
-      "total": 0
+      "total": 100
     },
     {
       "week": 1786233600,
-      "total": 0
+      "total": 21
     },
     {
       "week": 1786838400,
-      "total": 0
+      "total": 79
     },
     {
       "week": 1787443200,
@@ -568,7 +570,7 @@
     },
     {
       "week": 1788652800,
-      "total": 85
+      "total": 45
     },
     {
       "week": 1789257600,
@@ -576,7 +578,11 @@
     },
     {
       "week": 1789862400,
-      "total": 123
+      "total": 171
+    },
+    {
+      "week": 1790467200,
+      "total": 0
     }
   ]
 }
