@@ -1,10 +1,10 @@
 {
-  "fetchedAt": "2026-09-27T11:45:21.731Z",
+  "fetchedAt": "2026-09-28T13:25:13.327Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 25,
     "forks_count": 11,
-    "open_issues_count": 136
+    "open_issues_count": 145
   },
   "languages": {
     "Aiken": 359544,
@@ -17,109 +17,109 @@
   },
   "commits": [
     {
-      "sha": "a0bfebb040b175ab20b72f3dd20ab14b87f71f57",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/a0bfebb040b175ab20b72f3dd20ab14b87f71f57",
-      "message": "Merge the latest end-to-end commits into colll78/canonical-v1-watcher-l1-source-checkpoint",
+      "sha": "ac6c94217b9b48cacdfd2ba61a10c8176cc672c3",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ac6c94217b9b48cacdfd2ba61a10c8176cc672c3",
+      "message": "Record the pooled DA committee bond decision and its vocabulary (#685)\n\nEvery attestation locks its own DA bond today, and an honest block's bond has no release path. The owner replaced it with one DA bond pool for the whole committee: anyone may top it up, an attestation applies only while the pool holds one DA bond of backing, a lost availability challenge slashes the pool, and only the governance quorum can withdraw, after a delay. The decision record keeps the rejected options (a time-based per-block reclaim, and one bond per committee member) with the reasons they lost. CONTEXT.md gains the data-availability bonding terms, so the implementation tickets #686-#693 share one vocabulary.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-26T19:15:46Z"
+      "authorDate": "2026-09-27T17:37:41Z"
     },
     {
-      "sha": "e68a727fb4f043dd1171824e92743a8c6598fbc8",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/e68a727fb4f043dd1171824e92743a8c6598fbc8",
-      "message": "Mark the delivered lint rules, obligation tests, test-environment skill and compose derivation in the hardening plan",
+      "sha": "6afefbc0b246e4b3c3857211f577e0767ff1b166",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/6afefbc0b246e4b3c3857211f577e0767ff1b166",
+      "message": "Add the node L1 rollback redesign plan and its code audits\n\nRevision 4 of the proposed rollback redesign: owner rulings D1-D3, the P0 verifications, and the ticket breakdown in section 11. The six audits it cites (deletion, retained MPF roots, mempool reinjection, projection acceptance, recovery callers, schema draft) sit beside it so the plan's claims can be checked. Nothing in it is implemented yet, and its tickets are not published.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-26T19:15:35Z"
+      "authorDate": "2026-09-27T17:37:41Z"
     },
     {
-      "sha": "c8ab76c79af74957affe8411abf5afe28db2d004",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/c8ab76c79af74957affe8411abf5afe28db2d004",
-      "message": "Give exact-point recovery captures the ledger-scan deadline\n\nOgmios has no address index, so the state-queue capture that the expired\nintent release and the signed-header recovery take at the history\ncheckpoint walks the whole UTxO set. Both ran under the 30 s per-request\nsource timeout. On preprod one such scan takes about 13 s alone and about\n36 s when three clients of the same node scan at once, as happens when\nthe DA members and the node start together, so the capture timed out and\nthe history owner never became ready.\n\nBoth captures now use the same scan deadline as the first-start capture,\nmoved next to the snapshot reader. The history lease keeps renewing from\nthe follower's heartbeats while a recovery capture runs. The capture\nfailure now carries its cause in the message; the log previously showed\nonly \"capture failed\".",
+      "sha": "a1daf1220ff98d5bc7f3e78c48351b82be413680",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/a1daf1220ff98d5bc7f3e78c48351b82be413680",
+      "message": "Require public profiles to wait out a fork deeper than finality\n\nAn event's inclusion time is its transaction's validity upper bound\nplus the event wait, and a header's end time is its commit's validity\nupper bound, at most the maximum validity range after the commit's\nlower bound. Every event a header must include was therefore on L1 at\nleast (event wait - maximum validity range) before the commit became\nvalid.\n\ndeployment:check now requires every public profile to size that span\nas its confirmation depth in blocks, using the same 20 s mean block\ninterval and safety factor of two as the DA response budget:\nevent_wait_ms >= max_validity_range_ms + confirmation_depth * 40 s.\nAn honest block can then omit a required event only if L1 rolls back\npast its finality depth or produces under half its mean block rate for\nthe whole span, so the margin is probabilistic. Mainnet and\npreprod-public satisfy it (floor 1,680,000 ms). The README records\nthat under the stricter 3N/f worst case it uses to size the event\nwait, preprod-public's 30 minutes leave 22 blocks after the validity\nrange, not 30.\n\nThe testing profiles are exempt and accept the short-fork omission\nrisk that their 5 min event wait leaves. The block-interval constants\nlose their DA-specific names now that two budgets share them.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-26T19:15:19Z"
+      "authorDate": "2026-09-27T16:06:22Z"
     },
     {
-      "sha": "afcb4e4a363c78f5e50158928061535c90582e87",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/afcb4e4a363c78f5e50158928061535c90582e87",
-      "message": "Merge branch 'colll78/ah-obligations' into colll78/canonical-v1-watcher-l1-source-checkpoint",
+      "sha": "e967556137e91eb06098f5668fbc8385cbd1612b",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/e967556137e91eb06098f5668fbc8385cbd1612b",
+      "message": "Check the native owner before the phase-4 bootstrap touches the devnet\n\nOnly write-acceptance-env.sh checked the owner binary, and bootstrap ran it after the whole protocol bootstrap, so a missing or mismatched binary was found only after the L1 work, and rerunning bootstrap would repeat it on an initialized chain. The resolve-and-refuse logic now lives in native-owner.mjs; bootstrap runs it first through native-owner-preflight.sh, before compose up, and write-acceptance-env.sh pins its result. The README says to rerun only write-acceptance-env.sh after a late refusal.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-26T19:10:26Z"
+      "authorDate": "2026-09-27T15:53:05Z"
     },
     {
-      "sha": "44d754093121fb25855928019907d0ff9d636082",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/44d754093121fb25855928019907d0ff9d636082",
-      "message": "Merge branch 'colll78/ah-env' into colll78/canonical-v1-watcher-l1-source-checkpoint",
+      "sha": "6c375358524fde131051cb816586b1c2403802ac",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/6c375358524fde131051cb816586b1c2403802ac",
+      "message": "Leave the retention sweep interval to its derived default in .env.example\n\nThe template set WAIT_BETWEEN_RETENTION_SWEEPS=60000 while its own comment and the READMEs document the derived default min(900000, DA attestation timeout / 4). Any operator copying the template silently overrode that default. The line is now commented out, like L1_VIEW_FATAL_MS.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-26T19:10:26Z"
+      "authorDate": "2026-09-27T15:53:05Z"
     },
     {
-      "sha": "d65594ac8252415180840955a652b6f39b9a42a2",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d65594ac8252415180840955a652b6f39b9a42a2",
-      "message": "Merge branch 'colll78/ah-lint' into colll78/canonical-v1-watcher-l1-source-checkpoint",
+      "sha": "891c1102f51406fc7ecfdae0aabb7f2b93c7d07a",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/891c1102f51406fc7ecfdae0aabb7f2b93c7d07a",
+      "message": "Pin the native MPF owner in the live acceptance env checklist\n\nThe node refuses to listen without MPF_NATIVE_OWNER_BINARY_SHA256, which .env.example leaves blank, so following the checklist led to a crash loop. The checklist now names the owner path, sidecar and the command that prints the image's pin, and says to re-pin after each rebuild.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-26T19:10:26Z"
+      "authorDate": "2026-09-27T15:53:05Z"
     },
     {
-      "sha": "3a05c36e47d798c0112e848f45b519da91cffe6c",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/3a05c36e47d798c0112e848f45b519da91cffe6c",
-      "message": "Document the Midgard lint rules and tag the rules they enforce\n\ndocs/agents/lint-rules.md lists each rule with the ruling behind it, its\nblind spots and the baseline workflow. The localUPLCEval, validity-window,\nexact-fee and command-placement rules in the agent docs now carry the\neslint tags, and the enforcement-tag check knows the new rules, so a\n[review] tag on a rule they enforce is reported as an under-claim.",
+      "sha": "1023017a9700c425556226e4e7665421627ecd27",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/1023017a9700c425556226e4e7665421627ecd27",
+      "message": "Require an explicit committee finality depth\n\nThe committee launch defaulted CARDANO_FINALITY_DEPTH to 2 while preprod-testing pins confirmation depth 3, and the committee refuses a runtime/manifest mismatch. The launch now requires the value to be set to the manifest's l1Finality.confirmationDepth.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-26T19:06:06Z"
+      "authorDate": "2026-09-27T15:53:05Z"
     },
     {
-      "sha": "0d8bb8d8f58cb6bcf6ec8f1c9140cf8a99807064",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/0d8bb8d8f58cb6bcf6ec8f1c9140cf8a99807064",
-      "message": "Leave localUPLCEval to the workspace lint rule in the fault-proof limit scan\n\nThe limit-escape scan checked localUPLCEval in midgard-fault-proofs only.\nThe midgard/local-uplc-eval lint rule now checks it in every package with\nthe same markers, so the scan drops that kind and keeps the publication\nand transaction-limit checks.",
+      "sha": "74c1a41bb4780b4b918ac10477c0651e1743b6af",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/74c1a41bb4780b4b918ac10477c0651e1743b6af",
+      "message": "State the deposit validity upper bound as 120 s\n\nHistory submissions are valid from 60 s in the past for 180 s, so the upper bound is at most 120 s out, not 60 s.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-26T19:06:06Z"
+      "authorDate": "2026-09-27T15:53:05Z"
     },
     {
-      "sha": "99fcffd7b79a7783326c1300721759295939991e",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/99fcffd7b79a7783326c1300721759295939991e",
-      "message": "Check owner rulings with a local ESLint plugin and a shrink-only baseline\n\nThe demo workspace's ESLint config now loads eslint-plugin-midgard from\ndemo/scripts/lib, with eight rules that each end their message with how\nto fix the violation:\n\n- locale-compare-explicit-locale: localeCompare without a locale\n- local-uplc-eval: localUPLCEval set to anything but the literal true,\n  outside the unpublishable-diagnostic markers\n- fault-proof-reference-scripts-only: inline attach in the fault-proof\n  source trees\n- apply-params-through-blueprint: raw parameter application outside the\n  blueprint shape guard, and renamed imports of it\n- exact-fee-no-change-output: setMinFee without a completion in the same\n  function that turns coin selection off\n- scoped-utxo-override: an overrideUTxOs pin with no later\n  clearUTxOOverride on the same receiver\n- valid-from-wall-clock-margin: a validity lower bound from the wall\n  clock without a 30-second margin\n- node-cli-operator-commands-only: test, demo or bench commands in the\n  operator binary\n\nViolations that predate a rule are listed in baseline.json by rule, file\nand line text, each file entry with a reason, and do not fail the lint.\nA listed line that no longer occurs fails it, and prune-baseline.mjs only\nremoves sites. The plugin's test lints each rule's fixtures and requires\nthe reported lines to equal the ruleid lines, fails a rule without\nruleid and ok cases, checks every rule is an error in the config, and\nrefuses baseline entries without a reason or for missing rules or files.",
+      "sha": "b1100ae362d71446f1d92ebf50e0013d886d85ea",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/b1100ae362d71446f1d92ebf50e0013d886d85ea",
+      "message": "Set a deadline for public DA retrieval of each header\n\nThe committee prunes a merged non-head block's payload at end_time plus 1.5 x maturity (1,350 s on preprod-testing). Live acceptance now says to retrieve each header's payload as soon as it is attested and before that horizon, and that a later not-found is expected pruning.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-26T19:06:06Z"
+      "authorDate": "2026-09-27T15:53:05Z"
     },
     {
-      "sha": "c300c33d5507ba70218963b64a1240a41bb84e4c",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/c300c33d5507ba70218963b64a1240a41bb84e4c",
-      "message": "Map each validator and fault-proof family to its passing and failing emulator scenarios",
+      "sha": "06fd05f7090f8d0519a1b0c7efcaa04b9a35fcd1",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/06fd05f7090f8d0519a1b0c7efcaa04b9a35fcd1",
+      "message": "Derive the automatic-merge wait from block maturity\n\nThe await-automatic-merge step waited 900 s, shorter than the earliest merge of a header committed with a future end time under 900 s maturity. The budget is now maturity + 420 s end-time lead + 20 s alignment + 180 s confirmation + 300 s for sequential merges (1,820 s on preprod-testing), read from the compiled profile, and the runner timeout is 60 s longer than the loop's deadline.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-26T19:04:08Z"
+      "authorDate": "2026-09-27T15:53:05Z"
     },
     {
-      "sha": "c2f8e1d8c5990332498886bd6993fa0ba0969e0c",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/c2f8e1d8c5990332498886bd6993fa0ba0969e0c",
-      "message": "Replace a missed signed commit and reconcile to whichever commit lands\n\nA signed commit and its replacement both spend the same state-queue tail\nnode, and the state queue appends only onto a node with an empty next, so\nat most one of them can land. The node no longer holds a missed commit\nuntil a coverage proof shows it can never land. Once the authenticated\nhead reaches the commit's exclusive TTL with the tail's next still empty,\nor another header has taken the tail, the history owner abandons the\njournal under a replacement digest, reopens its members, removes its\nlocal finalization job, releases the lease and moves the native root and\nSQL marker back to the base. The commit worker then builds a new commit\non the same tail.\n\nIf a rollback shows an earlier replaced commit landed after all, the owner\nrevives that journal, abandons the active replacement, re-takes the\nrevived journal's members and restores the candidate root. Only journals\nabandoned by replacement are ever revived; blocks removed by a state-queue\ncorrection are not. Reviving over a replacement that has already been\nlocally finalized is a fatal integrity error raised before anything is\nwritten. When the tail node itself has been removed by a correction, the\ncorrection path owns the journal and the release defers to it. The\nconfirmation workers defer every signed intent to the history owner\ninstead of refusing replacement.\n\nThe coverage proof requirement and the intent retention hold are removed.\n\nAlso included are the rewind review fixes: a rejected transaction is fully\nreversed when a correction re-includes a block (admission, address history\nand ledger receipts), the rollback check runs before a revoke and its\nintegrity error is fatal, a payload of an abandoned or removed block is no\nlonger owed to the DA committee, blocked pending reconciliation backs off\nand warns periodically, and the SQL marker update is a compare-and-swap.\n\nKnown open items: a tail spent and then merged away is treated as removed\nby a correction (defer) and a commit that landed and was merged before the\nowner saw it waits; both can wedge a multi-operator deployment. A\nreplacement also terminally rejects pending transactions that spend the\nreplaced block's deposit outputs.",
+      "sha": "d46f43c84fb124f2df2e380ff69299e9d1103da3",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d46f43c84fb124f2df2e380ff69299e9d1103da3",
+      "message": "Mark the walkthrough's manual commit and merge calls devnet-only\n\nThe deposit/send/withdraw walkthrough called the admin /commit and /merge endpoints by hand, which bypasses the commit and automatic merge fibers that fresh-deploy acceptance must prove. It now says those calls are for a local devnet only, and live acceptance points at its withdrawal and payout commands with the instruction to wait for the fibers instead.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-26T19:01:10Z"
+      "authorDate": "2026-09-27T15:53:05Z"
     },
     {
-      "sha": "6910ecc4c13eb3830a045d80d7d2875b99fa514e",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/6910ecc4c13eb3830a045d80d7d2875b99fa514e",
-      "message": "Check every fraud-proof category id written in the repository against the catalogue",
+      "sha": "1d736653c75d85f36cc0ad1b4e4ae619786abb09",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/1d736653c75d85f36cc0ad1b4e4ae619786abb09",
+      "message": "Require the negligence timeout to cover the block-commitment gap\n\nThe scheduler's neglected-event guard accepts an event whose inclusion\ntime equals the tail block's end time, which that block already\nincludes. That is harmless only while inclusion + negligence timeout\ncan never precede tail end + maximum inactivity, and the operator\nwatchdog assumes the same ordering. Profile validation now enforces it\ninstead of relying on the shipped values.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-26T18:54:14Z"
+      "authorDate": "2026-09-27T15:53:05Z"
     },
     {
-      "sha": "3dc883da61abf2b1aac5b08f56fdaa04e1047191",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/3dc883da61abf2b1aac5b08f56fdaa04e1047191",
-      "message": "Add a local-test-environment skill\n\nWhat a checkout needs before its suites can run, verified against the tree:\nthe shared test Postgres on 127.0.0.1:5433 from scripts/start-test-postgres.sh\nwith synchronous_commit on, the per-worktree test-database prefix and\nMIDGARD_TEST_DATABASE_PREFIX, which packages' pretest builds dist and why\n(plain node resolves the workspace packages to dist, vitest to src), the\nblueprint stamp guard and its rebuild command, and running the operator\ncompose stack from a linked worktree. scripts/doctor.mjs is its entry point.\n\ndocs/agents/verification.md now points at the skill instead of repeating the\nPostgres and test-database notes, and the skill gets a line budget.",
+      "sha": "b1599ed78761383c88a35e8765153cb3e5f49f32",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/b1599ed78761383c88a35e8765153cb3e5f49f32",
+      "message": "Never count a suspended history authority row as a live owner\n\nRelease and suspend stamp lease_until with clock_timestamp(). This\nmachine's wall clock steps backwards by about a second every half\nminute, so a released row could read as live again before the next\ngeneration's acquire, and acquire refused the successor with \"History\nauthority still has a live owner\". A suspended row confers no\nauthority, so acquire now ignores its lease end. The restart helper\nuses the same rule and says whether the refusing lease belongs to the\nstopped owner or to another one.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-26T18:53:33Z"
+      "authorDate": "2026-09-27T15:53:05Z"
     },
     {
-      "sha": "8f010f74eb17b8dac9921a721efd2be740644735",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/8f010f74eb17b8dac9921a721efd2be740644735",
-      "message": "Give each worktree's operator compose stack its own project and ports\n\nThe operator compose files in demo/midgard-node took their project name from\nthe directory and published fixed host ports and fixed container names\n(prometheus, loki, promtail, grafana), so a second checkout's stack took over\nthe first one's containers or failed on its ports.\n\nEvery host port is now a variable whose default is today's value, and the\ncontainer names take an optional prefix. scripts/operator-compose.sh runs\ndocker compose with values derived from scripts/lib/worktree-identity.mjs: the\nmain checkout gets nothing, so its project, container names and ports stay\nexactly as before; a linked worktree gets project midgard-node-<hash>,\nprefixed container names and its own block of 100 host ports from\n20000 + 100 * slot. A block rather than phase 4's single offset, because these\ndefaults differ by multiples of 10 (12788/12798, 3100/3200) and one offset per\nworktree would land one worktree's port on another's. A value already set in\nthe environment or the env file compose reads, or -p, wins.\n\nThe four host-port lines in .env.example are commented out: set there, a copy\nin a worktree would pin the historical ports and defeat the derivation. No\ncode reads them inside the container.\n\noperator-compose.test.mjs renders the real compose files and proves the main\ncheckout keeps today's names and ports, two linked worktrees get different\nprojects and disjoint ports, and an explicit setting wins; midgard-node-ci runs\nit in the operator compose job.",
+      "sha": "cd838c8e4ed6e388c6f64ac9ac928a6c8945c9c9",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/cd838c8e4ed6e388c6f64ac9ac928a6c8945c9c9",
+      "message": "Name the live history lease a restarted test owner loses to\n\nA full node run once failed the endpoint-independence restart with only\n\"History authority still has a live owner\", after the restart's own\nrelease check had passed. The helper now reports the authority row it\nlost to, the stopped owner's token and the worker database, so the next\noccurrence identifies the holder.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-26T18:53:02Z"
+      "authorDate": "2026-09-27T15:53:05Z"
     },
     {
-      "sha": "2de35de93f31164ab4b4fe7f8d7d5aca2b0d890f",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/2de35de93f31164ab4b4fe7f8d7d5aca2b0d890f",
-      "message": "Run CI's full Aiken suite through the fail-closed guard and lint for a bare aiken check",
+      "sha": "697a84c9bc97a5256998a576cf2c21b59f7661d7",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/697a84c9bc97a5256998a576cf2c21b59f7661d7",
+      "message": "Clear the history authority before the local mutation job tests\n\nThe fixture producer gate refuses any acquired history owner row, and an\nearlier file on the same worker shard can leave one behind, which turned\nall seven fixture-producing tests red when the file ran after such a file.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-26T18:48:56Z"
+      "authorDate": "2026-09-27T15:53:05Z"
     }
   ],
   "contributors": [
@@ -326,52 +326,58 @@
   ],
   "issues": [
     {
-      "number": 683,
-      "title": "RemoveFraudulentBlocksLink can slash any operator: restore the descendant-operator check",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/683",
-      "updated_at": "2026-09-26T05:41:36Z"
+      "number": 685,
+      "title": "Spec: one pooled DA committee bond replaces the per-block DA bond",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/685",
+      "updated_at": "2026-09-27T17:38:24Z"
     },
     {
-      "number": 682,
-      "title": "Spec: bounded in-memory reference-script publication chaining",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/682",
-      "updated_at": "2026-09-25T00:27:30Z"
+      "number": 691,
+      "title": "DA bond pool operations: top-up and withdrawal CLI, low-backing alerts",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/691",
+      "updated_at": "2026-09-27T17:29:38Z"
     },
     {
-      "number": 681,
-      "title": "Availability-challenge discovery repeatedly fails when the canonical chain point changes during discovery",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/681",
-      "updated_at": "2026-09-23T12:18:00Z"
+      "number": 689,
+      "title": "SDK builders, codecs and emulator lifecycle tests for the pooled DA bond",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/689",
+      "updated_at": "2026-09-27T17:29:36Z"
     },
     {
-      "number": 680,
-      "title": "DA watchers remain unready after ordinary attested blocks merge: missing retention evidence",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/680",
-      "updated_at": "2026-09-23T12:16:49Z"
+      "number": 687,
+      "title": "DA bond pool contract: init, permissionless top-up, timeout-bound slash, delayed quorum withdrawal",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/687",
+      "updated_at": "2026-09-27T17:29:35Z"
     },
     {
-      "number": 679,
-      "title": "Private-testnet integration: deployment and runtime issues found across three attempts",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/679",
-      "updated_at": "2026-09-22T17:50:13Z"
+      "number": 686,
+      "title": "DA bond economics and timing constants for the pooled bond",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/686",
+      "updated_at": "2026-09-27T17:29:34Z"
     },
     {
-      "number": 678,
-      "title": "Unify the historical-authority config field names across the eight historical families and delete the per-record layout hook",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/678",
-      "updated_at": "2026-09-22T00:51:24Z"
+      "number": 688,
+      "title": "Bondless attestations and commitment-bound availability challenges (on-chain)",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/688",
+      "updated_at": "2026-09-27T17:29:32Z"
     },
     {
-      "number": 675,
-      "title": "Family registry 7/8: Watcher fault-proof application as one loop over the registry",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/675",
-      "updated_at": "2026-09-22T00:37:56Z"
+      "number": 693,
+      "title": "Availability timeout slashes the DA bond pool (on-chain)",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/693",
+      "updated_at": "2026-09-27T17:29:31Z"
     },
     {
-      "number": 676,
-      "title": "Family registry 8/8: Integrated verification against baseline and documentation for the registry",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/676",
-      "updated_at": "2026-09-21T21:12:33Z"
+      "number": 692,
+      "title": "Pooled DA bond end-to-end devnet journey and docs",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/692",
+      "updated_at": "2026-09-27T16:49:28Z"
+    },
+    {
+      "number": 690,
+      "title": "Committee node, operator node, watcher and deployment run on the pooled DA bond",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/690",
+      "updated_at": "2026-09-27T16:49:25Z"
     }
   ],
   "releases": [],
@@ -406,11 +412,11 @@
     },
     {
       "week": 1763856000,
-      "total": 16
+      "total": 15
     },
     {
       "week": 1764460800,
-      "total": 17
+      "total": 8
     },
     {
       "week": 1765065600,
@@ -502,15 +508,15 @@
     },
     {
       "week": 1778371200,
-      "total": 25
+      "total": 23
     },
     {
       "week": 1778976000,
-      "total": 14
+      "total": 10
     },
     {
       "week": 1779580800,
-      "total": 2
+      "total": 1
     },
     {
       "week": 1780185600,
@@ -518,11 +524,11 @@
     },
     {
       "week": 1780790400,
-      "total": 31
+      "total": 30
     },
     {
       "week": 1781395200,
-      "total": 21
+      "total": 13
     },
     {
       "week": 1782000000,
@@ -550,15 +556,15 @@
     },
     {
       "week": 1785628800,
-      "total": 100
+      "total": 0
     },
     {
       "week": 1786233600,
-      "total": 21
+      "total": 0
     },
     {
       "week": 1786838400,
-      "total": 79
+      "total": 0
     },
     {
       "week": 1787443200,
@@ -578,11 +584,11 @@
     },
     {
       "week": 1789862400,
-      "total": 171
+      "total": 172
     },
     {
       "week": 1790467200,
-      "total": 0
+      "total": 34
     }
   ]
 }
