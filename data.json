@@ -1,10 +1,10 @@
 {
-  "fetchedAt": "2026-09-29T12:29:16.707Z",
+  "fetchedAt": "2026-09-30T12:14:34.090Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 25,
     "forks_count": 11,
-    "open_issues_count": 145
+    "open_issues_count": 146
   },
   "languages": {
     "Aiken": 359544,
@@ -17,109 +17,109 @@
   },
   "commits": [
     {
-      "sha": "ac6c94217b9b48cacdfd2ba61a10c8176cc672c3",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ac6c94217b9b48cacdfd2ba61a10c8176cc672c3",
-      "message": "Record the pooled DA committee bond decision and its vocabulary (#685)\n\nEvery attestation locks its own DA bond today, and an honest block's bond has no release path. The owner replaced it with one DA bond pool for the whole committee: anyone may top it up, an attestation applies only while the pool holds one DA bond of backing, a lost availability challenge slashes the pool, and only the governance quorum can withdraw, after a delay. The decision record keeps the rejected options (a time-based per-block reclaim, and one bond per committee member) with the reasons they lost. CONTEXT.md gains the data-availability bonding terms, so the implementation tickets #686-#693 share one vocabulary.",
+      "sha": "dae1120a5611819af953ab539f848b5cdf745fdb",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/dae1120a5611819af953ab539f848b5cdf745fdb",
+      "message": "Evaluate scripts over the maps the fault proof commits\n\nThe node built each script context as Lucid Data. Lucid's encoder sorts\nevery map and its decoder merges duplicate keys. The fault proof keeps\ndatum and redeemer maps in their CBOR entry order, duplicates included,\nand orders the redeemer map by the witness list. The node sorted that\nmap. So a node could evaluate a script over a context the proof does not\ncommit. Two things went wrong:\n\n- An order-sensitive script could get a verdict the proof contradicts.\n- The trace builder failed closed with \"context differs\". That happened\n  on any transaction whose datum, output datum or redeemer held an\n  unsorted or duplicate-key map, or whose redeemers were not in sorted\n  order. Such a transaction's fraud was then unprovable.\n\nThe context is now built as harmonic Data straight from the witness\nbytes. It is encoded with the cardano-node encoder the CEK constants\nalready use. Harmonic's own dataToCbor is not used: it truncates byte\nstrings longer than 64 bytes. Redeemer data travels as its exact bytes\nthrough the ledger transaction, its codec and the worker wire format.\nThe context's redeemer map follows the witness list.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-27T17:37:41Z"
+      "authorDate": "2026-09-30T00:35:51Z"
     },
     {
-      "sha": "6afefbc0b246e4b3c3857211f577e0767ff1b166",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/6afefbc0b246e4b3c3857211f577e0767ff1b166",
-      "message": "Add the node L1 rollback redesign plan and its code audits\n\nRevision 4 of the proposed rollback redesign: owner rulings D1-D3, the P0 verifications, and the ticket breakdown in section 11. The six audits it cites (deletion, retained MPF roots, mempool reinjection, projection acceptance, recovery callers, schema draft) sit beside it so the plan's claims can be checked. Nothing in it is implemented yet, and its tickets are not published.",
+      "sha": "cdcf0eb196c7e19e3cd7488c95f5438eca4e7acc",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/cdcf0eb196c7e19e3cd7488c95f5438eca4e7acc",
+      "message": "Order the one-shot output Value like the script context\n\n`script_value_data` passed an output's canonical asset map straight into the\nTxOut Data it summarises. Canonical CBOR orders each policy's asset names\nlength-first, while the evaluated script context, the TypeScript context\ncommitment and the `ledger_output_value_v1` fold all order them by their\nbytes. So for a policy holding names such as `aa` and `0102`, the one-shot\npath behind `ledger_output_summaries_v1`, `ledger_output_descriptor_v1.build_v1`,\n`tx_out_data_v1` and `tx_out_summary_v1` produced a different summary, and a\ndifferent descriptor, from the one every producer commits. No deployed\nvalidator reaches this path; the blueprint is unchanged, 1163 validators with\nidentical hashes. Its callers are tests and fixtures, and a fixture with mixed\nname widths would have been silently wrong. The names are now re-sorted; policy\nids need no re-sort, since the canonical decode admits only 28-byte policies in\nascending order.\n\n`ledger_output_summaries_with_value_v1` let a caller substitute a Value summary\nwithout naming what authenticated it, and only one test used that branch. It is\nfolded into `ledger_output_summaries_v1`. The staged transition-trace rules\nalready compose through `ledger_output_summaries_of_authenticated_parts_v1`,\nwhose comment now says what it reads and where its Value comes from.\n\nThe test that used the removed branch paired an empty-value output with an\nunrelated 5,002-byte summary, so it pinned only how the parts compose. It now\nfolds a mixed-width Value through `ledger_output_value_v1`, composes it the\nway the output-summaries step does, and requires the one-shot summaries. With\nthe old ordering it fails. A new negative test pins that the fold refuses to\nfinalize, or to skip to finalizing, while assets remain; letting a no-witness\nstep jump to the finalize stage passed every existing test in the module and\nfails this one.\n\nThe sort adds execution cost only to tests that derive descriptors through the\none-shot path, so two execution ledgers are re-taken. In the transition-trace\ndescriptor ledger, deriving the descriptor of an output with no native assets\ncosts 666 mem more and the three-asset golden vector 27,850 mem more; each\ndeposit-arm derivation costs 9,546 mem more, and the L2 no-op arm's marginal\ncost falls by 134 mem. No fit judgement or crossing bracket moves. The Q21 L2 no-op row rises by\n532 mem and stays within the basis.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-27T17:37:41Z"
+      "authorDate": "2026-09-29T21:55:19Z"
     },
     {
-      "sha": "a1daf1220ff98d5bc7f3e78c48351b82be413680",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/a1daf1220ff98d5bc7f3e78c48351b82be413680",
-      "message": "Require public profiles to wait out a fork deeper than finality\n\nAn event's inclusion time is its transaction's validity upper bound\nplus the event wait, and a header's end time is its commit's validity\nupper bound, at most the maximum validity range after the commit's\nlower bound. Every event a header must include was therefore on L1 at\nleast (event wait - maximum validity range) before the commit became\nvalid.\n\ndeployment:check now requires every public profile to size that span\nas its confirmation depth in blocks, using the same 20 s mean block\ninterval and safety factor of two as the DA response budget:\nevent_wait_ms >= max_validity_range_ms + confirmation_depth * 40 s.\nAn honest block can then omit a required event only if L1 rolls back\npast its finality depth or produces under half its mean block rate for\nthe whole span, so the margin is probabilistic. Mainnet and\npreprod-public satisfy it (floor 1,680,000 ms). The README records\nthat under the stricter 3N/f worst case it uses to size the event\nwait, preprod-public's 30 minutes leave 22 blocks after the validity\nrange, not 30.\n\nThe testing profiles are exempt and accept the short-fork omission\nrisk that their 5 min event wait leaves. The block-interval constants\nlose their DA-specific names now that two budgets share them.",
+      "sha": "9993b316ecdb3f3a3f549f02e23042f59ff0d2ce",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/9993b316ecdb3f3a3f549f02e23042f59ff0d2ce",
+      "message": "Make node suite fixtures wait on the state they assert\n\n- The 10k DA publication test waited only for responses, which can arrive\n  before a peer's handler appends its metrics. It now waits until every peer\n  has recorded both completed requests.\n- The commit-selection cases skipped a scheduler refresh and assumed that left\n  too little headroom, which does not hold on a longer shift. They now place the\n  emulator at the current shift's end explicitly.\n- The journal retention fixture reopened the database layer for every block,\n  which hid the pruning cost and let its lease expire under contention. It now\n  builds the range in one layer and renews ownership on each append, as the\n  producer does.\n- Landed-merge finalization truncated four tables by hand; it now uses the\n  shared resetApplicationTables.\n- The admission backlog fixture drains through another connection and stamped\n  NOW(), which can be earlier than the admission's own timestamps. It keeps them\n  monotone with GREATEST.\n- The saturated-pool latency test asserted p99 <= 1.2 x an unsaturated p99, but\n  both were 24-sample p99s, and the ratio flaked under host load. It keeps the\n  absolute 1,000 ms bound, which still fails if admission queues behind the held\n  batch connections. A batch holder that fails before it acquires a connection\n  now fails its acquisition signal, so a connect timeout fails the test at once\n  instead of leaving it waiting for the test timeout.\n\nThe deposit-flow emulator publishes hundreds of reference scripts through\nprovider calls that resolve at once, which can starve worker IPC past Vitest\n3's 60 s reporting deadline. The shared fixture yields to I/O before each\nemulator submission. Vitest 4 removes the deadline (vitest-dev/vitest#8297),\nbut stable @effect/vitest supports only Vitest 3, so the wrapper stays until\nthe workspace moves to Effect 4.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-27T16:06:22Z"
+      "authorDate": "2026-09-29T20:30:52Z"
     },
     {
-      "sha": "e967556137e91eb06098f5668fbc8385cbd1612b",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/e967556137e91eb06098f5668fbc8385cbd1612b",
-      "message": "Check the native owner before the phase-4 bootstrap touches the devnet\n\nOnly write-acceptance-env.sh checked the owner binary, and bootstrap ran it after the whole protocol bootstrap, so a missing or mismatched binary was found only after the L1 work, and rerunning bootstrap would repeat it on an initialized chain. The resolve-and-refuse logic now lives in native-owner.mjs; bootstrap runs it first through native-owner-preflight.sh, before compose up, and write-acceptance-env.sh pins its result. The README says to rerun only write-acceptance-env.sh after a late refusal.",
+      "sha": "8a25f3ac14151c82986719d7fe3e0ae9448e6705",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/8a25f3ac14151c82986719d7fe3e0ae9448e6705",
+      "message": "Carry the upstream postgres.js fix for stranded reserve waiters\n\npostgres.js 3.4.9 can lose a queued reserve() request. When a pooled\nconnection closes or reconnects while requests wait for a connection, the pool\nhands the next waiter to the reconnecting connection and drops it once that\nconnection is ready, so the request never settles (porsager/postgres#1195). A\nwaiter that fails with CONNECT_TIMEOUT also stays queued and later takes a\nconnection that is never returned.\n\n@effect/sql-pg reserves every transaction's connection this way, inside an\nacquisition that cannot be interrupted, so a timeout around the transaction\ndoes not help. In the node this can strand the history-lease renewal: the owner\nschedules no further renewal, the lease expires, and shutdown waits on the\nstuck renewal. It is what hung the saturated batch-pool latency test in 2 of 11\nlocal runs. Holding one batch connection's handshake past the 10 s connect\ntimeout reproduces it every time.\n\nNo released version contains the fix; 3.4.9 is the latest. This patch is the\nsource change of the open upstream PR porsager/postgres#1229, applied to the\nESM and CommonJS builds. Every reserve waiter stays in the pool's queue,\nincluding one handed to a reconnect, a rejected waiter leaves the queue, and a\nclosed connection clears its per-query state. With the patch, the\nconnection-delay case passes in about 13 s. Drop the patch once a release\nincludes the fix.\n\npnpm also rewrites the lockfile's overrides in package.json order.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-27T15:53:05Z"
+      "authorDate": "2026-09-29T20:27:31Z"
     },
     {
-      "sha": "6c375358524fde131051cb816586b1c2403802ac",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/6c375358524fde131051cb816586b1c2403802ac",
-      "message": "Leave the retention sweep interval to its derived default in .env.example\n\nThe template set WAIT_BETWEEN_RETENTION_SWEEPS=60000 while its own comment and the READMEs document the derived default min(900000, DA attestation timeout / 4). Any operator copying the template silently overrode that default. The line is now commented out, like L1_VIEW_FATAL_MS.",
+      "sha": "0df4d0c91d9c98c438f173e6dd6859c7a56b865c",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/0df4d0c91d9c98c438f173e6dd6859c7a56b865c",
+      "message": "Re-take the execution ledgers on the pinned compiler\n\nEight execution ledgers had drifted from the tree. This re-takes their\nreadings with aiken v1.1.23+5adf783 and corrects the claims that the new\nreadings no longer support.\n\nThe transition-trace descriptor rows fell by about 720K mem per descriptor\nderivation and about 1.0M per deposit-arm derivation. The drop was bisected to\n13ff70d63, which summarises an output's value, datum and reference script once\ninstead of re-summarising the whole TxOut for each encoding. The compiler change\nmoves none of these rows. No check was removed: decoding, the materialisability\ncheck and descriptor_is_well_formed run unchanged, and the consolidated-summary\nand golden descriptor tests still pin the same summaries. Most of #628's\nwhole-test infeasibilities therefore no longer hold. The descriptor crossing now\nsits between 2,819 and 3,083 output bytes on both readings, and the deposit\ncrossing between 66 and 134 datum bytes, whole-test only. The original figures\nare kept under historicalMeasurement, the remaining over-basis rows state their\nown numbers, and the maximum-output-width and datum-width questions stay open.\n\nThe q1x rows are relabelled to what they measure: the bounded steps that\nreplaced direct absence walks (step-06 walks at most 64 script witnesses,\nstep-04 walks address witnesses in 32-item batches). midgard-tx.md says so and\nkeeps the constraint that a direct whole-field walk does not fit. The q21\nfixture simplification is accepted. Each ledger's compiler field names the\nbinary that took it.\n\nThe native-script-decoding scan planner copies its exec pins from that ledger,\nso its pins move with it. The transition-trace no-op proof test now builds its\nexpected root independently and derives its one shared descriptor once. Its\nlower whole-test reading is fixture work, not a validator speed-up.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-27T15:53:05Z"
+      "authorDate": "2026-09-29T18:15:21Z"
     },
     {
-      "sha": "891c1102f51406fc7ecfdae0aabb7f2b93c7d07a",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/891c1102f51406fc7ecfdae0aabb7f2b93c7d07a",
-      "message": "Pin the native MPF owner in the live acceptance env checklist\n\nThe node refuses to listen without MPF_NATIVE_OWNER_BINARY_SHA256, which .env.example leaves blank, so following the checklist led to a crash loop. The checklist now names the owner path, sidecar and the command that prints the image's pin, and says to re-pin after each rebuild.",
+      "sha": "d533ebd5498a6b32d2d151615ec7152c5a6fdbe5",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d533ebd5498a6b32d2d151615ec7152c5a6fdbe5",
+      "message": "Place a non-terminal PHAS leaf neighbour at its branching nibble\n\nThe node's PHAS proof verifier had the same defect the MPF proof fold had: in\nexcluding mode it placed a non-terminal leaf step's neighbour at the key nibble\nunder the cursor instead of at next_cursor - 1, where the paths branch after\nthe skip. When an absent key's proof opens with a skipped leaf that is not the\nlast step, the verifier rebuilt the wrong root and refused a proof that the\nMPF library's own verify(false) opens to the committed root. The block-commit\npath builds and checks EventToStep non-membership proofs this way, so such a\ntrie shape stops the commit. Both modes now use next_cursor - 1.\n\nThe new test uses three keys whose paths give that shape; it failed with a root\nmismatch before this change.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-27T15:53:05Z"
+      "authorDate": "2026-09-29T18:15:13Z"
     },
     {
-      "sha": "1023017a9700c425556226e4e7665421627ecd27",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/1023017a9700c425556226e4e7665421627ecd27",
-      "message": "Require an explicit committee finality depth\n\nThe committee launch defaulted CARDANO_FINALITY_DEPTH to 2 while preprod-testing pins confirmation depth 3, and the committee refuses a runtime/manifest mismatch. The launch now requires the value to be set to the manifest's l1Finality.confirmationDepth.",
+      "sha": "995a294bdc121bcf78f7d6a6484e564ef42c1bdc",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/995a294bdc121bcf78f7d6a6484e564ef42c1bdc",
+      "message": "Fold a non-terminal MPF leaf at its branching nibble\n\nA leaf step in an MPF proof places the neighbour beside the proven key at the\nnibble where their paths diverge, after the step's skip. The bounded proof fold\ntook that nibble at the frame's cursor instead of at next_cursor - 1 when it\nrebuilt the excluding root of a non-terminal leaf frame. The two positions agree\nonly when the skip is zero. With a nonzero skip, an honest proof folded to a\nroot that neither mpf_proof_v1 nor the reference Proof.verify(false) produces,\nand the nibble it read was not authenticated by the including root, so a prover\ncould choose among excluding roots. The Aiken fold and its TypeScript twin now\nboth read next_cursor - 1, as mpf_proof_v1's do_excluding does. The upstream\nAiken library still reads the cursor (decision 0005); Midgard uses its\ninsertion only with empty proofs.\n\nThe Aiken property test checks the incremental mutation against mpf_proof_v1 at\nevery shared-prefix depth, and fails without the fix at skip 1. The TypeScript\ntest compares with the reference library's Proof for skips 0 to 62 and fails\nwithout the fix. A 4,096-proof run over a real trie stays as a smoke anchor.\nIt is not a regression pin, because none of its proofs has a non-terminal leaf\nwith a nonzero skip.\n\nThe fix changes the bytes of the ledger-delta proof-frame and finalize\nvalidators, and so the validation-trace dispute, source, game and boundary\ncontracts that apply them. The contract registry pin, the DA committee and\nwatcher deployment fixtures, and the resolver publication fit ledger follow the\nnew blueprint; the two resolvers grew by 3 and 2 signed bytes. The two\ntransition-trace fit ledgers were re-measured on the new blueprint. That family\nruns no ledger-delta script, and its pin compares only the blueprint, compiler\nand roster, so their budget changes are run-to-run variance, not an effect of\nthis fix.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-27T15:53:05Z"
+      "authorDate": "2026-09-29T18:15:06Z"
     },
     {
-      "sha": "74c1a41bb4780b4b918ac10477c0651e1743b6af",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/74c1a41bb4780b4b918ac10477c0651e1743b6af",
-      "message": "State the deposit validity upper bound as 120 s\n\nHistory submissions are valid from 60 s in the past for 180 s, so the upper bound is at most 120 s out, not 60 s.",
+      "sha": "ebd17ce0bab1462921ea9006b9915a03326d9c3a",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ebd17ce0bab1462921ea9006b9915a03326d9c3a",
+      "message": "Give real-emulator tests time budgets that survive concurrent suites\n\nThese tests deploy real scripts, replay the installed catalogue, spawn a\ngenerator or parse the whole source tree, and they timed out on the five-second\nunit default when other suites ran beside them. No assertion changes. The raised\nlimits are:\n\n- catalogue retained classification: 30 s for the describe block\n- minimum-Ada forced rejection: 30 s, and 60 s for the two-deployment\n  substitution test\n- native-script wrongful forced rejection: 30 s for the describe block\n- history preparation, nonexistent IDs: 60 s\n- input-set uniqueness tier 2: 30 s for each of the two tests\n- transition raw history: 60 s\n- Wave 0 shared substrate, repository scan: 30 s\n- DA committee config, invalid libp2p manifest fields: 30 s\n- native compact golden generator: 30 s for the describe block\n\nThe unattested-block removal test also read a one-hour attestation timeout as\na literal; it now derives its deadline from DA_ATTESTATION_TIMEOUT_MS, which is\nten minutes on the testing profile.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-27T15:53:05Z"
+      "authorDate": "2026-09-29T18:14:56Z"
     },
     {
-      "sha": "b1100ae362d71446f1d92ebf50e0013d886d85ea",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/b1100ae362d71446f1d92ebf50e0013d886d85ea",
-      "message": "Set a deadline for public DA retrieval of each header\n\nThe committee prunes a merged non-head block's payload at end_time plus 1.5 x maturity (1,350 s on preprod-testing). Live acceptance now says to retrieve each header's payload as soon as it is attested and before that horizon, and that a later not-found is expected pruning.",
+      "sha": "b5931d93b0b235ae3ca6ed45a799ca75913a1619",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/b5931d93b0b235ae3ca6ed45a799ca75913a1619",
+      "message": "Derive watcher test deadlines from the profile and wait on real events\n\nThe watcher suites hard-coded the seven-day maturity, its half as the latest\nsafe start, a one-hour DA attestation timeout and a 30-block finality depth.\nThe testing consensus profile has shorter values, so those fixtures no longer\ndescribed a reachable deadline, and a one-hour alert headroom exceeds the\nprofile's worst-case proof bound, which the supervisor refuses. The fixtures\nnow read MIDGARD_RETENTION_WINDOW, DA_ATTESTATION_TIMEOUT_MS and\nDEPLOYMENT_MANIFEST_L1_FINALITY, and the test-only supervisor factory defaults\nits headroom to the smaller of one hour and that bound.\n\nSeveral tests slept or polled for a fixed time where they needed an event:\n\n- objective progress waits for the completed-workflow check and for the second\n  run to start, and gives its drain poll 10 s instead of 1 s;\n- the pending-growth runtime test jumps time between two owned captures and\n  waits for that capture to close, instead of counting queries and sleeping;\n- the DA transport lifecycle drives two heartbeat rounds on fake intervals and\n  counts a heartbeat when its stream closes, so a loaded runner cannot open a\n  second ping before the first finishes;\n- historical capture waits for all three helper stops before counting them;\n- the chain-sync helper installs its signal handlers before it reports\n  readiness, since the parent may close it as soon as it does.\n\nThe published deposit trace attests the predecessor before waiting for the\ndeposit, because the event wait can outlast an unattested head's append\ndeadline. Emulator initialization publishes reference scripts in chained mode.\nReference evidence keeps the creating output's original bytes, so the capture\ntest compares against to_cbor_hex rather than the canonical encoding.\n\nThe user-event-origin setup limit rises from 60 s to 120 s; the whole file\nruns in about 20 s on an idle machine.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-27T15:53:05Z"
+      "authorDate": "2026-09-29T18:14:44Z"
     },
     {
-      "sha": "06fd05f7090f8d0519a1b0c7efcaa04b9a35fcd1",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/06fd05f7090f8d0519a1b0c7efcaa04b9a35fcd1",
-      "message": "Derive the automatic-merge wait from block maturity\n\nThe await-automatic-merge step waited 900 s, shorter than the earliest merge of a header committed with a future end time under 900 s maturity. The budget is now maturity + 420 s end-time lead + 20 s alignment + 180 s confirmation + 300 s for sequential merges (1,820 s on preprod-testing), read from the compiled profile, and the runner timeout is 60 s longer than the loop's deadline.",
+      "sha": "6f452eb8b5111fc61d0b5906d89094c94375fb7a",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/6f452eb8b5111fc61d0b5906d89094c94375fb7a",
+      "message": "Run the interactive fault-proof journeys on an emulator-only profile\n\nThe owner ruling of 2026-09-27 accepted fault proofs as non-functional on the\nfifteen-minute live testing profiles. The interactive dispute journeys, and the\ntransition-trace final-deep-deposit journey, cannot open inside fifteen-minute\nmaturity, so under preprod-testing they stopped at the maturity guard instead\nof exercising the dispute paths.\n\npreprod-emulator-testing differs from preprod-testing only in block maturity\n(four hours), event wait, DA challenge window and bond withdrawal delay, and it\npasses the full public-class profile checks. The emulator advances its clock\ndirectly, so four hours of maturity cost no wall-clock time. Separate Vitest\nprojects in midgard-fault-proofs and midgard-watcher compile it into\nonchain/aiken/build/interactive-emulator/plutus.json with its own stamp, and a\nVite plugin selects its TypeScript profile only inside that project. The\nchecked-in selection and the default blueprint stay preprod-testing.\n\nThe profile is refused as the selected deployment, so generate, check and\nbuild cannot produce a deployable preprod blueprint for it. The shared build\nlock records its holder's PID: a lock left by a dead process is broken instead\nof stalling every waiting project for ten minutes.\n\nCI checks the DA bond relations under the new environment, and Repo Tools CI\nruns the profile and blueprint-cache tests. The deployments README records the\nruling and why the live testing profiles cannot run these proofs.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-27T15:53:05Z"
+      "authorDate": "2026-09-29T17:43:45Z"
     },
     {
-      "sha": "d46f43c84fb124f2df2e380ff69299e9d1103da3",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d46f43c84fb124f2df2e380ff69299e9d1103da3",
-      "message": "Mark the walkthrough's manual commit and merge calls devnet-only\n\nThe deposit/send/withdraw walkthrough called the admin /commit and /merge endpoints by hand, which bypasses the commit and automatic merge fibers that fresh-deploy acceptance must prove. It now says those calls are for a local devnet only, and live acceptance points at its withdrawal and payout commands with the instruction to wait for the fibers instead.",
+      "sha": "3b3fefa48992416a64330832b08fe8a5b2fe87fe",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/3b3fefa48992416a64330832b08fe8a5b2fe87fe",
+      "message": "Format the Aiken sources the formatter check rejects\n\nThese ten files have been unformatted since 090436fc3 (and in one case earlier), so the normalized Aiken formatter check in aiken-ci fails on them. Each change is exactly the pinned fork's aiken fmt output for the committed file, apart from trailing whitespace the CI step already normalizes. Nothing compiles differently.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-27T15:53:05Z"
+      "authorDate": "2026-09-29T17:42:48Z"
     },
     {
-      "sha": "1d736653c75d85f36cc0ad1b4e4ae619786abb09",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/1d736653c75d85f36cc0ad1b4e4ae619786abb09",
-      "message": "Require the negligence timeout to cover the block-commitment gap\n\nThe scheduler's neglected-event guard accepts an event whose inclusion\ntime equals the tail block's end time, which that block already\nincludes. That is harmless only while inclusion + negligence timeout\ncan never precede tail end + maximum inactivity, and the operator\nwatchdog assumes the same ordering. Profile validation now enforces it\ninstead of relying on the shipped values.",
+      "sha": "ad593be6f5bbcb399958ae97a1617ca0b67e92f2",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ad593be6f5bbcb399958ae97a1617ca0b67e92f2",
+      "message": "Merge agent contribution improvements into the current local branch\n\nIntegrate the preflight coverage, contribution guidance and module splits\nfrom codex/agent-preflight while retaining the newer DA and node changes.\nThe three overlapping committed paths merge without conflicts; current\nledger-channel metadata and node-tool test flags are preserved.\n\nIntegration checks on 2026-09-29 in /tmp/midgard-agent-sync-20260929:\n- Seven affected package typechecks: exit 0.\n- node --test scripts/preflight/*.test.mjs demo/scripts/lib/golden-channel.test.mjs\n  demo/scripts/lib/eslint-plugin-midgard.test.mjs: 67 passed, exit 0.\n- Golden channel table: 40 channels verified, exit 0.\n- Agent documentation links: 191 files checked, exit 0.\n- Required-check documentation and staged whitespace check: exit 0.\n- AST comparison preserves all 124 current database test registrations,\n  including the two pre-existing uncommitted test fixes.\n\nThe current branch advanced during preparation to 98bf75197 with a database\nreset-helper correction. Preserve that amendment and repeat node typechecking\n(exit 0). After source/profile-checked blueprint synchronization, the focused\ncurrent database cases pass: 2 passed, 126 excluded by selection, exit 0.\nThe command was NODE_ENV=emulator MIDGARD_TEST_DATABASE_PREFIX=midgard_sync_latest_20260929\npnpm --dir demo/midgard-node exec vitest run tests/database.test.ts\n-t 'keeps submit latency isolated|holds a stale refresh'\n--maxWorkers=1 --minWorkers=1.\n\nEarlier focused runs hit the old reset-helper SQL failure (also reproduced\nwith the original unsplit test), then an absent scratch blueprint. Those\nprerequisites are resolved for the passing run; no assertions were changed.\nFull combined runtime suites and live acceptance were not rerun.\nPrior split verification and remaining limits are recorded in\ndocs/exec-plans/agent-contribution-module-splits.md.\n\nThe existing database edits are carried into the split admissions module\nas uncommitted work during synchronization; they are not part of this merge.\n\nThe database fixture changed again during preparation. The final proof and\nfocused run use the latest local variant, including its absolute latency bound.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-27T15:53:05Z"
+      "authorDate": "2026-09-29T17:27:37Z"
     },
     {
-      "sha": "b1599ed78761383c88a35e8765153cb3e5f49f32",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/b1599ed78761383c88a35e8765153cb3e5f49f32",
-      "message": "Never count a suspended history authority row as a live owner\n\nRelease and suspend stamp lease_until with clock_timestamp(). This\nmachine's wall clock steps backwards by about a second every half\nminute, so a released row could read as live again before the next\ngeneration's acquire, and acquire refused the successor with \"History\nauthority still has a live owner\". A suspended row confers no\nauthority, so acquire now ignores its lease end. The restart helper\nuses the same rule and says whether the refusing lease belongs to the\nstopped owner or to another one.",
+      "sha": "98bf7519753dda32068d8c17dc651c407a90f23d",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/98bf7519753dda32068d8c17dc651c407a90f23d",
+      "message": "Automate reserve settlement and withdrawal payouts within the node\n\nRun settlement in a supervised worker with a dedicated fee wallet and bounded database resources. Persist signed transactions before broadcast and reconcile finality, rollback recovery, and restored fee inputs before further spending.\n\nSee demo/midgard-node/docs/automatic-settlement-verification.md for test evidence and remaining live-deployment, performance, and broad-gate limitations.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-27T15:53:05Z"
+      "authorDate": "2026-09-29T14:14:11Z"
     },
     {
-      "sha": "cd838c8e4ed6e388c6f64ac9ac928a6c8945c9c9",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/cd838c8e4ed6e388c6f64ac9ac928a6c8945c9c9",
-      "message": "Name the live history lease a restarted test owner loses to\n\nA full node run once failed the endpoint-independence restart with only\n\"History authority still has a live owner\", after the restart's own\nrelease check had passed. The helper now reports the authority row it\nlost to, the stopped owner's token and the worker database, so the next\noccurrence identifies the holder.",
+      "sha": "4cd1d5a85af2b61b913497ec7819b6283f5d5a7b",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/4cd1d5a85af2b61b913497ec7819b6283f5d5a7b",
+      "message": "Record the pooled DA bond live devnet journey and fix its reliability hazards\n\nThe pooled DA bond journey (#692) passed all six steps on a fresh\nlocal-devnet-testing process devnet in about 91 minutes, with the\ncommittee's quarantine fix in the previous commit. The committee\nevidence came from a real da-committee-node process (its /readyz answers\nand da_bond_pool_* events) and the pool transaction evidence from real\nmidgard-node da-bond CLI runs. The deployed script hashes matched the\nfrozen blueprint, and the Timeout slash matched planDaBondPoolSlash\nexactly. The report with the transaction ids is kept locally.\n\nIt was the fifth attempt. The first failed in step 3 on a rebroadcast\nwhose inputs were already spent; the second failed in step 2 on a header\ncommit outside its validity interval. A sweep of the driver for the same\nclass of hazards then fixed the following, each with tests:\n\n- A header commit that expires unminted in the mempool is rebuilt within\n  the same attempt cap, after the ledger has passed its expiry; one whose\n  submit hits a transport failure after Ogmios accepted it waits for it to\n  land or expire instead of failing closed.\n- Availability actions and the Apply wait for a fresh tip before each\n  build, and the Apply is run again when the ledger refuses it outside\n  its validity interval. An availability action that lapses with its\n  inputs still unspent is re-planned rather than failing the step, and a\n  transient canonical read after submission keeps polling instead of\n  re-planning a landed action.\n- The scheduler appointment submit is wrapped and retried like a header\n  commit.\n- The fallback block interval is slot-aligned, so the commit's upper\n  bound can equal the header's end time.\n- Ogmios tip and block-height reads have a fetch timeout and retry\n  transport errors until their deadline, which covers the long step-6\n  unlock wait; a failed or slow /readyz read is retried the same way.\n- Only the pool's backing transitions count as committee transitions; read\n  failures and backoff events are recorded separately.\n- Refusal reasons and CLI timeout kills are kept in errors, stage timings\n  and the journey record (new error-chain helper).\n- The live port can resume after step 5 on a kept devnet, which let\n  steps 2 and 6 be smoke-tested without a redeploy.\n\nThe smoke run showed that the committee process checks passed while the\nnode had quarantined its L1 source. Each committee observation now fails\nat once when /readyz reports the L1 source quarantined, and names the\nreason.\n\nThe automatic-watcher-journeys doc and the public testnet readiness list\nrecord the live result.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-27T15:53:05Z"
+      "authorDate": "2026-09-29T10:04:30Z"
     },
     {
-      "sha": "697a84c9bc97a5256998a576cf2c21b59f7661d7",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/697a84c9bc97a5256998a576cf2c21b59f7661d7",
-      "message": "Clear the history authority before the local mutation job tests\n\nThe fixture producer gate refuses any acquired history owner row, and an\nearlier file on the same worker shard can leave one behind, which turned\nall seven fixture-producing tests red when the file ran after such a file.",
+      "sha": "acc44cb2a786fead372e2fff7942c7ea4bab4659",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/acc44cb2a786fead372e2fff7942c7ea4bab4659",
+      "message": "Keep the committee's agreed state-queue nodes in linked-list order\n\nThe multi-surface L1 provider returned the agreed state-queue nodes in\ncanonical asset-name order, which is the order of the header hashes, not\nthe queue's. Replay compares a new snapshot with the durable anchor index\nby index, so once the header hashes stopped ascending along the list the\ntwo never matched: the committee raised\nStateQueueHistoryNotExtendingAnchorError, quarantined its L1 source and\nexited 70. On the devnet this happened in the journey's last step.\n\nmergeAgreedObservedNodes now keeps the first surface's own order and only\nmerges the chain points of the agreed nodes into it. The cross-surface\nagreement check still runs on the sorted sets and is unchanged. All three\nmerge sites use it: the multi-surface node fetch, the multi-surface\nsnapshot and the local node's one-point snapshot.\n\nTests: the provider keeps the surfaces' linked-list order, not asset-name\norder; and a scanner replay over a queue whose header hashes do not\nascend along the list resolves from a list-order anchor without refetching,\nand records its anchor in list order. Both are red on the old provider.\n\nA committee that already persisted a hash-ordered anchor stays\nquarantined until its store is re-bootstrapped. Clearing the L1 source\nrecord alone is not enough: the quarantine also marks the header rows\nconflicted and rewrites the payload and outbox rows.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-27T15:53:05Z"
+      "authorDate": "2026-09-29T10:04:20Z"
     }
   ],
   "contributors": [
@@ -326,6 +326,18 @@
   ],
   "issues": [
     {
+      "number": 617,
+      "title": "Post-freeze ABI regeneration wave — single batched cascade (owner-authorized 2026-08-18)",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/617",
+      "updated_at": "2026-09-29T21:10:56Z"
+    },
+    {
+      "number": 694,
+      "title": "Move the demo workspace off Vitest 3 (blocked on Effect 4)",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/694",
+      "updated_at": "2026-09-29T20:32:13Z"
+    },
+    {
       "number": 685,
       "title": "Spec: one pooled DA committee bond replaces the per-block DA bond",
       "html_url": "https://github.com/Anastasia-Labs/midgard/issues/685",
@@ -366,18 +378,6 @@
       "title": "Availability timeout slashes the DA bond pool (on-chain)",
       "html_url": "https://github.com/Anastasia-Labs/midgard/issues/693",
       "updated_at": "2026-09-27T17:29:31Z"
-    },
-    {
-      "number": 692,
-      "title": "Pooled DA bond end-to-end devnet journey and docs",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/692",
-      "updated_at": "2026-09-27T16:49:28Z"
-    },
-    {
-      "number": 690,
-      "title": "Committee node, operator node, watcher and deployment run on the pooled DA bond",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/690",
-      "updated_at": "2026-09-27T16:49:25Z"
     }
   ],
   "releases": [],
@@ -412,11 +412,11 @@
     },
     {
       "week": 1763856000,
-      "total": 15
+      "total": 16
     },
     {
       "week": 1764460800,
-      "total": 8
+      "total": 17
     },
     {
       "week": 1765065600,
@@ -464,19 +464,19 @@
     },
     {
       "week": 1771718400,
-      "total": 47
+      "total": 43
     },
     {
       "week": 1772323200,
-      "total": 25
+      "total": 24
     },
     {
       "week": 1772928000,
-      "total": 36
+      "total": 35
     },
     {
       "week": 1773532800,
-      "total": 29
+      "total": 28
     },
     {
       "week": 1774137600,
@@ -484,19 +484,19 @@
     },
     {
       "week": 1774742400,
-      "total": 29
+      "total": 30
     },
     {
       "week": 1775347200,
-      "total": 41
+      "total": 40
     },
     {
       "week": 1775952000,
-      "total": 31
+      "total": 32
     },
     {
       "week": 1776556800,
-      "total": 29
+      "total": 17
     },
     {
       "week": 1777161600,
@@ -508,7 +508,7 @@
     },
     {
       "week": 1778371200,
-      "total": 25
+      "total": 23
     },
     {
       "week": 1778976000,
@@ -524,11 +524,11 @@
     },
     {
       "week": 1780790400,
-      "total": 30
+      "total": 17
     },
     {
       "week": 1781395200,
-      "total": 13
+      "total": 20
     },
     {
       "week": 1782000000,
@@ -556,27 +556,27 @@
     },
     {
       "week": 1785628800,
-      "total": 88
+      "total": 100
     },
     {
       "week": 1786233600,
-      "total": 9
+      "total": 0
     },
     {
       "week": 1786838400,
-      "total": 53
+      "total": 0
     },
     {
       "week": 1787443200,
-      "total": 48
+      "total": 0
     },
     {
       "week": 1788048000,
-      "total": 2
+      "total": 1
     },
     {
       "week": 1788652800,
-      "total": 45
+      "total": 139
     },
     {
       "week": 1789257600,
@@ -584,11 +584,11 @@
     },
     {
       "week": 1789862400,
-      "total": 172
+      "total": 174
     },
     {
       "week": 1790467200,
-      "total": 34
+      "total": 80
     }
   ]
 }
