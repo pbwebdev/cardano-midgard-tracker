@@ -1,10 +1,10 @@
 {
-  "fetchedAt": "2026-10-02T12:12:34.188Z",
+  "fetchedAt": "2026-10-03T11:23:17.637Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 25,
     "forks_count": 11,
-    "open_issues_count": 180
+    "open_issues_count": 190
   },
   "languages": {
     "Aiken": 359544,
@@ -17,109 +17,109 @@
   },
   "commits": [
     {
-      "sha": "ef0c0f1a3c5e9a745deaa095f537102d5e4ba3ef",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ef0c0f1a3c5e9a745deaa095f537102d5e4ba3ef",
-      "message": "Classify Ogmios JSON-RPC error answers by code, not message text\n\nThe node's Ogmios session raised every JSON-RPC error answer as a plain Error, so the history owner treated a syncing node's era-mismatch (2001) or an expired acquired state (2003) as a terminal failure and exited. The ledger-snapshot reader and the startup protocol-status retry recognised outages by matching message prefixes, which broke as soon as an error was wrapped or reworded. Kupmios also marks every Ogmios error answer non-retryable because Ogmios returns HTTP 400 for all of them.\n\nA shared midgard-core helper now decodes the answer code and maps it to transient or terminal per the Ogmios v7.0.0 sources. The node session, the ledger snapshot, provider retry and three DA committee clients use it, and the two string-prefix shims are deleted. Retries stay bounded at the owning operation; no client-level loop and no new terminal state is added.",
+      "sha": "ced2ee55f5d1c7b7cb29bc08ba451b2070138d52",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ced2ee55f5d1c7b7cb29bc08ba451b2070138d52",
+      "message": "Select the testing deployment profile for CI migration\n\nThe isolated migration starts the node CLI after building it and must provide the deployment profile required by configuration. Bind that step to the preprod-testing artifact and existing Preprod network rather than weakening the profile requirement.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-02T01:47:56Z"
+      "authorDate": "2026-10-03T09:17:29Z"
     },
     {
-      "sha": "4f6f3786c5d88af1a9921a79679c5c72a14bd11a",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/4f6f3786c5d88af1a9921a79679c5c72a14bd11a",
-      "message": "Hold on an already-applied watcher rewind and bound rollback history to k\n\nWhen the chain re-announced a rollback the watcher had already applied, the replacement equalled the durable frontier, the step rejected it as a malformed finality result, and the coordinator exited 70; every restart met the same announcement. An exactly matching, already-durable rewind is now a duplicate held with no write and no instruction, and every other refusal is unchanged.\n\nThe consistency history also grew with uptime until the 6,483-entry decode bound threw. Each observation and canonical-progress commit now retires history entries, and the observations and chain points backing only them, more than 2,160 blocks below the frontier, which no rewind within Cardano's k can reach. The bound stays as an invariant assertion. Owned frozen snapshots also reuse their observation index instead of re-parsing it on every operation.",
+      "sha": "c0d9289195a9ece1d80e542db8370876082d03f6",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/c0d9289195a9ece1d80e542db8370876082d03f6",
+      "message": "Bind watcher CI authority smoke to the built profile\n\nThe shipped public sample uses depth 30 while the testing image requires depth 3. Generate the disposable smoke policy from the compiled profile and recompute its digest so the strict authority parser and authenticated HTTP smoke can run.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-02T01:20:03Z"
+      "authorDate": "2026-10-03T09:00:33Z"
     },
     {
-      "sha": "e63cd983038e7ba6a3eb57a146eac669106aabbf",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/e63cd983038e7ba6a3eb57a146eac669106aabbf",
-      "message": "Clear readiness reasons whose clearing path can stop being reached\n\nNow that /readyz publishes every liveness reason, a reason whose only clear runs on a conditional path becomes a permanent false unready. The operator watchdog raised and cleared its manifest reasons only on ticks where a strike was due, so once the lagging operator recovered the reason stayed up forever; idle and wait ticks now re-verify on the gate's own retry cadence while a reason is raised, and a wait is cut to that retry. A control-plane hold-timeout streak was published until the same scope next held the permit cleanly, which a conditionally entered scope may never do; it is now published only while the scope holds or waits, or within three hold budgets of its latest timeout.\n\nPins the confirmation tick's decision against the undecided reason, each fiber's halt source at its call site, and a restart test that now kills the child only after the restarted child serves. Corrects stale 'refuses to continue' wording and records that the devnet journey's idle phase blocks on /readyz.",
+      "sha": "18b65d58bfad9aad6973b8a01b2573acc144599a",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/18b65d58bfad9aad6973b8a01b2573acc144599a",
+      "message": "Ratchet module size limits after shared recovery cleanup\n\nThe field lifecycle and e2e summary cleanup reduced their modules to 907 and 608 lines. Lower the stale 949 and 627 exceptions so Repository Tools CI enforces the current sizes without unused headroom.\n\nRefs #740",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-02T01:12:24Z"
+      "authorDate": "2026-10-03T08:47:59Z"
     },
     {
-      "sha": "2570e179f6d144646dc9bf1c6571a234e1dc70a3",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/2570e179f6d144646dc9bf1c6571a234e1dc70a3",
-      "message": "Keep a payload-level invalid foreign-tip verdict until a payload verifies\n\nA foreign header whose retained payload failed verification was stored as invalid, but once that payload was gone the next replay re-derived the verdict as missing or Ready, so the window gate lifted the refusal and the commit could build past a block it had already seen fail. The replay now keeps a stored invalid verdict unless this pass holds a payload that verifies against the header; losing the payload or the passage of time never weakens it, and the row is never pruned while it holds the verdict.\n\nAdds tests pinning the sticky verdict in both directions, malformed-row and failed-replay refusals, the inclusive window end, every event-kind root/count pair, and the commit worker's call into the gate with the earliest barrier as its ingestion watermark. Corrects the assess docstring: it reads stored verdicts only.",
+      "sha": "aa7db4dfb66951636d58190ab277eb356cdb659c",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/aa7db4dfb66951636d58190ab277eb356cdb659c",
+      "message": "Carry current queue targets through shared removal actions (#740)\n\nRequire every typed family removal action to retain the authenticated current target alongside its immediate child and permanent proof reference. Carry the field through observation, planning and capture; update callers in place without a fallback. Preserve the obsolete-runner deletion and strict signed input checks.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-02T00:44:06Z"
+      "authorDate": "2026-10-03T05:03:43Z"
     },
     {
-      "sha": "84000fe088efa3c38c549d17a349e1fd1ad4ee2a",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/84000fe088efa3c38c549d17a349e1fd1ad4ee2a",
-      "message": "Add a devnet stack that deploys and runs the full lifecycle unattended\n\ndevnet-stack brings up an isolated Cardano chain, deploys the protocol,\nand starts the operator node, the DA committee and the watcher under a\nsupervisor. It then drives deposits, L2 transfers and withdrawals\nthrough to L1 payout using only the user CLIs, and runs chaos drills\nthat kill and restart each service. Every step is journaled so an\ninterrupted run resumes. Dist freshness is checked before reuse, and a\nreserve float keeps the payout reserve funded during long runs. The\nlive-acceptance reference is updated to match.",
+      "sha": "6811b7489292fdbef5415ea15ef6117942dcd14a",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/6811b7489292fdbef5415ea15ef6117942dcd14a",
+      "message": "Split required-gate summary tests without changing behavior\n\nMove two unchanged test registrations into an imported helper to satisfy the canonical file line limit. Keep assertions and registration order identical.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-02T00:12:38Z"
+      "authorDate": "2026-10-03T04:29:17Z"
     },
     {
-      "sha": "8c3309fa05e1a26fb3252048b8086cad4a0d0b76",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/8c3309fa05e1a26fb3252048b8086cad4a0d0b76",
-      "message": "Retry the watcher's transient L1 and retained-DA failures instead of exiting\n\nThe watcher exited on transient chain-sync, Kupo and retained-DA\ntransport failures. The supervisor restarted it into the same state, so\na merged header whose payload had been pruned put it into a permanent\ncrash loop. Transient failures are now classified in one place and\nretried with a bound, permanent refusals are kept separate and reach\nthe operations alert book, and merged headers no longer need their\npruned payloads.",
+      "sha": "c6456379c757cc7d659c60c855e69e430f39ff28",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/c6456379c757cc7d659c60c855e69e430f39ff28",
+      "message": "Replace obsolete field runner with shared recovery (#740)\n\nRemove the family-specific journal, orchestration and exports. Shared recovery authenticates descendant removal receipts and resumes already-slashed cleanup from the durable workflow journal. Retain evidence checks, transaction builders and validators.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-02T00:12:22Z"
+      "authorDate": "2026-10-03T04:24:45Z"
     },
     {
-      "sha": "8bcbe7ed0a8784775b6e2b453534aa9f06eb9d7b",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/8bcbe7ed0a8784775b6e2b453534aa9f06eb9d7b",
-      "message": "Keep the DA committee serving through provider, database and peer outages\n\nCommittee members exited, or stayed halted, on conditions that clear on\ntheir own: an Ogmios or Kupo outage during the state-queue scan or the\nrollback feed, a Postgres outage while the instance lock was held, a\npeer that went away. Each of these now retries with a bound and reports\nthe outage through readiness instead of ending the process. The tests\ncover the responder drain, a foreign spend of a challenge, and libp2p\npayload handlers that leave state they do not own untouched.",
+      "sha": "0eb45602c5eb2f9a2d54d7369e6cb2186388bc93",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/0eb45602c5eb2f9a2d54d7369e6cb2186388bc93",
+      "message": "Fit canonical output proof roles within the publication budget\n\nKeep the original descriptor decoder unchanged and specialize its canonical schema parser at the two measured oversized consumers. Share the value-fold successor checks while preserving guards, parameter schemas, and the existing publication limit.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-02T00:12:00Z"
+      "authorDate": "2026-10-03T02:48:03Z"
     },
     {
-      "sha": "d16c007fff12f275791ee0b0c53968d95e04c861",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d16c007fff12f275791ee0b0c53968d95e04c861",
-      "message": "Size commit selections against the full DA frame and step down on overflow\n\nThe commit planner budgeted DA bytes as the selected transaction bytes\nplus 128 per transaction. It never saw the base-ledger UTxO aggregate,\nthe second copy of each transaction, or the CEK program material and\ntraces, and it checked the 16 MiB transaction clause first, so the DA\nclause could essentially never fire. The pre-submit frame check sees the\nwhole payload and refused it. Selection is deterministic, so the planner\npicked and refused the same over-frame selection on every tick, and\nordinary traffic on a large ledger halted production.\n\nThe planner now threads the base aggregate into its budget and selects\nonly what the pre-submit check admits. If a built block still overflows,\nthe worker steps down once, from a fresh fork, to a smaller selection\nwith an empty-block floor. The pre-submit refusal stays as the last\nguard.",
+      "sha": "b00a34cb60eac329616b4c8b305c63fafdf4e390",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/b00a34cb60eac329616b4c8b305c63fafdf4e390",
+      "message": "Pay the authenticated prover when any caller submits slashing (#643)\n\nBind removal rewards to the authenticated proof producer across descendant removals and active or retired operators. Permit a different wallet to submit without requiring the prover signature, and retain validated reward attribution through funding recovery.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-02T00:11:47Z"
+      "authorDate": "2026-10-03T02:36:33Z"
     },
     {
-      "sha": "79e71b24f00fd97418eacb4cce7db37985e83fb3",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/79e71b24f00fd97418eacb4cce7db37985e83fb3",
-      "message": "Re-land a signed intent whose sibling finalized and then lost its header\n\nWhen a signed local block was replaced on L1 by a sibling that finalized\nlocally, and a rollback the node never saw as a confirmed removal then\ntook the sibling's header away, no admitted status matched the sibling.\nabandonReopenedJournal failed, and the expired-intent decision returned\nundecided on every evaluation. Block production stayed stopped until the\njournal was repaired by hand.\n\nThe expired-intent release now re-derives its decision from the landed\nchain. Before the TTL it waits. Once the TTL has passed it re-lands from\nthe base spend, following the ruling that whichever block lands wins,\nand the correction rewind keeps a held retained chain and resumes it in\nthe same process once its authority returns.",
+      "sha": "b285d1271142384fcfc8c7e51fff8e204367cf22",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/b285d1271142384fcfc8c7e51fff8e204367cf22",
+      "message": "Resolve compatible CBOR peers for Lucid reference script sweeps (#647)\n\nPin the older Lucid utilities peer graph to CBOR 1.6.6 while retaining CBOR 2 for the newer direct UPLC and Data libraries. The unchanged five reference-script sweep scenarios failed before and pass with the repaired graph; the root composed ten-case history and sweep suite passes. Frozen offline installation passes.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-02T00:11:44Z"
+      "authorDate": "2026-10-03T00:52:17Z"
     },
     {
-      "sha": "c7053caf0616fa93a632cd082c29e9270e0504dd",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/c7053caf0616fa93a632cd082c29e9270e0504dd",
-      "message": "Keep the operator node live through provider outages, restarts and rollbacks\n\nThe operator node had several ways to stop producing blocks until\nsomeone repaired it by hand, and several holds that looked healthy from\nthe outside:\n\n- /readyz never read the liveness reasons, so a node that had paused\n  block production still answered ready. Readiness now reports each hold,\n  and a stale incident is cleared once its condition goes away.\n- A local-finalization job left Failed on a Finalized journal was refused\n  at every startup, and each commit tick rewrote a Running job into that\n  shape. Recovery now closes the job.\n- The history owner exited on a lost signed-intent decision race and on\n  rewind-proof gaps. It now waits and decides again.\n- The worker cancelers that run under the L1 control-plane permit are\n  bounded, and the permit holder is watched. Transient provider and\n  database failures leave the node unready instead of exiting it.\n- A foreign-tip verdict of invalid stays a refusal: the window gate never\n  lifts it and the time-based prune never deletes it.\n\nOne identity race after the native CAS still exits the history owner. It\nis fixed in a later commit.",
+      "sha": "c89fe0059312a9b70194cb5a0ae1694f342e12bd",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/c89fe0059312a9b70194cb5a0ae1694f342e12bd",
+      "message": "Pin the native deep Data decoder and profile-bound watcher smoke\n\nUse the earliest upstream decoder release that accepts supported deep Data without a local parser shim, and keep the Go build pins consistent. Bind the disposable authority smoke configuration to the compiled testing profile while retaining public depth-30 templates and strict policy checks.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-02T00:11:40Z"
+      "authorDate": "2026-10-03T00:27:10Z"
     },
     {
-      "sha": "7822fe4a94d6db59e2f58b0fefe97e8e7a39505a",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/7822fe4a94d6db59e2f58b0fefe97e8e7a39505a",
-      "message": "Classify transient L1 provider failures in core, SDK and fault-proof readers\n\nOgmios slot evidence, event-history reads, singleton UTxO lookups, the\nreference-script and payout reference fetches, and the fault-proof\nKupmios source raised plain errors for conditions that clear on their\nown: a tip not yet reported, Kupo's datum index lagging a fresh mint, a\ndropped socket. Every caller treated them as terminal, so a node,\nwatcher or prover stopped on a provider hiccup.\n\nEach one now carries a typed, retryable classification. Conditions that\ncannot clear by waiting, such as two authentic singletons or malformed\ndata, stay terminal. The module-size exceptions are re-pinned to the new\nline counts.",
+      "sha": "31df81fe3cbd7da4987e689304e51a528dc49d78",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/31df81fe3cbd7da4987e689304e51a528dc49d78",
+      "message": "Bound node declaration build heap to avoid CI worker exhaustion\n\nThe tsup declaration worker exhausts its default heap during clean CI builds. Give both build steps the measured 6144 MiB heap while preserving inherited Node options; runtime image options remain unchanged.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-02T00:10:53Z"
+      "authorDate": "2026-10-03T00:07:47Z"
     },
     {
-      "sha": "d193c0b2c3130723bc6f62e105030c8299f90c0d",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d193c0b2c3130723bc6f62e105030c8299f90c0d",
-      "message": "Clean up README from the AI notes from the rewrite",
-      "authorName": "Drop-Table-Users",
-      "authorDate": "2026-10-01T16:32:16Z"
+      "sha": "86541d2b4e9a45a243473f09e749dc6956be436f",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/86541d2b4e9a45a243473f09e749dc6956be436f",
+      "message": "Fix typed byte buffers and external source references\n\nUse the declared Uint8Array return values in the Plutus test helpers and keep external Cardano source names out of local documentation link checks.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-10-02T23:48:22Z"
     },
     {
-      "sha": "3027be19cb3bc740f83af0e155e34ab38c7cf894",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/3027be19cb3bc740f83af0e155e34ab38c7cf894",
-      "message": "Split oversized off-chain modules and cap ESLint at 500 lines\n\nReduce the concentration of large modules while preserving declaration\nbehavior, public exports, mutable ownership and entrypoint contracts.\nSplit 717 TypeScript, JavaScript, Go and Rust originals; ratchet retained\noverages with exact per-file caps and documented reasons. No Aiken or\nPlutarch sources are included.\n\nThe 2026-09-30 production inventory drops from 159 to 21 modules above\n1,000 lines and from 45 to four above 2,000 lines. Extend source guards,\njourney source pins and scenario reachability checks across extracted\nimplementations; preserve SDK ESM initialization and direct-source loaders.\n\nVerification evidence, exact commands, counts, exit codes and limitations\nare recorded in docs/module-size-refactor/verification.json and README.md.\nOwned-file ESLint (3,159 files), workspace typecheck/build, all three\nrequired transaction-preparation gates, tooling and native checks pass.\nThe original full preflight remains non-green (44 passed, eight failed).\nCorrective runs resolve refactor regressions; migration/journey baseline\nfailures and one concurrent ledger-test failure are reported explicitly.\nLive devnet/release acceptance and skipped opt-in cases were not checked.",
+      "sha": "f2ad2a7963bf7b47d9ae355464a6a6c2ad1d00fb",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/f2ad2a7963bf7b47d9ae355464a6a6c2ad1d00fb",
+      "message": "Check blueprint application against the pinned UPLC oracle\n\nUse the independently supplied Plutus Data parameters with the pinned WASM evaluator. The previous direct Lucid comparison crashes in its upstream Harmonic encoder before checking the application boundary. Keep all existing arity, schema, cache and validator identity assertions.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-30T05:19:23Z"
+      "authorDate": "2026-10-02T23:08:25Z"
     },
     {
-      "sha": "dae1120a5611819af953ab539f848b5cdf745fdb",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/dae1120a5611819af953ab539f848b5cdf745fdb",
-      "message": "Evaluate scripts over the maps the fault proof commits\n\nThe node built each script context as Lucid Data. Lucid's encoder sorts\nevery map and its decoder merges duplicate keys. The fault proof keeps\ndatum and redeemer maps in their CBOR entry order, duplicates included,\nand orders the redeemer map by the witness list. The node sorted that\nmap. So a node could evaluate a script over a context the proof does not\ncommit. Two things went wrong:\n\n- An order-sensitive script could get a verdict the proof contradicts.\n- The trace builder failed closed with \"context differs\". That happened\n  on any transaction whose datum, output datum or redeemer held an\n  unsorted or duplicate-key map, or whose redeemers were not in sorted\n  order. Such a transaction's fraud was then unprovable.\n\nThe context is now built as harmonic Data straight from the witness\nbytes. It is encoded with the cardano-node encoder the CEK constants\nalready use. Harmonic's own dataToCbor is not used: it truncates byte\nstrings longer than 64 bytes. Redeemer data travels as its exact bytes\nthrough the ledger transaction, its codec and the worker wire format.\nThe context's redeemer map follows the witness list.",
+      "sha": "c3eac53e9b88ce41923c865c0244c4d49a130166",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/c3eac53e9b88ce41923c865c0244c4d49a130166",
+      "message": "Preserve the exact DA MPF package with reproducible source\n\nKeep the reviewed DA node-encoding package installable without relying on an unpublished package commit. Preserve its exact archive, genuine modified source, locked build dependencies, member receipts and reproduction recipe through the existing vendored dependency model.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-30T00:35:51Z"
+      "authorDate": "2026-10-02T22:43:42Z"
     },
     {
-      "sha": "cdcf0eb196c7e19e3cd7488c95f5438eca4e7acc",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/cdcf0eb196c7e19e3cd7488c95f5438eca4e7acc",
-      "message": "Order the one-shot output Value like the script context\n\n`script_value_data` passed an output's canonical asset map straight into the\nTxOut Data it summarises. Canonical CBOR orders each policy's asset names\nlength-first, while the evaluated script context, the TypeScript context\ncommitment and the `ledger_output_value_v1` fold all order them by their\nbytes. So for a policy holding names such as `aa` and `0102`, the one-shot\npath behind `ledger_output_summaries_v1`, `ledger_output_descriptor_v1.build_v1`,\n`tx_out_data_v1` and `tx_out_summary_v1` produced a different summary, and a\ndifferent descriptor, from the one every producer commits. No deployed\nvalidator reaches this path; the blueprint is unchanged, 1163 validators with\nidentical hashes. Its callers are tests and fixtures, and a fixture with mixed\nname widths would have been silently wrong. The names are now re-sorted; policy\nids need no re-sort, since the canonical decode admits only 28-byte policies in\nascending order.\n\n`ledger_output_summaries_with_value_v1` let a caller substitute a Value summary\nwithout naming what authenticated it, and only one test used that branch. It is\nfolded into `ledger_output_summaries_v1`. The staged transition-trace rules\nalready compose through `ledger_output_summaries_of_authenticated_parts_v1`,\nwhose comment now says what it reads and where its Value comes from.\n\nThe test that used the removed branch paired an empty-value output with an\nunrelated 5,002-byte summary, so it pinned only how the parts compose. It now\nfolds a mixed-width Value through `ledger_output_value_v1`, composes it the\nway the output-summaries step does, and requires the one-shot summaries. With\nthe old ordering it fails. A new negative test pins that the fold refuses to\nfinalize, or to skip to finalizing, while assets remain; letting a no-witness\nstep jump to the finalize stage passed every existing test in the module and\nfails this one.\n\nThe sort adds execution cost only to tests that derive descriptors through the\none-shot path, so two execution ledgers are re-taken. In the transition-trace\ndescriptor ledger, deriving the descriptor of an output with no native assets\ncosts 666 mem more and the three-asset golden vector 27,850 mem more; each\ndeposit-arm derivation costs 9,546 mem more, and the L2 no-op arm's marginal\ncost falls by 134 mem. No fit judgement or crossing bracket moves. The Q21 L2 no-op row rises by\n532 mem and stays within the basis.",
+      "sha": "bd9959c7cfaa1436b0e3192ae835d71c61f24950",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/bd9959c7cfaa1436b0e3192ae835d71c61f24950",
+      "message": "Plan public preprod acceptance against the October deadline\n\nWork backward from October 31 with integration, review and public-profile lifecycle milestones. Keep readiness gates open, distinguish ticket counts from acceptance work, and label unconfirmed capacity and ownership.\n\nVerification on 2026-10-02 in the isolated documentation worktree: node scripts/preflight.mjs --base 4d9d200cc4dc3b169ea6dbffc6b3426c9c51993c --json passed all 8 selected checks, exit 0. Prettier --check and git diff --check passed, exit 0. Live GitHub states and a local count check confirmed 65 gates, 28 open epic children out of 31, and 21 weekdays. Application tests and live public acceptance were not rerun for this documentation-only plan. Refs #696 and #724.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-09-29T21:55:19Z"
+      "authorDate": "2026-10-02T07:27:30Z"
     }
   ],
   "contributors": [
@@ -326,64 +326,46 @@
   ],
   "issues": [
     {
-      "number": 731,
-      "title": "Strengthen measurement-ledger and staged scenario coverage checks",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/731",
-      "updated_at": "2026-10-02T07:13:56Z"
+      "number": 740,
+      "title": "Remove obsolete field-preimage workflow runner and journal adapter",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/740",
+      "updated_at": "2026-10-03T04:28:20Z"
     },
     {
-      "number": 730,
-      "title": "Assess extreme script-generated constructor indices against Cardano semantics",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/730",
-      "updated_at": "2026-10-02T07:13:52Z"
+      "number": 643,
+      "title": "Owner sign-off: three soundness-relevant relaxations in the canonical-v1 watcher/L1-source wave",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/643",
+      "updated_at": "2026-10-03T02:19:26Z"
     },
     {
-      "number": 729,
-      "title": "Split T161 committee and MPF process modules as pure moves",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/729",
-      "updated_at": "2026-10-02T06:21:41Z"
+      "number": 647,
+      "title": "Make @harmoniclabs/cbor 2.0.1 resolution work for applyParamsToScript (da-committee-node, midgard-core)",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/647",
+      "updated_at": "2026-10-03T00:57:45Z"
     },
     {
-      "number": 728,
-      "title": "Assess bounded MPF collision-grinding assumptions after launch blockers",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/728",
-      "updated_at": "2026-10-02T06:21:36Z"
+      "number": 739,
+      "title": "Retry later public DA sources after canonical content refusal",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/739",
+      "updated_at": "2026-10-03T00:04:12Z"
     },
     {
-      "number": 696,
-      "title": "Devnet reliability program: remaining work",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/696",
-      "updated_at": "2026-10-02T01:59:59Z"
+      "number": 738,
+      "title": "Allow supported published carriage for inline-sized retained fields",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/738",
+      "updated_at": "2026-10-03T00:03:57Z"
     },
     {
-      "number": 727,
-      "title": "Watcher latches on rollbacks within k after finalizing at confirmation depth",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/727",
-      "updated_at": "2026-10-02T01:59:55Z"
+      "number": 683,
+      "title": "RemoveFraudulentBlocksLink can slash any operator: restore the descendant-operator check",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/683",
+      "updated_at": "2026-10-02T23:47:23Z"
     },
     {
-      "number": 713,
-      "title": "B4 recovery builds: explicit recovery operations and enumerated intervention residue",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/713",
-      "updated_at": "2026-10-02T01:59:31Z"
-    },
-    {
-      "number": 726,
-      "title": "Retain DA payload bytes to k = 2160 after header removal (committee and operator)",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/726",
-      "updated_at": "2026-10-02T01:59:22Z"
-    },
-    {
-      "number": 725,
-      "title": "Fault-proof workflows treat confirmation depth as final (completed latch, early abandon)",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/725",
-      "updated_at": "2026-10-02T01:59:20Z"
-    },
-    {
-      "number": 724,
-      "title": "Docs: deposit/withdraw guide, watcher README, readiness checklist",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/724",
-      "updated_at": "2026-10-02T01:51:56Z"
+      "number": 695,
+      "title": "[Fault-proof program] Fully verify foreign header commitments before building descendants",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/695",
+      "updated_at": "2026-10-02T23:47:20Z"
     }
   ],
   "releases": [],
@@ -458,35 +440,35 @@
     },
     {
       "week": 1769904000,
-      "total": 44
+      "total": 46
     },
     {
       "week": 1770508800,
-      "total": 32
+      "total": 36
     },
     {
       "week": 1771113600,
-      "total": 10
+      "total": 14
     },
     {
       "week": 1771718400,
-      "total": 47
+      "total": 43
     },
     {
       "week": 1772323200,
-      "total": 16
-    },
-    {
-      "week": 1772928000,
       "total": 23
     },
     {
+      "week": 1772928000,
+      "total": 35
+    },
+    {
       "week": 1773532800,
-      "total": 25
+      "total": 28
     },
     {
       "week": 1774137600,
-      "total": 26
+      "total": 36
     },
     {
       "week": 1774742400,
@@ -494,7 +476,7 @@
     },
     {
       "week": 1775347200,
-      "total": 36
+      "total": 39
     },
     {
       "week": 1775952000,
@@ -514,11 +496,11 @@
     },
     {
       "week": 1778371200,
-      "total": 40
+      "total": 25
     },
     {
       "week": 1778976000,
-      "total": 9
+      "total": 10
     },
     {
       "week": 1779580800,
@@ -526,23 +508,23 @@
     },
     {
       "week": 1780185600,
-      "total": 22
+      "total": 26
     },
     {
       "week": 1780790400,
-      "total": 25
+      "total": 16
     },
     {
       "week": 1781395200,
-      "total": 19
+      "total": 18
     },
     {
       "week": 1782000000,
-      "total": 6
+      "total": 10
     },
     {
       "week": 1782604800,
-      "total": 1
+      "total": 5
     },
     {
       "week": 1783209600,
@@ -550,7 +532,7 @@
     },
     {
       "week": 1783814400,
-      "total": 9
+      "total": 10
     },
     {
       "week": 1784419200,
@@ -558,7 +540,7 @@
     },
     {
       "week": 1785024000,
-      "total": 156
+      "total": 202
     },
     {
       "week": 1785628800,
@@ -566,11 +548,11 @@
     },
     {
       "week": 1786233600,
-      "total": 0
+      "total": 21
     },
     {
       "week": 1786838400,
-      "total": 53
+      "total": 132
     },
     {
       "week": 1787443200,
@@ -578,11 +560,11 @@
     },
     {
       "week": 1788048000,
-      "total": 1
+      "total": 0
     },
     {
       "week": 1788652800,
-      "total": 138
+      "total": 137
     },
     {
       "week": 1789257600,
@@ -590,11 +572,11 @@
     },
     {
       "week": 1789862400,
-      "total": 174
+      "total": 172
     },
     {
       "week": 1790467200,
-      "total": 93
+      "total": 190
     }
   ]
 }
