@@ -1,10 +1,10 @@
 {
-  "fetchedAt": "2026-10-03T11:23:17.637Z",
+  "fetchedAt": "2026-10-04T12:04:19.966Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 25,
     "forks_count": 11,
-    "open_issues_count": 190
+    "open_issues_count": 204
   },
   "languages": {
     "Aiken": 359544,
@@ -17,109 +17,109 @@
   },
   "commits": [
     {
-      "sha": "ced2ee55f5d1c7b7cb29bc08ba451b2070138d52",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ced2ee55f5d1c7b7cb29bc08ba451b2070138d52",
-      "message": "Select the testing deployment profile for CI migration\n\nThe isolated migration starts the node CLI after building it and must provide the deployment profile required by configuration. Bind that step to the preprod-testing artifact and existing Preprod network rather than weakening the profile requirement.",
+      "sha": "386054fefdbcd38d24a4b001e7c166b375ec5b7b",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/386054fefdbcd38d24a4b001e7c166b375ec5b7b",
+      "message": "Accept canonical zero-group observations during owned-process census\n\nTreat a readable literal PGID zero as a known nonmember while retaining positive owned-record and leader identity checks. Add causal controls for valid zero-group entries and malformed zero forms.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-03T09:17:29Z"
+      "authorDate": "2026-10-04T05:52:00Z"
     },
     {
-      "sha": "c0d9289195a9ece1d80e542db8370876082d03f6",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/c0d9289195a9ece1d80e542db8370876082d03f6",
-      "message": "Bind watcher CI authority smoke to the built profile\n\nThe shipped public sample uses depth 30 while the testing image requires depth 3. Generate the disposable smoke policy from the compiled profile and recompute its digest so the strict authority parser and authenticated HTTP smoke can run.",
+      "sha": "fbcd59b4e782f26612847e02ef27c97ac12dbefc",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/fbcd59b4e782f26612847e02ef27c97ac12dbefc",
+      "message": "Keep initialization reserve assertions within the existing file limit\n\nExpress the same output and mint assertions directly and shorten their comments; retain the 739-line limit and every funding constraint. Refs #643.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-03T09:00:33Z"
+      "authorDate": "2026-10-04T05:47:57Z"
     },
     {
-      "sha": "18b65d58bfad9aad6973b8a01b2573acc144599a",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/18b65d58bfad9aad6973b8a01b2573acc144599a",
-      "message": "Ratchet module size limits after shared recovery cleanup\n\nThe field lifecycle and e2e summary cleanup reduced their modules to 907 and 608 lines. Lower the stale 949 and 627 exceptions so Repository Tools CI enforces the current sizes without unused headroom.\n\nRefs #740",
+      "sha": "70ec1753a95d1b303d342eda06f2e39e6a45b644",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/70ec1753a95d1b303d342eda06f2e39e6a45b644",
+      "message": "Check correction-lock reserves without minting ADA (#643)\n\nUpdate the existing atomic initialization assertion for the new lock reserve while retaining all other output funding checks. Explicitly reject lovelace in the mint set, which caused the observed MULTIPLE_POLICIES regression during validation.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-03T08:47:59Z"
+      "authorDate": "2026-10-04T05:45:07Z"
     },
     {
-      "sha": "aa7db4dfb66951636d58190ab277eb356cdb659c",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/aa7db4dfb66951636d58190ab277eb356cdb659c",
-      "message": "Carry current queue targets through shared removal actions (#740)\n\nRequire every typed family removal action to retain the authenticated current target alongside its immediate child and permanent proof reference. Carry the field through observation, planning and capture; update callers in place without a fallback. Preserve the obsolete-runner deletion and strict signed input checks.",
+      "sha": "bbfb4fea83d98d13662fd9c3076064bbfdf6f558",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/bbfb4fea83d98d13662fd9c3076064bbfdf6f558",
+      "message": "Merge canonical watcher verification policy into permissionless recovery",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-03T05:03:43Z"
+      "authorDate": "2026-10-04T05:38:23Z"
     },
     {
-      "sha": "6811b7489292fdbef5415ea15ef6117942dcd14a",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/6811b7489292fdbef5415ea15ef6117942dcd14a",
-      "message": "Split required-gate summary tests without changing behavior\n\nMove two unchanged test registrations into an imported helper to satisfy the canonical file line limit. Keep assertions and registration order identical.",
+      "sha": "b804564c0a8b691583ad09dba2f9e1c159bc4af2",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/b804564c0a8b691583ad09dba2f9e1c159bc4af2",
+      "message": "Reserve correction-lock ADA for permissionless fraud recovery\n\nFund fresh correction locks for their largest typed locked datum using live ledger parameters. Preserve exact lock value, authenticated prover rewards and permissionless caller signatures. Build the canonical regression from confirmed genesis and real transition commitments. Both active and retired descendant removals pass with durable SQLite reservation recovery. Refs #643.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-03T04:29:17Z"
+      "authorDate": "2026-10-04T05:36:43Z"
     },
     {
-      "sha": "c6456379c757cc7d659c60c855e69e430f39ff28",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/c6456379c757cc7d659c60c855e69e430f39ff28",
-      "message": "Replace obsolete field runner with shared recovery (#740)\n\nRemove the family-specific journal, orchestration and exports. Shared recovery authenticates descendant removal receipts and resumes already-slashed cleanup from the durable workflow journal. Retain evidence checks, transaction builders and validators.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-03T04:24:45Z"
+      "sha": "6b9a83b0a0fb62fafacbcdfccf230becd180c714",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/6b9a83b0a0fb62fafacbcdfccf230becd180c714",
+      "message": "Merge pull request #764 from Anastasia-Labs/codex/lean-merge-verification\n\nSelect current merge scope and bind reusable validator evidence",
+      "authorName": "colll78",
+      "authorDate": "2026-10-04T05:34:39Z"
     },
     {
-      "sha": "0eb45602c5eb2f9a2d54d7369e6cb2186388bc93",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/0eb45602c5eb2f9a2d54d7369e6cb2186388bc93",
-      "message": "Fit canonical output proof roles within the publication budget\n\nKeep the original descriptor decoder unchanged and specialize its canonical schema parser at the two measured oversized consumers. Share the value-fold successor checks while preserving guards, parameter schemas, and the existing publication limit.",
+      "sha": "248d44e2e951d8ccfcd286a15b1b2138edb1307f",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/248d44e2e951d8ccfcd286a15b1b2138edb1307f",
+      "message": "Read CI merge parents from shallow commit objects\n\nThe real Actions identity artifact exposed empty revision-walker parent output in its depth-one checkout. Read ordered parents from the raw commit header so exact integration evidence remains verifiable without relaxing freshness checks. The causal shallow-checkout control and final tooling assertions are recorded in PR #764.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-03T02:48:03Z"
+      "authorDate": "2026-10-04T05:25:47Z"
     },
     {
-      "sha": "b00a34cb60eac329616b4c8b305c63fafdf4e390",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/b00a34cb60eac329616b4c8b305c63fafdf4e390",
-      "message": "Pay the authenticated prover when any caller submits slashing (#643)\n\nBind removal rewards to the authenticated proof producer across descendant removals and active or retired operators. Permit a different wallet to submit without requiring the prover signature, and retain validated reward attribution through funding recovery.",
+      "sha": "c016cfb29fc04b8e09552e38ef888aeb2d79e1c0",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/c016cfb29fc04b8e09552e38ef888aeb2d79e1c0",
+      "message": "Select current merge scope and bind reusable validator evidence\n\nJudge the intended target merge tree rather than a feature upstream or stale ancestor. Keep shared execution helpers at full scope while selecting tooling checks for preflight-only changes. Admit only two file validators with exact checkout, discovered inputs, Node profile, audited commands and completed CI coverage; retain distinct protocol and live acceptance gates. Verification details are recorded in the follow-on pull request.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-03T02:36:33Z"
+      "authorDate": "2026-10-04T05:17:00Z"
     },
     {
-      "sha": "b285d1271142384fcfc8c7e51fff8e204367cf22",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/b285d1271142384fcfc8c7e51fff8e204367cf22",
-      "message": "Resolve compatible CBOR peers for Lucid reference script sweeps (#647)\n\nPin the older Lucid utilities peer graph to CBOR 1.6.6 while retaining CBOR 2 for the newer direct UPLC and Data libraries. The unchanged five reference-script sweep scenarios failed before and pass with the repaired graph; the root composed ten-case history and sweep suite passes. Frozen offline installation passes.",
+      "sha": "ad587ebd06886f9ace66ee0a587c47cb1477d286",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ad587ebd06886f9ace66ee0a587c47cb1477d286",
+      "message": "Refresh verification catalogue for canonical test dependencies (#643)\n\nThe declared Node and Watcher fixture dependencies expand the generated workspace dependency closure. Regenerate the required-check catalogue from the current registry. Repository-tooling tests passed 199/199, exit 0, on 2026-10-04.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-03T00:52:17Z"
+      "authorDate": "2026-10-04T04:52:26Z"
     },
     {
-      "sha": "c89fe0059312a9b70194cb5a0ae1694f342e12bd",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/c89fe0059312a9b70194cb5a0ae1694f342e12bd",
-      "message": "Pin the native deep Data decoder and profile-bound watcher smoke\n\nUse the earliest upstream decoder release that accepts supported deep Data without a local parser shim, and keep the Go build pins consistent. Bind the disposable authority smoke configuration to the compiled testing profile while retaining public depth-30 templates and strict policy checks.",
+      "sha": "ebc9a4a3786e6436d664b210a3636c350bfec55f",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ebc9a4a3786e6436d664b210a3636c350bfec55f",
+      "message": "Preserve generated lockfile formatting (#643)\n\nKeep only the declared Node and Watcher test dependency links. Parsed YAML comparison confirms all keys, values, array order and dependencies match the formatted checkpoint; repository formatting checks cover TS and Markdown, not this generated lockfile.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-03T00:27:10Z"
+      "authorDate": "2026-10-04T04:45:04Z"
     },
     {
-      "sha": "31df81fe3cbd7da4987e689304e51a528dc49d78",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/31df81fe3cbd7da4987e689304e51a528dc49d78",
-      "message": "Bound node declaration build heap to avoid CI worker exhaustion\n\nThe tsup declaration worker exhausts its default heap during clean CI builds. Give both build steps the measured 6144 MiB heap while preserving inherited Node options; runtime image options remain unchanged.",
+      "sha": "9e32472c70432f44a4c281f5b2d66c7ef8dc2f7f",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/9e32472c70432f44a4c281f5b2d66c7ef8dc2f7f",
+      "message": "Exercise permissionless slash custody across SQLite restart (#643)\n\nPublish the canonical fixture deployment through the current publisher and bind actual third-party slashes to authenticated prover rewards, runtime funding authority and the real reservation store. Preserve exact signed bytes, confirmations and leases across reopen. Add declared test dependencies and the existing SQL loader without relaxing strictness or timeout guards.\n\nVerification: final fault-proof and Watcher typechecks, ten-file lint, and TS/config/package/lock formatting passed on 2026-10-04. Canonical runtime and hosted acceptance remain pending. Refs #643.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-03T00:07:47Z"
+      "authorDate": "2026-10-04T04:40:29Z"
     },
     {
-      "sha": "86541d2b4e9a45a243473f09e749dc6956be436f",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/86541d2b4e9a45a243473f09e749dc6956be436f",
-      "message": "Fix typed byte buffers and external source references\n\nUse the declared Uint8Array return values in the Plutus test helpers and keep external Cardano source names out of local documentation link checks.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-02T23:48:22Z"
+      "sha": "37a1f04e9c13f5020de0fb88d20f5af348a3e683",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/37a1f04e9c13f5020de0fb88d20f5af348a3e683",
+      "message": "Merge pull request #762 from Anastasia-Labs/codex/deterministic-contributor-tools\n\nMake recurring contributor workflows deterministic",
+      "authorName": "colll78",
+      "authorDate": "2026-10-04T04:30:34Z"
     },
     {
-      "sha": "f2ad2a7963bf7b47d9ae355464a6a6c2ad1d00fb",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/f2ad2a7963bf7b47d9ae355464a6a6c2ad1d00fb",
-      "message": "Check blueprint application against the pinned UPLC oracle\n\nUse the independently supplied Plutus Data parameters with the pinned WASM evaluator. The previous direct Lucid comparison crashes in its upstream Harmonic encoder before checking the application boundary. Keep all existing arity, schema, cache and validator identity assertions.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-02T23:08:25Z"
+      "sha": "fbc69dc3016e3a025f3bb85b5ae3e86a31b58196",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/fbc69dc3016e3a025f3bb85b5ae3e86a31b58196",
+      "message": "Merge pull request #760 from Anastasia-Labs/codex/683-descendant-attribution-20261003\n\nRestore per-block operator attribution when pruning descendants",
+      "authorName": "colll78",
+      "authorDate": "2026-10-04T04:11:44Z"
     },
     {
-      "sha": "c3eac53e9b88ce41923c865c0244c4d49a130166",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/c3eac53e9b88ce41923c865c0244c4d49a130166",
-      "message": "Preserve the exact DA MPF package with reproducible source\n\nKeep the reviewed DA node-encoding package installable without relying on an unpublished package commit. Preserve its exact archive, genuine modified source, locked build dependencies, member receipts and reproduction recipe through the existing vendored dependency model.",
+      "sha": "eff85c848dedffd222864df3cc9da6c03869fb69",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/eff85c848dedffd222864df3cc9da6c03869fb69",
+      "message": "Confirm owned process exit with stat-only termination observations\n\nAfter a validated SIGTERM, a leader can lose cmdline or cwd between proc\nreads. A redundant full identity observation then rejected safely completed\ngroups.\n\nBind post-signal observations to the recorded PGID and start ticks, scan\ngroup stat conservatively, and retain replacement, read-error and live-member\nrefusals before escalation or record removal. Initial full ownership\nauthorization remains strict.\n\nNormal setup under Node22 and pnpm9.15.4 produced causal RED with five passes\nand two expected failures, corrected seven passes, and fourteen passes in\nthe complete nearest file. An always-empty census mutant failed both\npreservation controls plus the live-leader control. Exact-path formatting,\nESLint and the declared Tools typecheck passed.\n\nRefs #696",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-02T22:43:42Z"
+      "authorDate": "2026-10-04T03:59:15Z"
     },
     {
-      "sha": "bd9959c7cfaa1436b0e3192ae835d71c61f24950",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/bd9959c7cfaa1436b0e3192ae835d71c61f24950",
-      "message": "Plan public preprod acceptance against the October deadline\n\nWork backward from October 31 with integration, review and public-profile lifecycle milestones. Keep readiness gates open, distinguish ticket counts from acceptance work, and label unconfirmed capacity and ownership.\n\nVerification on 2026-10-02 in the isolated documentation worktree: node scripts/preflight.mjs --base 4d9d200cc4dc3b169ea6dbffc6b3426c9c51993c --json passed all 8 selected checks, exit 0. Prettier --check and git diff --check passed, exit 0. Live GitHub states and a local count check confirmed 65 gates, 28 open epic children out of 31, and 21 weekdays. Application tests and live public acceptance were not rerun for this documentation-only plan. Refs #696 and #724.",
+      "sha": "16f5a1ea69fbbdd392b26b76b5fe0e035b9119ff",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/16f5a1ea69fbbdd392b26b76b5fe0e035b9119ff",
+      "message": "Match focused test runtime to each package recipe\n\nThe guarded runner forced emulator mode on watcher tests, refusing test-only recovery constructors. Keep emulator mode for node and node-tools and use the ordinary test runtime elsewhere. A child-process case in the existing orchestration suite catches this previously untested environment regression; it failed before the fix and passed after. All eight affected watcher files pass 110 assertions from a durable worktree without weakening production storage guards.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-02T07:27:30Z"
+      "authorDate": "2026-10-04T03:09:26Z"
     }
   ],
   "contributors": [
@@ -326,54 +326,44 @@
   ],
   "issues": [
     {
-      "number": 740,
-      "title": "Remove obsolete field-preimage workflow runner and journal adapter",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/740",
-      "updated_at": "2026-10-03T04:28:20Z"
+      "number": 696,
+      "title": "Devnet reliability program: remaining work",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/696",
+      "updated_at": "2026-10-03T19:18:56Z"
     },
     {
-      "number": 643,
-      "title": "Owner sign-off: three soundness-relevant relaxations in the canonical-v1 watcher/L1-source wave",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/643",
-      "updated_at": "2026-10-03T02:19:26Z"
+      "number": 759,
+      "title": "Remove the uncapped signed-header recovery retention hold; delete the coverage path in rollback ticket 14",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/759",
+      "updated_at": "2026-10-03T19:18:43Z"
     },
     {
-      "number": 647,
-      "title": "Make @harmoniclabs/cbor 2.0.1 resolution work for applyParamsToScript (da-committee-node, midgard-core)",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/647",
-      "updated_at": "2026-10-03T00:57:45Z"
+      "number": 758,
+      "title": "Event-history publication: refuse TTL-less pending bodies, require validTo in the staged builder",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/758",
+      "updated_at": "2026-10-03T19:18:41Z"
     },
     {
-      "number": 739,
-      "title": "Retry later public DA sources after canonical content refusal",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/739",
-      "updated_at": "2026-10-03T00:04:12Z"
+      "number": 701,
+      "title": "DA frame step-down follow-ups: mutation gaps, non-speculative path, readiness, step-down cost",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/701",
+      "updated_at": "2026-10-03T19:12:32Z"
     },
     {
-      "number": 738,
-      "title": "Allow supported published carriage for inline-sized retained fields",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/738",
-      "updated_at": "2026-10-03T00:03:57Z"
+      "number": 756,
+      "title": "Require a closed, bounded (~10 min) validity range when events are created",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/756",
+      "updated_at": "2026-10-03T19:12:30Z"
     },
     {
-      "number": 683,
-      "title": "RemoveFraudulentBlocksLink can slash any operator: restore the descendant-operator check",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/683",
-      "updated_at": "2026-10-02T23:47:23Z"
-    },
-    {
-      "number": 695,
-      "title": "[Fault-proof program] Fully verify foreign header commitments before building descendants",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/695",
-      "updated_at": "2026-10-02T23:47:20Z"
+      "number": 757,
+      "title": "Catch-up after a long block-production gap: events due in the gap cannot be split",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/757",
+      "updated_at": "2026-10-03T19:12:21Z"
     }
   ],
   "releases": [],
   "commitActivity": [
-    {
-      "week": 1759622400,
-      "total": 15
-    },
     {
       "week": 1760227200,
       "total": 13
@@ -448,7 +438,7 @@
     },
     {
       "week": 1771113600,
-      "total": 14
+      "total": 13
     },
     {
       "week": 1771718400,
@@ -500,7 +490,7 @@
     },
     {
       "week": 1778976000,
-      "total": 10
+      "total": 13
     },
     {
       "week": 1779580800,
@@ -508,7 +498,7 @@
     },
     {
       "week": 1780185600,
-      "total": 26
+      "total": 25
     },
     {
       "week": 1780790400,
@@ -516,7 +506,7 @@
     },
     {
       "week": 1781395200,
-      "total": 18
+      "total": 13
     },
     {
       "week": 1782000000,
@@ -532,7 +522,7 @@
     },
     {
       "week": 1783814400,
-      "total": 10
+      "total": 9
     },
     {
       "week": 1784419200,
@@ -544,7 +534,7 @@
     },
     {
       "week": 1785628800,
-      "total": 101
+      "total": 1
     },
     {
       "week": 1786233600,
@@ -564,7 +554,7 @@
     },
     {
       "week": 1788652800,
-      "total": 137
+      "total": 45
     },
     {
       "week": 1789257600,
@@ -576,7 +566,11 @@
     },
     {
       "week": 1790467200,
-      "total": 190
+      "total": 207
+    },
+    {
+      "week": 1791072000,
+      "total": 27
     }
   ]
 }
