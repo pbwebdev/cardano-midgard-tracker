@@ -1,10 +1,10 @@
 {
-  "fetchedAt": "2026-10-05T14:08:20.498Z",
+  "fetchedAt": "2026-10-06T13:05:42.710Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 25,
     "forks_count": 11,
-    "open_issues_count": 198
+    "open_issues_count": 165
   },
   "languages": {
     "Aiken": 359544,
@@ -17,109 +17,109 @@
   },
   "commits": [
     {
-      "sha": "ca5a648658b278909efcf45b0da5ab407d4001d5",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ca5a648658b278909efcf45b0da5ab407d4001d5",
-      "message": "Merge pull request #768 from Anastasia-Labs/codex/fix-751-terminal-removal\n\nReconcile descendant removals after external target cleanup",
+      "sha": "368263e5da6eada174a234097ec8cbc386b84584",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/368263e5da6eada174a234097ec8cbc386b84584",
+      "message": "Fail and back off when the database upstream drops connections unanswered\n\npostgres.js reconnects at once, with no backoff, when a socket closes\ncleanly while a connection is being set up, and each pass restarts its\nconnect timeout. An upstream that accepts and closes (a proxy in front\nof a dead Postgres) made the node reconnect ~700 times a second with\nthe pending query never settling, so the startup retry budget, the\npool-open timeout and readiness all waited silently forever. Every pool\nnow hands postgres.js a socket factory that turns a close before the\nserver's first byte into ECONNRESET: the query fails as\ndatabase_unreachable, postgres.js backs off, and the condition is\nlogged once when it starts and once when it clears.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-10-06T00:52:08Z"
+    },
+    {
+      "sha": "4da0943dd5f45dc4f5bb4ec33e6268b930604711",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/4da0943dd5f45dc4f5bb4ec33e6268b930604711",
+      "message": "Keep the TypeScript compiler out of the fault-proofs runtime barrel\n\nThe root barrel re-exported the lint-only limit-escape scanner, which\nimports typescript, so the settlement worker loaded the whole compiler\nunder its 256 MB heap cap. Its one caller already imports it by path.\nA module-graph test now refuses typescript in the barrel or the\nsettlement worker, and the heap probe no longer needs ESM shims.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-10-06T00:34:03Z"
+    },
+    {
+      "sha": "e30aab4f362c272fa89e6726317bdea9e5979ecc",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/e30aab4f362c272fa89e6726317bdea9e5979ecc",
+      "message": "Merge pull request #767 from Anastasia-Labs/colll78/devnet-lifecycle\n\nComplete the devnet reliability program and merge it into the watcher checkpoint",
       "authorName": "colll78",
-      "authorDate": "2026-10-05T10:14:19Z"
+      "authorDate": "2026-10-05T23:48:47Z"
     },
     {
-      "sha": "02049c3b16ab80d89da71c612214ad78b0301998",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/02049c3b16ab80d89da71c612214ad78b0301998",
-      "message": "Reconcile descendant removals after external target cleanup (#751)\n\nAn included descendant peel could remain unresolved when another caller removed the target before its acknowledgement. Confirm the original peel receipt and authenticate the later terminal independently, while refusing completion over unresolved submission intents.",
+      "sha": "f43b7d0702d43db206a4883b4314f4d14fa7b1e6",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/f43b7d0702d43db206a4883b4314f4d14fa7b1e6",
+      "message": "Journal quiet recovery evidence in runs, one durable revision per run\n\nEvery finalized quiet block ran a full single-block durable authority\ncommit, each O(retained store), and quiet blocks never move the\nfinality frontier, so catching up the 2,161 blocks grown after a\ncorrection was quadratic (over 40 minutes; the watcher journey hung\nits CI shard). Quiet blocks are now observed one by one and journaled\nin runs of up to 128 in one revision, before any of them is delivered.\nA run stops at a touched block, the forced authority checkpoint or the\nconfirmation depth, and blocks waiting in a growing run are not hooked\nas included. The batched authority equals block-by-block persistence.\nThe journey stage now takes ~3 minutes; its deadline drops to 10.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-05T08:53:46Z"
+      "authorDate": "2026-10-05T22:22:28Z"
     },
     {
-      "sha": "b987e6d9ee07139e817c68acd4a05ef5abea4c66",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/b987e6d9ee07139e817c68acd4a05ef5abea4c66",
-      "message": "Merge pull request #737 from Anastasia-Labs/codex/da-public-candidate\n\nComplete canonical fault-proof recovery and foreign-block verification",
-      "authorName": "colll78",
-      "authorDate": "2026-10-05T05:29:10Z"
-    },
-    {
-      "sha": "c0837efad623cb7f24887b5fde0d8427e283ac0d",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/c0837efad623cb7f24887b5fde0d8427e283ac0d",
-      "message": "Shrink the workflow size record after parent recovery extraction (#737)\n\nThe required module-size metadata check enforces exact current sizes. Record the smaller 959-line orchestrator after extracting historical-parent reobservation, preserving a stricter cap and the verified runtime source.",
+      "sha": "10c44601246b942f3ef015e25a5936b7df82139f",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/10c44601246b942f3ef015e25a5936b7df82139f",
+      "message": "Verify the foreign commit base on idle commitment ticks\n\n/readyz holds a node unready until its Ready history authority has\nverified foreign-base evidence, but only a commit produced that\nevidence, and an idle tick stops before the commit. A fresh node\nbefore any deposit, or any node after a restart or a new history\ngeneration, never became ready, and devnet up and the healthcheck wait\non /readyz. An idle tick now runs the commit path's own base check\nagainst the live tail, without a lease or the worker, until the\nevidence is verified.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-05T04:10:26Z"
+      "authorDate": "2026-10-05T21:05:04Z"
     },
     {
-      "sha": "c86719bd0cb49d4869927ae2108050c57e4fc656",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/c86719bd0cb49d4869927ae2108050c57e4fc656",
-      "message": "Budget real-contract source fixture setup explicitly (#737)\n\nThe canonical contract and manifest fixture exceeded Vitest's default 10-second setup budget under CI contention. Load the identical contracts once and use the existing same-helper 120-second fixture budget without changing test assertions or global timeouts.",
+      "sha": "8d00b2323999986652014a00a3c9e50f62cd8ffd",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/8d00b2323999986652014a00a3c9e50f62cd8ffd",
+      "message": "Point the startup-retry proxy at POSTGRES_* and isolate the history authority row\n\nThe proxy forwarded to PGHOST/PGPORT, a dead port on CI where Postgres\nserves 5432 through POSTGRES_PORT. The foreign DA test now clears the\nsingleton event_history_authority row an earlier file on the same shard\ncan leave behind.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-05T03:58:15Z"
+      "authorDate": "2026-10-05T20:47:48Z"
     },
     {
-      "sha": "4f7c38e787f7fbbe5eea49857a070a3f91fe57ea",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/4f7c38e787f7fbbe5eea49857a070a3f91fe57ea",
-      "message": "Keep included proof parents closed during descendant recovery (#737)\n\nAn included cancellation can consume a parent's effects before its journal confirmation. Authenticate the historical parent's inclusion without replay authority before reopening its funding and journal, so pending descendants can reconcile. Preserve rollback recovery and signed-intent ownership checks.",
+      "sha": "819b7fdac5c595d1bb314a993a1030e6fe01a979",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/819b7fdac5c595d1bb314a993a1030e6fe01a979",
+      "message": "Seed a verified foreign base in the readiness route fixtures\n\n/readyz is unready until the current history authority's foreign base\nis verified; the healthy-node fixtures now reach that through the real\nauthority and verification transitions, and one route test covers the\nunverified hold.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-05T03:50:37Z"
+      "authorDate": "2026-10-05T20:47:40Z"
     },
     {
-      "sha": "877f1673d4c450b9f5fbb4f964ea3ae42166657b",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/877f1673d4c450b9f5fbb4f964ea3ae42166657b",
-      "message": "Reconcile rolled-back proof parents before pending descendants (#737)\n\nA pending descendant must not suppress reobservation of its previously confirmed parent after rollback. Keep reconciliation first for the current action when its own signed intent is unresolved, and preserve funding collision and authenticated expiry checks. The twelve canonical reobservation cases and the original workflow, cancellation and terminal recovery suites pass.",
+      "sha": "e4cb9cd649e13f7deb31be0510c702f293d48e1b",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/e4cb9cd649e13f7deb31be0510c702f293d48e1b",
+      "message": "Defer foreign adoption while a correction rewind holds on the native root\n\nAfter the merge, foreign native adoption ran in the same preparation\npass as a correction rewind that had just held on the native owner's\nstate, replayed from a root it cannot place, and failed the history\nowner. A hold on the native state now returns a marker, and adoption\nwaits for the next pass, as it did when such a refusal failed the pass.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-05T02:39:50Z"
+      "authorDate": "2026-10-05T20:47:30Z"
     },
     {
-      "sha": "4fd96e816b0c2c10a79187978e25fbb0d0728e11",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/4fd96e816b0c2c10a79187978e25fbb0d0728e11",
-      "message": "Align recovery fixtures with the canonical root and scheduler (#737)\n\nKeep the SQL adoption fixture connected to its authenticated confirmed root. Refresh the parent scheduler before each bounded commit retry so advancing an emulator slot does not repeatedly invoke the mutation worker with a stale schedule. Preserve the production guards, signed-intent assertions and native recovery paths.",
+      "sha": "038dea3f27bb51db921fd6cd615f38ad620a0e4c",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/038dea3f27bb51db921fd6cd615f38ad620a0e4c",
+      "message": "Complete fault-proof objectives beyond the recovery horizon in watcher tests\n\nA completed terminal now requires depth automaticRecoveryMaxDepth + 2;\nthe provisional case keeps its shallow terminal_included depth.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-05T02:32:59Z"
+      "authorDate": "2026-10-05T20:45:01Z"
     },
     {
-      "sha": "72523d52040a495fb509052ad7bd316b4fae48e6",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/72523d52040a495fb509052ad7bd316b4fae48e6",
-      "message": "Use typed event-key schemas in fault-proof expectations (#737)\n\nThe raw TypeBox schema inferred its schema shape as the serialized value type and failed the complete fault-proof TypeScript check. Use the existing typed alias of the same runtime schema. The affected two-file selection passes all eight tests and the complete package typecheck passes.",
+      "sha": "e8916f3cb3416ad16fd02eb3f4623cfeae87cb06",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/e8916f3cb3416ad16fd02eb3f4623cfeae87cb06",
+      "message": "Shim __filename in the settlement worker heap probe bundle\n\nThe settlement path now reaches the fault-proofs barrel, which inlines\nthe CommonJS TypeScript compiler; it reads __filename at load and the\nESM bundle had no such binding.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-05T01:25:36Z"
+      "authorDate": "2026-10-05T20:44:53Z"
     },
     {
-      "sha": "3d9c4c098b7a1e57e42dc5f8766f04c648ab6846",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/3d9c4c098b7a1e57e42dc5f8766f04c648ab6846",
-      "message": "Adopt canonical foreign replay and authenticated deposit identity (#737)\n\nEncode native inserts with the shared ledger descriptor converter, compare descriptor replay with independently verified raw ledger entries, and retain authenticated deposit transaction/address identity in SQL. Prove honest foreign-header recovery through actual rebuilt submission and confirmation.",
+      "sha": "baa96110549ec783ab6f4379f12ac7d02482d85d",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/baa96110549ec783ab6f4379f12ac7d02482d85d",
+      "message": "Re-pin DA bond delay, DA fixture and contract hashes to the 880 s profile\n\nRuling B1 moved the testing DA response windows to 880 s, which changes\nthe timeout and challenge validators and the compiled withdraw delay\n(2,380,000 ms). The fixture is regenerated through its write channel.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-05T01:05:21Z"
+      "authorDate": "2026-10-05T20:44:39Z"
     },
     {
-      "sha": "09cba090515edafd7e020fba35181ac374759bb4",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/09cba090515edafd7e020fba35181ac374759bb4",
-      "message": "Keep removed local roots under correction recovery ownership (#737)\n\nAvoid foreign-adoption work for authenticated local recovery obligations. Bind retained journal or applied signed-release ancestry to the deployment, profile, native binary and current canonical base; preserve closed readiness and unbound-root refusal while ordinary correction recovery completes.",
+      "sha": "bf0736ef0ce270dd4c57beb2440658956bcd3a72",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/bf0736ef0ce270dd4c57beb2440658956bcd3a72",
+      "message": "Replace the synthetic native's control file atomically\n\nThe fixture's native re-reads its control file every 10 ms; a\ntruncate-then-write let it read an empty file, crash on JSON.parse and\nend the stream under test (the CI rewind failure, ~2% under load).\nWrite a temp file and rename it over the control file instead.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-05T01:02:25Z"
+      "authorDate": "2026-10-05T20:44:30Z"
     },
     {
-      "sha": "932b35f3d59720c5a3031c6b20475249f652cebd",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/932b35f3d59720c5a3031c6b20475249f652cebd",
-      "message": "Verify the current base during signed local continuation (#737)\n\nA landed signed journal can outlive the previous confirmed queue reference. Resolve and authenticate the current canonical tail for pending local finalization while retaining exact signed-journal, native, deployment and source checks on the separately retained continuation.",
+      "sha": "41e6453e2cbee8131697643aaa85e7d5c5054f85",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/41e6453e2cbee8131697643aaa85e7d5c5054f85",
+      "message": "Pass the watcher shard flag through to vitest\n\n'pnpm test --shard' parses --shard as a pnpm option and fails. 'pnpm run test --shard' forwards it to vitest, as the fault-proof job already does.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-05T00:53:42Z"
+      "authorDate": "2026-10-05T19:00:29Z"
     },
     {
-      "sha": "d239acba97a5ea339d72f2a2581a492cdb57df4e",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d239acba97a5ea339d72f2a2581a492cdb57df4e",
-      "message": "Tighten module caps after recovery fixture reductions (#737)\n\nRefresh the four explicit ceilings to the shorter current files and remove obsolete declaration line counts. No ceiling is raised and no new exception is introduced.",
+      "sha": "635e1e0adb0a6ce821601d34eef1cd2922585e1d",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/635e1e0adb0a6ce821601d34eef1cd2922585e1d",
+      "message": "Pin the network-id forced workflow test's size cap to its new length\n\nThe test shrank to 1,100 lines, and the module-size validator requires an exact cap.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-05T00:48:55Z"
+      "authorDate": "2026-10-05T18:57:35Z"
     },
     {
-      "sha": "1aad727d4bad94dc1089effb1835212aa09b8f42",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/1aad727d4bad94dc1089effb1835212aa09b8f42",
-      "message": "Restore reachable forced-verdict and retained frontier fixtures (#737)\n\nUse individually legal, conserved outputs to exercise aggregate certified carriage, keep oversized output refusal as an explicit first-fault control, and use an accepted native mint trace to prove the complete retained ScriptSources frontier.",
+      "sha": "4e6ba58080dbca901bafbb39ec03bc21facbf17d",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/4e6ba58080dbca901bafbb39ec03bc21facbf17d",
+      "message": "Align two fault-proof tests with collateral release and at-tip supersession\n\nThe permissionless-slash SQLite helper still expected the collateral lease to survive confirmation. Under owner ruling G5 (fc62de472) collateral is released at confirmation, and the consumed funding stays leased until final completion. The helper now asserts exactly that.\n\nThe network-id forced workflow test expected an attempt that expired within the recovery horizon to reconcile as unknown. Under the whichever-lands-wins ruling (da234bff3) it is superseded at once, so it now reconciles as not_found with no retirement attached. The deep case still attaches retirement.\n\nBoth files pass, 11 tests.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-05T00:38:26Z"
-    },
-    {
-      "sha": "40e440859e253c5cb582d3033f0e2f5392ea507e",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/40e440859e253c5cb582d3033f0e2f5392ea507e",
-      "message": "Exercise authenticated history and current recovery fixtures (#737)\n\nUse actual paired-history initialization in the pool-isolation regression, provide the runtime Globals dependency, and pin the two new transactional migrations. Verify exact reference-output matching without weakening publication authentication.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-05T00:34:19Z"
+      "authorDate": "2026-10-05T18:47:14Z"
     }
   ],
   "contributors": [
@@ -326,52 +326,52 @@
   ],
   "issues": [
     {
-      "number": 643,
-      "title": "Owner sign-off: three soundness-relevant relaxations in the canonical-v1 watcher/L1-source wave",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/643",
-      "updated_at": "2026-10-04T16:44:01Z"
+      "number": 724,
+      "title": "Docs: deposit/withdraw guide, watcher README, readiness checklist",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/724",
+      "updated_at": "2026-10-06T00:24:08Z"
     },
     {
-      "number": 696,
-      "title": "Devnet reliability program: remaining work",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/696",
-      "updated_at": "2026-10-03T19:18:56Z"
+      "number": 723,
+      "title": "Final proof: fresh deploy, full journey and all drills on the final dist",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/723",
+      "updated_at": "2026-10-06T00:23:59Z"
     },
     {
-      "number": 759,
-      "title": "Remove the uncapped signed-header recovery retention hold; delete the coverage path in rollback ticket 14",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/759",
-      "updated_at": "2026-10-03T19:18:43Z"
+      "number": 722,
+      "title": "Run the four chaos drills that have never run",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/722",
+      "updated_at": "2026-10-06T00:23:51Z"
     },
     {
-      "number": 758,
-      "title": "Event-history publication: refuse TTL-less pending bodies, require validTo in the staged builder",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/758",
-      "updated_at": "2026-10-03T19:18:41Z"
+      "number": 715,
+      "title": "Re-review LV-DA1, LV-FB2, LV-HO1, LV-ND1, LV-WA1, UP2 and the W3b fix",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/715",
+      "updated_at": "2026-10-06T00:23:41Z"
     },
     {
-      "number": 701,
-      "title": "DA frame step-down follow-ups: mutation gaps, non-speculative path, readiness, step-down cost",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/701",
-      "updated_at": "2026-10-03T19:12:32Z"
+      "number": 714,
+      "title": "Batched review of the low-risk reliability lanes",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/714",
+      "updated_at": "2026-10-06T00:23:29Z"
     },
     {
-      "number": 756,
-      "title": "Require a closed, bounded (~10 min) validity range when events are created",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/756",
-      "updated_at": "2026-10-03T19:12:30Z"
+      "number": 713,
+      "title": "B4 recovery builds: explicit recovery operations and enumerated intervention residue",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/713",
+      "updated_at": "2026-10-06T00:23:18Z"
     },
     {
-      "number": 757,
-      "title": "Catch-up after a long block-production gap: events due in the gap cannot be split",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/757",
-      "updated_at": "2026-10-03T19:12:21Z"
+      "number": 708,
+      "title": "Devnet genesis funds every role wallet for months of unattended running",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/708",
+      "updated_at": "2026-10-06T00:23:06Z"
     },
     {
-      "number": 755,
-      "title": "Catch-up after a long gap: the first block must carry every event due during it",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/755",
-      "updated_at": "2026-10-03T19:06:15Z"
+      "number": 707,
+      "title": "Derive housekeeping retention from the verified manifest window and wire prunes under the history permit",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/707",
+      "updated_at": "2026-10-06T00:22:56Z"
     }
   ],
   "releases": [],
@@ -450,7 +450,7 @@
     },
     {
       "week": 1771113600,
-      "total": 13
+      "total": 14
     },
     {
       "week": 1771718400,
@@ -474,7 +474,7 @@
     },
     {
       "week": 1774742400,
-      "total": 28
+      "total": 29
     },
     {
       "week": 1775347200,
@@ -498,23 +498,23 @@
     },
     {
       "week": 1778371200,
-      "total": 25
+      "total": 43
     },
     {
       "week": 1778976000,
-      "total": 9
+      "total": 16
     },
     {
       "week": 1779580800,
-      "total": 0
+      "total": 2
     },
     {
       "week": 1780185600,
-      "total": 25
+      "total": 26
     },
     {
       "week": 1780790400,
-      "total": 17
+      "total": 30
     },
     {
       "week": 1781395200,
@@ -534,7 +534,7 @@
     },
     {
       "week": 1783814400,
-      "total": 9
+      "total": 10
     },
     {
       "week": 1784419200,
@@ -546,7 +546,7 @@
     },
     {
       "week": 1785628800,
-      "total": 0
+      "total": 2
     },
     {
       "week": 1786233600,
@@ -578,11 +578,11 @@
     },
     {
       "week": 1790467200,
-      "total": 215
+      "total": 209
     },
     {
       "week": 1791072000,
-      "total": 84
+      "total": 175
     }
   ]
 }
