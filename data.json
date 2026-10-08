@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-10-07T13:00:16.206Z",
+  "fetchedAt": "2026-10-08T13:07:49.759Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 25,
@@ -17,109 +17,109 @@
   },
   "commits": [
     {
-      "sha": "8cd4a56e56e499a08827d19a4a12874b5d168ee5",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/8cd4a56e56e499a08827d19a4a12874b5d168ee5",
-      "message": "Keep discovery completion controls compatible with ES2022\n\nUse a one-shot Node event for the native read completion observable. The repository typecheck targets ES2022, which does not declare Promise.withResolvers. Preserve the physical-join assertion and cleanup without changing runtime code or compiler settings.",
+      "sha": "cb4ae4b221a621ee6070534480f6cae3b9bc9eeb",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/cb4ae4b221a621ee6070534480f6cae3b9bc9eeb",
+      "message": "Merge N3b R2: repair acceptance receipts that record a rejected member\n\nThe receipt-rejections migration becomes 0016, after the confirmed-ledger merges (0014) and the derived settlement status (0015).",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-07T05:46:01Z"
+      "authorDate": "2026-10-08T12:40:31Z"
     },
     {
-      "sha": "853d7b9ac785680b608bdf511a003f4ef8e7b7a9",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/853d7b9ac785680b608bdf511a003f4ef8e7b7a9",
-      "message": "Authenticate availability discovery across forward chain progress (#681)\n\nReplace discovery-wide tip equality in both responder runtimes with a durable native forward interval and selected-input rechecks. Preserve generation, provider alignment, scope ownership and pre-submission authority refusals. Refs #681.",
+      "sha": "108221c4d1cb1379dcc70cc512f26335ba6a7651",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/108221c4d1cb1379dcc70cc512f26335ba6a7651",
+      "message": "Merge N3f: hold native restore refusals by cause in every history recovery caller",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-07T05:32:21Z"
+      "authorDate": "2026-10-08T12:35:32Z"
     },
     {
-      "sha": "1d6471f5d5e6891ba5e650b599a38a28e16e36fa",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/1d6471f5d5e6891ba5e650b599a38a28e16e36fa",
-      "message": "Merge remote-tracking branch 'origin/colll78/canonical-v1-watcher-l1-source-checkpoint' into codex/issue-648-correction-lock-funding",
+      "sha": "a9accb62f14e616c6473c0dea0003a5f3969032c",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/a9accb62f14e616c6473c0dea0003a5f3969032c",
+      "message": "Merge N6b: settlement status derived from the intent journal, orphaned activity records pruned",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-07T05:12:44Z"
+      "authorDate": "2026-10-08T12:34:33Z"
     },
     {
-      "sha": "a270ba04db587ea5b1f637a3eaf27de2b6d20200",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/a270ba04db587ea5b1f637a3eaf27de2b6d20200",
-      "message": "Fund standalone correction locks for their Locked datum (#648)\n\nShare the parameter-derived worst-case reserve with atomic initialization so correction creation can preserve value through Idle to Locked. Exercise both public creators and causal insufficient-funding controls against the real validator.",
+      "sha": "63f07d081894ab225a07d572215618ac460f1493",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/63f07d081894ab225a07d572215618ac460f1493",
+      "message": "Merge N5: temporal confirmed ledger, merges finalized by delta",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-07T05:12:12Z"
+      "authorDate": "2026-10-08T12:28:08Z"
     },
     {
-      "sha": "17fdffd9bb04a529c29fdc729aebab64aeb63d28",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/17fdffd9bb04a529c29fdc729aebab64aeb63d28",
-      "message": "Merge pull request #781 from Anastasia-Labs/codex/pr-runtime-verification-owner\n\nAssign the ordinary PR runtime matrix to Node CI",
-      "authorName": "colll78",
-      "authorDate": "2026-10-07T05:09:18Z"
-    },
-    {
-      "sha": "f993af55a067a6fb48e60c0e24ae2ac73f1f62a5",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/f993af55a067a6fb48e60c0e24ae2ac73f1f62a5",
-      "message": "Merge reviewed canonical outage repair into PR verification branch",
+      "sha": "319d1edea3d6a07f1537ef3d3d8e8fc5f116e508",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/319d1edea3d6a07f1537ef3d3d8e8fc5f116e508",
+      "message": "Hold native restore refusals by cause in every history recovery caller\n\nThe signed-header recovery let a native restore refusal fail the history owner with no readiness reason, and every restore failure was relabelled as an unretained root, so a capped index or a transient store read looked like missing state.\n\nThe signed-header recovery now holds a native restore refusal under its own readiness source instead of failing the history owner, and skips the landed-block rebase in the pass it holds. A failed restore is named by its real cause: a target closure that is not in the store, a full index over FULL_INDEX_MAX_RECORDS or FULL_INDEX_MAX_BYTES (naming the cap and its value), or a transient store read that a later restore retries. The correction rewind, release, revival and signed-header callers hold each under a named reason and clear it on the next success.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-07T04:44:41Z"
+      "authorDate": "2026-10-08T12:23:53Z"
     },
     {
-      "sha": "d19d1886e51877efdc4d275ea8feae57986ea46e",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d19d1886e51877efdc4d275ea8feae57986ea46e",
-      "message": "Merge pull request #779 from Anastasia-Labs/codex/issue-778-lifecycle-order\n\nOrder lifecycle aggregation and synchronize recurrent outage recovery",
-      "authorName": "colll78",
-      "authorDate": "2026-10-07T04:43:07Z"
-    },
-    {
-      "sha": "0da179447284a0f827627e595649367e9d7bebf5",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/0da179447284a0f827627e595649367e9d7bebf5",
-      "message": "Merge remote-tracking branch 'origin/colll78/canonical-v1-watcher-l1-source-checkpoint' into codex/issue-778-lifecycle-order",
+      "sha": "2f3a595d97ab669a531e04e990f029a893516621",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/2f3a595d97ab669a531e04e990f029a893516621",
+      "message": "Repair acceptance receipts that record a rejected member\n\nBefore the commit-stage closure, a commit-stage or speculative rejection removed a transaction and wrote its rejection row without reversing the acceptance receipt that held it. A later closure over that receipt then failed on the gone member, and the landed-block rebase stayed failed until an operator intervened.\n\nMigration 0014 records each member of an unreversed acceptance receipt that has a terminal rejection row. The batch closure reads a recorded member that is no longer pending as decided. The working-ledger rebuild rejects the pending members of each recorded receipt with no undecided member as batch members, and recordRejections reverses every recorded receipt whose members are all decided and drops its recorded rows. A repair whose batch rejections reach an undecided member is not applied.\n\nA closure that meets a member that is neither pending, settled, nor recorded rejected fails with UndecidedBatchMember; the rebase raises it as the readiness reason landed_block_batch_undecided, and the rebase failure record carries its reason and detail.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-07T04:12:31Z"
+      "authorDate": "2026-10-08T12:23:43Z"
     },
     {
-      "sha": "c50f057836e3048f1a9e269b155895f895660857",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/c50f057836e3048f1a9e269b155895f895660857",
-      "message": "Synchronize recurrent outage recovery with journaled completion",
+      "sha": "bc56f0822d01a35ee92a007985968657e9253c25",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/bc56f0822d01a35ee92a007985968657e9253c25",
+      "message": "Derive settlement status from the intent journal and prune orphaned activity records (#804)\n\nA settlement attempt is no longer stored confirmed at the\nconfirmation depth. It stays pending and its level is read from the\nintent journal every tick, so a rollback below the confirmation depth\nputs the job's phase back. Only the follower prune step writes final,\nonce the attempt's transaction is deeper than k, and the retention\nhold lasts until then. A new attempt is refused while any attempt\nreads open, under the owner-row lock. The restored-fee and generation\nrecheck machinery is deleted.\n\nOrphaned operator activity records are cleared in the follower prune\nstep's transaction, with a prune floor holding them through a replay.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-07T04:12:23Z"
+      "authorDate": "2026-10-08T11:57:22Z"
     },
     {
-      "sha": "47b57c19e5bc83b80162ae48aa68e4d258d76c85",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/47b57c19e5bc83b80162ae48aa68e4d258d76c85",
-      "message": "Merge pull request #780 from Anastasia-Labs/codex/issue-645-status-disagreement\n\nRefuse contradictory StateQueueStatusV1 observations (#645)",
-      "authorName": "colll78",
-      "authorDate": "2026-10-07T03:50:51Z"
-    },
-    {
-      "sha": "36b35d7c1f056fe7c7b5109fe1141ecd9658f384",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/36b35d7c1f056fe7c7b5109fe1141ecd9658f384",
-      "message": "Assign the ordinary PR runtime matrix to Node CI\n\nKeep focused local regressions, fast hooks and distinct acceptance lanes required. Retain explicit full-local execution and conservative fallback when hosted routing cannot be established. Add the two missing hosted typechecks before moving matrix ownership.",
+      "sha": "633a5f5b1b5d25dcc587641ac7f02a338317ad4c",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/633a5f5b1b5d25dcc587641ac7f02a338317ad4c",
+      "message": "Make confirmed_ledger temporal and finalize merges by delta (#803)\n\nA landed merge now folds into confirmed_ledger as a stored delta keyed\nby the merge: spent rows move to node_confirmed_ledger_spent, produced\nrows are inserted and the event marks are recorded, so a rollback\nunfolds it exactly. Stored deltas are released only once the merge is\nbelow the follower's pruned-through slot, where no rollback can reach\nit. Merge finalization no longer rewrites or locks the whole ledger.\n\nA fold onto the wrong base is held as confirmed_ledger_base_mismatch\nand writes nothing; the frontier is bound by header identity, never\nre-anchored on an equal root. Both merge finalization paths and the\nstartup repair refuse a journal that is not bound to its canonical\nheader. Landed-block processing reads the ledger only when it\nprocesses a new row.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-07T03:38:41Z"
+      "authorDate": "2026-10-08T11:57:17Z"
     },
     {
-      "sha": "16d43facec1b14304944c0a8554fefdf8249c4b9",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/16d43facec1b14304944c0a8554fefdf8249c4b9",
-      "message": "Ratchet the scanner test size cap after removing its coverage debt\n\nRepo Tools CI on 8bbbeb2d1 refused the stale exact cap: recorded 708, actual 705. Lower only this cap and its declaration count, and point the scanner comment at the replacement suite.\n\nnode --test demo/scripts/lib/module-sizes.test.mjs: 1 passed, 0 failed, exit 0 on 2026-10-07; before correction 1 passed and 1 process failure, exit 1. Verified all 360 explicit caps. No executable source or assertion changes.",
+      "sha": "3dea210588839af5d64b73c9cdfde58e8a8c440b",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/3dea210588839af5d64b73c9cdfde58e8a8c440b",
+      "message": "Merge N3b R1: apply the rejection closure to commit-stage rejections and carry inclusion marks through skipped submissions",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-07T03:26:04Z"
+      "authorDate": "2026-10-08T11:52:28Z"
     },
     {
-      "sha": "8bbbeb2d1a02a8e12d20b8393ca939737998cebd",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/8bbbeb2d1a02a8e12d20b8393ca939737998cebd",
-      "message": "Refuse contradictory status observations at immutable outputs\n\nCompare the full StateQueueStatusV1 identity at repeated live outputs before accepting the scan. Constructor and same-kind field disagreements were silently accepted by the scanner; signed decisions already had a later quarantine check. Reuse the integrity refusal and durable quarantine path.\n\nTerminal retention records carry forward an older datum while naming a newer spent output, so exclude those synthetic observations. The replay-produced control caught this false positive in review.\n\nFocused recipe: 82 passed, no selected skips, 40 filtered assertions, exit 0 on 2026-10-07. Receipt ed80cdb0-c4b2-40f3-93ba-9796f7af9f84. Guard-removal control: 4 passed, 16 failed, exit 1. Refs #645.",
+      "sha": "82880988a6be42a9601cc54d156cbba2fa021de6",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/82880988a6be42a9601cc54d156cbba2fa021de6",
+      "message": "Merge N3e: compare the displacement aggregate's root and hold an unretained target root",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-07T03:17:00Z"
+      "authorDate": "2026-10-08T11:47:00Z"
     },
     {
-      "sha": "6c14d1011a9896f4bb7bfb7e70fa0423a86907f5",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/6c14d1011a9896f4bb7bfb7e70fa0423a86907f5",
-      "message": "Add status disagreement observation regressions (#645)\n\nExercise immutable-output status contradictions through the scanner and committee peer boundary. The scanner matrix is regression-first: four agreement controls pass and twelve disagreements resolve instead of refusing on the canonical base. The new file keeps the existing scanner test line budget intact. Repair and final verification follow in this draft.",
+      "sha": "21bb720847284df140d9a677977d30485d171bf2",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/21bb720847284df140d9a677977d30485d171bf2",
+      "message": "Apply the working-ledger rejection closure to commit-stage rejections\n\nA commit-stage rejection now runs closeRejections in one transaction:\npending spenders of a rejected output are rejected as dependents,\npending co-members of an unreversed acceptance receipt holding a\nrejected transaction are rejected as batch members, and the receipts\nare reversed by recordRejections. Rows marked by a block are settled.\nA closure that reaches a transaction Phase B accepted for the block\nbeing built removes it from the candidates and runs Phase B again.\nThe separate dependent cascade is removed.\n\nThe skipped-submission transfer moves mempool rows to the processed\nmempool in one statement that carries included_by.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-07T03:10:17Z"
+      "authorDate": "2026-10-08T11:42:49Z"
     },
     {
-      "sha": "42734c8033371195e7f6cf05cad77075dd50a206",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/42734c8033371195e7f6cf05cad77075dd50a206",
-      "message": "Merge pull request #777 from Anastasia-Labs/codex/issue-758-publication-ttl\n\nRequire bounded event-history publication and pending bodies (#758)",
-      "authorName": "colll78",
-      "authorDate": "2026-10-07T03:09:31Z"
+      "sha": "0af5c8b155e562cf3795632a7b9763e6daa3f6cf",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/0af5c8b155e562cf3795632a7b9763e6daa3f6cf",
+      "message": "Compare the base journal's expected root before taking its aggregate, and hold a native restore refused as not retained on the release and revival paths\n\nDisplacement compensation with no returned prefix now takes the base journal's UTxO payload aggregate only when that journal's expected root is the target root, through the helper the displaced-chain repair already uses. A NativeMpfRootNotRetained refusal on the signed-intent release, the displaced-chain rewind, the displacement compensation or the retained displacement's inverse is held under the caller's source as signed_intent_target_root_not_retained, with the plan prepared and retried on every evaluation. The cause-chain matcher moves to history-dependent-recovery so the correction rewind and these holds share it.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-10-08T11:39:23Z"
+    },
+    {
+      "sha": "9eb8785f737fd60ecc979571d06b6673dce2ddde",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/9eb8785f737fd60ecc979571d06b6673dce2ddde",
+      "message": "Give the node's follower test database cleanup an explicit hook budget\n\ndropAll drops each database a suite created one at a time with FORCE, and a fork-sim that creates a store per run outgrew the 10 s hook default on a loaded CI runner (l1-operator-set-fork-sim's afterAll timed out on 4d7da9845). Every suite on the shared helper now gives its cleanup the same budget the committee suites use.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-10-08T11:38:58Z"
+    },
+    {
+      "sha": "d198c0cbf8363bdbbcf64e0177abba4d90314d97",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d198c0cbf8363bdbbcf64e0177abba4d90314d97",
+      "message": "Merge I1d: hold the intent prune floor through a replay and journal in-node list inserts",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-10-08T11:17:06Z"
+    },
+    {
+      "sha": "32520f5b9eee1387e36dc8ed49be6de0f60b576e",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/32520f5b9eee1387e36dc8ed49be6de0f60b576e",
+      "message": "Hold the intent journal's prune floor through a replay and journal in-node list inserts\n\nWhile the tracked-set record says replaying, the intent journal declares a class A prune floor at its prune mark's boundary (or, with no mark, where the replay began); the first prune step after the replay ends sets none.\n\nThe genesis deposit and the atomic protocol initialization are journaled as the list_insert family, keyed by event key and one-shot nonce. Their predicate is wanted while the follower's facts show the insert's target unreached: the event key absent from the never-reuse key set, no live state-queue policy output. Submissions from CLI-only paths go out unjournaled with reason no_follower, the only unjournaled reason left.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-10-08T11:13:34Z"
     }
   ],
   "contributors": [
@@ -326,58 +326,58 @@
   ],
   "issues": [
     {
-      "number": 784,
-      "title": "L1 chain follower: one authority for canonical L1 history, rollback as rewind and recompute",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/784",
-      "updated_at": "2026-10-07T06:35:30Z"
+      "number": 806,
+      "title": "L1 follower I1: Intent journal with derived status: delete the finalization machine",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/806",
+      "updated_at": "2026-10-08T10:25:36Z"
     },
     {
-      "number": 810,
-      "title": "L1 follower I3: Commits under whichever-lands-wins: delete coverage and expired-intent release",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/810",
-      "updated_at": "2026-10-07T06:35:23Z"
+      "number": 804,
+      "title": "L1 follower N6: Settlement, operator-set and watchdog projections",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/804",
+      "updated_at": "2026-10-08T10:25:35Z"
     },
     {
-      "number": 735,
-      "title": "Rollbacks on demand: two producers with a switchable partition",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/735",
-      "updated_at": "2026-10-07T06:33:45Z"
+      "number": 801,
+      "title": "L1 follower N3: In-order landed-block processing on facts",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/801",
+      "updated_at": "2026-10-08T10:25:34Z"
     },
     {
-      "number": 744,
-      "title": "Multi-operator: finalize merged foreign blocks and decide interim throughput (E1)",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/744",
-      "updated_at": "2026-10-07T06:33:42Z"
+      "number": 795,
+      "title": "L1 follower C3: Committee durable actions gate on final",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/795",
+      "updated_at": "2026-10-08T10:25:32Z"
     },
     {
-      "number": 716,
-      "title": "Watcher Ogmios queries get one attempt; record-directory rescan",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/716",
-      "updated_at": "2026-10-07T06:33:41Z"
+      "number": 796,
+      "title": "L1 follower W1: Watcher on the follower: delete the Kupo and Ogmios cross-checks",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/796",
+      "updated_at": "2026-10-08T03:57:21Z"
     },
     {
-      "number": 725,
-      "title": "Fault-proof workflows treat confirmation depth as final (completed latch, early abandon)",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/725",
-      "updated_at": "2026-10-07T06:33:40Z"
+      "number": 805,
+      "title": "L1 follower N10: Forced-order carriage resolver without Kupo",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/805",
+      "updated_at": "2026-10-08T03:14:08Z"
     },
     {
-      "number": 727,
-      "title": "Watcher latches on rollbacks within k after finalizing at confirmation depth",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/727",
-      "updated_at": "2026-10-07T06:33:39Z"
+      "number": 809,
+      "title": "L1 follower U3: Commit horizon lag d from operator config (off-chain part)",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/809",
+      "updated_at": "2026-10-08T02:59:07Z"
     },
     {
-      "number": 720,
-      "title": "Fiber-level confirmationTick pin for the readiness-clearing fix",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/720",
-      "updated_at": "2026-10-07T06:33:38Z"
+      "number": 799,
+      "title": "L1 follower N1: Node lists, events, key set and deposits as projections: delete the event-history stack",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/799",
+      "updated_at": "2026-10-08T02:15:05Z"
     },
     {
-      "number": 753,
-      "title": "Rename the pending-finalization status finalized to say applied locally",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/753",
-      "updated_at": "2026-10-07T06:33:37Z"
+      "number": 800,
+      "title": "L1 follower N2: Node state-queue projection: no L1 reads in fiber ticks",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/800",
+      "updated_at": "2026-10-08T02:15:04Z"
     }
   ],
   "releases": [],
@@ -388,11 +388,11 @@
     },
     {
       "week": 1760832000,
-      "total": 52
+      "total": 35
     },
     {
       "week": 1761436800,
-      "total": 114
+      "total": 112
     },
     {
       "week": 1762041600,
@@ -404,11 +404,11 @@
     },
     {
       "week": 1763251200,
-      "total": 32
+      "total": 22
     },
     {
       "week": 1763856000,
-      "total": 37
+      "total": 16
     },
     {
       "week": 1764460800,
@@ -448,43 +448,43 @@
     },
     {
       "week": 1769904000,
-      "total": 46
-    },
-    {
-      "week": 1770508800,
-      "total": 36
-    },
-    {
-      "week": 1771113600,
-      "total": 14
-    },
-    {
-      "week": 1771718400,
       "total": 45
     },
     {
+      "week": 1770508800,
+      "total": 32
+    },
+    {
+      "week": 1771113600,
+      "total": 10
+    },
+    {
+      "week": 1771718400,
+      "total": 47
+    },
+    {
       "week": 1772323200,
-      "total": 24
+      "total": 16
     },
     {
       "week": 1772928000,
-      "total": 35
+      "total": 23
     },
     {
       "week": 1773532800,
-      "total": 28
+      "total": 25
     },
     {
       "week": 1774137600,
-      "total": 36
+      "total": 26
     },
     {
       "week": 1774742400,
-      "total": 30
+      "total": 29
     },
     {
       "week": 1775347200,
-      "total": 40
+      "total": 36
     },
     {
       "week": 1775952000,
@@ -492,23 +492,23 @@
     },
     {
       "week": 1776556800,
-      "total": 16
+      "total": 27
     },
     {
       "week": 1777161600,
-      "total": 10
+      "total": 9
     },
     {
       "week": 1777766400,
-      "total": 19
+      "total": 18
     },
     {
       "week": 1778371200,
-      "total": 42
+      "total": 23
     },
     {
       "week": 1778976000,
-      "total": 15
+      "total": 10
     },
     {
       "week": 1779580800,
@@ -516,23 +516,23 @@
     },
     {
       "week": 1780185600,
-      "total": 25
+      "total": 21
     },
     {
       "week": 1780790400,
-      "total": 18
+      "total": 12
     },
     {
       "week": 1781395200,
-      "total": 19
+      "total": 18
     },
     {
       "week": 1782000000,
-      "total": 10
+      "total": 3
     },
     {
       "week": 1782604800,
-      "total": 5
+      "total": 1
     },
     {
       "week": 1783209600,
@@ -540,15 +540,15 @@
     },
     {
       "week": 1783814400,
-      "total": 10
+      "total": 9
     },
     {
       "week": 1784419200,
-      "total": 26
+      "total": 20
     },
     {
       "week": 1785024000,
-      "total": 102
+      "total": 8
     },
     {
       "week": 1785628800,
@@ -572,7 +572,7 @@
     },
     {
       "week": 1788652800,
-      "total": 38
+      "total": 138
     },
     {
       "week": 1789257600,
@@ -580,15 +580,15 @@
     },
     {
       "week": 1789862400,
-      "total": 174
+      "total": 125
     },
     {
       "week": 1790467200,
-      "total": 210
+      "total": 179
     },
     {
       "week": 1791072000,
-      "total": 322
+      "total": 419
     }
   ]
 }
