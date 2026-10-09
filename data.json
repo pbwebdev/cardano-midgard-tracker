@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-10-08T13:07:49.759Z",
+  "fetchedAt": "2026-10-09T12:54:19.405Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 25,
@@ -17,109 +17,109 @@
   },
   "commits": [
     {
-      "sha": "cb4ae4b221a621ee6070534480f6cae3b9bc9eeb",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/cb4ae4b221a621ee6070534480f6cae3b9bc9eeb",
-      "message": "Merge N3b R2: repair acceptance receipts that record a rejected member\n\nThe receipt-rejections migration becomes 0016, after the confirmed-ledger merges (0014) and the derived settlement status (0015).",
+      "sha": "cc21bbf4c3b7b25ebebe8c7f0e578a4cb3a51f13",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/cc21bbf4c3b7b25ebebe8c7f0e578a4cb3a51f13",
+      "message": "Name the published-lifecycle prefix the run-shared fixture directory holds",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-08T12:40:31Z"
+      "authorDate": "2026-10-09T02:27:28Z"
     },
     {
-      "sha": "108221c4d1cb1379dcc70cc512f26335ba6a7651",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/108221c4d1cb1379dcc70cc512f26335ba6a7651",
-      "message": "Merge N3f: hold native restore refusals by cause in every history recovery caller",
+      "sha": "d74e02195e451ae8f5af87cd0b5546f84e9f7611",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d74e02195e451ae8f5af87cd0b5546f84e9f7611",
+      "message": "Describe the working-ledger rebuild's upsert by its mechanism",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-08T12:35:32Z"
+      "authorDate": "2026-10-09T02:27:06Z"
     },
     {
-      "sha": "a9accb62f14e616c6473c0dea0003a5f3969032c",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/a9accb62f14e616c6473c0dea0003a5f3969032c",
-      "message": "Merge N6b: settlement status derived from the intent journal, orphaned activity records pruned",
+      "sha": "d8b0ebc2feb5f3db6d3e64cf7c185d8afb516d65",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d8b0ebc2feb5f3db6d3e64cf7c185d8afb516d65",
+      "message": "Merge colll78/l1-n1u into the L1 integration branch",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-08T12:34:33Z"
+      "authorDate": "2026-10-09T02:26:47Z"
     },
     {
-      "sha": "63f07d081894ab225a07d572215618ac460f1493",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/63f07d081894ab225a07d572215618ac460f1493",
-      "message": "Merge N5: temporal confirmed ledger, merges finalized by delta",
+      "sha": "737780e04964e1ea92880d3987b26693ab38bdb7",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/737780e04964e1ea92880d3987b26693ab38bdb7",
+      "message": "Document the node instance-lock readiness reasons",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-08T12:28:08Z"
+      "authorDate": "2026-10-09T02:10:42Z"
     },
     {
-      "sha": "319d1edea3d6a07f1537ef3d3d8e8fc5f116e508",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/319d1edea3d6a07f1537ef3d3d8e8fc5f116e508",
-      "message": "Hold native restore refusals by cause in every history recovery caller\n\nThe signed-header recovery let a native restore refusal fail the history owner with no readiness reason, and every restore failure was relabelled as an unretained root, so a capped index or a transient store read looked like missing state.\n\nThe signed-header recovery now holds a native restore refusal under its own readiness source instead of failing the history owner, and skips the landed-block rebase in the pass it holds. A failed restore is named by its real cause: a target closure that is not in the store, a full index over FULL_INDEX_MAX_RECORDS or FULL_INDEX_MAX_BYTES (naming the cap and its value), or a transient store read that a later restore retries. The correction rewind, release, revival and signed-header callers hold each under a named reason and clear it on the next success.",
+      "sha": "3ac19e68f32041247be2b3aaf6244c97e9ce3634",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/3ac19e68f32041247be2b3aaf6244c97e9ce3634",
+      "message": "Merge colll78/l1-n1x into the L1 integration branch",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-08T12:23:53Z"
+      "authorDate": "2026-10-09T02:10:06Z"
     },
     {
-      "sha": "2f3a595d97ab669a531e04e990f029a893516621",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/2f3a595d97ab669a531e04e990f029a893516621",
-      "message": "Repair acceptance receipts that record a rejected member\n\nBefore the commit-stage closure, a commit-stage or speculative rejection removed a transaction and wrote its rejection row without reversing the acceptance receipt that held it. A later closure over that receipt then failed on the gone member, and the landed-block rebase stayed failed until an operator intervened.\n\nMigration 0014 records each member of an unreversed acceptance receipt that has a terminal rejection row. The batch closure reads a recorded member that is no longer pending as decided. The working-ledger rebuild rejects the pending members of each recorded receipt with no undecided member as batch members, and recordRejections reverses every recorded receipt whose members are all decided and drops its recorded rows. A repair whose batch rejections reach an undecided member is not applied.\n\nA closure that meets a member that is neither pending, settled, nor recorded rejected fails with UndecidedBatchMember; the rebase raises it as the readiness reason landed_block_batch_undecided, and the rebase failure record carries its reason and detail.",
+      "sha": "836785c0ed224f355dea11d034a2d2ce711d505a",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/836785c0ed224f355dea11d034a2d2ce711d505a",
+      "message": "Merge colll78/l1-n1close2 into the L1 integration branch",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-08T12:23:43Z"
+      "authorDate": "2026-10-09T02:05:48Z"
     },
     {
-      "sha": "bc56f0822d01a35ee92a007985968657e9253c25",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/bc56f0822d01a35ee92a007985968657e9253c25",
-      "message": "Derive settlement status from the intent journal and prune orphaned activity records (#804)\n\nA settlement attempt is no longer stored confirmed at the\nconfirmation depth. It stays pending and its level is read from the\nintent journal every tick, so a rollback below the confirmation depth\nputs the job's phase back. Only the follower prune step writes final,\nonce the attempt's transaction is deeper than k, and the retention\nhold lasts until then. A new attempt is refused while any attempt\nreads open, under the owner-row lock. The restored-fee and generation\nrecheck machinery is deleted.\n\nOrphaned operator activity records are cleared in the follower prune\nstep's transaction, with a prune floor holding them through a replay.",
+      "sha": "9d24f5a80523da09b13ecb28b0e6ec27c06c7a70",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/9d24f5a80523da09b13ecb28b0e6ec27c06c7a70",
+      "message": "Follow the emulator chain with one node follower store\n\nThe emulator's confirmed blocks are recorded once per change of its block\nheight and applied once, through the follower store's own writer, to the\nnode's Postgres follower store. NodeL1Provider, the follower-change\ndriver's plan and the landed-queue read all read that store. A ledger\nput back without its record drops the blocks whose consumed outputs it\nholds again. Each block widens the tracked set by the script\ncredentials, the key credentials outside the origin wallets and the\npolicies it shows. The store is emptied when the installation is\nrestored.\n\nThe synthetic follower view and tip are removed from the emulator\npaths, along with the unused live-orders helper. Every emulator suite\nthat used either now runs on the store. The installed afterAll still\nchecks that a transaction confirmed and that the store holds exactly the\nconfirmed set. The deposit-flow submission suite's gate-refusal case is\nremoved: it assumed follower tables without the operator's wallet. The\ncommit-gate emulator suite refuses an untracked input on a store fed\nreal blocks. Duration rows, the Postgres inventory and module-size caps\nare updated.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-08T11:57:22Z"
+      "authorDate": "2026-10-09T02:03:41Z"
     },
     {
-      "sha": "633a5f5b1b5d25dcc587641ac7f02a338317ad4c",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/633a5f5b1b5d25dcc587641ac7f02a338317ad4c",
-      "message": "Make confirmed_ledger temporal and finalize merges by delta (#803)\n\nA landed merge now folds into confirmed_ledger as a stored delta keyed\nby the merge: spent rows move to node_confirmed_ledger_spent, produced\nrows are inserted and the event marks are recorded, so a rollback\nunfolds it exactly. Stored deltas are released only once the merge is\nbelow the follower's pruned-through slot, where no rollback can reach\nit. Merge finalization no longer rewrites or locks the whole ledger.\n\nA fold onto the wrong base is held as confirmed_ledger_base_mismatch\nand writes nothing; the frontier is bound by header identity, never\nre-anchored on an equal root. Both merge finalization paths and the\nstartup repair refuse a journal that is not bound to its canonical\nheader. Landed-block processing reads the ledger only when it\nprocesses a new row.",
+      "sha": "e09eab7a661cff437517caa60ba0a8480ded211d",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/e09eab7a661cff437517caa60ba0a8480ded211d",
+      "message": "Merge colll78/l1-docs into the L1 integration branch",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-08T11:57:17Z"
+      "authorDate": "2026-10-09T02:01:51Z"
     },
     {
-      "sha": "3dea210588839af5d64b73c9cdfde58e8a8c440b",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/3dea210588839af5d64b73c9cdfde58e8a8c440b",
-      "message": "Merge N3b R1: apply the rejection closure to commit-stage rejections and carry inclusion marks through skipped submissions",
+      "sha": "54535f62553ae3ebc6f528afba4f8acc962e75b7",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/54535f62553ae3ebc6f528afba4f8acc962e75b7",
+      "message": "Take a node instance lock at startup and replay pending txs in causal order\n\nThe node takes a Postgres session advisory lock before database\ninitialization, lease release, mutation-job classification and the\nfollower driver. The lock's session also holds the follower's writer\nlease, which the node lends to its follower store. A second process\nwaits, unready under node_instance_lock_held_elsewhere (or\nnode_instance_lock_unavailable), and retries with backoff; the wait\nstops at once on interrupt. When the holding session ends under a live\nnode, node_instance_lock_suspended holds commit, settlement, merge and\nwatchdog until the lock is taken again. The committee store lock is now\nan adapter over the same shared module.\n\nThe working-ledger rebuild replays pending transactions by time stamp,\nthen admission order (tx_admissions.arrival_seq), then id, and places\neach pending producer before any transaction that spends its output,\nso a child is never replayed before its parent. Dead rebuild helpers\nare removed.\n\nAdds tests for both lock polarities, the replay order, kept-row time\nstamps, and the funded-transfer journey after a deposit leaves the\nchain.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-08T11:52:28Z"
+      "authorDate": "2026-10-09T02:00:20Z"
     },
     {
-      "sha": "82880988a6be42a9601cc54d156cbba2fa021de6",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/82880988a6be42a9601cc54d156cbba2fa021de6",
-      "message": "Merge N3e: compare the displacement aggregate's root and hold an unretained target root",
+      "sha": "f046df6f2c1b657aed8c64ff9cec49311d6c53b0",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/f046df6f2c1b657aed8c64ff9cec49311d6c53b0",
+      "message": "Delete the node's event-history control plane\n\nThe L1 follower's facts and the follower-change driver now carry every duty\nof the event-history owner: ingestion, the commit horizon and the\nunpublished-ledger requeue. Delete the owner, its authority lease, the Ogmios\nChainSync journal, the replay and L2 ledger receipts, the recovery plans, the\nhistory-genesis pin and the node's Kupo/Ogmios readers. Migration 0022 drops\ntheir ten tables, children first and without CASCADE; the submission journal\nstays.\n\nThe node reads and submits L1 only through the cardano-node socket.\nL1_OGMIOS_KEY, L1_KUPO_KEY and L1_HISTORY_GENESIS_LOSSLESS_SHA256 are gone.\nOgmios and Kupo stay in the compose overlay for the devnet harness, its\nstop-kupo/stop-ogmios drills and the fault-proofs prover; the harness readers\nmove to midgard-node-tools. Five emulator tests leave the event-history\nnamespace under new names. A grep-gate test refuses any return of the deleted\nmodules, tables, keys or command.\n\nRefs #799",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-08T11:47:00Z"
+      "authorDate": "2026-10-09T02:00:16Z"
     },
     {
-      "sha": "21bb720847284df140d9a677977d30485d171bf2",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/21bb720847284df140d9a677977d30485d171bf2",
-      "message": "Apply the working-ledger rejection closure to commit-stage rejections\n\nA commit-stage rejection now runs closeRejections in one transaction:\npending spenders of a rejected output are rejected as dependents,\npending co-members of an unreversed acceptance receipt holding a\nrejected transaction are rejected as batch members, and the receipts\nare reversed by recordRejections. Rows marked by a block are settled.\nA closure that reaches a transaction Phase B accepted for the block\nbeing built removes it from the candidates and runs Phase B again.\nThe separate dependent cascade is removed.\n\nThe skipped-submission transfer moves mempool rows to the processed\nmempool in one statement that carries included_by.",
+      "sha": "19e91ce8a0bd964af0b45bde4eaad0271f13c6cd",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/19e91ce8a0bd964af0b45bde4eaad0271f13c6cd",
+      "message": "Document node readiness reasons and reconcile docs with the L1 follower\n\nEvery reason the node can put in /readyz now has operator text in the devnet endpoints reference, and scripts/ci/check-readiness-reasons-doc.mjs derives the reasons from the node source and fails when one is missing. Committee, watcher, transport and node docs describe the current behaviour: the committee and retention sweeper stay up and report readiness instead of exiting, tx_rejection_causes is documented, the transport checks block bodies, and watcher startup, journal and objective-cleanup behaviour matches the code. The plan records whole-file journal rollback as an accepted residual. Registry entries for deleted modules are dropped, and dated records citing deleted files are marked historical.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-08T11:42:49Z"
+      "authorDate": "2026-10-09T00:27:31Z"
     },
     {
-      "sha": "0af5c8b155e562cf3795632a7b9763e6daa3f6cf",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/0af5c8b155e562cf3795632a7b9763e6daa3f6cf",
-      "message": "Compare the base journal's expected root before taking its aggregate, and hold a native restore refused as not retained on the release and revival paths\n\nDisplacement compensation with no returned prefix now takes the base journal's UTxO payload aggregate only when that journal's expected root is the target root, through the helper the displaced-chain repair already uses. A NativeMpfRootNotRetained refusal on the signed-intent release, the displaced-chain rewind, the displacement compensation or the retained displacement's inverse is held under the caller's source as signed_intent_target_root_not_retained, with the plan prepared and retried on every evaluation. The cause-chain matcher moves to history-dependent-recovery so the correction rewind and these holds share it.",
+      "sha": "82aec8716e2dce986ea4608f98e716de3d121b70",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/82aec8716e2dce986ea4608f98e716de3d121b70",
+      "message": "Merge N1H: move event-history runtime duties onto the follower-change driver",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-08T11:39:23Z"
+      "authorDate": "2026-10-08T23:47:06Z"
     },
     {
-      "sha": "9eb8785f737fd60ecc979571d06b6673dce2ddde",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/9eb8785f737fd60ecc979571d06b6673dce2ddde",
-      "message": "Give the node's follower test database cleanup an explicit hook budget\n\ndropAll drops each database a suite created one at a time with FORCE, and a fork-sim that creates a store per run outgrew the 10 s hook default on a loaded CI runner (l1-operator-set-fork-sim's afterAll timed out on 4d7da9845). Every suite on the shared helper now gives its cleanup the same budget the committee suites use.",
+      "sha": "ba0c31011e80669342758344832f0ddaf81fd51d",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ba0c31011e80669342758344832f0ddaf81fd51d",
+      "message": "Move event-history runtime duties onto the follower-change driver\n\nWrites that derive from the L1 view now run the follower view check in\ntheir own transaction and take the node_follower_write_gate row (migration\n0021) under a permit at the driver's applied view and gate epoch. A stale\nview, a pending driver recompute or a superseded epoch is a named hold\nthe caller retries; the held error names its reason.\n\nThe driver hosts the landed-block rebase and folds orphan repair into its\nrecompute, re-projecting events the rebase released. The recompute reads\nfollower event entries instead of the receipt-member tables, which are\nretired along with ledger repair. Startup preparation runs once after the\nfollower catches up; a failure is the startup_preparation_failed hold with\nretry rather than an exit.\n\nThe settlement fence and tx-status merge evidence read the gate. /readyz\nnames the gate's reasons (l1_follower_view_unapplied,\nl1_driver_recompute_pending, l1_driver_recompute_failed) and the\nfollower's own; historyOwnerStopped and the history_owner_not_ready,\nhistory_follower_lagging, history_sync and history_initialization reasons\nare removed. node-tools reads the deployment manifest from node_deployment\ninstead of the ledger snapshot module. A module-graph test keeps runtime\nentry points off the event-history owner modules.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-08T11:38:58Z"
+      "authorDate": "2026-10-08T23:17:56Z"
     },
     {
-      "sha": "d198c0cbf8363bdbbcf64e0177abba4d90314d97",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d198c0cbf8363bdbbcf64e0177abba4d90314d97",
-      "message": "Merge I1d: hold the intent prune floor through a replay and journal in-node list inserts",
+      "sha": "47993f660582b4976c146b5e691a1a160f89f583",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/47993f660582b4976c146b5e691a1a160f89f583",
+      "message": "Merge N1K2: run each emulator family suite once, follower-hosted",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-08T11:17:06Z"
+      "authorDate": "2026-10-08T22:47:29Z"
     },
     {
-      "sha": "32520f5b9eee1387e36dc8ed49be6de0f60b576e",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/32520f5b9eee1387e36dc8ed49be6de0f60b576e",
-      "message": "Hold the intent journal's prune floor through a replay and journal in-node list inserts\n\nWhile the tracked-set record says replaying, the intent journal declares a class A prune floor at its prune mark's boundary (or, with no mark, where the replay began); the first prune step after the replay ends sets none.\n\nThe genesis deposit and the atomic protocol initialization are journaled as the list_insert family, keyed by event key and one-shot nonce. Their predicate is wanted while the follower's facts show the insert's target unreached: the event key absent from the never-reuse key set, no live state-queue policy output. Submissions from CLI-only paths go out unjournaled with reason no_follower, the only unjournaled reason left.",
+      "sha": "f9376cb2cd36eabea459b0054ffc8ec62f978c25",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/f9376cb2cd36eabea459b0054ffc8ec62f978c25",
+      "message": "Delete the follower-provider suite wrappers\n\nEach wrapped emulator family suite now runs follower-hosted itself, so the 25 wrappers only re-ran it.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-08T11:13:34Z"
+      "authorDate": "2026-10-08T22:46:28Z"
     }
   ],
   "contributors": [
@@ -388,11 +388,11 @@
     },
     {
       "week": 1760832000,
-      "total": 35
+      "total": 52
     },
     {
       "week": 1761436800,
-      "total": 112
+      "total": 114
     },
     {
       "week": 1762041600,
@@ -404,11 +404,11 @@
     },
     {
       "week": 1763251200,
-      "total": 22
+      "total": 32
     },
     {
       "week": 1763856000,
-      "total": 16
+      "total": 44
     },
     {
       "week": 1764460800,
@@ -448,35 +448,35 @@
     },
     {
       "week": 1769904000,
-      "total": 45
+      "total": 46
     },
     {
       "week": 1770508800,
-      "total": 32
+      "total": 36
     },
     {
       "week": 1771113600,
-      "total": 10
+      "total": 13
     },
     {
       "week": 1771718400,
-      "total": 47
+      "total": 43
     },
     {
       "week": 1772323200,
-      "total": 16
-    },
-    {
-      "week": 1772928000,
       "total": 23
     },
     {
+      "week": 1772928000,
+      "total": 35
+    },
+    {
       "week": 1773532800,
-      "total": 25
+      "total": 28
     },
     {
       "week": 1774137600,
-      "total": 26
+      "total": 36
     },
     {
       "week": 1774742400,
@@ -484,31 +484,31 @@
     },
     {
       "week": 1775347200,
-      "total": 36
+      "total": 40
     },
     {
       "week": 1775952000,
-      "total": 28
+      "total": 32
     },
     {
       "week": 1776556800,
-      "total": 27
+      "total": 17
     },
     {
       "week": 1777161600,
-      "total": 9
+      "total": 26
     },
     {
       "week": 1777766400,
-      "total": 18
+      "total": 33
     },
     {
       "week": 1778371200,
-      "total": 23
+      "total": 43
     },
     {
       "week": 1778976000,
-      "total": 10
+      "total": 15
     },
     {
       "week": 1779580800,
@@ -516,11 +516,11 @@
     },
     {
       "week": 1780185600,
-      "total": 21
+      "total": 25
     },
     {
       "week": 1780790400,
-      "total": 12
+      "total": 30
     },
     {
       "week": 1781395200,
@@ -528,11 +528,11 @@
     },
     {
       "week": 1782000000,
-      "total": 3
+      "total": 10
     },
     {
       "week": 1782604800,
-      "total": 1
+      "total": 5
     },
     {
       "week": 1783209600,
@@ -540,19 +540,19 @@
     },
     {
       "week": 1783814400,
-      "total": 9
+      "total": 10
     },
     {
       "week": 1784419200,
-      "total": 20
+      "total": 47
     },
     {
       "week": 1785024000,
-      "total": 8
+      "total": 202
     },
     {
       "week": 1785628800,
-      "total": 190
+      "total": 90
     },
     {
       "week": 1786233600,
@@ -572,7 +572,7 @@
     },
     {
       "week": 1788652800,
-      "total": 138
+      "total": 46
     },
     {
       "week": 1789257600,
@@ -580,15 +580,15 @@
     },
     {
       "week": 1789862400,
-      "total": 125
+      "total": 174
     },
     {
       "week": 1790467200,
-      "total": 179
+      "total": 210
     },
     {
       "week": 1791072000,
-      "total": 419
+      "total": 549
     }
   ]
 }
