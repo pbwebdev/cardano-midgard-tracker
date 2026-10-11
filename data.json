@@ -1,10 +1,10 @@
 {
-  "fetchedAt": "2026-10-10T12:12:18.299Z",
+  "fetchedAt": "2026-10-11T12:26:33.099Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 25,
     "forks_count": 11,
-    "open_issues_count": 196
+    "open_issues_count": 198
   },
   "languages": {
     "Aiken": 359544,
@@ -17,109 +17,109 @@
   },
   "commits": [
     {
-      "sha": "c3f507391487cb56813b5bdc9e6354a8e4a0ddda",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/c3f507391487cb56813b5bdc9e6354a8e4a0ddda",
-      "message": "Document how to run the blueprint fixture writers without racing\n\nTwo raw writer runs in one checkout share its default test database and fail on migrations. Say to run one at a time, prefer artifacts sync where the channel has a check, and why contrib test reports a changed watcher fixture as a failed run.",
+      "sha": "5d0acc503cc15c5b6e07fa43ced8cbde2080b6e2",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/5d0acc503cc15c5b6e07fa43ced8cbde2080b6e2",
+      "message": "Resume a chain-sync stream from its events, not the open answer's point\n\nThe sidecar's answer to cs_open settles a promise, while stream frames are\ndispatched synchronously as each read chunk is parsed. When the answer and\nthe first events arrive in one chunk, the events are handled before the\nopen's continuation, which then overwrote the stream's last point with the\nintersection and its tip with the answer's older one. A failure before the\nnext event made the stream resume from the intersection, so the sidecar\ndelivered the same blocks again: the consumer saw repeats, and the fake\nsidecar test saw its consecutive-failure count reset (3 of the last 40\nl1-node-transport CI runs on #814 failed this way).\n\nThe continuation now keeps a position and tip that events have already\nset. The fake sidecar sends an open's answer and the events it releases in\none write, so its tests always take the coalesced path a busy client sees;\n\"records each failure a resuming stream reopens from\" fails on every run\nagainst the old continuation and passed 40 of 40 runs after the fix.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-10T01:40:54Z"
+      "authorDate": "2026-10-11T07:22:39Z"
     },
     {
-      "sha": "81d5422e41326b7b34aac131553c9f531b057661",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/81d5422e41326b7b34aac131553c9f531b057661",
-      "message": "Accept minute and hour units in ci-status --timeout\n\n--timeout 7200 meant to wait two hours was refused as over the 360-minute cap with no hint that the unit is minutes. Accept 90, 90m and 2h, and say how to write a value that looks like seconds.",
+      "sha": "59c3b7d726ce0c60d6c6551515e73b5439cd207a",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/59c3b7d726ce0c60d6c6551515e73b5439cd207a",
+      "message": "Hold the transition-trace fixture's deposit past a fresh history root's protection\n\nOn a fresh deployment the deposit-history root stays protected for the\ndeployment's protection window. The fixture built its deposit at once, so a\nlive journey started within that window failed with\nEventHistoryPredecessorProtectedError. Earlier green runs used deployments\nhours old.\n\nThe deposit build now goes through the bounded predecessor hold the history\nstaging already uses, on the chain's ledger clock. The hold moves to the\nwatcher's test support so both packages share it.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-10T01:40:54Z"
+      "authorDate": "2026-10-11T07:02:26Z"
     },
     {
-      "sha": "14cb85ddb451c56e7f29eb6125e067237050b75d",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/14cb85ddb451c56e7f29eb6125e067237050b75d",
-      "message": "Name the missing install when a contrib build runs in a bare checkout\n\nA blueprint or package build in a worktree nobody installed failed deep in its first import with ERR_MODULE_NOT_FOUND. Check for demo/node_modules first and point at contrib worktree setup. Packages that declare no dependencies still build without an install.",
+      "sha": "f15322bb6126490dcc920f7e451beb1c8f861874",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/f15322bb6126490dcc920f7e451beb1c8f861874",
+      "message": "Deploy journey contracts with the Custom devnet's slot mapping\n\nThe published-workflow deployment helper applied the scripts and wrote the\nmanifest with Preprod's slot mapping whatever network it deployed to. On a\nCustom devnet the watcher then refused every installed family with\nl1_slot_config_mismatch, because the chain it reads anchors slot 0 at the\ndevnet's genesis, not at Preprod's Shelley start.\n\nThe helper now takes Preprod's constants for a Preprod deployment and, for a\nCustom one, the mapping of the Lucid it deploys with, and uses that one value\nfor both the parameterised scripts and the manifest.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-10T01:40:53Z"
+      "authorDate": "2026-10-11T07:02:19Z"
     },
     {
-      "sha": "cd530e3ceb37af7a9cb3ef6f0d595c967e0438c1",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/cd530e3ceb37af7a9cb3ef6f0d595c967e0438c1",
-      "message": "Let contrib list options take every word up to the next option\n\nThe help already read --file PATH..., but --file a.test.ts b.test.ts silently dropped the second file into a positional slot. --file, --related and --exclude now collect each following word until the next option.",
+      "sha": "feacac5c97bae7daaea1e02323b0365979e8f8d0",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/feacac5c97bae7daaea1e02323b0365979e8f8d0",
+      "message": "Lower the initialization emulator test's module-size cap to its new length\n\nThe fixture-staleness check shortened the file from 741 to 738 lines, and the size inventory refuses a cap above a file's length.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-10T01:40:53Z"
+      "authorDate": "2026-10-11T06:28:08Z"
     },
     {
-      "sha": "7fcedff55a94cb1883050b4ab975466433636684",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/7fcedff55a94cb1883050b4ab975466433636684",
-      "message": "Accept the workspace scope on unscoped package names in contrib\n\nHalf the demo packages are scoped (@al-ft/...) and half are not, so --package @al-ft/midgard-node was refused as unknown even though the workspace uses that scope. A directory name may now carry a scope the workspace declares; other scopes are still refused.",
+      "sha": "ec49d622e5c1bbca7951f4b310fd388abf065fa0",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ec49d622e5c1bbca7951f4b310fd388abf065fa0",
+      "message": "Fail the node suite when the watcher's initialization capture is stale\n\nThe initialization emulator test writes the watcher's captured\ninitialization transactions when MIDGARD_WRITE_WATCHER_INITIALIZATION_FIXTURE\nis set, but nothing compared the capture's recorded blueprintSha256 with the\ncurrent build. A validator change left it stale silently, and its only\nrecipe (contrib test with the write flag) always ended in a failed receipt\nbecause the fixture is one of midgard-node's own inputs.\n\nThe test now always checks the recorded hash against the current\nblueprint, as da-deployment-fixture-generation already does, so the\nchannel gains a check and artifacts sync can regenerate it in a scratch\ncheckout.\n\nRegression caught: a blueprint change without regenerating the capture now\nfails \"Test Midgard node\" in CI, naming the sync command. It belongs in the\ngenerating test because that is where the current hash is already computed.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-10T01:40:53Z"
+      "authorDate": "2026-10-11T06:09:33Z"
     },
     {
-      "sha": "ab02df92f35429cf952080ae4b26a2ffba10703d",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ab02df92f35429cf952080ae4b26a2ffba10703d",
-      "message": "Merge the Node CI fixes into the L1 follower integration",
+      "sha": "3e1f541475e13694b3851552ec2b6f76851b0d76",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/3e1f541475e13694b3851552ec2b6f76851b0d76",
+      "message": "Regenerate the watcher initialization fixture and re-copy the scan-plan pins\n\nThe tx-order script hash changed with the validity-bound decoding change, so\nthe watcher's recorded initialization still named the old tx-order address\nand the follower capture dropped the forced order. The native-script-decoding\nscan planner's execution pins still held the costs from before the body\ndecoders gained the bound check, while its exec ledger had been re-taken.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-10T00:34:39Z"
+      "authorDate": "2026-10-11T05:52:16Z"
     },
     {
-      "sha": "daad7a36790e3a2174a7d7f22944ba0bb6011753",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/daad7a36790e3a2174a7d7f22944ba0bb6011753",
-      "message": "Keep the node's pure L1 modules pure and re-pin tests the follower lanes made stale\n\nThe retry-discipline change gave the pure event driver an import of the network transport package and a path to Math.random. The failure classification and hold now live in services/l1-follower.failure-hold.ts, and the driver takes it as a required option. The forced-order lint now excludes the database-reading own-landed-orphans module, next to its sibling read modules. The deployable-script counts drop by the 17 scripts of the retired native-script families and the deleted duplicate-event family. The merge maturity test mocks the poisoned-own-header read and gains a case for it. The startup CLI test expects the ruled behaviour: a deterministic failure holds the process unready, and an exhausted transient fails the command. Two test files over the line limit are split by topic.",
+      "sha": "6b79dec1e313ed0096fc1345198e3156e7ecdf4c",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/6b79dec1e313ed0096fc1345198e3156e7ecdf4c",
+      "message": "Pin that the tx-order mint refuses a submitted bound below -1 (#817)\n\nThe transition-trace test for a forced order carrying a start bound of -2\nassumed such an order could be minted and then judged malformed by the\nmachine. Since bodies with a bound below -1 no longer decode, the tx-order\nmint, which decodes every order's submitted body, refuses them, so no such\norder exists for a proof to read. The test is replaced by mint tests that\nwrite the bounds raw into the forced envelope: the sentinel and slot cases\nmatch the encoder byte for byte and are admitted, and a start or end below\n-1 is refused.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-10T00:34:39Z"
+      "authorDate": "2026-10-11T05:52:15Z"
     },
     {
-      "sha": "7fd4e3a509f42fd645a1d3d7eff56d70612ee0b3",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/7fd4e3a509f42fd645a1d3d7eff56d70612ee0b3",
-      "message": "Merge the shift-grace invariant into the L1 follower integration",
+      "sha": "5183faef94459bf503fbf29f38acbcb22169be5b",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/5183faef94459bf503fbf29f38acbcb22169be5b",
+      "message": "Document the node's l1_slot_config_mismatch readiness reason\n\nThe slot-mapping refusal added with the validRange conversion had no operator text in the readiness reasons doc, so the doc check refused it.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-10T00:06:53Z"
+      "authorDate": "2026-10-11T05:15:17Z"
     },
     {
-      "sha": "f747bb6696e67baf487cbc6260fc9fa4ed29d619",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/f747bb6696e67baf487cbc6260fc9fa4ed29d619",
-      "message": "Require the new-shift inactivity grace to cover the maximum validity range\n\nA successor that inherits an event already overdue at its shift start needs up to the maximum validity range L to land the commit that covers it. With a 300 s grace and L = 480 s, an honest successor could be struck before that commit could land. Every profile now has to satisfy grace >= L, and all five set grace = L = 480 s. Only the scheduler spend script changes; fixtures, fit ledgers and the registry digest are regenerated for the new blueprint. The README also states that after a fraud removal, an event the removal re-exposes is held only to shift start + grace.",
+      "sha": "62c99e6a9ff31043e480fe683adf107645a1ba52",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/62c99e6a9ff31043e480fe683adf107645a1ba52",
+      "message": "Wait for the phase4 log followers to record before asserting on them\n\nup.sh returns once it has started the four followers, and each records\nits docker call a moment later. On a slow runner the up test read only\none follower and a late one wrote into the down test's calls. The up\ntest now waits for all four before asserting. Also gives the cleanup's\nempty catch a comment for no-empty.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-10T00:06:49Z"
+      "authorDate": "2026-10-11T05:09:45Z"
     },
     {
-      "sha": "c2f5ef8fbbf0f17b272d1c9319bcda1e278195d4",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/c2f5ef8fbbf0f17b272d1c9319bcda1e278195d4",
-      "message": "Merge colll78/l1-sfdfix into the L1 follower integration",
+      "sha": "e412114a9ef2f06c6c1ff4d9928d6d03b2c17949",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/e412114a9ef2f06c6c1ff4d9928d6d03b2c17949",
+      "message": "Read the derived deployment's slot mapping from the L1 port\n\nA derived-mode deployment (no manifest) needs the L1 slot mapping that the\nvalidRange conversion is parameterised with. It was supplied through a\nseparate MIDGARD_L1_SLOT_CONFIG setting, a second source of truth that could\ndisagree with the chain the node actually follows, and which the phase4\nbootstrap never set, so a fresh phase4 node refused to start.\n\nDerived mode now reads the mapping through the L1 adapter the role already\nholds (follower for node roles, tool adapter for CLI commands); the manifest\npath never opens L1. A transient read failure holds startup as\nl1_slot_mapping_pending under the bounded startup retry, and a named mismatch\nagainst the deployment stays a non-transient hold. The setting is removed.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-09T23:41:04Z"
+      "authorDate": "2026-10-11T05:07:08Z"
     },
     {
-      "sha": "34669d275d4bd9b649716e0d5ebd50040187b6a6",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/34669d275d4bd9b649716e0d5ebd50040187b6a6",
-      "message": "Merge colll78/l1-tjfix into the L1 follower integration",
+      "sha": "8c939e60b90f9b4681575c918c4affcecc665777",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/8c939e60b90f9b4681575c918c4affcecc665777",
+      "message": "Pin the validRange encoding across languages and drop a dead tx-queue hold\n\nA shared hex golden now pins the PlutusV3 and MidgardV1 validRange Data\nfor finite and absent bounds under one non-trivial slot mapping: the\nAiken derivation and the TypeScript builder must both produce it. A\nphase-B test runs an L2 PlutusV3 script that requires a POSIX lower\nbound: it passes with the deployment's mapping and fails one slot early\nor with a slot-domain context.\n\nThe tx-queue processor logged and skipped forever when Lucid had no slot\nmapping, with no readiness reason. Startup has already matched the\nmapping against the manifest, so that state is a defect, not one to wait\nout; it now dies instead of stalling silently.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-09T23:41:04Z"
+      "authorDate": "2026-10-11T04:03:56Z"
     },
     {
-      "sha": "26c3af4d2bd322b8c4974a39b5968c82ec88b2d7",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/26c3af4d2bd322b8c4974a39b5968c82ec88b2d7",
-      "message": "Test the early side of the forced due window and drop citations of deleted predicates\n\nNo test exercised the early-window check of the forced-order fault, so weakening it went unnoticed. Three tests now pin inclusion at, before and just after the header start time. Comments that cited the deleted due predicate now cite the live rule.",
+      "sha": "13e0619a84bb5afb349fd893d41a9bf219830584",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/13e0619a84bb5afb349fd893d41a9bf219830584",
+      "message": "Regenerate script-hash fixtures for the validity-bound changes\n\nThe exclusive upper bound and the decoder's validity-bound check change\nthe validation machine, the native-tx codec, invalid-range step 01 and\nda-hash-preimage step 01, so every script compiling them in has a new\nhash. Regenerated through their generators: the two transition-trace fit\nledgers (margins stay positive) and the DA deployment fixture (177\ncontracts, exactly the scripts that compile those modules). Re-pinned the\ncontracts registry digest, which covers every applied recipe's hash.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-09T23:41:00Z"
+      "authorDate": "2026-10-11T04:03:55Z"
     },
     {
-      "sha": "b1b022d8c9ffb07be98ad7ca44e34027099ffec0",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/b1b022d8c9ffb07be98ad7ca44e34027099ffec0",
-      "message": "Treat ESRCH as a process that has exited when attesting a pid\n\nA process that exits between two /proc reads reports ESRCH on the second read. processIdentity threw on it, so liveness probes could fail on a dying pid and the lifecycle test raced in CI.",
+      "sha": "7ad9802ad4ac54474846fa9120c234d91903a1bc",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/7ad9802ad4ac54474846fa9120c234d91903a1bc",
+      "message": "Give L2 Plutus scripts their validity range in POSIX milliseconds\n\nA PlutusV3 script reads txInfoValidRange in POSIX milliseconds, as\nCardano's transValidityInterval builds it. Midgard's L2 script contexts\ncarried the committed body's raw L1 slots instead, so a script checking a\ntime bound saw values in the wrong domain, and an absent upper bound was\nencoded as NegInf/False rather than PosInf/True.\n\nThe context derivation now converts each finite bound on the affine\nShelley anchor, zero_time + (slot - zero_slot) * slot_length: an\ninclusive finite lower bound, a strict finite upper bound, and an absent\nbound as NegInf or PosInf, both inclusive. The MidgardV1 context uses the\nsame domain. The conversion happens inside the existing derivation, so\nthe existing validation-trace proofs cover it.\n\nThe slot-to-time mapping is a deploy-time parameter of\ncek-context-tx-info, recorded in the deployment manifest as l1SlotConfig:\nthe named networks use their Shelley constants, a custom network or\ndevnet its Shelley genesis (system start, slot 0, slot length). The node,\nwatcher and prover refuse a mapping that differs from the manifest; the\nnode goes unready with L1_SLOT_CONFIG_MISMATCH instead of crash-looping.\nA manifest-less node on a custom network takes MIDGARD_L1_SLOT_CONFIG.\nThe devnet tooling passes the genesis mapping through.\n\nThe transaction spec, technical spec and docs describe the time domain.\nRegenerated through their generators: the two transition-trace fit\nledgers and the DA deployment fixture; re-pinned the contracts registry\ndigest and two event-replay trace hashes (absent-upper encoding).",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-09T23:41:00Z"
+      "authorDate": "2026-10-11T02:32:07Z"
     },
     {
-      "sha": "5dba7c0b75952f42382bb96da17291007124d500",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/5dba7c0b75952f42382bb96da17291007124d500",
-      "message": "Keep the commit-event depth out of fault-proof release identities\n\nThe commit-event depth that the depth work added to the manifest's L1 finality record leaked into the release policy that two fault-proofs producers record. The policy digest binds only the three rollback fields, so the first run passed. But a resumed workflow compared its recorded release identity against the watcher's three-field one, and recovery refused for good. Release policies are now projected to the digest-bound fields where they are made and where they are validated. The validation-dispute binding drops its private copy of the producer.",
+      "sha": "3780f200444326bee943fa734b31f8414a8e018c",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/3780f200444326bee943fa734b31f8414a8e018c",
+      "message": "Refuse validity bounds below -1 when decoding a native body (#817)\n\nA body's validity_interval_start/end is -1 (absent) or a slot, but the\ncodec decoded any signed integer there. The validation machine called a\nbound below -1 malformed while the invalid-range normalization read it as\na real lower bound, so the two disagreed about such a body.\n\nEvery body decoder and encoder now refuses a bound below -1, on-chain\n(expect_validity_bound in the compact and full-body codecs) and in\nTypeScript (asValidityBound in native-body.ts). The da-hash-preimage\ninspector guards the same range so it stays total: accepting a leaf with\nsuch a bound is convicted there as a malformed proof source. The tx-order\nmint decodes forced sources through the same codec, so no forced leaf can\ncarry one. With every path decoding first, the machine's and phase-A's\n\"below -1 is malformed\" arms are unreachable and are removed.\n\nThe spec, CDDL (validity_bound = -1 / uint), technical spec and docs say\nso.\n\nExec ledgers re-taken: two expect_validity_bound checks per body\nencode/decode, about +3.7k mem and +0.89M cpu per body decode.\n\nCloses #817",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-09T23:41:00Z"
+      "authorDate": "2026-10-11T02:31:06Z"
     },
     {
-      "sha": "e5a982a06d2af580957ad69347553aa91108cca0",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/e5a982a06d2af580957ad69347553aa91108cca0",
-      "message": "Re-pin the module-size caps of the two tests edited after the strike merge",
+      "sha": "a78d4edd28f3b9faf365a4b59f531f92fb938bd3",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/a78d4edd28f3b9faf365a4b59f531f92fb938bd3",
+      "message": "Split the devnet campaign's definition from its runner\n\nThe definition (schema validation, the resume digest and each stage's\ncommand) is pure and now lives in campaign-definition.mjs; campaign.mjs\nkeeps pinning, the build and blueprint freeze, the receipt and the stage\nrunner.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-09T23:05:56Z"
+      "authorDate": "2026-10-11T02:27:11Z"
     }
   ],
   "contributors": [
@@ -326,6 +326,18 @@
   ],
   "issues": [
     {
+      "number": 817,
+      "title": "Reject validity bounds below -1 when decoding a native transaction body",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/817",
+      "updated_at": "2026-10-11T01:25:50Z"
+    },
+    {
+      "number": 816,
+      "title": "Dev-ex footguns from L1 follower devnet acceptance",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/816",
+      "updated_at": "2026-10-10T20:17:43Z"
+    },
+    {
       "number": 815,
       "title": "Automate resolution of settlement nodes after merge",
       "html_url": "https://github.com/Anastasia-Labs/midgard/issues/815",
@@ -366,26 +378,10 @@
       "title": "L1 follower N10: Forced-order carriage resolver without Kupo",
       "html_url": "https://github.com/Anastasia-Labs/midgard/issues/805",
       "updated_at": "2026-10-08T03:14:08Z"
-    },
-    {
-      "number": 809,
-      "title": "L1 follower U3: Commit horizon lag d from operator config (off-chain part)",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/809",
-      "updated_at": "2026-10-08T02:59:07Z"
-    },
-    {
-      "number": 799,
-      "title": "L1 follower N1: Node lists, events, key set and deposits as projections: delete the event-history stack",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/799",
-      "updated_at": "2026-10-08T02:15:05Z"
     }
   ],
   "releases": [],
   "commitActivity": [
-    {
-      "week": 1760227200,
-      "total": 13
-    },
     {
       "week": 1760832000,
       "total": 52
@@ -408,15 +404,15 @@
     },
     {
       "week": 1763856000,
-      "total": 44
+      "total": 43
     },
     {
       "week": 1764460800,
-      "total": 17
+      "total": 8
     },
     {
       "week": 1765065600,
-      "total": 6
+      "total": 7
     },
     {
       "week": 1765670400,
@@ -460,19 +456,19 @@
     },
     {
       "week": 1771718400,
-      "total": 43
+      "total": 47
     },
     {
       "week": 1772323200,
-      "total": 23
+      "total": 26
     },
     {
       "week": 1772928000,
-      "total": 35
+      "total": 36
     },
     {
       "week": 1773532800,
-      "total": 28
+      "total": 29
     },
     {
       "week": 1774137600,
@@ -484,31 +480,31 @@
     },
     {
       "week": 1775347200,
-      "total": 40
+      "total": 42
     },
     {
       "week": 1775952000,
-      "total": 32
+      "total": 28
     },
     {
       "week": 1776556800,
-      "total": 17
+      "total": 28
     },
     {
       "week": 1777161600,
-      "total": 26
+      "total": 10
     },
     {
       "week": 1777766400,
-      "total": 33
+      "total": 19
     },
     {
       "week": 1778371200,
-      "total": 25
+      "total": 42
     },
     {
       "week": 1778976000,
-      "total": 13
+      "total": 15
     },
     {
       "week": 1779580800,
@@ -520,11 +516,11 @@
     },
     {
       "week": 1780790400,
-      "total": 17
+      "total": 18
     },
     {
       "week": 1781395200,
-      "total": 19
+      "total": 21
     },
     {
       "week": 1782000000,
@@ -540,7 +536,7 @@
     },
     {
       "week": 1783814400,
-      "total": 9
+      "total": 11
     },
     {
       "week": 1784419200,
@@ -552,11 +548,11 @@
     },
     {
       "week": 1785628800,
-      "total": 2
+      "total": 90
     },
     {
       "week": 1786233600,
-      "total": 21
+      "total": 30
     },
     {
       "week": 1786838400,
@@ -564,15 +560,15 @@
     },
     {
       "week": 1787443200,
-      "total": 47
+      "total": 48
     },
     {
       "week": 1788048000,
-      "total": 1
+      "total": 2
     },
     {
       "week": 1788652800,
-      "total": 138
+      "total": 45
     },
     {
       "week": 1789257600,
@@ -580,15 +576,19 @@
     },
     {
       "week": 1789862400,
-      "total": 174
+      "total": 172
     },
     {
       "week": 1790467200,
-      "total": 210
+      "total": 209
     },
     {
       "week": 1791072000,
-      "total": 549
+      "total": 511
+    },
+    {
+      "week": 1791676800,
+      "total": 38
     }
   ]
 }
