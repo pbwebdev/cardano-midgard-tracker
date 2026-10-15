@@ -1,10 +1,10 @@
 {
-  "fetchedAt": "2026-10-14T11:31:15.609Z",
+  "fetchedAt": "2026-10-15T11:09:16.404Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 25,
     "forks_count": 11,
-    "open_issues_count": 172
+    "open_issues_count": 176
   },
   "languages": {
     "Aiken": 359544,
@@ -17,109 +17,109 @@
   },
   "commits": [
     {
-      "sha": "09768164fc7f43e29dfafeef15a8d2eb1caf40df",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/09768164fc7f43e29dfafeef15a8d2eb1caf40df",
-      "message": "Rebuild a deposit-trace block whose end passed before its commit\n\nA resumed deposit-trace journey keeps the deposited block it prepared before\nthe stop. When the run resumes after that block's end, the commit's validity\nrange is inverted and its script evaluation fails while the transaction is\nbuilt, so neither the expiry rebuild nor the late-refusal path is reached.\nThe fixture's commit now settles such a block as expired before building,\nand the existing loop rebuilds it with a fresh end time.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-11T21:43:45Z"
+      "sha": "5ac344ab486ac776bd728aa771c78efe0caea8f7",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/5ac344ab486ac776bd728aa771c78efe0caea8f7",
+      "message": "Align the demo Nix shell with Go 1.26.5\n\nMatch the native L1 transport's Go 1.26.5 requirement by updating the\nGo package, nixpkgs revision, lockfile and version checks.\n\nUse the 26.05 backport to retain Intel macOS support while keeping the\nNode, pnpm and other flake inputs unchanged.\n\nValidation (2026-10-15, repository root):\n`nix flake check --no-build --all-systems --no-write-lock-file ./demo`\ncompleted with exit 0 for all four platforms. Evaluation only; no\npackages were built.",
+      "authorName": "keyanm",
+      "authorDate": "2026-10-15T10:19:59Z"
     },
     {
-      "sha": "bbc4d7a590eecc6b3364b46917109c21b2de472c",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/bbc4d7a590eecc6b3364b46917109c21b2de472c",
-      "message": "Settle a header commit refused past its validity bound as expired\n\nThe journey fixture fixes a block's end time when it prepares the block, and\nthe commit's validity ends there. When the predecessor's DA attestation ran\npast that end, the commit was built already expired; the node refused it with\nOgmios 3118 and the actor raised a submission error, so the fixture's\nrebuild-on-expiry path never ran and the watcher journey failed. A refusal at\nor past the upper bound is now an expiry: the transaction is in no mempool,\nso the caller rebuilds the block. A refusal before the lower bound stays a\nsubmission error.",
+      "sha": "89b2accd719594758f1d5d6f76b4fe9c44bd4372",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/89b2accd719594758f1d5d6f76b4fe9c44bd4372",
+      "message": "Re-pin the state_queue registry fingerprint for the smaller output-scan scripts",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-11T21:36:33Z"
+      "authorDate": "2026-10-15T03:32:40Z"
     },
     {
-      "sha": "c189bf4905fcf2a797d2113629429022e35ee4a4",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/c189bf4905fcf2a797d2113629429022e35ee4a4",
-      "message": "Match lucid-evolution 0.8 Data.to in the iterative Plutus Data encoder\n\nlucid-evolution 0.8 encodes Plutus Data with a pure JavaScript encoder first and falls back to CML only when that encoder declines. The JavaScript encoder keeps the last of a map's entries with equal keys before it encodes any value, so a value that a later key replaces is never checked; CML serializes every key and value before replacing, so it refuses the same tree when a replaced value cannot be encoded. The iterative encoder modelled only CML and refused trees that Data.to now accepts (the differential test's seed 426, a map with two equal keys whose replaced value carried a constructor index above 2^64 - 1).\n\nThe encoder now plans the tree under the JavaScript encoder's rules (number or bigint constructor index, Array fields, keys planned first and only surviving values planned) and, if that refuses, under CML's rules as before. Edge cases cover both outcomes: a replaced bad value accepted, and the same tree refused when another feature (a string or object index, Set fields) sends Lucid to CML. The edge table moves to its own module to keep the test under the line cap.",
+      "sha": "c8d387f091f15ce13b77d91e8ff4486da8a6856d",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/c8d387f091f15ce13b77d91e8ff4486da8a6856d",
+      "message": "Regenerate the pinned fit ledgers and blueprint fixtures for the smaller output-scan scripts\n\nThe output-scan publication rows shrink by 269 bytes; the remaining\nexecution readings move only with the new script hashes, and every row\nstill fits.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-11T20:55:18Z"
+      "authorDate": "2026-10-15T00:57:36Z"
     },
     {
-      "sha": "6b65b88b8bb487d0c0858ea6ba2e715d040680a6",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/6b65b88b8bb487d0c0858ea6ba2e715d040680a6",
-      "message": "Re-pin the contract registry and fix two CI reds from the final batch\n\nThe contract registry digests in midgard-contracts.test.ts moved with the tighter event-history admission and the correction lock's ADA top-up; both pins are re-taken from the current blueprint (the same values CI computed).\n\nprocess.process-mpfs.ts shrank to 1537 lines when the duplicate-outref refusal became in-order classification, so its module-size cap is lowered to match.\n\ndevnet-stack-service-preflight.test.ts compared the compiled profile's literal name with \"local-devnet-testing\", which fails to typecheck when another profile is compiled (CI builds preprod-testing). The name is widened to string before the comparison.",
+      "sha": "40fcd0c7db9c896ead8ddb79856be929d6f54df2",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/40fcd0c7db9c896ead8ddb79856be929d6f54df2",
+      "message": "Test that an output-scan step refuses a result that is not well formed\n\nA run of scan steps checks each control as a step's result, so the\nresult check must refuse on its own: a well-formed control that already\ncounts two optional fields cannot take a third.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-11T20:47:58Z"
+      "authorDate": "2026-10-15T00:38:45Z"
     },
     {
-      "sha": "bb879931488c02387d8800a4a095a2618b4fcb91",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/bb879931488c02387d8800a4a095a2618b4fcb91",
-      "message": "Regenerate the blueprint-bound fixtures and fit ledgers after the correction-lock merge\n\nThe correction-lock rule and the admission changes reached this branch on\nseparate lines, each with its own regenerated outputs; the merge kept the\nadmission side. This regenerates the DA deployment fixture, the watcher\ninitialization fixture and the two transition-trace fit ledgers once against\na fresh preprod-testing blueprint of the merged tree, through their\n`contrib artifacts sync` channels.",
+      "sha": "531ed34232aa8e102a55e941a3fba40d4b30b7f1",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/531ed34232aa8e102a55e941a3fba40d4b30b7f1",
+      "message": "Read back a computation thread's own scan and value controls without repeating their checks\n\nThe output scan's step, finish and terminal checks now each have a\nwell-formed variant that skips control_is_well_formed for a control the\ncaller already knows is well formed; step_v1, finish_v1 and\nterminal_is_exact_v1 keep their behaviour by checking well-formedness\nonce and delegating. terminal_is_exact_well_formed_v1 drops only the\nconjuncts control_is_well_formed already decides. decode_written_control_v1\n(scan and value) reads back bytes that encode_control_v1 wrote, which\nalready checked the control well formed.\n\nTests cover a terminal refusing a control that is not well formed, a datum\nlength without a datum, encoding refusing a malformed control, and\nwritten controls reading back unchanged.\n\nFourteen validators that link the scan library shrink by 269 to 310\nbytes; no validator grows past its publication target.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-11T20:09:34Z"
+      "authorDate": "2026-10-15T00:26:00Z"
     },
     {
-      "sha": "97c1a32c7cf23dd243304636bd8d1e96f6a45e39",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/97c1a32c7cf23dd243304636bd8d1e96f6a45e39",
-      "message": "Merge the chain-rule withdrawal value checks into the L1 follower branch",
+      "sha": "3da7288d3c8221ea4e378035142304fb49230571",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/3da7288d3c8221ea4e378035142304fb49230571",
+      "message": "Re-take the Q21 execution ledger after the TxOut-summary reuse\n\nThe L2 no-op row summarises two unprotected outputs, whose Cardano and\nMidgard TxOut summaries are now taken once: 9,393,170 -> 7,740,888 mem.\nThe other row, the basis and every basisFit judgement are unchanged.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-11T19:50:33Z"
+      "authorDate": "2026-10-15T00:25:40Z"
     },
     {
-      "sha": "aefc8bc874eec049b5bcdbaf52e0ee311059b96e",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/aefc8bc874eec049b5bcdbaf52e0ee311059b96e",
-      "message": "Judge withdrawal values by the chain's rule in the node and the prover\n\nThe node classified a withdrawal's requested value against the ledger output\nby comparing re-encoded CBOR, and counted lovelace toward the 100-asset cap.\nThe withdrawal-mistag family judges by step-03's rule instead: the ADA policy\nholds exactly the empty name, lovelace is equal, the non-ADA assets match as a\nset, and at most 100 non-ADA assets are counted (lovelace excluded). An output\nwith exactly 100 non-ADA assets was therefore tagged TooManyTokensInWithdrawal\nby the node and valid by the chain. The prover's own comparison also ignored\nextra names under the ADA policy.\n\nwithdrawal-value.ts now holds that rule once; the SDK classifier (used by the\nblock producer, foreign replay and the validation replay) and the\nwithdrawal-mistag prover both use it. The SDK already writes withdrawal values\nwith bytewise-sorted keys, which admission requires; tests pin that.\n\nTests: node classification cases for out-of-order policies sent as raw CBOR,\nmixed-width names, missing and extra assets, a second ADA name, and 100/101\nnon-ADA assets; 12 Aiken vectors through step-03's `output_value_matches_v1`\nwith a TypeScript twin asserting the node agrees on each; withdrawal-mistag\ncases at the cap; admission emulator rows for SDK-built values. No validator\nhash changes.",
+      "sha": "28d85d1966cede1757e0b3e6a3470f6fe12124f9",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/28d85d1966cede1757e0b3e6a3470f6fe12124f9",
+      "message": "Regenerate the pinned fit ledgers and blueprint fixtures for the TxOut-summary reuse\n\nBlueprint fb542abf. The two summaries validators grow by 31 compiled\nbytes each (deposit 15,272, output 15,279; publication 15,847 and\n15,854 against the 15,872 target); no other validator changes.\n\nIn the transition-trace workflow ledger the deposit summaries steps fall\nby 826,503 mem (deposit) and 813,338 mem (maximum deposit datum). The\nremaining movements, in both directions and in event-history admission\ntoo, follow the new script hashes: the same per-row readings reappear\nunder different shapes. Every row still fits.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-11T19:50:31Z"
+      "authorDate": "2026-10-15T00:13:22Z"
     },
     {
-      "sha": "801802930bb71aa7a5025a56a5bf5352517fea82",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/801802930bb71aa7a5025a56a5bf5352517fea82",
-      "message": "Merge trace-order classification of duplicate-outref withdrawals into the L1 follower branch",
+      "sha": "d79759f1e379beb90eb494977d274e60eb85183b",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d79759f1e379beb90eb494977d274e60eb85183b",
+      "message": "Re-take the descriptor execution ledger after the TxOut-summary reuse\n\nSummarising an unprotected output's TxOut once (e9117395a, 7c8bb33d4)\nlowers every descriptor derivation by 826,046 mem / 409,541,415 cpu.\nMeasured on one tree with only script-context-v1.ak swapped, the base\nside reproduces every recorded reading exactly. Fixture-only rows that\nderive no descriptor do not move; the four protected-address golden\nvectors rise by 4,458 mem.\n\nFour raw rows and one net-of-baseline figure recorded `exceeds` now fit\nand are flipped with a dated `cause`: descriptor 3,149 and 3,215 bytes,\nthe 256-byte deposit rung and the rich golden vector (99.5% of the\nbasis, marginal), plus the 3,215-byte net figure. Both crossings stopped\nstraddling the basis and are retired.\n\nFive descriptor rungs, 3,281 to 3,545 output bytes, are added with\nfixture-only twins. The whole-test crossing is now between 3,347 and\n3,413 bytes; net of fixture the derivation first misses at 3,479.\n\nOne deposit rung, 384 bytes (398 serialised), is added and fits. A\n416-byte datum's payload is over the 512-byte inline limit the harness\ncarries deposits under, so the deposit ladder has no crossing; the\nretired entry, the open question and the not-measured list say so.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-11T19:40:03Z"
+      "authorDate": "2026-10-14T23:52:34Z"
     },
     {
-      "sha": "1c09bd9ca11f62c78d4f7b235aeca3542b0efcd3",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/1c09bd9ca11f62c78d4f7b235aeca3542b0efcd3",
-      "message": "Classify duplicate-outref withdrawals in trace order instead of refusing the block\n\nTwo admitted withdrawal orders may name the same L2 outref, and admission\ndoes not compare orders with each other. When both fell in one block window,\nblock building failed with \"multiple withdrawals target the same L2 outref\",\nevery tick, on every operator: overdue withdrawals are forced into the next\nblock, so the same pair was selected again and block production stopped.\n\nThe producer now classifies a block's withdrawals in trace-step order, each\nagainst the ledger the earlier payable ones leave. The first payable order\ndrains the outref; a later order on it finds no output and is tagged\nNonExistentWithdrawalUtxo. This is what foreign-block replay, the validation\nreplay and the withdrawal-mistag family already derive, and the double-\nwithdraw family refuses a block whose second leaf is non-payable.\n\nTests: trace-order unit cases; a Postgres-backed processMpfs build of two\norders on one outref whose block the verified-block-import replay accepts\n(and refuses with the duplicate re-tagged valid); withdrawal-mistag emulator\nin both polarities on that block, the honest one refused at step 04; Aiken\nregression pins for the NonExistentWithdrawalUtxo tag in double-withdraw\nsteps 01 and 02 (no validator hash changes).",
+      "sha": "a2166db72ba0fb2c2ad93f66105150eb53181632",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/a2166db72ba0fb2c2ad93f66105150eb53181632",
+      "message": "Pass the address Data to the TxOut summary so the summaries scripts stay within the publication target",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-11T19:40:00Z"
+      "authorDate": "2026-10-14T23:32:51Z"
     },
     {
-      "sha": "04eb74fc44a6420c4652e9e7dab8062abdbcc7c6",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/04eb74fc44a6420c4652e9e7dab8062abdbcc7c6",
-      "message": "Merge declared-order contrib tests into the L1 follower branch",
+      "sha": "8e46d6a2b5a158e5e526729296e2ee74ae862e4b",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/8e46d6a2b5a158e5e526729296e2ee74ae862e4b",
+      "message": "Re-pin the contract registry fingerprints for the optimised fault-proof scripts",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-11T19:08:19Z"
+      "authorDate": "2026-10-14T23:32:14Z"
     },
     {
-      "sha": "2db9b03b71d2770fb07184b252a4f807dc2c0098",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/2db9b03b71d2770fb07184b252a4f807dc2c0098",
-      "message": "Merge the dev-ex leftovers into the L1 follower branch",
+      "sha": "28eb48e9f1bcba2c0e8280db87fa9bf11b63d275",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/28eb48e9f1bcba2c0e8280db87fa9bf11b63d275",
+      "message": "Summarise an unprotected output's TxOut once for both encodings\n\nThe Cardano and Midgard script-context encodings of a ledger output differ\nonly in the address constructor of a protected address, so an unprotected\noutput's TxOut summary is computed once and used for both. Tests pin both\ncases against the per-encoding entry points.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-11T19:08:19Z"
+      "authorDate": "2026-10-14T22:34:47Z"
     },
     {
-      "sha": "3b1b6bcf362e303e00b9b5492ef0eba442580f13",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/3b1b6bcf362e303e00b9b5492ef0eba442580f13",
-      "message": "Merge the correction-lock ADA top-up rule into the L1 follower branch\n\n# Conflicts:\n#\tdemo/da-committee-node/tests/fixtures/da-contract-deployment-info.json\n#\tdemo/midgard-watcher/tests/fixtures/user-event-initialization.json\n#\tdocs/fault-proofs/size-plans/transition-trace-forced-window-fit-ledger.json\n#\tdocs/fault-proofs/size-plans/transition-trace-workflow-fit-ledger.json",
+      "sha": "8fe309ebd6af13bb208c623c15cd47b9116ee1bc",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/8fe309ebd6af13bb208c623c15cd47b9116ee1bc",
+      "message": "Add negatives for frontier, asset-leaf, mint evaluate and withdrawal membership checks\n\nCovers a malformed input frontier peak, membership at every peak of a\nseven-leaf frontier, a short asset policy id, a truncated mint payload,\na signer past the count, and the fabricated-withdrawal step-01\ncommitted-membership check against a real one-leaf root.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-11T19:08:19Z"
+      "authorDate": "2026-10-14T22:19:33Z"
     },
     {
-      "sha": "ddedc8f569b0574d1bd44f1ce19d1c1031d6d059",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ddedc8f569b0574d1bd44f1ce19d1c1031d6d059",
-      "message": "Regenerate the blueprint-bound fixtures and fit ledgers for the correction-lock rule\n\nThe correction-lock validator changed, so its script hash and every hash parameterized by it moved. Regenerated with each channel's generator against a fresh preprod-testing blueprint (artifacts sync, which also ran each channel's check): the DA contract deployment fixture, the watcher user-event initialization fixture, and the transition-trace forced-window and workflow fit ledgers. Fit-ledger budgets moved in both directions (at most about 0.19M memory units per row, signed bytes +22 at most); no row spends the correction lock.\n\nRefs #648",
+      "sha": "acc5deef6093ad27ff878cda097e14ad8c6d01b6",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/acc5deef6093ad27ff878cda097e14ad8c6d01b6",
+      "message": "Test missing-script-source source checks through the batch scan\n\nThe single-source scan_source_v1 has no validator caller since the batch\nscan replaced it, so delete it and run its location, membership,\ncheckpoint and cursor tests through advance_scan_v1 instead, plus the\nempty-batch completion and batch-split agreement cases.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-11T18:58:13Z"
+      "authorDate": "2026-10-14T22:19:33Z"
     },
     {
-      "sha": "ab15f99b5d040f35661b276b6fdd4da422fe93c1",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ab15f99b5d040f35661b276b6fdd4da422fe93c1",
-      "message": "Prove a correction tops up a lock funded only for Idle (#648)\n\nSeeds the real correction lock with exactly the ledger minimum for its Idle datum, as a lock minted outside atomic initialization is, then runs a prune (Idle to Locked) and the terminal removal (Locked to Idle) through the applied validators. The prune output carries more ADA than the Idle lock and the release keeps it. Under the old strict value equality the prune is refused on chain.\n\nRefs #648",
+      "sha": "9becc38102081903a2faace359576bdf70a9a33d",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/9becc38102081903a2faace359576bdf70a9a33d",
+      "message": "Resync DA deployment and watcher initialization fixtures (blueprint 16c62e69)",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-11T18:40:24Z"
+      "authorDate": "2026-10-14T21:30:06Z"
     },
     {
-      "sha": "c516877908796917fa61642bedf4e05a218c36e0",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/c516877908796917fa61642bedf4e05a218c36e0",
-      "message": "Correct the correction-lock funding note at initialization\n\nThe note said a correction preserves the lock's value and that a top-up is forbidden. A correction may now add ADA to the lock, so the Locked-size funding at initialization is a choice that spares the first correction a top-up, the same choice the state-queue root makes a few lines below. No behavior changes.\n\nRefs #648",
+      "sha": "a7ecd577ad9ce74380c594ffddc103a73a47245d",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/a7ecd577ad9ce74380c594ffddc103a73a47245d",
+      "message": "Regenerate the three pinned fit ledgers (blueprint 16c62e69)",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-11T18:30:38Z"
+      "authorDate": "2026-10-14T21:30:06Z"
     }
   ],
   "contributors": [
@@ -326,6 +326,24 @@
   ],
   "issues": [
     {
+      "number": 842,
+      "title": "Retain verifiable execution reports from fit regeneration",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/842",
+      "updated_at": "2026-10-14T22:19:13Z"
+    },
+    {
+      "number": 841,
+      "title": "Generate native-script planner cost pins from the measured execution ledger",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/841",
+      "updated_at": "2026-10-14T18:47:44Z"
+    },
+    {
+      "number": 840,
+      "title": "Fault-proof fit ledgers recorded only as fragments are never checked against the build",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/840",
+      "updated_at": "2026-10-14T14:24:35Z"
+    },
+    {
       "number": 826,
       "title": "Track P1 integration and public release gates in PR #471",
       "html_url": "https://github.com/Anastasia-Labs/midgard/issues/826",
@@ -354,24 +372,6 @@
       "title": "P1: G-A canonical decodability (streamed, bounded)",
       "html_url": "https://github.com/Anastasia-Labs/midgard/issues/837",
       "updated_at": "2026-10-13T22:19:46Z"
-    },
-    {
-      "number": 834,
-      "title": "P1: readiness gates R3-R11 and ForcedAdmissionDivergence alarm (R8)",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/834",
-      "updated_at": "2026-10-13T21:30:09Z"
-    },
-    {
-      "number": 827,
-      "title": "Require exactly one event NFT in user-event mint authentication",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/827",
-      "updated_at": "2026-10-13T17:16:00Z"
-    },
-    {
-      "number": 681,
-      "title": "Availability-challenge discovery repeatedly fails when the canonical chain point changes during discovery",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/681",
-      "updated_at": "2026-10-12T01:58:11Z"
     }
   ],
   "releases": [],
@@ -394,7 +394,7 @@
     },
     {
       "week": 1763251200,
-      "total": 32
+      "total": 31
     },
     {
       "week": 1763856000,
@@ -450,19 +450,19 @@
     },
     {
       "week": 1771718400,
-      "total": 43
+      "total": 45
     },
     {
       "week": 1772323200,
-      "total": 23
+      "total": 25
     },
     {
       "week": 1772928000,
-      "total": 35
+      "total": 36
     },
     {
       "week": 1773532800,
-      "total": 28
+      "total": 29
     },
     {
       "week": 1774137600,
@@ -470,19 +470,19 @@
     },
     {
       "week": 1774742400,
-      "total": 30
+      "total": 29
     },
     {
       "week": 1775347200,
-      "total": 40
+      "total": 41
     },
     {
       "week": 1775952000,
-      "total": 32
+      "total": 31
     },
     {
       "week": 1776556800,
-      "total": 17
+      "total": 29
     },
     {
       "week": 1777161600,
@@ -494,27 +494,27 @@
     },
     {
       "week": 1778371200,
-      "total": 25
+      "total": 41
     },
     {
       "week": 1778976000,
-      "total": 13
-    },
-    {
-      "week": 1779580800,
-      "total": 1
-    },
-    {
-      "week": 1780185600,
-      "total": 25
-    },
-    {
-      "week": 1780790400,
       "total": 16
     },
     {
+      "week": 1779580800,
+      "total": 2
+    },
+    {
+      "week": 1780185600,
+      "total": 26
+    },
+    {
+      "week": 1780790400,
+      "total": 17
+    },
+    {
       "week": 1781395200,
-      "total": 18
+      "total": 20
     },
     {
       "week": 1782000000,
@@ -530,7 +530,7 @@
     },
     {
       "week": 1783814400,
-      "total": 9
+      "total": 10
     },
     {
       "week": 1784419200,
@@ -538,27 +538,27 @@
     },
     {
       "week": 1785024000,
-      "total": 154
+      "total": 202
     },
     {
       "week": 1785628800,
-      "total": 2
+      "total": 89
     },
     {
       "week": 1786233600,
-      "total": 21
+      "total": 9
     },
     {
       "week": 1786838400,
-      "total": 132
+      "total": 0
     },
     {
       "week": 1787443200,
-      "total": 47
+      "total": 1
     },
     {
       "week": 1788048000,
-      "total": 0
+      "total": 2
     },
     {
       "week": 1788652800,
@@ -570,19 +570,19 @@
     },
     {
       "week": 1789862400,
-      "total": 128
+      "total": 172
     },
     {
       "week": 1790467200,
-      "total": 195
+      "total": 209
     },
     {
       "week": 1791072000,
-      "total": 355
+      "total": 482
     },
     {
       "week": 1791676800,
-      "total": 67
+      "total": 303
     }
   ]
 }
