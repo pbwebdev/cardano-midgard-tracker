@@ -1,10 +1,10 @@
 {
-  "fetchedAt": "2026-10-15T11:09:16.404Z",
+  "fetchedAt": "2026-10-16T11:03:52.897Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 25,
     "forks_count": 11,
-    "open_issues_count": 176
+    "open_issues_count": 178
   },
   "languages": {
     "Aiken": 359544,
@@ -17,109 +17,109 @@
   },
   "commits": [
     {
-      "sha": "5ac344ab486ac776bd728aa771c78efe0caea8f7",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/5ac344ab486ac776bd728aa771c78efe0caea8f7",
-      "message": "Align the demo Nix shell with Go 1.26.5\n\nMatch the native L1 transport's Go 1.26.5 requirement by updating the\nGo package, nixpkgs revision, lockfile and version checks.\n\nUse the 26.05 backport to retain Intel macOS support while keeping the\nNode, pnpm and other flake inputs unchanged.\n\nValidation (2026-10-15, repository root):\n`nix flake check --no-build --all-systems --no-write-lock-file ./demo`\ncompleted with exit 0 for all four platforms. Evaluation only; no\npackages were built.",
+      "sha": "740b2f9086c7b4be5b46bc1edc1e749315e42975",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/740b2f9086c7b4be5b46bc1edc1e749315e42975",
+      "message": "Support ARM64 Docker stacks and document build heap limits\n\nReplace AMD64-only image pins with immutable image lists for ARM64 and\nAMD64, keeping private-testnet helpers and Preprod defaults aligned.\nPostgreSQL stays on 15.15 with refreshed image builds.\n\nDocument an optional 8 GiB heap override for Node build failures,\npreserving existing options and explaining RAM use.",
       "authorName": "keyanm",
-      "authorDate": "2026-10-15T10:19:59Z"
+      "authorDate": "2026-10-14T22:25:51Z"
     },
     {
-      "sha": "89b2accd719594758f1d5d6f76b4fe9c44bd4372",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/89b2accd719594758f1d5d6f76b4fe9c44bd4372",
-      "message": "Re-pin the state_queue registry fingerprint for the smaller output-scan scripts",
+      "sha": "d8598fe98093e9353f2c2102b476a99cc084ab1e",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d8598fe98093e9353f2c2102b476a99cc084ab1e",
+      "message": "Give the maximum-shape Data step planner cases an explicit timeout",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-15T03:32:40Z"
+      "authorDate": "2026-10-14T04:33:25Z"
     },
     {
-      "sha": "c8d387f091f15ce13b77d91e8ff4486da8a6856d",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/c8d387f091f15ce13b77d91e8ff4486da8a6856d",
-      "message": "Regenerate the pinned fit ledgers and blueprint fixtures for the smaller output-scan scripts\n\nThe output-scan publication rows shrink by 269 bytes; the remaining\nexecution readings move only with the new script hashes, and every row\nstill fits.",
+      "sha": "d976e5d3fbd518e760f3327a47c8a36559a62cdc",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d976e5d3fbd518e760f3327a47c8a36559a62cdc",
+      "message": "Merge CI-reds lane: lint, ledgers, DA fixture, compose and fault-proof shard fixes",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-15T00:57:36Z"
+      "authorDate": "2026-10-14T04:32:38Z"
     },
     {
-      "sha": "40fcd0c7db9c896ead8ddb79856be929d6f54df2",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/40fcd0c7db9c896ead8ddb79856be929d6f54df2",
-      "message": "Test that an output-scan step refuses a result that is not well formed\n\nA run of scan steps checks each control as a step's result, so the\nresult check must refuse on its own: a well-formed control that already\ncounts two optional fields cannot take a third.",
+      "sha": "9f56d2e21969ba8f034a1b7bc41d331f3302facd",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/9f56d2e21969ba8f034a1b7bc41d331f3302facd",
+      "message": "Drop the validation-dispute argument case whose flags left the CLI",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-15T00:38:45Z"
+      "authorDate": "2026-10-14T04:29:28Z"
     },
     {
-      "sha": "531ed34232aa8e102a55e941a3fba40d4b30b7f1",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/531ed34232aa8e102a55e941a3fba40d4b30b7f1",
-      "message": "Read back a computation thread's own scan and value controls without repeating their checks\n\nThe output scan's step, finish and terminal checks now each have a\nwell-formed variant that skips control_is_well_formed for a control the\ncaller already knows is well formed; step_v1, finish_v1 and\nterminal_is_exact_v1 keep their behaviour by checking well-formedness\nonce and delegating. terminal_is_exact_well_formed_v1 drops only the\nconjuncts control_is_well_formed already decides. decode_written_control_v1\n(scan and value) reads back bytes that encode_control_v1 wrote, which\nalready checked the control well formed.\n\nTests cover a terminal refusing a control that is not well formed, a datum\nlength without a datum, encoding refusing a malformed control, and\nwritten controls reading back unchanged.\n\nFourteen validators that link the scan library shrink by 269 to 310\nbytes; no validator grows past its publication target.",
+      "sha": "f3b84fe2c54318f1491b0ce5be1cbeade848dcf9",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/f3b84fe2c54318f1491b0ce5be1cbeade848dcf9",
+      "message": "Judge resolved-output datum coverage in a case so filtered runs skip it",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-15T00:26:00Z"
+      "authorDate": "2026-10-14T04:28:25Z"
     },
     {
-      "sha": "3da7288d3c8221ea4e378035142304fb49230571",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/3da7288d3c8221ea4e378035142304fb49230571",
-      "message": "Re-take the Q21 execution ledger after the TxOut-summary reuse\n\nThe L2 no-op row summarises two unprotected outputs, whose Cardano and\nMidgard TxOut summaries are now taken once: 9,393,170 -> 7,740,888 mem.\nThe other row, the basis and every basisFit judgement are unchanged.",
+      "sha": "8b7623064c4c96193d586abe3fa65ec2c2dae061",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/8b7623064c4c96193d586abe3fa65ec2c2dae061",
+      "message": "Give the timeout-correction submit test its node the block_time clock",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-15T00:25:40Z"
+      "authorDate": "2026-10-14T04:25:33Z"
     },
     {
-      "sha": "28d85d1966cede1757e0b3e6a3470f6fe12124f9",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/28d85d1966cede1757e0b3e6a3470f6fe12124f9",
-      "message": "Regenerate the pinned fit ledgers and blueprint fixtures for the TxOut-summary reuse\n\nBlueprint fb542abf. The two summaries validators grow by 31 compiled\nbytes each (deposit 15,272, output 15,279; publication 15,847 and\n15,854 against the 15,872 target); no other validator changes.\n\nIn the transition-trace workflow ledger the deposit summaries steps fall\nby 826,503 mem (deposit) and 813,338 mem (maximum deposit datum). The\nremaining movements, in both directions and in event-history admission\ntoo, follow the new script hashes: the same per-row readings reappear\nunder different shapes. Every row still fits.",
+      "sha": "1fdadc0db7691de43dd57b49493a37fe496cd616",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/1fdadc0db7691de43dd57b49493a37fe496cd616",
+      "message": "Regenerate the event-history admission and transition-trace workflow fit ledgers on the current blueprint",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-15T00:13:22Z"
+      "authorDate": "2026-10-14T04:24:49Z"
     },
     {
-      "sha": "d79759f1e379beb90eb494977d274e60eb85183b",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d79759f1e379beb90eb494977d274e60eb85183b",
-      "message": "Re-take the descriptor execution ledger after the TxOut-summary reuse\n\nSummarising an unprotected output's TxOut once (e9117395a, 7c8bb33d4)\nlowers every descriptor derivation by 826,046 mem / 409,541,415 cpu.\nMeasured on one tree with only script-context-v1.ak swapped, the base\nside reproduces every recorded reading exactly. Fixture-only rows that\nderive no descriptor do not move; the four protected-address golden\nvectors rise by 4,458 mem.\n\nFour raw rows and one net-of-baseline figure recorded `exceeds` now fit\nand are flipped with a dated `cause`: descriptor 3,149 and 3,215 bytes,\nthe 256-byte deposit rung and the rich golden vector (99.5% of the\nbasis, marginal), plus the 3,215-byte net figure. Both crossings stopped\nstraddling the basis and are retired.\n\nFive descriptor rungs, 3,281 to 3,545 output bytes, are added with\nfixture-only twins. The whole-test crossing is now between 3,347 and\n3,413 bytes; net of fixture the derivation first misses at 3,479.\n\nOne deposit rung, 384 bytes (398 serialised), is added and fits. A\n416-byte datum's payload is over the 512-byte inline limit the harness\ncarries deposits under, so the deposit ladder has no crossing; the\nretired entry, the open question and the not-measured list say so.",
+      "sha": "b69a31092e2eb47c4065b565a3cbb6626418d11c",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/b69a31092e2eb47c4065b565a3cbb6626418d11c",
+      "message": "Merge branch 'p1/integration' into p1/ci-reds-a",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-14T23:52:34Z"
+      "authorDate": "2026-10-14T04:20:29Z"
     },
     {
-      "sha": "a2166db72ba0fb2c2ad93f66105150eb53181632",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/a2166db72ba0fb2c2ad93f66105150eb53181632",
-      "message": "Pass the address Data to the TxOut summary so the summaries scripts stay within the publication target",
+      "sha": "f0cf9e186353ba4f451e5310153352e3c734337b",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/f0cf9e186353ba4f451e5310153352e3c734337b",
+      "message": "Drop the Dockerfile text-match test from the operator compose suite\n\nIt pinned the transport build stage's FROM line by regular expression, and\nthe image now names that stage through a build-image argument. Rendered\ncompose tests keep the transport path the node reads.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-14T23:32:51Z"
+      "authorDate": "2026-10-14T04:20:15Z"
     },
     {
-      "sha": "8e46d6a2b5a158e5e526729296e2ee74ae862e4b",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/8e46d6a2b5a158e5e526729296e2ee74ae862e4b",
-      "message": "Re-pin the contract registry fingerprints for the optimised fault-proof scripts",
+      "sha": "38edd3b2b15769665d5858d2aa654a418bbf94d4",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/38edd3b2b15769665d5858d2aa654a418bbf94d4",
+      "message": "Route the MintItemMalformed rejection arm to the mint-item non-canonical family\n\nThe validation machine now emits arm 47, so the typed-reason disposition\ntable must cover it; its non-interactive proof is the mint-item\nnon-canonical category.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-14T23:32:14Z"
+      "authorDate": "2026-10-14T04:19:43Z"
     },
     {
-      "sha": "28eb48e9f1bcba2c0e8280db87fa9bf11b63d275",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/28eb48e9f1bcba2c0e8280db87fa9bf11b63d275",
-      "message": "Summarise an unprotected output's TxOut once for both encodings\n\nThe Cardano and Midgard script-context encodings of a ledger output differ\nonly in the address constructor of a protected address, so an unprotected\noutput's TxOut summary is computed once and used for both. Tests pin both\ncases against the per-encoding entry points.",
+      "sha": "bf7b3f5a4b35a1874ecc592a66b4e104022f5404",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/bf7b3f5a4b35a1874ecc592a66b4e104022f5404",
+      "message": "Give DA committee test fixtures the block_time clock and drop the parent-ledger test\n\nApply validity and signature clocks now count from the state-queue node's\nauthenticated block_time, so the apply-range and submitter fixtures set\nblock_time instead of a header end time, and the stored header records used\nby the peer and libp2p exchange tests carry the raw node datum it is read\nfrom. The parent post-state test pinned the pre-block ledger lookup that\nca44ed805 removed, so it is deleted.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-14T22:34:47Z"
+      "authorDate": "2026-10-14T04:19:37Z"
     },
     {
-      "sha": "8fe309ebd6af13bb208c623c15cd47b9116ee1bc",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/8fe309ebd6af13bb208c623c15cd47b9116ee1bc",
-      "message": "Add negatives for frontier, asset-leaf, mint evaluate and withdrawal membership checks\n\nCovers a malformed input frontier peak, membership at every peak of a\nseven-leaf frontier, a short asset policy id, a truncated mint payload,\na signer past the count, and the fabricated-withdrawal step-01\ncommitted-membership check against a real one-leaf root.",
+      "sha": "2ec6717e173cfad5bb4ddcdb80489d623eef397e",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/2ec6717e173cfad5bb4ddcdb80489d623eef397e",
+      "message": "Regenerate the DA deployment fixture on the current blueprint\n\nProduced by the da-deployment-fixture channel sync on a fresh preprod-testing\nblueprint; it picks up the redeemer-canonicity step-02 data and resolved-output\nstep-04 datum contracts.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-14T22:19:33Z"
+      "authorDate": "2026-10-14T04:09:14Z"
     },
     {
-      "sha": "acc5deef6093ad27ff878cda097e14ad8c6d01b6",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/acc5deef6093ad27ff878cda097e14ad8c6d01b6",
-      "message": "Test missing-script-source source checks through the batch scan\n\nThe single-source scan_source_v1 has no validator caller since the batch\nscan replaced it, so delete it and run its location, membership,\ncheckpoint and cursor tests through advance_scan_v1 instead, plus the\nempty-batch completion and batch-split agreement cases.",
+      "sha": "0332d5e959157c652548269e57d87b377d929971",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/0332d5e959157c652548269e57d87b377d929971",
+      "message": "Re-take the Q21 and transition-trace descriptor execution ledgers after N2\n\nThe N2 merge (c0d4b8358) is the only merge since the previous re-take that\nchanges on-chain source. Deposit-arm and L2 rows move by a few hundred to\n2,200 mem; fixture-only rows do not move, and no fit judgement, crossing or\nbasis moves. Rows rewritten by each verifier's --update.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-14T22:19:33Z"
+      "authorDate": "2026-10-14T03:56:14Z"
     },
     {
-      "sha": "9becc38102081903a2faace359576bdf70a9a33d",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/9becc38102081903a2faace359576bdf70a9a33d",
-      "message": "Resync DA deployment and watcher initialization fixtures (blueprint 16c62e69)",
+      "sha": "0f5fd59f5f8ed399a684f8037f8b36f0f607f3f8",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/0f5fd59f5f8ed399a684f8037f8b36f0f607f3f8",
+      "message": "Merge remote-tracking branch 'origin/colll78/canonical-v1-watcher-l1-source-checkpoint' into p1/ci-reds-a",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-14T21:30:06Z"
+      "authorDate": "2026-10-14T03:52:23Z"
     },
     {
-      "sha": "a7ecd577ad9ce74380c594ffddc103a73a47245d",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/a7ecd577ad9ce74380c594ffddc103a73a47245d",
-      "message": "Regenerate the three pinned fit ledgers (blueprint 16c62e69)",
+      "sha": "21c4b1ccc724f8365c4438f3824ed311c8152bc3",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/21c4b1ccc724f8365c4438f3824ed311c8152bc3",
+      "message": "Merge transfer and readiness fixture alignment",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-14T21:30:06Z"
+      "authorDate": "2026-10-14T03:45:20Z"
     }
   ],
   "contributors": [
@@ -326,6 +326,18 @@
   ],
   "issues": [
     {
+      "number": 846,
+      "title": "Watcher stays unready: 42 installed workflows compared with 52 catalogue entries",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/846",
+      "updated_at": "2026-10-16T06:49:50Z"
+    },
+    {
+      "number": 845,
+      "title": "Validate AI review findings for midgard-l1-follower PR",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/845",
+      "updated_at": "2026-10-15T16:10:48Z"
+    },
+    {
       "number": 842,
       "title": "Retain verifiable execution reports from fit regeneration",
       "html_url": "https://github.com/Anastasia-Labs/midgard/issues/842",
@@ -360,18 +372,6 @@
       "title": "Preserve the field-publication reserve for base-address wallets",
       "html_url": "https://github.com/Anastasia-Labs/midgard/issues/839",
       "updated_at": "2026-10-14T02:39:04Z"
-    },
-    {
-      "number": 838,
-      "title": "Dev-ex footguns from transition-trace and history-admission work",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/838",
-      "updated_at": "2026-10-13T22:50:26Z"
-    },
-    {
-      "number": 837,
-      "title": "P1: G-A canonical decodability (streamed, bounded)",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/837",
-      "updated_at": "2026-10-13T22:19:46Z"
     }
   ],
   "releases": [],
@@ -394,15 +394,15 @@
     },
     {
       "week": 1763251200,
-      "total": 31
+      "total": 32
     },
     {
       "week": 1763856000,
-      "total": 43
+      "total": 37
     },
     {
       "week": 1764460800,
-      "total": 8
+      "total": 17
     },
     {
       "week": 1765065600,
@@ -438,7 +438,7 @@
     },
     {
       "week": 1769904000,
-      "total": 46
+      "total": 45
     },
     {
       "week": 1770508800,
@@ -446,7 +446,7 @@
     },
     {
       "week": 1771113600,
-      "total": 13
+      "total": 14
     },
     {
       "week": 1771718400,
@@ -454,15 +454,15 @@
     },
     {
       "week": 1772323200,
-      "total": 25
+      "total": 24
     },
     {
       "week": 1772928000,
-      "total": 36
+      "total": 35
     },
     {
       "week": 1773532800,
-      "total": 29
+      "total": 28
     },
     {
       "week": 1774137600,
@@ -470,19 +470,19 @@
     },
     {
       "week": 1774742400,
-      "total": 29
+      "total": 30
     },
     {
       "week": 1775347200,
-      "total": 41
+      "total": 40
     },
     {
       "week": 1775952000,
-      "total": 31
+      "total": 32
     },
     {
       "week": 1776556800,
-      "total": 29
+      "total": 17
     },
     {
       "week": 1777161600,
@@ -498,7 +498,7 @@
     },
     {
       "week": 1778976000,
-      "total": 16
+      "total": 15
     },
     {
       "week": 1779580800,
@@ -510,11 +510,11 @@
     },
     {
       "week": 1780790400,
-      "total": 17
+      "total": 18
     },
     {
       "week": 1781395200,
-      "total": 20
+      "total": 21
     },
     {
       "week": 1782000000,
@@ -538,11 +538,11 @@
     },
     {
       "week": 1785024000,
-      "total": 202
+      "total": 156
     },
     {
       "week": 1785628800,
-      "total": 89
+      "total": 190
     },
     {
       "week": 1786233600,
@@ -558,11 +558,11 @@
     },
     {
       "week": 1788048000,
-      "total": 2
+      "total": 3
     },
     {
       "week": 1788652800,
-      "total": 45
+      "total": 46
     },
     {
       "week": 1789257600,
@@ -570,19 +570,19 @@
     },
     {
       "week": 1789862400,
-      "total": 172
+      "total": 174
     },
     {
       "week": 1790467200,
-      "total": 209
+      "total": 210
     },
     {
       "week": 1791072000,
-      "total": 482
+      "total": 450
     },
     {
       "week": 1791676800,
-      "total": 303
+      "total": 268
     }
   ]
 }
