@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-10-16T11:03:52.897Z",
+  "fetchedAt": "2026-10-17T10:24:28.992Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 25,
@@ -17,109 +17,109 @@
   },
   "commits": [
     {
-      "sha": "740b2f9086c7b4be5b46bc1edc1e749315e42975",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/740b2f9086c7b4be5b46bc1edc1e749315e42975",
-      "message": "Support ARM64 Docker stacks and document build heap limits\n\nReplace AMD64-only image pins with immutable image lists for ARM64 and\nAMD64, keeping private-testnet helpers and Preprod defaults aligned.\nPostgreSQL stays on 15.15 with refreshed image builds.\n\nDocument an optional 8 GiB heap override for Node build failures,\npreserving existing options and explaining RAM use.",
-      "authorName": "keyanm",
-      "authorDate": "2026-10-14T22:25:51Z"
+      "sha": "f4cf28ca100e99f5bc07c7b1ed6e9b936062a44d",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/f4cf28ca100e99f5bc07c7b1ed6e9b936062a44d",
+      "message": "Copy the build lock into the interactive-emulator test's scratch tree\n\nThe interactive-emulator setup now imports build-lock.js, so the isolated\nproducer tree the test builds needs it beside the setup module.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-10-17T04:03:52Z"
     },
     {
-      "sha": "d8598fe98093e9353f2c2102b476a99cc084ab1e",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d8598fe98093e9353f2c2102b476a99cc084ab1e",
-      "message": "Give the maximum-shape Data step planner cases an explicit timeout",
+      "sha": "a3e374b1c02b82630444ec32a128681542062c0f",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/a3e374b1c02b82630444ec32a128681542062c0f",
+      "message": "Claim the script-source lookup rows and mark the deleted derived files historical\n\nThe script-source lookup work added a generated Aiken module written by a\nmidgard-validation suite but no channel for it, so the channel table check\nrefused the tree; it now has one. Two docs cite files P1 deleted, and two skill\nrules lost their enforcement tags in the merge.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-14T04:33:25Z"
+      "authorDate": "2026-10-17T03:50:37Z"
     },
     {
-      "sha": "d976e5d3fbd518e760f3327a47c8a36559a62cdc",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d976e5d3fbd518e760f3327a47c8a36559a62cdc",
-      "message": "Merge CI-reds lane: lint, ledgers, DA fixture, compose and fault-proof shard fixes",
+      "sha": "794bf5c6c6730e904cd99398ab7169c0d7f54d53",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/794bf5c6c6730e904cd99398ab7169c0d7f54d53",
+      "message": "Merge the script-source lookup work into the P1 derived-values branch\n\nUpstream re-took three fit ledgers and both blueprint fixtures for the\nscript-source change; those files are deleted here, so the merge keeps the\ndeletions. The new step-04 reference capture drops the ledger kind argument\nlike its neighbours, and the trace-preparation cap takes upstream's value\nwithout the size-change note.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-14T04:32:38Z"
+      "authorDate": "2026-10-17T03:47:27Z"
     },
     {
-      "sha": "9f56d2e21969ba8f034a1b7bc41d331f3302facd",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/9f56d2e21969ba8f034a1b7bc41d331f3302facd",
-      "message": "Drop the validation-dispute argument case whose flags left the CLI",
+      "sha": "3482293ac8ed1d6e86081fa810d7a477c9378e89",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/3482293ac8ed1d6e86081fa810d7a477c9378e89",
+      "message": "Drop the two module-size caps the fit-ledger deletion made obsolete\n\nDeleting the fit-ledger writers took both lifecycle tests under 500 lines,\nand a cap for a file within the limit is refused.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-14T04:29:28Z"
+      "authorDate": "2026-10-17T03:45:11Z"
     },
     {
-      "sha": "f3b84fe2c54318f1491b0ce5be1cbeade848dcf9",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/f3b84fe2c54318f1491b0ce5be1cbeade848dcf9",
-      "message": "Judge resolved-output datum coverage in a case so filtered runs skip it",
+      "sha": "f326bfaf9b851300e706155b26ce8fb4b26ea108",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/f326bfaf9b851300e706155b26ce8fb4b26ea108",
+      "message": "Merge branch 'colll78/p1-fixtures' into colll78/p1-derived-values\n\nWith the DA and watcher fixtures derived per run, no channel reads the\nblueprint any more, so the @blueprint input sets go and the skill says no\nchannel check needs a fresh build. The blueprint-freshness blind spot is closed\nby the suites' stamp setup, which now rebuilds a stale blueprint.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-14T04:28:25Z"
+      "authorDate": "2026-10-17T03:40:13Z"
     },
     {
-      "sha": "8b7623064c4c96193d586abe3fa65ec2c2dae061",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/8b7623064c4c96193d586abe3fa65ec2c2dae061",
-      "message": "Give the timeout-correction submit test its node the block_time clock",
+      "sha": "1a599845ffa9dacd4477f69858f6410a6ca3a6af",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/1a599845ffa9dacd4477f69858f6410a6ca3a6af",
+      "message": "Rebuild a missing or stale blueprint in the test suites' stamp setup\n\nThe stamp setup refused a run whose default blueprint was stale and let a\nrun without one start and fail file by file. It now makes the blueprint\nfresh before any file starts, the way contrib prepares one: copied from a\ncheckout with identical inputs, else built with deployment:build. One run\nbuilds under a lock in onchain/aiken/build/ while parallel runs wait for it.\nThe run is refused only when the pinned compiler is unavailable or the stamp\ncannot be judged; a blueprint named by MIDGARD_REAL_BLUEPRINT_PATH is still\nrefused unless its build record is fresh.\n\nThe MIDGARD_BLUEPRINT_STAMP=warn downgrade is gone, with the guards in\ncontrib and the SDK suite evidence that refused it. The interactive-emulator\nblueprint build shares the new lock module.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-14T04:25:33Z"
+      "authorDate": "2026-10-17T03:37:51Z"
     },
     {
-      "sha": "1fdadc0db7691de43dd57b49493a37fe496cd616",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/1fdadc0db7691de43dd57b49493a37fe496cd616",
-      "message": "Regenerate the event-history admission and transition-trace workflow fit ledgers on the current blueprint",
+      "sha": "537f4da2430d30dd049566348df81aa7384f3a62",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/537f4da2430d30dd049566348df81aa7384f3a62",
+      "message": "Merge branch 'colll78/p1-fit' into colll78/p1-derived-values\n\nBoth lanes deleted their ledger kind from the channel table and the skill, so\nthe merge keeps neither: execution costs are ceilings and Van Rossem fit is\nchecked at submission. The discovery patterns for both file shapes stay, so a\nrecreated ledger is flagged as unclaimed. Also documents the two channels\n(cek-cost-v1-aiken, cek-program-large-integer) the skill's own test reported\nmissing from channels.md.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-14T04:24:49Z"
+      "authorDate": "2026-10-17T03:37:01Z"
     },
     {
-      "sha": "b69a31092e2eb47c4065b565a3cbb6626418d11c",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/b69a31092e2eb47c4065b565a3cbb6626418d11c",
-      "message": "Merge branch 'p1/integration' into p1/ci-reds-a",
+      "sha": "8cc85cdeafc4d35542bedf2620e304f1972715e6",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/8cc85cdeafc4d35542bedf2620e304f1972715e6",
+      "message": "Delete the Van Rossem fit ledgers now that every submission is checked\n\nThe emulator submit guard judges every transaction of every run against\nthe Van Rossem byte, memory and CPU limits on the current build. The\nsaved fit ledgers, their afterAll writers and collectors, the pinned and\nsplit ledger checks, the regenerate command and its CI step only restated\nthat check from a past run, and could drift from the build they claimed\nto describe.\n\nRemove all of them along with MIDGARD_WRITE_FIT_LEDGER and fit:regenerate,\nkeep each test's per-submission assertions, and point the skills, size\nplan docs and audit notes at the guard instead. The availability\nchallenge fit summary stays because its design note cites it.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-14T04:20:29Z"
+      "authorDate": "2026-10-17T03:33:53Z"
     },
     {
-      "sha": "f0cf9e186353ba4f451e5310153352e3c734337b",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/f0cf9e186353ba4f451e5310153352e3c734337b",
-      "message": "Drop the Dockerfile text-match test from the operator compose suite\n\nIt pinned the transport build stage's FROM line by regular expression, and\nthe image now names that stage through a build-image argument. Rendered\ncompose tests keep the transport path the node reads.",
+      "sha": "bca70bb7992e6ebdf4d1e1bffe52e36919ec0341",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/bca70bb7992e6ebdf4d1e1bffe52e36919ec0341",
+      "message": "Merge branch 'colll78/p1-budgets' into colll78/p1-derived-values",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-14T04:20:15Z"
+      "authorDate": "2026-10-17T03:31:28Z"
     },
     {
-      "sha": "38edd3b2b15769665d5858d2aa654a418bbf94d4",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/38edd3b2b15769665d5858d2aa654a418bbf94d4",
-      "message": "Route the MintItemMalformed rejection arm to the mint-item non-canonical family\n\nThe validation machine now emits arm 47, so the typed-reason disposition\ntable must cover it; its non-interactive proof is the mint-item\nnon-canonical category.",
+      "sha": "0f04bce36bb5e07c2dcbab520575ec2c70642a12",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/0f04bce36bb5e07c2dcbab520575ec2c70642a12",
+      "message": "Judge script execution costs against one ceiling table\n\nThe ten execution ledgers pinned exact readings, so every on-chain change that\nmoved a cost, even downward, had to re-take a ledger before CI went green. They\nbecome one table, demo/midgard-core/src/script-budgets.json, read by CI and by\nproduction alike. Each entry is a ceiling: a reading above it fails, a reading\nthat shrinks needs no edit. Rows production reads keep a ceiling equal to the\ncurrent reading, so planner and estimator output is unchanged; the rest get 1%\nheadroom, capped at the basis. onchain/aiken/scripts/script-budgets.mjs checks\nthe table, tightens it to fresh readings, or raises one ceiling with a reason.\n\nEntries above the basis still fail if the reading comes to fit, and growth\nclaims keep their band. Interpolated and extrapolated rows that were never\nmeasured are dropped rather than carried as ceilings.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-14T04:19:43Z"
+      "authorDate": "2026-10-17T03:31:10Z"
     },
     {
-      "sha": "bf7b3f5a4b35a1874ecc592a66b4e104022f5404",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/bf7b3f5a4b35a1874ecc592a66b4e104022f5404",
-      "message": "Give DA committee test fixtures the block_time clock and drop the parent-ledger test\n\nApply validity and signature clocks now count from the state-queue node's\nauthenticated block_time, so the apply-range and submitter fixtures set\nblock_time instead of a header end time, and the stored header records used\nby the peer and libp2p exchange tests carry the raw node datum it is read\nfrom. The parent post-state test pinned the pre-block ledger lookup that\nca44ed805 removed, so it is deleted.",
+      "sha": "dd025b6ed84a0a4842be7b17088c61946dc21ef5",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/dd025b6ed84a0a4842be7b17088c61946dc21ef5",
+      "message": "Derive the DA deployment input and watcher initialization frame per run\n\nBoth fixtures were blueprint outputs committed as JSON: every validator change\nmade them stale, and a test existed only to say so and to regenerate them\nbehind a MIDGARD_WRITE_* flag. They are now produced from the run's own\nblueprint, once per run, by the code that generated them.\n\nderiveDaDeploymentInfo applies the real contracts with synthetic reference\noutpoints, as the generation test did. deriveWatcherInitializationFrame runs\nthe real node atomic initialization on an emulator with fixed wallets,\nprotocol parameters and a fixed wall clock, so the frame is the same bytes on\nevery run of one blueprint. The clock is held through a faked Date for the\nproduction only, because the node's reference-script publication compares\nthe auth policy's deadline with Date.now(); the initialization tests keep the\nreal clock.\n\nThe DA committee and watcher suites read the derived values and keep their\nbehavioural assertions. The DA suite now builds on the blueprint stamp and\nloads raw SQL, since the producer reaches midgard-node's sources; the watcher\nderives only in its testing-profile project, which reads the same blueprint\nas the producer.\n\nRemoved with them: the committed-equals-regenerated test, the watcher write\nbranch and its blueprint-hash pin in the initialization test, both channels\nand the skill steps that regenerated them.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-14T04:19:37Z"
+      "authorDate": "2026-10-17T03:26:45Z"
     },
     {
-      "sha": "2ec6717e173cfad5bb4ddcdb80489d623eef397e",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/2ec6717e173cfad5bb4ddcdb80489d623eef397e",
-      "message": "Regenerate the DA deployment fixture on the current blueprint\n\nProduced by the da-deployment-fixture channel sync on a fresh preprod-testing\nblueprint; it picks up the redeemer-canonicity step-02 data and resolved-output\nstep-04 datum contracts.",
+      "sha": "2552c8138b9940ee0d3c84a6543d969f3b5ed9e0",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/2552c8138b9940ee0d3c84a6543d969f3b5ed9e0",
+      "message": "Move the run-shared fixture directory into midgard-test-support\n\nValues derived from the blueprint are about to be shared by the DA committee\nand watcher suites as well as the node's, so the run-scoped directory, its\nclaim lock and its global setup move out of midgard-node's tests into\nmidgard-test-support, unchanged in behaviour. memoizeForRun adds the shape\nthose suites need: produce a value once per run, publish it atomically for\nevery other worker, and hand each caller its own copy. The directory is new\neach run, so there is no cache key to keep correct.\n\nThe workspace bundle analysis now also walks the absolute global setups a\npackage exports, so a setup that imports a module tests import too is served\nfrom the same bundle instead of being refused as a second instance.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-14T04:09:14Z"
+      "authorDate": "2026-10-17T03:26:21Z"
     },
     {
-      "sha": "0332d5e959157c652548269e57d87b377d929971",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/0332d5e959157c652548269e57d87b377d929971",
-      "message": "Re-take the Q21 and transition-trace descriptor execution ledgers after N2\n\nThe N2 merge (c0d4b8358) is the only merge since the previous re-take that\nchanges on-chain source. Deposit-arm and L2 rows move by a few hundred to\n2,200 mem; fixture-only rows do not move, and no fit judgement, crossing or\nbasis moves. Rows rewritten by each verifier's --update.",
+      "sha": "29d9af5f0b0415f85d4d149ce841e2b43bb4550b",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/29d9af5f0b0415f85d4d149ce841e2b43bb4550b",
+      "message": "Judge every emulator submission against the Van Rossem limits\n\nThe publication target (15,872 bytes for a transaction with zero execution\nunits) was enforced only while a test built its fit ledger, so a test that\nmeasured no ledger row could submit an oversized publication unnoticed.\nThe limits now live in proof-fit/van-rossem.ts as constants plus\nassertFitsVanRossem, and a vitest setup file layers it over\nEmulator.prototype.submitTx for every project in the suite, so each signed\ntransaction any emulator is asked to accept is judged before the emulator\nsees it. The emulator itself checks neither transaction size nor execution\nunits. The traced-refusal run stays exempt, as its publication envelope\nalready is.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-14T03:56:14Z"
+      "authorDate": "2026-10-17T03:04:12Z"
     },
     {
-      "sha": "0f5fd59f5f8ed399a684f8037f8b36f0f607f3f8",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/0f5fd59f5f8ed399a684f8037f8b36f0f607f3f8",
-      "message": "Merge remote-tracking branch 'origin/colll78/canonical-v1-watcher-l1-source-checkpoint' into p1/ci-reds-a",
+      "sha": "ce4d82afe8fcd5fa90caeb412d26edc4cf65a818",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ce4d82afe8fcd5fa90caeb412d26edc4cf65a818",
+      "message": "Show on-chain ABI and size movement in the PR summary\n\nA pull request touching the validators now gets a job summary listing the\nvalidators and reached definitions whose interface changed, and the largest\ncompiled-size movements, read off fresh blueprints built at the merge base and\nat the head. It replaces reading committed derived files as the way a reviewer\nsees on-chain impact: nothing is committed, so no change has to re-sync a\nsnapshot to keep CI green. The job is informational and not a merge gate.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-14T03:52:23Z"
+      "authorDate": "2026-10-17T02:55:04Z"
     },
     {
-      "sha": "21c4b1ccc724f8365c4438f3824ed311c8152bc3",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/21c4b1ccc724f8365c4438f3824ed311c8152bc3",
-      "message": "Merge transfer and readiness fixture alignment",
+      "sha": "8022fd6cfae4ce3e46db37671abc70010368f34e",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/8022fd6cfae4ce3e46db37671abc70010368f34e",
+      "message": "Hold module-size caps as ceilings\n\nEach module-size exception required its file to be exactly the recorded\nlength, so a file that got shorter failed until someone edited its entry.\nAcross the branch history that rule produced hundreds of commits whose only\nchange was a lowered max, and it never resisted growth better than a ceiling\nwould: ESLint max-lines already enforces the ceiling for demo TS/JS.\n\nA cap now fails only when the file grows past it, or when the file is back\nwithin the 500-line limit and the exception is obsolete. Shrinking needs no\nedit. The size-change notes appended to 118 reasons are removed, and the\nvalidator refuses new ones: a reason says why a file stays large, and its size\nhistory lives in git.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-14T03:45:20Z"
+      "authorDate": "2026-10-17T02:46:45Z"
     }
   ],
   "contributors": [
@@ -398,7 +398,7 @@
     },
     {
       "week": 1763856000,
-      "total": 37
+      "total": 44
     },
     {
       "week": 1764460800,
@@ -438,7 +438,7 @@
     },
     {
       "week": 1769904000,
-      "total": 45
+      "total": 46
     },
     {
       "week": 1770508800,
@@ -450,11 +450,11 @@
     },
     {
       "week": 1771718400,
-      "total": 45
+      "total": 43
     },
     {
       "week": 1772323200,
-      "total": 24
+      "total": 23
     },
     {
       "week": 1772928000,
@@ -494,11 +494,11 @@
     },
     {
       "week": 1778371200,
-      "total": 41
+      "total": 23
     },
     {
       "week": 1778976000,
-      "total": 15
+      "total": 14
     },
     {
       "week": 1779580800,
@@ -510,7 +510,7 @@
     },
     {
       "week": 1780790400,
-      "total": 18
+      "total": 32
     },
     {
       "week": 1781395200,
@@ -538,15 +538,15 @@
     },
     {
       "week": 1785024000,
-      "total": 156
+      "total": 202
     },
     {
       "week": 1785628800,
-      "total": 190
+      "total": 2
     },
     {
       "week": 1786233600,
-      "total": 9
+      "total": 0
     },
     {
       "week": 1786838400,
@@ -554,15 +554,15 @@
     },
     {
       "week": 1787443200,
-      "total": 1
+      "total": 0
     },
     {
       "week": 1788048000,
-      "total": 3
+      "total": 0
     },
     {
       "week": 1788652800,
-      "total": 46
+      "total": 45
     },
     {
       "week": 1789257600,
@@ -570,19 +570,19 @@
     },
     {
       "week": 1789862400,
-      "total": 174
+      "total": 172
     },
     {
       "week": 1790467200,
-      "total": 210
+      "total": 209
     },
     {
       "week": 1791072000,
-      "total": 450
+      "total": 482
     },
     {
       "week": 1791676800,
-      "total": 268
+      "total": 424
     }
   ]
 }
