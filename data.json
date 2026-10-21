@@ -1,10 +1,10 @@
 {
-  "fetchedAt": "2026-10-20T11:12:52.953Z",
+  "fetchedAt": "2026-10-21T11:28:49.852Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 25,
     "forks_count": 11,
-    "open_issues_count": 182
+    "open_issues_count": 183
   },
   "languages": {
     "Aiken": 359544,
@@ -17,109 +17,109 @@
   },
   "commits": [
     {
-      "sha": "09fe39990c0be9fa0b13603b9b85a2d7823c111a",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/09fe39990c0be9fa0b13603b9b85a2d7823c111a",
-      "message": "Merge remote-tracking branch 'origin/colll78/canonical-v1-watcher-l1-source-checkpoint' into p1/exec-dispute",
+      "sha": "4714a6208cb62323d36cae9883e18ef0afce0f0a",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/4714a6208cb62323d36cae9883e18ef0afce0f0a",
+      "message": "Merge remote-tracking branch 'origin/colll78/canonical-v1-watcher-l1-source-checkpoint' into p1/exec-onestep-push5",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-20T09:37:16Z"
+      "authorDate": "2026-10-21T09:57:50Z"
     },
     {
-      "sha": "671db4d30f3560a20ba59a9477a70b6d24378e32",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/671db4d30f3560a20ba59a9477a70b6d24378e32",
-      "message": "Refuse a validation-trace VerifySource that does not spend its pending claim\n\nAdds a funding-permit row presenting VerifySource with the pending claim\nleft out of its spent inputs; the permit must refuse it as omitting its\npending claim.",
+      "sha": "6e6620b177e26f31842409d6af8ffd8d02a43d59",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/6e6620b177e26f31842409d6af8ffd8d02a43d59",
+      "message": "Resolve a validation-trace canonical-decode step through its empty or item stages",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-20T09:36:34Z"
+      "authorDate": "2026-10-21T09:39:57Z"
     },
     {
-      "sha": "4be900b4e704079634ce6758020946e26404c1d9",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/4be900b4e704079634ce6758020946e26404c1d9",
-      "message": "Give each pass's held-event retry to the least recently retried hold\n\nThe per-pass retry slot went to the first due held event in step order,\nso a later held event could wait while an earlier one kept failing. The\nslot now goes to the block's due hold that failed least recently, with\nties in step order, so every hold is retried within a bounded number of\npasses.",
+      "sha": "072541a99bd9254f237c16a3ce8e22c80965c961",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/072541a99bd9254f237c16a3ce8e22c80965c961",
+      "message": "Alarm on a validation-trace thread waiting for an undriven one-step on our clock\n\nThe one-step-required wait now names the case, the thread, the step and\nour deadline, and raises the operator's alarm. Also tighten the wallet-move\ndeadline's case expiry to a number, restore a doc-comment paragraph break,\nand correct the installed-funding support's note on capacity pricing.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-20T09:33:20Z"
+      "authorDate": "2026-10-21T09:16:54Z"
     },
     {
-      "sha": "791438a511aa8e52e28bb9a736ee696291595d28",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/791438a511aa8e52e28bb9a736ee696291595d28",
-      "message": "Resolve validation-trace removal contracts as deployed and forget completed removals\n\nThe conviction row now removes the block through the production\nremoval-contract resolution for 00000006, re-derived from the deployment's\ndispute bond and case-configuration one-shot, with no resolution stub.\nA block's removal adapter is forgotten once its removal is complete or in\nconflict; a later observation rebuilds it from the L1 view, as after a\nrestart.",
+      "sha": "457a1ca0357883f1807e38940c8d576f8092eda1",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/457a1ca0357883f1807e38940c8d576f8092eda1",
+      "message": "Merge remote-tracking branch 'origin/colll78/canonical-v1-watcher-l1-source-checkpoint' into p1/exec-onestep-push4",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-20T09:01:32Z"
+      "authorDate": "2026-10-21T09:10:23Z"
     },
     {
-      "sha": "07696271797ec47fffebce2b68144efb994d26fc",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/07696271797ec47fffebce2b68144efb994d26fc",
-      "message": "Reuse the detector's pre-state ledger for validation-trace claims\n\nClaim preparation and artifact validation read the ledger the detector\nwalked to before a failing event, kept per evidence object and per event,\ninstead of walking the block's steps from the predecessor again. A claim\nprepared from another predecessor, or for an event the detector did not\nkeep, walks as before.",
+      "sha": "d71308d379385acd88d5116f6c87fd601a6ec995",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d71308d379385acd88d5116f6c87fd601a6ec995",
+      "message": "Test the validation-trace decode records under the prover funding permit in both directions\n\nA funded watcher with no publication observer refuses to run a dispute\nthat drives script selections, signing nothing; one whose roster does not\ngovern the script-decode contract stalls at the decode record that pays to\nit, and the case does not open; with both, it records the decode and then\nopens the case.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-20T08:51:28Z"
+      "authorDate": "2026-10-21T08:58:52Z"
     },
     {
-      "sha": "9389358c43cc9d281f807c3f0450e28d40cf6e18",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/9389358c43cc9d281f807c3f0450e28d40cf6e18",
-      "message": "Bound the retry work of held validation-trace re-executions\n\nOne replay pass re-executes at most one held event and carries any other\ndue one, still held, to the next pass. A hold forgotten past the\nreplayer's capacity keeps its retry time and attempt count in a fixed-size\nbacklog, so it is never retried sooner or backed off less. An event whose\nre-execution fails the same way five times in a row is named stuck, its\nown readiness reason, with one alert on entry; it keeps retrying at the\ncapped backoff, is never a verdict, and clears once it re-executes to an\noutcome.",
+      "sha": "9a71bd159a2fe54465575f289faf83e5641efd44",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/9a71bd159a2fe54465575f289faf83e5641efd44",
+      "message": "Drive the remaining spend, output, signer and item context steps\n\nEach finishing step of the spend, output and signer stages, and the item\nsteps that head a sequence and finalize a frame, gets its own drive through\nthe resolution to the award, with the stage's refusal pinned.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-20T08:43:07Z"
+      "authorDate": "2026-10-21T08:49:11Z"
     },
     {
-      "sha": "85f8417682a119f4620b227afc910d20fa5a1bd2",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/85f8417682a119f4620b227afc910d20fa5a1bd2",
-      "message": "Cover each validation-trace dispute funding guard on its own\n\nAdds refusal rows for the bond marker and case token units, the pending\nclaim's output bytes and out-ref, a second case output, a bond or case\noutput without its own token, an action other than the one the\nreservation began, and a claim for another header. Drops two checks the\npermit already enforces elsewhere: the opener-spent binding (the claim\nlookup refuses an unspent claim) and the released-custody equality (the\nclaim is the only contract input admitted, and the runtime custody bound\ncovers the rest).",
+      "sha": "7aaf6432a3bee476bb04c1362231d903ddd554d9",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/7aaf6432a3bee476bb04c1362231d903ddd554d9",
+      "message": "Resolve a validation-trace CEK context step through the finalize stage\n\nThe runner drives a CEK context step that finalizes a Cardano spend: the\nfinalize authenticate binds the step's redeemers control, the finalize\nspend writes the context's successor, and the context settle awards the\nthread. A finalization of any other purpose is left undriven.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-20T08:31:31Z"
+      "authorDate": "2026-10-21T08:45:46Z"
     },
     {
-      "sha": "0afd814234c6d9369e011950a9040f8db95de17f",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/0afd814234c6d9369e011950a9040f8db95de17f",
-      "message": "Refuse a validation-trace dispute authority bound to other bond or case terms\n\nAdds funded refusal rows for a VerifySource whose authority and outputs\nagree with each other but not with the deployment's dispute terms: a bond\nabove the deployment-bound bond, and the bond or the case paid to, and\nbound at, another dispute contract. Each row stalls with its named binding.",
+      "sha": "23bc5b1b647a2dce9e2ee1fd6d6a4a555ba9a48d",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/23bc5b1b647a2dce9e2ee1fd6d6a4a555ba9a48d",
+      "message": "Refuse a wallet-paid validation dispute move only when it does not build\n\nThe funding permit no longer checks the wallet-move reserve at each thread\nmove our wallet pays. A move the wallet can fund lands, however far below\nthe reserve the wallet is; a move it cannot fund does not build and raises\nthe operator's named alarm, retried at each observation until a top-up\nlands it. The reserve is still kept when the case opens.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-20T08:21:14Z"
+      "authorDate": "2026-10-21T08:34:37Z"
     },
     {
-      "sha": "42e11a4c3be77a038fa1429906494e08c7e1c5e4",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/42e11a4c3be77a038fa1429906494e08c7e1c5e4",
-      "message": "Cover the validation-trace dispute's Open shortfall and shaped-coin funding\n\nUnder the watcher's prover funding, a wallet emptied after Init pauses\nthe objective at Open on the funding-shortfall hold on every observation,\nreleases the paused attempt's inputs, and Opens and VerifySources after a\ntop-up. A wallet whose ada sits in coins carrying an inline datum, a\ndatum hash or a reference script pauses VerifySource as an underfunded\none does, and none of those coins is ever spent or offered as\ncollateral.",
+      "sha": "7689e7f27b8a30840477034914f5fddf63add1e7",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/7689e7f27b8a30840477034914f5fddf63add1e7",
+      "message": "Merge remote-tracking branch 'origin/colll78/canonical-v1-watcher-l1-source-checkpoint' into p1/exec-onestep-push3",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-20T07:42:58Z"
+      "authorDate": "2026-10-21T08:20:29Z"
     },
     {
-      "sha": "a644ef4ac9d8a6d1f4380a901387064733e94f6e",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/a644ef4ac9d8a6d1f4380a901387064733e94f6e",
-      "message": "Build the validation-trace pre-state ledger once per block\n\nThe validation-trace replay rebuilt each Plutus event's pre-state from the\npredecessor ledger, re-checking every earlier step's committed root in\nfull. One walk of the block's steps now serves all of its events in step\norder, and a step's root check reuses the descriptors of entries the\nprevious checked ledger already holds byte for byte. Results and refusals\nare unchanged; a step whose root does not open refuses every later event\nwhile earlier ones still decide.\n\nBlock replay at 10k predecessor entries: 10.7 s to 0.85 s (four passing\nevents), 15.8 s to 5.9 s (two failing). At 100k: 132 s to 10.9 s, and\n219 s to 70 s.",
+      "sha": "7a9eb2bd38961b4a6fcf578399981fc5470f37ab",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/7a9eb2bd38961b4a6fcf578399981fc5470f37ab",
+      "message": "Price the validation dispute wallet-move reserve at the parameters of each turn\n\nThe reserve is a bound derived from the protocol parameters, so a\nreservation admitted at earlier parameters no longer refuses a permit minted\nat today's, and each move our wallet pays is checked against the reserve at\nthe fees of the turn that makes it. The funded test runner now prices each\nturn's policy at the emulator's current fees, as the watcher's funding\nfactory does with its fresh query.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-20T07:35:16Z"
+      "authorDate": "2026-10-21T08:19:31Z"
     },
     {
-      "sha": "bdc8b32520945889943f976db4f95648b0796511",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/bdc8b32520945889943f976db4f95648b0796511",
-      "message": "Retry a validation-trace re-execution that fails without a verdict\n\nOnly a deterministic outcome without a verdict (a trace replay that\ndisagrees with the verdict, or a refused event pre-state) classifies the\nblock as an unprovable gap. An evaluator or store failure, including a\ntrace build stopped as unavailable, now holds only that event: it is\nretried after a doubling backoff capped at 60 s, the block's other events\nstill replay, a failure proven on any of them decides the block, and\notherwise the replay throws ValidationTraceReplayHeldError naming the\nvalidation_trace_replay_held readiness reason and its retry time.\n\nThe prepared artifact is accepted against any validation-trace detection\nof the block, so a claim started while an earlier event was held stays\nvalid once that event resolves.",
+      "sha": "137e9b23bf9c9bc8d58116f3f4b4e804e905f544",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/137e9b23bf9c9bc8d58116f3f4b4e804e905f544",
+      "message": "Fund each wallet-paid validation dispute move through the permit\n\nThe funding permit now checks the wallet-move reserve at every thread move\nour wallet pays, not only when the case opens, and prices the reserve at the\nprotocol's largest transaction size. A move the wallet cannot fund raises a\nnamed operator alarm naming the case, the thread and the move's deadline,\nreleases its reservation and retries at each observation until a top-up\nlands it.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-20T07:03:41Z"
+      "authorDate": "2026-10-21T08:00:59Z"
     },
     {
-      "sha": "71f12163cb65d1eda7863ab36aff97436853cc0e",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/71f12163cb65d1eda7863ab36aff97436853cc0e",
-      "message": "Remove the convicted block through the shared remove stage\n\nOnce our case's fraud-proof record is on chain, the validation-trace\nrunner hands the block to the shared cursor-family remove stage over the\nfamily's authenticated raw-L1 observation, with the shared state-queue\nmutation lease and the shared remove-fraudulent-block builder, instead of\nraising validation-trace-case-convicted and waiting forever. The thread\ntoken's path (opener, pending claim, case, proof token) is the family's\ncursor spec; the case datum is read as a thread datum with its bounty\nclaimant as the fraud prover.\n\nThe convicted alarm now means only that the authenticated L1 view has not\nyet seen the record. The conviction row runs to the authenticated\nterminal: three removals (the two descendants, then the block), the\nrecord kept, and the bond returned at close.",
+      "sha": "6bcf2d3527de8afba8b628ede67bc1068ee3158c",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/6bcf2d3527de8afba8b628ede67bc1068ee3158c",
+      "message": "Drive a validation-trace CEK context item step that opens an item's tail in a data scan",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-20T06:42:13Z"
+      "authorDate": "2026-10-21T07:28:52Z"
     },
     {
-      "sha": "48199186413d61fc21b127eb5589fb480b7ec55f",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/48199186413d61fc21b127eb5589fb480b7ec55f",
-      "message": "Cover the validation-trace runner's own outputs, landing and supersede rows\n\nLook-alikes: exact copies and other shapes of the pending claim's datum,\nplanted at its contract before VerifySource is built, and of the case and\nbond once the case is open, through the shared own-outputs harness.\nVerifySource consumes the claim Open made, no transaction of ours touches\na plant, and a rerun over the open case submits nothing.\n\nUnder the watcher's prover funding: a larger token-bearing coin at the\nprover address stays out of Init, Open and VerifySource; a process stopped\nafter its broadcast VerifySource landed sends nothing again; a stop before\nbroadcast supersedes the unsent bytes once they expire with one re-signed\nattempt, after which the ledger refuses the stopped bytes. The case row\nstates that a production-built opener always clears the case floor.",
+      "sha": "4d796bdcb61a0d5f39e153b4ca7ceaf5c67ec9c5",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/4d796bdcb61a0d5f39e153b4ca7ceaf5c67ec9c5",
+      "message": "Document the builder balance error the validation-trace move fee matches",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-20T06:15:44Z"
+      "authorDate": "2026-10-21T07:26:01Z"
     },
     {
-      "sha": "100efaa22718d4a075d44946b0eafa55b6af610d",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/100efaa22718d4a075d44946b0eafa55b6af610d",
-      "message": "Gate CEK and trace-commit scaling on semantic-store reads too\n\nThe hashed-bytes count cannot see super-linear work that hashes nothing, such as an unmemoised list walk. Both scaling gates now also count reads of the CEK semantic store (node, link, pairLink, blob) and allow at most 5% more per step at 2n than at n, on all 13 shapes. Removing the per-suffix size memo in MidgardCekSemanticSizing.sizedItems now turns mapData widening red in both gates (39.79 against a bound of 21.03 reads per step) while its hashing growth stays at 0.9998. Unchanged code measures 0.73 to 0.96.\n\nThe helper becomes measureWork in tests/helpers/work-count.ts and says what each counter counts and that only the non-gating bench sees work neither counts; the workflow marker reason says the same.",
+      "sha": "ac8f0b8a6c7fd4e490e51e7e78445deaf5a6ea2a",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ac8f0b8a6c7fd4e490e51e7e78445deaf5a6ea2a",
+      "message": "Hold a validation-trace item chain move unless its thread history names one pending step\n\nThe shared item chain reads the pending item step from the thread's L1\nhistory. Any count of entry payments other than one now holds the run\nunder a named alarm instead of picking the last. A funded row drives a\nthread through the item chain, restarts the watcher mid-chain, and checks\nthe hold and the recovery once the history is whole.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-20T06:03:43Z"
+      "authorDate": "2026-10-21T07:25:55Z"
     },
     {
-      "sha": "5a60e335ff714b6c523c5cd36a6fb603383a45bc",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/5a60e335ff714b6c523c5cd36a6fb603383a45bc",
-      "message": "Hold only the event whose validation-trace re-execution ends in an error\n\nA verdict replay with no verdict, or a trace build that fails for a\nreason other than a stop, no longer fails the whole block's replay: the\nevent is named under validation-trace-replay-unavailable, an unregistered\nid, so it classifies as an unprovable gap and the block still decides.\nRows inject the evaluator fault at the validation package; without it the\nsame block is the ordinary validation-trace fault.",
+      "sha": "76e9c4dbfa7077b73b0644fb555061c2b880c690",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/76e9c4dbfa7077b73b0644fb555061c2b880c690",
+      "message": "Resolve a validation-trace CEK context step through the redeemer select chain",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-20T06:01:25Z"
+      "authorDate": "2026-10-21T07:12:59Z"
     }
   ],
   "contributors": [
@@ -326,6 +326,12 @@
   ],
   "issues": [
     {
+      "number": 851,
+      "title": "Devnet journey cannot reconcile expired deposit attempts with its default node-ledger provider",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/851",
+      "updated_at": "2026-10-21T09:34:45Z"
+    },
+    {
       "number": 849,
       "title": "Wall-clock assertions and tight timeouts keep Node CI validation red on CI runners",
       "html_url": "https://github.com/Anastasia-Labs/midgard/issues/849",
@@ -366,12 +372,6 @@
       "title": "Validate AI review findings for midgard-l1-follower PR",
       "html_url": "https://github.com/Anastasia-Labs/midgard/issues/845",
       "updated_at": "2026-10-15T16:10:48Z"
-    },
-    {
-      "number": 842,
-      "title": "Retain verifiable execution reports from fit regeneration",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/842",
-      "updated_at": "2026-10-14T22:19:13Z"
     }
   ],
   "releases": [],
@@ -394,11 +394,11 @@
     },
     {
       "week": 1763856000,
-      "total": 43
+      "total": 44
     },
     {
       "week": 1764460800,
-      "total": 8
+      "total": 17
     },
     {
       "week": 1765065600,
@@ -442,23 +442,23 @@
     },
     {
       "week": 1771113600,
-      "total": 13
+      "total": 14
     },
     {
       "week": 1771718400,
-      "total": 43
+      "total": 47
     },
     {
       "week": 1772323200,
-      "total": 23
+      "total": 26
     },
     {
       "week": 1772928000,
-      "total": 35
+      "total": 36
     },
     {
       "week": 1773532800,
-      "total": 28
+      "total": 29
     },
     {
       "week": 1774137600,
@@ -474,39 +474,39 @@
     },
     {
       "week": 1775952000,
-      "total": 28
+      "total": 32
     },
     {
       "week": 1776556800,
-      "total": 28
+      "total": 29
     },
     {
       "week": 1777161600,
-      "total": 10
+      "total": 26
     },
     {
       "week": 1777766400,
-      "total": 19
+      "total": 33
     },
     {
       "week": 1778371200,
-      "total": 40
+      "total": 41
     },
     {
       "week": 1778976000,
-      "total": 15
+      "total": 16
     },
     {
       "week": 1779580800,
-      "total": 1
+      "total": 2
     },
     {
       "week": 1780185600,
-      "total": 25
+      "total": 26
     },
     {
       "week": 1780790400,
-      "total": 18
+      "total": 32
     },
     {
       "week": 1781395200,
@@ -554,11 +554,11 @@
     },
     {
       "week": 1788048000,
-      "total": 2
+      "total": 3
     },
     {
       "week": 1788652800,
-      "total": 45
+      "total": 46
     },
     {
       "week": 1789257600,
@@ -566,11 +566,11 @@
     },
     {
       "week": 1789862400,
-      "total": 172
+      "total": 174
     },
     {
       "week": 1790467200,
-      "total": 209
+      "total": 210
     },
     {
       "week": 1791072000,
@@ -578,7 +578,7 @@
     },
     {
       "week": 1791676800,
-      "total": 267
+      "total": 272
     },
     {
       "week": 1792281600,
