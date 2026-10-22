@@ -1,10 +1,10 @@
 {
-  "fetchedAt": "2026-10-21T11:28:49.852Z",
+  "fetchedAt": "2026-10-22T11:28:45.367Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 25,
     "forks_count": 11,
-    "open_issues_count": 183
+    "open_issues_count": 186
   },
   "languages": {
     "Aiken": 359544,
@@ -17,109 +17,109 @@
   },
   "commits": [
     {
-      "sha": "4714a6208cb62323d36cae9883e18ef0afce0f0a",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/4714a6208cb62323d36cae9883e18ef0afce0f0a",
-      "message": "Merge remote-tracking branch 'origin/colll78/canonical-v1-watcher-l1-source-checkpoint' into p1/exec-onestep-push5",
+      "sha": "5f800ed9e3d1f9a0161bdf090af5fb17e73ff693",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/5f800ed9e3d1f9a0161bdf090af5fb17e73ff693",
+      "message": "Merge branch 'p1/ex14' into p1/integrate",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-21T09:57:50Z"
+      "authorDate": "2026-10-22T09:55:58Z"
     },
     {
-      "sha": "6e6620b177e26f31842409d6af8ffd8d02a43d59",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/6e6620b177e26f31842409d6af8ffd8d02a43d59",
-      "message": "Resolve a validation-trace canonical-decode step through its empty or item stages",
+      "sha": "6f0ff0be3dcabb08e57074a362f74b9387e34c5d",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/6f0ff0be3dcabb08e57074a362f74b9387e34c5d",
+      "message": "Play the validation-trace dispute runner to conviction at the deepest admitted trace\n\nThe failing event's script runs to the per-transaction memory cap before it\nfails (394,860 steps, bisection depth 19). Two defenders, the operator's thread\non the bisection's longest path and the successor's to the redeemer field's\ncanonical-decode step, are bisected, resolved through one-step and closed; the\ncase closes Convicted with the bond back. One file observes a 13,623-byte\nredeemer field inline through the compute arm, with an honest-block negative;\nthe other reads a 13,624-byte field through a published copy and the machine\narm. Every move lands within the transaction limits at its real fee.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-21T09:39:57Z"
+      "authorDate": "2026-10-22T08:57:50Z"
     },
     {
-      "sha": "072541a99bd9254f237c16a3ce8e22c80965c961",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/072541a99bd9254f237c16a3ce8e22c80965c961",
-      "message": "Alarm on a validation-trace thread waiting for an undriven one-step on our clock\n\nThe one-step-required wait now names the case, the thread, the step and\nour deadline, and raises the operator's alarm. Also tighten the wallet-move\ndeadline's case expiry to a number, restore a doc-comment paragraph break,\nand correct the installed-funding support's note on capacity pricing.",
+      "sha": "45e8254c1f1366e5c13adb016807fb7ee62489b2",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/45e8254c1f1366e5c13adb016807fb7ee62489b2",
+      "message": "Merge branch 'p1/ex15-b4' into p1/integrate\n\n# Conflicts:\n#\tdemo/midgard-fault-proofs/tests/support/validation-trace-dispute-funded-runner.ts",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-21T09:16:54Z"
+      "authorDate": "2026-10-22T07:25:55Z"
     },
     {
-      "sha": "457a1ca0357883f1807e38940c8d576f8092eda1",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/457a1ca0357883f1807e38940c8d576f8092eda1",
-      "message": "Merge remote-tracking branch 'origin/colll78/canonical-v1-watcher-l1-source-checkpoint' into p1/exec-onestep-push4",
+      "sha": "0575c5b05cb9e0e30327d875a9c9449fe87a6f8c",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/0575c5b05cb9e0e30327d875a9c9449fe87a6f8c",
+      "message": "Stop proposing a lost-defense slash past its deadline\n\nOnce the defender's bond unlock has passed, the receipt slash is no longer\ndue: the run raises no unbuilt or unfunded alarm for it and stops under\ndefender-won. A node that names no unlock, or cannot be read, stands on\nthe case's own bound (started_at + D_case + P); when that cannot be read\neither the slash is not due, and the read failure is logged once.\n\nThe raw-L1 terminal derivation now takes the case id from the record's\nown transaction (the case token beside its bond marker), so a header with\nmore than one case still derives, and takes a receipt slash as the end of\nthe operator's bond only when it was included before the removal.\n\nTests: past-unlock rows for the unbuilt and unfunded slash, an\nunknown-deadline row, a restart row where another watcher's slash lands\nwhile our process is stopped at its submit, a second-case row and a\nslash-after-removal row. Shared lost-defense helpers move to a support\nmodule; a stale comment is corrected.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-21T09:10:23Z"
+      "authorDate": "2026-10-22T07:24:52Z"
     },
     {
-      "sha": "d71308d379385acd88d5116f6c87fd601a6ec995",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d71308d379385acd88d5116f6c87fd601a6ec995",
-      "message": "Test the validation-trace decode records under the prover funding permit in both directions\n\nA funded watcher with no publication observer refuses to run a dispute\nthat drives script selections, signing nothing; one whose roster does not\ngovern the script-decode contract stalls at the decode record that pays to\nit, and the case does not open; with both, it records the decode and then\nopens the case.",
+      "sha": "5fc0dc53affcb4bd7eb1ab38462f2cfc3e0e4c99",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/5fc0dc53affcb4bd7eb1ab38462f2cfc3e0e4c99",
+      "message": "Alert once when a data directory still holds the old layout's in-flight proofs\n\nAn in-place upgrade over an old-layout data directory starts, but the\nper-proof fault-proofs/ journals and the handoff and abandonment funding\ntables are never read, so in-flight proofs from that layout are dropped.\nThe warning text said their rows live in the new databases, and the README\nsaid ignoring them did not discard durable state; neither was true.\n\nAt startup the watcher now logs one error-level\nlegacy_proofs_not_carried_over alert naming the non-empty fault-proofs/\ndirectory and each legacy funding table holding rows, and still starts.\nThe legacy journal warning and the README now say the old journals are\nnever imported, list fault-proofs/, and state that the launch deployment\nstarts with a fresh data directory.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-21T08:58:52Z"
+      "authorDate": "2026-10-22T06:57:03Z"
     },
     {
-      "sha": "9a71bd159a2fe54465575f289faf83e5641efd44",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/9a71bd159a2fe54465575f289faf83e5641efd44",
-      "message": "Drive the remaining spend, output, signer and item context steps\n\nEach finishing step of the spend, output and signer stages, and the item\nsteps that head a sequence and finalize a frame, gets its own drive through\nthe resolution to the award, with the stage's refusal pinned.",
+      "sha": "a5dd470cb75e1280f12b195c13a8ee90ca6f52fb",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/a5dd470cb75e1280f12b195c13a8ee90ca6f52fb",
+      "message": "Delete a settled orphan reservation so a returning objective is funded again\n\nAn orphan settle left the reservation released under its decision digest.\nWhen the header came back after the settle (a rollback shallower than\nrelease finality, or the documented race between the eligibility check\nand the settle), the objective was admitted again under the same decision,\nmet the released reservation, could not reserve or prepare, and was\nquarantined.\n\nThe settle now deletes the reservation with its rows in the same\ntransaction, so the inputs return to the wallet and a returning objective\nplans a fresh reservation.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-21T08:49:11Z"
+      "authorDate": "2026-10-22T06:52:01Z"
     },
     {
-      "sha": "7aaf6432a3bee476bb04c1362231d903ddd554d9",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/7aaf6432a3bee476bb04c1362231d903ddd554d9",
-      "message": "Resolve a validation-trace CEK context step through the finalize stage\n\nThe runner drives a CEK context step that finalizes a Cardano spend: the\nfinalize authenticate binds the step's redeemers control, the finalize\nspend writes the context's successor, and the context settle awards the\nthread. A finalization of any other purpose is left undriven.",
+      "sha": "3358651274d9b78b01f3136248b8aac9d01ea28b",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/3358651274d9b78b01f3136248b8aac9d01ea28b",
+      "message": "Prove own thread custody from the chain again after total state loss\n\nA watcher that loses its whole data directory in the middle of a proof\nthread and restarts with the same keys could never spend its own thread\noutput again: its funding store no longer held the output's lineage, so\nevery further step was refused and the objective stayed quarantined.\n\nA contract input with no stored lineage is again accepted as released\ncustody only when the authenticated L1 source shows it carrying this\nobjective's computation-thread token under a step datum whose\nfraud_prover is the reservation's funding key. Any other output stays\nrefused.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-21T08:45:46Z"
+      "authorDate": "2026-10-22T06:47:10Z"
     },
     {
-      "sha": "23bc5b1b647a2dce9e2ee1fd6d6a4a555ba9a48d",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/23bc5b1b647a2dce9e2ee1fd6d6a4a555ba9a48d",
-      "message": "Refuse a wallet-paid validation dispute move only when it does not build\n\nThe funding permit no longer checks the wallet-move reserve at each thread\nmove our wallet pays. A move the wallet can fund lands, however far below\nthe reserve the wallet is; a move it cannot fund does not build and raises\nthe operator's named alarm, retried at each observation until a top-up\nlands it. The reserve is still kept when the case opens.",
+      "sha": "31233efeb1e1114251bd2c343cfaad429265ed9f",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/31233efeb1e1114251bd2c343cfaad429265ed9f",
+      "message": "Remove the convicted block under the deployment's finalized manifest\n\nThe installed validation-trace lifecycle now binds a finalized manifest\ndescribing the scene's deployment as both the watcher identity and the\nremoval's deployment, so the convicted block's own removal and its\nbond-backed slash are funded and land. The lifecycle test drives the run\nto its terminal and checks the spent operator bond and the reward output.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-21T08:34:37Z"
+      "authorDate": "2026-10-22T06:34:38Z"
     },
     {
-      "sha": "7689e7f27b8a30840477034914f5fddf63add1e7",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/7689e7f27b8a30840477034914f5fddf63add1e7",
-      "message": "Merge remote-tracking branch 'origin/colll78/canonical-v1-watcher-l1-source-checkpoint' into p1/exec-onestep-push3",
+      "sha": "31b30422c293658f2f555818d9c48af98258ba1b",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/31b30422c293658f2f555818d9c48af98258ba1b",
+      "message": "Merge branch 'p1/watcher-one-store' into p1/integrate-wos",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-21T08:20:29Z"
+      "authorDate": "2026-10-22T06:16:47Z"
     },
     {
-      "sha": "7a9eb2bd38961b4a6fcf578399981fc5470f37ab",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/7a9eb2bd38961b4a6fcf578399981fc5470f37ab",
-      "message": "Price the validation dispute wallet-move reserve at the parameters of each turn\n\nThe reserve is a bound derived from the protocol parameters, so a\nreservation admitted at earlier parameters no longer refuses a permit minted\nat today's, and each move our wallet pays is checked against the reserve at\nthe fees of the turn that makes it. The funded test runner now prices each\nturn's policy at the emulator's current fees, as the watcher's funding\nfactory does with its fresh query.",
+      "sha": "7b8769ec829e5ffed3d4bd13e35d020ad18091ef",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/7b8769ec829e5ffed3d4bd13e35d020ad18091ef",
+      "message": "Mark the deleted submission-handoff module as historical in two decision records\n\nThe module went when each funding change began committing with its journal\nentries; the records keep the reference and say it no longer exists.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-21T08:19:31Z"
+      "authorDate": "2026-10-22T06:16:00Z"
     },
     {
-      "sha": "137e9b23bf9c9bc8d58116f3f4b4e804e905f544",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/137e9b23bf9c9bc8d58116f3f4b4e804e905f544",
-      "message": "Fund each wallet-paid validation dispute move through the permit\n\nThe funding permit now checks the wallet-move reserve at every thread move\nour wallet pays, not only when the case opens, and prices the reserve at the\nprotocol's largest transaction size. A move the wallet cannot fund raises a\nnamed operator alarm naming the case, the thread and the move's deadline,\nreleases its reservation and retries at each observation until a top-up\nlands it.",
+      "sha": "03555849add96866996db6febd47314aa47fc3c8",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/03555849add96866996db6febd47314aa47fc3c8",
+      "message": "Slash a lost defender by its receipt once the dispute is settled\n\nThe validation-trace runner now slashes each defender who lost a thread of\nour case, by that thread's lost-defense receipt, under the prover funding\npermit. The slash is due only once the case is settled for us: after the\nclose when the defender won, and after the convicted block's removal when\nthe case convicted. It never precedes or blocks a thread move, the close or\nthe removal. A due slash that does not build holds the run under an alarm\nnaming its deadline, the defender's bond unlock, until it lands; when\nanother watcher lands it first the run stops cleanly.\n\nThe funding permit admits the slash only under an authority that binds its\nexact receipt action, header, deployment, economics, operator bond input,\nreward, fee, reward address and inputs.\n\nThe removal's raw-L1 terminal derivation accepts a block whose operator was\nalready slashed by this case's receipt, taking the bond's end from the one\ntransaction that burns that receipt and consumes the operator's bond.\n\nNew emulator tests cover the slash landing, another watcher landing it\nfirst, the unbuilt alarm, every permit refusal, and the removal after the\noperator's receipt slash.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-21T08:00:59Z"
+      "authorDate": "2026-10-22T06:12:07Z"
     },
     {
-      "sha": "6bcf2d3527de8afba8b628ede67bc1068ee3158c",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/6bcf2d3527de8afba8b628ede67bc1068ee3158c",
-      "message": "Drive a validation-trace CEK context item step that opens an item's tail in a data scan",
+      "sha": "25bbd7771728d27c780a3834dc9e261ccef84d52",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/25bbd7771728d27c780a3834dc9e261ccef84d52",
+      "message": "Cover the shared watcher.sqlite writers with guard, contention and timing rows\n\nThe workflow journal refuses an entry out of sequence as a concurrent write and\nkeeps its rows; a funding change committed on one connection is read on another\nrather than a cached audit. A prepare and its confirmation complete while the\ndurable state-queue backend appends and another process holds the write lock in\nbursts on the same file. A prepared body of about 1.4 MB and 200 ordinary\nentries commit within loose bounds, and the row logs both timings.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-21T07:28:52Z"
+      "authorDate": "2026-10-22T05:58:20Z"
     },
     {
-      "sha": "4d796bdcb61a0d5f39e153b4ca7ceaf5c67ec9c5",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/4d796bdcb61a0d5f39e153b4ca7ceaf5c67ec9c5",
-      "message": "Document the builder balance error the validation-trace move fee matches",
+      "sha": "214817a1d69831558a64e6de617e8995f18ffd70",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/214817a1d69831558a64e6de617e8995f18ffd70",
+      "message": "Drop the unused workflow-id listing from the workflow journal\n\nNothing reads every workflow id any more; the one test that did now asserts\nthe objective's single execution instead.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-21T07:26:01Z"
+      "authorDate": "2026-10-22T05:58:20Z"
     },
     {
-      "sha": "ac8f0b8a6c7fd4e490e51e7e78445deaf5a6ea2a",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ac8f0b8a6c7fd4e490e51e7e78445deaf5a6ea2a",
-      "message": "Hold a validation-trace item chain move unless its thread history names one pending step\n\nThe shared item chain reads the pending item step from the thread's L1\nhistory. Any count of entry payments other than one now holds the run\nunder a named alarm instead of picking the last. A funded row drives a\nthread through the item chain, restarts the watcher mid-chain, and checks\nthe hold and the recovery once the history is whole.",
+      "sha": "eafdc1da093b0ed8e9a062b83c55d44959aa90b6",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/eafdc1da093b0ed8e9a062b83c55d44959aa90b6",
+      "message": "Keep two watcher modules within their size ceilings\n\nThe unattended-objective wiring had raised the ceilings of the progress\nauthority and the supervisor. Optional callbacks and retention are now\npassed through directly, and the in-process job check reads one list, so\nboth modules fit their earlier ceilings again.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-21T07:25:55Z"
+      "authorDate": "2026-10-22T05:45:38Z"
     },
     {
-      "sha": "76e9c4dbfa7077b73b0644fb555061c2b880c690",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/76e9c4dbfa7077b73b0644fb555061c2b880c690",
-      "message": "Resolve a validation-trace CEK context step through the redeemer select chain",
+      "sha": "1822dacff627d0d0fbd94f27a5cc70e0ae4c1d52",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/1822dacff627d0d0fbd94f27a5cc70e0ae4c1d52",
+      "message": "Delete a forgotten objective's workflow rows when its funding settles\n\nA released objective whose execution holds a signed attempt is forgotten\nwith its workflow rows kept. The funding sweep that settles that attempt's\nreservation, once each attempt is retired on L1, now deletes those rows in\nthe same watcher.sqlite transaction, so they no longer stay without limit.\nAn objective whose header returned before the sweep keeps its rows and its\nfunding for its run.\n\nfault_proof_objective_unreadable stays: startup can still meet workflow\nrows it cannot read (a corrupt row, a foreign execution, a storage error),\nand holding that objective keeps startup from failing. The docs for it and\nfor fault_proof_objective_cleanup_failed, and the README's cleanup and\nretention text, describe workflow rows instead of directories and\ntombstones.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-21T07:12:59Z"
+      "authorDate": "2026-10-22T05:41:44Z"
     }
   ],
   "contributors": [
@@ -326,6 +326,24 @@
   ],
   "issues": [
     {
+      "number": 854,
+      "title": "Removal terminal when the operator's bond ended another way",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/854",
+      "updated_at": "2026-10-22T06:51:29Z"
+    },
+    {
+      "number": 853,
+      "title": "Let the funded watcher reclaim its own published field copy after the observe move is final",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/853",
+      "updated_at": "2026-10-22T01:55:23Z"
+    },
+    {
+      "number": 852,
+      "title": "Let the defender reclaim a stopped validation-trace thread's value after the challenge expires",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/852",
+      "updated_at": "2026-10-22T00:08:21Z"
+    },
+    {
       "number": 851,
       "title": "Devnet journey cannot reconcile expired deposit attempts with its default node-ledger provider",
       "html_url": "https://github.com/Anastasia-Labs/midgard/issues/851",
@@ -360,18 +378,6 @@
       "title": "Midgard-compatible minting policies",
       "html_url": "https://github.com/Anastasia-Labs/midgard/issues/224",
       "updated_at": "2026-10-17T22:41:49Z"
-    },
-    {
-      "number": 846,
-      "title": "Watcher stays unready: 42 installed workflows compared with 52 catalogue entries",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/846",
-      "updated_at": "2026-10-16T06:49:50Z"
-    },
-    {
-      "number": 845,
-      "title": "Validate AI review findings for midgard-l1-follower PR",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/845",
-      "updated_at": "2026-10-15T16:10:48Z"
     }
   ],
   "releases": [],
