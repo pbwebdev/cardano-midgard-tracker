@@ -1,10 +1,10 @@
 {
-  "fetchedAt": "2026-10-22T11:28:45.367Z",
+  "fetchedAt": "2026-10-23T11:18:43.756Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 25,
     "forks_count": 11,
-    "open_issues_count": 186
+    "open_issues_count": 188
   },
   "languages": {
     "Aiken": 359544,
@@ -17,109 +17,109 @@
   },
   "commits": [
     {
-      "sha": "5f800ed9e3d1f9a0161bdf090af5fb17e73ff693",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/5f800ed9e3d1f9a0161bdf090af5fb17e73ff693",
-      "message": "Merge branch 'p1/ex14' into p1/integrate",
+      "sha": "9d27c355e9c34dff73081e5ad6c5212fd505a8bc",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/9d27c355e9c34dff73081e5ad6c5212fd505a8bc",
+      "message": "Order replay findings against held events only when a re-execution is held\n\nA replay union with no held member returns its findings without placing\nthem on the block's event order, so reconstructions that carry no\ntransition trace are classified as before.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-22T09:55:58Z"
+      "authorDate": "2026-10-22T00:17:07Z"
     },
     {
-      "sha": "6f0ff0be3dcabb08e57074a362f74b9387e34c5d",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/6f0ff0be3dcabb08e57074a362f74b9387e34c5d",
-      "message": "Play the validation-trace dispute runner to conviction at the deepest admitted trace\n\nThe failing event's script runs to the per-transaction memory cap before it\nfails (394,860 steps, bisection depth 19). Two defenders, the operator's thread\non the bisection's longest path and the successor's to the redeemer field's\ncanonical-decode step, are bisected, resolved through one-step and closed; the\ncase closes Convicted with the bond back. One file observes a 13,623-byte\nredeemer field inline through the compute arm, with an honest-block negative;\nthe other reads a 13,624-byte field through a published copy and the machine\narm. Every move lands within the transaction limits at its real fee.",
+      "sha": "6178768057dfe87665d3c8253ede4389c26840b7",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/6178768057dfe87665d3c8253ede4389c26840b7",
+      "message": "Merge PR 471 head dabcc07640 into p1/t255\n\nEight conflicts, all in fault-proof test code. No validator or library\nmodule needed a hand resolution.\n\nThe two forced-reason coordinate tests keep this branch's pin on the\nterminal step's membership check of state.pre_utxos_root.\n\nThe input-existence chronology fixture and seed take PR 471's submitted\nwithdrawal rows, with the third seed deposit and the larger seed value\nthose rows need. They also keep this branch's deposit chronologies. The\nsame-block deposit now uses transaction-id byte 84. Byte 83 is now a seed\ndeposit, and the same-block deposit's output has to stay absent from the\npredecessor ledger.\n\nThe lifecycle test now runs on PR 471's shared input-existence route\nhelper. The helper gains two options: a replacement step submitter, and a\nrefusal at step 03. The block-initial absence rows use both. The\nwithdrawal rows stay in PR 471's own submitted-withdrawal file.\n\nThe maximum-carriage test keeps this branch's deep ledger absence. It also\ntakes PR 471's explicit empty validation-trace header fields and its\nown-output journal. The raw input-existence submitter keeps this branch's\nclaimed pre-root option.\n\nUNMAPPED_VALIDATOR_COUNT is 526, which is the length of the merged list.\nThe registry test passes at 526 and fails at 525 and at 527.\n\nThe present-maximum journey now passes the own-output journal, which\nfield carriage publication now requires.\n\nThe rest merges automatically. It brings in the validation-trace dispute\nrunner and its one-step resolution, the case-on-constant CEK core arm,\nscript decoding split across six control-class stakers, and proof-thread\nopeners per source kind that reuse the opener's verified view. It also\nbrings input existence run on a submitted withdrawal and field carriage\nidentified by our own signed out-refs.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-22T08:57:50Z"
+      "authorDate": "2026-10-22T00:03:32Z"
     },
     {
-      "sha": "45e8254c1f1366e5c13adb016807fb7ee62489b2",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/45e8254c1f1366e5c13adb016807fb7ee62489b2",
-      "message": "Merge branch 'p1/ex15-b4' into p1/integrate\n\n# Conflicts:\n#\tdemo/midgard-fault-proofs/tests/support/validation-trace-dispute-funded-runner.ts",
+      "sha": "91fe825a159995a04a8cb36822142ab8e5b4c807",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/91fe825a159995a04a8cb36822142ab8e5b4c807",
+      "message": "Drop the orphan funding cancel\n\nThe watcher no longer signs a cancel for orphaned funding. The cancel rows, the cancel wallet wiring and the cancel step of the orphan sweep are removed; the settle half of the sweep is unchanged.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-22T07:25:55Z"
+      "authorDate": "2026-10-22T00:02:22Z"
     },
     {
-      "sha": "0575c5b05cb9e0e30327d875a9c9449fe87a6f8c",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/0575c5b05cb9e0e30327d875a9c9449fe87a6f8c",
-      "message": "Stop proposing a lost-defense slash past its deadline\n\nOnce the defender's bond unlock has passed, the receipt slash is no longer\ndue: the run raises no unbuilt or unfunded alarm for it and stops under\ndefender-won. A node that names no unlock, or cannot be read, stands on\nthe case's own bound (started_at + D_case + P); when that cannot be read\neither the slash is not due, and the read failure is logged once.\n\nThe raw-L1 terminal derivation now takes the case id from the record's\nown transaction (the case token beside its bond marker), so a header with\nmore than one case still derives, and takes a receipt slash as the end of\nthe operator's bond only when it was included before the removal.\n\nTests: past-unlock rows for the unbuilt and unfunded slash, an\nunknown-deadline row, a restart row where another watcher's slash lands\nwhile our process is stopped at its submit, a second-case row and a\nslash-after-removal row. Shared lost-defense helpers move to a support\nmodule; a stale comment is corrected.",
+      "sha": "df66860d2115b9dc366acc6d13de036418a8566e",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/df66860d2115b9dc366acc6d13de036418a8566e",
+      "message": "Read the stage-four begin and stage-six fold-asset evidence by their own constructors\n\nThe script-sources middle yields read the auxiliary evidence by its\nconstructor. The stage-four begin yield now reads\nTransactionRedeemerItemBeginWitness (27) and the stage-six fold-asset\nyield reads MintFoldAssetWitness (35), the constructors the evidence type\ngives these steps and the ones the off-chain writer emits. On-chain\nvectors drive both yields through withdraw over an honest step, under\ntheir own constructor and under another.\n\nThe runner now drives both steps like the other middle-yield roles: a\nnon-output step at stage four with the begin evidence, or at stage six\nwith the fold-asset evidence, carries its witness and role beside that\nrole's yield, and a stage-four begin step whose field is delivered by\nreference waits. Each step has an emulator row through the award with\nits refusals, replacing the rows that held them undriven.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-22T07:24:52Z"
+      "authorDate": "2026-10-21T23:49:00Z"
     },
     {
-      "sha": "5fc0dc53affcb4bd7eb1ab38462f2cfc3e0e4c99",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/5fc0dc53affcb4bd7eb1ab38462f2cfc3e0e4c99",
-      "message": "Alert once when a data directory still holds the old layout's in-flight proofs\n\nAn in-place upgrade over an old-layout data directory starts, but the\nper-proof fault-proofs/ journals and the handoff and abandonment funding\ntables are never read, so in-flight proofs from that layout are dropped.\nThe warning text said their rows live in the new databases, and the README\nsaid ignoring them did not discard durable state; neither was true.\n\nAt startup the watcher now logs one error-level\nlegacy_proofs_not_carried_over alert naming the non-empty fault-proofs/\ndirectory and each legacy funding table holding rows, and still starts.\nThe legacy journal warning and the README now say the old journals are\nnever imported, list fault-proofs/, and state that the launch deployment\nstarts with a fresh data directory.",
+      "sha": "ebb0a364025ab081bc7d8c438bab3c6ca5134632",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ebb0a364025ab081bc7d8c438bab3c6ca5134632",
+      "message": "Merge commit 'f4e60d1ba2' into p1/watcher-one-store",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-22T06:57:03Z"
+      "authorDate": "2026-10-21T23:30:48Z"
     },
     {
-      "sha": "a5dd470cb75e1280f12b195c13a8ee90ca6f52fb",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/a5dd470cb75e1280f12b195c13a8ee90ca6f52fb",
-      "message": "Delete a settled orphan reservation so a returning objective is funded again\n\nAn orphan settle left the reservation released under its decision digest.\nWhen the header came back after the settle (a rollback shallower than\nrelease finality, or the documented race between the eligibility check\nand the settle), the objective was admitted again under the same decision,\nmet the released reservation, could not reserve or prepare, and was\nquarantined.\n\nThe settle now deletes the reservation with its rows in the same\ntransaction, so the inputs return to the wallet and a returning objective\nplans a fresh reservation.",
+      "sha": "1e4cd35ebfd4f89302c2697c3a8f2bf90c3aae92",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/1e4cd35ebfd4f89302c2697c3a8f2bf90c3aae92",
+      "message": "Install the Plutus execution dispute in the public preprod catalogue\n\nThe owner put validationTraceDispute (00000006) in the preprod-public\ncatalogue at launch (2026-10-21). Drop it from the profile's exclusions and\nfrom the curated emulator profile, which mirrors them. The nine families\nwith no installed off-chain workflow stay excluded, and mainnet keeps the\ndispute excluded.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-22T06:52:01Z"
+      "authorDate": "2026-10-21T23:22:35Z"
     },
     {
-      "sha": "3358651274d9b78b01f3136248b8aac9d01ea28b",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/3358651274d9b78b01f3136248b8aac9d01ea28b",
-      "message": "Prove own thread custody from the chain again after total state loss\n\nA watcher that loses its whole data directory in the middle of a proof\nthread and restarts with the same keys could never spend its own thread\noutput again: its funding store no longer held the output's lineage, so\nevery further step was refused and the objective stayed quarantined.\n\nA contract input with no stored lineage is again accepted as released\ncustody only when the authenticated L1 source shows it carrying this\nobjective's computation-thread token under a step datum whose\nfraud_prover is the reservation's funding key. Any other output stays\nrefused.",
+      "sha": "7dcfc3d2bf0f010956b3552e2ad2405b85f61dbf",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/7dcfc3d2bf0f010956b3552e2ad2405b85f61dbf",
+      "message": "Shorten the public DA challenge window to 24 hours\n\nSet da_challenge_window_ms to 86,400,000 on preprod-public and mainnet.\nThe withdrawal delay stays 778,080,000: block maturity still dominates\nthe challenge path (259,680,000 with the 48 h full response window).\nThe open-after-Apply margin (82,800,000 against a 2,160,000 floor), the\nattestation ordering and the response budget still hold.\n\nRegenerate the profiles and the Aiken environments, and move the public\nfigures in the profile tests, the DA bond literal tests, the deployments\nREADME and decision 0002.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-22T06:47:10Z"
+      "authorDate": "2026-10-21T23:18:24Z"
     },
     {
-      "sha": "31233efeb1e1114251bd2c343cfaad429265ed9f",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/31233efeb1e1114251bd2c343cfaad429265ed9f",
-      "message": "Remove the convicted block under the deployment's finalized manifest\n\nThe installed validation-trace lifecycle now binds a finalized manifest\ndescribing the scene's deployment as both the watcher identity and the\nremoval's deployment, so the convicted block's own removal and its\nbond-backed slash are funded and land. The lifecycle test drives the run\nto its terminal and checks the spent operator bond and the reward output.",
+      "sha": "609112b23d290d4f7d9b71747a934c6442e89ebf",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/609112b23d290d4f7d9b71747a934c6442e89ebf",
+      "message": "Merge commit 'f4e60d1ba2' into p1/watchdog-850",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-22T06:34:38Z"
+      "authorDate": "2026-10-21T23:12:29Z"
     },
     {
-      "sha": "31b30422c293658f2f555818d9c48af98258ba1b",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/31b30422c293658f2f555818d9c48af98258ba1b",
-      "message": "Merge branch 'p1/watcher-one-store' into p1/integrate-wos",
+      "sha": "005562d9b9ed37ce54750aad00962f34304c21c7",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/005562d9b9ed37ce54750aad00962f34304c21c7",
+      "message": "Weigh the new operator-watchdog test files in the node shard plan",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-22T06:16:47Z"
+      "authorDate": "2026-10-21T23:06:08Z"
     },
     {
-      "sha": "7b8769ec829e5ffed3d4bd13e35d020ad18091ef",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/7b8769ec829e5ffed3d4bd13e35d020ad18091ef",
-      "message": "Mark the deleted submission-handoff module as historical in two decision records\n\nThe module went when each funding change began committing with its journal\nentries; the records keep the reference and say it no longer exists.",
+      "sha": "ac47a4741b05f107a9b92941f874756d66b359c9",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ac47a4741b05f107a9b92941f874756d66b359c9",
+      "message": "Retry a failed watchdog takeover on a backoff and report it in readiness\n\nA strike or forced retirement that failed for any reason other than a\nscript refusal ended the tick with a warning. The next tick retried on the\nfiber's schedule, and after three failures citing the only undelivered\nevent the watchdog passed that event over and went idle, so the shift\nstayed stalled.\n\nA failed takeover now defers the watchdog on a doubling backoff from 10 s\nup to 5 min and is retried until it lands. After three failures in a row\nreadiness reports operator_watchdog_takeover_failing with the last error. A\nlanded takeover, or a tick with no takeover due, clears it. An unfunded\nwallet goes through the same backoff. A script refusal still passes over\nits citation at once.\n\nA citation passed over only because its attempts ran out is cited again\nwhen no other event is citable. A refused citation is never cited again\nunder the same scheduler state.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-22T06:16:00Z"
+      "authorDate": "2026-10-21T23:01:38Z"
     },
     {
-      "sha": "03555849add96866996db6febd47314aa47fc3c8",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/03555849add96866996db6febd47314aa47fc3c8",
-      "message": "Slash a lost defender by its receipt once the dispute is settled\n\nThe validation-trace runner now slashes each defender who lost a thread of\nour case, by that thread's lost-defense receipt, under the prover funding\npermit. The slash is due only once the case is settled for us: after the\nclose when the defender won, and after the convicted block's removal when\nthe case convicted. It never precedes or blocks a thread move, the close or\nthe removal. A due slash that does not build holds the run under an alarm\nnaming its deadline, the defender's bond unlock, until it lands; when\nanother watcher lands it first the run stops cleanly.\n\nThe funding permit admits the slash only under an authority that binds its\nexact receipt action, header, deployment, economics, operator bond input,\nreward, fee, reward address and inputs.\n\nThe removal's raw-L1 terminal derivation accepts a block whose operator was\nalready slashed by this case's receipt, taking the bond's end from the one\ntransaction that burns that receipt and consumes the operator's bond.\n\nNew emulator tests cover the slash landing, another watcher landing it\nfirst, the unbuilt alarm, every permit refusal, and the removal after the\noperator's receipt slash.",
+      "sha": "387f9d0cd1e70b20505840e24e146fdd18932634",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/387f9d0cd1e70b20505840e24e146fdd18932634",
+      "message": "Choose the strike's validity window when the strike is built\n\nThe watchdog planned a strike's validity window from the L1 time of the\ntick, then ran the strike gate, the funding preflight and the reference\nscript and wallet reads before building it. A tick slower than the window\nbuilt a strike the ledger refused as expired.\n\nThe strike is now planned again from the same snapshot and citation, as of\nthe L1 time just before the build, so its window starts from that time. The\nsame planner chooses the bounds, so the on-chain checks on them still hold:\nthe range lies entirely after the inactivity threshold and the new shift\nstarts at its inclusive upper bound.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-22T06:12:07Z"
+      "authorDate": "2026-10-21T23:01:19Z"
     },
     {
-      "sha": "25bbd7771728d27c780a3834dc9e261ccef84d52",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/25bbd7771728d27c780a3834dc9e261ccef84d52",
-      "message": "Cover the shared watcher.sqlite writers with guard, contention and timing rows\n\nThe workflow journal refuses an entry out of sequence as a concurrent write and\nkeeps its rows; a funding change committed on one connection is read on another\nrather than a cached audit. A prepare and its confirmation complete while the\ndurable state-queue backend appends and another process holds the write lock in\nbursts on the same file. A prepared body of about 1.4 MB and 200 ordinary\nentries commit within loose bounds, and the row logs both timings.",
+      "sha": "f4e60d1ba2bb4e2f5e90ef8fddf3a602ccb84fba",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/f4e60d1ba2bb4e2f5e90ef8fddf3a602ccb84fba",
+      "message": "Pin the run's own unbuilt action appearing once in a named-state hold\n\nA named-state run whose reason is also one of its alarms lists that\nreason once in the readiness detail.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-22T05:58:20Z"
+      "authorDate": "2026-10-21T22:48:40Z"
     },
     {
-      "sha": "214817a1d69831558a64e6de617e8995f18ffd70",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/214817a1d69831558a64e6de617e8995f18ffd70",
-      "message": "Drop the unused workflow-id listing from the workflow journal\n\nNothing reads every workflow id any more; the one test that did now asserts\nthe objective's single execution instead.",
+      "sha": "d1ff39a3913515ce782cbd84a100d660e1b2cfb3",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d1ff39a3913515ce782cbd84a100d660e1b2cfb3",
+      "message": "Alarm on a held validation-trace replay once its case open window is at risk\n\nA header whose classification waits on a held script re-execution is now\nlogged at error level, with its readiness detail naming the end of the\ncase open window, once half the window or less is left or the header's\nblock time cannot be read. The threshold and window arithmetic are shared\nwith the held claim build alarm. The hold still decides nothing.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-22T05:58:20Z"
+      "authorDate": "2026-10-21T22:48:27Z"
     },
     {
-      "sha": "eafdc1da093b0ed8e9a062b83c55d44959aa90b6",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/eafdc1da093b0ed8e9a062b83c55d44959aa90b6",
-      "message": "Keep two watcher modules within their size ceilings\n\nThe unattended-objective wiring had raised the ceilings of the progress\nauthority and the supervisor. Optional callbacks and retention are now\npassed through directly, and the in-process job check reads one list, so\nboth modules fit their earlier ceilings again.",
+      "sha": "1bdbbc534d0b040666dd73cbad698972035f232a",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/1bdbbc534d0b040666dd73cbad698972035f232a",
+      "message": "Weigh the new validation-trace test files in the fault-proofs shard plan",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-22T05:45:38Z"
+      "authorDate": "2026-10-21T22:33:52Z"
     },
     {
-      "sha": "1822dacff627d0d0fbd94f27a5cc70e0ae4c1d52",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/1822dacff627d0d0fbd94f27a5cc70e0ae4c1d52",
-      "message": "Delete a forgotten objective's workflow rows when its funding settles\n\nA released objective whose execution holds a signed attempt is forgotten\nwith its workflow rows kept. The funding sweep that settles that attempt's\nreservation, once each attempt is retired on L1, now deletes those rows in\nthe same watcher.sqlite transaction, so they no longer stay without limit.\nAn objective whose header returned before the sweep keeps its rows and its\nfunding for its run.\n\nfault_proof_objective_unreadable stays: startup can still meet workflow\nrows it cannot read (a corrupt row, a foreign execution, a storage error),\nand holding that objective keeps startup from failing. The docs for it and\nfor fault_proof_objective_cleanup_failed, and the README's cleanup and\nretention text, describe workflow rows instead of directories and\ntombstones.",
+      "sha": "af720b88dbb7198f10a9e0c808c254917b2f14ff",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/af720b88dbb7198f10a9e0c808c254917b2f14ff",
+      "message": "Merge the review fixes for the validation-trace install",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-22T05:41:44Z"
+      "authorDate": "2026-10-21T21:54:30Z"
     }
   ],
   "contributors": [
@@ -326,6 +326,18 @@
   ],
   "issues": [
     {
+      "number": 856,
+      "title": "Isolate a repeatedly failing transaction from its admission batch",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/856",
+      "updated_at": "2026-10-23T03:27:45Z"
+    },
+    {
+      "number": 855,
+      "title": "Delete the unused measured funding-profile code after launch",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/855",
+      "updated_at": "2026-10-23T03:27:44Z"
+    },
+    {
       "number": 854,
       "title": "Removal terminal when the operator's bond ended another way",
       "html_url": "https://github.com/Anastasia-Labs/midgard/issues/854",
@@ -366,25 +378,13 @@
       "title": "contrib test refuses the whole run when one --file is outside the package vitest config",
       "html_url": "https://github.com/Anastasia-Labs/midgard/issues/848",
       "updated_at": "2026-10-19T16:19:55Z"
-    },
-    {
-      "number": 847,
-      "title": "contrib test --related selects unrelated tests instead of the ones importing the given sources",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/847",
-      "updated_at": "2026-10-19T07:06:36Z"
-    },
-    {
-      "number": 224,
-      "title": "Midgard-compatible minting policies",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/224",
-      "updated_at": "2026-10-17T22:41:49Z"
     }
   ],
   "releases": [],
   "commitActivity": [
     {
       "week": 1761436800,
-      "total": 114
+      "total": 112
     },
     {
       "week": 1762041600,
@@ -448,7 +448,7 @@
     },
     {
       "week": 1771113600,
-      "total": 14
+      "total": 13
     },
     {
       "week": 1771718400,
@@ -512,7 +512,7 @@
     },
     {
       "week": 1780790400,
-      "total": 32
+      "total": 31
     },
     {
       "week": 1781395200,
@@ -532,7 +532,7 @@
     },
     {
       "week": 1783814400,
-      "total": 11
+      "total": 9
     },
     {
       "week": 1784419200,
@@ -540,11 +540,11 @@
     },
     {
       "week": 1785024000,
-      "total": 202
+      "total": 201
     },
     {
       "week": 1785628800,
-      "total": 190
+      "total": 188
     },
     {
       "week": 1786233600,
@@ -572,7 +572,7 @@
     },
     {
       "week": 1789862400,
-      "total": 174
+      "total": 130
     },
     {
       "week": 1790467200,
@@ -584,11 +584,11 @@
     },
     {
       "week": 1791676800,
-      "total": 272
+      "total": 271
     },
     {
       "week": 1792281600,
-      "total": 200
+      "total": 100
     }
   ]
 }
