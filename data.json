@@ -1,10 +1,10 @@
 {
-  "fetchedAt": "2026-10-23T11:18:43.756Z",
+  "fetchedAt": "2026-10-24T10:38:15.353Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 25,
     "forks_count": 11,
-    "open_issues_count": 188
+    "open_issues_count": 190
   },
   "languages": {
     "Aiken": 359544,
@@ -17,109 +17,109 @@
   },
   "commits": [
     {
-      "sha": "9d27c355e9c34dff73081e5ad6c5212fd505a8bc",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/9d27c355e9c34dff73081e5ad6c5212fd505a8bc",
-      "message": "Order replay findings against held events only when a re-execution is held\n\nA replay union with no held member returns its findings without placing\nthem on the block's event order, so reconstructions that carry no\ntransition trace are classified as before.",
+      "sha": "f9594e4036b0ce6b119d8bf3502ee9b7db843ef3",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/f9594e4036b0ce6b119d8bf3502ee9b7db843ef3",
+      "message": "Time the import check's rebuild as the steadiest of three runs\n\nA single stall from the host (a collection or a preempted runner) could\nland in the one timed run and fail the bound. Take the run whose longest\nstretch is the smallest share of its total: a stall lands in one run,\nwhile a rebuild that never gives the event loop a turn stretches every\nrun and still fails.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-22T00:17:07Z"
+      "authorDate": "2026-10-24T09:34:37Z"
     },
     {
-      "sha": "6178768057dfe87665d3c8253ede4389c26840b7",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/6178768057dfe87665d3c8253ede4389c26840b7",
-      "message": "Merge PR 471 head dabcc07640 into p1/t255\n\nEight conflicts, all in fault-proof test code. No validator or library\nmodule needed a hand resolution.\n\nThe two forced-reason coordinate tests keep this branch's pin on the\nterminal step's membership check of state.pre_utxos_root.\n\nThe input-existence chronology fixture and seed take PR 471's submitted\nwithdrawal rows, with the third seed deposit and the larger seed value\nthose rows need. They also keep this branch's deposit chronologies. The\nsame-block deposit now uses transaction-id byte 84. Byte 83 is now a seed\ndeposit, and the same-block deposit's output has to stay absent from the\npredecessor ledger.\n\nThe lifecycle test now runs on PR 471's shared input-existence route\nhelper. The helper gains two options: a replacement step submitter, and a\nrefusal at step 03. The block-initial absence rows use both. The\nwithdrawal rows stay in PR 471's own submitted-withdrawal file.\n\nThe maximum-carriage test keeps this branch's deep ledger absence. It also\ntakes PR 471's explicit empty validation-trace header fields and its\nown-output journal. The raw input-existence submitter keeps this branch's\nclaimed pre-root option.\n\nUNMAPPED_VALIDATOR_COUNT is 526, which is the length of the merged list.\nThe registry test passes at 526 and fails at 525 and at 527.\n\nThe present-maximum journey now passes the own-output journal, which\nfield carriage publication now requires.\n\nThe rest merges automatically. It brings in the validation-trace dispute\nrunner and its one-step resolution, the case-on-constant CEK core arm,\nscript decoding split across six control-class stakers, and proof-thread\nopeners per source kind that reuse the opener's verified view. It also\nbrings input existence run on a submitted withdrawal and field carriage\nidentified by our own signed out-refs.",
+      "sha": "5212fc10e0d6ba72827bbcb59bd1cd711d52d9f2",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/5212fc10e0d6ba72827bbcb59bd1cd711d52d9f2",
+      "message": "List the HarmonicLabs packages as midgard-node dev dependencies\n\nOnly midgard-node's tests import them; src, scripts and bin do not. The pnpm dependency digest is unchanged.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-22T00:03:32Z"
+      "authorDate": "2026-10-24T09:07:06Z"
     },
     {
-      "sha": "91fe825a159995a04a8cb36822142ab8e5b4c807",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/91fe825a159995a04a8cb36822142ab8e5b4c807",
-      "message": "Drop the orphan funding cancel\n\nThe watcher no longer signs a cancel for orphaned funding. The cancel rows, the cancel wallet wiring and the cancel step of the orphan sweep are removed; the settle half of the sweep is unchanged.",
+      "sha": "ae2c17bacaf54010739fb13a9d180db893392c50",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ae2c17bacaf54010739fb13a9d180db893392c50",
+      "message": "Say why constant types refuse array and Value tags\n\nThe comments still blamed the HarmonicLabs tag numbering, which the owned constant types no longer use. No term constant holds an array or a Value because the Flat reader reads one as an error term.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-22T00:02:22Z"
+      "authorDate": "2026-10-24T09:07:06Z"
     },
     {
-      "sha": "df66860d2115b9dc366acc6d13de036418a8566e",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/df66860d2115b9dc366acc6d13de036418a8566e",
-      "message": "Read the stage-four begin and stage-six fold-asset evidence by their own constructors\n\nThe script-sources middle yields read the auxiliary evidence by its\nconstructor. The stage-four begin yield now reads\nTransactionRedeemerItemBeginWitness (27) and the stage-six fold-asset\nyield reads MintFoldAssetWitness (35), the constructors the evidence type\ngives these steps and the ones the off-chain writer emits. On-chain\nvectors drive both yields through withdraw over an honest step, under\ntheir own constructor and under another.\n\nThe runner now drives both steps like the other middle-yield roles: a\nnon-output step at stage four with the begin evidence, or at stage six\nwith the fold-asset evidence, carries its witness and role beside that\nrole's yield, and a stage-four begin step whose field is delivered by\nreference waits. Each step has an emulator row through the award with\nits refusals, replacing the rows that held them undriven.",
+      "sha": "5585b3d2e6fa859e42e1d5463f58d3cc8ed2139e",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/5585b3d2e6fa859e42e1d5463f58d3cc8ed2139e",
+      "message": "Pin every cost twin coefficient by its cost-model parameter name\n\nThe cost twin's only tie to PLUTUS_V3_CANONICAL_COST_MODEL_VIEW went through the HarmonicLabs cost-model reader. The test reads each coefficient by name, in the Plutus V3 parameter order of the pinned aiken, and checks the twin's budgets for tags 0 to 86 over a grid of sizes; every builtin coefficient of those tags must be read.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-21T23:49:00Z"
+      "authorDate": "2026-10-24T09:07:06Z"
     },
     {
-      "sha": "ebb0a364025ab081bc7d8c438bab3c6ca5134632",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ebb0a364025ab081bc7d8c438bab3c6ca5134632",
-      "message": "Merge commit 'f4e60d1ba2' into p1/watcher-one-store",
+      "sha": "74e91e247a91aad6751ac544a3b3208c0629d33b",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/74e91e247a91aad6751ac544a3b3208c0629d33b",
+      "message": "Export the uplc entry of midgard-validation as ESM only\n\nThe CommonJS build of the entry bundles its own copy of the Data classes, so mixing it with other CommonJS entries rejects valid Data. Nothing requires the entry; the plain-ESM fixtures import it.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-21T23:30:48Z"
+      "authorDate": "2026-10-24T09:07:06Z"
     },
     {
-      "sha": "1e4cd35ebfd4f89302c2697c3a8f2bf90c3aae92",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/1e4cd35ebfd4f89302c2697c3a8f2bf90c3aae92",
-      "message": "Install the Plutus execution dispute in the public preprod catalogue\n\nThe owner put validationTraceDispute (00000006) in the preprod-public\ncatalogue at launch (2026-10-21). Drop it from the profile's exclusions and\nfrom the curated emulator profile, which mirrors them. The nine families\nwith no installed off-chain workflow stay excluded, and mainnet keeps the\ndispute excluded.",
+      "sha": "3dc27db7d15c23b0eeea22ddacb3e6523090e0fc",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/3dc27db7d15c23b0eeea22ddacb3e6523090e0fc",
+      "message": "Run the transaction differential's reference leg on the script's own bytes\n\nThe reference leg handed the pinned aiken a program it had decoded with Midgard's own Flat and Data decoders and re-encoded, so it no longer read the script independently. Aiken now reads the script's original flat bytes and applies it to the context itself; the context reaches it as a data literal written by a CBOR reader of the leg's own. The builtin-tag check and the step sample take the script's term from the scenario generator instead of decoding the script.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-21T23:22:35Z"
+      "authorDate": "2026-10-24T09:07:05Z"
     },
     {
-      "sha": "7dcfc3d2bf0f010956b3552e2ad2405b85f61dbf",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/7dcfc3d2bf0f010956b3552e2ad2405b85f61dbf",
-      "message": "Shorten the public DA challenge window to 24 hours\n\nSet da_challenge_window_ms to 86,400,000 on preprod-public and mainnet.\nThe withdrawal delay stays 778,080,000: block maturity still dominates\nthe challenge path (259,680,000 with the 48 h full response window).\nThe open-after-Apply margin (82,800,000 against a 2,160,000 floor), the\nattestation ordering and the response budget still hold.\n\nRegenerate the profiles and the Aiken environments, and move the public\nfigures in the profile tests, the DA bond literal tests, the deployments\nREADME and decision 0002.",
+      "sha": "2eccd5cc4004b3b781a8254f1d3f3d84a48f10b0",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/2eccd5cc4004b3b781a8254f1d3f3d84a48f10b0",
+      "message": "Merge commit 'aca622b661e88b98e1ba160d95587fd740d8b351' into p1/drop-harmonic",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-21T23:18:24Z"
+      "authorDate": "2026-10-24T08:45:25Z"
     },
     {
-      "sha": "609112b23d290d4f7d9b71747a934c6442e89ebf",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/609112b23d290d4f7d9b71747a934c6442e89ebf",
-      "message": "Merge commit 'f4e60d1ba2' into p1/watchdog-850",
+      "sha": "250e8649898e1dc09fe3437edf5c7456632fad02",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/250e8649898e1dc09fe3437edf5c7456632fad02",
+      "message": "Cost builtins with a TypeScript twin of cek-cost-v1.ak\n\ncomputeMidgardCekBuiltinBudget charges the cost functions and\ncoefficients of the on-chain cost module directly, replacing the\nHarmonicLabs costing and its three corrections (variant E division,\nmultiplyInteger over the product of the sizes, verifyEd25519Signature\nlinear in the message). A differential test holds the twin to the\nreplaced costing over tags 0 to 86 and a grid of sizes. The reference\nevaluator keeps the library's own cost functions for the budget it\ncharges internally, which nothing reads.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-21T23:12:29Z"
+      "authorDate": "2026-10-24T08:20:00Z"
     },
     {
-      "sha": "005562d9b9ed37ce54750aad00962f34304c21c7",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/005562d9b9ed37ce54750aad00962f34304c21c7",
-      "message": "Weigh the new operator-watchdog test files in the node shard plan",
+      "sha": "aca622b661e88b98e1ba160d95587fd740d8b351",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/aca622b661e88b98e1ba160d95587fd740d8b351",
+      "message": "Cover our removal builder for a validation-trace conviction of a retired operator\n\nThe validation-trace dispute runner convicts a block whose operator retired\nafter committing it, with descendants committed by that operator and by a\nsecond operator the scheduler rotated to. The shared removal builder prunes\neach descendant under the validation-trace exemption, touching no operator\nnode and paying no reward, then removes the convicted block by slashing the\nretired operator's retired-directory node with the exact fee, reward and\nanchor split.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-21T23:06:08Z"
+      "authorDate": "2026-10-24T08:19:29Z"
     },
     {
-      "sha": "ac47a4741b05f107a9b92941f874756d66b359c9",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ac47a4741b05f107a9b92941f874756d66b359c9",
-      "message": "Retry a failed watchdog takeover on a backoff and report it in readiness\n\nA strike or forced retirement that failed for any reason other than a\nscript refusal ended the tick with a warning. The next tick retried on the\nfiber's schedule, and after three failures citing the only undelivered\nevent the watchdog passed that event over and went idle, so the shift\nstayed stalled.\n\nA failed takeover now defers the watchdog on a doubling backoff from 10 s\nup to 5 min and is retried until it lands. After three failures in a row\nreadiness reports operator_watchdog_takeover_failing with the last error. A\nlanded takeover, or a tick with no takeover due, clears it. An unfunded\nwallet goes through the same backoff. A script refusal still passes over\nits citation at once.\n\nA citation passed over only because its attempts ran out is cited again\nwhen no other event is citable. A refused citation is never cited again\nunder the same scheduler state.",
+      "sha": "fe1a658e1d14a6a290818c8a7b5b12e8d0bf8f21",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/fe1a658e1d14a6a290818c8a7b5b12e8d0bf8f21",
+      "message": "Hold Plutus Data in the owned classes\n\nProduction reads, builds and commits Plutus Data through the owned\nuplc-data classes; the reference evaluator boundary copies Data between\nthem and HarmonicLabs' classes without recursion. Tests and fixtures that\nbuild Data constants now build Midgard's terms, through the new\n@al-ft/midgard-validation/uplc entry for the plain-ESM fixtures.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-21T23:01:38Z"
+      "authorDate": "2026-10-24T08:14:18Z"
     },
     {
-      "sha": "387f9d0cd1e70b20505840e24e146fdd18932634",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/387f9d0cd1e70b20505840e24e146fdd18932634",
-      "message": "Choose the strike's validity window when the strike is built\n\nThe watchdog planned a strike's validity window from the L1 time of the\ntick, then ran the strike gate, the funding preflight and the reference\nscript and wallet reads before building it. A tick slower than the window\nbuilt a strike the ledger refused as expired.\n\nThe strike is now planned again from the same snapshot and citation, as of\nthe L1 time just before the build, so its window starts from that time. The\nsame planner chooses the bounds, so the on-chain checks on them still hold:\nthe range lies entirely after the inactivity threshold and the new shift\nstarts at its inclusive upper bound.",
+      "sha": "d2a28c01c635a6dd66cc640614bea1c18b047e5a",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d2a28c01c635a6dd66cc640614bea1c18b047e5a",
+      "message": "Read Flat programs into the owned UPLC terms and constants",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-21T23:01:19Z"
+      "authorDate": "2026-10-24T07:51:15Z"
     },
     {
-      "sha": "f4e60d1ba2bb4e2f5e90ef8fddf3a602ccb84fba",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/f4e60d1ba2bb4e2f5e90ef8fddf3a602ccb84fba",
-      "message": "Pin the run's own unbuilt action appearing once in a named-state hold\n\nA named-state run whose reason is also one of its alarms lists that\nreason once in the readiness detail.",
+      "sha": "721d4e980548dc116fb8ec4810e4d8216b5c2f4b",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/721d4e980548dc116fb8ec4810e4d8216b5c2f4b",
+      "message": "Write Flat programs with the owned encoder\n\nencodeMidgardCekCardanoFlatProgram now takes any program shaped as the\nencoder reads it and writes it with the owned iterative encoder; the\nHarmonicLabs encoder subclass is gone. Every golden generator --check is\nunchanged.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-21T22:48:40Z"
+      "authorDate": "2026-10-24T07:41:18Z"
     },
     {
-      "sha": "d1ff39a3913515ce782cbd84a100d660e1b2cfb3",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d1ff39a3913515ce782cbd84a100d660e1b2cfb3",
-      "message": "Alarm on a held validation-trace replay once its case open window is at risk\n\nA header whose classification waits on a held script re-execution is now\nlogged at error level, with its readiness detail naming the end of the\ncase open window, once half the window or less is left or the header's\nblock time cannot be read. The threshold and window arithmetic are shared\nwith the held claim build alarm. The hold still decides nothing.",
+      "sha": "8ea846dab8e4958280ef68e8a56d2d2c81269151",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/8ea846dab8e4958280ef68e8a56d2d2c81269151",
+      "message": "Add an owned UPLC value model and Flat encoder to midgard-validation\n\nData classes, constant types numbered as Flat numbers them, term classes\nholding Cardano builtin tags, and an iterative Flat encoder that inverts\nthe Cardano reader. The vendored parts carry the Apache-2.0 attribution\nof the HarmonicLabs packages they derive from. Nothing uses them yet: a\ndifferential test pins the encoder byte-identical to the encoder\nproduction uses today over every fixture, corpus and vector-table program.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-21T22:48:27Z"
+      "authorDate": "2026-10-24T07:36:53Z"
     },
     {
-      "sha": "1bdbbc534d0b040666dd73cbad698972035f232a",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/1bdbbc534d0b040666dd73cbad698972035f232a",
-      "message": "Weigh the new validation-trace test files in the fault-proofs shard plan",
+      "sha": "23cebbdce3a0e61ec8f09c43e5e8e77f3563d1ff",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/23cebbdce3a0e61ec8f09c43e5e8e77f3563d1ff",
+      "message": "Drop the HarmonicLabs packages nothing imports\n\nmidgard-node-tools declared all six HarmonicLabs packages, midgard-fault-proofs\ndeclared cbor and midgard-node declared bytestring and pair; none of them is\nimported. The six midgard-validation barrels imported plutus-data, uplc and\nplutus-machine for side effects only. The lockfile and the flake pnpm\ndependency hash follow.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-21T22:33:52Z"
+      "authorDate": "2026-10-24T07:22:39Z"
     },
     {
-      "sha": "af720b88dbb7198f10a9e0c808c254917b2f14ff",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/af720b88dbb7198f10a9e0c808c254917b2f14ff",
-      "message": "Merge the review fixes for the validation-trace install",
+      "sha": "796c39fc51226b1512c75bd808d8794e0166be8d",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/796c39fc51226b1512c75bd808d8794e0166be8d",
+      "message": "Remove the removal-builder overrides the validation-trace tests no longer use",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-21T21:54:30Z"
+      "authorDate": "2026-10-24T01:16:21Z"
     }
   ],
   "contributors": [
@@ -326,6 +326,18 @@
   ],
   "issues": [
     {
+      "number": 858,
+      "title": "Fault-proof raw-L1 snapshots re-decode transactions per snapshot without caching or freeing",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/858",
+      "updated_at": "2026-10-23T22:30:59Z"
+    },
+    {
+      "number": 857,
+      "title": "Concurrent history submissions can fail when one run funds from another's pinned nonce",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/857",
+      "updated_at": "2026-10-23T12:53:39Z"
+    },
+    {
       "number": 856,
       "title": "Isolate a repeatedly failing transaction from its admission batch",
       "html_url": "https://github.com/Anastasia-Labs/midgard/issues/856",
@@ -366,25 +378,13 @@
       "title": "Wall-clock assertions and tight timeouts keep Node CI validation red on CI runners",
       "html_url": "https://github.com/Anastasia-Labs/midgard/issues/849",
       "updated_at": "2026-10-20T07:14:53Z"
-    },
-    {
-      "number": 850,
-      "title": "Watchdog strike intermittently fails evaluation with 'validity start or end too far in the past' under load",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/850",
-      "updated_at": "2026-10-20T05:42:22Z"
-    },
-    {
-      "number": 848,
-      "title": "contrib test refuses the whole run when one --file is outside the package vitest config",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/848",
-      "updated_at": "2026-10-19T16:19:55Z"
     }
   ],
   "releases": [],
   "commitActivity": [
     {
       "week": 1761436800,
-      "total": 112
+      "total": 114
     },
     {
       "week": 1762041600,
@@ -448,7 +448,7 @@
     },
     {
       "week": 1771113600,
-      "total": 13
+      "total": 14
     },
     {
       "week": 1771718400,
@@ -512,7 +512,7 @@
     },
     {
       "week": 1780790400,
-      "total": 31
+      "total": 32
     },
     {
       "week": 1781395200,
@@ -532,7 +532,7 @@
     },
     {
       "week": 1783814400,
-      "total": 9
+      "total": 11
     },
     {
       "week": 1784419200,
@@ -540,11 +540,11 @@
     },
     {
       "week": 1785024000,
-      "total": 201
+      "total": 202
     },
     {
       "week": 1785628800,
-      "total": 188
+      "total": 190
     },
     {
       "week": 1786233600,
@@ -572,7 +572,7 @@
     },
     {
       "week": 1789862400,
-      "total": 130
+      "total": 174
     },
     {
       "week": 1790467200,
@@ -584,11 +584,11 @@
     },
     {
       "week": 1791676800,
-      "total": 271
+      "total": 272
     },
     {
       "week": 1792281600,
-      "total": 100
+      "total": 200
     }
   ]
 }
