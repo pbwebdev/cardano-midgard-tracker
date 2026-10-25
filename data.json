@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-10-24T10:38:15.353Z",
+  "fetchedAt": "2026-10-25T11:02:19.642Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 25,
@@ -17,109 +17,109 @@
   },
   "commits": [
     {
-      "sha": "f9594e4036b0ce6b119d8bf3502ee9b7db843ef3",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/f9594e4036b0ce6b119d8bf3502ee9b7db843ef3",
-      "message": "Time the import check's rebuild as the steadiest of three runs\n\nA single stall from the host (a collection or a preempted runner) could\nland in the one timed run and fail the bound. Take the run whose longest\nstretch is the smallest share of its total: a stall lands in one run,\nwhile a rebuild that never gives the event loop a turn stretches every\nrun and still fails.",
+      "sha": "ce545bf6293308ca1ecb4e38b53b427dce361d54",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ce545bf6293308ca1ecb4e38b53b427dce361d54",
+      "message": "Give the heavy staged-product and writeBits proof tests their own time allowance",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-24T09:34:37Z"
+      "authorDate": "2026-10-25T10:30:01Z"
     },
     {
-      "sha": "5212fc10e0d6ba72827bbcb59bd1cd711d52d9f2",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/5212fc10e0d6ba72827bbcb59bd1cd711d52d9f2",
-      "message": "List the HarmonicLabs packages as midgard-node dev dependencies\n\nOnly midgard-node's tests import them; src, scripts and bin do not. The pnpm dependency digest is unchanged.",
+      "sha": "fbc34a6a760eb63ee7efd8a0f2a8d25795ab41c0",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/fbc34a6a760eb63ee7efd8a0f2a8d25795ab41c0",
+      "message": "Keep the staged CEK core members in one family table",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-24T09:07:06Z"
+      "authorDate": "2026-10-25T10:29:58Z"
     },
     {
-      "sha": "ae2c17bacaf54010739fb13a9d180db893392c50",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ae2c17bacaf54010739fb13a9d180db893392c50",
-      "message": "Say why constant types refuse array and Value tags\n\nThe comments still blamed the HarmonicLabs tag numbering, which the owned constant types no longer use. No term constant holds an array or a Value because the Flat reader reads one as an error term.",
+      "sha": "e7def6a5d1659c3a5415138fa3f377bb46ef5c6b",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/e7def6a5d1659c3a5415138fa3f377bb46ef5c6b",
+      "message": "Merge p1/arm31-dup-merge 6ec5808d6 into the P1 compose\n\none-step-core-chains.ts: keep both sides. The staged bytes and staged\ninteger stages extend CEK_CORE_SEMANTIC_STAGES and drive staged steps of\nsemantics groups 7 and 8 with their decoded material; the staged failure\nhop of group 7 and cekCoreStagedSemanticStage (groups 7, 8 and 11) stay.\nvalidation-dispute-funding-terms.test.ts: the one-step resolver list also\nnames the staged failure hop, which the arm holders include.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-24T09:07:06Z"
+      "authorDate": "2026-10-25T07:34:53Z"
     },
     {
-      "sha": "5585b3d2e6fa859e42e1d5463f58d3cc8ed2139e",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/5585b3d2e6fa859e42e1d5463f58d3cc8ed2139e",
-      "message": "Pin every cost twin coefficient by its cost-model parameter name\n\nThe cost twin's only tie to PLUTUS_V3_CANONICAL_COST_MODEL_VIEW went through the HarmonicLabs cost-model reader. The test reads each coefficient by name, in the Plutus V3 parameter order of the pinned aiken, and checks the twin's budgets for tags 0 to 86 over a grid of sizes; every builtin coefficient of those tags must be read.",
+      "sha": "508005422091728bd68e1ac0a5cc5d529ae8c4ea",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/508005422091728bd68e1ac0a5cc5d529ae8c4ea",
+      "message": "Merge p1/c12-b2 1fd94814f into the P1 compose\n\ncek-staged-product.hops.ts: keep the shared loop hop budget and its fits\ncheck (identical budget and margin) and take the typed hop plan, with its\nfirst-column check routed through midgardCekLoopHopFits.\ncek-executor.staged-product.test.ts: both imports; the division-by-zero\npast-the-bound rows use the owned builtin() helper.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-24T09:07:06Z"
+      "authorDate": "2026-10-25T07:20:13Z"
     },
     {
-      "sha": "74e91e247a91aad6751ac544a3b3208c0629d33b",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/74e91e247a91aad6751ac544a3b3208c0629d33b",
-      "message": "Export the uplc entry of midgard-validation as ESM only\n\nThe CommonJS build of the entry bundles its own copy of the Data classes, so mixing it with other CommonJS entries rejects valid Data. Nothing requires the entry; the plain-ESM fixtures import it.",
+      "sha": "f0b1365c946a83bfff6a7c9e21984979994d080a",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/f0b1365c946a83bfff6a7c9e21984979994d080a",
+      "message": "Merge p1/forced-membership e320e0d1c into the P1 compose\n\nNo conflicts; no lockfile change.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-24T09:07:06Z"
+      "authorDate": "2026-10-25T07:13:52Z"
     },
     {
-      "sha": "3dc27db7d15c23b0eeea22ddacb3e6523090e0fc",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/3dc27db7d15c23b0eeea22ddacb3e6523090e0fc",
-      "message": "Run the transaction differential's reference leg on the script's own bytes\n\nThe reference leg handed the pinned aiken a program it had decoded with Midgard's own Flat and Data decoders and re-encoded, so it no longer read the script independently. Aiken now reads the script's original flat bytes and applies it to the context itself; the context reaches it as a data literal written by a CBOR reader of the leg's own. The builtin-tag check and the step sample take the script's term from the scenario generator instead of decoding the script.",
+      "sha": "7b87378ff66a4c15d79322d46ac05cdc6d8a8298",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/7b87378ff66a4c15d79322d46ac05cdc6d8a8298",
+      "message": "Merge p1/unbdata-large bcf791dfb into the P1 compose\n\niData, bData, unIData and unBData proved from the Data leaf alone, at\nany size.\n\nResolutions:\n- onchain/aiken/lib/midgard/cek-builtin-v1.test.ak: both imports\n  (cek_staged_blob_v1.flat_root_v1 and the staged fixture); the\n  serialiseData split-arm rows stay removed, as the writeBits-loop\n  branch moved serialiseData to its loop, and the integer-leaf rows take\n  this branch's direct-payload-bound names and the past-the-bound row.\n- The branch's two data-leaf-past-the-bound test files build their\n  terms with the owned uplc-constant / uplc-data / uplc-term classes and\n  builtin(). The row that needs a non-canonical spelling of a long\n  integer (one definite magnitude string) builds the same program with\n  the generic encoder's own classes, since the owned encoder writes the\n  canonical spelling.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-24T09:07:05Z"
+      "authorDate": "2026-10-25T06:58:28Z"
     },
     {
-      "sha": "2eccd5cc4004b3b781a8254f1d3f3d84a48f10b0",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/2eccd5cc4004b3b781a8254f1d3f3d84a48f10b0",
-      "message": "Merge commit 'aca622b661e88b98e1ba160d95587fd740d8b351' into p1/drop-harmonic",
+      "sha": "483efa09126f6d1889c860f9dbcec45d96907fdf",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/483efa09126f6d1889c860f9dbcec45d96907fdf",
+      "message": "Merge p1/writebits-loop f9e72fe6e into the P1 compose\n\nBrings in the writeBits loop, the serialiseData loop and the staged\nproduct loop.\n\nResolutions:\n- cek-builtin.evaluate-reference-builtin.ts: the branch's version (its\n  compacted-failure helpers now live in cek-builtin.compacted-failures.ts),\n  keeping the reference-evaluator boundary (referenceValueOf,\n  constantOfReferenceValue, MIDGARD_CEK_REFERENCE_BUILTIN_COSTS) and the\n  owned uplc-constant / uplc-data imports from the base.\n- cek-machine.verify-semantic-data.ts: the branch's version, with DataConstr\n  and DataI from the owned uplc-data module.\n- cek-executor.write-bits-builtin.ts: DataList from the owned uplc-data\n  module, the class decodeMidgardCekConstantWitness now returns, so the\n  loop-route check still recognises a decoded index list.\n- The branch's new tests and test helpers build their terms with the owned\n  uplc-constant / uplc-term classes, builtin() and\n  encodeMidgardCekCardanoFlatProgram, and cross into the reference\n  evaluator through referenceValueOf.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-24T08:45:25Z"
+      "authorDate": "2026-10-25T06:48:41Z"
     },
     {
-      "sha": "250e8649898e1dc09fe3437edf5c7456632fad02",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/250e8649898e1dc09fe3437edf5c7456632fad02",
-      "message": "Cost builtins with a TypeScript twin of cek-cost-v1.ak\n\ncomputeMidgardCekBuiltinBudget charges the cost functions and\ncoefficients of the on-chain cost module directly, replacing the\nHarmonicLabs costing and its three corrections (variant E division,\nmultiplyInteger over the product of the sizes, verifyEd25519Signature\nlinear in the message). A differential test holds the twin to the\nreplaced costing over tags 0 to 86 and a grid of sizes. The reference\nevaluator keeps the library's own cost functions for the budget it\ncharges internally, which nothing reads.",
+      "sha": "9af81f62f29dea86b69ca0e0db2a9d9e8d7385e5",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/9af81f62f29dea86b69ca0e0db2a9d9e8d7385e5",
+      "message": "Merge p1/builtin-failures 2f8e7fa24 into the PR 471 head\n\nStaged-operand builtin failures, the staged conversion hop and the\nbyteStringToInteger input bound, onto the owned UPLC classes.\n\nResolutions:\n- tests/cek-executor.staged-route.test.ts: the branch's content (its\n  helpers moved to tests/helpers/cek-staged-route-terms.ts and its\n  failure rows to cek-executor.staged-route-failures.test.ts), with\n  the owned-class imports and the builtin() helper.\n- The branch's staged-builtin test files and test helpers build their\n  terms with the owned classes (src/uplc-constant.ts, uplc-data.ts,\n  uplc-term.ts, tests/helpers/uplc-builtins.ts) and encode programs with\n  encodeMidgardCekCardanoFlatProgram, as the shared term helpers they\n  call now do. CEKConst values for the reference evaluator stay on the\n  evaluator's own classes. cek-executor.staged-bitwise.test.ts names its\n  three-operand logical terms through one local helper.\n- src/cek-builtin.evaluate-reference-builtin.ts: both sides grow the\n  file; five blank or split lines are joined so it stays within the\n  500-line limit (layout only).",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-24T08:20:00Z"
+      "authorDate": "2026-10-25T06:27:01Z"
     },
     {
-      "sha": "aca622b661e88b98e1ba160d95587fd740d8b351",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/aca622b661e88b98e1ba160d95587fd740d8b351",
-      "message": "Cover our removal builder for a validation-trace conviction of a retired operator\n\nThe validation-trace dispute runner convicts a block whose operator retired\nafter committing it, with descendants committed by that operator and by a\nsecond operator the scheduler rotated to. The shared removal builder prunes\neach descendant under the validation-trace exemption, touching no operator\nnode and paying no reward, then removes the convicted block by slashing the\nretired operator's retired-directory node with the exact fee, reward and\nanchor split.",
+      "sha": "6ec5808d64dde45c5ef28a8c42ab1ac098e89e78",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/6ec5808d64dde45c5ef28a8c42ab1ac098e89e78",
+      "message": "Describe the reconciliation-only staging hold at the prepare holder",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-24T08:19:29Z"
+      "authorDate": "2026-10-25T06:12:41Z"
     },
     {
-      "sha": "fe1a658e1d14a6a290818c8a7b5b12e8d0bf8f21",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/fe1a658e1d14a6a290818c8a7b5b12e8d0bf8f21",
-      "message": "Hold Plutus Data in the owned classes\n\nProduction reads, builds and commits Plutus Data through the owned\nuplc-data classes; the reference evaluator boundary copies Data between\nthem and HarmonicLabs' classes without recursion. Tests and fixtures that\nbuild Data constants now build Midgard's terms, through the new\n@al-ft/midgard-validation/uplc entry for the plain-ESM fixtures.",
+      "sha": "1fd94814fbda05c69d7abaafc3b4b456da7d227d",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/1fd94814fbda05c69d7abaafc3b4b456da7d227d",
+      "message": "Prove a division by zero past the direct bound through the executor\n\nAlso rewrap the staged builtins module doc to the line limit.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-24T08:14:18Z"
+      "authorDate": "2026-10-25T06:11:12Z"
     },
     {
-      "sha": "d2a28c01c635a6dd66cc640614bea1c18b047e5a",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d2a28c01c635a6dd66cc640614bea1c18b047e5a",
-      "message": "Read Flat programs into the owned UPLC terms and constants",
+      "sha": "ee87614c9e0020f60c909c8bcfb618e3ed9be10e",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ee87614c9e0020f60c909c8bcfb618e3ed9be10e",
+      "message": "Cover all-ones operands in the hop cost model and return an indeterminate plan when no column fits",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-24T07:51:15Z"
+      "authorDate": "2026-10-25T06:11:08Z"
     },
     {
-      "sha": "721d4e980548dc116fb8ec4810e4d8216b5c2f4b",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/721d4e980548dc116fb8ec4810e4d8216b5c2f4b",
-      "message": "Write Flat programs with the owned encoder\n\nencodeMidgardCekCardanoFlatProgram now takes any program shaped as the\nencoder reads it and writes it with the owned iterative encoder; the\nHarmonicLabs encoder subclass is gone. Every golden generator --check is\nunchanged.",
+      "sha": "0ffc76c7826cc2f35bb54c6272d665c11f165df2",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/0ffc76c7826cc2f35bb54c6272d665c11f165df2",
+      "message": "Pin the staged product result's leading byte and zero memory with refusal rows",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-24T07:41:18Z"
+      "authorDate": "2026-10-25T06:11:08Z"
     },
     {
-      "sha": "8ea846dab8e4958280ef68e8a56d2d2c81269151",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/8ea846dab8e4958280ef68e8a56d2d2c81269151",
-      "message": "Add an owned UPLC value model and Flat encoder to midgard-validation\n\nData classes, constant types numbered as Flat numbers them, term classes\nholding Cardano builtin tags, and an iterative Flat encoder that inverts\nthe Cardano reader. The vendored parts carry the Apache-2.0 attribution\nof the HarmonicLabs packages they derive from. Nothing uses them yet: a\ndifferential test pins the encoder byte-identical to the encoder\nproduction uses today over every fixture, corpus and vector-table program.",
+      "sha": "2f8e7fa247cdbf91ed5b4948c373b67772ef403d",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/2f8e7fa247cdbf91ed5b4948c373b67772ef403d",
+      "message": "Pin the staged operand binding and the conversion input bound\n\nRows that claim the correct value of what is actually staged, so each is\nrefused only by the check it names:\n- byteStringToInteger with different bytes of the same length staged in\n  place of the input, claiming the staged bytes' value, in both byte orders;\n- verifyEd25519Signature and verifySchnorrSecp256k1Signature with another\n  message of the same length staged in place of the argument, claiming the\n  valid signature over the staged message;\n- byteStringToInteger over 65,537 bytes whose value is 7, claiming 7: big\n  endian, little endian and in three pieces, with the same shapes at 65,536\n  bytes accepted.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-24T07:36:53Z"
+      "authorDate": "2026-10-25T05:41:37Z"
     },
     {
-      "sha": "23cebbdce3a0e61ec8f09c43e5e8e77f3563d1ff",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/23cebbdce3a0e61ec8f09c43e5e8e77f3563d1ff",
-      "message": "Drop the HarmonicLabs packages nothing imports\n\nmidgard-node-tools declared all six HarmonicLabs packages, midgard-fault-proofs\ndeclared cbor and midgard-node declared bytestring and pair; none of them is\nimported. The six midgard-validation barrels imported plutus-data, uplc and\nplutus-machine for side effects only. The lockfile and the flake pnpm\ndependency hash follow.",
+      "sha": "7ee76cdf40e63ad9770abc2b25ac49c0fabb5095",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/7ee76cdf40e63ad9770abc2b25ac49c0fabb5095",
+      "message": "Refresh interactive-emulator durations for the staged-step files\n\nRecords one local forks-1 run for the staged-step files whose entries had\ndrifted and adds entries for the files the removal-by-another-record\nrows and the merged own-thread reclaim files added.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-24T07:22:39Z"
+      "authorDate": "2026-10-25T04:55:35Z"
     },
     {
-      "sha": "796c39fc51226b1512c75bd808d8794e0166be8d",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/796c39fc51226b1512c75bd808d8794e0166be8d",
-      "message": "Remove the removal-builder overrides the validation-trace tests no longer use",
+      "sha": "d81a3534263e30215b0642d757729a0b4dfa4697",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d81a3534263e30215b0642d757729a0b4dfa4697",
+      "message": "Spend back staging outputs when another record resolves the case\n\nA staged step's staging outputs stayed at our staging address once the\nblock was removed against another record: the resolution reached the run\nbefore the staging sweep, so no spend back went out. The staging wrapper\nnow sits outside the own-thread reclaim, so a thread of ours is cancelled\nfirst and the sweep then sees the resolution, whether it is raised or\nobserved as a terminal our journal did not create. It spends each staging\noutput back and holds the ending as outstanding until each spend back is\nfinal at release depth.\n\nUnder reconciliation-only authority the sweep keeps holding the outputs a\nthread of ours past the PrepareSelected move holds, until that thread\nleaves its holders. When the thread committed evidence and no staging is\nfound, the staged-step plan now refuses, and the run raises the one-step\nalarm each time instead of building without the staging.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-24T01:16:21Z"
+      "authorDate": "2026-10-25T04:55:35Z"
     }
   ],
   "contributors": [
@@ -383,10 +383,6 @@
   "releases": [],
   "commitActivity": [
     {
-      "week": 1761436800,
-      "total": 114
-    },
-    {
       "week": 1762041600,
       "total": 46
     },
@@ -588,7 +584,11 @@
     },
     {
       "week": 1792281600,
-      "total": 200
+      "total": 183
+    },
+    {
+      "week": 1792886400,
+      "total": 17
     }
   ]
 }
