@@ -1,10 +1,10 @@
 {
-  "fetchedAt": "2026-10-25T11:02:19.642Z",
+  "fetchedAt": "2026-10-26T12:35:16.373Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 25,
     "forks_count": 11,
-    "open_issues_count": 190
+    "open_issues_count": 191
   },
   "languages": {
     "Aiken": 359544,
@@ -17,109 +17,109 @@
   },
   "commits": [
     {
-      "sha": "ce545bf6293308ca1ecb4e38b53b427dce361d54",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ce545bf6293308ca1ecb4e38b53b427dce361d54",
-      "message": "Give the heavy staged-product and writeBits proof tests their own time allowance",
+      "sha": "af468352ef244ff7afb160901c6f2757b0474c24",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/af468352ef244ff7afb160901c6f2757b0474c24",
+      "message": "Compare the classifier launch scope with the installed catalogue rather than a fixed count",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-25T10:30:01Z"
+      "authorDate": "2026-10-26T12:08:50Z"
     },
     {
-      "sha": "fbc34a6a760eb63ee7efd8a0f2a8d25795ab41c0",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/fbc34a6a760eb63ee7efd8a0f2a8d25795ab41c0",
-      "message": "Keep the staged CEK core members in one family table",
+      "sha": "5c448742b8af510c35b0674e2df6f6bee5ea89ae",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/5c448742b8af510c35b0674e2df6f6bee5ea89ae",
+      "message": "Give the writeBits hop-plan proof test the same time allowance as its siblings",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-25T10:29:58Z"
+      "authorDate": "2026-10-26T11:36:02Z"
     },
     {
-      "sha": "e7def6a5d1659c3a5415138fa3f377bb46ef5c6b",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/e7def6a5d1659c3a5415138fa3f377bb46ef5c6b",
-      "message": "Merge p1/arm31-dup-merge 6ec5808d6 into the P1 compose\n\none-step-core-chains.ts: keep both sides. The staged bytes and staged\ninteger stages extend CEK_CORE_SEMANTIC_STAGES and drive staged steps of\nsemantics groups 7 and 8 with their decoded material; the staged failure\nhop of group 7 and cekCoreStagedSemanticStage (groups 7, 8 and 11) stay.\nvalidation-dispute-funding-terms.test.ts: the one-step resolver list also\nnames the staged failure hop, which the arm holders include.",
+      "sha": "2bc898efe9ec5e41034dea319a7497b0418f5d80",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/2bc898efe9ec5e41034dea319a7497b0418f5d80",
+      "message": "Document P1 user flows and operational runbooks\n\nCovers deposit and withdrawal milestones, forced-transaction limits,\nevaluate(), the curated operator lifecycle and runbooks for commit lag,\ncatch-up, replay mismatches, forced-admission divergence, follower holds,\nstuck settlements and proof submission deadlines under permissionless\nchallenging.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-25T07:34:53Z"
+      "authorDate": "2026-10-26T11:05:57Z"
     },
     {
-      "sha": "508005422091728bd68e1ac0a5cc5d529ae8c4ea",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/508005422091728bd68e1ac0a5cc5d529ae8c4ea",
-      "message": "Merge p1/c12-b2 1fd94814f into the P1 compose\n\ncek-staged-product.hops.ts: keep the shared loop hop budget and its fits\ncheck (identical budget and margin) and take the typed hop plan, with its\nfirst-column check routed through midgardCekLoopHopFits.\ncek-executor.staged-product.test.ts: both imports; the division-by-zero\npast-the-bound rows use the owned builtin() helper.",
+      "sha": "b3c16599915ed136e36b54d15a91abedd4d1ae17",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/b3c16599915ed136e36b54d15a91abedd4d1ae17",
+      "message": "List the all-purposes scan steps the script-integrity and missing-redeemer walks share",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-25T07:20:13Z"
+      "authorDate": "2026-10-26T10:49:46Z"
     },
     {
-      "sha": "f0b1365c946a83bfff6a7c9e21984979994d080a",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/f0b1365c946a83bfff6a7c9e21984979994d080a",
-      "message": "Merge p1/forced-membership e320e0d1c into the P1 compose\n\nNo conflicts; no lockfile change.",
+      "sha": "f1239d33ce3f837cd905b9f884df95d580d2a156",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/f1239d33ce3f837cd905b9f884df95d580d2a156",
+      "message": "Leave a leaf with an unresolved input to the input families in script-integrity detection\n\nDetection now declines when a spent or referenced input has no\npredecessor descriptor instead of failing to build the source index, so\nthe replay goes on to prove the missing input.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-25T07:13:52Z"
+      "authorDate": "2026-10-26T10:49:40Z"
     },
     {
-      "sha": "7b87378ff66a4c15d79322d46ac05cdc6d8a8298",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/7b87378ff66a4c15d79322d46ac05cdc6d8a8298",
-      "message": "Merge p1/unbdata-large bcf791dfb into the P1 compose\n\niData, bData, unIData and unBData proved from the Data leaf alone, at\nany size.\n\nResolutions:\n- onchain/aiken/lib/midgard/cek-builtin-v1.test.ak: both imports\n  (cek_staged_blob_v1.flat_root_v1 and the staged fixture); the\n  serialiseData split-arm rows stay removed, as the writeBits-loop\n  branch moved serialiseData to its loop, and the integer-leaf rows take\n  this branch's direct-payload-bound names and the past-the-bound row.\n- The branch's two data-leaf-past-the-bound test files build their\n  terms with the owned uplc-constant / uplc-data / uplc-term classes and\n  builtin(). The row that needs a non-canonical spelling of a long\n  integer (one definite magnitude string) builds the same program with\n  the generic encoder's own classes, since the owned encoder writes the\n  canonical spelling.",
+      "sha": "3011340d9d2ef5562d5c4eef614b7f03a4d957a9",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/3011340d9d2ef5562d5c4eef614b7f03a4d957a9",
+      "message": "Point the script-integrity scenario registry at the forged-successor test's name",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-25T06:58:28Z"
+      "authorDate": "2026-10-26T10:42:15Z"
     },
     {
-      "sha": "483efa09126f6d1889c860f9dbcec45d96907fdf",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/483efa09126f6d1889c860f9dbcec45d96907fdf",
-      "message": "Merge p1/writebits-loop f9e72fe6e into the P1 compose\n\nBrings in the writeBits loop, the serialiseData loop and the staged\nproduct loop.\n\nResolutions:\n- cek-builtin.evaluate-reference-builtin.ts: the branch's version (its\n  compacted-failure helpers now live in cek-builtin.compacted-failures.ts),\n  keeping the reference-evaluator boundary (referenceValueOf,\n  constantOfReferenceValue, MIDGARD_CEK_REFERENCE_BUILTIN_COSTS) and the\n  owned uplc-constant / uplc-data imports from the base.\n- cek-machine.verify-semantic-data.ts: the branch's version, with DataConstr\n  and DataI from the owned uplc-data module.\n- cek-executor.write-bits-builtin.ts: DataList from the owned uplc-data\n  module, the class decodeMidgardCekConstantWitness now returns, so the\n  loop-route check still recognises a decoded index list.\n- The branch's new tests and test helpers build their terms with the owned\n  uplc-constant / uplc-term classes, builtin() and\n  encodeMidgardCekCardanoFlatProgram, and cross into the reference\n  evaluator through referenceValueOf.",
+      "sha": "e251b4c8d7af1d9fb08ce362c9a2848cf8cf5116",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/e251b4c8d7af1d9fb08ce362c9a2848cf8cf5116",
+      "message": "Count both new cursor families in the family-roster tests",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-25T06:48:41Z"
+      "authorDate": "2026-10-26T09:06:24Z"
     },
     {
-      "sha": "9af81f62f29dea86b69ca0e0db2a9d9e8d7385e5",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/9af81f62f29dea86b69ca0e0db2a9d9e8d7385e5",
-      "message": "Merge p1/builtin-failures 2f8e7fa24 into the PR 471 head\n\nStaged-operand builtin failures, the staged conversion hop and the\nbyteStringToInteger input bound, onto the owned UPLC classes.\n\nResolutions:\n- tests/cek-executor.staged-route.test.ts: the branch's content (its\n  helpers moved to tests/helpers/cek-staged-route-terms.ts and its\n  failure rows to cek-executor.staged-route-failures.test.ts), with\n  the owned-class imports and the builtin() helper.\n- The branch's staged-builtin test files and test helpers build their\n  terms with the owned classes (src/uplc-constant.ts, uplc-data.ts,\n  uplc-term.ts, tests/helpers/uplc-builtins.ts) and encode programs with\n  encodeMidgardCekCardanoFlatProgram, as the shared term helpers they\n  call now do. CEKConst values for the reference evaluator stay on the\n  evaluator's own classes. cek-executor.staged-bitwise.test.ts names its\n  three-operand logical terms through one local helper.\n- src/cek-builtin.evaluate-reference-builtin.ts: both sides grow the\n  file; five blank or split lines are joined so it stays within the\n  500-line limit (layout only).",
+      "sha": "7e0e9381fbd87d769a1cc0dce81aab1141a56698",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/7e0e9381fbd87d769a1cc0dce81aab1141a56698",
+      "message": "Merge remote-tracking branch 'origin/colll78/canonical-v1-watcher-l1-source-checkpoint' into p1/w1c-sihm\n\n# Conflicts:\n#\tdemo/midgard-fault-proofs/src/workflow/cursor-family-spec.ts",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-25T06:27:01Z"
+      "authorDate": "2026-10-26T08:28:59Z"
     },
     {
-      "sha": "6ec5808d64dde45c5ef28a8c42ab1ac098e89e78",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/6ec5808d64dde45c5ef28a8c42ab1ac098e89e78",
-      "message": "Describe the reconciliation-only staging hold at the prepare holder",
+      "sha": "c22cf08bd78a23062229440a747d7454556039ae",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/c22cf08bd78a23062229440a747d7454556039ae",
+      "message": "Cover every script-integrity role with forged successors and admissible forced rows",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-25T06:12:41Z"
+      "authorDate": "2026-10-26T08:28:29Z"
     },
     {
-      "sha": "1fd94814fbda05c69d7abaafc3b4b456da7d227d",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/1fd94814fbda05c69d7abaafc3b4b456da7d227d",
-      "message": "Prove a division by zero past the direct bound through the executor\n\nAlso rewrap the staged builtins module doc to the line limit.",
+      "sha": "a12fa319673b5957349c48d5703a74e5bdc968e9",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/a12fa319673b5957349c48d5703a74e5bdc968e9",
+      "message": "Fit each script-integrity walk page to the transaction budget\n\nThe prover now builds proof-opening pages at the configured maximum and\nhalves them until the evaluated transaction fits, so a deep ledger or\nsource map no longer stalls the walk. A max-shape case over a padded\nledger and source map covers the fitted path through conviction.\nForced fixtures use shapes the forced-transaction admission screen accepts.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-25T06:11:12Z"
+      "authorDate": "2026-10-26T08:28:21Z"
     },
     {
-      "sha": "ee87614c9e0020f60c909c8bcfb618e3ed9be10e",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ee87614c9e0020f60c909c8bcfb618e3ed9be10e",
-      "message": "Cover all-ones operands in the hop cost model and return an indeterminate plan when no column fits",
+      "sha": "3df1a40af62cd5ea58abef44d799965537665b40",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/3df1a40af62cd5ea58abef44d799965537665b40",
+      "message": "Refuse opening the next purpose field while the current one is mid-walk",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-25T06:11:08Z"
+      "authorDate": "2026-10-26T08:28:20Z"
     },
     {
-      "sha": "0ffc76c7826cc2f35bb54c6272d665c11f165df2",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/0ffc76c7826cc2f35bb54c6272d665c11f165df2",
-      "message": "Pin the staged product result's leading byte and zero memory with refusal rows",
+      "sha": "6df0fb2791c1ca48f1e232ba3786f011315d1af7",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/6df0fb2791c1ca48f1e232ba3786f011315d1af7",
+      "message": "Merge branch 'p1/t261m-entry-count' into p1/ga-cd-walk",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-25T06:11:08Z"
+      "authorDate": "2026-10-26T07:10:07Z"
     },
     {
-      "sha": "2f8e7fa247cdbf91ed5b4948c373b67772ef403d",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/2f8e7fa247cdbf91ed5b4948c373b67772ef403d",
-      "message": "Pin the staged operand binding and the conversion input bound\n\nRows that claim the correct value of what is actually staged, so each is\nrefused only by the check it names:\n- byteStringToInteger with different bytes of the same length staged in\n  place of the input, claiming the staged bytes' value, in both byte orders;\n- verifyEd25519Signature and verifySchnorrSecp256k1Signature with another\n  message of the same length staged in place of the argument, claiming the\n  valid signature over the staged message;\n- byteStringToInteger over 65,537 bytes whose value is 7, claiming 7: big\n  endian, little endian and in three pieces, with the same shapes at 65,536\n  bytes accepted.",
+      "sha": "48f9637bccc547463abec1052a66eaf2ceba0772",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/48f9637bccc547463abec1052a66eaf2ceba0772",
+      "message": "List the operator-economics module among the deployment-profile generator inputs\n\nAdd it wherever the generator's source files are enumerated: the Aiken CI\npath filters, the golden channel, the interactive-setup and traced-refusal\ninput copies, and the preflight deployment checks. Regenerate the\nrequired-checks page.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-25T05:41:37Z"
+      "authorDate": "2026-10-26T06:43:57Z"
     },
     {
-      "sha": "7ee76cdf40e63ad9770abc2b25ac49c0fabb5095",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/7ee76cdf40e63ad9770abc2b25ac49c0fabb5095",
-      "message": "Refresh interactive-emulator durations for the staged-step files\n\nRecords one local forks-1 run for the staged-step files whose entries had\ndrifted and adds entries for the files the removal-by-another-record\nrows and the merged own-thread reclaim files added.",
+      "sha": "95512708fb845c8176980d4da9ab7b05095d763e",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/95512708fb845c8176980d4da9ab7b05095d763e",
+      "message": "State the committed-field-shape item ceiling on its own terms",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-25T04:55:35Z"
+      "authorDate": "2026-10-26T06:42:56Z"
     },
     {
-      "sha": "d81a3534263e30215b0642d757729a0b4dfa4697",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d81a3534263e30215b0642d757729a0b4dfa4697",
-      "message": "Spend back staging outputs when another record resolves the case\n\nA staged step's staging outputs stayed at our staging address once the\nblock was removed against another record: the resolution reached the run\nbefore the staging sweep, so no spend back went out. The staging wrapper\nnow sits outside the own-thread reclaim, so a thread of ours is cancelled\nfirst and the sweep then sees the resolution, whether it is raised or\nobserved as a terminal our journal did not create. It spends each staging\noutput back and holds the ending as outstanding until each spend back is\nfinal at release depth.\n\nUnder reconciliation-only authority the sweep keeps holding the outputs a\nthread of ours past the PrepareSelected move holds, until that thread\nleaves its holders. When the thread committed evidence and no staging is\nfound, the staged-step plan now refuses, and the run raises the one-step\nalarm each time instead of building without the staging.",
+      "sha": "5fa3c053c96f9311aeba82bb51bb40c5c07be0bb",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/5fa3c053c96f9311aeba82bb51bb40c5c07be0bb",
+      "message": "Name the canonical-decodability cursor's transaction field bad_tx_id in the spec",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-25T04:55:35Z"
+      "authorDate": "2026-10-26T06:42:56Z"
     }
   ],
   "contributors": [
@@ -326,6 +326,18 @@
   ],
   "issues": [
     {
+      "number": 838,
+      "title": "Dev-ex footguns from transition-trace and history-admission work",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/838",
+      "updated_at": "2026-10-26T06:05:56Z"
+    },
+    {
+      "number": 859,
+      "title": "da-publication-reconciler E2E: reserve-then-release port race (EADDRINUSE on committee start)",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/859",
+      "updated_at": "2026-10-26T04:02:05Z"
+    },
+    {
       "number": 858,
       "title": "Fault-proof raw-L1 snapshots re-decode transactions per snapshot without caching or freeing",
       "html_url": "https://github.com/Anastasia-Labs/midgard/issues/858",
@@ -366,18 +378,6 @@
       "title": "Let the defender reclaim a stopped validation-trace thread's value after the challenge expires",
       "html_url": "https://github.com/Anastasia-Labs/midgard/issues/852",
       "updated_at": "2026-10-22T00:08:21Z"
-    },
-    {
-      "number": 851,
-      "title": "Devnet journey cannot reconcile expired deposit attempts with its default node-ledger provider",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/851",
-      "updated_at": "2026-10-21T09:34:45Z"
-    },
-    {
-      "number": 849,
-      "title": "Wall-clock assertions and tight timeouts keep Node CI validation red on CI runners",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/849",
-      "updated_at": "2026-10-20T07:14:53Z"
     }
   ],
   "releases": [],
@@ -492,11 +492,11 @@
     },
     {
       "week": 1778371200,
-      "total": 41
+      "total": 23
     },
     {
       "week": 1778976000,
-      "total": 16
+      "total": 14
     },
     {
       "week": 1779580800,
@@ -580,15 +580,15 @@
     },
     {
       "week": 1791676800,
-      "total": 272
+      "total": 274
     },
     {
       "week": 1792281600,
-      "total": 183
+      "total": 112
     },
     {
       "week": 1792886400,
-      "total": 17
+      "total": 86
     }
   ]
 }
