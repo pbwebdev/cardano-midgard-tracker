@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-10-26T12:35:16.373Z",
+  "fetchedAt": "2026-10-27T11:52:26.842Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 25,
@@ -17,109 +17,109 @@
   },
   "commits": [
     {
-      "sha": "af468352ef244ff7afb160901c6f2757b0474c24",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/af468352ef244ff7afb160901c6f2757b0474c24",
-      "message": "Compare the classifier launch scope with the installed catalogue rather than a fixed count",
+      "sha": "a1f6f6ec78bb862dfb2fc5b06edc8df63c21b840",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/a1f6f6ec78bb862dfb2fc5b06edc8df63c21b840",
+      "message": "Merge branch 'p1/cired2' into p1/w2b-ensi-essd",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-26T12:08:50Z"
+      "authorDate": "2026-10-27T05:15:49Z"
     },
     {
-      "sha": "5c448742b8af510c35b0674e2df6f6bee5ea89ae",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/5c448742b8af510c35b0674e2df6f6bee5ea89ae",
-      "message": "Give the writeBits hop-plan proof test the same time allowance as its siblings",
+      "sha": "15e94103d6640952339deea895f1382880fcad3d",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/15e94103d6640952339deea895f1382880fcad3d",
+      "message": "Hold the forced readiness probe's request at one instant\n\nThe raw-probe readiness cases force the probe by setting the provider\nevidence bound to 1 ms, and the handler then reads the probe's own\nsuccess back under that same bound. A runner that stalls for 2 ms or\nmore between the probe's completion and the handler's read sees the\nfresh success as stale, so the healthy case reports\nproviderQueryHealthy false (node shard 1/3 on CI). Injecting a 3 ms\nstall at that point fails both healthy cases every run.\n\nThe fixture now freezes Date for a forced-probe request, so the probe's\ncompletion and the handler's read share one clock reading. Production is\nunchanged: its bound defaults to 30 s and nothing between the two reads\nwaits on I/O.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-26T11:36:02Z"
+      "authorDate": "2026-10-27T05:04:22Z"
     },
     {
-      "sha": "2bc898efe9ec5e41034dea319a7497b0418f5d80",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/2bc898efe9ec5e41034dea319a7497b0418f5d80",
-      "message": "Document P1 user flows and operational runbooks\n\nCovers deposit and withdrawal milestones, forced-transaction limits,\nevaluate(), the curated operator lifecycle and runbooks for commit lag,\ncatch-up, replay mismatches, forced-admission divergence, follower holds,\nstuck settlements and proof submission deadlines under permissionless\nchallenging.",
+      "sha": "40147436c6d2b4bc9d39ef410cfbca6090aadfad",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/40147436c6d2b4bc9d39ef410cfbca6090aadfad",
+      "message": "Merge commit 'd9c28cdf3' into p1/w2b-ensi-essd",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-26T11:05:57Z"
+      "authorDate": "2026-10-27T05:00:14Z"
     },
     {
-      "sha": "b3c16599915ed136e36b54d15a91abedd4d1ae17",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/b3c16599915ed136e36b54d15a91abedd4d1ae17",
-      "message": "List the all-purposes scan steps the script-integrity and missing-redeemer walks share",
+      "sha": "e54b756284b51f5a46f7bdd12809ad5e90e9d7ed",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/e54b756284b51f5a46f7bdd12809ad5e90e9d7ed",
+      "message": "Merge remote-tracking branch 'origin/colll78/canonical-v1-watcher-l1-source-checkpoint' into p1/w2b-ensi-essd\n\n# Conflicts:\n#\tdemo/midgard-fault-proofs/src/workflow/catalogue-replay.ts\n#\tdemo/midgard-fault-proofs/src/workflow/complete-replay.resolved-output-non-canonical-complete-canonical-replay.ts\n#\tdemo/midgard-fault-proofs/src/workflow/cursor-family-spec.ts\n#\tdemo/midgard-fault-proofs/src/workflow/family-application-registry.bundle-cursor-family-application-record.ts\n#\tdemo/midgard-fault-proofs/src/workflow/family-application-registry.family-application-registry.ts\n#\tdemo/midgard-fault-proofs/src/workflow/family-application-registry.ts\n#\tdemo/midgard-fault-proofs/src/workflow/family-definitions.ts\n#\tdemo/midgard-fault-proofs/src/workflow/installed-categories.ts\n#\tdemo/midgard-fault-proofs/tests/cursor-family-state.test.ts\n#\tdemo/midgard-fault-proofs/tests/family-application-registry.bound-steps.ts\n#\tdemo/midgard-fault-proofs/tests/manifest-bound-family-assembly.test.ts\n#\tdemo/midgard-fault-proofs/tests/support/emulator/contracts.build-minimal-fault-proof-contracts.ts\n#\tdemo/midgard-fault-proofs/tests/support/validator-scenario-registry.ts\n#\tdemo/midgard-fault-proofs/tests/support/validator-scenario-registry.unmapped-families.ts\n#\tdemo/midgard-node-tools/devnet/watcher-journeys/catalogue.test.ts\n#\tdemo/midgard-node-tools/devnet/watcher-journeys/catalogue.ts\n#\tdemo/midgard-node-tools/devnet/watcher-journeys/readiness.test.ts\n#\tdemo/midgard-node-tools/devnet/watcher-journeys/script-cases.test.ts\n#\tdemo/midgard-node-tools/devnet/watcher-journeys/script-cases.ts\n#\tdemo/midgard-node/tests/deployable-scripts.test.ts\n#\tdemo/midgard-node/tests/helpers/deployable-catalogue-order-pins.ts\n#\tdemo/midgard-node/tests/helpers/published-workflow-deployment.submit-published-initialization.ts\n#\tdemo/midgard-sdk/tests/fault-proof.fault-proof-contract-builder.ts\n#\tdemo/midgard-watcher/tests/fault-proofs/fault-proof-application.test.ts\n#\tdemo/module-size-exceptions.json\n#\tdocs/fault-proofs/catalogue-status.md",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-26T10:49:46Z"
+      "authorDate": "2026-10-27T04:59:29Z"
     },
     {
-      "sha": "f1239d33ce3f837cd905b9f884df95d580d2a156",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/f1239d33ce3f837cd905b9f884df95d580d2a156",
-      "message": "Leave a leaf with an unresolved input to the input families in script-integrity detection\n\nDetection now declines when a spent or referenced input has no\npredecessor descriptor instead of failing to build the source index, so\nthe replay goes on to prove the missing input.",
+      "sha": "d9c28cdf38c6acef94865bd3213f0970db8e254f",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d9c28cdf38c6acef94865bd3213f0970db8e254f",
+      "message": "Count the event loop's turns during a foreign block's import\n\nThe import test bounded the longest stretch without a timer tick by five\ntransactions' share of the run's wall-clock total. The stretch before the\nfirst transaction (decoding the block, and the process's first evaluation)\nis a quarter to a third of a 16-transaction run, so a loaded runner crossed\nthe bound with the yields in place. An immediate that re-queues itself\nruns once per turn: the import gives one turn per transaction (16), and\nnone without the per-event yield.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-26T10:49:40Z"
+      "authorDate": "2026-10-27T02:53:25Z"
     },
     {
-      "sha": "3011340d9d2ef5562d5c4eef614b7f03a4d957a9",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/3011340d9d2ef5562d5c4eef614b7f03a4d957a9",
-      "message": "Point the script-integrity scenario registry at the forged-successor test's name",
+      "sha": "4c4e35818e4dc183b18c19540a7074f90671a99d",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/4c4e35818e4dc183b18c19540a7074f90671a99d",
+      "message": "Read the confirmed proof's own reservation by id in the collateral release test\n\nThe store lists reservations by id. The test took the first record as the\nproof's own, which held only while the proof's derived reservation id\nsorted before the peer's fixed one. Wiring the unused-script-witness family\ninto the catalogue (e25aff33a) changed the deployment roster, and with it\nthe derived id, so the test read the peer's record instead. Production\nbehaves as intended: the proof selects fresh collateral, and the store\nrefuses to re-lease collateral the peer holds.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-26T10:42:15Z"
+      "authorDate": "2026-10-27T02:47:26Z"
     },
     {
-      "sha": "e251b4c8d7af1d9fb08ce362c9a2848cf8cf5116",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/e251b4c8d7af1d9fb08ce362c9a2848cf8cf5116",
-      "message": "Count both new cursor families in the family-roster tests",
+      "sha": "c38359d3c932d8f3c226d6a0eb3c0efaf86baad0",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/c38359d3c932d8f3c226d6a0eb3c0efaf86baad0",
+      "message": "Size the duplicate-asset maximum shape at the 5,000-byte value cap\n\nSince the ledger-output scan refuses a Value over 5,000 bytes (b8c10beee),\nan accepted output filled with assets to the 16,384-byte output bound is no\nlonger canonical, so its twin cannot be. The real maximum for a repeat at\nthe last asset name is the value at the cap in both the accepted and the\nforced case; the shape test now also shows one more byte is past it.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-26T09:06:24Z"
+      "authorDate": "2026-10-27T02:45:36Z"
     },
     {
-      "sha": "7e0e9381fbd87d769a1cc0dce81aab1141a56698",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/7e0e9381fbd87d769a1cc0dce81aab1141a56698",
-      "message": "Merge remote-tracking branch 'origin/colll78/canonical-v1-watcher-l1-source-checkpoint' into p1/w1c-sihm\n\n# Conflicts:\n#\tdemo/midgard-fault-proofs/src/workflow/cursor-family-spec.ts",
+      "sha": "868df6c502d576541c26e2f09a8acca6fd0df300",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/868df6c502d576541c26e2f09a8acca6fd0df300",
+      "message": "Re-measure the largest validation-dispute wallet move after the value cap\n\nThe ledger-output scan's 5,000-byte Value check (b8c10beee) adds 22 bytes\nto each ledger-output descriptor summary yield. The script-sources output\nproof finalize hop attaches the datum and value summary yields, so its\nreference scripts now total 34,693 bytes (14,748 + 12,405 + 7,540).",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-26T08:28:59Z"
+      "authorDate": "2026-10-27T02:44:23Z"
     },
     {
-      "sha": "c22cf08bd78a23062229440a747d7454556039ae",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/c22cf08bd78a23062229440a747d7454556039ae",
-      "message": "Cover every script-integrity role with forged successors and admissible forced rows",
+      "sha": "0c9a38f72a271c9a2bc33550555c545b94af95b2",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/0c9a38f72a271c9a2bc33550555c545b94af95b2",
+      "message": "Read and write long Flat naturals in linear time\n\nSince builtins are evaluated through the pinned evaluator (d69f634ff),\nevery builtin value crosses as a Flat constant. The Flat reader and\nwriter shifted a bigint once per 7-bit group, which is quadratic in the\nvalue's length: decoding the integer byteStringToInteger gives for a\n49,784-byte input took about 200 ms and allocated gigabytes, and a\nproof-mode run evaluates that application three times. Long naturals now\ngo through their bytes; short ones keep the shifting path.\n\nThe staged-conversion test also dropped its second check of the last\nconversion and the per-order test that repeated the 49,784 and 49,785\nbyte rows' assertions; every boundary row still runs.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-26T08:28:29Z"
+      "authorDate": "2026-10-27T02:35:21Z"
     },
     {
-      "sha": "a12fa319673b5957349c48d5703a74e5bdc968e9",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/a12fa319673b5957349c48d5703a74e5bdc968e9",
-      "message": "Fit each script-integrity walk page to the transaction budget\n\nThe prover now builds proof-opening pages at the configured maximum and\nhalves them until the evaluated transaction fits, so a deep ledger or\nsource map no longer stalls the walk. A max-shape case over a padded\nledger and source map covers the fitted path through conviction.\nForced fixtures use shapes the forced-transaction admission screen accepts.",
+      "sha": "6372afb809d0500bf01c3ec85f835243bae86112",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/6372afb809d0500bf01c3ec85f835243bae86112",
+      "message": "Merge remote-tracking branch 'origin/colll78/canonical-v1-watcher-l1-source-checkpoint' into p1/w2a-usw",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-26T08:28:21Z"
+      "authorDate": "2026-10-27T00:11:36Z"
     },
     {
-      "sha": "3df1a40af62cd5ea58abef44d799965537665b40",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/3df1a40af62cd5ea58abef44d799965537665b40",
-      "message": "Refuse opening the next purpose field while the current one is mid-walk",
+      "sha": "c24a55158ed882663f0caa23a3031814f600f252",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/c24a55158ed882663f0caa23a3031814f600f252",
+      "message": "Merge remote-tracking branch 'origin/colll78/canonical-v1-watcher-l1-source-checkpoint' into p1/w2a-usw\n\n# Conflicts:\n#\tdemo/midgard-fault-proofs/src/workflow/catalogue-replay.ts\n#\tdemo/midgard-fault-proofs/src/workflow/complete-replay.resolved-output-non-canonical-complete-canonical-replay.ts\n#\tdemo/midgard-fault-proofs/src/workflow/cursor-family-spec.ts\n#\tdemo/midgard-fault-proofs/src/workflow/family-application-registry.bundle-cursor-family-application-record.ts\n#\tdemo/midgard-fault-proofs/src/workflow/family-application-registry.family-application-registry.ts\n#\tdemo/midgard-fault-proofs/src/workflow/family-definitions.ts\n#\tdemo/midgard-fault-proofs/src/workflow/installed-categories.ts\n#\tdemo/midgard-fault-proofs/tests/cursor-family-state.test.ts\n#\tdemo/midgard-fault-proofs/tests/family-application-registry.bound-steps.ts\n#\tdemo/midgard-fault-proofs/tests/manifest-bound-family-assembly.test.ts\n#\tdemo/midgard-fault-proofs/tests/support/emulator/contracts.build-minimal-fault-proof-contracts.ts\n#\tdemo/midgard-fault-proofs/tests/support/emulator/validators.make-always-succeeds-fault-proof-contracts.ts\n#\tdemo/midgard-fault-proofs/tests/support/validator-scenario-registry.ts\n#\tdemo/midgard-fault-proofs/tests/support/validator-scenario-registry.unmapped-families.ts\n#\tdemo/midgard-node-tools/devnet/watcher-journeys/catalogue.test.ts\n#\tdemo/midgard-node-tools/devnet/watcher-journeys/catalogue.ts\n#\tdemo/midgard-node-tools/devnet/watcher-journeys/readiness.test.ts\n#\tdemo/midgard-node-tools/devnet/watcher-journeys/script-cases.test.ts\n#\tdemo/midgard-node-tools/devnet/watcher-journeys/script-cases.ts\n#\tdemo/midgard-node/src/services/always-succeeds.make-always-succeeds-service.ts\n#\tdemo/midgard-node/tests/deployable-scripts.test.ts\n#\tdemo/midgard-node/tests/helpers/deployable-catalogue-order-pins.ts\n#\tdemo/midgard-sdk/tests/fault-proof.fault-proof-contract-builder.ts\n#\tdemo/midgard-watcher/tests/fault-proofs/fault-proof-application.test.ts\n#\tdemo/module-size-exceptions.json\n#\tdocs/fault-proofs/catalogue-status.md",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-26T08:28:20Z"
+      "authorDate": "2026-10-27T00:10:46Z"
     },
     {
-      "sha": "6df0fb2791c1ca48f1e232ba3786f011315d1af7",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/6df0fb2791c1ca48f1e232ba3786f011315d1af7",
-      "message": "Merge branch 'p1/t261m-entry-count' into p1/ga-cd-walk",
+      "sha": "82e32eac372dbcedc0fc6e8fc7678be56bbdd95a",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/82e32eac372dbcedc0fc6e8fc7678be56bbdd95a",
+      "message": "Pin the forced output Value cap from mint to block and drop a reason with no producer\n\nA forced transaction with a 5,001-byte output Value is refused at the order\nmint; built directly, it classifies as an output canonicity rejection, the\nreplay and the DA payload agree, and block production continues. The honest\nrejection cannot be convicted and the acceptance is. The admission-stopped\nreadiness reason has had no producer since the forced screens were removed.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-26T07:10:07Z"
+      "authorDate": "2026-10-26T23:43:20Z"
     },
     {
-      "sha": "48f9637bccc547463abec1052a66eaf2ceba0772",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/48f9637bccc547463abec1052a66eaf2ceba0772",
-      "message": "List the operator-economics module among the deployment-profile generator inputs\n\nAdd it wherever the generator's source files are enumerated: the Aiken CI\npath filters, the golden channel, the interactive-setup and traced-refusal\ninput copies, and the preflight deployment checks. Regenerate the\nrequired-checks page.",
+      "sha": "a1cdcb93dfdc24118b612e0d927f33d8ef5947f9",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/a1cdcb93dfdc24118b612e0d927f33d8ef5947f9",
+      "message": "Merge remote-tracking branch 'origin/colll78/canonical-v1-watcher-l1-source-checkpoint' into p1/t227-output-value-cap\n\n# Conflicts:\n#\tonchain/aiken/lib/midgard/ledger-output-scan-v1.test.ak",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-26T06:43:57Z"
+      "authorDate": "2026-10-26T22:51:38Z"
     },
     {
-      "sha": "95512708fb845c8176980d4da9ab7b05095d763e",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/95512708fb845c8176980d4da9ab7b05095d763e",
-      "message": "State the committed-field-shape item ceiling on its own terms",
+      "sha": "c1289ae6c21a0c6d8401d6794741152248ee26ae",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/c1289ae6c21a0c6d8401d6794741152248ee26ae",
+      "message": "State both sides of the output Value cap in remaining gaps",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-26T06:42:56Z"
+      "authorDate": "2026-10-26T22:49:00Z"
     },
     {
-      "sha": "5fa3c053c96f9311aeba82bb51bb40c5c07be0bb",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/5fa3c053c96f9311aeba82bb51bb40c5c07be0bb",
-      "message": "Name the canonical-decodability cursor's transaction field bad_tx_id in the spec",
+      "sha": "ba6aec37ebe63cca84fe1dd4da275a2732ed7dc0",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ba6aec37ebe63cca84fe1dd4da275a2732ed7dc0",
+      "message": "Pin the over-cap output Value refusal in the shared ledger-output corpus\n\nA 5,001-byte long-asset-name Value is refused by the TypeScript and Aiken\nscans after the same steps, at a control with the same hash.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-26T06:42:56Z"
+      "authorDate": "2026-10-26T22:48:56Z"
     }
   ],
   "contributors": [
@@ -452,7 +452,7 @@
     },
     {
       "week": 1772323200,
-      "total": 26
+      "total": 25
     },
     {
       "week": 1772928000,
@@ -492,11 +492,11 @@
     },
     {
       "week": 1778371200,
-      "total": 23
+      "total": 41
     },
     {
       "week": 1778976000,
-      "total": 14
+      "total": 16
     },
     {
       "week": 1779580800,
@@ -584,11 +584,11 @@
     },
     {
       "week": 1792281600,
-      "total": 112
+      "total": 0
     },
     {
       "week": 1792886400,
-      "total": 86
+      "total": 198
     }
   ]
 }
