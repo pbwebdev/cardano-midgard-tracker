@@ -1,10 +1,10 @@
 {
-  "fetchedAt": "2026-10-27T11:52:26.842Z",
+  "fetchedAt": "2026-10-28T12:27:15.142Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 25,
     "forks_count": 11,
-    "open_issues_count": 191
+    "open_issues_count": 195
   },
   "languages": {
     "Aiken": 359544,
@@ -17,109 +17,109 @@
   },
   "commits": [
     {
-      "sha": "a1f6f6ec78bb862dfb2fc5b06edc8df63c21b840",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/a1f6f6ec78bb862dfb2fc5b06edc8df63c21b840",
-      "message": "Merge branch 'p1/cired2' into p1/w2b-ensi-essd",
+      "sha": "e6fad45ad5240975548026d50fe19af05f4b3909",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/e6fad45ad5240975548026d50fe19af05f4b3909",
+      "message": "Refresh the Nix pnpm dependency hash for the SDK packaging lockfile",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-27T05:15:49Z"
+      "authorDate": "2026-10-28T10:40:01Z"
     },
     {
-      "sha": "15e94103d6640952339deea895f1382880fcad3d",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/15e94103d6640952339deea895f1382880fcad3d",
-      "message": "Hold the forced readiness probe's request at one instant\n\nThe raw-probe readiness cases force the probe by setting the provider\nevidence bound to 1 ms, and the handler then reads the probe's own\nsuccess back under that same bound. A runner that stalls for 2 ms or\nmore between the probe's completion and the handler's read sees the\nfresh success as stale, so the healthy case reports\nproviderQueryHealthy false (node shard 1/3 on CI). Injecting a 3 ms\nstall at that point fails both healthy cases every run.\n\nThe fixture now freezes Date for a forced-probe request, so the probe's\ncompletion and the handler's read share one clock reading. Production is\nunchanged: its bound defaults to 30 s and nothing between the two reads\nwaits on I/O.",
+      "sha": "6f202b4a609ba4ca34a8b3100774c8b167aeae5d",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/6f202b4a609ba4ca34a8b3100774c8b167aeae5d",
+      "message": "Drop the stale excluded-category limit now the public profile enables every family\n\nAlso regenerate the required-checks list after core dropped the\ntransport dependency.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-27T05:04:22Z"
+      "authorDate": "2026-10-28T10:39:21Z"
     },
     {
-      "sha": "40147436c6d2b4bc9d39ef410cfbca6090aadfad",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/40147436c6d2b4bc9d39ef410cfbca6090aadfad",
-      "message": "Merge commit 'd9c28cdf3' into p1/w2b-ensi-essd",
+      "sha": "fc29baa37a7d9f2bbc8d6ef0333ef79d1b9bb548",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/fc29baa37a7d9f2bbc8d6ef0333ef79d1b9bb548",
+      "message": "Merge branch 'p1/cired8' into p1/land6a",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-27T05:00:14Z"
+      "authorDate": "2026-10-28T10:39:06Z"
     },
     {
-      "sha": "e54b756284b51f5a46f7bdd12809ad5e90e9d7ed",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/e54b756284b51f5a46f7bdd12809ad5e90e9d7ed",
-      "message": "Merge remote-tracking branch 'origin/colll78/canonical-v1-watcher-l1-source-checkpoint' into p1/w2b-ensi-essd\n\n# Conflicts:\n#\tdemo/midgard-fault-proofs/src/workflow/catalogue-replay.ts\n#\tdemo/midgard-fault-proofs/src/workflow/complete-replay.resolved-output-non-canonical-complete-canonical-replay.ts\n#\tdemo/midgard-fault-proofs/src/workflow/cursor-family-spec.ts\n#\tdemo/midgard-fault-proofs/src/workflow/family-application-registry.bundle-cursor-family-application-record.ts\n#\tdemo/midgard-fault-proofs/src/workflow/family-application-registry.family-application-registry.ts\n#\tdemo/midgard-fault-proofs/src/workflow/family-application-registry.ts\n#\tdemo/midgard-fault-proofs/src/workflow/family-definitions.ts\n#\tdemo/midgard-fault-proofs/src/workflow/installed-categories.ts\n#\tdemo/midgard-fault-proofs/tests/cursor-family-state.test.ts\n#\tdemo/midgard-fault-proofs/tests/family-application-registry.bound-steps.ts\n#\tdemo/midgard-fault-proofs/tests/manifest-bound-family-assembly.test.ts\n#\tdemo/midgard-fault-proofs/tests/support/emulator/contracts.build-minimal-fault-proof-contracts.ts\n#\tdemo/midgard-fault-proofs/tests/support/validator-scenario-registry.ts\n#\tdemo/midgard-fault-proofs/tests/support/validator-scenario-registry.unmapped-families.ts\n#\tdemo/midgard-node-tools/devnet/watcher-journeys/catalogue.test.ts\n#\tdemo/midgard-node-tools/devnet/watcher-journeys/catalogue.ts\n#\tdemo/midgard-node-tools/devnet/watcher-journeys/readiness.test.ts\n#\tdemo/midgard-node-tools/devnet/watcher-journeys/script-cases.test.ts\n#\tdemo/midgard-node-tools/devnet/watcher-journeys/script-cases.ts\n#\tdemo/midgard-node/tests/deployable-scripts.test.ts\n#\tdemo/midgard-node/tests/helpers/deployable-catalogue-order-pins.ts\n#\tdemo/midgard-node/tests/helpers/published-workflow-deployment.submit-published-initialization.ts\n#\tdemo/midgard-sdk/tests/fault-proof.fault-proof-contract-builder.ts\n#\tdemo/midgard-watcher/tests/fault-proofs/fault-proof-application.test.ts\n#\tdemo/module-size-exceptions.json\n#\tdocs/fault-proofs/catalogue-status.md",
+      "sha": "ccb34f4d449dcfb1736918e35a737e102914c6d2",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ccb34f4d449dcfb1736918e35a737e102914c6d2",
+      "message": "Merge branch 'p1/r10-publishable' into p1/land6a",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-27T04:59:29Z"
+      "authorDate": "2026-10-28T10:39:06Z"
     },
     {
-      "sha": "d9c28cdf38c6acef94865bd3213f0970db8e254f",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d9c28cdf38c6acef94865bd3213f0970db8e254f",
-      "message": "Count the event loop's turns during a foreign block's import\n\nThe import test bounded the longest stretch without a timer tick by five\ntransactions' share of the run's wall-clock total. The stretch before the\nfirst transaction (decoding the block, and the process's first evaluation)\nis a quarter to a third of a 16-transaction run, so a loaded runner crossed\nthe bound with the yields in place. An immediate that re-queues itself\nruns once per turn: the import gives one turn per transaction (16), and\nnone without the per-event yield.",
+      "sha": "0696d5916f2f528960d4b74a41d01cced98a7c90",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/0696d5916f2f528960d4b74a41d01cced98a7c90",
+      "message": "Check each retention scan page size in its own test\n\nThe whole-store cycle is computed once; each page size then replays the\nstore and compares, so no single test runs four full cycles.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-27T02:53:25Z"
+      "authorDate": "2026-10-28T05:57:45Z"
     },
     {
-      "sha": "4c4e35818e4dc183b18c19540a7074f90671a99d",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/4c4e35818e4dc183b18c19540a7074f90671a99d",
-      "message": "Read the confirmed proof's own reservation by id in the collateral release test\n\nThe store lists reservations by id. The test took the first record as the\nproof's own, which held only while the proof's derived reservation id\nsorted before the peer's fixed one. Wiring the unused-script-witness family\ninto the catalogue (e25aff33a) changed the deployment roster, and with it\nthe derived id, so the test read the peer's record instead. Production\nbehaves as intended: the proof selects fresh collateral, and the store\nrefuses to re-lease collateral the peer holds.",
+      "sha": "0eab46b3e6d5ba5e6c2bbb3d5681a3313b1f6911",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/0eab46b3e6d5ba5e6c2bbb3d5681a3313b1f6911",
+      "message": "Keep the deployment refusal test off the transaction-flow guard\n\nThe refusal stops the node before it submits anything, so the guard's\ncheck that every confirmed transaction reached the follower store has\nnothing to see when the fixture is replayed.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-27T02:47:26Z"
+      "authorDate": "2026-10-28T04:43:12Z"
     },
     {
-      "sha": "c38359d3c932d8f3c226d6a0eb3c0efaf86baad0",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/c38359d3c932d8f3c226d6a0eb3c0efaf86baad0",
-      "message": "Size the duplicate-asset maximum shape at the 5,000-byte value cap\n\nSince the ledger-output scan refuses a Value over 5,000 bytes (b8c10beee),\nan accepted output filled with assets to the 16,384-byte output bound is no\nlonger canonical, so its twin cannot be. The real maximum for a repeat at\nthe last asset name is the value at the cap in both the accepted and the\nforced case; the shape test now also shows one more byte is past it.",
+      "sha": "82a31360e313410f55d3a849db8646eeadebbd6e",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/82a31360e313410f55d3a849db8646eeadebbd6e",
+      "message": "Register the public testnet parameter table as a generated doc channel",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-27T02:45:36Z"
+      "authorDate": "2026-10-28T04:43:12Z"
     },
     {
-      "sha": "868df6c502d576541c26e2f09a8acca6fd0df300",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/868df6c502d576541c26e2f09a8acca6fd0df300",
-      "message": "Re-measure the largest validation-dispute wallet move after the value cap\n\nThe ledger-output scan's 5,000-byte Value check (b8c10beee) adds 22 bytes\nto each ledger-output descriptor summary yield. The script-sources output\nproof finalize hop attaches the datum and value summary yields, so its\nreference scripts now total 34,693 bytes (14,748 + 12,405 + 7,540).",
+      "sha": "cd456dc6bfe2e47a7cf8dbbb739db0b86c987b59",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/cd456dc6bfe2e47a7cf8dbbb739db0b86c987b59",
+      "message": "Close the remaining gaps in the SDK publish-set check\n\npnpm skips postpack when a pack fails, so a failed pack left the\nrepository LICENSE and validation's vendored copy in the package. The\ncheck now removes them itself whatever the pack does, and\ndemo/midgard-validation/vendor/ is ignored.\n\nThe type probe dropped every tsc line outside the probe files and the\npublish set's declarations, so a failure that named no such file (a\nmissing @types/node, a crash) passed. Errors that name no file are now\nreported, a failure that printed no error is reported with its output\ntail, and an @types/node the probe cannot link is a problem.\n\nThe probe now runs TypeScript 5.8 (the SDK's typescript-5-8 dev\ndependency), the first compiler that lets a CommonJS consumer require\nthe packages' ES module dependencies; the packages declare Node.js\n22.12.0 or newer, and the release doc and package READMEs say both.\n\nValidation ships modified MPL-2.0 code, so its licence is\nApache-2.0 AND MPL-2.0 and the pack writes a SOURCE.md beside the\nvendored copy that names where the modified source is; the check\nrequires it. The release doc also says that any app loading validation\nat runtime must declare the forestry itself, and that registry\nconsumers get the unpatched blake2b.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-27T02:44:23Z"
+      "authorDate": "2026-10-28T03:55:53Z"
     },
     {
-      "sha": "0c9a38f72a271c9a2bc33550555c545b94af95b2",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/0c9a38f72a271c9a2bc33550555c545b94af95b2",
-      "message": "Read and write long Flat naturals in linear time\n\nSince builtins are evaluated through the pinned evaluator (d69f634ff),\nevery builtin value crosses as a Flat constant. The Flat reader and\nwriter shifted a bigint once per 7-bit group, which is quadratic in the\nvalue's length: decoding the integer byteStringToInteger gives for a\n49,784-byte input took about 200 ms and allocated gigabytes, and a\nproof-mode run evaluates that application three times. Long naturals now\ngo through their bytes; short ones keep the shifting path.\n\nThe staged-conversion test also dropped its second check of the last\nconversion and the per-order test that repeated the 49,784 and 49,785\nbyte rows' assertions; every boundary row still runs.",
+      "sha": "0ee67ae56be33de808e5c6346d75154a45f9c79b",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/0ee67ae56be33de808e5c6346d75154a45f9c79b",
+      "message": "Make the watcher declare the Merkle Patricia Forestry it loads at runtime\n\nValidation resolves #merkle-patricia-forestry to the workspace package but lists it only as a dev dependency, and the watcher listed it as a dev dependency too, so its pnpm deploy --prod image reached the package only through pnpm's hidden hoist. Declare it in the watcher's dependencies with the specifier the node, the DA committee node and fault proofs use.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-27T02:35:21Z"
+      "authorDate": "2026-10-28T03:55:42Z"
     },
     {
-      "sha": "6372afb809d0500bf01c3ec85f835243bae86112",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/6372afb809d0500bf01c3ec85f835243bae86112",
-      "message": "Merge remote-tracking branch 'origin/colll78/canonical-v1-watcher-l1-source-checkpoint' into p1/w2a-usw",
+      "sha": "fad34ca92c6dcfa8db668b4239a2bee143a35cac",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/fad34ca92c6dcfa8db668b4239a2bee143a35cac",
+      "message": "Merge branch 'p1/r10-r3' into p1/land5",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-27T00:11:36Z"
+      "authorDate": "2026-10-28T03:26:05Z"
     },
     {
-      "sha": "c24a55158ed882663f0caa23a3031814f600f252",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/c24a55158ed882663f0caa23a3031814f600f252",
-      "message": "Merge remote-tracking branch 'origin/colll78/canonical-v1-watcher-l1-source-checkpoint' into p1/w2a-usw\n\n# Conflicts:\n#\tdemo/midgard-fault-proofs/src/workflow/catalogue-replay.ts\n#\tdemo/midgard-fault-proofs/src/workflow/complete-replay.resolved-output-non-canonical-complete-canonical-replay.ts\n#\tdemo/midgard-fault-proofs/src/workflow/cursor-family-spec.ts\n#\tdemo/midgard-fault-proofs/src/workflow/family-application-registry.bundle-cursor-family-application-record.ts\n#\tdemo/midgard-fault-proofs/src/workflow/family-application-registry.family-application-registry.ts\n#\tdemo/midgard-fault-proofs/src/workflow/family-definitions.ts\n#\tdemo/midgard-fault-proofs/src/workflow/installed-categories.ts\n#\tdemo/midgard-fault-proofs/tests/cursor-family-state.test.ts\n#\tdemo/midgard-fault-proofs/tests/family-application-registry.bound-steps.ts\n#\tdemo/midgard-fault-proofs/tests/manifest-bound-family-assembly.test.ts\n#\tdemo/midgard-fault-proofs/tests/support/emulator/contracts.build-minimal-fault-proof-contracts.ts\n#\tdemo/midgard-fault-proofs/tests/support/emulator/validators.make-always-succeeds-fault-proof-contracts.ts\n#\tdemo/midgard-fault-proofs/tests/support/validator-scenario-registry.ts\n#\tdemo/midgard-fault-proofs/tests/support/validator-scenario-registry.unmapped-families.ts\n#\tdemo/midgard-node-tools/devnet/watcher-journeys/catalogue.test.ts\n#\tdemo/midgard-node-tools/devnet/watcher-journeys/catalogue.ts\n#\tdemo/midgard-node-tools/devnet/watcher-journeys/readiness.test.ts\n#\tdemo/midgard-node-tools/devnet/watcher-journeys/script-cases.test.ts\n#\tdemo/midgard-node-tools/devnet/watcher-journeys/script-cases.ts\n#\tdemo/midgard-node/src/services/always-succeeds.make-always-succeeds-service.ts\n#\tdemo/midgard-node/tests/deployable-scripts.test.ts\n#\tdemo/midgard-node/tests/helpers/deployable-catalogue-order-pins.ts\n#\tdemo/midgard-sdk/tests/fault-proof.fault-proof-contract-builder.ts\n#\tdemo/midgard-watcher/tests/fault-proofs/fault-proof-application.test.ts\n#\tdemo/module-size-exceptions.json\n#\tdocs/fault-proofs/catalogue-status.md",
+      "sha": "c523ab2e48edf2fa930a6107464c804229c5fb48",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/c523ab2e48edf2fa930a6107464c804229c5fb48",
+      "message": "Report an SDK invalid-UTxO refusal as a node deposit error",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-27T00:10:46Z"
+      "authorDate": "2026-10-28T03:25:59Z"
     },
     {
-      "sha": "82e32eac372dbcedc0fc6e8fc7678be56bbdd95a",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/82e32eac372dbcedc0fc6e8fc7678be56bbdd95a",
-      "message": "Pin the forced output Value cap from mint to block and drop a reason with no producer\n\nA forced transaction with a 5,001-byte output Value is refused at the order\nmint; built directly, it classifies as an output canonicity rejection, the\nreplay and the DA payload agree, and block production continues. The honest\nrejection cannot be convicted and the acceptance is. The admission-stopped\nreadiness reason has had no producer since the forced screens were removed.",
+      "sha": "c05d98223d9c16a525ee35ec82d26692a3b992c6",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/c05d98223d9c16a525ee35ec82d26692a3b992c6",
+      "message": "Merge branch 'p1/r10-r3' into p1/land5",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-26T23:43:20Z"
+      "authorDate": "2026-10-28T03:25:09Z"
     },
     {
-      "sha": "a1cdcb93dfdc24118b612e0d927f33d8ef5947f9",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/a1cdcb93dfdc24118b612e0d927f33d8ef5947f9",
-      "message": "Merge remote-tracking branch 'origin/colll78/canonical-v1-watcher-l1-source-checkpoint' into p1/t227-output-value-cap\n\n# Conflicts:\n#\tonchain/aiken/lib/midgard/ledger-output-scan-v1.test.ak",
+      "sha": "7c3eafb987ee2db4c588ec8d58d0a45c4feec3ee",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/7c3eafb987ee2db4c588ec8d58d0a45c4feec3ee",
+      "message": "Make the SDK packages publishable\n\nThe publish check failed on the real packages. Each tarball now installs\nfrom the registry by itself:\n\n- Core no longer depends on the private native transport. The node\n  readers that need it (reward accounts, the Kupmios ledger and the\n  protocol-parameter snapshot) move to midgard-l1-follower, which the\n  tools that use them already depend on. Type-only assertions keep the\n  core sources they reach valid under the follower's stricter settings;\n  core's emitted JavaScript is unchanged.\n- Validation imports its patched Merkle Patricia Forestry through\n  #merkle-patricia-forestry. In the workspace that is the package\n  installed from the vendored tarball; the pack copies that package into\n  the tarball and the published import points at the copy, so the\n  registry package runs the vendored code. Its dependencies become\n  validation's own.\n- publishConfig gives each package its registry exports: no\n  midgard-source condition, no test-only exports, and .d.cts types for\n  every require target. Core publishes no imports.\n- Every tarball carries the repository LICENSE, copied in only while it\n  is packed, and leaves out the local build stamps in dist/.\n- Core's declarations name the budget table as a type, not as a\n  JavaScript value.\n- The SDK lists core once.\n\nThe check now requires each packed export to be the registry form of\nits workspace export, the LICENSE, an exact vendored copy, and no hidden\nfiles.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-26T22:51:38Z"
+      "authorDate": "2026-10-28T03:25:07Z"
     },
     {
-      "sha": "c1289ae6c21a0c6d8401d6794741152248ee26ae",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/c1289ae6c21a0c6d8401d6794741152248ee26ae",
-      "message": "State both sides of the output Value cap in remaining gaps",
+      "sha": "5b776d7160c80607a921000102738e357a005576",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/5b776d7160c80607a921000102738e357a005576",
+      "message": "Let the node deposit builder report an invalid UTxO from the SDK",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-26T22:49:00Z"
+      "authorDate": "2026-10-28T02:22:52Z"
     },
     {
-      "sha": "ba6aec37ebe63cca84fe1dd4da275a2732ed7dc0",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ba6aec37ebe63cca84fe1dd4da275a2732ed7dc0",
-      "message": "Pin the over-cap output Value refusal in the shared ledger-output corpus\n\nA 5,001-byte long-asset-name Value is refused by the TypeScript and Aiken\nscans after the same steps, at a control with the same hash.",
+      "sha": "9d666336bfe58a3bc1414ca9927063f3652c20a9",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/9d666336bfe58a3bc1414ca9927063f3652c20a9",
+      "message": "Merge branch 'p1/r8-wallet-alerts' into p1/land5",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-26T22:48:56Z"
+      "authorDate": "2026-10-28T02:03:52Z"
     }
   ],
   "contributors": [
@@ -326,6 +326,30 @@
   ],
   "issues": [
     {
+      "number": 863,
+      "title": "Mainnet profile: registration_ms is 30 ms instead of 30 s",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/863",
+      "updated_at": "2026-10-28T10:48:28Z"
+    },
+    {
+      "number": 862,
+      "title": "Add a public HTTP endpoint for withdrawal status",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/862",
+      "updated_at": "2026-10-27T17:37:06Z"
+    },
+    {
+      "number": 861,
+      "title": "SqliteProcessMutex: two first-time acquirers on a new sidecar can both be refused",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/861",
+      "updated_at": "2026-10-27T16:58:00Z"
+    },
+    {
+      "number": 860,
+      "title": "List and array builtins: charge wrong-kind constant arguments before failing",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/860",
+      "updated_at": "2026-10-27T13:09:15Z"
+    },
+    {
       "number": 838,
       "title": "Dev-ex footguns from transition-trace and history-admission work",
       "html_url": "https://github.com/Anastasia-Labs/midgard/issues/838",
@@ -354,30 +378,6 @@
       "title": "Isolate a repeatedly failing transaction from its admission batch",
       "html_url": "https://github.com/Anastasia-Labs/midgard/issues/856",
       "updated_at": "2026-10-23T03:27:45Z"
-    },
-    {
-      "number": 855,
-      "title": "Delete the unused measured funding-profile code after launch",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/855",
-      "updated_at": "2026-10-23T03:27:44Z"
-    },
-    {
-      "number": 854,
-      "title": "Removal terminal when the operator's bond ended another way",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/854",
-      "updated_at": "2026-10-22T06:51:29Z"
-    },
-    {
-      "number": 853,
-      "title": "Let the funded watcher reclaim its own published field copy after the observe move is final",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/853",
-      "updated_at": "2026-10-22T01:55:23Z"
-    },
-    {
-      "number": 852,
-      "title": "Let the defender reclaim a stopped validation-trace thread's value after the challenge expires",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/852",
-      "updated_at": "2026-10-22T00:08:21Z"
     }
   ],
   "releases": [],
@@ -452,7 +452,7 @@
     },
     {
       "week": 1772323200,
-      "total": 25
+      "total": 26
     },
     {
       "week": 1772928000,
@@ -580,7 +580,7 @@
     },
     {
       "week": 1791676800,
-      "total": 274
+      "total": 272
     },
     {
       "week": 1792281600,
@@ -588,7 +588,7 @@
     },
     {
       "week": 1792886400,
-      "total": 198
+      "total": 200
     }
   ]
 }
