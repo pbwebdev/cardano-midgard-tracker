@@ -1,10 +1,10 @@
 {
-  "fetchedAt": "2026-10-28T12:27:15.142Z",
+  "fetchedAt": "2026-10-29T12:38:13.488Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 25,
     "forks_count": 11,
-    "open_issues_count": 195
+    "open_issues_count": 197
   },
   "languages": {
     "Aiken": 359544,
@@ -17,109 +17,109 @@
   },
   "commits": [
     {
-      "sha": "e6fad45ad5240975548026d50fe19af05f4b3909",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/e6fad45ad5240975548026d50fe19af05f4b3909",
-      "message": "Refresh the Nix pnpm dependency hash for the SDK packaging lockfile",
+      "sha": "08ee94bcbb4753353a256379f6a402a4b70e496e",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/08ee94bcbb4753353a256379f6a402a4b70e496e",
+      "message": "Match the intended refusal in the rehearsal profile tests",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-28T10:40:01Z"
+      "authorDate": "2026-10-29T10:00:45Z"
     },
     {
-      "sha": "6f202b4a609ba4ca34a8b3100774c8b167aeae5d",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/6f202b4a609ba4ca34a8b3100774c8b167aeae5d",
-      "message": "Drop the stale excluded-category limit now the public profile enables every family\n\nAlso regenerate the required-checks list after core dropped the\ntransport dependency.",
+      "sha": "e83a8688cb1f80416bffd4f268419f20cbe2ab03",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/e83a8688cb1f80416bffd4f268419f20cbe2ab03",
+      "message": "Carry the release-age exemption into the boundary consumer",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-28T10:39:21Z"
+      "authorDate": "2026-10-29T09:56:27Z"
     },
     {
-      "sha": "fc29baa37a7d9f2bbc8d6ef0333ef79d1b9bb548",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/fc29baa37a7d9f2bbc8d6ef0333ef79d1b9bb548",
-      "message": "Merge branch 'p1/cired8' into p1/land6a",
+      "sha": "7ac57286852148d0ebfbaeae098581995bf211ba",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/7ac57286852148d0ebfbaeae098581995bf211ba",
+      "message": "Add the preprod-rehearsal deployment profile\n\nA Preprod profile for rehearsing the public deploy with low bonds. Every\nvalue equals preprod-public's except the economics and the pooled DA bond\namounts, which equal preprod-testing's under its bounded-acceptance-v1\nschedule, so maturity, dispute, operator shift and every DA window match\nthe public release while bonds stay cheap. preprod-testing stays the\nselected profile and is unchanged.\n\nThe rehearsal is classed with the public profiles everywhere except\neconomics: the production allow-list and commit-event depth rules, the\nretained-DA transport requirement, the public timing rules, release\nprovenance and watcher release authoring, the blueprint classification\nregistry, public HTTP/TLS listen, readiness and database-error redaction,\nthe opener margin, and the release image and blueprint-rebuild scripts.\n\nThe profile-name and profile-class tables move to\ndeployment-profile-names.mjs, and the generator now emits\nPRODUCTION_DEPLOYMENT_PROFILE_NAMES so core, node and watcher read one\npublic-class helper instead of comparing names. The new module is listed\nwherever the generator inputs are (CI paths, preflight FULL_RUN, traced\nrefusal inputs, the interactive emulator fixture).\n\nThe generated profile table's size cap rises to its new line count: it\nholds one literal per profile.\n\nTests compare the loaded profiles rather than pinning numbers: the\nrehearsal is preprod-public with preprod-testing's economics and DA bond,\nis held to every production rule preprod-public is, and generates its own\nAiken environment.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-28T10:39:06Z"
+      "authorDate": "2026-10-29T09:50:41Z"
     },
     {
-      "sha": "ccb34f4d449dcfb1736918e35a737e102914c6d2",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ccb34f4d449dcfb1736918e35a737e102914c6d2",
-      "message": "Merge branch 'p1/r10-publishable' into p1/land6a",
+      "sha": "8a64813288c896fc76349dabe62c3ce66a30aa64",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/8a64813288c896fc76349dabe62c3ce66a30aa64",
+      "message": "Bump Lucid to 0.8.9 and uplc to 0.5.3, and drop HarmonicLabs\n\nuplc 0.5.3 decodes a tag 102 Plutus Data constructor (index 128 and up)\nin the indefinite form, the spelling Lucid's Data.to writes. Before it,\nthe evaluator's decoder left that pair's break unread, so the enclosing\nlist ended there and a sibling value after the constructor broke the\ntransaction decode: local evaluation of any script transaction whose\nredeemer or inline datum held such a value failed. tx-completion.test.ts\npins it: a script spend whose redeemer and inline datum are\nConstr(0, [Constr(128, []), 5]) completes and submits.\n\nutils 0.3.0, which lucid 0.8.9 depends on, applies script parameters\nthrough the uplc wasm instead of @harmoniclabs/uplc and plutus-data.\nThat retires the two utils@0.2.6>@harmoniclabs overrides, the utils\npatch that adapted applyParamsToScript to UPLC 2's encodeUPLC, and the\nsdk's cbor and crypto dependencies, which were there only so Lucid's\nharmonic copy matched the sdk's. No @harmoniclabs package is left in\nthe lockfile; the first case of lucid-parameterization-resolution.test.ts\nnow checks that none resolves from any workspace package, from Lucid or\nfrom Lucid's own packages.\n\npnpm 11 holds a package back for a day after it is published.\n@lucid-evolution/* are releases we cut ourselves, so the workspace\nexempts them (minimumReleaseAgeExclude). A frozen install with a clean\nHOME passes with the exemption and is refused without it.\n\npnpmDepsHash follows the lockfile.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-28T10:39:06Z"
+      "authorDate": "2026-10-29T06:51:05Z"
     },
     {
-      "sha": "0696d5916f2f528960d4b74a41d01cced98a7c90",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/0696d5916f2f528960d4b74a41d01cced98a7c90",
-      "message": "Check each retention scan page size in its own test\n\nThe whole-store cycle is computed once; each page size then replays the\nstore and compares, so no single test runs four full cycles.",
+      "sha": "392964f03bb43aec2cf484bad4d06d37f816ccc5",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/392964f03bb43aec2cf484bad4d06d37f816ccc5",
+      "message": "Check a signed public release as public listen does before reporting it\n\nsign-deployment-release verified only the release signature and the watcher's reopen. A public release it reported as signed could still be refused by public listen: provenance without a node, Postgres or ingress image signed cleanly, and no public node could start from it. The command now opens a public release with authenticatePublicHttpRelease, with the manifest id and the provenance's source revision and role images as the expected identities, and refuses the release otherwise. The old test's mounted-registry check computed the expected digest from the file it checked, so it could never fail; it is gone, and a preprod-public-release Vitest project signs a public release and has the real public listen check accept it and refuse a changed revision, an edited classification reason and another key's trust roots.\n\nprogramCommitments was signed as typed, so a mistyped commitment produced a release that verified. The command derives computation-thread-policy-v1 from the manifest's computation-thread policy (the derivation the devnet release uses, now shared) and refuses a supplied value that differs. The field stays in the release input, which e2e-stack shares and binds into its intent digest; it may be empty.\n\nA refusal after the output directory was created left it behind, so a retry failed with EEXIST. Any refusal now removes the directory the call created. Tests cover the retry and --funding-payment-key-hash, and the docs scope the external-roots rule to public listen and name the profile generation step.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-28T05:57:45Z"
+      "authorDate": "2026-10-29T06:35:07Z"
     },
     {
-      "sha": "0eab46b3e6d5ba5e6c2bbb3d5681a3313b1f6911",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/0eab46b3e6d5ba5e6c2bbb3d5681a3313b1f6911",
-      "message": "Keep the deployment refusal test off the transaction-flow guard\n\nThe refusal stops the node before it submits anything, so the guard's\ncheck that every confirmed transaction reached the follower store has\nnothing to see when the fixture is replayed.",
+      "sha": "91d6cb47ba02ac44513512a8ad9fd350ddeeccbc",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/91d6cb47ba02ac44513512a8ad9fd350ddeeccbc",
+      "message": "Build a preprod-public test blueprint and let the registry fixture use it\n\nA test that signs a public release and opens it as public listen does needs the preprod-public profile compiled. The emulator-profile mechanism already selects a profile inside one Vitest project and builds a separately stamped blueprint for it; preprod-public-profile.js applies it to preprod-public under onchain/aiken/build/preprod-public. CI builds it once in test-blueprints and the node tools job restores it under MIDGARD_REQUIRE_PREBUILT_BLUEPRINTS, as the interactive and curated blueprints are.\n\nThe genuine deployment registry fixture failed under a public profile: the node's member list also checks the members against the unused-validator census from MIDGARD_BLUEPRINT_CLASSIFICATION_FILE, which the fixture had not built yet. It now takes the members from the SDK directly (the same list without that check) and, for a public profile, mounts its census in that variable while the manifest is built. Testing profiles behave as before.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-28T04:43:12Z"
+      "authorDate": "2026-10-29T06:34:56Z"
     },
     {
-      "sha": "82a31360e313410f55d3a849db8646eeadebbd6e",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/82a31360e313410f55d3a849db8646eeadebbd6e",
-      "message": "Register the public testnet parameter table as a generated doc channel",
+      "sha": "5b01cbdbb19bffd67ecb9855557082651e27e8a7",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/5b01cbdbb19bffd67ecb9855557082651e27e8a7",
+      "message": "Refuse every @harmoniclabs import in the demo workspace\n\nMidgard's own code no longer imports any @harmoniclabs package: the Plutus Data, constant and term classes and the Flat encoder are owned in midgard-validation, and builtins run through the pinned aiken wasm. A no-restricted-imports pattern now refuses @harmoniclabs/* in every block that configures the rule, so the dependency cannot come back through a stray import.\n\nno-recursive-plutus-data drops its @harmoniclabs branches (the recursive plutus-data codecs, the plutus-machine allow-list and harmonic Cbor), which named packages that are no longer installed; it keeps cborg and Lucid Data.from/Data.to. Its fixtures and docs/agents/lint-rules.md follow.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-28T04:43:12Z"
+      "authorDate": "2026-10-29T06:16:24Z"
     },
     {
-      "sha": "cd456dc6bfe2e47a7cf8dbbb739db0b86c987b59",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/cd456dc6bfe2e47a7cf8dbbb739db0b86c987b59",
-      "message": "Close the remaining gaps in the SDK publish-set check\n\npnpm skips postpack when a pack fails, so a failed pack left the\nrepository LICENSE and validation's vendored copy in the package. The\ncheck now removes them itself whatever the pack does, and\ndemo/midgard-validation/vendor/ is ignored.\n\nThe type probe dropped every tsc line outside the probe files and the\npublish set's declarations, so a failure that named no such file (a\nmissing @types/node, a crash) passed. Errors that name no file are now\nreported, a failure that printed no error is reported with its output\ntail, and an @types/node the probe cannot link is a problem.\n\nThe probe now runs TypeScript 5.8 (the SDK's typescript-5-8 dev\ndependency), the first compiler that lets a CommonJS consumer require\nthe packages' ES module dependencies; the packages declare Node.js\n22.12.0 or newer, and the release doc and package READMEs say both.\n\nValidation ships modified MPL-2.0 code, so its licence is\nApache-2.0 AND MPL-2.0 and the pack writes a SOURCE.md beside the\nvendored copy that names where the modified source is; the check\nrequires it. The release doc also says that any app loading validation\nat runtime must declare the forestry itself, and that registry\nconsumers get the unpatched blake2b.",
+      "sha": "9577b5ddff1a142650eb8148bf68be61b64cc6aa",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/9577b5ddff1a142650eb8148bf68be61b64cc6aa",
+      "message": "Build the fee-sensitive Lucid fixture with an owned Flat encoder\n\nThe static-completion fixture built its fee-threshold script with @harmoniclabs/uplc, reached through @lucid-evolution/utils. That package is leaving the dependency graph once utils applies parameters through the aiken wasm, so the fixture now writes its program with a small Flat encoder of its own that covers the terms and constants it uses. Its output is byte-identical to harmonic compileUPLC for the fixture program at fourteen thresholds (zero, signs, 7-bit group edges, 64- and 70-bit values) and for a 600-byte bytestring that needs chunking.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-28T03:55:53Z"
+      "authorDate": "2026-10-29T06:16:15Z"
     },
     {
-      "sha": "0ee67ae56be33de808e5c6346d75154a45f9c79b",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/0ee67ae56be33de808e5c6346d75154a45f9c79b",
-      "message": "Make the watcher declare the Merkle Patricia Forestry it loads at runtime\n\nValidation resolves #merkle-patricia-forestry to the workspace package but lists it only as a dev dependency, and the watcher listed it as a dev dependency too, so its pnpm deploy --prod image reached the package only through pnpm's hidden hoist. Declare it in the watcher's dependencies with the specifier the node, the DA committee node and fault proofs use.",
+      "sha": "264fcdbc9cfb2d1e6ddf63246a539e1700cd3bb9",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/264fcdbc9cfb2d1e6ddf63246a539e1700cd3bb9",
+      "message": "Add a release signing command for the deployment release\n\nsign-deployment-release signs a finalized deployment with the release key\nnamed by the existing release input and writes, into a new directory, every\nfile public listen and the watcher verify: the signed authority, its trust\nroots, the rule and funding bundles, the manifest and deployment info, the\nblueprint, and the provenance, parameter registry and classification when\nsupplied. It reuses the watcher's release authoring and checks the result\nwith the shared release verifier against the written trust roots.\n\nTests sign with temporary keys and check the output with the core release\nverifier, the node's mounted registry check and the watcher's authority\nloader, and that a tampered binding and another key's signature are refused.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-28T03:55:42Z"
+      "authorDate": "2026-10-29T05:49:57Z"
     },
     {
-      "sha": "fad34ca92c6dcfa8db668b4239a2bee143a35cac",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/fad34ca92c6dcfa8db668b4239a2bee143a35cac",
-      "message": "Merge branch 'p1/r10-r3' into p1/land5",
+      "sha": "29abe7ea2fdc4719d1781129a3100231a65f8ffc",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/29abe7ea2fdc4719d1781129a3100231a65f8ffc",
+      "message": "Tighten the HarmonicLabs-migrated tests after review\n\n- reserve-payout evaluation context: the control now re-encodes every\n  output through CML, the path each mutation takes, instead of an empty\n  replacement that was equal by construction.\n- cek-cost parameter names: probe the 64/65 boundary and 2^20, and give\n  arity-6 ChooseData one vector of distinct sizes.\n- Flat encode differential: state what agreement with the crate proves;\n  the crate normalises Data, so it catches non-minimal output, and the\n  program-to-bytes mapping is anchored by the reader's vector tables.\n- real minting policy: refusals assert error_kind 2 (failed within\n  budget) as well as ok false; tq-05 records the question as settled.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-28T03:26:05Z"
+      "authorDate": "2026-10-29T00:10:01Z"
     },
     {
-      "sha": "c523ab2e48edf2fa930a6107464c804229c5fb48",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/c523ab2e48edf2fa930a6107464c804229c5fb48",
-      "message": "Report an SDK invalid-UTxO refusal as a node deposit error",
+      "sha": "78fd6801c188a8bf6e43f73c2cf9a599f5a180c5",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/78fd6801c188a8bf6e43f73c2cf9a599f5a180c5",
+      "message": "Drop HarmonicLabs from midgard-validation and midgard-node\n\nNothing in either package imports it any more. The lockfile loses only\nthe removed entries and the packages no one else needs; pnpmDepsHash\nfollows it. The Lucid resolution test no longer compares the Harmonic\ninstances Lucid's utils resolve with midgard-validation's, which has\nnone; it still pins them to 2.x and to the SDK's CBOR and crypto.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-28T03:25:59Z"
+      "authorDate": "2026-10-28T16:38:57Z"
     },
     {
-      "sha": "c05d98223d9c16a525ee35ec82d26692a3b992c6",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/c05d98223d9c16a525ee35ec82d26692a3b992c6",
-      "message": "Merge branch 'p1/r10-r3' into p1/land5",
+      "sha": "c3f656d53d888c27e43f4c22852c09a5e2c036aa",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/c3f656d53d888c27e43f4c22852c09a5e2c036aa",
+      "message": "Migrate midgard-node tests off HarmonicLabs\n\nThe real minting-policy evaluation test runs the policies through the\npinned aiken evaluator (eval_program_raw) instead of the HarmonicLabs\nmachine, which re-enables the hub-oracle case its lessThanByteString\ndefect had forced off. The reserve-payout mutants splice replacement\nitems into the signed bytes instead of reparsing and re-encoding the\nwhole transaction. Fixtures build programs with the owned term classes\nand Flat encoder.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-28T03:25:09Z"
+      "authorDate": "2026-10-28T16:38:46Z"
     },
     {
-      "sha": "7c3eafb987ee2db4c588ec8d58d0a45c4feec3ee",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/7c3eafb987ee2db4c588ec8d58d0a45c4feec3ee",
-      "message": "Make the SDK packages publishable\n\nThe publish check failed on the real packages. Each tarball now installs\nfrom the registry by itself:\n\n- Core no longer depends on the private native transport. The node\n  readers that need it (reward accounts, the Kupmios ledger and the\n  protocol-parameter snapshot) move to midgard-l1-follower, which the\n  tools that use them already depend on. Type-only assertions keep the\n  core sources they reach valid under the follower's stricter settings;\n  core's emitted JavaScript is unchanged.\n- Validation imports its patched Merkle Patricia Forestry through\n  #merkle-patricia-forestry. In the workspace that is the package\n  installed from the vendored tarball; the pack copies that package into\n  the tarball and the published import points at the copy, so the\n  registry package runs the vendored code. Its dependencies become\n  validation's own.\n- publishConfig gives each package its registry exports: no\n  midgard-source condition, no test-only exports, and .d.cts types for\n  every require target. Core publishes no imports.\n- Every tarball carries the repository LICENSE, copied in only while it\n  is packed, and leaves out the local build stamps in dist/.\n- Core's declarations name the budget table as a type, not as a\n  JavaScript value.\n- The SDK lists core once.\n\nThe check now requires each packed export to be the registry form of\nits workspace export, the LICENSE, an exact vendored copy, and no hidden\nfiles.",
+      "sha": "611faf10699f770519c014c2998b697452027e2a",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/611faf10699f770519c014c2998b697452027e2a",
+      "message": "Name builtins in validation generators from the owned table\n\nThe golden generators take builtin names, arities and force counts from\nmidgard-validation's own tables, which match aiken's textual syntax, and\nbuild programs with the owned term classes and Flat encoder. Every\ngenerator's --check output is unchanged.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-28T03:25:07Z"
+      "authorDate": "2026-10-28T16:34:21Z"
     },
     {
-      "sha": "5b776d7160c80607a921000102738e357a005576",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/5b776d7160c80607a921000102738e357a005576",
-      "message": "Let the node deposit builder report an invalid UTxO from the SDK",
+      "sha": "1253af93d3c16b34cda72b4cf4b14a248b687429",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/1253af93d3c16b34cda72b4cf4b14a248b687429",
+      "message": "Migrate midgard-validation tests off HarmonicLabs\n\nBuiltins are named from an owned table of aiken's textual builtin names,\nprograms are written by the owned Flat encoder, and every independent\noracle that was HarmonicLabs is now the pinned aiken uplc evaluator or\nCML: the Flat encoder differential re-encodes through the uplc crate, the\nBLS expression oracle runs through eval_program_raw, the Data-tree\ninteger oracle decodes with CML PlutusData, and the fuzz oracle unwraps\ncompiled code with the midgard-core CBOR reader. Non-canonical Data\nspellings are spliced into owned Flat bytes by a test helper.\n\nThe cost differential is deleted: the per-parameter test checks every\ncoefficient against aiken by name, and its refusals move into the cost\nunit test.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-28T02:22:52Z"
+      "authorDate": "2026-10-28T16:34:09Z"
     },
     {
-      "sha": "9d666336bfe58a3bc1414ca9927063f3652c20a9",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/9d666336bfe58a3bc1414ca9927063f3652c20a9",
-      "message": "Merge branch 'p1/r8-wallet-alerts' into p1/land5",
+      "sha": "fdbdfc1d0274491958d404805a6e365714d1adaa",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/fdbdfc1d0274491958d404805a6e365714d1adaa",
+      "message": "Refresh the Nix pnpm dependency hash for the uplc 0.5.2 lockfile",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-28T02:03:52Z"
+      "authorDate": "2026-10-28T14:31:13Z"
     }
   ],
   "contributors": [
@@ -326,6 +326,18 @@
   ],
   "issues": [
     {
+      "number": 865,
+      "title": "Node wallet: fund script transactions only from plain outputs",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/865",
+      "updated_at": "2026-10-28T23:57:02Z"
+    },
+    {
+      "number": 864,
+      "title": "`lucid-midgard` rejects Custom networks when deriving protocol parameters",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/864",
+      "updated_at": "2026-10-28T13:47:04Z"
+    },
+    {
       "number": 863,
       "title": "Mainnet profile: registration_ms is 30 ms instead of 30 s",
       "html_url": "https://github.com/Anastasia-Labs/midgard/issues/863",
@@ -366,18 +378,6 @@
       "title": "Fault-proof raw-L1 snapshots re-decode transactions per snapshot without caching or freeing",
       "html_url": "https://github.com/Anastasia-Labs/midgard/issues/858",
       "updated_at": "2026-10-23T22:30:59Z"
-    },
-    {
-      "number": 857,
-      "title": "Concurrent history submissions can fail when one run funds from another's pinned nonce",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/857",
-      "updated_at": "2026-10-23T12:53:39Z"
-    },
-    {
-      "number": 856,
-      "title": "Isolate a repeatedly failing transaction from its admission batch",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/856",
-      "updated_at": "2026-10-23T03:27:45Z"
     }
   ],
   "releases": [],
