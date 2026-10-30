@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-10-29T12:38:13.488Z",
+  "fetchedAt": "2026-10-30T12:29:11.147Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 25,
@@ -17,11 +17,60 @@
   },
   "commits": [
     {
+      "sha": "b10deb3fe72b1c8536a2ad7dc114b95266c3a9b4",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/b10deb3fe72b1c8536a2ad7dc114b95266c3a9b4",
+      "message": "Route the stack profile refusal by the fragments the stack prints",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-10-30T02:17:40Z"
+    },
+    {
+      "sha": "d1711f48155dabcefe026a2d85501acbc69e2b56",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d1711f48155dabcefe026a2d85501acbc69e2b56",
+      "message": "Render the public node compose model from the stack's own node directory and env file\n\nThe containers test rendered the base compose file against the checkout's\nuntracked demo/midgard-node/.env, which CI does not have. The public stack\nfixture now writes its env file into its node directory, as the stack\nrequires, and the test renders in that directory with that env file.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-10-30T01:47:59Z"
+    },
+    {
+      "sha": "4e5cb615f40d7d2e94664897124e7126da7eb586",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/4e5cb615f40d7d2e94664897124e7126da7eb586",
+      "message": "Add the preprod-testing fast-timer twin stack example and drill steps\n\nThe twin configuration runs one journey cycle on its own endpoint and DA\nports, so it can run beside the default stack from a separate worktree. The\ntesting-flow page lists the existing commands that prove the withdrawal\npayout, operator bond recovery and the DA-bond withdraw on its short timers.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-10-30T01:08:36Z"
+    },
+    {
+      "sha": "1e9435cf416836a35d36af475c588432a3614f60",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/1e9435cf416836a35d36af475c588432a3614f60",
+      "message": "Run the preprod-rehearsal profile on the public stack route\n\nThe stack takes the public route for every Preprod production profile and\nchecks operators against the compiled profile's allow-list, so a\npreprod-rehearsal stack loads with every public input check. Refusal\nmessages name the compiled profile. A preprod-rehearsal-stack test project\nloads a rehearsal configuration against that profile's allow-list.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-10-30T01:02:13Z"
+    },
+    {
+      "sha": "1cf3ebadef8500c5c95d62d05539b3c5ab1c0695",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/1cf3ebadef8500c5c95d62d05539b3c5ab1c0695",
+      "message": "Tighten public release resume checks and mounted-file refusals\n\nReopening a placed public release now requires its provenance to equal the\nprovenance the stack completed, and a public stack checks its provenance\nblueprint hash on every run. Mounted public files report size and permission\nrefusals separately, and mounted release JSON keeps the read refusal. The\nout-of-band signing steps name the registry digest and the key file phase 1\nreads. The public release tests share one fixture module and the container\nchecks move to their own file.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-10-30T01:01:56Z"
+    },
+    {
       "sha": "08ee94bcbb4753353a256379f6a402a4b70e496e",
       "html_url": "https://github.com/Anastasia-Labs/midgard/commit/08ee94bcbb4753353a256379f6a402a4b70e496e",
       "message": "Match the intended refusal in the rehearsal profile tests",
       "authorName": "Philip DiSarro",
       "authorDate": "2026-10-29T10:00:45Z"
+    },
+    {
+      "sha": "28bfa878da7c5955f5613163efab079ba197d7a3",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/28bfa878da7c5955f5613163efab079ba197d7a3",
+      "message": "Complete the public release provenance from the deployed registry\n\nA preprod-public operator cannot know the parameter registry digest before\ninitialize writes the registry, yet prerequisites demanded the registry\nand a provenance carrying its digest. The operator now supplies the\nprovenance without evidence.parameterRegistryDigest. Phase 1 checks its\nother fields against the .env revision and images and the compiled\nprofile, and that the release input names no registry but the stack's;\nprerequisites check its blueprint hash against the blueprint they build.\nOnce the deployment has written its registry, the public-release step\nwrites the completed provenance once into the run directory, with a\nrelease input naming it and the deployed registry. The public release and\nthe watcher release are both signed from that input. A resume reuses the\ncompleted provenance and refuses one that no longer matches, and a\nsupplied digest that differs from the deployed registry is refused.\n\nTests cover a fresh public stack passing the prerequisite check without a\nregistry, the completed digest equal to the deployed registry's, a resume\nand the watcher release reusing it, the phase-1 provenance refusals, and\nan ingress subnet held by another Docker network. The public input\nfixture moves to its own module.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-10-29T10:00:30Z"
+    },
+    {
+      "sha": "cca36185061ce1fcca856bac01322492cc774e96",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/cca36185061ce1fcca856bac01322492cc774e96",
+      "message": "Report why a mounted public file is refused\n\nreadMountedHttpFile replaced its own refusals (a secret file others can\nread, an empty or oversized file) with the generic missing-or-unreadable\nmessage, so an operator never learned what to fix. It now keeps them; a\nmissing or unreadable file still gets the generic message. File contents\nnever enter either.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-10-29T10:00:12Z"
     },
     {
       "sha": "e83a8688cb1f80416bffd4f268419f20cbe2ab03",
@@ -38,88 +87,39 @@
       "authorDate": "2026-10-29T09:50:41Z"
     },
     {
-      "sha": "8a64813288c896fc76349dabe62c3ce66a30aa64",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/8a64813288c896fc76349dabe62c3ce66a30aa64",
-      "message": "Bump Lucid to 0.8.9 and uplc to 0.5.3, and drop HarmonicLabs\n\nuplc 0.5.3 decodes a tag 102 Plutus Data constructor (index 128 and up)\nin the indefinite form, the spelling Lucid's Data.to writes. Before it,\nthe evaluator's decoder left that pair's break unread, so the enclosing\nlist ended there and a sibling value after the constructor broke the\ntransaction decode: local evaluation of any script transaction whose\nredeemer or inline datum held such a value failed. tx-completion.test.ts\npins it: a script spend whose redeemer and inline datum are\nConstr(0, [Constr(128, []), 5]) completes and submits.\n\nutils 0.3.0, which lucid 0.8.9 depends on, applies script parameters\nthrough the uplc wasm instead of @harmoniclabs/uplc and plutus-data.\nThat retires the two utils@0.2.6>@harmoniclabs overrides, the utils\npatch that adapted applyParamsToScript to UPLC 2's encodeUPLC, and the\nsdk's cbor and crypto dependencies, which were there only so Lucid's\nharmonic copy matched the sdk's. No @harmoniclabs package is left in\nthe lockfile; the first case of lucid-parameterization-resolution.test.ts\nnow checks that none resolves from any workspace package, from Lucid or\nfrom Lucid's own packages.\n\npnpm 11 holds a package back for a day after it is published.\n@lucid-evolution/* are releases we cut ourselves, so the workspace\nexempts them (minimumReleaseAgeExclude). A frozen install with a clean\nHOME passes with the exemption and is refused without it.\n\npnpmDepsHash follows the lockfile.",
+      "sha": "546fbfd3df2ce8f506a995e7e267e3468a993b2a",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/546fbfd3df2ce8f506a995e7e267e3468a993b2a",
+      "message": "Document the stack-signed public release\n\nThe preprod-public procedure now builds the profile first, signs the\nrelease in the public-release step, and names the standalone\nsign-deployment-release command only as the out-of-band alternative with\nits real arguments. It describes the loopback host ports, the Postgres\npassword file, the ingress subnet, the new phase-1 refusals, and the\njourney user and recipient funding. The node example uses the signed\nrelease's file names.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-29T06:51:05Z"
+      "authorDate": "2026-10-29T08:16:37Z"
     },
     {
-      "sha": "392964f03bb43aec2cf484bad4d06d37f816ccc5",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/392964f03bb43aec2cf484bad4d06d37f816ccc5",
-      "message": "Check a signed public release as public listen does before reporting it\n\nsign-deployment-release verified only the release signature and the watcher's reopen. A public release it reported as signed could still be refused by public listen: provenance without a node, Postgres or ingress image signed cleanly, and no public node could start from it. The command now opens a public release with authenticatePublicHttpRelease, with the manifest id and the provenance's source revision and role images as the expected identities, and refuses the release otherwise. The old test's mounted-registry check computed the expected digest from the file it checked, so it could never fail; it is gone, and a preprod-public-release Vitest project signs a public release and has the real public listen check accept it and refuse a changed revision, an edited classification reason and another key's trust roots.\n\nprogramCommitments was signed as typed, so a mistyped commitment produced a release that verified. The command derives computation-thread-policy-v1 from the manifest's computation-thread policy (the derivation the devnet release uses, now shared) and refuses a supplied value that differs. The field stays in the release input, which e2e-stack shares and binds into its intent digest; it may be empty.\n\nA refusal after the output directory was created left it behind, so a retry failed with EEXIST. Any refusal now removes the directory the call created. Tests cover the retry and --funding-payment-key-hash, and the docs scope the external-roots rule to public listen and name the profile generation step.",
+      "sha": "48020abb80d2d291db6e58fdc4bf47f92921aadc",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/48020abb80d2d291db6e58fdc4bf47f92921aadc",
+      "message": "Write public journey wallet seeds exclusively and delete them after use\n\nA preprod-public journey writes each signing seed to a new 0600 file in\nthe run directory (exclusive create, replacing one an interrupted run left)\nand deletes it when the deposit or withdrawal command ends, failed or not.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-29T06:35:07Z"
+      "authorDate": "2026-10-29T08:16:30Z"
     },
     {
-      "sha": "91d6cb47ba02ac44513512a8ad9fd350ddeeccbc",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/91d6cb47ba02ac44513512a8ad9fd350ddeeccbc",
-      "message": "Build a preprod-public test blueprint and let the registry fixture use it\n\nA test that signs a public release and opens it as public listen does needs the preprod-public profile compiled. The emulator-profile mechanism already selects a profile inside one Vitest project and builds a separately stamped blueprint for it; preprod-public-profile.js applies it to preprod-public under onchain/aiken/build/preprod-public. CI builds it once in test-blueprints and the node tools job restores it under MIDGARD_REQUIRE_PREBUILT_BLUEPRINTS, as the interactive and curated blueprints are.\n\nThe genuine deployment registry fixture failed under a public profile: the node's member list also checks the members against the unused-validator census from MIDGARD_BLUEPRINT_CLASSIFICATION_FILE, which the fixture had not built yet. It now takes the members from the SDK directly (the same list without that check) and, for a public profile, mounts its census in that variable while the manifest is built. Testing profiles behave as before.",
+      "sha": "3a1cbf5d584b0b99816908f72425df47aa65782a",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/3a1cbf5d584b0b99816908f72425df47aa65782a",
+      "message": "Sign the public release in the stack and harden the public inputs\n\nThe public-release step now signs the release for the finalized\ndeployment into public.releaseDirectory with the release input's key,\nthrough the same code as sign-deployment-release, and opens it as public\nlisten does. It runs before runtime-configuration, which binds the signed\nfiles; a rerun verifies the release already there and never signs again.\nThe stack and the standalone command share the program-commitments\nderivation, so they sign the same release from the same input.\n\nPhase 1 also refuses: a signing key the trust roots do not list, a release\ndirectory without a parent or holding a partial release, a private file\nowned by another user, a node database owned by another user (printing\nthe chown), an operator wallet off the allow-list, and a Docker network on\nthe ingress subnet. The deployed blueprint classification is its own\ninput, and the step refuses a release registry that classifies otherwise.\n\nIn public mode the node metrics and DA ports and Postgres bind to the\nloopback, the node API too when the ingress fronts it, and Postgres reads\nits password from a 0600 file instead of its environment. The example\nprover and availability minimums cover the 10,000 ADA bond, collateral\nand fees. The ingress config-text test is removed.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-29T06:34:56Z"
+      "authorDate": "2026-10-29T08:16:17Z"
     },
     {
-      "sha": "5b01cbdbb19bffd67ecb9855557082651e27e8a7",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/5b01cbdbb19bffd67ecb9855557082651e27e8a7",
-      "message": "Refuse every @harmoniclabs import in the demo workspace\n\nMidgard's own code no longer imports any @harmoniclabs package: the Plutus Data, constant and term classes and the Flat encoder are owned in midgard-validation, and builtins run through the pinned aiken wasm. A no-restricted-imports pattern now refuses @harmoniclabs/* in every block that configures the rule, so the dependency cannot come back through a stray import.\n\nno-recursive-plutus-data drops its @harmoniclabs branches (the recursive plutus-data codecs, the plutus-machine allow-list and harmonic Cbor), which named packages that are no longer installed; it keeps cborg and Lucid Data.from/Data.to. Its fixtures and docs/agents/lint-rules.md follow.",
+      "sha": "b1b5c75c8d81da84cf1cfc7da3b2614905be98a1",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/b1b5c75c8d81da84cf1cfc7da3b2614905be98a1",
+      "message": "Refuse a stack whose profile differs from the compiled one\n\nloadStackConfig, and so --check, now refuses an .env whose\nMIDGARD_DEPLOYMENT_PROFILE is not the profile the checkout was compiled\nfor, printing the generate-and-build command that fixes it. A\npreprod-testing stack accepts a ws:// endpoint again; only https:// is\nrefused for it.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-29T06:16:24Z"
+      "authorDate": "2026-10-29T08:16:00Z"
     },
     {
-      "sha": "9577b5ddff1a142650eb8148bf68be61b64cc6aa",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/9577b5ddff1a142650eb8148bf68be61b64cc6aa",
-      "message": "Build the fee-sensitive Lucid fixture with an owned Flat encoder\n\nThe static-completion fixture built its fee-threshold script with @harmoniclabs/uplc, reached through @lucid-evolution/utils. That package is leaving the dependency graph once utils applies parameters through the aiken wasm, so the fixture now writes its program with a small Flat encoder of its own that covers the terms and constants it uses. Its output is byte-identical to harmonic compileUPLC for the fixture program at fourteen thresholds (zero, signs, 7-bit group edges, 64- and 70-bit values) and for a 600-byte bytestring that needs chunking.",
+      "sha": "7d98a272e3f7eac7bd973df6e59defd7c1d28d61",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/7d98a272e3f7eac7bd973df6e59defd7c1d28d61",
+      "message": "Document the preprod-public deployment procedure\n\nA new operator page gives the e2e-stack sequence for preprod-public:\ninputs, Mithril-synced providers, reference scripts, init, operator,\nthe release-signing stop and resume, services and the acceptance\njourney. It lists each wallet's funding from the profile parameters, the\nwatcher process fields and the remaining owner inputs. The stack\nspecification and the acceptance runbook name the public profile and the\npublic-release step.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-29T06:16:15Z"
-    },
-    {
-      "sha": "264fcdbc9cfb2d1e6ddf63246a539e1700cd3bb9",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/264fcdbc9cfb2d1e6ddf63246a539e1700cd3bb9",
-      "message": "Add a release signing command for the deployment release\n\nsign-deployment-release signs a finalized deployment with the release key\nnamed by the existing release input and writes, into a new directory, every\nfile public listen and the watcher verify: the signed authority, its trust\nroots, the rule and funding bundles, the manifest and deployment info, the\nblueprint, and the provenance, parameter registry and classification when\nsupplied. It reuses the watcher's release authoring and checks the result\nwith the shared release verifier against the written trust roots.\n\nTests sign with temporary keys and check the output with the core release\nverifier, the node's mounted registry check and the watcher's authority\nloader, and that a tampered binding and another key's signature are refused.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-29T05:49:57Z"
-    },
-    {
-      "sha": "29abe7ea2fdc4719d1781129a3100231a65f8ffc",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/29abe7ea2fdc4719d1781129a3100231a65f8ffc",
-      "message": "Tighten the HarmonicLabs-migrated tests after review\n\n- reserve-payout evaluation context: the control now re-encodes every\n  output through CML, the path each mutation takes, instead of an empty\n  replacement that was equal by construction.\n- cek-cost parameter names: probe the 64/65 boundary and 2^20, and give\n  arity-6 ChooseData one vector of distinct sizes.\n- Flat encode differential: state what agreement with the crate proves;\n  the crate normalises Data, so it catches non-minimal output, and the\n  program-to-bytes mapping is anchored by the reader's vector tables.\n- real minting policy: refusals assert error_kind 2 (failed within\n  budget) as well as ok false; tq-05 records the question as settled.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-29T00:10:01Z"
-    },
-    {
-      "sha": "78fd6801c188a8bf6e43f73c2cf9a599f5a180c5",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/78fd6801c188a8bf6e43f73c2cf9a599f5a180c5",
-      "message": "Drop HarmonicLabs from midgard-validation and midgard-node\n\nNothing in either package imports it any more. The lockfile loses only\nthe removed entries and the packages no one else needs; pnpmDepsHash\nfollows it. The Lucid resolution test no longer compares the Harmonic\ninstances Lucid's utils resolve with midgard-validation's, which has\nnone; it still pins them to 2.x and to the SDK's CBOR and crypto.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-28T16:38:57Z"
-    },
-    {
-      "sha": "c3f656d53d888c27e43f4c22852c09a5e2c036aa",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/c3f656d53d888c27e43f4c22852c09a5e2c036aa",
-      "message": "Migrate midgard-node tests off HarmonicLabs\n\nThe real minting-policy evaluation test runs the policies through the\npinned aiken evaluator (eval_program_raw) instead of the HarmonicLabs\nmachine, which re-enables the hub-oracle case its lessThanByteString\ndefect had forced off. The reserve-payout mutants splice replacement\nitems into the signed bytes instead of reparsing and re-encoding the\nwhole transaction. Fixtures build programs with the owned term classes\nand Flat encoder.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-28T16:38:46Z"
-    },
-    {
-      "sha": "611faf10699f770519c014c2998b697452027e2a",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/611faf10699f770519c014c2998b697452027e2a",
-      "message": "Name builtins in validation generators from the owned table\n\nThe golden generators take builtin names, arities and force counts from\nmidgard-validation's own tables, which match aiken's textual syntax, and\nbuild programs with the owned term classes and Flat encoder. Every\ngenerator's --check output is unchanged.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-28T16:34:21Z"
-    },
-    {
-      "sha": "1253af93d3c16b34cda72b4cf4b14a248b687429",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/1253af93d3c16b34cda72b4cf4b14a248b687429",
-      "message": "Migrate midgard-validation tests off HarmonicLabs\n\nBuiltins are named from an owned table of aiken's textual builtin names,\nprograms are written by the owned Flat encoder, and every independent\noracle that was HarmonicLabs is now the pinned aiken uplc evaluator or\nCML: the Flat encoder differential re-encodes through the uplc crate, the\nBLS expression oracle runs through eval_program_raw, the Data-tree\ninteger oracle decodes with CML PlutusData, and the fuzz oracle unwraps\ncompiled code with the midgard-core CBOR reader. Non-canonical Data\nspellings are spliced into owned Flat bytes by a test helper.\n\nThe cost differential is deleted: the per-parameter test checks every\ncoefficient against aiken by name, and its refusals move into the cost\nunit test.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-28T16:34:09Z"
-    },
-    {
-      "sha": "fdbdfc1d0274491958d404805a6e365714d1adaa",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/fdbdfc1d0274491958d404805a6e365714d1adaa",
-      "message": "Refresh the Nix pnpm dependency hash for the uplc 0.5.2 lockfile",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-28T14:31:13Z"
+      "authorDate": "2026-10-29T06:57:20Z"
     }
   ],
   "contributors": [
