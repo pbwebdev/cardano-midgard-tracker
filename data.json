@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-10-30T12:29:11.147Z",
+  "fetchedAt": "2026-10-31T11:57:33.222Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 25,
@@ -16,6 +16,13 @@
     "Perl": 37
   },
   "commits": [
+    {
+      "sha": "34ea84fd22d6d8e31e596e025d5b25dbcb7f7d9b",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/34ea84fd22d6d8e31e596e025d5b25dbcb7f7d9b",
+      "message": "Give the public node and its migration only node.env\n\nCompose appends env_file lists across files, so the base node file's\n`env_file: [.env]` stayed on the public node and its migration under the\npublic overlay and the generated services file. Every .env key that node.env\ndoes not override reached the container: before the services step writes\nnode.env (the owner-pin run on a fresh stack) that is the whole .env, with\nevery STACK_ secret and the DA producer transport; after it, any key the\npublic node environment deletes rather than blanks, such as the\nDA_LIBP2P_PRIVATE_KEY_SOURCE that .env.example ships, which as a process\nsetting also overrides the mounted configuration. The public overlay now\nresets env_file for both services (`!override []`), so they read only the\nnode.env the services file adds.\n\nThe containers test renders the files the stack passes to Compose (base,\nKupmios, public overlay and the node's services file) with each env_file\nresolved, before and after node.env exists, instead of `--no-env-resolution`,\nwhose output differs between Compose releases. The public fixture keeps the\nnode's secrets out of the on-disk .env, which the stack refuses, and only in\nthe in-memory environment, as phase 1 leaves them.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-10-31T10:59:38Z"
+    },
     {
       "sha": "b10deb3fe72b1c8536a2ad7dc114b95266c3a9b4",
       "html_url": "https://github.com/Anastasia-Labs/midgard/commit/b10deb3fe72b1c8536a2ad7dc114b95266c3a9b4",
@@ -113,13 +120,6 @@
       "message": "Refuse a stack whose profile differs from the compiled one\n\nloadStackConfig, and so --check, now refuses an .env whose\nMIDGARD_DEPLOYMENT_PROFILE is not the profile the checkout was compiled\nfor, printing the generate-and-build command that fixes it. A\npreprod-testing stack accepts a ws:// endpoint again; only https:// is\nrefused for it.",
       "authorName": "Philip DiSarro",
       "authorDate": "2026-10-29T08:16:00Z"
-    },
-    {
-      "sha": "7d98a272e3f7eac7bd973df6e59defd7c1d28d61",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/7d98a272e3f7eac7bd973df6e59defd7c1d28d61",
-      "message": "Document the preprod-public deployment procedure\n\nA new operator page gives the e2e-stack sequence for preprod-public:\ninputs, Mithril-synced providers, reference scripts, init, operator,\nthe release-signing stop and resume, services and the acceptance\njourney. It lists each wallet's funding from the profile parameters, the\nwatcher process fields and the remaining owner inputs. The stack\nspecification and the acceptance runbook name the public profile and the\npublic-release step.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-29T06:57:20Z"
     }
   ],
   "contributors": [
