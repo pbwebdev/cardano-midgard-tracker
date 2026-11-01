@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-10-31T11:57:33.222Z",
+  "fetchedAt": "2026-11-01T12:57:39.301Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 25,
@@ -17,109 +17,109 @@
   },
   "commits": [
     {
-      "sha": "34ea84fd22d6d8e31e596e025d5b25dbcb7f7d9b",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/34ea84fd22d6d8e31e596e025d5b25dbcb7f7d9b",
-      "message": "Give the public node and its migration only node.env\n\nCompose appends env_file lists across files, so the base node file's\n`env_file: [.env]` stayed on the public node and its migration under the\npublic overlay and the generated services file. Every .env key that node.env\ndoes not override reached the container: before the services step writes\nnode.env (the owner-pin run on a fresh stack) that is the whole .env, with\nevery STACK_ secret and the DA producer transport; after it, any key the\npublic node environment deletes rather than blanks, such as the\nDA_LIBP2P_PRIVATE_KEY_SOURCE that .env.example ships, which as a process\nsetting also overrides the mounted configuration. The public overlay now\nresets env_file for both services (`!override []`), so they read only the\nnode.env the services file adds.\n\nThe containers test renders the files the stack passes to Compose (base,\nKupmios, public overlay and the node's services file) with each env_file\nresolved, before and after node.env exists, instead of `--no-env-resolution`,\nwhose output differs between Compose releases. The public fixture keeps the\nnode's secrets out of the on-disk .env, which the stack refuses, and only in\nthe in-memory environment, as phase 1 leaves them.",
+      "sha": "dd1d8cfb0b4ce8738c81461c342797e8b15735ab",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/dd1d8cfb0b4ce8738c81461c342797e8b15735ab",
+      "message": "Attach operator-2's node to a public stack as a loopback second instance\n\nA second instance now attaches to a preprod-rehearsal or preprod-public\nstack. It names its own private node configuration (nodeConfigFile, the\nsix node secrets, none of them in its .env) and an https:// loopback\nendpoint, and runs the stack's release: the release revision, public\norigin and node, Postgres and ingress images come from the stack's .env,\nwhich its own may only repeat. Its node runs from the stack's node image,\nserves the stack's TLS certificate and mounts the stack's signed release,\nTLS files and trust roots read-only; every host port, the node API's\nincluded, is on loopback, it builds no image and never starts ingress.\n\nLoading refuses an operator or merge wallet off the compiled allow-list,\nanother profile than the stack's, a validation worker pool below 2 or\ndisabled rate limits, and a node directory, run directory or node\nconfiguration that would lie in (or hold) the stack's release directory.\nA run refuses to start its node before the stack has signed its release,\nsince Docker would otherwise create the missing mount source.\n\nThe public node's .env, secret-loading, limit and allow-list checks move\ninto helpers the primary and the second instance share. Adds the\noperator-2 rehearsal example, its drill steps, and the two merge wallets\nin the rehearsal funding table.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-31T10:59:38Z"
+      "authorDate": "2026-11-01T03:38:40Z"
     },
     {
-      "sha": "b10deb3fe72b1c8536a2ad7dc114b95266c3a9b4",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/b10deb3fe72b1c8536a2ad7dc114b95266c3a9b4",
-      "message": "Route the stack profile refusal by the fragments the stack prints",
+      "sha": "ab07802863b30c34db8638a289488afd0b96d427",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ab07802863b30c34db8638a289488afd0b96d427",
+      "message": "Say that the late-shift lead beyond its minimum is the commit's window",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-30T02:17:40Z"
+      "authorDate": "2026-11-01T03:09:03Z"
     },
     {
-      "sha": "d1711f48155dabcefe026a2d85501acbc69e2b56",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d1711f48155dabcefe026a2d85501acbc69e2b56",
-      "message": "Render the public node compose model from the stack's own node directory and env file\n\nThe containers test rendered the base compose file against the checkout's\nuntracked demo/midgard-node/.env, which CI does not have. The public stack\nfixture now writes its env file into its node directory, as the stack\nrequires, and the test renders in that directory with that env file.",
+      "sha": "40f8c6b6a6ec7b658efdf728e2759761a3550229",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/40f8c6b6a6ec7b658efdf728e2759761a3550229",
+      "message": "Allow-list one merge key per operator on the Preprod production profiles\n\npreprod-rehearsal and preprod-public list each operator's wallet and its\nmerge wallet (2 -> 4 payment key hashes), regenerated with preprod-testing\nkept as the selected profile. The generated profile module's size cap in\nthe declarative table moves from 632 to 636 lines for the four new list\nentries.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-30T01:47:59Z"
+      "authorDate": "2026-11-01T03:08:52Z"
     },
     {
-      "sha": "4e5cb615f40d7d2e94664897124e7126da7eb586",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/4e5cb615f40d7d2e94664897124e7126da7eb586",
-      "message": "Add the preprod-testing fast-timer twin stack example and drill steps\n\nThe twin configuration runs one journey cycle on its own endpoint and DA\nports, so it can run beside the default stack from a separate worktree. The\ntesting-flow page lists the existing commands that prove the withdrawal\npayout, operator bond recovery and the DA-bond withdraw on its short timers.",
+      "sha": "6458537660385f5211f3de5ef97e77c0829acccd",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/6458537660385f5211f3de5ef97e77c0829acccd",
+      "message": "End the late-shift window where the fault's header still ends in the shift\n\nA late or retried commit started up to a commit allowance before the shift\nended could build a fault header ending past operator-2's shift. The window\nnow closes at the shift's end less the shortest lead, plus one millisecond,\nso both the commit and the header end inside the shift.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-30T01:08:36Z"
+      "authorDate": "2026-11-01T03:08:29Z"
     },
     {
-      "sha": "1e9435cf416836a35d36af475c588432a3614f60",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/1e9435cf416836a35d36af475c588432a3614f60",
-      "message": "Run the preprod-rehearsal profile on the public stack route\n\nThe stack takes the public route for every Preprod production profile and\nchecks operators against the compiled profile's allow-list, so a\npreprod-rehearsal stack loads with every public input check. Refusal\nmessages name the compiled profile. A preprod-rehearsal-stack test project\nloads a rehearsal configuration against that profile's allow-list.",
+      "sha": "ecb033b411da00b3059ccf516f20c5dbbc978bd4",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ecb033b411da00b3059ccf516f20c5dbbc978bd4",
+      "message": "Announce a public stack's retained DA at its public DNS name\n\nA preprod-rehearsal or preprod-public stack now names the public DNS name\nof its retained DA (public.retainedDaHost), refused by name when missing,\nlocal, private or an IP address. Its committee manifests announce the\nretained DA as /dns4 on the retained-transport port, listening on every\ninterface, so the stack's watcher, whose public-endpoint rule is unchanged\nfor production, accepts it.\n\nA preprod-testing stack's watcher reaches its retained DA on loopback\nthrough the generated watcher setting da.stackLoopbackPeers, which admits\nloopback IPv4 peers only and which a production build's watcher refuses by\nname (production_profile_refused).",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-30T01:02:13Z"
+      "authorDate": "2026-11-01T03:03:54Z"
     },
     {
-      "sha": "1cf3ebadef8500c5c95d62d05539b3c5ab1c0695",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/1cf3ebadef8500c5c95d62d05539b3c5ab1c0695",
-      "message": "Tighten public release resume checks and mounted-file refusals\n\nReopening a placed public release now requires its provenance to equal the\nprovenance the stack completed, and a public stack checks its provenance\nblueprint hash on every run. Mounted public files report size and permission\nrefusals separately, and mounted release JSON keeps the read refusal. The\nout-of-band signing steps name the registry digest and the key file phase 1\nreads. The public release tests share one fixture module and the container\nchecks move to their own file.",
+      "sha": "692b661942da0a2b8fa2ed39c9353e42b86a551d",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/692b661942da0a2b8fa2ed39c9353e42b86a551d",
+      "message": "Document removing an old-format pending ledger-owner deposit record\n\nA pending deposit recorded by an older drill has no transaction hash or\nvalidity end; the drill stops on it. The fault drill inputs now say which\nfile to remove by hand and what happens next.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-30T01:01:56Z"
+      "authorDate": "2026-11-01T03:00:56Z"
     },
     {
-      "sha": "08ee94bcbb4753353a256379f6a402a4b70e496e",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/08ee94bcbb4753353a256379f6a402a4b70e496e",
-      "message": "Match the intended refusal in the rehearsal profile tests",
+      "sha": "20785cece33404dc3f1d749011a976361ee5a3b4",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/20785cece33404dc3f1d749011a976361ee5a3b4",
+      "message": "Require a late-shift lead that covers the fault header's end\n\nA staged fault's header ends up to a minute after it is built, so a lead\nshorter than the commit allowance plus 60,000 ms could put the header past\noperator-2's shift. The drill now refuses such a lead up front, naming\nSTACK_LATE_SHIFT_LEAD_MS and the bound, and the header's end offset is a\nnamed constant shared with staging.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-29T10:00:45Z"
+      "authorDate": "2026-11-01T02:59:52Z"
     },
     {
-      "sha": "28bfa878da7c5955f5613163efab079ba197d7a3",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/28bfa878da7c5955f5613163efab079ba197d7a3",
-      "message": "Complete the public release provenance from the deployed registry\n\nA preprod-public operator cannot know the parameter registry digest before\ninitialize writes the registry, yet prerequisites demanded the registry\nand a provenance carrying its digest. The operator now supplies the\nprovenance without evidence.parameterRegistryDigest. Phase 1 checks its\nother fields against the .env revision and images and the compiled\nprofile, and that the release input names no registry but the stack's;\nprerequisites check its blueprint hash against the blueprint they build.\nOnce the deployment has written its registry, the public-release step\nwrites the completed provenance once into the run directory, with a\nrelease input naming it and the deployed registry. The public release and\nthe watcher release are both signed from that input. A resume reuses the\ncompleted provenance and refuses one that no longer matches, and a\nsupplied digest that differs from the deployed registry is refused.\n\nTests cover a fresh public stack passing the prerequisite check without a\nregistry, the completed digest equal to the deployed registry's, a resume\nand the watcher release reusing it, the phase-1 provenance refusals, and\nan ingress subnet held by another Docker network. The public input\nfixture moves to its own module.",
+      "sha": "32d6d39714e23f9b299d4db0755d6046c79d6c72",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/32d6d39714e23f9b299d4db0755d6046c79d6c72",
+      "message": "Start the fault-tail window at our node's first landed_block_invalid\n\nA shift of ours that ended before our node knew the fault invalid says\nnothing about its refusal to build on it, so the overlap window now opens\nat the first held observation. The lead measurements stay measured from\nthe fault's commit, which the record now names.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-29T10:00:30Z"
+      "authorDate": "2026-11-01T02:55:53Z"
     },
     {
-      "sha": "cca36185061ce1fcca856bac01322492cc774e96",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/cca36185061ce1fcca856bac01322492cc774e96",
-      "message": "Report why a mounted public file is refused\n\nreadMountedHttpFile replaced its own refusals (a secret file others can\nread, an empty or oversized file) with the generic missing-or-unreadable\nmessage, so an operator never learned what to fix. It now keeps them; a\nmissing or unreadable file still gets the generic message. File contents\nnever enter either.",
+      "sha": "5fcc40cca1a36ad7a5b845f9aecf80adee42fc92",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/5fcc40cca1a36ad7a5b845f9aecf80adee42fc92",
+      "message": "Prove operator-2's node stopped before each DA publication as its producer\n\nThe drill's DA publications use operator-2's producer key, so the session\nnow guards them like operator-2's wallet signatures: each publication first\nproves the node held stopped, and one without that proof is refused before\nany transport opens.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-29T10:00:12Z"
+      "authorDate": "2026-11-01T02:53:11Z"
     },
     {
-      "sha": "e83a8688cb1f80416bffd4f268419f20cbe2ab03",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/e83a8688cb1f80416bffd4f268419f20cbe2ab03",
-      "message": "Carry the release-age exemption into the boundary consumer",
+      "sha": "b706ca9f9c04cdb1da3c9480355c99f688d9014e",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/b706ca9f9c04cdb1da3c9480355c99f688d9014e",
+      "message": "Pin the successor's fault binding and the resumed node's follower tip in tests\n\nThe other-fault transfer case now checks the retried attempt stages a\ntransfer bound to this fault, and the removed-node case covers a follower\nbehind the tip without a catching-up reason, or with no follower at all.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-29T09:56:27Z"
+      "authorDate": "2026-11-01T02:48:24Z"
     },
     {
-      "sha": "7ac57286852148d0ebfbaeae098581995bf211ba",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/7ac57286852148d0ebfbaeae098581995bf211ba",
-      "message": "Add the preprod-rehearsal deployment profile\n\nA Preprod profile for rehearsing the public deploy with low bonds. Every\nvalue equals preprod-public's except the economics and the pooled DA bond\namounts, which equal preprod-testing's under its bounded-acceptance-v1\nschedule, so maturity, dispute, operator shift and every DA window match\nthe public release while bonds stay cheap. preprod-testing stays the\nselected profile and is unchanged.\n\nThe rehearsal is classed with the public profiles everywhere except\neconomics: the production allow-list and commit-event depth rules, the\nretained-DA transport requirement, the public timing rules, release\nprovenance and watcher release authoring, the blueprint classification\nregistry, public HTTP/TLS listen, readiness and database-error redaction,\nthe opener margin, and the release image and blueprint-rebuild scripts.\n\nThe profile-name and profile-class tables move to\ndeployment-profile-names.mjs, and the generator now emits\nPRODUCTION_DEPLOYMENT_PROFILE_NAMES so core, node and watcher read one\npublic-class helper instead of comparing names. The new module is listed\nwherever the generator inputs are (CI paths, preflight FULL_RUN, traced\nrefusal inputs, the interactive emulator fixture).\n\nThe generated profile table's size cap rises to its new line count: it\nholds one literal per profile.\n\nTests compare the loaded profiles rather than pinning numbers: the\nrehearsal is preprod-public with preprod-testing's economics and DA bond,\nis held to every production rule preprod-public is, and generates its own\nAiken environment.",
+      "sha": "1c9891e6b0415d298490a077b854f086103c9905",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/1c9891e6b0415d298490a077b854f086103c9905",
+      "message": "Fail a refusal drill a DA peer rejects for its delivery\n\nA committee peer rejecting the payload for another deployment, another\npayload schema or the size bound says nothing about the fault, so the\ndrill now fails on those codes instead of counting them as a refusal.\nEach peer's code stays in the saved delivery.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-29T09:50:41Z"
+      "authorDate": "2026-11-01T02:46:36Z"
     },
     {
-      "sha": "546fbfd3df2ce8f506a995e7e267e3468a993b2a",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/546fbfd3df2ce8f506a995e7e267e3468a993b2a",
-      "message": "Document the stack-signed public release\n\nThe preprod-public procedure now builds the profile first, signs the\nrelease in the public-release step, and names the standalone\nsign-deployment-release command only as the out-of-band alternative with\nits real arguments. It describes the loopback host ports, the Postgres\npassword file, the ingress subnet, the new phase-1 refusals, and the\njourney user and recipient funding. The node example uses the signed\nrelease's file names.",
+      "sha": "8e340a6f9a0b898d45d0bcfb4b2c7b163f073844",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/8e340a6f9a0b898d45d0bcfb4b2c7b163f073844",
+      "message": "Stop our node's hold watch on every failed attached journey run\n\nThe watch starts at the fault's commit and was stopped only by staging\nfailures, the successor port and a completed refusal. A failed public DA\npreflight or age-out wait left it polling our node. The attached mode now\ncloses it from the run's finally.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-29T08:16:37Z"
+      "authorDate": "2026-11-01T02:43:40Z"
     },
     {
-      "sha": "48020abb80d2d291db6e58fdc4bf47f92921aadc",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/48020abb80d2d291db6e58fdc4bf47f92921aadc",
-      "message": "Write public journey wallet seeds exclusively and delete them after use\n\nA preprod-public journey writes each signing seed to a new 0600 file in\nthe run directory (exclusive create, replacing one an interrupted run left)\nand deletes it when the deposit or withdrawal command ends, failed or not.",
+      "sha": "eaf267109186c7a3b55e10527383de1832435daa",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/eaf267109186c7a3b55e10527383de1832435daa",
+      "message": "Bound the runbook's node-start check to the preflight function's body\n\nThe check that node-start.ts still runs producer-da-preflight matched from\nthe preflightProducerTransport declaration to the id anywhere after it, so\nthe id in a later function passed it. It now reads only the function's body,\nup to its closing brace. The validator takes --full-stack-dir to read a\ncopy of the stack's sources, and a test edits that copy to prove the check\nfails.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-29T08:16:30Z"
+      "authorDate": "2026-11-01T02:38:54Z"
     },
     {
-      "sha": "3a1cbf5d584b0b99816908f72425df47aa65782a",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/3a1cbf5d584b0b99816908f72425df47aa65782a",
-      "message": "Sign the public release in the stack and harden the public inputs\n\nThe public-release step now signs the release for the finalized\ndeployment into public.releaseDirectory with the release input's key,\nthrough the same code as sign-deployment-release, and opens it as public\nlisten does. It runs before runtime-configuration, which binds the signed\nfiles; a rerun verifies the release already there and never signs again.\nThe stack and the standalone command share the program-commitments\nderivation, so they sign the same release from the same input.\n\nPhase 1 also refuses: a signing key the trust roots do not list, a release\ndirectory without a parent or holding a partial release, a private file\nowned by another user, a node database owned by another user (printing\nthe chown), an operator wallet off the allow-list, and a Docker network on\nthe ingress subnet. The deployed blueprint classification is its own\ninput, and the step refuses a release registry that classifies otherwise.\n\nIn public mode the node metrics and DA ports and Postgres bind to the\nloopback, the node API too when the ingress fronts it, and Postgres reads\nits password from a 0600 file instead of its environment. The example\nprover and availability minimums cover the 10,000 ADA bond, collateral\nand fees. The ingress config-text test is removed.",
+      "sha": "811cffe75d2ecacb696008f80f2b06fce3cb3084",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/811cffe75d2ecacb696008f80f2b06fce3cb3084",
+      "message": "Bound the rehearsal example's waits to four hours and rerun for the payout\n\nThe 8-day timeout let one run hold the controller across the whole 7-day\nblock maturity. The example keeps the 4-hour bound every other stack uses;\nthe drill steps say that a run stopped waiting for the payout is rerun with\nthe same configuration, and its withdrawal step resumes waiting for the\nsame payout from its saved receipt.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-29T08:16:17Z"
+      "authorDate": "2026-11-01T02:36:21Z"
     },
     {
-      "sha": "b1b5c75c8d81da84cf1cfc7da3b2614905be98a1",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/b1b5c75c8d81da84cf1cfc7da3b2614905be98a1",
-      "message": "Refuse a stack whose profile differs from the compiled one\n\nloadStackConfig, and so --check, now refuses an .env whose\nMIDGARD_DEPLOYMENT_PROFILE is not the profile the checkout was compiled\nfor, printing the generate-and-build command that fixes it. A\npreprod-testing stack accepts a ws:// endpoint again; only https:// is\nrefused for it.",
+      "sha": "d71571eb8dd7c58b8c7d2f34e0efa637c8d7bc46",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d71571eb8dd7c58b8c7d2f34e0efa637c8d7bc46",
+      "message": "Recreate DA and node containers when their generated manifest changes\n\nCompose recreates a container on up -d only when its service definition\nchanges, never when a bind-mounted file's bytes do. A later run that\nadmitted operator-2 rewrote every committee manifest, yet the committee and\nretained-DA containers kept running with the old ones; operator-2's node\nlikewise kept a stale producer manifest after the stack regenerated its own.\nEach service that mounts a generated manifest now carries a label with the\nmanifest's digest, so its Compose configuration hash changes with the file.\nThe tests read that hash from docker compose config --hash.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-29T08:16:00Z"
+      "authorDate": "2026-11-01T02:35:19Z"
     }
   ],
   "contributors": [
@@ -383,10 +383,6 @@
   "releases": [],
   "commitActivity": [
     {
-      "week": 1762041600,
-      "total": 46
-    },
-    {
       "week": 1762646400,
       "total": 14
     },
@@ -588,7 +584,11 @@
     },
     {
       "week": 1792886400,
-      "total": 200
+      "total": 183
+    },
+    {
+      "week": 1793491200,
+      "total": 17
     }
   ]
 }
