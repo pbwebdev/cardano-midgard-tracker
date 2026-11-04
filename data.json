@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-11-03T13:54:36.210Z",
+  "fetchedAt": "2026-11-04T14:04:22.907Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 25,
@@ -17,109 +17,109 @@
   },
   "commits": [
     {
-      "sha": "afed12eb1165aad1b13f229f14957f959b8f6cd5",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/afed12eb1165aad1b13f229f14957f959b8f6cd5",
-      "message": "Keep the replay source free of the follower runtime's imports\n\nThe pre-init check imported parseHubOracleOneShot from follower-runtime.ts,\nwhich the projection determinism lint excludes as a node-reaching module, so\nthe replay source now reached it. The parser moves, unchanged, into its own\nmodule that both the replay source and the deployment follower import.\n\nprojection-lints.test.ts was red on 4ef65d769 in CI (excluded_import\n./follower-runtime.js from replay-source.ts) and is green here; watcher tsc,\neslint and prettier pass.",
+      "sha": "2062907dd320148405a4baa7c892c9fe4224530c",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/2062907dd320148405a4baa7c892c9fe4224530c",
+      "message": "Document the l1_index_unconfigured readiness reason\n\nThe node refuses to start when its L1 index cannot be built from the\ndeployment and configuration; operators need the reason's text and its\npublic presentation entry like every other readiness reason.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-03T05:49:38Z"
+      "authorDate": "2026-11-04T05:54:28Z"
     },
     {
-      "sha": "4ef65d769a12ff02b9ae77b29cf713e10c9ee960",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/4ef65d769a12ff02b9ae77b29cf713e10c9ee960",
-      "message": "Merge the persisted, lane-serialized wallet seed",
+      "sha": "f1931a83dce40731219a9ff52f62d3ed864e3146",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/f1931a83dce40731219a9ff52f62d3ed864e3146",
+      "message": "Read deployment status from the deployment's own outputs, never by address\n\nDeployment status read every protocol component by scanning its script\naddress, which on a local node is a full ledger scan and timed out on\npreprod. It is now one exact-output read: the hub-oracle nonce plus the\nrecorded initialization transaction's outputs. Initialization creates\nevery component at once and the hub-oracle output can never be spent,\nso that output alone shows the deployment landed; the partial state is\ngone.\n\ninit records each attempt, with its validity bound, before submitting.\nAn attempt whose bound has passed while the nonce is unspent can never\nland, so status reports empty and init builds again instead of waiting\nforever. Status needs no contracts while the nonce is unspent, so the\nharness checks the nonce right after creating it. The readiness probe\nfinds the hub-oracle output among the initialization outputs and keeps\nthat reference. init on a complete deployment reports the real\ninitialization hash.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-03T04:36:00Z"
+      "authorDate": "2026-11-04T05:13:04Z"
     },
     {
-      "sha": "a4994e1a3fc19cce12766a619f62423cc0612b84",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/a4994e1a3fc19cce12766a619f62423cc0612b84",
-      "message": "Bump the transport frame protocol to version 2\n\nVersion 2 adds noDeadline on lsq_query (the wallet seed read). A version 1\nsidecar paired with a version 2 client used to pass hello and then fail\nthe first seed query as a terminal client_protocol_violation. With the\nversion bumped on both sides (TypeScript client, Go sidecar, the fake\nsidecar used by tests), a mismatched pair now fails at hello with\nversion_unsupported, at startup. The README documents the version and why\nit changed.\n\nTest gate:\n1. The transport suite fails if the built sidecar's --protocol-version is\n   not 2, or if a hello at the previous version (1) is not refused with a\n   fatal version_unsupported frame and exit 64. The Go session test fails\n   on the same refusal at the frame layer.\n2. It extends the existing version tests: the unsupported-version cases\n   now send version 1 instead of an arbitrary one, so they cover the\n   old-sidecar pairing this bump is for.\n\nRed before the bump: TS 'Expected \"2\" Received \"1\"' and the version 1\nhello answered malformed_frame, not version_unsupported; Go\nsession_test.go:222 got malformed_frame (\"hello needs version, ...\").\n\nGates run under the serial lock and run-capped, all exit 0:\n- contrib native --package @al-ft/l1-node-transport (built sidecar prints\n  --protocol-version 2; go vet + go test -race ok);\n- contrib boundary --package @al-ft/l1-node-transport;\n- contrib gate process-boundaries (21 + 77 + 22 tests passed).",
+      "sha": "2c2fc715ed48e815fd26610e4cc2a2ebe5c7a850",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/2c2fc715ed48e815fd26610e4cc2a2ebe5c7a850",
+      "message": "Open the node's L1 reader with its full index, so it never scans\n\nThe node's reader started with an empty tracked set and adopted the\nfollower's recorded set later; until then any protocol read fell back to\na full ledger scan. One definition of the node's index (protocol set,\nown wallets, projections) now serves the follower and the reader, so\nboth record the same set and the reader tracks it from the open. A read\nbefore the follower's first cursor is follower:not_initialized.\n\nChain parameters (the slot mapping) are a keyed ledger query and no\nlonger go through the reader, which removes the cycle between the\nreader and the contracts it is configured from.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-03T04:35:25Z"
+      "authorDate": "2026-11-04T05:05:26Z"
     },
     {
-      "sha": "d3d9e3ab034e63c3992edb2fc95655f929111dad",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d3d9e3ab034e63c3992edb2fc95655f929111dad",
-      "message": "Close the node connection before awaiting the follow loop on shutdown\n\nEach role aborted the follow loop and awaited it before closing the\ntransport. Abort only closes the chain-sync stream, so a loop parked in a\nblock write behind a wallet seed read in flight (which holds the store's\nwriter lane and has no request deadline) never returned, and a shutdown\nwaited out the node's whole UTxO scan.\n\nThe watcher, the node and the committee now close the transport right\nafter the abort, before awaiting the loop: the read fails as at a sidecar\nexit, the lane frees, and the block write and the loop finish. The\nwatcher's tx-input resolver closes after the loop too. The later transport\nclose in each release stays (it is idempotent).\n\nTest gate:\n1. The new watcher case fails if a shutdown requested while a seed read is\n   in flight, with a block waiting behind it, waits for that read; it also\n   fails if readiness then waits on the node, or does not name the seed\n   read in flight (with its point) and the node lag as unknown.\n2. It is a new file: no watcher runtime test drives a node whose ledger\n   side hangs. The fake sits at the transport boundary (ledger states\n   serialize as in the real transport; a closed transport fails every\n   pending read). The node and committee changes have no role-level test:\n   neither role has a transport seam.\n\nRed before the fix: \"expected 'still waiting' to be 'closed'\" (the\nshutdown still waiting 2 s after it was requested).",
+      "sha": "8f2121ddf7a7afc5a3efd601ac52c20c8128412d",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/8f2121ddf7a7afc5a3efd601ac52c20c8128412d",
+      "message": "Read the cancelled orphan's state from one /proc read\n\nPID 1 may reap the killed grandchild between an existence check and a\nsecond read of its stat file, which failed the test with ENOENT. The\nprocess identity already carries the state from a single read.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-03T04:28:16Z"
+      "authorDate": "2026-11-04T00:23:52Z"
     },
     {
-      "sha": "166538fe49b8cbf060f9a395c42711c671e7d46f",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/166538fe49b8cbf060f9a395c42711c671e7d46f",
-      "message": "Never wait on the slot time in the node-behind check\n\nThe follow loop awaited slotTime after every applied event. The watcher and\nthe committee read the slot configuration from the node through the\ntransport's ledger lock, which a wallet seed read (no request deadline)\nholds, so before the configuration was cached the loop parked on it and a\nhung node was never reported behind.\n\n- watchNodeBehind never awaits slotTime. A number is judged at once. A\n  promise makes the lag unknown (nodeBehind { lagMs: null }), which is not\n  ready (\"lag behind wall-clock time unknown, waiting on the node for the\n  slot configuration\"), and is judged and published when it lands. A throw\n  or a rejection still skips the check: the last judged result stands, and\n  the next check reads again. No timer is added to the lock wait.\n- The watcher and the committee answer slotTime synchronously once the slot\n  configuration is read; the node already uses Lucid's synchronous clock.\n\nTest gate:\n1. The new follower case fails if the loop waits on an outstanding slot\n   time (it applied 0 events within the bound) or if the outstanding read\n   is reported as ready; the failure case fails if a rejected read leaves\n   the lag unknown instead of the last result.\n2. They extend follow-loop-node-behind.test.ts, the suite for this check;\n   no case had a slot time that does not answer at once.\n\nRed before the fix: \"timed out; last status {state: starting, events: 0,\n...}\" for the new case. The role-level case (the watcher over a hung ledger\nside, in the next commit) with this change reverted: \"no seed in flight;\nreadiness [l1_follower_catching_up: no node tip seen yet, ...]\": the loop\nparked on the slot configuration after its first block.",
+      "sha": "faad72eb32fda6be6e841c545b8474f8c07e6c40",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/faad72eb32fda6be6e841c545b8474f8c07e6c40",
+      "message": "Build a resumed stack's images again so new code reaches its containers\n\nA resumed run confirmed running services from one readiness snapshot\nwhenever their generated configuration was unchanged. Nothing in that\nconfiguration names the source the node, committee and watcher images\nare built from, so a run resumed after new commits kept testing the\ncontainers an earlier run had built.\n\nEach harness run now carries a build id. A services record confirms\nonly when this run built it; a record from an earlier run starts the\nservices again, which builds the images (cached when nothing changed)\nand lets Compose recreate only the containers whose image changed. An\nattached public node still confirms by its pinned release image.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-03T04:28:04Z"
+      "authorDate": "2026-11-04T00:16:02Z"
     },
     {
-      "sha": "37eaff78970213d50f7dccbc254a024c06bf6425",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/37eaff78970213d50f7dccbc254a024c06bf6425",
-      "message": "Hold the slow seed read until the block is delivered, without a sleep\n\nThe slow-read test raced the block's write against a 300 ms sleep. The\nfake ledger read now delivers the block to the store and only then answers,\nso the block is always queued behind the seed when the read returns, with no\ntiming involved.\n\nTest gate:\n1. The test still fails if the seed's read and write do not run as one\n   writer-lane task: running the store's seed outside the lane makes it\n   return pending (the cursor moved under the read) instead of seeded.\n2. This replaces the timing of an existing case; no new case.\n\nRed with the seed taken out of the writer lane: \"expected { kind:\n'pending', ... } to match object { kind: 'seeded', ... }\" on both stores.",
+      "sha": "1248ba7e1a0509c57c4d41e541b6a3bb3e486ee8",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/1248ba7e1a0509c57c4d41e541b6a3bb3e486ee8",
+      "message": "Let the watcher dial the loopback DA peer its config admits\n\nThe config parser admits a local-only stack's own 127.* DA peers on a\nnamed network (stackLoopbackPeers), but the libp2p transport only\ndialed ip4 peers on a Custom chain. A preprod twin's watcher therefore\nparsed its retained-DA peer and then refused to dial it, so it could\nnever fetch a block's DA payload.\n\nThe transport now has one rule: it dials an ip4 peer only when the\nadmitted config, re-parsed, lists that exact peer and the verified\nidentity's network and protocol match. Which ip4 peers a config may\nhold stays the parser's decision alone. The runtime always passes its\nadmitted config.\n\nThe harness's public-DA check now reports each failed attempt instead\nof only the header hash.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-03T04:13:37Z"
+      "authorDate": "2026-11-03T23:58:54Z"
     },
     {
-      "sha": "9ccef3ddb4a786aa5cd9c927f61d0aaba3148b6c",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/9ccef3ddb4a786aa5cd9c927f61d0aaba3148b6c",
-      "message": "Report a wallet seed in flight, with the point it reads at\n\nWhile a seed ran, the seeder's status() still said not_initialized or the\nlast attempt's failure, so an operator could not tell a seed read stuck in\nthe node from one never started. The node's intent stage computed its seed\nhold only after the step returned, and the committee kept the last step's\ndetail, so both showed the old reason for the whole read.\n\n- WalletSeedPendingReason gains in_flight. While a step runs, status()\n  reports it with inFlight { at, sinceMs }: at is the cursor point the\n  ledger read is at, null while the seed waits for the writer lane. The\n  detail reads \"seed read in flight at slot S (block H) since <time>\".\n- seedWallets takes an optional onRead hook, called as the read starts\n  inside the writer lane.\n- The committee's L1 source and the node's intent stage read the seed hold\n  live from status() instead of from the last step's answer.\n\nTest gate:\n1. The new tests fail if status() keeps reporting not_initialized while a\n   seed read is held, if the committee's readiness or the node's holds()\n   show the previous answer instead of in_flight during the read, or if the\n   in-flight state outlives the step.\n2. The follower case is a new file because it is a different unit (the\n   seeder's status, not the seed write) and wallet-seed.test.ts is near its\n   size cap; the committee and node cases extend their existing suites,\n   whose fakes already reach the seed path.\n\nRed before the fix: wallet-seeder-status.test.ts got reason\n\"not_initialized\" where \"in_flight\" was expected; the committee case got\ndetail \"own wallets not seeded yet\"; the node case got [] from holds()\nduring the read.",
+      "sha": "e3eda77b0663d1c989f55428f25a2535e1afeb99",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/e3eda77b0663d1c989f55428f25a2535e1afeb99",
+      "message": "Generate MDX types after Next loads the docs configuration\n\nNext typegen loads the Fumadocs configuration and starts its asynchronous generator. Await the explicit MDX generator afterward so TypeScript reads a completed generated module. This ordering fixes the documentation check exposed while verifying the module refactor.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-03T04:12:38Z"
+      "authorDate": "2026-11-03T23:47:40Z"
     },
     {
-      "sha": "dd7afc8f7510cda8db1b3b0ef42acf47f7a4c9ce",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/dd7afc8f7510cda8db1b3b0ef42acf47f7a4c9ce",
-      "message": "Pin the replay checkpoint's persistence and a rewind that removes the init\n\nOnce the init is deep enough to be the checkpoint point, the test now\nchecks that the checked genesis ledger is persisted and that the replay\nretention floor rises above the origin. Before that, the floor stays at\nthe origin. A new case rewinds the init away while the chain is still\nshort and expects the checkpoint to go back to pending.",
+      "sha": "e0cd3eda5f0fbf0bab8d910f2cffa5fb0da051b5",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/e0cd3eda5f0fbf0bab8d910f2cffa5fb0da051b5",
+      "message": "Keep historical source evidence linked to its original commit",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-03T03:52:29Z"
+      "authorDate": "2026-11-03T23:12:56Z"
     },
     {
-      "sha": "5a14325f7880898d06fe68247d69ea2fc7200170",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/5a14325f7880898d06fe68247d69ea2fc7200170",
-      "message": "Treat a replay checkpoint at or below the follower's origin as pre-init\n\nWhen fewer than automaticRecoveryMaxDepth+2 blocks separate the store\norigin from the protocol init, the checkpoint observation is\nl1_follower_short_chain and readiness stayed\nreplayed_ledger_stable_observation_pending until the chain grew (up to\nabout 12 hours). The replay checkpoint driver now asks the follower store\nwhether the checkpoint point lies at or below the origin while the\nrecorded one-shot spend followed the origin and created the deployment's\nroot. Only then is it ready: nothing is advanced, persisted or released,\nand every ledger replays from genesis. Any other short chain stays\npending.\n\nThe init check is shared with the confirmed-state read and now reuses the\nfollower's exported protocolInitIn instead of its own SQL. A test covers a\nrewind landing while a pre-init checkpoint is read. The replay-source tests\nare split into a fixture and a pre-init file to stay under the line limit.",
+      "sha": "9f35f6fdcf996ce6b8c595e231acf654bd646416",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/9f35f6fdcf996ce6b8c595e231acf654bd646416",
+      "message": "Point the transaction source map at the new module owners",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-03T03:40:29Z"
+      "authorDate": "2026-11-03T23:04:19Z"
     },
     {
-      "sha": "fddf07640d88556dc185a6660081d2ec39298174",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/fddf07640d88556dc185a6660081d2ec39298174",
-      "message": "Seed each own wallet once, in the writer lane, with no request deadline\n\nThe wallet seed's LSQ utxo_by_address read scans the node's whole UTxO set\n(35-44 s on preprod) and failed three ways: it raced the follow loop and lost\nto cursor_moved, it re-read every wallet on every restart, and the request\ndeadline killed it. The owner ruled out deadline tuning and Kupo; the\nfollower stays the only index.\n\n- Seed once, persisted. Migration 0003_wallet_seeds adds l1_wallet_seeds\n  (address, seed_slot, seed_hash; class A). A seeded wallet, one with no\n  outputs included, is never read again. A committed rewind below the seed\n  point deletes it with the seed rows, a reset deletes it as class A, and a\n  store start deletes the point of every wallet it does not track. INV6 also\n  refuses a seed point above the cursor.\n- Serialized with block application. FactStore.seedWallets reads the cursor\n  and the stored seed points, reads the owed wallets from the ledger and\n  writes their rows and seed points as one writer-lane task, so no block,\n  rewind or prune lands between the read and the write. The cursor_moved\n  retry and its attempts budget are gone. The seeder keeps no retry state:\n  step() is coalesced, status() gives the readiness detail, and the three\n  role callers lose their own in-flight bookkeeping.\n- No per-request deadline for the seed read only. LedgerStateSession.query\n  takes QueryOptions { deadline: \"none\" }; the client skips its timer and\n  sends noDeadline in the lsq_query header, and the sidecar runs that query\n  with no deadline timer. Every other request keeps requestTimeoutMs. The\n  request still ends with the node connection or the sidecar, so each role\n  now closes the transport before the store on shutdown.\n\nTest gate:\n1. The new follower tests fail if a restart reads the ledger again for a\n   seeded wallet (also one with no outputs), if a block arriving during the\n   seed read moves the cursor before the write, or if a rewind's marker\n   handling owes too much or too little. The transport test fails if the\n   client or the sidecar abandons a no-deadline query at its deadline, or if\n   the option leaks to an ordinary query.\n2. They extend the existing wallet-seed and transport suites, whose fakes\n   and mock node already reach these paths; no existing case covered\n   persistence across a restart, a slow read under arriving blocks, or a\n   query outliving requestTimeoutMs.\n\nRed before the fix: wallet-seed.test.ts 8 failed (seeded at b3 instead of\nb2; 2 queries after a restart where 1 is owed); transport.test.ts failed with\n\"node_timeout: the node did not answer within the request deadline\". Killing\nthe sidecar's noDeadline branch, the rewind's marker delete or the start-time\nuntracked delete each turns its test red.",
+      "sha": "7b37c1730b88cabf30aee2ea51a1dd85f17b75a1",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/7b37c1730b88cabf30aee2ea51a1dd85f17b75a1",
+      "message": "Read the stack's wallets through Kupo, not the local node's ledger\n\nThe live harness checked wallet funding, the operator's hub-oracle nonce\nand the user's deposit funds with the node's l1-utxos over its default\naccess: an address query against the local node's ledger, which scans\nthe whole UTxO set and does not fit a command's deadline on preprod.\nThe twin run stopped at the wallet check with node_timeout.\n\nThese reads now go through the stack's Kupo and Ogmios, the same view\nthe user's own midgard-user already reads through.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-03T03:36:51Z"
+      "authorDate": "2026-11-03T22:54:51Z"
     },
     {
-      "sha": "56820e461d2f1d9d64f0cbb286cf1b507d4888ff",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/56820e461d2f1d9d64f0cbb286cf1b507d4888ff",
-      "message": "Move the transport's public declarations and test helpers into their own modules\n\ntransport.ts sat at 499 of the 500-line max-lines cap and its test at 486, so the no-deadline query in the next commit cannot land in either without raising the cap. This is a pure move with no behaviour change. The public option, result and error declarations (L1NodeTransportOptions, TransportUnavailableError, TransportTimeoutError, SubmitResult, MempoolSizes, LedgerStateSession: 6 declarations) move from src/transport.ts to src/transport-api.ts. The mock-node test helpers (sidecarBinary, mockNodeBinary, MAGIC, owned, mockNode, transportFor, take, expectContiguous: 8 declarations) move from tests/transport.test.ts to tests/transport-support.ts.\n\nverify-pure-move: \"Pure move confirmed: 17 top-level declarations in 1 before file(s) at 6739c8110728; 17 in 2 after file(s)\" (src) and \"Pure move confirmed: 13 top-level declarations in 1 before file(s) at 6739c8110728; 13 in 2 after file(s)\" (tests).\n\nNon-move edits: src/index.ts exports the moved names from ./transport-api.js; transport.ts imports them; the test helpers became exports and the test file imports them; afterEach stays in the test file. Package typecheck, lint and format-check pass; tests/transport.test.ts 15/15.",
+      "sha": "4bad3fd7974a2545fea5d6b6781160f02984ae97",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/4bad3fd7974a2545fea5d6b6781160f02984ae97",
+      "message": "Give HTTP, Phase B and test fixtures clear module owners\n\nGroup declarations by domain responsibility instead of extraction order.\nHTTP separates routes, public reads, operator actions, readiness and submission\nresources. Phase B separates UTxO overlays, candidate graphs, input resolution\nand script execution. Shared fixtures separate transaction material, proof\nconstruction, scenario ownership and explicit test resources.\n\nCarry the latest branch behavior into these owners, including its removal of\nthe deposit-build endpoint and deposit-submission records. Retain the public\nsurfaces and module limits, including the existing 717-line retirement ceiling.\nMove only the affected lint-baseline and size-exception paths. Point the HTTP\nsource guard at the complete implementation directory.\n\nPure moves against 7b37c1730b88 confirmed 316 declaration groups on 2026-11-03:\nHTTP 99, Phase B 51, submit-init fixtures 67, database fixtures 47 and collection\nfixtures 52; all five verifier commands exited 0. Import targets, evaluation\norder, compiled boundaries and behavior require their separate review/checks.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-03T03:30:23Z"
+      "authorDate": "2026-11-03T22:49:19Z"
     },
     {
-      "sha": "5aa1919a17d0d52357e61d5edd6d6b10e2701772",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/5aa1919a17d0d52357e61d5edd6d6b10e2701772",
-      "message": "Treat a replay checkpoint below the deployment's init as the empty queue\n\nAfter a fresh deployment the watcher stayed not ready with\nreplayed_ledger_source_pending (\"replay checkpoint has no unique\nconfirmed-state root\") until the protocol init was\nautomaticRecoveryMaxDepth + 2 blocks deep, about 12 hours on preprod.\nThe checkpoint point sits that far below the tip, and before the init\nthere is no root there to read.\n\nThe replay source now tells that case apart from a missing root. It\nreturns no ConfirmedState when, at the checkpoint point, no root and no\nCorrectionLock is live, the observation admitted an empty queue, the\nstore's protocol-init fact (the tx spending the hub-oracle one-shot) is\nstrictly after the point, and that tx created the deployment's root.\nThe root and the CorrectionLock are minted only with the hub-oracle\ntoken, which only the one-shot spend can mint, so a point the one-shot\noutlived holds no queue. The keeper then reports ready with no head to\ncheck: ledgers replay from genesis, and admission history stays\nretained from the origin until a real checkpoint is durable.\n\nEvery other shape stays pending as before: more than one root at the\npoint, no root anywhere, a root from a tx that does not spend the\none-shot, the one-shot spent without creating a root or at or before\nthe point, a deinitialised queue, or a stray CorrectionLock.",
+      "sha": "6e465265de899b0e4cd24f7f9de852106044d099",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/6e465265de899b0e4cd24f7f9de852106044d099",
+      "message": "Extend source guards to inspect module directories\n\nAllow an explicit implementation directory to include nested source modules,\nso source guards continue inspecting code when cohesive modules replace\nsame-prefix file facets. Existing file/facet discovery remains unchanged.\n\nThe nested-directory regression fails against the previous helper at its\npath-list assertion. node --test scripts/lib/source-facets.test.mjs passed\n4 tests, 0 failed, exit 0 on 2026-11-03.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-03T03:14:36Z"
+      "authorDate": "2026-11-03T22:26:56Z"
     },
     {
-      "sha": "6739c8110728eae44572c04c1254d229ef23d1a0",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/6739c8110728eae44572c04c1254d229ef23d1a0",
-      "message": "Check the DA submitter wallet against its committee's floor before deploying\n\nThe committee refuses a submitter wallet with fewer than two plain ADA\noutputs or under 80 ADA of them, but only once it starts, after the\ndeployment has spent. The stack's wallet step now refuses the same\nwallet up front; a test pins the two numbers to the committee's own.",
+      "sha": "a5e30ef7821906e6b8035a9af9953fcf78ea661a",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/a5e30ef7821906e6b8035a9af9953fcf78ea661a",
+      "message": "Document deposits and withdrawals with midgard-user\n\nThe node guides, the docs site and the acceptance reference now send users to\nmidgard-user, with its provider requirement: a Kupo that indexes the wallet\nand the deposit or withdrawal list (or everything) and keeps spent outputs, or\nBlockfrost.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-03T02:25:59Z"
+      "authorDate": "2026-11-03T22:02:04Z"
     },
     {
-      "sha": "9b1a97b96832791bc2f5600102ed30e4f18ca834",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/9b1a97b96832791bc2f5600102ed30e4f18ca834",
-      "message": "Give the submitting DA committee member its own availability responder wallet\n\nThe submitting member refused to start because the preprod stack never\nset its availability journal or a responder key separate from its L1\nsubmitter. Add a daResponder wallet role and write both settings into\nmember 0's environment, with the journal on its state volume.",
+      "sha": "e50e2ed63dc20860d6f5395337602d2b05c4cc6c",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/e50e2ed63dc20860d6f5395337602d2b05c4cc6c",
+      "message": "Drop the node's user submission tables\n\nMigration 0031 drops event_history_submission_inputs,\nevent_history_submissions and deposit_submission_attempts, children first and\nwithout CASCADE, so an unexpected dependent fails the migration instead of\nbeing dropped silently. The registry moves to schema version 31.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-03T01:53:59Z"
+      "authorDate": "2026-11-03T22:01:56Z"
     },
     {
-      "sha": "8df46c74f38b74b4824a3da074f86557d6b18515",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/8df46c74f38b74b4824a3da074f86557d6b18515",
-      "message": "Ignore the node's runtime db directory\n\nThe node's Compose files mount demo/midgard-node/db as its data\ndirectory, and the container writes root-owned files there. Untracked and\nnot ignored, they were listed among the package's files, so a contrib\nbuild in a checkout running the stack failed reading them.",
+      "sha": "38da0cbecf47d84ec2b20b57cfe2b3188d62f898",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/38da0cbecf47d84ec2b20b57cfe2b3188d62f898",
+      "message": "Delete the node's user deposit and withdrawal submission path\n\nDeposits and withdrawals are built, recorded and confirmed by the user's own\nmidgard-user tool, so the node no longer carries any of it: the\nsubmit-deposit, reconcile-deposit-submission and submit-withdrawal commands,\nthe durable history-submission driver with its history-nonce lock, input\nreservations and takeover, the submission and attempt database modules, and\nthe SDK's checkpointed submission state machine. Their tests go with them;\nbehavior that still matters is covered by the SDK and midgard-user tests.\n\nThe node keeps its own intent journal for its own transactions, genesis\ndeposits and the L2 transfer command. The read-only L1 comparison view no\nlonger fills deposits' admission-hash column from an Order's location, so the\ncolumn has one meaning: the admission transaction the follower recorded.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-03T01:19:53Z"
+      "authorDate": "2026-11-03T22:01:42Z"
     }
   ],
   "contributors": [
@@ -388,11 +388,11 @@
     },
     {
       "week": 1763251200,
-      "total": 23
+      "total": 31
     },
     {
       "week": 1763856000,
-      "total": 16
+      "total": 44
     },
     {
       "week": 1764460800,
@@ -440,23 +440,23 @@
     },
     {
       "week": 1771113600,
-      "total": 14
+      "total": 13
     },
     {
       "week": 1771718400,
-      "total": 47
+      "total": 43
     },
     {
       "week": 1772323200,
-      "total": 26
+      "total": 23
     },
     {
       "week": 1772928000,
-      "total": 36
+      "total": 35
     },
     {
       "week": 1773532800,
-      "total": 29
+      "total": 28
     },
     {
       "week": 1774137600,
@@ -468,7 +468,7 @@
     },
     {
       "week": 1775347200,
-      "total": 42
+      "total": 40
     },
     {
       "week": 1775952000,
@@ -476,7 +476,7 @@
     },
     {
       "week": 1776556800,
-      "total": 29
+      "total": 17
     },
     {
       "week": 1777161600,
@@ -492,23 +492,23 @@
     },
     {
       "week": 1778976000,
-      "total": 16
+      "total": 15
     },
     {
       "week": 1779580800,
-      "total": 2
+      "total": 1
     },
     {
       "week": 1780185600,
-      "total": 26
+      "total": 25
     },
     {
       "week": 1780790400,
-      "total": 32
+      "total": 17
     },
     {
       "week": 1781395200,
-      "total": 21
+      "total": 20
     },
     {
       "week": 1782000000,
@@ -524,7 +524,7 @@
     },
     {
       "week": 1783814400,
-      "total": 11
+      "total": 10
     },
     {
       "week": 1784419200,
@@ -552,11 +552,11 @@
     },
     {
       "week": 1788048000,
-      "total": 3
+      "total": 2
     },
     {
       "week": 1788652800,
-      "total": 46
+      "total": 45
     },
     {
       "week": 1789257600,
@@ -564,19 +564,19 @@
     },
     {
       "week": 1789862400,
-      "total": 174
+      "total": 172
     },
     {
       "week": 1790467200,
-      "total": 210
+      "total": 209
     },
     {
       "week": 1791072000,
-      "total": 482
+      "total": 427
     },
     {
       "week": 1791676800,
-      "total": 272
+      "total": 100
     },
     {
       "week": 1792281600,
@@ -584,11 +584,11 @@
     },
     {
       "week": 1792886400,
-      "total": 131
+      "total": 7
     },
     {
       "week": 1793491200,
-      "total": 69
+      "total": 93
     }
   ]
 }
