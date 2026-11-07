@@ -1,10 +1,10 @@
 {
-  "fetchedAt": "2026-11-06T13:59:46.340Z",
+  "fetchedAt": "2026-11-07T12:44:08.230Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 25,
     "forks_count": 11,
-    "open_issues_count": 200
+    "open_issues_count": 211
   },
   "languages": {
     "Aiken": 359544,
@@ -17,109 +17,109 @@
   },
   "commits": [
     {
-      "sha": "dd1d8cfb0b4ce8738c81461c342797e8b15735ab",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/dd1d8cfb0b4ce8738c81461c342797e8b15735ab",
-      "message": "Attach operator-2's node to a public stack as a loopback second instance\n\nA second instance now attaches to a preprod-rehearsal or preprod-public\nstack. It names its own private node configuration (nodeConfigFile, the\nsix node secrets, none of them in its .env) and an https:// loopback\nendpoint, and runs the stack's release: the release revision, public\norigin and node, Postgres and ingress images come from the stack's .env,\nwhich its own may only repeat. Its node runs from the stack's node image,\nserves the stack's TLS certificate and mounts the stack's signed release,\nTLS files and trust roots read-only; every host port, the node API's\nincluded, is on loopback, it builds no image and never starts ingress.\n\nLoading refuses an operator or merge wallet off the compiled allow-list,\nanother profile than the stack's, a validation worker pool below 2 or\ndisabled rate limits, and a node directory, run directory or node\nconfiguration that would lie in (or hold) the stack's release directory.\nA run refuses to start its node before the stack has signed its release,\nsince Docker would otherwise create the missing mount source.\n\nThe public node's .env, secret-loading, limit and allow-list checks move\ninto helpers the primary and the second instance share. Adds the\noperator-2 rehearsal example, its drill steps, and the two merge wallets\nin the rehearsal funding table.",
+      "sha": "3f8164ee831fd7776c80afbfb9eb42e375157933",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/3f8164ee831fd7776c80afbfb9eb42e375157933",
+      "message": "Allow one tick between the process and main-thread CPU totals\n\nThe kernel rounds a thread's CPU time and its process's total to clock ticks separately, so over a 300 ms spin the process total can read one tick below the main thread's. CI shard 1 on a138ba907 failed exactly that way: 0.8306 against 0.8638 cores, one 10 ms tick over 0.301 s. The test now allows one tick of slack.\n\nRefs #871",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-01T03:38:40Z"
+      "authorDate": "2026-11-07T10:50:54Z"
     },
     {
-      "sha": "ab07802863b30c34db8638a289488afd0b96d427",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ab07802863b30c34db8638a289488afd0b96d427",
-      "message": "Say that the late-shift lead beyond its minimum is the commit's window",
+      "sha": "a138ba9077989f55ce2ca09a072b426b57427078",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/a138ba9077989f55ce2ca09a072b426b57427078",
+      "message": "Key the recent tx id index so ground ids cannot share one probe chain\n\nThe recent-id ring placed each id at the cell its own first four bytes named. A submitter can grind tx ids that share those bits and get them admitted, piling them into one probe chain that every duplicate check on the main thread then walks; the ring's own model test, whose ids share five prefixes, ran 200 s locally and timed out in CI at 783 s. The home cell now comes from SHA-256 over a per-process secret and the id, stored per slot so growth and deletion never hash again.\n\nTests: a new case remembers 40,000 ids sharing their first eight bytes within 15 s. It timed out at 15 s on the unkeyed ring and takes 147 ms keyed. The model test compares fields directly, with one assertion per checkpoint, and runs in 3 s instead of 200 s.\n\nRefs #874",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-01T03:09:03Z"
+      "authorDate": "2026-11-07T09:31:19Z"
     },
     {
-      "sha": "40f8c6b6a6ec7b658efdf728e2759761a3550229",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/40f8c6b6a6ec7b658efdf728e2759761a3550229",
-      "message": "Allow-list one merge key per operator on the Preprod production profiles\n\npreprod-rehearsal and preprod-public list each operator's wallet and its\nmerge wallet (2 -> 4 payment key hashes), regenerated with preprod-testing\nkept as the selected profile. The generated profile module's size cap in\nthe declarative table moves from 632 to 636 lines for the four new list\nentries.",
+      "sha": "927ec3aa4e87be3151e5ab5e2fef19c9435bf3a1",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/927ec3aa4e87be3151e5ab5e2fef19c9435bf3a1",
+      "message": "Delete the admission writer's obsolete module-size exception\n\nThe in-memory writer rewrite left admission-writer.make-admission-writer-with-options.ts at 492 lines, inside the 500-line default, and the size guard refuses an exception a file no longer needs.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-01T03:08:52Z"
+      "authorDate": "2026-11-07T08:04:34Z"
     },
     {
-      "sha": "6458537660385f5211f3de5ef97e77c0829acccd",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/6458537660385f5211f3de5ef97e77c0829acccd",
-      "message": "End the late-shift window where the fault's header still ends in the shift\n\nA late or retried commit started up to a commit allowance before the shift\nended could build a fault header ending past operator-2's shift. The window\nnow closes at the shift's end less the shortest lead, plus one millisecond,\nso both the commit and the header end inside the shift.",
+      "sha": "75cd23fa7172dad45177fe5ed96bdc1cff64ea66",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/75cd23fa7172dad45177fe5ed96bdc1cff64ea66",
+      "message": "Repoint the two doc citations of the deleted admission module\n\n#872 removed txAdmissions.admit-without-byte-quota.ts. The F3 decision memo now links to the file at the commit it was read against, and the ingress design names the removed module in the past tense.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-01T03:08:29Z"
+      "authorDate": "2026-11-07T07:57:41Z"
     },
     {
-      "sha": "ecb033b411da00b3059ccf516f20c5dbbc978bd4",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ecb033b411da00b3059ccf516f20c5dbbc978bd4",
-      "message": "Announce a public stack's retained DA at its public DNS name\n\nA preprod-rehearsal or preprod-public stack now names the public DNS name\nof its retained DA (public.retainedDaHost), refused by name when missing,\nlocal, private or an IP address. Its committee manifests announce the\nretained DA as /dns4 on the retained-transport port, listening on every\ninterface, so the stack's watcher, whose public-endpoint rule is unchanged\nfor production, accepts it.\n\nA preprod-testing stack's watcher reaches its retained DA on loopback\nthrough the generated watcher setting da.stackLoopbackPeers, which admits\nloopback IPv4 peers only and which a production build's watcher refuses by\nname (production_profile_refused).",
+      "sha": "b57934dc0d2d53b9d1fed4a9e97f3d99be1ea8ad",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/b57934dc0d2d53b9d1fed4a9e97f3d99be1ea8ad",
+      "message": "Point the load harness test and the M2 bench at the in-memory admission writer\n\nSince /submit answers from memory, the harness stack test counted queued rows before the writer had committed the last group; it now waits for the writer first. The M2 bench stubbed the removed admitReserved method; its writer stub now implements lookup and admit, and the SqlClient stub for the removed direct-admission fallback is gone.\n\nRefs #871 #874",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-01T03:03:54Z"
+      "authorDate": "2026-11-07T07:56:13Z"
     },
     {
-      "sha": "692b661942da0a2b8fa2ed39c9353e42b86a551d",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/692b661942da0a2b8fa2ed39c9353e42b86a551d",
-      "message": "Document removing an old-format pending ledger-owner deposit record\n\nA pending deposit recorded by an older drill has no transaction hash or\nvalidity end; the drill stops on it. The fault drill inputs now say which\nfile to remove by hand and what happens next.",
+      "sha": "15d0483bc04bdd3c92b5b67e327e97c1f703a7de",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/15d0483bc04bdd3c92b5b67e327e97c1f703a7de",
+      "message": "Retry admission writes through database outages instead of dropping the txs\n\nThe writer retried only serialization failures, deadlocks, lock timeouts, cancelled statements and lost connections. A full disk (53100), an out-of-memory server (53200), an I/O error (58030) or a server left read-only by a failover (25006) counted as a fault of the row, so the batch split and every acknowledged tx was dropped one by one as poisoned. These outages fail every row alike; retried, they show as the writer stall (503 and not ready) and clear once the database recovers.\n\nTest: the pipeline retry case now runs once per code. Red before the fix: expected { code: '53100', attempts: 1 } to deeply equal { code: '53100', attempts: 3 }.\n\nRefs #874",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-01T03:00:56Z"
+      "authorDate": "2026-11-07T07:56:07Z"
     },
     {
-      "sha": "20785cece33404dc3f1d749011a976361ee5a3b4",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/20785cece33404dc3f1d749011a976361ee5a3b4",
-      "message": "Require a late-shift lead that covers the fault header's end\n\nA staged fault's header ends up to a minute after it is built, so a lead\nshorter than the commit allowance plus 60,000 ms could put the header past\noperator-2's shift. The drill now refuses such a lead up front, naming\nSTACK_LATE_SHIFT_LEAD_MS and the bound, and the header's end offset is a\nnamed constant shared with staging.",
+      "sha": "fb4e549f02d5039686cc76565d933ebc8ba56745",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/fb4e549f02d5039686cc76565d933ebc8ba56745",
+      "message": "Say that a duplicate still answers 200 while the admission backlog is full\n\nThe backlog paragraph in PUBLIC_HTTP.md still said a full backlog refused a resubmitted duplicate. Since the ack moved into memory, the duplicate lookup runs before any backlog reservation, so a duplicate answers 200 whatever the backlog holds.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-01T02:59:52Z"
+      "authorDate": "2026-11-07T07:45:07Z"
     },
     {
-      "sha": "32d6d39714e23f9b299d4db0755d6046c79d6c72",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/32d6d39714e23f9b299d4db0755d6046c79d6c72",
-      "message": "Start the fault-tail window at our node's first landed_block_invalid\n\nA shift of ours that ended before our node knew the fault invalid says\nnothing about its refusal to build on it, so the overlap window now opens\nat the first held observation. The lead measurements stay measured from\nthe fault's commit, which the record now names.",
+      "sha": "61429cbb7719e1b3276be6f2ed8ce0d75d9424cb",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/61429cbb7719e1b3276be6f2ed8ce0d75d9424cb",
+      "message": "Acknowledge /submit from memory with a bounded pending set (#874)\n\n/submit and /peer/txs waited for the admission row's commit before\nanswering, so every request held an HTTP slot through a Postgres round trip\nand a slow database stalled the whole ingress. Per the D9 ruling the node\nnow answers once the checked transaction is in the admission writer's\nin-memory pending set, with the backlog gauges reserved before the 202, and\nthe row follows by per-lane group commit.\n\n- Duplicates are answered from the pending set, then from a bounded cache of\n  recently written native ids (a typed-array ring, 1M ids), with no database\n  read. A cache entry stops answering once its row may have been pruned\n  (ADMISSION_TERMINAL_RETENTION_MS), so a late resubmission is admitted and\n  validated again as before. Peer rows are not cached: the tx-queue\n  processor deletes a peer row whose inputs it has not seen, and the next\n  offer must reach the database again.\n- A same-id variant that only the database holds is resolved after the ack:\n  the stored version stays and a counter records it.\n- Transient write failures retry with backoff and keep the txs pending;\n  other failures split the batch and write row by row; a row that still\n  fails is dropped with a counter and an error log, so it cannot block its\n  shard.\n- When the oldest pending tx has waited longer than 30 s, /submit and\n  /peer/txs answer 503 and /readyz reports admission_writer_stalled; both\n  clear by themselves once writes succeed.\n- A graceful stop flushes for at most 10 s, then counts and logs the ids it\n  could not write. The flush is made interruptible: finalizers run\n  uninterruptibly, so without it the timeout could not end the wait and a\n  stop with Postgres stalled would hang.\n- /tx-status reports pending txs as queued and /peer/inventory treats them\n  as known.\n\nVisible changes the existing tests now pin: a duplicate answered from\nmemory reports the status the node wrote (/tx-status has the verdict) and\nno longer bumps request_count; a duplicate still answers 200 while the\nbacklog is full; a peer re-offer of a tx that is already written counts as\nadmitted, since only pending peer txs are known in memory. The peer test\nhelper flushes the writer before it drains the queue. The writer's readiness\ncheck lives in its own module so readiness.ts stays under the size limit.\n\nThe Postgres-backed tests hold ACCESS EXCLUSIVE on tx_admissions from\nanother connection: /submit still answers 202, /tx-status answers queued and\nduplicates answer 200 within the lock; a capped writer fills, stalls,\nanswers 503 and recovers when the lock is released; a 31-byte id that the\ntable's CHECK refuses is dropped while its batch is written; a stop writes\nevery pending tx, and a stop under the lock ends within its bound (red\nwithout the interruptible flush: the test timed out). A recent id older\nthan its age bound stops answering (red with the bound removed). The\nrecent-id ring is checked against a reference model through growth and\neviction with ids that share probe chains.\n\nPUBLIC_HTTP.md and the docs-site API page now say that 202 means accepted,\nnot stored, and that a crash can lose acknowledged transactions.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-01T02:55:53Z"
+      "authorDate": "2026-11-07T07:42:00Z"
     },
     {
-      "sha": "5fcc40cca1a36ad7a5b845f9aecf80adee42fc92",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/5fcc40cca1a36ad7a5b845f9aecf80adee42fc92",
-      "message": "Prove operator-2's node stopped before each DA publication as its producer\n\nThe drill's DA publications use operator-2's producer key, so the session\nnow guards them like operator-2's wallet signatures: each publication first\nproves the node held stopped, and one without that proof is refused before\nany transport opens.",
+      "sha": "c38769136f4119f75253018a2a6093050376cf8c",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/c38769136f4119f75253018a2a6093050376cf8c",
+      "message": "Record the measured submit check and handler costs in the ingress design\n\nThe decode-once check measures 0.075, 0.12 and 0.33 ms for the 1/2, 4/4 and 16/16 shapes, well under the stale-build figures the plan carried. Today's whole /submit handler costs 475-600 us of main thread per request, so one thread saturates near 2,000 req/s and the lean handler (#881) is required for 5,000 TPS. The plan now names its tracking issue instead of saying it has no tickets.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-01T02:53:11Z"
+      "authorDate": "2026-11-07T07:17:13Z"
     },
     {
-      "sha": "b706ca9f9c04cdb1da3c9480355c99f688d9014e",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/b706ca9f9c04cdb1da3c9480355c99f688d9014e",
-      "message": "Pin the successor's fault binding and the resumed node's follower tip in tests\n\nThe other-fault transfer case now checks the retried attempt stages a\ntransfer bound to this fault, and the removed-node case covers a follower\nbehind the tip without a catching-up reason, or with no follower at all.",
+      "sha": "dc1259c0d21f637961bec4ae545f36b1f67f3619",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/dc1259c0d21f637961bec4ae545f36b1f67f3619",
+      "message": "Serve the public node only on a Unix socket behind its TLS ingress\n\nThe public profiles used to open a TLS listener on TCP in the node, with an\noptional nginx in front on a fixed Docker subnet that the node trusted by\naddress. Every public request paid TLS in the node, nginx rate limited submit\nand read routes ahead of the node's own limiter, and nginx cut the node's\nconnections at 100 requests each.\n\nThe node now serves plain HTTP only on HTTP_SOCKET_PATH on the public\nprofiles and opens no TCP listener; TLS ends at nginx. The socket's\ndirectory must grant other users no access, the socket is made 0660, and a\nsocket a killed node left behind is replaced so a restart needs no manual\ncleanup. On the socket the node takes each client from x-midgard-client-ip,\nwhich nginx sets to the connecting address. The stack always runs the\ningress: a socket directory of mode 0700 in the run directory is mounted\ninto the node and the ingress only, both run as the host user, and the\ningress sits on a network of its own with no TCP route to the node.\n\nnginx keeps upstream connections alive to the socket (the node no longer\ncaps requests per socket there), drops limit_req from submit and read\nroutes, keeps a per-address connection cap and the liveness/admin rate\nzone, caps /submit and /tx/evaluate bodies at SUBMIT_HTTP_BODY_MAX_BYTES,\nand answers its own refusals as JSON with Retry-After and the node's error\ncodes.\n\nHTTP_TRUSTED_PROXY_PEERS, for a node on TCP, now takes up to 64 IPv4 or\nIPv6 addresses or ranges (at least /8 and /24, no host bits) so a cloud load\nbalancer's published ranges fit; it is refused together with\nHTTP_SOCKET_PATH. The listener transport moves out of listen-public-http.ts\ninto listen-http-transport.ts to keep that file under the line limit.\n\nTest gate: public-ingress.test.mjs renders the config and serves it with a\nreal nginx in front of a stub node on a socket. It fails if a request rate\nreturns to submit or read routes (1,000 r/s from one client must all reach\nthe node), if the body cap drifts from the node's limit, or if nginx\nforwards the client's own x-midgard-client-ip; no existing test ran nginx.\nThe listener tests fail if the public profile opens TCP, accepts a socket\ndirectory others can enter, leaves the socket world-writable, or cannot\nstart over a stale socket; they extend the existing listen-public-http and\nrate-limit suites. CI runs the ingress test next to the operator compose\nderivation test.\n\nRefs #879",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-01T02:48:24Z"
+      "authorDate": "2026-11-07T07:14:30Z"
     },
     {
-      "sha": "1c9891e6b0415d298490a077b854f086103c9905",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/1c9891e6b0415d298490a077b854f086103c9905",
-      "message": "Fail a refusal drill a DA peer rejects for its delivery\n\nA committee peer rejecting the payload for another deployment, another\npayload schema or the size bound says nothing about the fault, so the\ndrill now fails on those codes instead of counting them as a refusal.\nEach peer's code stays in the saved delivery.",
+      "sha": "24a43ff5e9c060b66ac4565559ccc12e0c4ecdd0",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/24a43ff5e9c060b66ac4565559ccc12e0c4ecdd0",
+      "message": "Delete admission payloads at the terminal mark and retire old terminal rows (#875)\n\nNothing reads tx_admission_payloads after an admission's verdict:\nacceptance copies the bytes into the mempool table, peer sharing reads\nthat copy, and the duplicate check compares the full hash on the\nadmission row since #872. The payload still sat there forever, and every\nterminal admission row stayed too, so the primary key grew with every\ntransaction (3.6M rows an hour at 1,000 TPS).\n\nMark-accepted and mark-rejected now delete the payload row in the same\ntransaction, and the accepted path checks the deleted count with the\nothers. Migration 35 drops the payloads of rows already terminal and adds\na partial (terminal_at, tx_id) index.\n\nA new retention fiber deletes accepted and rejected rows older than\nADMISSION_TERMINAL_RETENTION_MS (default one hour, 0 keeps them) in\nbatches of 5,000, up to 60 batches a minute. It keeps a row while\nmempool or processed_mempool holds its tx, because the mempool page\norder, replay order and peer catch-up read its arrival_seq, and while\ntx_rejections holds it, because a re-admitted tx rejected with another\ncode would fail the exactly-once rejection insert and stall its batch.\nCandidates are taken with SKIP LOCKED, so the sweep never waits on a\nlock, and a keyset cursor carried across sweeps (kept as Postgres text so\nit keeps microseconds) walks past rows that must stay. /tx-status never\nreads a terminal admission row, so deleting one changes no answer.\n\nTests: the rejection and acceptance journal tests now check that no\npayload is left after the mark, that an exact resubmission is still a\nduplicate and that the same id with other witnesses still answers 409;\nremoving the payload delete from mark-rejected fails the first with\n\"expected [ ...(8) ] to deeply equal []\". A new Postgres-backed retention\ntest checks which rows go and which stay, and that a walk over held rows\nat one timestamp still reaches the deletable rows behind them.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-01T02:46:36Z"
+      "authorDate": "2026-11-07T06:10:49Z"
     },
     {
-      "sha": "8e340a6f9a0b898d45d0bcfb4b2c7b163f073844",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/8e340a6f9a0b898d45d0bcfb4b2c7b163f073844",
-      "message": "Stop our node's hold watch on every failed attached journey run\n\nThe watch starts at the fault's commit and was stopped only by staging\nfailures, the successor port and a completed refusal. A failed public DA\npreflight or age-out wait left it polling our node. The attached mode now\ncloses it from the run's finally.",
+      "sha": "85a01a71b7a948e230639587e15de46dc8ed79da",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/85a01a71b7a948e230639587e15de46dc8ed79da",
+      "message": "Add the submit ingress load harness, drain stub and M2 bench (#871)\n\nPhase P0 of the public submit ingress design needs a baseline of /submit apart from block production. scripts/submit-ingress-load.mjs builds a corpus of valid txs (each spending its own genesis output) plus a junk mix (bad CBOR, bad signature, low fee, missing input, double spend), offers it one tx per request at a fixed open-loop rate, mostly on new connections, from many client addresses (the trusted-proxy header straight to the node, or loopback source addresses through an edge on the host network), and writes a report: admitted rate, outcome mix overall and per kind, latency quantiles, admission rows/s and Postgres write rates, and the node's main-thread and process CPU from /proc. The drain stub marks queued admissions terminal at a set rate under E_LOAD_DRAIN_STUB, so ingress is measured without validation or blocks.\n\nThe corpus test runs every request through the real submit check, Phase A and Phase B against the corpus genesis and requires each kind to land where the manifest says: valid accepted, bad CBOR refused at ingress, bad signature and low fee at Phase A, missing input and double spend at Phase B. The stack test drives the client against the production /submit route and admission writer in process, then empties the queue with the drain stub. The l2-peer-node helper takes an optional ingress policy so that test can turn the rate limits off.\n\nbench:submit-main-thread is M2: main-thread CPU per /submit with the admission writer stubbed and the client in a child process.\n\nRefs #871",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-01T02:43:40Z"
+      "authorDate": "2026-11-07T05:55:51Z"
     },
     {
-      "sha": "eaf267109186c7a3b55e10527383de1832435daa",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/eaf267109186c7a3b55e10527383de1832435daa",
-      "message": "Bound the runbook's node-start check to the preflight function's body\n\nThe check that node-start.ts still runs producer-da-preflight matched from\nthe preflightProducerTransport declaration to the id anywhere after it, so\nthe id in a later function passed it. It now reads only the function's body,\nup to its closing brace. The validator takes --full-stack-dir to read a\ncopy of the stack's sources, and a test edits that copy to prove the check\nfails.",
+      "sha": "c498770842698cdda69138b3095658e1cd739a89",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/c498770842698cdda69138b3095658e1cd739a89",
+      "message": "Drop the unknown-length submit holder from the peer permit test\n\nThe submit route now answers a body with no declared length with 411 before it takes a permit (#878), so a holder of unknown length can no longer fill the submit byte budget and the row waited for a pool that never filled. The count-based holder still proves submit users cannot starve /peer/txs.\n\nRefs #878",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-01T02:38:54Z"
+      "authorDate": "2026-11-07T05:47:25Z"
     },
     {
-      "sha": "811cffe75d2ecacb696008f80f2b06fce3cb3084",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/811cffe75d2ecacb696008f80f2b06fce3cb3084",
-      "message": "Bound the rehearsal example's waits to four hours and rerun for the payout\n\nThe 8-day timeout let one run hold the controller across the whole 7-day\nblock maturity. The example keeps the 4-hour bound every other stack uses;\nthe drill steps say that a run stopped waiting for the payout is rerun with\nthe same configuration, and its withdrawal step resumes waiting for the\nsame payout from its saved receipt.",
+      "sha": "8f5c19c573b77b506e8e5788f1c5378fde92fc09",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/8f5c19c573b77b506e8e5788f1c5378fde92fc09",
+      "message": "Refuse at once when the admission writer is full and group-commit its batches (#873)\n\nThe writer took a semaphore slot per request, so a full writer parked every\nfurther request (and its body) on a wait with no byte bound, and each batch\nwaited out a deadline even when the database was idle. Admission commits\nalso paid a synchronous WAL flush per batch, and readiness failed at a\nfixed 10,000 rows however large the backlog bound was.\n\nThe writer now counts rows and bytes across every stage and refuses with\nAdmissionWriterFullError the moment either bound (queue capacity, 64 MiB)\nwould be exceeded; /submit and /peer/txs answer 503 and the gauge treats\nthe refusal as proof nothing was inserted. Each shard's collector waits\nfor its persister to be free and then takes everything queued, up to 256\nrows, with no clock: a lone request is written immediately and a busy\ndatabase gets ever larger batches. Admission batches run with\nSET LOCAL synchronous_commit = off (owner ruling 2026-11-06; a lost tail\nafter a crash is a dropped acknowledged submission, not a safety fault).\nRows are still inserted in tx-id order so concurrent batches lock in one\norder, but arrival_seq is now drawn in request order, so FIFO claiming\nholds across a group-committed batch.\n\nReadiness reports queue_depth_exceeded once the backlog passes 95 % of\nMAX_DURABLE_ADMISSION_BACKLOG; READINESS_MAX_DURABLE_ADMISSION_BACKLOG\nis no longer read.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-01T02:36:21Z"
+      "authorDate": "2026-11-07T05:30:48Z"
     },
     {
-      "sha": "d71571eb8dd7c58b8c7d2f34e0efa637c8d7bc46",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d71571eb8dd7c58b8c7d2f34e0efa637c8d7bc46",
-      "message": "Recreate DA and node containers when their generated manifest changes\n\nCompose recreates a container on up -d only when its service definition\nchanges, never when a bind-mounted file's bytes do. A later run that\nadmitted operator-2 rewrote every committee manifest, yet the committee and\nretained-DA containers kept running with the old ones; operator-2's node\nlikewise kept a stale producer manifest after the stack regenerated its own.\nEach service that mounts a generated manifest now carries a label with the\nmanifest's digest, so its Compose configuration hash changes with the file.\nThe tests read that hash from docker compose config --hash.",
+      "sha": "5aa993192dabb87264db34d57f0f0fbf6ed46fbb",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/5aa993192dabb87264db34d57f0f0fbf6ed46fbb",
+      "message": "Limit public submissions with fixed-memory hashed buckets per client and prefix\n\nThe public rate limiter kept one Map entry per client address, capped at HTTP_PEER_MAX_ENTRIES and tied to a config-time idle-window check. A flood of distinct addresses filled the table and refused every new client, and an IPv6 subscriber could claim a fresh key per /64.\n\nPublic classes now use two rows of 2^18 hashed cells (Float32 tokens, Uint32 whole-second refill stamps, Uint16 in-flight counts), keyed by a per-process secret. Memory is fixed however many clients arrive. A client is an IPv4 address or an IPv6 /56 (IPv4-mapped IPv6 counts as IPv4); writes also pass a prefix tier on the /24 or /48. Submissions default to 20 tx/s per client with burst 100 and 200 tx/s (burst 1,000) per prefix, charged one token per transaction, with no global write cap. Health, admin and peer keep a small exact table of 8,192 entries that evicts the least recently used idle entry instead of refusing. HTTP_PEER_MAX_ENTRIES, httpPublicKeysPerIdleWindow and the idle-window config check are gone, and HTTP_RATE_LIMIT_WRITE now takes client then prefix pairs.\n\nTests: listen-http-rate-buckets.test.ts drives the ingress with a fake clock. It fails if the limiter keeps per-client state (1,000,000 distinct clients must leave the exhausted client refused, with bounded heap growth), if a /48 can spread over its /56s past the prefix rate, if refill stamps wrap at 2^32 ms, or if in-flight slots are not held per client. No existing test covered hashed state, prefix tiers or the clock wrap; the old table-capacity tests were replaced, not extended, because the behavior they pinned is removed.\n\nRefs #880",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-01T02:35:19Z"
+      "authorDate": "2026-11-07T05:25:51Z"
     }
   ],
   "contributors": [
@@ -326,58 +326,58 @@
   ],
   "issues": [
     {
-      "number": 869,
-      "title": "Settlement job stays stuck when the node returns after the follower pruned another operator's settlement",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/869",
-      "updated_at": "2026-11-05T14:46:47Z"
+      "number": 870,
+      "title": "Public submit ingress redesign: 5,000 TPS per node",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/870",
+      "updated_at": "2026-11-07T11:58:16Z"
     },
     {
-      "number": 868,
-      "title": "Let a fresh node join a deployment after its first block",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/868",
-      "updated_at": "2026-11-05T07:33:04Z"
+      "number": 883,
+      "title": "Submit ingress: load shedding from in-memory gauges and a larger backlog",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/883",
+      "updated_at": "2026-11-07T07:20:32Z"
     },
     {
-      "number": 867,
-      "title": "midgard-node: write-behind module cycle reads WriteBehind at load",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/867",
-      "updated_at": "2026-11-05T00:21:05Z"
+      "number": 889,
+      "title": "Submit ingress P3 gate: 5,000 TPS with 20 % junk",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/889",
+      "updated_at": "2026-11-07T03:51:49Z"
     },
     {
-      "number": 865,
-      "title": "Node wallet: fund script transactions only from plain outputs",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/865",
-      "updated_at": "2026-10-28T23:57:02Z"
+      "number": 888,
+      "title": "lucid-midgard: resubmit lost txs and check status on spent-input refusals",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/888",
+      "updated_at": "2026-11-07T03:51:47Z"
     },
     {
-      "number": 864,
-      "title": "`lucid-midgard` rejects Custom networks when deriving protocol parameters",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/864",
-      "updated_at": "2026-10-28T13:47:04Z"
+      "number": 887,
+      "title": "Submit ingress: first-seen input claims before admission",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/887",
+      "updated_at": "2026-11-07T03:51:46Z"
     },
     {
-      "number": 863,
-      "title": "Mainnet profile: registration_ms is 30 ms instead of 30 s",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/863",
-      "updated_at": "2026-10-28T10:48:28Z"
+      "number": 886,
+      "title": "Submit ingress: stateless fail-fast checks via Phase A",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/886",
+      "updated_at": "2026-11-07T03:51:45Z"
     },
     {
-      "number": 862,
-      "title": "Add a public HTTP endpoint for withdrawal status",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/862",
-      "updated_at": "2026-10-27T17:37:06Z"
+      "number": 885,
+      "title": "Submit ingress: worker-thread pool for submit checks",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/885",
+      "updated_at": "2026-11-07T03:51:43Z"
     },
     {
-      "number": 861,
-      "title": "SqliteProcessMutex: two first-time acquirers on a new sidecar can both be refused",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/861",
-      "updated_at": "2026-10-27T16:58:00Z"
+      "number": 884,
+      "title": "Submit ingress P2 gate: 5,000 TPS from 1,000+ source IPs",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/884",
+      "updated_at": "2026-11-07T03:51:42Z"
     },
     {
-      "number": 860,
-      "title": "List and array builtins: charge wrong-kind constant arguments before failing",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/860",
-      "updated_at": "2026-10-27T13:09:15Z"
+      "number": 882,
+      "title": "Submit ingress: batch admit for /peer/txs",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/882",
+      "updated_at": "2026-11-07T03:51:39Z"
     }
   ],
   "releases": [],
@@ -388,15 +388,15 @@
     },
     {
       "week": 1763251200,
-      "total": 31
+      "total": 32
     },
     {
       "week": 1763856000,
-      "total": 43
+      "total": 44
     },
     {
       "week": 1764460800,
-      "total": 8
+      "total": 17
     },
     {
       "week": 1765065600,
@@ -440,23 +440,23 @@
     },
     {
       "week": 1771113600,
-      "total": 13
+      "total": 14
     },
     {
       "week": 1771718400,
-      "total": 45
+      "total": 47
     },
     {
       "week": 1772323200,
-      "total": 23
+      "total": 26
     },
     {
       "week": 1772928000,
-      "total": 35
+      "total": 36
     },
     {
       "week": 1773532800,
-      "total": 28
+      "total": 29
     },
     {
       "week": 1774137600,
@@ -464,11 +464,11 @@
     },
     {
       "week": 1774742400,
-      "total": 29
+      "total": 30
     },
     {
       "week": 1775347200,
-      "total": 40
+      "total": 42
     },
     {
       "week": 1775952000,
@@ -476,7 +476,7 @@
     },
     {
       "week": 1776556800,
-      "total": 17
+      "total": 29
     },
     {
       "week": 1777161600,
@@ -508,7 +508,7 @@
     },
     {
       "week": 1781395200,
-      "total": 20
+      "total": 21
     },
     {
       "week": 1782000000,
@@ -524,19 +524,19 @@
     },
     {
       "week": 1783814400,
-      "total": 9
+      "total": 11
     },
     {
       "week": 1784419200,
-      "total": 20
+      "total": 47
     },
     {
       "week": 1785024000,
-      "total": 106
+      "total": 202
     },
     {
       "week": 1785628800,
-      "total": 89
+      "total": 190
     },
     {
       "week": 1786233600,
@@ -568,15 +568,15 @@
     },
     {
       "week": 1790467200,
-      "total": 208
+      "total": 210
     },
     {
       "week": 1791072000,
-      "total": 415
+      "total": 482
     },
     {
       "week": 1791676800,
-      "total": 270
+      "total": 272
     },
     {
       "week": 1792281600,
@@ -584,11 +584,11 @@
     },
     {
       "week": 1792886400,
-      "total": 83
+      "total": 48
     },
     {
       "week": 1793491200,
-      "total": 17
+      "total": 152
     }
   ]
 }
