@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-11-09T15:44:23.386Z",
+  "fetchedAt": "2026-11-10T14:37:40.371Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 25,
@@ -17,109 +17,109 @@
   },
   "commits": [
     {
-      "sha": "4e5135b39fc5d09e18e91743fc8f6bb5171d6bd5",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/4e5135b39fc5d09e18e91743fc8f6bb5171d6bd5",
-      "message": "Pin Go 1.26.5 and provide Cargo in the demo Nix shell\n\nThe native L1 transport requires Go 1.26.5, while the MPF owner needs\nCargo and a Rust compiler. The demo shell selected Go 1.25.7 and omitted\nthe Rust tools, leaving native builds and devnet prerequisite checks\ndependent on tools installed outside the shell.\n\nUpdate the Go package, lockfile and version checks to 1.26.5. Use the\nnixpkgs 26.05 backport to retain Intel macOS support. Include Cargo and\nrustc 1.94.1 from the existing pinned toolchain input and print their\nversions when entering the shell.\n\nValidation (2026-10-15, repository root):\n`nix flake check --no-build --all-systems --no-write-lock-file ./demo`\nevaluated all four supported platform shells successfully, exit 0.\n`git diff --check` completed with exit 0.\n\nValidation was limited to evaluation; no packages were built and no\ndevnet was started.",
-      "authorName": "keyanm",
-      "authorDate": "2026-10-15T16:15:40Z"
-    },
-    {
-      "sha": "7b1accfabf6e25794194bc4ddb3b2a2c4bd2041d",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/7b1accfabf6e25794194bc4ddb3b2a2c4bd2041d",
-      "message": "Clarify the nixpkgs release choice for the Go toolchain\n\nName nixpkgs explicitly and explain why the Go pin uses its 26.05 release: nixpkgs 26.11 dropped Intel Mac support.",
-      "authorName": "keyanm",
-      "authorDate": "2026-10-15T12:24:42Z"
-    },
-    {
-      "sha": "5ac344ab486ac776bd728aa771c78efe0caea8f7",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/5ac344ab486ac776bd728aa771c78efe0caea8f7",
-      "message": "Align the demo Nix shell with Go 1.26.5\n\nMatch the native L1 transport's Go 1.26.5 requirement by updating the\nGo package, nixpkgs revision, lockfile and version checks.\n\nUse the 26.05 backport to retain Intel macOS support while keeping the\nNode, pnpm and other flake inputs unchanged.\n\nValidation (2026-10-15, repository root):\n`nix flake check --no-build --all-systems --no-write-lock-file ./demo`\ncompleted with exit 0 for all four platforms. Evaluation only; no\npackages were built.",
-      "authorName": "keyanm",
-      "authorDate": "2026-10-15T10:19:59Z"
-    },
-    {
-      "sha": "740b2f9086c7b4be5b46bc1edc1e749315e42975",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/740b2f9086c7b4be5b46bc1edc1e749315e42975",
-      "message": "Support ARM64 Docker stacks and document build heap limits\n\nReplace AMD64-only image pins with immutable image lists for ARM64 and\nAMD64, keeping private-testnet helpers and Preprod defaults aligned.\nPostgreSQL stays on 15.15 with refreshed image builds.\n\nDocument an optional 8 GiB heap override for Node build failures,\npreserving existing options and explaining RAM use.",
-      "authorName": "keyanm",
-      "authorDate": "2026-10-14T22:25:51Z"
-    },
-    {
-      "sha": "d8598fe98093e9353f2c2102b476a99cc084ab1e",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d8598fe98093e9353f2c2102b476a99cc084ab1e",
-      "message": "Give the maximum-shape Data step planner cases an explicit timeout",
+      "sha": "fbce27ab1a5bfc247d6a741867ac6441f348d9a6",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/fbce27ab1a5bfc247d6a741867ac6441f348d9a6",
+      "message": "Run the throughput drill through the public ingress and at the node\n\ne2e-stress-l2-throughput takes --route public-ingress|node. The ingress\nroute is a closed-loop functional check over https from one client: it keeps\nat most the node's per-client in-flight cap and paces each rate class below\nthe node's own resolved limits. The node route is an open-loop capacity run\non the node socket with the rate limiter on, its load spread over synthetic\nclients. Both refuse to run with rate limits off, and each run's config,\nsummary and report carry its evidence label. The nginx ingress takes its\nper-address cap from the node's constant instead of its own copy.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-14T04:33:25Z"
+      "authorDate": "2026-11-10T04:38:53Z"
     },
     {
-      "sha": "d976e5d3fbd518e760f3327a47c8a36559a62cdc",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d976e5d3fbd518e760f3327a47c8a36559a62cdc",
-      "message": "Merge CI-reds lane: lint, ledgers, DA fixture, compose and fault-proof shard fixes",
+      "sha": "aeb621c6f9f09194c3bf9a8933266129b61f85bc",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/aeb621c6f9f09194c3bf9a8933266129b61f85bc",
+      "message": "Let the node's load generator reach the node socket as many clients\n\nThe node's per-client in-flight cap and its route-to-rate-class table are\nexported from one place, so a load client can pace itself by the node's own\nclasses. The benchmark HTTP client moves to its own module and can reach the\nnode over its Unix socket, spreading its requests over synthetic client\naddresses, one per /24, so a capacity run measures the node with its rate\nlimiter on and no per-client or per-prefix bucket binding.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-14T04:32:38Z"
+      "authorDate": "2026-11-10T04:38:46Z"
     },
     {
-      "sha": "9f56d2e21969ba8f034a1b7bc41d331f3302facd",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/9f56d2e21969ba8f034a1b7bc41d331f3302facd",
-      "message": "Drop the validation-dispute argument case whose flags left the CLI",
+      "sha": "924a1a4c1d7072832e0443cc3e8fd5d1571f1ac4",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/924a1a4c1d7072832e0443cc3e8fd5d1571f1ac4",
+      "message": "Document the clean journey's settlement step\n\nThe deposit step now finishes at the L2 credit and the transfer step at\ncommit; the runbook and the release-readiness checks say so, and list the\ncycle settlement step that observes the deposit's settlement and the\ntransfer's finality after the payout.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-14T04:29:28Z"
+      "authorDate": "2026-11-10T03:40:21Z"
     },
     {
-      "sha": "f3b84fe2c54318f1491b0ce5be1cbeade848dcf9",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/f3b84fe2c54318f1491b0ce5be1cbeade848dcf9",
-      "message": "Judge resolved-output datum coverage in a case so filtered runs skip it",
+      "sha": "fe86de934f5311ae763495a9927ac18c3efac508",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/fe86de934f5311ae763495a9927ac18c3efac508",
+      "message": "Build the routed redeemers in the traced-refusal negatives\n\nThe validation-trace negatives that rewrite an honest hop now build it with\nthe field item route the runner computes, so each one still reaches the\ncheck it pins: the rewritten hop carries the stage's route, and a\nsubstituted foreign item yield reads its item through our own field grammar\ncertificate. The width lifecycle harness leaves the publication-fit record\nto the plain run, as the other traced publications do, since the traced run\npublishes its verbose steps under the lifted envelope.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-14T04:28:25Z"
+      "authorDate": "2026-11-10T03:30:02Z"
     },
     {
-      "sha": "8b7623064c4c96193d586abe3fa65ec2c2dae061",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/8b7623064c4c96193d586abe3fa65ec2c2dae061",
-      "message": "Give the timeout-correction submit test its node the block_time clock",
+      "sha": "eaa10e56d4495fb0ef5a1830095fcf3ccee21058",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/eaa10e56d4495fb0ef5a1830095fcf3ccee21058",
+      "message": "Finish settlement jobs whose event the follower has pruned (#869)\n\nA settlement job looked up whether another operator had settled its event\nthrough the follower's event rows, which are pruned once the event's\nretirement is deeper than k. A node returning after that read \"event not\nfound\", counted failures to the cap and left the job stuck.\n\nThe event key table is never pruned, so a known key with no row now reads\nas pruned. Settlement treats a pruned deposit as final, and a pruned\nwithdrawal as final only when its payout's conclusion is k deep or pruned\nwith it. The reserve-payout retry, the other job keyed to an L1 output the\nfollower can prune, refuses with a clear pruned error instead of building\nagainst a gone output.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-14T04:25:33Z"
+      "authorDate": "2026-11-10T02:51:51Z"
     },
     {
-      "sha": "1fdadc0db7691de43dd57b49493a37fe496cd616",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/1fdadc0db7691de43dd57b49493a37fe496cd616",
-      "message": "Regenerate the event-history admission and transition-trace workflow fit ledgers on the current blueprint",
+      "sha": "59e57e1cba6fd2a8e1415c8cccd99a7938041c6d",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/59e57e1cba6fd2a8e1415c8cccd99a7938041c6d",
+      "message": "Test the ledger signature verifier startup fault through real startup\n\nThe fault test mocked our own startup modules and asserted only that\nstartup never got far. It now runs the real node startup with the\nsignature library's readiness failing (a third-party module, the only\nthing replaced) and checks that startup fails at the ledger signature\nverifier step with its reason after its attempts are exhausted, exiting\nbefore the instance lock. With the verifier step removed the test fails.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-14T04:24:49Z"
+      "authorDate": "2026-11-10T02:51:42Z"
     },
     {
-      "sha": "b69a31092e2eb47c4065b565a3cbb6626418d11c",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/b69a31092e2eb47c4065b565a3cbb6626418d11c",
-      "message": "Merge branch 'p1/integration' into p1/ci-reds-a",
+      "sha": "3130eb8554f9babb9ab87a1e17b3617f4df0b5c5",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/3130eb8554f9babb9ab87a1e17b3617f4df0b5c5",
+      "message": "Treat a lost L1 race whose effect already landed as normal, not an error\n\nWhen two operators sent the same scheduler advance within a second, the\nloser's transaction was refused for spent inputs, waited the 90 s recovery\nwindow for its exact transaction, then logged ERROR and skipped the tick,\nalthough the state it was sent for was already on chain.\n\nsubmitSignedTxWithRecovery takes an optional probe for the state a\ntransaction is meant to reach. On a spent-inputs refusal, if that state is\nalready visible, or becomes visible during the unchanged recovery wait,\nthe outcome is lost_race: logged at info, and the caller carries on. The\nwait ends early only because the intended state is seen; no bound\nchanged. Every other failure is unchanged. The scheduler refresh passes\n\"the next scheduler output appoints the operator I meant to appoint\" and on\na lost race replans from it within the same tick. Merges are not wired yet.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-14T04:20:29Z"
+      "authorDate": "2026-11-10T02:51:34Z"
     },
     {
-      "sha": "f0cf9e186353ba4f451e5310153352e3c734337b",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/f0cf9e186353ba4f451e5310153352e3c734337b",
-      "message": "Drop the Dockerfile text-match test from the operator compose suite\n\nIt pinned the transport build stage's FROM line by regular expression, and\nthe image now names that stage through a build-image argument. Rendered\ncompose tests keep the transport path the node reads.",
+      "sha": "95df0d826d8f4ea529b5507e7d355cc46821b201",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/95df0d826d8f4ea529b5507e7d355cc46821b201",
+      "message": "Let the successor take its turn first at a shift end\n\nAt a shift boundary every operator holding pending work pushed the\nscheduler at once, whether or not the successor already held that work, so\nthe successor's own takeover and the pushes raced on L1.\n\nThe tx-sharing forwarder now records, per peer operator, which pending tx\nids that peer's last catch-up answer showed it holds; inventory answers are\nsigned by the answering node's operator key, and an unsigned answer proves\nnothing. A node that is not the successor waits the deployment's existing\nnew_shift_inactivity_grace_period before pushing, but only when the\nsuccessor's answer covers every pending tx; with sharing off, a failed lane,\none missing tx or any read error it pushes at once, as before. The\nsuccessor's own path and first appointment are unchanged, and no setting\nwas added.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-14T04:20:15Z"
+      "authorDate": "2026-11-10T02:51:15Z"
     },
     {
-      "sha": "38edd3b2b15769665d5858d2aa654a418bbf94d4",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/38edd3b2b15769665d5858d2aa654a418bbf94d4",
-      "message": "Route the MintItemMalformed rejection arm to the mint-item non-canonical family\n\nThe validation machine now emits arm 47, so the typed-reason disposition\ntable must cover it; its non-interactive proof is the mint-item\nnon-canonical category.",
+      "sha": "ef9164705fdadeec54d53648d0a339bff1b33c5f",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ef9164705fdadeec54d53648d0a339bff1b33c5f",
+      "message": "Add operator commands that submit forced orders and Plutus L2 transactions\n\nThe rehearsal journey needs one forced order of each admitted shape, the\nrefused shapes, and normal L2 transactions including Plutus, and nothing\nsubmitted these on Preprod.\n\nmidgard-user forced-order --shape <shape> builds and signs an L2\ntransaction of the named shape, screens it with the shared forced\nadmission check, and mints its tx-order on L1. Admitted shapes: plain,\ninline-datum, native-mint, reference-input and required-signer. Refused\nshapes (validity-upper-bound, plutus-mint, reference-script-output) exit 1\nnaming the failed check and send nothing to L1. midgard-user plutus-tx\nsubmits an L2 transaction minting under a PlutusV3 policy and waits for\nthe node's verdict. Both refuse a node whose deployment marker is not the\nmanifest's.\n\nThe SDK's tx-order builder now needs only the hub oracle and tx-order\ncontracts: its hub-oracle check compares this event's policy and address,\nand its validity window takes an injectable clock (Date.now by default).",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-14T04:19:43Z"
+      "authorDate": "2026-11-10T02:17:25Z"
     },
     {
-      "sha": "bf7b3f5a4b35a1874ecc592a66b4e104022f5404",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/bf7b3f5a4b35a1874ecc592a66b4e104022f5404",
-      "message": "Give DA committee test fixtures the block_time clock and drop the parent-ledger test\n\nApply validity and signature clocks now count from the state-queue node's\nauthenticated block_time, so the apply-range and submitter fixtures set\nblock_time instead of a header end time, and the stored header records used\nby the peer and libp2p exchange tests carry the raw node datum it is read\nfrom. The parent post-state test pinned the pre-block ledger lookup that\nca44ed805 removed, so it is deleted.",
+      "sha": "2a5f0370a000a9475cc140aa41cac66d1bfad2af",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/2a5f0370a000a9475cc140aa41cac66d1bfad2af",
+      "message": "Share L2 transactions between the operators of a public stack\n\nOn the public route each node sits behind a TLS ingress with no plain HTTP\nport, and the attached second instance's ingress publishes on loopback\nonly, so the two operators could not reach each other to share L2\ntransactions.\n\nWhen a public stack admits one producer on its own host (the attached\nsecond instance), the harness now creates two Docker networks, one per\ndirection. Each ingress joins its inbound network under the certificate's\nhost name, each node joins the other's, and each node gets\nL2_TX_PEERS=https://<host>:8443 and the stack CA through\nNODE_EXTRA_CA_CERTS. Operator-set peers are kept. More than one producer on\nthe host is refused, since both ingresses serve the one host name. No node\ncode changes.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-14T04:19:37Z"
+      "authorDate": "2026-11-10T02:17:09Z"
     },
     {
-      "sha": "2ec6717e173cfad5bb4ddcdb80489d623eef397e",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/2ec6717e173cfad5bb4ddcdb80489d623eef397e",
-      "message": "Regenerate the DA deployment fixture on the current blueprint\n\nProduced by the da-deployment-fixture channel sync on a fresh preprod-testing\nblueprint; it picks up the redeemer-canonicity step-02 data and resolved-output\nstep-04 datum contracts.",
+      "sha": "ab85e89ee8c727468654bb80e5a3cdde0060a656",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ab85e89ee8c727468654bb80e5a3cdde0060a656",
+      "message": "Give each stack fault journey the time its own budget needs\n\nIn stack mode every fault family got a fixed 2 h test limit, below its\ncomputed journey budget at a one-hour-shift cadence, and the refusal-only\nfamilies also wait for operator-2's shift and the attestation timeouts.\n\nThe limit is now the family's computed journey budget, from the same timing\nthe runner reads (the stack's Shelley genesis and deployment manifest), plus\ntwo of operator-2's shifts: one waiting for its turn and one holding the\nstaging. A limit no timer can hold is refused. The new test file joins the\nno-devnet watcher journey list in Node CI.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-10-14T04:09:14Z"
+      "authorDate": "2026-11-10T02:14:08Z"
+    },
+    {
+      "sha": "a3700029b45e4b79353fb33c21d02bdfed9eac14",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/a3700029b45e4b79353fb33c21d02bdfed9eac14",
+      "message": "Run the stack fault journeys against a public HTTPS stack\n\nOn a public stack each node sits behind a TLS ingress. The fault journeys\nattached to such a stack read our node and operator-2 over HTTPS without the\nstack's CA, and the operator-2 pause stopped only the node service, so the\ningress kept answering /readyz and the stop proof refused.\n\nThe stack's TLS (CA file and servername) now comes from one helper in\nnode-tls.ts, used by the e2e-stack controller, its process runner and the\nattached journey session, which trusts it before any read. On a public stack\nthe pause control stops and starts the node and its ingress together; stop\nproves nothing runs and /readyz is unreachable on either route, and resume\nreads the ingress's own refusal (an error code, no readiness reasons) as\n\"not ready yet\". Any other reasonless answer still fails.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-11-10T02:13:54Z"
+    },
+    {
+      "sha": "ac3529f96a0c2df80d36d2b8f036fc11caeb4a9e",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ac3529f96a0c2df80d36d2b8f036fc11caeb4a9e",
+      "message": "Finish the clean journey's deposit and transfer steps without waiting for maturity\n\nOn a profile with a seven-day maturity the e2e-stack wallet journey waited\nfor three maturities in a row: the deposit step for its settlement, the\ntransfer step for its merge, and the withdrawal for its payout. A cycle took\nabout three weeks.\n\nThe deposit step now completes when the deposit credit is visible on L2, and\nthe transfer step at commit, after its public DA and balance checks. A new\nsettlement step after the withdrawal observes the deposit's settlement and\nthe transfer's merge (same header, confirmed ledger finalized), so every\ncheck still runs, only later. The finalize summary reads that evidence from\nthe new step and refuses a settlement or merge for another event, tx or\nheader. Each wait keeps its existing limit and the rerun model, and the\norder is the same on every profile.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-11-10T02:13:37Z"
+    },
+    {
+      "sha": "115822b010fce513881918894ad21f04f3bf5f0b",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/115822b010fce513881918894ad21f04f3bf5f0b",
+      "message": "Reuse only the prover's own field grammar certificate\n\nA step now relies only on a certificate the prover controls: the builder\nreuses a live Complete certificate, or resumes an InProgress one, only when\nits datum owner is the prover's key, and otherwise certifies its own.\n\nAlso:\n- the validation-trace workflow resolves its certificate through the\n  families' shared resolver, which also checks the mint member;\n- the SDK's certificate titles derive from the shared title registry;\n- min-fee step 02 documents why its acceptance direction reads only the\n  committed lengths;\n- field-item-width-illegal step 02 gains a test that the certified route\n  refuses a fixed-stride field;\n- two comments in the field access and walk libraries now say what the\n  code does.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-11-09T19:58:36Z"
+    },
+    {
+      "sha": "ffa4c8747e99827ca954becae44bbe3dcbc65cd4",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ffa4c8747e99827ca954becae44bbe3dcbc65cd4",
+      "message": "Drop removed worktrees' test databases and clear week-old run folders\n\nA worktree removed with plain `git worktree remove` left its suites'\ndatabases on the shared test Postgres, and contrib's run folders under\nthe temp directory were never cleared; both piled up into the thousands.\n\nEach `contrib test` run's cleanup now also drops databases whose checkout\nhash matches no existing worktree. It uses a plain DROP, so a database\nthat still has a connection is skipped and reported, never forced. The\nreceipt records the result as `removedWorktreeCleanup`.\n\nThe first run folder a process makes now clears run folders older than a\nweek. Nothing reads an old run folder back.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-11-09T18:06:00Z"
     }
   ],
   "contributors": [
@@ -384,7 +384,7 @@
   "commitActivity": [
     {
       "week": 1763251200,
-      "total": 32
+      "total": 31
     },
     {
       "week": 1763856000,
@@ -396,7 +396,7 @@
     },
     {
       "week": 1765065600,
-      "total": 6
+      "total": 7
     },
     {
       "week": 1765670400,
@@ -428,7 +428,7 @@
     },
     {
       "week": 1769904000,
-      "total": 45
+      "total": 46
     },
     {
       "week": 1770508800,
@@ -460,11 +460,11 @@
     },
     {
       "week": 1774742400,
-      "total": 28
+      "total": 30
     },
     {
       "week": 1775347200,
-      "total": 37
+      "total": 40
     },
     {
       "week": 1775952000,
@@ -472,27 +472,27 @@
     },
     {
       "week": 1776556800,
-      "total": 16
+      "total": 17
     },
     {
       "week": 1777161600,
-      "total": 25
+      "total": 26
     },
     {
       "week": 1777766400,
-      "total": 32
+      "total": 33
     },
     {
       "week": 1778371200,
-      "total": 40
+      "total": 41
     },
     {
       "week": 1778976000,
-      "total": 11
+      "total": 15
     },
     {
       "week": 1779580800,
-      "total": 0
+      "total": 1
     },
     {
       "week": 1780185600,
@@ -500,15 +500,15 @@
     },
     {
       "week": 1780790400,
-      "total": 16
+      "total": 18
     },
     {
       "week": 1781395200,
-      "total": 13
+      "total": 19
     },
     {
       "week": 1782000000,
-      "total": 7
+      "total": 10
     },
     {
       "week": 1782604800,
@@ -520,15 +520,15 @@
     },
     {
       "week": 1783814400,
-      "total": 9
+      "total": 11
     },
     {
       "week": 1784419200,
-      "total": 47
+      "total": 44
     },
     {
       "week": 1785024000,
-      "total": 156
+      "total": 195
     },
     {
       "week": 1785628800,
@@ -552,27 +552,27 @@
     },
     {
       "week": 1788652800,
-      "total": 1
+      "total": 46
     },
     {
       "week": 1789257600,
-      "total": 0
+      "total": 32
     },
     {
       "week": 1789862400,
-      "total": 91
+      "total": 174
     },
     {
       "week": 1790467200,
-      "total": 196
+      "total": 210
     },
     {
       "week": 1791072000,
-      "total": 436
+      "total": 482
     },
     {
       "week": 1791676800,
-      "total": 270
+      "total": 267
     },
     {
       "week": 1792281600,
@@ -580,15 +580,15 @@
     },
     {
       "week": 1792886400,
-      "total": 0
+      "total": 5
     },
     {
       "week": 1793491200,
-      "total": 0
+      "total": 162
     },
     {
       "week": 1794096000,
-      "total": 0
+      "total": 33
     }
   ]
 }
