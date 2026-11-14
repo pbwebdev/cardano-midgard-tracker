@@ -1,10 +1,10 @@
 {
-  "fetchedAt": "2026-11-13T14:19:25.583Z",
+  "fetchedAt": "2026-11-14T13:15:20.818Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 25,
     "forks_count": 11,
-    "open_issues_count": 204
+    "open_issues_count": 213
   },
   "languages": {
     "Aiken": 359544,
@@ -17,109 +17,109 @@
   },
   "commits": [
     {
-      "sha": "a2283a8192ac9bcf15d27c0ba29c50f0706b07d4",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/a2283a8192ac9bcf15d27c0ba29c50f0706b07d4",
-      "message": "Claim a never-attempted DA outbox row whatever the database clock\n\nA seed writes each peer and announcement row with next_retry_at = NOW(),\nand the claim later in the same pass required next_retry_at <= NOW().\nWhen the database host's clock is stepped back between the two, as a\ntime sync does, the claim reads an earlier NOW() and skips the row: the\npayload is delivered a whole pass late and the pass reports it as\nbacklog. A clock stepping back about 100 ms every 30 s did this to the\nannouncement in the corrupt-manifest rebase test.\n\nA row with no attempt is now due at once; backoff starts with the first\nrecorded attempt, which always sets attempts to at least 1.\n\nRefs #926",
+      "sha": "1baad4895a05d7a8f5bed4f76a0a7ed1bd697c75",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/1baad4895a05d7a8f5bed4f76a0a7ed1bd697c75",
+      "message": "Read the drill's chain transactions one Ogmios session at a time\n\nEvery confirmed-transaction read on an attached stack opens its own\nOgmios chain-sync session, and each session is a new node-to-client\nconnection to the stack's cardano-node. Callers ask for several reads at\nonce, and a burst of them overflowed the node's socket backlog: Ogmios\ndropped the websockets it could not connect, and the drill failed a family\non \"Ogmios chain-sync socket closed\".\n\nThe reader now runs its reads one at a time, in the order they were asked\nfor. A failed read rejects only its own caller; the next one still runs.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-13T12:34:12Z"
+      "authorDate": "2026-11-14T12:28:45Z"
     },
     {
-      "sha": "6456bc9103810c75b7dcc85de2fb006c41241664",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/6456bc9103810c75b7dcc85de2fb006c41241664",
-      "message": "Point the doc references at the moved parity test and the deleted recovery\n\nThe SDK/Aiken schema parity test moved into the SDK package, and the\ncanonical journal recovery service was deleted with the stored own-block\nstatus. The splitting reference now names the parity test's new path, and\nthe architecture plan marks its recovery citation as historical.",
+      "sha": "eb0a8de6dd9e87f62b79b70a84dbb3fcc1244e28",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/eb0a8de6dd9e87f62b79b70a84dbb3fcc1244e28",
+      "message": "Resume a completed withdrawal from its recorded payout\n\nA resumed run reconciled every completed step again, and the withdrawal\nstep proved its payout by finding the payout output unspent at the L1\nnode's tip. A later cycle's deposit spends that output, so a resume after\ncycle 1 waited out the full timeout and failed. Inclusion proven at depth\nis permanent: a complete record that holds this withdrawal's payout (same\nevent, address and assets) is now taken as the proof, and only the L2\nspend, the balance guard and readiness are checked again.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-13T12:28:17Z"
+      "authorDate": "2026-11-14T09:29:28Z"
     },
     {
-      "sha": "990c8d462d1840c278da22ac46075cd5131e0398",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/990c8d462d1840c278da22ac46075cd5131e0398",
-      "message": "Screen forced rows that block processing writes and test the retired-event skip\n\nBlock processing now writes the rows of the retired events and spent\nforced orders a processed landed block names, so the skip that leaves\nevery other retired event alone rests on a lookup, not on the query.\nTests now pin it for deposits, withdrawals and forced orders: an event\nnamed only by a removed landed block, or by no block, gets no row and\nno mempool projection. The withdrawal case runs through the production\nreplayer on a real block.\n\nA forced order that processing wrote first used to skip the admission\ndivergence screen, because the forced-order hook only screens the rows\nit writes itself. The screen is now one function in forced-orders/entry,\nand both the hook and block processing call it with the hook's\ndivergence register, so the alarm reaches /readyz on either path.\n\nrecordNamedEvents and its types move to follower-events.named.ts, which\ntakes follower-events.ts and forced-orders/ingest.ts well below their\nline limits and undoes the line-saving in ingest.\n\nRefs #931",
+      "sha": "93ef455aabebab6f6e8664736bdc8ed2e30db20c",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/93ef455aabebab6f6e8664736bdc8ed2e30db20c",
+      "message": "Select three more checks from the files they read\n\nThree preflight checks read files their triggers did not name, so a change\nto one of those files passed preflight unchecked:\n\n- workflow-lint lints the composite actions under .github/actions/ as well\n  as the workflows.\n- agent-enforcement-tags resolves [eslint] tags against the ESLint configs,\n  [ci] tags against the workflows' step names and [hook] tags against\n  .githooks/.\n- registry.mjs imports onchain/aiken/scripts/guard-focused-selector.mjs,\n  which imports complete-test-shards.mjs, so both are preflight's own code\n  and now full-run paths beside scripts/preflight/**.\n\nCloses #947",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-13T08:35:09Z"
+      "authorDate": "2026-11-14T07:00:13Z"
     },
     {
-      "sha": "1cedffdb02e0e98b1015f35e355bc5b57f310e7d",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/1cedffdb02e0e98b1015f35e355bc5b57f310e7d",
-      "message": "Delete the L1 control-plane source scans and bundle worker probes outside the package\n\nMidgard Node CI on e71c6d22c failed in l1-control-plane-deleted.test.ts:\nits scan of the node sources found the esbuild bundle that\nintent-journal-worker-holds.test.ts was writing into the package root at\nthe same moment. Tests that scan source text or census the tree are\ndeleted when they go red, so that test goes, together with its docs\ncounterpart and the key list only those two read.\n\nThe two worker-thread tests now bundle their probe through one helper\nthat writes into the system temporary directory, with the package's\nnode_modules linked beside the bundle so its external imports still\nresolve. No tree walk can find a probe bundle mid-run, and the copied\nbundling setup lives in one place.",
+      "sha": "f360f9a20936fe9021b9ab1ed4d42badf63d11c0",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/f360f9a20936fe9021b9ab1ed4d42badf63d11c0",
+      "message": "Select the tooling self-tests from the files they read\n\nrepo-tooling-tests ran only on changes under scripts/, .githooks/ and\n.claude/settings.json, yet several of its self-tests hold files outside\nscripts/ to each other: the journey wiring check reads the watcher journey\ntests and Node CI's workflow. A new journey test therefore passed preflight\nand failed Repo Tools CI after the push.\n\nEach self-test that reads files outside scripts/ now declares them in\ntoolingTestInputs, and the step is selected from those declarations. A\nchange to a declared file runs only the self-tests that read it; a change\nunder the step's own paths, a full run and `--run repo-tooling-tests` still\nrun the whole suite.\n\nregistry.tooling-inputs.test.mjs pins the selection and runs each declaring\nself-test in a copy of the repository holding only scripts/ and the files it\ndeclares, so a read left off its entry fails there, as does a glob that\nmatches no file. A self-test with no entry at all is not caught: whoever\nadds a self-test that reads outside scripts/ adds its entry.\n\nRefs #947",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-13T07:56:03Z"
+      "authorDate": "2026-11-14T06:58:18Z"
     },
     {
-      "sha": "79d9b8b3f29c4f7c95c4fd6c8a1b8728f49145cb",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/79d9b8b3f29c4f7c95c4fd6c8a1b8728f49145cb",
-      "message": "Carry an active own journal whose intent was pruned through 0037\n\nThe follower prunes an intent row once it has been terminal for k\nblocks, and it does so during catch-up, before the node disposes of its\njournals. A node that signs commit T, then is stopped for more than k\nblocks after T settles on L1 (landed, expired, an input spent or a\ndependency dead), restarts to find its active journal still naming T\nwhile T's l1_intents row is gone. Disposition treats a pruned intent as\nnot dead, so the journal stays active, and migration 0037 refused it\nwith MIGRATION_0037_SIGNED_JOURNAL_WITHOUT_INTENT. Its hint could not\nclear that refusal, so the node could not start without a hand edit.\n\nSuch a journal needs no refusal. After 0037 its status is derived from\nthe facts: landed or applied if its block landed, and otherwise dead\nbecause its intent is no longer journaled, the reasoning the migration\nalready applies to applied and abandoned journals with pruned intents.\nThe journal keeps its intended hash, which satisfies the prepared-hash\ncheck and keeps it out of the unsigned-journal discard. The refusal now\nguards only a mismatch between the journal's signed bytes and an intent\nrow with the same hash, alongside the existing guards for a submitted\nhash with no intended one and for a database with no intent journal.\n\nTests cover the carried journal in the pending and submitted states,\nwith and without a landed block, and a runtime case where the commit\ntick resumes and prepares the next block once the live journal's\nintent is pruned.",
+      "sha": "b43f3dd94ad063f2b6c8329df1cb0c274c1528d9",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/b43f3dd94ad063f2b6c8329df1cb0c274c1528d9",
+      "message": "Wait out public DA's not_found after a block commits\n\nThe node reports a transfer committed before it hands the block's payload\nto the committee, whose store the public retained-DA server reads. The\njourney's transfer step fetched that payload once, so a fetch landing in\nbetween failed the run with not_found although the payload arrived seconds\nlater.\n\nThe fetch now asks again while every attempt answers not_found, within the\nstep's existing limit, reusing one retained-DA runtime, and throws the same\nerror with the last attempts when the limit runs out. Any other answer\n(conflict, invalid content, refusal, failed verification, transport error,\ntimeout) still fails at once.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-13T07:43:06Z"
+      "authorDate": "2026-11-14T05:34:55Z"
     },
     {
-      "sha": "264ef87d07e96016f01195878b4f43eb00b455ff",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/264ef87d07e96016f01195878b4f43eb00b455ff",
-      "message": "Compare the CPU sampler's process and thread totals in whole ticks\n\nThe check that the process total trails the main thread's by at most one\ntick compared seconds rebuilt from tick counts. When the trail was\nexactly one tick, the float products could put it a hair below the bound\n(0.3 against 0.30000000000000004) and fail the test. Both totals are\nwhole ticks, so the test now compares them as ticks.",
+      "sha": "70c6d9d939ff217e1b3daaa1e9e9014e0309e102",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/70c6d9d939ff217e1b3daaa1e9e9014e0309e102",
+      "message": "Run the new drill harness journey tests in node CI\n\nFive watcher-journey test files added with the drill harness fixes need no\ndevnet but were missing from the node CI list, so the wiring check failed.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-13T05:34:23Z"
+      "authorDate": "2026-11-14T04:10:16Z"
     },
     {
-      "sha": "5c9bcb1258841009079e1bc99b4addf89edd2986",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/5c9bcb1258841009079e1bc99b4addf89edd2986",
-      "message": "Name a DA publication hold on an unavailable DA manifest\n\nThe DA publication reconciler loads the DA manifest on every pass. When\nit is missing or invalid, the pass seeds and delivers nothing and raises\nda_publication_manifest_unavailable, which escalates after ten minutes.\nThe pass leaves the seeding cursor where it was and reports, as its\nbacklog, the stored payloads still awaiting outbox seeding. The first\npass with a valid manifest clears the reason and delivers every payload\nheld meanwhile, once to each committee peer.\n\nThe summary field that said whether the manifest loaded is renamed to\nmanifestLoaded. The comment on the seeding cursor now states how\ndelivery depends on its one-hour overlap: a query that also selected\nevery unseeded payload would scan the whole retention window on each\npass.\n\nA test shows that a missing and a corrupt manifest each leave the rebase\napplying the own block while delivery waits, and that delivery completes\nonce the manifest is restored.\n\nCloses #926",
+      "sha": "f6eb612f542d96e2a6f64583faea1fbf2354e135",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/f6eb612f542d96e2a6f64583faea1fbf2354e135",
+      "message": "State what an unspent seed row proves at a point\n\nA seed row reads unspent while no spend at or below the point is\nrecorded. It may also cover an output created after the origin while its\nwallet was untracked, so it does not prove the output existed at a point\nbefore its seed slot.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-13T05:09:46Z"
+      "authorDate": "2026-11-14T03:56:40Z"
     },
     {
-      "sha": "6efcce72937bde64e690fd7764c72e25a6a24c7b",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/6efcce72937bde64e690fd7764c72e25a6a24c7b",
-      "message": "Store an own landed block's DA payload without reading the DA manifest\n\nThe landed-block rebase seeded the payload's publication outboxes as it\napplied the node's own block, which made it read the DA manifest inside\nthe rebase transaction. A missing or corrupt manifest therefore held the\nrebase. The rebase now stores only the payload, and the DA publication\nreconciler, which already seeds the outboxes from stored payloads, seeds\nand delivers it.\n\nThe per-payload seeding helpers have no callers left and are deleted.\nThe module that now holds only the publication transport cache is\nrenamed to say so, and its unused publicationSatisfied is removed. The\ntests that stubbed the manifest for the rebase no longer need to.\n\nRefs #926",
+      "sha": "716a72bddf22e4535f0904a188bfc29e336aff31",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/716a72bddf22e4535f0904a188bfc29e336aff31",
+      "message": "Test a recorded release replaced by a rollback, and its settle boundary\n\nTwo cases on the real follower store read a release from its recorded block once the store has pruned the walk from the Open. In the first, a rollback replaced the recorded block and the same burn landed again at the same slot; the row is revived, not settled. In the second, the row stays unsettled at a depth of exactly automatic rollback recovery and settles one block later.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-13T05:09:37Z"
+      "authorDate": "2026-11-14T03:50:54Z"
     },
     {
-      "sha": "22030dd9e32c14b323171feee7a71e13c66aa819",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/22030dd9e32c14b323171feee7a71e13c66aa819",
-      "message": "Delete the obsolete commit-parent-lease test size exception\n\nDriving the production lifecycle through the intent journal brought\ncommit-parent-lease-emulator.test.ts to 498 lines, under the default\n500-line limit, so its 590-line exception no longer applies.",
+      "sha": "2ae58bb0cd6233a988b044aa2b6a7260bb80a736",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/2ae58bb0cd6233a988b044aa2b6a7260bb80a736",
+      "message": "Test the availability reconcile's pending demotion and new-step pin\n\nAn included intent that a rollback took out of the store, together with\nthe blocks that created its inputs, now has a case showing it returns to\npending while still valid. A newly actuated step now has a case showing\nits own submit pins it in the follower before it is broadcast, since the\npass pinned the journal before the step was signed.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-13T04:15:00Z"
+      "authorDate": "2026-11-14T03:43:02Z"
     },
     {
-      "sha": "e71c6d22cc95e84185d7047f4a4b595e458d1400",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/e71c6d22cc95e84185d7047f4a4b595e458d1400",
-      "message": "Build the stack drill on the confirmed state when every block has merged\n\nOn an idle stack our node merges each attested block once it matures,\nwhoever holds the shift, so the state queue can hold only its root. The\ndrill read its predecessor, appended its blocks and checked its correction\nevidence as if the queue always held a block, and twin4-long-2 failed at\nits first family reading an empty queue.\n\nA commit on an empty queue spends the root, and its header continues the\nroot's confirmed state (state-queue.ak:1157-1191, :124-138); a merge\nwrites the merged block's hash, UTxO root and end time into the root\n(:401-409). So the drill now:\n\n- reads the root as the settled, attested tail, rebuilding the block it\n  holds from the authenticated transaction whose output the merge spent;\n- appends after a block that merged by anchoring on the root, re-read at\n  every commit attempt, in staging and in the transition trace;\n- treats a block that left the queue by an authenticated merge as kept,\n  in the predecessor, successor and removal-tail evidence;\n- reads an attested history block that merged between polls as attested,\n  and fails by name on a fault that merged before its fraud proof.",
+      "sha": "0a74f74adf2bd81ead8ac38941598cced19260b9",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/0a74f74adf2bd81ead8ac38941598cced19260b9",
+      "message": "Read availability inputs as unspent without needing their bytes\n\nThe availability reconcile asked the follower for the exact bytes of every\ninput of a signed intent that had not landed, only to learn which were\nunspent. A wallet coin the follower's origin already held has no stored\ncreating transaction, so that read was refused and the whole pass failed\non every tick.\n\nThe follower now answers which outrefs are unspent at a point without\nreading bytes: a seed row is unspent from the origin until a spend the\nstore records at or below the point. The byte read is built on the same\nwalk and still refuses where bytes are needed and absent. The intent\nobservation, the workflow release spend lookup and the signed-recovery\nmissing-row check use the new read.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-13T03:31:44Z"
+      "authorDate": "2026-11-14T03:42:51Z"
     },
     {
-      "sha": "45ff57ba85a96c055a8d20fe2c57e86918daf0a7",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/45ff57ba85a96c055a8d20fe2c57e86918daf0a7",
-      "message": "Arrange the commit-site tests for the derived journal status\n\nEvery commit tick now discards unsigned journals under the follower\nwrite gate, so the commit-lease owner test opens the gate at a real\nfollower view rather than one no follower holds. The commit-base\nresolver test's in-flight journal gets a commit anchor, without which\nit derives dead and holds nothing.\n\nRefs #806",
+      "sha": "4c2c09a6512b8155f4f03a3198f2ccae9a96be5f",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/4c2c09a6512b8155f4f03a3198f2ccae9a96be5f",
+      "message": "End the funding test's families with a conviction\n\nThe last family's conviction needs no further bond. With a refused family\nlast, counting that bond or not gave the same total, so the test could not\ntell. Ordering the attested family last makes an over-count refuse the\nexactly-funded case.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-13T02:53:20Z"
+      "authorDate": "2026-11-14T03:29:39Z"
     },
     {
-      "sha": "f432fa5ba3e402847ac958c32400e41692cbc043",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/f432fa5ba3e402847ac958c32400e41692cbc043",
-      "message": "Keep an own block's first landed time and clear it on a revert\n\nThe landed time was overwritten by every rebase that took the landing\nin and was never cleared when a rebase reverted it, so a rolled-back\nblock still read as committed in the stress metrics. It is now kept\nonce stamped, and cleared in the same transaction as the rebase\ndeletes the reverted landed row, so a block that lands again is\nstamped again.\n\nThe fork simulator's journal comparison leaves the column out: it is\nwall-clock time for the metrics, which no derivation from the chain\nreproduces. The stamp test now checks another journal stays unstamped\nand that a revert clears the stamp.\n\nRefs #806",
+      "sha": "2d8bcea24cb705254f4468ee63c3a70e6ba5dda9",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/2d8bcea24cb705254f4468ee63c3a70e6ba5dda9",
+      "message": "Disarm every operator-2 release guard before the compose test's holder ends\n\nA test that failed before its own release left the guard armed, so once\nthe fake docker directory was gone the guard could start a real compose\nproject. The teardown now releases every hold while the fake docker is\nstill first on PATH.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-13T02:52:26Z"
+      "authorDate": "2026-11-14T03:29:32Z"
     },
     {
-      "sha": "0b0dddae9f0824065a0a7231501ed2ef037efda6",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/0b0dddae9f0824065a0a7231501ed2ef037efda6",
-      "message": "Carry every submitted unjournaled commit through 0037\n\n0037 copied the submitted hash into the intended one only for\nabandoned journals. A journal of any status whose commit was submitted\nwithout an intent journal entry records only its submitted hash, and\nonce that column goes it reads as unsigned; the next commit tick\ndiscards every unsigned journal, so an applied or folded one would be\ndeleted. The copy now covers every row with a submitted hash and no\nintended one, and a pending submission in that state is refused with\nthe other active ones.\n\nA row whose prepared hash differs from its submitted one is refused by\nname (MIGRATION_0037_SUBMITTED_COMMIT_NOT_PREPARED) instead of failing\nthe relaxed check. The migration test runs the unsigned-journal\ndiscard after migrating and shows only the unsigned journal goes.\n\nRefs #806",
+      "sha": "d2a8d5351e05a6273139c4c38408d9469d8f7916",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d2a8d5351e05a6273139c4c38408d9469d8f7916",
+      "message": "Settle availability workflow releases after the follower prunes\n\nA released challenge workflow settles only once its terminal step is\ndeeper than automatic rollback recovery, and every release check walked\nfrom the Open's node output. The follower keeps rows only to its\nretained depth, which is far shallower, so that walk lost its first\nrows long before the release could settle: the row deferred on every\npass and stayed in the journal, where it holds the wallet's capital.\n\nThe release pass now pins each terminal step before the journal records\nit, and the journal's pin set keeps every unsettled release's terminal.\nWhen the walk from the Open is no longer retained, the check re-reads\nthe recorded release from the block it was verified in: it stands while\nthat block is canonical and is revived once that block leaves the\nchain. A walk that meets a pruned node output reads that output's spend\nfrom the header's queue history, which the follower keeps while the\nheader is queued, checked against the spending transaction's own bytes.\n\nWhere nothing retained proves a release, the row stays live or\nunsettled and its deferral carries the release-evidence-beyond-retention\nreason instead of an unexplained refusal. Nothing is settled or dropped\nwithout proof.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-13T02:47:48Z"
+      "authorDate": "2026-11-14T03:27:52Z"
     },
     {
-      "sha": "1fca083e4d34eb10cf95e22de1c58577fb8f3d0f",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/1fca083e4d34eb10cf95e22de1c58577fb8f3d0f",
-      "message": "Keep the forced-order derivation free of the node's services\n\nThe forced-order derivation reached the node's services through\nl1-admission-identity, which took its journal status fragments from\nthe derived-status reads: the determinism lint reported clocks, the\nnetwork and the host across 28 sites. The pure status and dead-header\nSQL fragments move to pendingBlockFinalizations.status-sql.ts, and the\nnewest terminal outcome to l1-queue-terminals/terminal-outcome.ts;\nderived-status keeps only the reads that need the database. Importers\ntake the fragments from their new home.\n\nRefs #806",
+      "sha": "6d3db339444c0324941a54cee276b719daa012da",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/6d3db339444c0324941a54cee276b719daa012da",
+      "message": "Count every operator-2 and funding spend in the drill's funding check\n\nThe funding check counted one bond per attested family and three fees\nplus a header node per family. It left out the ledger owner's deposit\nfrom the funding wallet, the user events (deposits, withdrawal and tx\norders) and history blocks that families stage from operator-2's\nwallet, and the bond that a family after the last attested one posts\nagain.\n\nIt now takes the families in order and counts, from the constants the\nspends use:\n- the bond at the first family's onboarding (operator-2 may start\n  unbonded, as after a run that ended in a conviction) and again for each\n  family that follows a conviction;\n- each family's onboarding and top-up fees, and its fault's header node;\n- each history block's header node and commit;\n- each user event at the deposit's amount (JOURNEY_USER_EVENT_LOVELACE,\n  now the deposit's own constant) and its fee;\n- the ledger owner's deposit (journey.depositLovelace) and its fee.\n\nFixtures now expose the history blocks and user events they declare;\nthe transition trace declares its two deposits and its empty block.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-13T02:46:13Z"
+      "authorDate": "2026-11-13T20:27:05Z"
     },
     {
-      "sha": "6c9243901747b115132377bf6d27a7ec1b21d8f2",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/6c9243901747b115132377bf6d27a7ec1b21d8f2",
-      "message": "Record a foreign block's named events as it is processed\n\nThe foreign replay now returns the deposits, withdrawals and forced\norders it checked the block against, the forced rows built from the\nfield preimages its source check verified. Processing the block writes\nthe node's rows for them in the same transaction, so the rebase finds\nevery event the block names even after the follower has pruned it.\nThe rows match ingestion's byte for byte, and either write leaves the\nother's row as it is.\n\nThe test covers all three kinds through rebaseIfDue on the real store:\na block processed now, one processed before this change whose event\nretired unseen, and the row equality with ingestion.\n\nCloses #931",
+      "sha": "7d27da7d11e18dba0736bd3c71b4e2f118a1eb95",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/7d27da7d11e18dba0736bd3c71b4e2f118a1eb95",
+      "message": "Read the verified-predecessor check's first tail read through a reset\n\nThe check's first read of the stack's attested tail was the one read\nthat a lost connection did not retry, so one reset closed the session\nfor every remaining family. It is now read again after a transport\nfailure (isTransientTransportError), pausing between tries, within the\ncheck's existing decision bound on the check's own clock; at the bound\nthe last transport failure is rethrown. readThroughTransportFailures\ntakes an optional clock for this; its other callers keep the monotonic\nclock.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-13T02:42:42Z"
+      "authorDate": "2026-11-13T19:56:02Z"
     }
   ],
   "contributors": [
@@ -326,58 +326,58 @@
   ],
   "issues": [
     {
+      "number": 948,
+      "title": "Test the availability spend lookup's liveness read",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/948",
+      "updated_at": "2026-11-14T05:02:06Z"
+    },
+    {
+      "number": 947,
+      "title": "Preflight skips the wiring checks that judge a changed journey test or workflow",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/947",
+      "updated_at": "2026-11-14T04:10:44Z"
+    },
+    {
+      "number": 946,
+      "title": "Watcher: an availability row past retention blocks the actor in any other deployment",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/946",
+      "updated_at": "2026-11-14T03:47:05Z"
+    },
+    {
       "number": 937,
       "title": "Committee promise clock: decide the trusted clock before enabling DA_PROMISE_*",
       "html_url": "https://github.com/Anastasia-Labs/midgard/issues/937",
-      "updated_at": "2026-11-13T14:10:56Z"
+      "updated_at": "2026-11-14T03:01:21Z"
     },
     {
-      "number": 936,
-      "title": "Backward clock steps delay several due checks by up to one pass",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/936",
-      "updated_at": "2026-11-13T13:29:53Z"
+      "number": 945,
+      "title": "Node stays stuck for good after a block it found invalid merges",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/945",
+      "updated_at": "2026-11-14T03:01:08Z"
     },
     {
-      "number": 935,
-      "title": "A backward clock step can reject a mempool child selected without its pending parent",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/935",
-      "updated_at": "2026-11-13T13:29:38Z"
+      "number": 944,
+      "title": "Watcher supervisor: reverify convicted objectives only at finality, and stop false deadline_unsafe",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/944",
+      "updated_at": "2026-11-14T03:01:06Z"
     },
     {
-      "number": 934,
-      "title": "A run state refuses its own timestamps when the host clock steps back",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/934",
-      "updated_at": "2026-11-13T13:14:46Z"
+      "number": 943,
+      "title": "Stack drill harness: follow-ups from the twin long-drill reviews",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/943",
+      "updated_at": "2026-11-14T03:01:05Z"
     },
     {
-      "number": 933,
-      "title": "Foreign replay's DA fetch hides a bad DA manifest behind a generic awaiting-DA hold",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/933",
-      "updated_at": "2026-11-13T06:04:47Z"
+      "number": 942,
+      "title": "DA committee: deferred gossip, concurrent payload fetch, prune rejected-payload set",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/942",
+      "updated_at": "2026-11-14T03:01:04Z"
     },
     {
-      "number": 932,
-      "title": "contrib reach: a package-root .env.example marks every dependent package whole",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/932",
-      "updated_at": "2026-11-13T06:04:21Z"
-    },
-    {
-      "number": 931,
-      "title": "Node: a restarted node is stuck when a foreign block names an event created and spent while it was down",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/931",
-      "updated_at": "2026-11-13T00:06:18Z"
-    },
-    {
-      "number": 916,
-      "title": "Derive deployment orders from the member rows and move reference-script tokens onto them",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/916",
-      "updated_at": "2026-11-12T23:48:43Z"
-    },
-    {
-      "number": 915,
-      "title": "Share one signer witness scan between the two signer-missing families",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/915",
-      "updated_at": "2026-11-12T23:48:42Z"
+      "number": 941,
+      "title": "DA committee: a hung tick has nothing that restarts the member",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/941",
+      "updated_at": "2026-11-14T03:01:02Z"
     }
   ],
   "releases": [],
@@ -440,19 +440,19 @@
     },
     {
       "week": 1771718400,
-      "total": 43
+      "total": 47
     },
     {
       "week": 1772323200,
-      "total": 23
+      "total": 26
     },
     {
       "week": 1772928000,
-      "total": 35
+      "total": 36
     },
     {
       "week": 1773532800,
-      "total": 28
+      "total": 29
     },
     {
       "week": 1774137600,
@@ -468,43 +468,43 @@
     },
     {
       "week": 1775952000,
-      "total": 28
+      "total": 32
     },
     {
       "week": 1776556800,
-      "total": 28
+      "total": 29
     },
     {
       "week": 1777161600,
-      "total": 10
+      "total": 26
     },
     {
       "week": 1777766400,
-      "total": 19
+      "total": 33
     },
     {
       "week": 1778371200,
-      "total": 40
+      "total": 41
     },
     {
       "week": 1778976000,
-      "total": 14
+      "total": 16
     },
     {
       "week": 1779580800,
-      "total": 1
+      "total": 2
     },
     {
       "week": 1780185600,
-      "total": 25
+      "total": 26
     },
     {
       "week": 1780790400,
-      "total": 31
+      "total": 32
     },
     {
       "week": 1781395200,
-      "total": 12
+      "total": 21
     },
     {
       "week": 1782000000,
@@ -520,11 +520,11 @@
     },
     {
       "week": 1783814400,
-      "total": 9
+      "total": 11
     },
     {
       "week": 1784419200,
-      "total": 26
+      "total": 47
     },
     {
       "week": 1785024000,
@@ -532,11 +532,11 @@
     },
     {
       "week": 1785628800,
-      "total": 102
+      "total": 190
     },
     {
       "week": 1786233600,
-      "total": 0
+      "total": 9
     },
     {
       "week": 1786838400,
@@ -544,23 +544,23 @@
     },
     {
       "week": 1787443200,
-      "total": 0
+      "total": 1
     },
     {
       "week": 1788048000,
-      "total": 1
+      "total": 3
     },
     {
       "week": 1788652800,
-      "total": 1
+      "total": 46
     },
     {
       "week": 1789257600,
-      "total": 0
+      "total": 32
     },
     {
       "week": 1789862400,
-      "total": 151
+      "total": 174
     },
     {
       "week": 1790467200,
@@ -568,11 +568,11 @@
     },
     {
       "week": 1791072000,
-      "total": 480
+      "total": 482
     },
     {
       "week": 1791676800,
-      "total": 169
+      "total": 272
     },
     {
       "week": 1792281600,
