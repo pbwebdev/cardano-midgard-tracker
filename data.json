@@ -1,10 +1,10 @@
 {
-  "fetchedAt": "2026-11-16T15:20:22.210Z",
+  "fetchedAt": "2026-11-17T15:44:41.493Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 25,
     "forks_count": 11,
-    "open_issues_count": 212
+    "open_issues_count": 218
   },
   "languages": {
     "Aiken": 359544,
@@ -17,109 +17,109 @@
   },
   "commits": [
     {
-      "sha": "f8d661ceaddf95556e59005763dc6b851994591b",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/f8d661ceaddf95556e59005763dc6b851994591b",
-      "message": "Take the responder's validity and deadlines from the committee's L1 clock\n\nThe availability responder read Date.now() for its transaction's\nvalidity window and for every due, expired and deadline decision. A\ncommittee member whose wall clock drifted from the chain's could give up\non a response it could still publish, or build one outside the window\nthe ledger accepts.\n\nThe committee now keeps an L1 clock: the newest tip slot its follower\nobserved plus the monotonic time since, never decreasing. Every boundary\nread observes the tip, and until one has, a step reports that it is\nawaiting the scan. The responder's deadline checks, the transaction's\nvalidity window and a check after the build all read that clock. A\npublication's inclusive upper bound is the response deadline plus one,\nand settling an Active tranche starts at the deadline. When the tip lags\ntoo far for any valid interval, the step reports pending and tries again\non the next tick.\n\nIn promise mode valid_to still follows the promise network clock, so\nthe promise TTL rule holds while the L1 clock lags. Leases and journal\ntimestamps stay on the wall clock, since other processes read them. The\nSDK runner's wall-clock deadline guard is no longer used: both modes\nfence the preparation scope at the deadline on the L1 clock, so signing\nstill stops once it passes.",
+      "sha": "1cedffdb02e0e98b1015f35e355bc5b57f310e7d",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/1cedffdb02e0e98b1015f35e355bc5b57f310e7d",
+      "message": "Delete the L1 control-plane source scans and bundle worker probes outside the package\n\nMidgard Node CI on e71c6d22c failed in l1-control-plane-deleted.test.ts:\nits scan of the node sources found the esbuild bundle that\nintent-journal-worker-holds.test.ts was writing into the package root at\nthe same moment. Tests that scan source text or census the tree are\ndeleted when they go red, so that test goes, together with its docs\ncounterpart and the key list only those two read.\n\nThe two worker-thread tests now bundle their probe through one helper\nthat writes into the system temporary directory, with the package's\nnode_modules linked beside the bundle so its external imports still\nresolve. No tree walk can find a probe bundle mid-run, and the copied\nbundling setup lives in one place.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-15T21:55:22Z"
+      "authorDate": "2026-11-13T07:56:03Z"
     },
     {
-      "sha": "44d65c959988ba4f1dbdccec89008a36c44750a4",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/44d65c959988ba4f1dbdccec89008a36c44750a4",
-      "message": "Call the forced-order spend a close-out in fault-proof tests",
+      "sha": "e71c6d22cc95e84185d7047f4a4b595e458d1400",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/e71c6d22cc95e84185d7047f4a4b595e458d1400",
+      "message": "Build the stack drill on the confirmed state when every block has merged\n\nOn an idle stack our node merges each attested block once it matures,\nwhoever holds the shift, so the state queue can hold only its root. The\ndrill read its predecessor, appended its blocks and checked its correction\nevidence as if the queue always held a block, and twin4-long-2 failed at\nits first family reading an empty queue.\n\nA commit on an empty queue spends the root, and its header continues the\nroot's confirmed state (state-queue.ak:1157-1191, :124-138); a merge\nwrites the merged block's hash, UTxO root and end time into the root\n(:401-409). So the drill now:\n\n- reads the root as the settled, attested tail, rebuilding the block it\n  holds from the authenticated transaction whose output the merge spent;\n- appends after a block that merged by anchoring on the root, re-read at\n  every commit attempt, in staging and in the transition trace;\n- treats a block that left the queue by an authenticated merge as kept,\n  in the predecessor, successor and removal-tail evidence;\n- reads an attested history block that merged between polls as attested,\n  and fails by name on a fault that merged before its fraud proof.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-15T18:39:22Z"
+      "authorDate": "2026-11-13T03:31:44Z"
     },
     {
-      "sha": "0b11e83f9d4a3c3f6a7297fd8cca3b13cba64c36",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/0b11e83f9d4a3c3f6a7297fd8cca3b13cba64c36",
-      "message": "Prove a same-block missing output index with its NoIdx family\n\nAn input or reference input naming an output index past the end of a\nproducer committed by the same block is also absent from the event's\npre-state ledger, so the ledger-absence family found it at the same event\nand, ranking first in catalogue order, was selected whenever the\npredecessor ledger was available. Per the owner ruling of 2026-11-15\n(decision 0010), the classifier now ranks nonExistentInputNoIndex ahead of\nnonExistentInput and referenceInputNoIdx ahead of noReferenceInput, as an\nowner-ruled promotion beside the existing doubleWithdraw one. Every other\nfamily keeps its catalogue order.\n\nThe NoIdx detectors now emit a finding only when both the naming\ntransaction and the producer are accepted, matching what steps 01 and 03\nbind; a finding naming a TxIsInvalid transaction could never be proved.\n\nTests: with the predecessor ledger present, both fields select the NoIdx\nfamily and its four-step route mints the proof on the emulator; an absent\ninput with no same-block producer stays with the ledger-absence family; a\nTxIsInvalid producer or spender yields no NoIdx finding; the Preprod-stack\ndrill check now asserts the full catalogue selects each staged category.",
+      "sha": "ecc9d1a6059e34801b80f96ba4dfa72b8cb644fe",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ecc9d1a6059e34801b80f96ba4dfa72b8cb644fe",
+      "message": "Forget a removal's backoff and warning when the bridge stops driving it\n\nA finished correction clears its backoff, now pinned by a test: a later\nfailure retries at once and warns again. The bridge also drops the\nasset's warned failure when it stops finishing that correction, so the\nmap no longer only shrinks on a settled removal.\n\nRefs #921",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-15T18:30:36Z"
+      "authorDate": "2026-11-12T16:34:44Z"
     },
     {
-      "sha": "3e70b21b63e4330052d2aae98b9daf0cffc8b65c",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/3e70b21b63e4330052d2aae98b9daf0cffc8b65c",
-      "message": "Pay the deployment's minimum fee in every drill transaction a replay accepts\n\nThe history, withdrawn-input, withdrawal-split and transaction-fault\nfixtures built their transactions at fee zero. A Preprod stack's node\ncommits a nonzero fee schedule into every header, so those controls and\nhonest successors replayed rejected, and faults that were not about the\nfee were classified as minFee instead of their own family.\n\nEach of these builders now prices its transaction through\nbuildAtJourneyMinFee from the predecessor header's schedule, taking the\nfee out of its change output. The minFee fault alone still pays nothing,\nsince that fee is the fault it carries.\n\nTests build the fixtures on a predecessor whose header commits the\nschedule from the node environment example, and check that controls\nreplay accepted and faults are rejected and proved. The history fixture\ntest runs in CI with the other watcher journeys that need no devnet.",
+      "sha": "932cf36bd6d4a15e0258ffa74c66d18717d2d087",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/932cf36bd6d4a15e0258ffa74c66d18717d2d087",
+      "message": "Type the watcher's wallet holds from one signature\n\nThe funding store's holdWalletInputs takes the fault-proofs\nHoldWalletInputs type, and WatcherWalletLeases names the store view the\napplication and the bridge share.\n\nRefs #921",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-15T16:08:27Z"
+      "authorDate": "2026-11-12T16:34:37Z"
     },
     {
-      "sha": "6226f37c39ed27138b657912dd90477d0e5ba81c",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/6226f37c39ed27138b657912dd90477d0e5ba81c",
-      "message": "Pay the deployment's minimum fee in every forced-order transaction\n\nThe transaction a forced-order fixture places in its L1 order paid no fee,\nso on a stack whose nodes charge a nonzero L2 fee its valid control replayed\nas E_MIN_FEE and the drill stopped at the forced order inclusion interval.\nIt now pays the minimum fee its size prices under the retained\npredecessor's schedule, the schedule the block's replay applies.\n\nNormal journey controls and the Plutus mint journey priced their fees with\ntwo copies of the same loop; all three now share one helper.\n\nThe forced-order tests build their predecessor with the fee schedule a\nPreprod stack's node commits, read from the node's environment example.",
+      "sha": "39b840d1ca0fc53168f7419b8a9dcc0bd65c87bd",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/39b840d1ca0fc53168f7419b8a9dcc0bd65c87bd",
+      "message": "Hold a proven removal's coins until its transaction's TTL\n\nThe hold now ends when the signed removal can no longer land, read from\nits TTL, rather than a fresh wall-clock window, so a caller's later\nvalidTo cannot outlive it. A test pins that a failed removal keeps its\nholds, as its last transaction may still land.\n\nRefs #921",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-15T15:28:37Z"
+      "authorDate": "2026-11-12T16:34:29Z"
     },
     {
-      "sha": "113e4c4a7b59b392411e4ea3ee7ac9941f04b4c1",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/113e4c4a7b59b392411e4ea3ee7ac9941f04b4c1",
-      "message": "Alert when the watcher finds a block no installed family proves\n\nA header whose latest decision is unprovable because no installed\nfault-proof family proves its finding (an unregistered finding, or a\ncategory the deployment does not install) now raises the\nproof_family_coverage_gap alert, one subject per header. Being a\nnon-informational alert it holds readiness, as an unprovable header must,\nwhile the bridge keeps classifying and proving later headers. A decision\nwaiting on its predecessor's context raises nothing.\n\nThe alert clears without an operator when a later decision of the header\nis not such a gap, or when the header merges, is removed, or leaves the\nobserved queue, rollbacks included. The merged-header recorder, which\nalready sees each header's release and latest decision, drives it.\n\nAdds the MidgardWatcherProofFamilyCoverageGap alert rule and its runbook\nentry.",
+      "sha": "9402acb8aa23195319c6a874519b0ba27c81ae47",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/9402acb8aa23195319c6a874519b0ba27c81ae47",
+      "message": "Drop the local-finalization fields from commit worker test inputs\n\nDeleting block confirmation removed availableLocalFinalizationBlock and\nlocalFinalizationPending from the commit worker's input, and the\ncandidate-input validator now requires the exact remaining key set.\nThe candidate-probe artifact test still built its input with both, so\nfour of its cases failed on the key check. Remove them there and from\nthe three other test inputs that still carried them.\n\nRefs #806",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-14T14:38:51Z"
+      "authorDate": "2026-11-12T16:31:22Z"
     },
     {
-      "sha": "e643f5c13de55d43a0bbfd13f80bd55b0b62e62f",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/e643f5c13de55d43a0bbfd13f80bd55b0b62e62f",
-      "message": "Classify a forced rejection naming a coordinate the transaction lacks\n\nA forced leaf's rejection reason names coordinates the block producer\nchose: a field index, an item index, an input source kind, a script item\nkind, a decode class. A claimed coordinate the transaction does not have\nis a classification outcome, never a classifier error, but several\ndetectors indexed straight into the transaction with it and threw, which\nfailed the header's classification.\n\nDetectors now open claimed coordinates through one seam\n(evidence/claimed-coordinate.ts) that returns undefined outside the\ntransaction; the detector then reports no finding of its own family for\nthat claim. Only the claim is forgiven: a field preimage that does not\ndecode for any other reason, or authenticated material that disagrees\nwith its commitment, still throws.\n\nWhen the complete replay finds nothing provable, the header classifier\nadds one forced-claim-coordinate-absent detection per rejected forced leaf\nwhose claimed coordinate is certainly absent. No family is registered for\nit, so such a block classifies as an unprovable gap rather than healthy,\nand it never displaces a finding a family proves.\n\nThe new watcher-journey suite classifies 62 wrongful forced rejections\nagainst one valid native forced transaction, covering absent, negative\nand largest coordinates for every arm that names one, and is wired into\nthe node-tools journey CI step.\n\nA rejection naming the reference script of an output that carries none\n(OutputReferenceScriptMalformed, NodeLimit, DepthLimit, or\nPlutusScriptUndecodable on an output) was not prepared, because the\ndetector required a reference script at the output. Such an output now\nbinds the empty item and closes no-fault at step 04, the twin of the\non-chain bind's language -1 arm, so the rejection is contradicted on\nchain. The registered-chain lifecycle test runs the forced Malformed claim\nat an output without a reference script from Init to conviction.",
+      "sha": "7e1e3fe979a746348cbb0900610b36c65992317a",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/7e1e3fe979a746348cbb0900610b36c65992317a",
+      "message": "Move the SDK/Aiken schema parity test into the SDK\n\nThe parity test now sits next to the schemas it checks, in\ndemo/midgard-sdk/tests/sdk-aiken-schema-parity.test.ts. The node copy\nand its ci-file-durations entry are gone, so exactly one table remains.\n\nABI_MAPPINGS becomes MIRRORS: an object from SDK export name to Aiken\ndefinition. Its keys are typed against the SDK's exports, so renaming\na schema without the table fails typecheck. The 39 rows are unchanged\nand each still has to refine its definition, field titles included.\n\nThe comments that explained missing rows become NO_BLUEPRINT_DEFINITION.\nEach entry names the Aiken definition the blueprint does not publish,\nwhat pins the encoding instead, and a one-line reason. There are six:\n- ValidationTraceDescriptor: the transition-trace-abi channel;\n- MidgardTxValidity: VALIDITY_VECTORS, which moved with the test;\n- CaseConfig: validation-case-v1.test.ak;\n- LostDefenseReceipt: operator-lost-defense-slash.test.ak;\n- ValidationAuxiliaryWitness: the validation-auxiliary-witness-v1\n  channel;\n- ValidationProofItemDatum: the validation-one-step-cross-language\n  channel.\nThe list is shrink-only. An entry fails once the blueprint gains its\ndefinition, and also when its pin is neither a golden channel, an\nexisting repository path nor VALIDITY_VECTORS. The entry count is\npinned at six.\n\nThe comments about rows that were red pending #579 regeneration are\ndropped, because those rows have been green for some time.\n\nRefs #917",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-14T14:38:46Z"
+      "authorDate": "2026-11-12T15:33:09Z"
     },
     {
-      "sha": "636a818f8c8811da73119a1a4da6b42d16633b02",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/636a818f8c8811da73119a1a4da6b42d16633b02",
-      "message": "Build every forced-order drill fixture as a native-only transaction\n\nThe drill's forced-order families placed a Plutus mint, or an output\ncarrying a reference script, in their L1 orders. The tx-order mint and the\nSDK screen admit only native-only forced transactions, so every forced-order\nfamily failed before its order was signed.\n\nAll forced-order fixtures now share one builder: the ledger owner's signed\nspend into one protected output, minting one token under an always-true\nnative policy, with a required signer and the native script witness, and no\nredeemer, integrity hash, reference script, auxiliary data or validity upper\nbound. The Plutus builder remains only for the validation-trace fixture's\nnormal L2 transaction. The order submission bytes come from one helper that\nthe new test also uses.\n\nThe new test screens those exact submission bytes through the SDK's\ntx-order material derivation, and checks locally that each forced family\nstill classifies through the full catalogue, prepares its proof, and that\nits honest successor is healthy. Two families are held out of that check\npending a ruling.",
+      "sha": "d050cc2f1aba908d942eeb97ee8ad4f17c7f46f4",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d050cc2f1aba908d942eeb97ee8ad4f17c7f46f4",
+      "message": "Back off retries of a failed proven-record removal\n\nThe fault decision bridge started a failed removal again on every\ndispatching pass and warned on each failure. Retries now follow a\nbackoff per fraud-proof asset name, from 1 s doubling to 60 s, on the\nbridge's monotonic clock, and a failure is warned only when it first\nhappens or its message changes. A confirmed removal or a finished\ncorrection clears the backoff.\n\nCloses #921",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-14T13:23:28Z"
+      "authorDate": "2026-11-12T15:20:28Z"
     },
     {
-      "sha": "1baad4895a05d7a8f5bed4f76a0a7ed1bd697c75",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/1baad4895a05d7a8f5bed4f76a0a7ed1bd697c75",
-      "message": "Read the drill's chain transactions one Ogmios session at a time\n\nEvery confirmed-transaction read on an attached stack opens its own\nOgmios chain-sync session, and each session is a new node-to-client\nconnection to the stack's cardano-node. Callers ask for several reads at\nonce, and a burst of them overflowed the node's socket backlog: Ogmios\ndropped the websockets it could not connect, and the drill failed a family\non \"Ogmios chain-sync socket closed\".\n\nThe reader now runs its reads one at a time, in the order they were asked\nfor. A failed read rejects only its own caller; the next one still runs.",
+      "sha": "c5288e389c18a457f013c7f1f31c1474c8340afe",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/c5288e389c18a457f013c7f1f31c1474c8340afe",
+      "message": "Hold a proven removal's wallet coins until it confirms\n\nAt its pre-submit boundary, the proven-record removal now holds the\nsigned transaction's wallet inputs and collateral in the funding store\nuntil its validity window ends, and releases the hold once the removal\nconfirms. A rejected removal leaves its hold to expire. If a coin is\nalready leased or held, the attempt fails before anything is submitted.\n\nOnly coins at the prover wallet address are held: script inputs belong\nto no reservation, and holding them would make a retried removal\nconflict with its own earlier hold.\n\nThe watcher passes the removal one walletLeases dependency, the store's\nreadReservedOutRefs and holdWalletInputs, in place of the separate\nreserved out-ref readers.\n\nRefs #921",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-14T12:28:45Z"
+      "authorDate": "2026-11-12T15:20:13Z"
     },
     {
-      "sha": "eb0a8de6dd9e87f62b79b70a84dbb3fcc1244e28",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/eb0a8de6dd9e87f62b79b70a84dbb3fcc1244e28",
-      "message": "Resume a completed withdrawal from its recorded payout\n\nA resumed run reconciled every completed step again, and the withdrawal\nstep proved its payout by finding the payout output unspent at the L1\nnode's tip. A later cycle's deposit spends that output, so a resume after\ncycle 1 waited out the full timeout and failed. Inclusion proven at depth\nis permanent: a complete record that holds this withdrawal's payout (same\nevent, address and assets) is now taken as the proof, and only the L2\nspend, the balance guard and readiness are checked again.",
+      "sha": "5ae738a99fdd1b83b1f7dd6b7086d9497e826ee9",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/5ae738a99fdd1b83b1f7dd6b7086d9497e826ee9",
+      "message": "Let the funding store hold wallet coins outside a reservation\n\nA proven-record removal spends prover-wallet coins (its fee input and\ncollateral) that no funding reservation leases, so a reservation plan\nbuilt while the removal is unconfirmed can select the same coin and the\ntwo transactions race for it.\n\nAdd holdWalletInputs to the prover funding reservation store. A hold\nlives in memory until its wall-clock expiry or its release, and a\nrestart drops every hold. Holding a coin that is leased or already held\nthrows ReservationConflictError and takes nothing. readReservedOutRefs\nnow also returns live holds, and reserving a held coin conflicts.\n\nRefs #921",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-14T09:29:28Z"
+      "authorDate": "2026-11-12T15:20:06Z"
     },
     {
-      "sha": "93ef455aabebab6f6e8664736bdc8ed2e30db20c",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/93ef455aabebab6f6e8664736bdc8ed2e30db20c",
-      "message": "Select three more checks from the files they read\n\nThree preflight checks read files their triggers did not name, so a change\nto one of those files passed preflight unchecked:\n\n- workflow-lint lints the composite actions under .github/actions/ as well\n  as the workflows.\n- agent-enforcement-tags resolves [eslint] tags against the ESLint configs,\n  [ci] tags against the workflows' step names and [hook] tags against\n  .githooks/.\n- registry.mjs imports onchain/aiken/scripts/guard-focused-selector.mjs,\n  which imports complete-test-shards.mjs, so both are preflight's own code\n  and now full-run paths beside scripts/preflight/**.\n\nCloses #947",
+      "sha": "f117f72212c1ac633bf3153b07ad789d9cffbe7e",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/f117f72212c1ac633bf3153b07ad789d9cffbe7e",
+      "message": "Check every registered step datum against its validator's blueprint datum\n\nThe registry now drives a conformance test. For each family definition\nREGISTERED_FAMILY_DEFINITIONS derives from FAMILY_APPLICATION_REGISTRY,\nstepDatumSchemas[i] is paired with step contract i\n(familyStepContractNames), that contract's validator title\n(deploymentValidatorTitle), and the validator's datum definition in the\nblueprint. Each pair is checked with refines(). No schema is declared\nanew. Every lookup throws rather than skipping a step.\n\nThat gives 361 pairs over the 47 registered families:\n- 158 refine;\n- 202 declare their step with FraudProofComputationThreadStepDatum,\n  whose thread state is opaque Data;\n- min_ada step_04 adds a never-emitted second state arm, because Lucid\n  collapses a one-constructor enum to void.\n\nThe last two groups are seeded into a shrink-only allowance list keyed\nby validator title: 79 opaque-state titles and one min-ada title. Each\nentry gives a one-line reason and the exact report it permits. A pair\nwhose report differs fails, including one that starts to refine. So\ndoes an entry no registered step reaches. The entry count is pinned\nat 80.\n\nTwo permanent negatives cover mistakes made at declaration:\n- min-ada's step datums declared out of order are caught at both\n  misplaced steps;\n- a mis-titled envelope field is caught with its blueprint title.\n\nRefs #917",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-14T07:00:13Z"
+      "authorDate": "2026-11-12T15:00:21Z"
     },
     {
-      "sha": "f360f9a20936fe9021b9ab1ed4d42badf63d11c0",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/f360f9a20936fe9021b9ab1ed4d42badf63d11c0",
-      "message": "Select the tooling self-tests from the files they read\n\nrepo-tooling-tests ran only on changes under scripts/, .githooks/ and\n.claude/settings.json, yet several of its self-tests hold files outside\nscripts/ to each other: the journey wiring check reads the watcher journey\ntests and Node CI's workflow. A new journey test therefore passed preflight\nand failed Repo Tools CI after the push.\n\nEach self-test that reads files outside scripts/ now declares them in\ntoolingTestInputs, and the step is selected from those declarations. A\nchange to a declared file runs only the self-tests that read it; a change\nunder the step's own paths, a full run and `--run repo-tooling-tests` still\nrun the whole suite.\n\nregistry.tooling-inputs.test.mjs pins the selection and runs each declaring\nself-test in a copy of the repository holding only scripts/ and the files it\ndeclares, so a read left off its entry fails there, as does a glob that\nmatches no file. A self-test with no entry at all is not caught: whoever\nadds a self-test that reads outside scripts/ adds its entry.\n\nRefs #947",
+      "sha": "3d256733ad62c2c7f8c6640924a175e0f3ce8d06",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/3d256733ad62c2c7f8c6640924a175e0f3ce8d06",
+      "message": "Check SDK schemas against the blueprint by refinement\n\nsdk-aiken-schema-parity compared each SDK schema with its blueprint\ndefinition after normalising titles away. Two same-typed fields\nswapped in a TypeScript schema therefore passed. Swap normalizeSchema\nfor refines on the same 39 ABI_MAPPINGS rows, so constructor field\ntitles and their order are now checked too. Add a negative test:\nHeaderSchema with withdrawal_count and deposit_count, both Int,\nswapped is reported at both fields.\n\nrefines compares recursive definitions coinductively. Correct the\nnotes that blamed recursion for the missing ValidationAuxiliaryWitnessV1\nrow: no validator declares it in its ABI, so the blueprint has no\ndefinition to check it against. The notes are in the parity test, the\none-step fixture generator and the HeaderV1 ABI step of Node CI.\n\nRefs #917",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-14T06:58:18Z"
+      "authorDate": "2026-11-12T14:37:18Z"
     },
     {
-      "sha": "b43f3dd94ad063f2b6c8329df1cb0c274c1528d9",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/b43f3dd94ad063f2b6c8329df1cb0c274c1528d9",
-      "message": "Wait out public DA's not_found after a block commits\n\nThe node reports a transfer committed before it hands the block's payload\nto the committee, whose store the public retained-DA server reads. The\njourney's transfer step fetched that payload once, so a fetch landing in\nbetween failed the run with not_found although the payload arrived seconds\nlater.\n\nThe fetch now asks again while every attempt answers not_found, within the\nstep's existing limit, reusing one retained-DA runtime, and throws the same\nerror with the last attempts when the limit runs out. Any other answer\n(conflict, invalid content, refusal, failed verification, transport error,\ntimeout) still fails at once.",
+      "sha": "3a11b34b0fb9c0ab6f8a57be231f4ad79ad1d16b",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/3a11b34b0fb9c0ab6f8a57be231f4ad79ad1d16b",
+      "message": "Move blueprint readers onto the SDK blueprint ABI reader\n\nMove parseExactAikenDataCbor from @al-ft/midgard-fault-proofs into\n@al-ft/midgard-sdk/blueprint-abi and drop its fault-proofs root\nexport. It now resolves definitions through the reader and shares its\nopaque-Data predicate, so an opaque alias of Data (description \"Any\nPlutus data.\") accepts any Plutus Data. Its callers in\nmidgard-validation import it from the subpath, and its test moves to\nthe SDK.\n\nDelete the test-support readers it replaces:\n- fault-proofs tests/support/blueprint-abi.ts; its callers read\n  constructors through parseBlueprintAbi.\n- midgard-node's header-fixture definition, constructor, constructors\n  and fields helpers; the tests read the same data through the\n  reader.\n- midgard-validation's spendRedeemerDefinitionName, which had no\n  callers.\n\nverify-canonical-v1-header-v1-abi.mjs already runs after the SDK\nbuild. It now reads the blueprint through the built subpath. Its\nself-test pins the reader's refusal for a missing HeaderV1\ndefinition.\n\nRefs #917",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-14T05:34:55Z"
+      "authorDate": "2026-11-12T14:37:00Z"
     },
     {
-      "sha": "70c6d9d939ff217e1b3daaa1e9e9014e0309e102",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/70c6d9d939ff217e1b3daaa1e9e9014e0309e102",
-      "message": "Run the new drill harness journey tests in node CI\n\nFive watcher-journey test files added with the drill harness fixes need no\ndevnet but were missing from the node CI list, so the wiring check failed.",
+      "sha": "ad6cd5cf6bd0b086291f0bf4e83e3ed2d76f7cea",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ad6cd5cf6bd0b086291f0bf4e83e3ed2d76f7cea",
+      "message": "Add the blueprint ABI reader subpath to the SDK\n\nAdd @al-ft/midgard-sdk/blueprint-abi, one pure reader of a compiled\nAiken blueprint. parseBlueprintAbi parses validators eagerly and\nresolves definitions on lookup; it throws on a missing title, a\nmissing definition or any $ref that is not a #/definitions/<name>\npointer. refines(ts, ref) lists every place a TypeScript Data schema\nfails to refine a blueprint definition, comparing snake-normalised\nconstructor field titles and order, constructor indices, arity and\nshapes, and treating a recursive definition coinductively.\n\nRe-implement parseFaultProofBlueprint and assertParameterShapes over\nthe reader, with the same exports. The blueprint shape refusals drop\ntheir \"Fault proof\" prefix, and a parameter, datum or redeemer schema\nthat is not a definitions pointer or an object is now refused at\nparse time.\n\nThe subpath is wired like the existing ones: package exports,\npublishConfig and the tsup entry. A static module-graph test holds it\nto its own directory.\n\nRefs #917",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-14T04:10:16Z"
+      "authorDate": "2026-11-12T14:36:57Z"
     },
     {
-      "sha": "f6eb612f542d96e2a6f64583faea1fbf2354e135",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/f6eb612f542d96e2a6f64583faea1fbf2354e135",
-      "message": "State what an unspent seed row proves at a point\n\nA seed row reads unspent while no spend at or below the point is\nrecorded. It may also cover an output created after the origin while its\nwallet was untracked, so it does not prove the output existed at a point\nbefore its seed slot.",
+      "sha": "7ff1fde88d0563f0206d897eafc451ef1758fcbd",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/7ff1fde88d0563f0206d897eafc451ef1758fcbd",
+      "message": "Drop the size exception for the deposit-flow commit-selection test\n\nThe deposit-flow emulator rework left the file at 456 lines, under the\n500-line limit.\n\nRefs #806",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-14T03:56:40Z"
+      "authorDate": "2026-11-12T14:30:37Z"
     }
   ],
   "contributors": [
@@ -326,6 +326,42 @@
   ],
   "issues": [
     {
+      "number": 954,
+      "title": "Migration events store their details as a JSON string instead of an object",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/954",
+      "updated_at": "2026-11-17T06:27:39Z"
+    },
+    {
+      "number": 950,
+      "title": "Scale confirmed-ledger root verification past ~240k entries before mainnet",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/950",
+      "updated_at": "2026-11-17T00:08:06Z"
+    },
+    {
+      "number": 952,
+      "title": "Watcher-journey devnet: three gaps stop a fresh run outside a campaign",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/952",
+      "updated_at": "2026-11-16T22:51:33Z"
+    },
+    {
+      "number": 953,
+      "title": "DA committee: make the promise-mode 3 s propagation allowance a single adopted value",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/953",
+      "updated_at": "2026-11-16T20:30:44Z"
+    },
+    {
+      "number": 951,
+      "title": "contrib: a failed prerequisite build hides its own error output",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/951",
+      "updated_at": "2026-11-16T19:14:51Z"
+    },
+    {
+      "number": 949,
+      "title": "Native MPF owner: read-only Lookup/Prove message kind",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/949",
+      "updated_at": "2026-11-16T16:35:19Z"
+    },
+    {
       "number": 948,
       "title": "Test the availability spend lookup's liveness read",
       "html_url": "https://github.com/Anastasia-Labs/midgard/issues/948",
@@ -342,57 +378,21 @@
       "title": "Committee promise clock: decide the trusted clock before enabling DA_PROMISE_*",
       "html_url": "https://github.com/Anastasia-Labs/midgard/issues/937",
       "updated_at": "2026-11-14T03:01:21Z"
-    },
-    {
-      "number": 945,
-      "title": "Node stays stuck for good after a block it found invalid merges",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/945",
-      "updated_at": "2026-11-14T03:01:08Z"
-    },
-    {
-      "number": 944,
-      "title": "Watcher supervisor: reverify convicted objectives only at finality, and stop false deadline_unsafe",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/944",
-      "updated_at": "2026-11-14T03:01:06Z"
-    },
-    {
-      "number": 943,
-      "title": "Stack drill harness: follow-ups from the twin long-drill reviews",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/943",
-      "updated_at": "2026-11-14T03:01:05Z"
-    },
-    {
-      "number": 942,
-      "title": "DA committee: deferred gossip, concurrent payload fetch, prune rejected-payload set",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/942",
-      "updated_at": "2026-11-14T03:01:04Z"
-    },
-    {
-      "number": 941,
-      "title": "DA committee: a hung tick has nothing that restarts the member",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/941",
-      "updated_at": "2026-11-14T03:01:02Z"
-    },
-    {
-      "number": 940,
-      "title": "DA committee submitter posts init before it holds threshold witnesses",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/940",
-      "updated_at": "2026-11-14T03:01:01Z"
     }
   ],
   "releases": [],
   "commitActivity": [
     {
       "week": 1763856000,
-      "total": 15
+      "total": 44
     },
     {
       "week": 1764460800,
-      "total": 8
+      "total": 17
     },
     {
       "week": 1765065600,
-      "total": 6
+      "total": 7
     },
     {
       "week": 1765670400,
@@ -432,23 +432,23 @@
     },
     {
       "week": 1771113600,
-      "total": 13
+      "total": 14
     },
     {
       "week": 1771718400,
-      "total": 43
+      "total": 47
     },
     {
       "week": 1772323200,
-      "total": 23
+      "total": 26
     },
     {
       "week": 1772928000,
-      "total": 35
+      "total": 36
     },
     {
       "week": 1773532800,
-      "total": 28
+      "total": 29
     },
     {
       "week": 1774137600,
@@ -456,7 +456,7 @@
     },
     {
       "week": 1774742400,
-      "total": 28
+      "total": 29
     },
     {
       "week": 1775347200,
@@ -464,47 +464,47 @@
     },
     {
       "week": 1775952000,
-      "total": 31
+      "total": 32
     },
     {
       "week": 1776556800,
-      "total": 17
+      "total": 28
     },
     {
       "week": 1777161600,
-      "total": 26
-    },
-    {
-      "week": 1777766400,
-      "total": 33
-    },
-    {
-      "week": 1778371200,
-      "total": 23
-    },
-    {
-      "week": 1778976000,
-      "total": 9
-    },
-    {
-      "week": 1779580800,
-      "total": 0
-    },
-    {
-      "week": 1780185600,
       "total": 25
     },
     {
-      "week": 1780790400,
+      "week": 1777766400,
+      "total": 32
+    },
+    {
+      "week": 1778371200,
+      "total": 41
+    },
+    {
+      "week": 1778976000,
       "total": 16
     },
     {
+      "week": 1779580800,
+      "total": 2
+    },
+    {
+      "week": 1780185600,
+      "total": 26
+    },
+    {
+      "week": 1780790400,
+      "total": 32
+    },
+    {
       "week": 1781395200,
-      "total": 12
+      "total": 20
     },
     {
       "week": 1782000000,
-      "total": 10
+      "total": 7
     },
     {
       "week": 1782604800,
@@ -516,23 +516,23 @@
     },
     {
       "week": 1783814400,
-      "total": 9
+      "total": 10
     },
     {
       "week": 1784419200,
-      "total": 26
+      "total": 20
     },
     {
       "week": 1785024000,
-      "total": 154
+      "total": 151
     },
     {
       "week": 1785628800,
-      "total": 88
+      "total": 2
     },
     {
       "week": 1786233600,
-      "total": 9
+      "total": 0
     },
     {
       "week": 1786838400,
@@ -540,35 +540,35 @@
     },
     {
       "week": 1787443200,
-      "total": 1
+      "total": 0
     },
     {
       "week": 1788048000,
-      "total": 2
+      "total": 1
     },
     {
       "week": 1788652800,
-      "total": 45
+      "total": 1
     },
     {
       "week": 1789257600,
-      "total": 32
+      "total": 0
     },
     {
       "week": 1789862400,
-      "total": 172
+      "total": 107
     },
     {
       "week": 1790467200,
-      "total": 195
+      "total": 210
     },
     {
       "week": 1791072000,
-      "total": 480
+      "total": 458
     },
     {
       "week": 1791676800,
-      "total": 267
+      "total": 271
     },
     {
       "week": 1792281600,
@@ -584,11 +584,11 @@
     },
     {
       "week": 1794096000,
-      "total": 195
+      "total": 100
     },
     {
       "week": 1794700800,
-      "total": 5
+      "total": 0
     }
   ]
 }
