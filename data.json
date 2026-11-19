@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-11-18T15:24:58.863Z",
+  "fetchedAt": "2026-11-19T15:30:06.795Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 25,
@@ -17,109 +17,109 @@
   },
   "commits": [
     {
-      "sha": "a6fc14a5f91e36812a6553a58d4a568208a23669",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/a6fc14a5f91e36812a6553a58d4a568208a23669",
-      "message": "Delete the watcher's unused replay generation\n\nThe watcher decides faults from the fault-proofs replayed ledger and\nclassifyHeader. Its own block replay, Phase A verifier, header-root\nreconstruction and authenticated replay transcript in src/verification,\nand the replay-transcript store in src/storage, were reached only through\nthe package index and their own tests. Nothing wrote a transcript: the\ndecision driver only retired, reset and completed operations against an\nempty store.\n\nRemoved with them:\n- the decision driver's retirement stage and the readiness reasons\n  watcher_retirement_reset_failed and watcher_retirement_reset_pending;\n  the handled-generation marker now moves as soon as a pass has pulled\n  the generation;\n- the replayTranscriptStore dependency of the fault-proof application,\n  which now completes a workflow with verifyCompletedFraudProofWorkflow\n  alone;\n- the forced operator verdict spelling in user-event.ts, which only the\n  replay records used;\n- the tests and fixtures of the above, and their entries in the duration,\n  module-size and lint baseline lists.\n\nKept: the rule bundle, user events, and openWatcherSqliteDurableBackend,\nwhich still refuses a non-durable or symlinked store path at startup and\nsets the journal mode. Existing databases keep their now unread\nwatcher_replay_transcript tables.\n\nmidgard-node-tools' public DA test built its empty block from a deleted\nwatcher fixture; it now builds the payload itself.",
+      "sha": "0bd579dbb457b600a24ee46d8a07bb043da15c27",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/0bd579dbb457b600a24ee46d8a07bb043da15c27",
+      "message": "Hold wallet-only fault-proof sends until one validity window after restart\n\nA transaction that spends only wallet coins has no input of ours that\nexcludes a duplicate, so a copy built before a restart could land beside\na rebuilt one. The shared runner now holds such a transaction after its\npreflight and before anything is journaled or sent, returning pending\nunder the named state fault_proof_restart_wait until the caller's\nrestart wait opens. It also refuses one that carries no upper validity\nbound, or one later than the caller's latest wallet-only slot (one\nwindow past the caller's clock, plus one slot of rounding).\n\nThe caller owns both answers through one walletOnlySend object, on its\nown clock: the watcher builds it once per process from its clock, the\nfollower's applied cursor and the deployment rule bundle's slot config;\nthe CLI uses a clock-only wait. The watcher supervisor does not admit a\njob held by the wait again until the wait has opened, so a held\nobjective is preflighted once while the wait is closed, and its\nreadiness hold stays visible for the whole wait.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-18T00:24:12Z"
+      "authorDate": "2026-11-19T14:29:56Z"
     },
     {
-      "sha": "2f883c1902293100af82095a22d71d7629f4bbe7",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/2f883c1902293100af82095a22d71d7629f4bbe7",
-      "message": "Restore a reservation's collateral before an action when what remains is short\n\nA confirmation releases only the collateral coins its transaction named. A\nreservation whose collateral took two coins (a removal's collateral is the\nslashing penalty's percentage) kept the other coin, and the next action began\nwithout refreshing because some collateral remained. A removal then needed\nmore collateral than the restricted wallet offered, Lucid took a reserved\nfunding coin as collateral, and preparation refused the transaction.\n\nThe next action now refreshes the idle reservation whenever its collateral is\nshort of what the planner reserves: the largest of the release floor, an\nordinary action's collateral and a removal's. A refusal of the separation now\nnames each out-ref that broke it and on which side.",
+      "sha": "094b8394011c436b5ecc90241cf8e604259497fe",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/094b8394011c436b5ecc90241cf8e604259497fe",
+      "message": "Bound wallet-only fault-proof transactions to a three-minute validity window\n\nInit, proof chunk publication, transition-trace data carriage, script-decode\nstage and Bind, field-preimage certification, field-grammar Open and CEK\nstaging spend only wallet coins, so a copy rebuilt after a restart could land\nbeside the original. Each now carries an upper validity bound from one shared\nhelper (walletOnlyValidTo, WALLET_ONLY_VALIDITY_MS = 180000), held to at most\nhalf of the worst-case proof-time bound on the shortest-maturity profile.\nNo lower bound is set.\n\nThe field-preimage carriage publication stays unbounded: a full chunk's\npublication already sits exactly on the publication size target. A duplicate\ncosts only an output's min-ada, which the proof-materials sweep recovers.\nGoal spec row W33 states the exception.\n\nTests pin the bound on every bounded kind, the publication exemption, and\nledger refusal of a stale init and chunk publication with acceptance of a\nrebuilt one. Step transcripts are regenerated: bounded rows gain a ttl, and\nlater rows move only in redeemer ledger-order indices that follow from the\nearlier transactions' new hashes.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-17T02:45:43Z"
+      "authorDate": "2026-11-19T10:45:49Z"
     },
     {
-      "sha": "e64f5422c8f916381a8731aa680984bcfa7cc2bf",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/e64f5422c8f916381a8731aa680984bcfa7cc2bf",
-      "message": "Prove a same-block withdrawal rather than the input's ledger absence\n\nA spend or reference of an output a valid withdrawal of the same block\nremoved is also absent from the event's pre-state ledger, so both families\nfind it at the same event. Rank withdrawnInput ahead of nonExistentInput and\nwithdrawnReferenceInput ahead of noReferenceInput, as the existing doubleWithdraw\nand NoIdx promotions do. An input absent for any other reason stays with the\nledger-absence family.",
+      "sha": "94aaa22ed9fe406b90f89e855a78e66a528d7fd0",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/94aaa22ed9fe406b90f89e855a78e66a528d7fd0",
+      "message": "Give the DA committee node's declaration build a 6 GB heap\n\nThe tsup declaration build needs between 3.5 and 4 GB of heap. Under\nNode's default it runs out of memory on the CI runners, which fails the\npackage's tests and the installed-boundary check at their prerequisite\nbuild. Set the heap the way midgard-node's build steps do.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-17T02:18:15Z"
+      "authorDate": "2026-11-19T09:24:50Z"
     },
     {
-      "sha": "c25a3f7671057812f61e58bdbfc8283d7671a6ac",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/c25a3f7671057812f61e58bdbfc8283d7671a6ac",
-      "message": "Leave an included correction alone until its block leaves the chain or settles\n\nAn objective whose last outcome is an included but not yet final\ncorrection was queued again on every follower change until it was\nrecovery-deep, and each run captured and verified the same inclusion\nagain. Its outcome changes only when a rollback takes the inclusion block\noff the chain, or when that block reaches completion depth. The progress\nauthority now reads the block's depth from the follower and queues such an\nobjective only then.",
+      "sha": "4464394a8a0365e82e13140bf76adbfca547b6bc",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/4464394a8a0365e82e13140bf76adbfca547b6bc",
+      "message": "Submit the Present-maximum journey's steps after building them\n\nThe forced step builders return a signed transaction and no longer\nsubmit. The journey still called them directly, so each step-1 capture\nsaw no submission and all twelve maximum-fit cases failed.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-17T02:11:32Z"
+      "authorDate": "2026-11-19T09:24:44Z"
     },
     {
-      "sha": "984f942ffda48ea65dc4922ee70f370da6fbb2ed",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/984f942ffda48ea65dc4922ee70f370da6fbb2ed",
-      "message": "Keep a queued header's deadline on objectives no fault names\n\nAn objective with a signed attempt that no fault names in an observation\n(after a restart, until the decision selects it again) was re-queued for\nreconciliation with no deadline. Its maturity then dropped out of the\ndeadline health, the late-start readiness and the deadline alert, though\nits header still bound it. While the header is queued, the re-queued job\nnow carries the deadline the header's queue node gives, the same one a\nfault for it carries; a departed header still carries none.",
+      "sha": "783fcc1e09b984adda1e6e4638e96e265f40dc70",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/783fcc1e09b984adda1e6e4638e96e265f40dc70",
+      "message": "Confirm the carriage the tier-3 action chains publish in their journal\n\nThe healing chains serve republished field chunks and the certificate as\noutputs of transactions the workflow confirmed, as a real run journals them.\nThe suite's top-level fixtures move to a support module so the file stays\nunder its size ceiling.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-17T02:00:59Z"
+      "authorDate": "2026-11-19T07:04:10Z"
     },
     {
-      "sha": "08735c839b22de28ba78aceb9078efffca7611f7",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/08735c839b22de28ba78aceb9078efffca7611f7",
-      "message": "Treat nothing as stable while the follower's chain is younger than the recovery depth\n\nSigned-intent recovery read the release-final boundary with a lookup that\nrefused while the boundary lay below the follower's origin. Every passed\nTTL or conflicting spend on a young chain then came back unavailable, the\nworkflow saw reconciliation as unknown, and the dead attempt was never\nreplaced. Below the origin no stored block is recovery-deep, so an expiry\nis now expired_at_tip and a spend invalidated_at_tip, which supersede the\nattempt at once; releaseFinalPoint stays the tip.",
+      "sha": "d37735de77ca0d3f2cf86bf63b651fa45b96e1ce",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d37735de77ca0d3f2cf86bf63b651fa45b96e1ce",
+      "message": "Journal the carriage the network-id forced harness serves as the workflow's own\n\nThe adapter claims field carriage only among outputs of transactions its\njournal confirmed, so the harness now hands the adapter a confirmed entry for\nevery transaction it serves at the materials and certificate addresses. The\nentry builder is shared with the double-spend carriage harness.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-17T01:55:41Z"
+      "authorDate": "2026-11-19T07:03:56Z"
     },
     {
-      "sha": "12be5fa18a39a26a65869939703c5cfe36616aec",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/12be5fa18a39a26a65869939703c5cfe36616aec",
-      "message": "Check the confirmed_ledger root builders' heap in the default suite and move the at-size runs to the bench lane\n\nThe default suite now holds the two cheap bounds: the streaming trie\nbuilder takes 1,000,000 leaves in path order in a heap that does not\ngrow with them, and the built root worker, driven through its message\nprotocol over 100,000 entries, keeps its heap after a full collection\nwithin 4 MB from its first checkpoint to its last. Each fails against a\nbuilder or worker that keeps the leaves or the entries.\n\nThe 1,000,000-entry worker run and the 300,000-entry paged verification\nmove to vitest.bench.config.ts (bench:confirmed-ledger:root and\nbench:confirmed-ledger:verification), which CI does not run; the paged\ntest keeps its small cases. The CI file durations follow.",
+      "sha": "504b458a5b15fbff50cf698a7865feb821b952df",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/504b458a5b15fbff50cf698a7865feb821b952df",
+      "message": "Give the family assembly fixture its proof-materials address and count a tagged refund in the top-up test",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-17T01:54:13Z"
+      "authorDate": "2026-11-19T06:55:18Z"
     },
     {
-      "sha": "f962423da3b0ec2da28e3becf9dcb0bfcc634125",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/f962423da3b0ec2da28e3becf9dcb0bfcc634125",
-      "message": "Let traced runs reach the mint-item honest-leaf refusals\n\nThe case table moves to a named constant so the traced-refusal planner finds the cases, and each leaf names the check that refuses it.",
+      "sha": "2ffc595a966401394ceae886db18422ff1351922",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/2ffc595a966401394ceae886db18422ff1351922",
+      "message": "Reset the commit-base fixture's tables before taking the follower write gate\n\nThe fixture reset inside its gated write, so a follower view an earlier file\napplied in the same worker database refused it. The node fast tier packs\nconfirmed-ledger-generation after such a file and failed three of its tests.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-17T01:06:38Z"
+      "authorDate": "2026-11-19T06:01:52Z"
     },
     {
-      "sha": "141ccd87cfb9c766e28ff8ca9609c824f6447bc7",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/141ccd87cfb9c766e28ff8ca9609c824f6447bc7",
-      "message": "Verify confirmed_ledger in bounded memory and replay folds made during a run\n\nThe verification built its trie from the whole of confirmed_ledger held in\nmemory, so above a few hundred thousand entries every run failed inside\nthe worker's fixed heap and commits on landed tails waited for good. A run\nnow pages confirmed_ledger by outref inside its one repeatable-read\ntransaction: the worker hashes each page to leaves, which go to a temporary\ntable dropped on commit, and the leaves are read back in path order into a\nstreaming MPF builder that keeps one path of the trie. The tail root comes\nfrom the same pass, merging each outref the landed deltas name into the\nstream in path order. Neither thread holds the ledger, and the roots,\nreasons, counters and outcomes are unchanged.\n\nA fold that committed while a run was reading moved the frontier past the\ngeneration the run recorded, and nothing applied it afterwards, so under\nsteady merging the record could stay behind the frontier. Every committed\nfold now goes to a log of at most 256 folds. A pass is replayed over the\nlog before it is recorded, and the record after each fold, applying a fold\nonly when it read the candidate's generation, builds on its header, passed\nthe delta checks and carries the digest the pass checked. A pass whose\nreplay reaches the recorded generation replaces the record. A fold past\nthe cap drops the log and makes one full run due.\n\nThe runbook names the run, replay and overflow log lines.\n\nTests: the streaming builder gives the same root as the in-memory one for\nrandom sets and for empty, single and long shared-prefix sets; the built\nworker derives the roots of a million entries a page at a time, a size\nthe whole-ledger build could not reach; a run over several pages\nfinds a divergence on its last page; a fold made during a run is replayed\nonto its pass, and a wrong digest, failed delta check or other parent\nstops the replay; pushing past the cap leaves the record behind until the\ndue run, after which the commit builds.",
+      "sha": "13d4772d2723b658ec6f213c1a3779e4d4ae9331",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/13d4772d2723b658ec6f213c1a3779e4d4ae9331",
+      "message": "Keep the scripted defender's agreed hashes and memoised nodes in one buffer per level\n\nEach agreed state hash was a 32-byte pooled Buffer copy, and each kept one\npinned an 8 KiB Buffer pool slab: about 900 MB in a max-shape dispute\nworker. Worker peak RSS drops from 3.70 to 2.58 GB on the builtin-semantic\nmax-shape dispute and from 4.07 to 3.02 GB on the writeBits loop.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-16T23:39:48Z"
+      "authorDate": "2026-11-19T05:25:44Z"
     },
     {
-      "sha": "6bbd2bf3f79044afa995f0a2536407bf2858f905",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/6bbd2bf3f79044afa995f0a2536407bf2858f905",
-      "message": "Wait as pending for an unprocessed tail and judge payload faults before the parent ledger\n\nA commit tail that landed-block processing has not reached yet reported\ncommit_base_ledger_unverified whenever the verified record lagged, though\nwhat it waits for is processing. A header off the processed chain is now\noff it whatever the verification, so the commit waits as\ncommit_base_pending.\n\nForeign replay checked the parent snapshot's root before the payload checks\nthat do not read the parent ledger (repeated keys, the DA commitment and\ncount). A block with such a payload fault on a diverged local ledger was\nheld as a local fault and retried instead of judged. The parent check now\nruns just before the events replay, so those faults are invalid on any\nparent ledger.\n\nTests: a header no processed row names resolves off the chain for a\nmissing, stale or other-generation verification; a payload with repeated\nkeys, or a DA count or commitment mismatch, replayed on a parent snapshot\nthat does not derive its root is invalid.",
+      "sha": "fa2a96d803737bcf93e5306c3948f7fc48b201bb",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/fa2a96d803737bcf93e5306c3948f7fc48b201bb",
+      "message": "Split the nested-list walk-cost gate rows and the maximum transition-trace lifecycle by case\n\nThe two nested-list gate groups (1,190 and 1,039 CI seconds) become one file per row, and the honest-root refusal at the maximum transition-trace shape moves beside the conviction into its own file, so their plays run in parallel. Test names, shapes and timeouts are unchanged.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-16T23:39:41Z"
+      "authorDate": "2026-11-19T05:07:46Z"
     },
     {
-      "sha": "0039dec8e92cedd93265f1ea70eb079128b26aec",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/0039dec8e92cedd93265f1ea70eb079128b26aec",
-      "message": "Refresh the min-ADA standalone transcript for the changed step scripts",
+      "sha": "5889a6da49fec433e9bb84ad37361f4af0286722",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/5889a6da49fec433e9bb84ad37361f4af0286722",
+      "message": "Fault-proof builders return a signed transaction and never submit\n\nEach builder used to build, sign, call an optional pre-submit boundary and\nthen submit. The workflow adapters passed a boundary that threw to carry\nthe signed transaction out, so the code after it never ran in production,\nand a caller that omitted the boundary submitted with no record.\n\nBuilders now stop at the signed transaction and return it. Adapters call\nthem directly and keep the checks they ran on the built transaction. The\ncapture exception and the boundary parameter are gone.\n\n- A builder that sent several transactions in one call returns the next\n  one as a turn; the CLI and tests loop over turns.\n- Removal is split into a builder for one removal and a driver that owns\n  the lease from acquisition to release. The driver fails the lease on an\n  error in any pass.\n- Direct submission has one name, submitUnjournaled, and a lint guard\n  keeps it and the turn submitters out of the watcher, the node and the\n  workflow code. Field-grammar certification still submits its batches\n  itself and is the one builder-side exception.\n- The CLI submission gate is an allow-list: a command or init category\n  that is neither admitted nor retired is refused before any provider\n  access.\n- Submitting drivers with no production caller are deleted, and the two\n  in-process provers that only tests used move to test support.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-16T22:47:01Z"
+      "authorDate": "2026-11-19T05:01:56Z"
     },
     {
-      "sha": "e33dbec73f5253700c3bef47dd8996974fcfbfef",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/e33dbec73f5253700c3bef47dd8996974fcfbfef",
-      "message": "Pin each absent-coordinate refusal to the check that refuses it\n\nTraced runs now name the refusing expect for every new refusal, and the three harnesses that record publication fit skip that record under traced builds, as the other harnesses do.",
+      "sha": "b965de915f43407f58175ea072579da13abede17",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/b965de915f43407f58175ea072579da13abede17",
+      "message": "Refresh the CI file duration tables from Node CI runs 44252349699, 44209831618 and 43921606823\n\nThe committed tables predated about a quarter of the fault-proof seconds and most of the node and watcher seconds, so shards were unbalanced and the tiers would have been drawn from stale weights. The traced-refusal reservation moves to the median of the same runs.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-16T22:47:01Z"
+      "authorDate": "2026-11-19T04:55:05Z"
     },
     {
-      "sha": "1cfe75148445b2d5a5d2381398d8d748e10d6a30",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/1cfe75148445b2d5a5d2381398d8d748e10d6a30",
-      "message": "Keep the absent-coordinate tests inside the lint and file-size limits\n\nSort two imports, move the in-layout field-length detection into the payload fixture, and split the forced-claim journey into its coordinate cases, its proof-material cases and a shared fixture module, wiring the new file into the Node CI journey list.",
+      "sha": "4e21d346d4e260c60356929d4aaff26aff531da3",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/4e21d346d4e260c60356929d4aaff26aff531da3",
+      "message": "Split the fault-proof, node and watcher suites into fast and slow tiers by CI seconds\n\nA file at or over 60 CI seconds in its package's duration table is in the slow tier, every other file in the fast tier. MIDGARD_TEST_TIER selects one; unset, as in CI, the whole suite runs. contrib test takes --tier fast|slow and the packages gain test:fast and test:slow.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-16T22:46:52Z"
+      "authorDate": "2026-11-19T04:54:38Z"
     },
     {
-      "sha": "b869dbf0e49ad8ac8b90c991b785b24bed01224e",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/b869dbf0e49ad8ac8b90c991b785b24bed01224e",
-      "message": "Hand the run head on with the record its watcher verified it by\n\nA devnet family builds on the run's head: the healthy successor the previous family committed and its watcher verified. The watcher keeps verification records in memory only and never re-verifies a header an earlier process decided, so a family that opens a new session (a resumed or follow-up run) restarts the watcher and then waits for a verified record of its predecessor that never comes. The automatic decision stage timed out after 900 s even though the watcher had proved the fault and removed the header within a minute.\n\nThe head is now written with the successor's verified record, and each family's collector takes that record as it already takes an earlier attempt's retained ones. The record is still bound to the block's payload envelope.",
+      "sha": "95757b1223496be73174ca397967096df3347bc9",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/95757b1223496be73174ca397967096df3347bc9",
+      "message": "Update the mint-authorization and transition-trace step transcripts for the script-locked proof-materials address\n\nEach changed lifecycle's first changed transaction is the first that pays\nthe proof-materials address; lifecycles that pay it nothing are unchanged.\nStep digests change for transactions paying it and for those whose datums\nor redeemers carry the changed hashes; the rest change only their hashes\nthrough wallet change. Row counts are unchanged.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-16T21:41:07Z"
+      "authorDate": "2026-11-19T04:31:13Z"
     },
     {
-      "sha": "d4241ef99378a59499ac1938e061ec2ef824e8ff",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d4241ef99378a59499ac1938e061ec2ef824e8ff",
-      "message": "Version confirmed_ledger by generation and advance its verification on a clean fold\n\nA verification pass recorded only the frontier it read, so a ledger row\nchanged outside a fold, or a frontier unfolded and folded back to the same\nheader and root, still looked verified to the commit base. And every fold\nmoved the frontier past the recorded pass, so commits on landed tails\nwaited for the next full run after each one.\n\nMigration 0038 adds a generation to the frontier, drawn from a sequence no\ntable owns, so it is never reset or drawn twice. Every frontier write draws\none, and a statement-level trigger draws one onto the frontier row for any\nstatement that writes confirmed_ledger, in the writing transaction. A\nverification pass records the generation it read, and a commit builds from\nit only while the frontier carries the same one.\n\nOnce landed-block processing commits a fold, the record advances to the\nfolded block, its root and the generation the fold left, when the fold read\nthe recorded generation under its frontier lock, the block's delta passes\nthe commit's apply checks, and the delta's digest is the one the last run\nchecked for that block. Otherwise the record is unchanged and commits wait\nfor the next full run. A pass from a run that read an older generation is\nignored; a divergence it finds is counted and logged, but raises nothing\nand leaves the record.\n\nTests: the generation changes on each frontier write and each write to\nconfirmed_ledger, and survives a truncate with restart; a clean fold\nadvances the record and lets the next commit build without a full run; a\nchanged generation, a failed delta check or a different delta digest\nleaves it; a lower-generation pass is ignored and a lower-generation\ndivergence is counted without touching readiness or the record.",
+      "sha": "32df6a8025ebd65ee9056bdb81a337abadf0ed35",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/32df6a8025ebd65ee9056bdb81a337abadf0ed35",
+      "message": "Delete the obsolete size exception of the event-history capture test",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-16T21:37:47Z"
+      "authorDate": "2026-11-19T02:42:41Z"
     }
   ],
   "contributors": [
@@ -384,15 +384,15 @@
   "commitActivity": [
     {
       "week": 1763856000,
-      "total": 43
+      "total": 44
     },
     {
       "week": 1764460800,
-      "total": 8
+      "total": 17
     },
     {
       "week": 1765065600,
-      "total": 6
+      "total": 7
     },
     {
       "week": 1765670400,
@@ -432,7 +432,7 @@
     },
     {
       "week": 1771113600,
-      "total": 13
+      "total": 14
     },
     {
       "week": 1771718400,
@@ -440,7 +440,7 @@
     },
     {
       "week": 1772323200,
-      "total": 24
+      "total": 23
     },
     {
       "week": 1772928000,
@@ -456,15 +456,15 @@
     },
     {
       "week": 1774742400,
-      "total": 29
+      "total": 30
     },
     {
       "week": 1775347200,
-      "total": 41
+      "total": 42
     },
     {
       "week": 1775952000,
-      "total": 31
+      "total": 32
     },
     {
       "week": 1776556800,
@@ -484,23 +484,23 @@
     },
     {
       "week": 1778976000,
-      "total": 9
+      "total": 14
     },
     {
       "week": 1779580800,
-      "total": 0
+      "total": 2
     },
     {
       "week": 1780185600,
-      "total": 25
+      "total": 26
     },
     {
       "week": 1780790400,
-      "total": 30
+      "total": 32
     },
     {
       "week": 1781395200,
-      "total": 17
+      "total": 21
     },
     {
       "week": 1782000000,
@@ -516,23 +516,23 @@
     },
     {
       "week": 1783814400,
-      "total": 8
+      "total": 10
     },
     {
       "week": 1784419200,
-      "total": 26
+      "total": 47
     },
     {
       "week": 1785024000,
-      "total": 156
+      "total": 202
     },
     {
       "week": 1785628800,
-      "total": 0
+      "total": 189
     },
     {
       "week": 1786233600,
-      "total": 0
+      "total": 9
     },
     {
       "week": 1786838400,
@@ -540,35 +540,35 @@
     },
     {
       "week": 1787443200,
-      "total": 0
+      "total": 1
     },
     {
       "week": 1788048000,
-      "total": 0
+      "total": 3
     },
     {
       "week": 1788652800,
-      "total": 0
+      "total": 46
     },
     {
       "week": 1789257600,
-      "total": 0
+      "total": 32
     },
     {
       "week": 1789862400,
-      "total": 149
+      "total": 174
     },
     {
       "week": 1790467200,
-      "total": 209
+      "total": 210
     },
     {
       "week": 1791072000,
-      "total": 436
+      "total": 480
     },
     {
       "week": 1791676800,
-      "total": 267
+      "total": 272
     },
     {
       "week": 1792281600,
@@ -584,11 +584,11 @@
     },
     {
       "week": 1794096000,
-      "total": 18
+      "total": 0
     },
     {
       "week": 1794700800,
-      "total": 82
+      "total": 200
     }
   ]
 }
