@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-11-19T15:30:06.795Z",
+  "fetchedAt": "2026-11-20T15:09:01.812Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 25,
@@ -17,109 +17,109 @@
   },
   "commits": [
     {
-      "sha": "0bd579dbb457b600a24ee46d8a07bb043da15c27",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/0bd579dbb457b600a24ee46d8a07bb043da15c27",
-      "message": "Hold wallet-only fault-proof sends until one validity window after restart\n\nA transaction that spends only wallet coins has no input of ours that\nexcludes a duplicate, so a copy built before a restart could land beside\na rebuilt one. The shared runner now holds such a transaction after its\npreflight and before anything is journaled or sent, returning pending\nunder the named state fault_proof_restart_wait until the caller's\nrestart wait opens. It also refuses one that carries no upper validity\nbound, or one later than the caller's latest wallet-only slot (one\nwindow past the caller's clock, plus one slot of rounding).\n\nThe caller owns both answers through one walletOnlySend object, on its\nown clock: the watcher builds it once per process from its clock, the\nfollower's applied cursor and the deployment rule bundle's slot config;\nthe CLI uses a clock-only wait. The watcher supervisor does not admit a\njob held by the wait again until the wait has opened, so a held\nobjective is preflighted once while the wait is closed, and its\nreadiness hold stays visible for the whole wait.",
+      "sha": "fde26971133c77420f6c318c0d173aacbf91a27a",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/fde26971133c77420f6c318c0d173aacbf91a27a",
+      "message": "List the SDK declaration writer as a build step, not a generator\n\nIt writes only into the gitignored dist/, so the golden-channel table\nignores it like the core dist stamp.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-19T14:29:56Z"
+      "authorDate": "2026-11-20T06:52:31Z"
     },
     {
-      "sha": "094b8394011c436b5ecc90241cf8e604259497fe",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/094b8394011c436b5ecc90241cf8e604259497fe",
-      "message": "Bound wallet-only fault-proof transactions to a three-minute validity window\n\nInit, proof chunk publication, transition-trace data carriage, script-decode\nstage and Bind, field-preimage certification, field-grammar Open and CEK\nstaging spend only wallet coins, so a copy rebuilt after a restart could land\nbeside the original. Each now carries an upper validity bound from one shared\nhelper (walletOnlyValidTo, WALLET_ONLY_VALIDITY_MS = 180000), held to at most\nhalf of the worst-case proof-time bound on the shortest-maturity profile.\nNo lower bound is set.\n\nThe field-preimage carriage publication stays unbounded: a full chunk's\npublication already sits exactly on the publication size target. A duplicate\ncosts only an output's min-ada, which the proof-materials sweep recovers.\nGoal spec row W33 states the exception.\n\nTests pin the bound on every bounded kind, the publication exemption, and\nledger refusal of a stale init and chunk publication with acceptance of a\nrebuilt one. Step transcripts are regenerated: bounded rows gain a ttl, and\nlater rows move only in redeemer ledger-order indices that follow from the\nearlier transactions' new hashes.",
+      "sha": "de547441c7ffd20bffe57087a6910284df7cf361",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/de547441c7ffd20bffe57087a6910284df7cf361",
+      "message": "Split the SDK into layer entry points and import them directly\n\nThe SDK root pulled every consumer onto the whole package, so one SDK\nedit selected nearly every test. The SDK now has seven one-directional\nlayers (core, state-queue, da, operators, users, deployment,\nfraud-proof); the root stays as the umbrella with the same exports.\nConsumers import the layer they use. Files whose tests stub the root,\nand files at their size cap, stay on the root and are baselined.\n\nThe layer entries are ESM-only so a CommonJS consumer cannot load two\ncopies of the SDK; the root keeps its CommonJS build. A module-graph\ntest pins each source file's owning layer.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-19T10:45:49Z"
+      "authorDate": "2026-11-20T05:04:36Z"
     },
     {
-      "sha": "94aaa22ed9fe406b90f89e855a78e66a528d7fd0",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/94aaa22ed9fe406b90f89e855a78e66a528d7fd0",
-      "message": "Give the DA committee node's declaration build a 6 GB heap\n\nThe tsup declaration build needs between 3.5 and 4 GB of heap. Under\nNode's default it runs out of memory on the CI runners, which fails the\npackage's tests and the installed-boundary check at their prerequisite\nbuild. Set the heap the way midgard-node's build steps do.",
+      "sha": "3cb2ce1558026e0f50cc25839fa0118bacff7302",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/3cb2ce1558026e0f50cc25839fa0118bacff7302",
+      "message": "Keep the hasher's members on the withdrawal-signature hash stub\n\nThe stub replaced blake2b with a bare function, so the multi-part hash\nthat core now computes with blake2b.create failed at module load.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-19T09:24:50Z"
+      "authorDate": "2026-11-20T02:21:20Z"
     },
     {
-      "sha": "4464394a8a0365e82e13140bf76adbfca547b6bc",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/4464394a8a0365e82e13140bf76adbfca547b6bc",
-      "message": "Submit the Present-maximum journey's steps after building them\n\nThe forced step builders return a signed transaction and no longer\nsubmit. The journey still called them directly, so each step-1 capture\nsaw no submission and all twelve maximum-fit cases failed.",
+      "sha": "4080f079b7498ff12bf1941063319308e78e3bdf",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/4080f079b7498ff12bf1941063319308e78e3bdf",
+      "message": "Tell a file written during a test run by its own metadata, not a clock\n\nThe result cache took a file as written during a run when its times were at\nor after a reading taken at the start. File times are not ordered against a\nclock that is stepped: after a backward step, files written before the run\nlooked written during it and nothing was recorded, and a file edited and\nrestored during the run could look older than the start and be missed. The\nsnapshot now keeps each file's inode, size and nanosecond times as it reads\nit, and a file whose metadata differs at the end was written.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-19T09:24:44Z"
+      "authorDate": "2026-11-20T01:22:17Z"
     },
     {
-      "sha": "783fcc1e09b984adda1e6e4638e96e265f40dc70",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/783fcc1e09b984adda1e6e4638e96e265f40dc70",
-      "message": "Confirm the carriage the tier-3 action chains publish in their journal\n\nThe healing chains serve republished field chunks and the certificate as\noutputs of transactions the workflow confirmed, as a real run journals them.\nThe suite's top-level fixtures move to a support module so the file stays\nunder its size ceiling.",
+      "sha": "36ba6d556a63850d415f3bcaf12ffb3e9c645d76",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/36ba6d556a63850d415f3bcaf12ffb3e9c645d76",
+      "message": "Import fault-proofs and validation by subpath across packages\n\nOther packages imported fault-proofs and validation through their root\nentries, so an edit anywhere in either package selected every test that\nused any part of it. Both packages now publish a subpath per cohesive unit\nand importers use the one that declares the name. The root entries still\nexport everything. Files whose tests stub a name on the root, and the\nnode-tools pair that loads the compiled package at run time, stay on it.\n\nWATCHER_PACKAGE_NAME moves to its own module so the watcher's CLI and\nscaffold no longer reach each other for one constant.\n\nA lint rule, midgard/no-cross-package-root, keeps it so.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-19T07:04:10Z"
+      "authorDate": "2026-11-19T23:25:18Z"
     },
     {
-      "sha": "d37735de77ca0d3f2cf86bf63b651fa45b96e1ce",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d37735de77ca0d3f2cf86bf63b651fa45b96e1ce",
-      "message": "Journal the carriage the network-id forced harness serves as the workflow's own\n\nThe adapter claims field carriage only among outputs of transactions its\njournal confirmed, so the harness now hands the adapter a confirmed entry for\nevery transaction it serves at the materials and certificate addresses. The\nentry builder is shared with the double-spend carriage harness.",
+      "sha": "fc6b94eca040d1ace6c142d825b21f58cebc7e72",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/fc6b94eca040d1ace6c142d825b21f58cebc7e72",
+      "message": "Wait until the clock reaches the replay hold's retry time\n\nThe hold-runner test slept for the remaining time and then expected the held\nevent to be re-executed. A timer can fire a millisecond early, and the hold\nis kept while the clock is before its retry time, so the run was sometimes\nstill held and all five tests of the file failed.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-19T07:03:56Z"
+      "authorDate": "2026-11-19T22:28:41Z"
     },
     {
-      "sha": "504b458a5b15fbff50cf698a7865feb821b952df",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/504b458a5b15fbff50cf698a7865feb821b952df",
-      "message": "Give the family assembly fixture its proof-materials address and count a tagged refund in the top-up test",
+      "sha": "263c671c09b43138de3495507119fcf197ce1629",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/263c671c09b43138de3495507119fcf197ce1629",
+      "message": "Import the module a file needs, not its package's index\n\nTests, test support and source modules in fault-proofs, watcher and node\nimported through their own package's index modules, so nearly every test\ndepended on nearly the whole package and an edit to one module selected most\nof the suite. They now import the defining module. Only import statements\nchange; names a test stubs on a module still come through that module.\n\nA lint rule, midgard/no-own-package-barrel, keeps it so. The published\npackage entry points are unchanged.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-19T06:55:18Z"
+      "authorDate": "2026-11-19T20:21:50Z"
     },
     {
-      "sha": "2ffc595a966401394ceae886db18422ff1351922",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/2ffc595a966401394ceae886db18422ff1351922",
-      "message": "Reset the commit-base fixture's tables before taking the follower write gate\n\nThe fixture reset inside its gated write, so a follower view an earlier file\napplied in the same worker database refused it. The node fast tier packs\nconfirmed-ledger-generation after such a file and failed three of its tests.",
+      "sha": "12f6539b445855555d56f0477b1a86af097ef70d",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/12f6539b445855555d56f0477b1a86af097ef70d",
+      "message": "Run the interactive-emulator test projects from the workspace bundle\n\nThe interactive-emulator projects of fault-proofs and watcher transformed\ntheir source graph per file. They now load the workspace bundle, built with\nthe emulator-profile rewrite as a named source rewrite whose name, options\nand code are part of the bundle key, so a plain and a rewritten bundle never\nserve each other. Files the bundle analysis cannot serve stay on a\nsource-mode project.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-19T06:01:52Z"
+      "authorDate": "2026-11-19T19:00:26Z"
     },
     {
-      "sha": "13d4772d2723b658ec6f213c1a3779e4d4ae9331",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/13d4772d2723b658ec6f213c1a3779e4d4ae9331",
-      "message": "Keep the scripted defender's agreed hashes and memoised nodes in one buffer per level\n\nEach agreed state hash was a 32-byte pooled Buffer copy, and each kept one\npinned an 8 KiB Buffer pool slab: about 900 MB in a max-shape dispute\nworker. Worker peak RSS drops from 3.70 to 2.58 GB on the builtin-semantic\nmax-shape dispute and from 4.07 to 3.02 GB on the writeBits loop.",
+      "sha": "125b4c0c84a68df7ff673d0fb90733481a9c54d2",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/125b4c0c84a68df7ff673d0fb90733481a9c54d2",
+      "message": "Cut the test runner's per-run overhead and the node suite's setup time\n\ncontrib resolved a real path per input file and recomputed the preparation\nplan four times a run, each prerequisite in its own identity scope. A\ndirectory's real path is now resolved once per scope and the plan's\nidentities share one scope; the identities and the checks are unchanged.\n\nThe node suite's global setups move from the root config onto its projects,\nso their workspace imports load from the bundle instead of being transformed\nmodule by module, and the setup no longer rebuilds the native binary contrib\nhas just prepared for the same run.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-19T05:25:44Z"
+      "authorDate": "2026-11-19T18:18:14Z"
     },
     {
-      "sha": "fa2a96d803737bcf93e5306c3948f7fc48b201bb",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/fa2a96d803737bcf93e5306c3948f7fc48b201bb",
-      "message": "Split the nested-list walk-cost gate rows and the maximum transition-trace lifecycle by case\n\nThe two nested-list gate groups (1,190 and 1,039 CI seconds) become one file per row, and the honest-root refusal at the maximum transition-trace shape moves beside the conviction into its own file, so their plays run in parallel. Test names, shapes and timeouts are unchanged.",
+      "sha": "bb2b8ef08ba34fc2a5acb3547228f7d2e17568b8",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/bb2b8ef08ba34fc2a5acb3547228f7d2e17568b8",
+      "message": "Reset the paged verification fixture before its gated write\n\nThe fixture ran the application reset inside the follower-gated write, so the\ngate was checked before the reset. A file run earlier on the same worker\ndatabase that left the gate at an applied view made the fixture's write\nrefused, and both paged tests failed depending on file order.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-19T05:07:46Z"
+      "authorDate": "2026-11-19T17:45:30Z"
     },
     {
-      "sha": "5889a6da49fec433e9bb84ad37361f4af0286722",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/5889a6da49fec433e9bb84ad37361f4af0286722",
-      "message": "Fault-proof builders return a signed transaction and never submit\n\nEach builder used to build, sign, call an optional pre-submit boundary and\nthen submit. The workflow adapters passed a boundary that threw to carry\nthe signed transaction out, so the code after it never ran in production,\nand a caller that omitted the boundary submitted with no record.\n\nBuilders now stop at the signed transaction and return it. Adapters call\nthem directly and keep the checks they ran on the built transaction. The\ncapture exception and the boundary parameter are gone.\n\n- A builder that sent several transactions in one call returns the next\n  one as a turn; the CLI and tests loop over turns.\n- Removal is split into a builder for one removal and a driver that owns\n  the lease from acquisition to release. The driver fails the lease on an\n  error in any pass.\n- Direct submission has one name, submitUnjournaled, and a lint guard\n  keeps it and the turn submitters out of the watcher, the node and the\n  workflow code. Field-grammar certification still submits its batches\n  itself and is the one builder-side exception.\n- The CLI submission gate is an allow-list: a command or init category\n  that is neither admitted nor retired is refused before any provider\n  access.\n- Submitting drivers with no production caller are deleted, and the two\n  in-process provers that only tests used move to test support.",
+      "sha": "08180348037052172e8a1a726a17cd7f77198bc5",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/08180348037052172e8a1a726a17cd7f77198bc5",
+      "message": "Bind the parsed fault-proof blueprint, not the raw one\n\nThe workflow deployment binding kept the raw blueprint JSON, so every\nadapter and every direct-purpose transaction build parsed the whole\nblueprint again: 9,063 parses and 24 s in the unused-script-witness\nmaximum-shape file, one per page-fit attempt. The binding and the\ndirect-purpose custody now hold the blueprint the resolver already\nparses, typed so a raw blueprint cannot reach the build path. No cache is\nadded and nothing is accepted or refused differently.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-19T05:01:56Z"
+      "authorDate": "2026-11-19T17:15:37Z"
     },
     {
-      "sha": "b965de915f43407f58175ea072579da13abede17",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/b965de915f43407f58175ea072579da13abede17",
-      "message": "Refresh the CI file duration tables from Node CI runs 44252349699, 44209831618 and 43921606823\n\nThe committed tables predated about a quarter of the fault-proof seconds and most of the node and watcher seconds, so shards were unbalanced and the tiers would have been drawn from stale weights. The traced-refusal reservation moves to the median of the same runs.",
+      "sha": "7a4ee743f89dbcecd97fc36788d5fd871803e5b9",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/7a4ee743f89dbcecd97fc36788d5fd871803e5b9",
+      "message": "Hash and encode the validation-trace replay with fewer copies\n\nThe replay spent about a third of its time on copies around hashing and\non re-encoding: Buffer.from, the generic CBOR encoder for the CEK machine\nstate, and a full witness encoding per step. Hash through libsodium's raw\nexport over one fixed heap region, hash multi-part input without joining\nit, write the machine state's CBOR straight into one buffer, and build\neach execution's core-step witness once with the step's state hash\ndropped in. Every digest, encoded byte and refusal is unchanged, and any\nvalue that is not a plain byte array still takes the previous path. The\nmaximum-shape builtin dispute file goes from about 280 s to about 190 s.\n\nThe hashed-byte counter the scaling gates use now binds libsodium's\nexport before wrapping it and refuses a run whose hook was replaced.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-19T04:55:05Z"
+      "authorDate": "2026-11-19T17:08:40Z"
     },
     {
-      "sha": "4e21d346d4e260c60356929d4aaff26aff531da3",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/4e21d346d4e260c60356929d4aaff26aff531da3",
-      "message": "Split the fault-proof, node and watcher suites into fast and slow tiers by CI seconds\n\nA file at or over 60 CI seconds in its package's duration table is in the slow tier, every other file in the fast tier. MIDGARD_TEST_TIER selects one; unset, as in CI, the whole suite runs. contrib test takes --tier fast|slow and the packages gain test:fast and test:slow.",
+      "sha": "97fed92cd0d4a1ef3a33d852754228570587a07e",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/97fed92cd0d4a1ef3a33d852754228570587a07e",
+      "message": "Resolve ledger descriptors once per retained deposit block build\n\nThe deposit-events block helper rebuilt the whole ledger root and\nre-derived every entry's descriptor on each inserted deposit, 47 s of a\n128 s inline-cap file. It now shares one descriptor resolver per block\nbuild; roots and payloads are byte-identical. The nine inline-cap entries\nin the duration table are scaled by the measured ratio.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-19T04:54:38Z"
+      "authorDate": "2026-11-19T16:30:29Z"
     },
     {
-      "sha": "95757b1223496be73174ca397967096df3347bc9",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/95757b1223496be73174ca397967096df3347bc9",
-      "message": "Update the mint-authorization and transition-trace step transcripts for the script-locked proof-materials address\n\nEach changed lifecycle's first changed transaction is the first that pays\nthe proof-materials address; lifecycles that pay it nothing are unchanged.\nStep digests change for transactions paying it and for those whose datums\nor redeemers carry the changed hashes; the rest change only their hashes\nthrough wallet change. Row counts are unchanged.",
+      "sha": "2aac80d0a322b98bac90711d2c094c5553616b3c",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/2aac80d0a322b98bac90711d2c094c5553616b3c",
+      "message": "Build the operator deployment once per run under the follower provider\n\nEight node files each built the same deployment through the follower\nprovider, about a minute apiece. The first file now builds it into a\nrun-shared fixture and every test starts from a fresh clone, so no file\ndepends on run order. operator-watchdog-emulator still builds its own, so\nits stored-equals-confirmed check covers the deployment transactions in\nevery run, and each file's own check over what it submits is unchanged.\nThe duration table carries the measured ratios for those files and for\nthe frame-pressure file.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-19T04:31:13Z"
+      "authorDate": "2026-11-19T16:30:22Z"
     },
     {
-      "sha": "32df6a8025ebd65ee9056bdb81a337abadf0ed35",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/32df6a8025ebd65ee9056bdb81a337abadf0ed35",
-      "message": "Delete the obsolete size exception of the event-history capture test",
+      "sha": "59979ff38b41f2ce659077ecae02544b6c0f5e14",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/59979ff38b41f2ce659077ecae02544b6c0f5e14",
+      "message": "Find the frame-pressure payload sizes by estimate and bisection\n\nEach target size took over twenty full payload builds to find. Start from\na one-probe estimate, widen and bisect, and build each target once per\nmode for the cases that share it. The sizes found and both exact-size\nchecks are unchanged.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-19T02:42:41Z"
+      "authorDate": "2026-11-19T16:30:15Z"
     }
   ],
   "contributors": [
@@ -432,7 +432,7 @@
     },
     {
       "week": 1771113600,
-      "total": 14
+      "total": 13
     },
     {
       "week": 1771718400,
@@ -440,7 +440,7 @@
     },
     {
       "week": 1772323200,
-      "total": 23
+      "total": 24
     },
     {
       "week": 1772928000,
@@ -460,7 +460,7 @@
     },
     {
       "week": 1775347200,
-      "total": 42
+      "total": 40
     },
     {
       "week": 1775952000,
@@ -468,7 +468,7 @@
     },
     {
       "week": 1776556800,
-      "total": 29
+      "total": 17
     },
     {
       "week": 1777161600,
@@ -480,11 +480,11 @@
     },
     {
       "week": 1778371200,
-      "total": 23
+      "total": 41
     },
     {
       "week": 1778976000,
-      "total": 14
+      "total": 16
     },
     {
       "week": 1779580800,
@@ -496,7 +496,7 @@
     },
     {
       "week": 1780790400,
-      "total": 32
+      "total": 18
     },
     {
       "week": 1781395200,
@@ -516,19 +516,19 @@
     },
     {
       "week": 1783814400,
-      "total": 10
+      "total": 11
     },
     {
       "week": 1784419200,
-      "total": 47
+      "total": 44
     },
     {
       "week": 1785024000,
-      "total": 202
+      "total": 149
     },
     {
       "week": 1785628800,
-      "total": 189
+      "total": 190
     },
     {
       "week": 1786233600,
@@ -544,11 +544,11 @@
     },
     {
       "week": 1788048000,
-      "total": 3
+      "total": 2
     },
     {
       "week": 1788652800,
-      "total": 46
+      "total": 45
     },
     {
       "week": 1789257600,
@@ -556,19 +556,19 @@
     },
     {
       "week": 1789862400,
-      "total": 174
+      "total": 172
     },
     {
       "week": 1790467200,
-      "total": 210
+      "total": 209
     },
     {
       "week": 1791072000,
-      "total": 480
+      "total": 475
     },
     {
       "week": 1791676800,
-      "total": 272
+      "total": 270
     },
     {
       "week": 1792281600,
