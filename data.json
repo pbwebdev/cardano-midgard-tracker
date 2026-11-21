@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-11-20T15:09:01.812Z",
+  "fetchedAt": "2026-11-21T14:26:59.890Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 25,
@@ -17,109 +17,109 @@
   },
   "commits": [
     {
-      "sha": "fde26971133c77420f6c318c0d173aacbf91a27a",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/fde26971133c77420f6c318c0d173aacbf91a27a",
-      "message": "List the SDK declaration writer as a build step, not a generator\n\nIt writes only into the gitignored dist/, so the golden-channel table\nignores it like the core dist stamp.",
+      "sha": "6943f1e66b09e891bad125ab075fdc96d41c73da",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/6943f1e66b09e891bad125ab075fdc96d41c73da",
+      "message": "Remove an import the deleted committee store test left unused",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-20T06:52:31Z"
+      "authorDate": "2026-11-21T07:14:46Z"
     },
     {
-      "sha": "de547441c7ffd20bffe57087a6910284df7cf361",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/de547441c7ffd20bffe57087a6910284df7cf361",
-      "message": "Split the SDK into layer entry points and import them directly\n\nThe SDK root pulled every consumer onto the whole package, so one SDK\nedit selected nearly every test. The SDK now has seven one-directional\nlayers (core, state-queue, da, operators, users, deployment,\nfraud-proof); the root stays as the umbrella with the same exports.\nConsumers import the layer they use. Files whose tests stub the root,\nand files at their size cap, stay on the root and are baselined.\n\nThe layer entries are ESM-only so a CommonJS consumer cannot load two\ncopies of the SDK; the root keeps its CommonJS build. A module-graph\ntest pins each source file's owning layer.",
+      "sha": "e2069657e9d686bb52be3e2ecb9f38f3ae91f983",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/e2069657e9d686bb52be3e2ecb9f38f3ae91f983",
+      "message": "Drop three test expectations that named deleted code\n\nThe SDK layer owners list still named the deleted cek-selection module, the committee store test still expected the removed store upgrade to refill a missing commit clock, and the Flat encoder differential test asserted a program count that included the deleted script-decode-step fixtures.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-20T05:04:36Z"
+      "authorDate": "2026-11-21T06:21:17Z"
     },
     {
-      "sha": "3cb2ce1558026e0f50cc25839fa0118bacff7302",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/3cb2ce1558026e0f50cc25839fa0118bacff7302",
-      "message": "Keep the hasher's members on the withdrawal-signature hash stub\n\nThe stub replaced blake2b with a bare function, so the multi-part hash\nthat core now computes with blake2b.create failed at module load.",
+      "sha": "427157810f6c894a51b6900a6b2f5e7e5551425f",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/427157810f6c894a51b6900a6b2f5e7e5551425f",
+      "message": "Drop duration and lint-baseline entries for deleted files\n\nThe three CI duration tables still listed test files this branch deletes, and the lint baseline kept one site in a deleted export. Neither affects coverage; they are removed so the tables describe files that exist.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-20T02:21:20Z"
+      "authorDate": "2026-11-21T03:29:50Z"
     },
     {
-      "sha": "4080f079b7498ff12bf1941063319308e78e3bdf",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/4080f079b7498ff12bf1941063319308e78e3bdf",
-      "message": "Tell a file written during a test run by its own metadata, not a clock\n\nThe result cache took a file as written during a run when its times were at\nor after a reading taken at the start. File times are not ordered against a\nclock that is stepped: after a backward step, files written before the run\nlooked written during it and nothing was recorded, and a file edited and\nrestored during the run could look older than the start and be missed. The\nsnapshot now keeps each file's inode, size and nanosecond times as it reads\nit, and a file whose metadata differs at the end was written.",
+      "sha": "150db5666cba1e49e283296d2d2625a6b4a9387c",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/150db5666cba1e49e283296d2d2625a6b4a9387c",
+      "message": "Remove the watcher's legacy journal directory warnings\n\nPrelaunch deployments start with a fresh journal, so no watcher will find a leftover file journal or an old proof layout to warn about. The startup checks, their module, their test and the README section describing them are removed.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-20T01:22:17Z"
+      "authorDate": "2026-11-21T03:00:10Z"
     },
     {
-      "sha": "36ba6d556a63850d415f3bcaf12ffb3e9c645d76",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/36ba6d556a63850d415f3bcaf12ffb3e9c645d76",
-      "message": "Import fault-proofs and validation by subpath across packages\n\nOther packages imported fault-proofs and validation through their root\nentries, so an edit anywhere in either package selected every test that\nused any part of it. Both packages now publish a subpath per cohesive unit\nand importers use the one that declares the name. The root entries still\nexport everything. Files whose tests stub a name on the root, and the\nnode-tools pair that loads the compiled package at run time, stay on it.\n\nWATCHER_PACKAGE_NAME moves to its own module so the watcher's CLI and\nscaffold no longer reach each other for one constant.\n\nA lint rule, midgard/no-cross-package-root, keeps it so.",
+      "sha": "dcbd9d5ef40b1c1365a7cf23115ab4a4ac769f2c",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/dcbd9d5ef40b1c1365a7cf23115ab4a4ac769f2c",
+      "message": "Remove the committee store upgrade\n\nLaunch starts every committee from a fresh store, so the in-place upgrade of older stores never runs. It covered the conflict-evidence column drop, the end-time backfill, the outbox quarantine-field strip and the L1 record upgrade. The block_time_ms column that the upgrade added now sits in the CREATE TABLE at the same position, so a fresh database gets the schema it had before. The upgrade fixture, its tests and the security-parameter open check are deleted with it, and the decision record now says the store starts fresh.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-19T23:25:18Z"
+      "authorDate": "2026-11-21T03:00:09Z"
     },
     {
-      "sha": "fc6b94eca040d1ace6c142d825b21f58cebc7e72",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/fc6b94eca040d1ace6c142d825b21f58cebc7e72",
-      "message": "Wait until the clock reaches the replay hold's retry time\n\nThe hold-runner test slept for the remaining time and then expected the held\nevent to be re-executed. A timer can fire a millisecond early, and the hold\nis kept while the clock is before its retry time, so the run was sometimes\nstill held and all five tests of the file failed.",
+      "sha": "cef3c8448ed8585a7850e7e37f16dee1cb28b240",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/cef3c8448ed8585a7850e7e37f16dee1cb28b240",
+      "message": "Delete unreferenced TypeScript exports\n\nThe 167 exports were referenced nowhere in the repository. Deleting them left further helpers, types and barrel lines with no remaining user, and those go too. Two fault-proof modules and one SDK module were left empty and are deleted. The eslint baseline drops the one localeCompare site that went with them.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-19T22:28:41Z"
+      "authorDate": "2026-11-21T03:00:08Z"
     },
     {
-      "sha": "263c671c09b43138de3495507119fcf197ce1629",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/263c671c09b43138de3495507119fcf197ce1629",
-      "message": "Import the module a file needs, not its package's index\n\nTests, test support and source modules in fault-proofs, watcher and node\nimported through their own package's index modules, so nearly every test\ndepended on nearly the whole package and an edit to one module selected most\nof the suite. They now import the defining module. Only import statements\nchange; names a test stubs on a module still come through that module.\n\nA lint rule, midgard/no-own-package-barrel, keeps it so. The published\npackage entry points are unchanged.",
+      "sha": "78fe751bfdde3f6665ab2570dfd0c75b65144bad",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/78fe751bfdde3f6665ab2570dfd0c75b65144bad",
+      "message": "Delete unreferenced Aiken library functions\n\nThirty-eight library functions and constants had no caller in any validator, library module or test. Removing them leaves every validator hash unchanged (1191 validators compared before and after) and the build warning count at its baseline.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-19T20:21:50Z"
+      "authorDate": "2026-11-21T02:59:37Z"
     },
     {
-      "sha": "12f6539b445855555d56f0477b1a86af097ef70d",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/12f6539b445855555d56f0477b1a86af097ef70d",
-      "message": "Run the interactive-emulator test projects from the workspace bundle\n\nThe interactive-emulator projects of fault-proofs and watcher transformed\ntheir source graph per file. They now load the workspace bundle, built with\nthe emulator-profile rewrite as a named source rewrite whose name, options\nand code are part of the bundle key, so a plain and a rewritten bundle never\nserve each other. Files the bundle analysis cannot serve stay on a\nsource-mode project.",
+      "sha": "123f98a9c3f058d737d14194eb40a7fbcce2fd65",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/123f98a9c3f058d737d14194eb40a7fbcce2fd65",
+      "message": "Name three golden generators' Aiken outputs by full path\n\nThe preflight registry selects a golden check from the file paths its generator names. Once the JSON fixtures were gone, the staged-arm, serialise-loop and write-bits-loop generators only named their Aiken module as a bare file name joined to a directory, so an edit to the generated module no longer selected its own check. Name the module by its repository path, as the routing generator does. Also restore Prettier formatting of channels.json.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-19T19:00:26Z"
+      "authorDate": "2026-11-21T01:14:58Z"
     },
     {
-      "sha": "125b4c0c84a68df7ff673d0fb90733481a9c54d2",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/125b4c0c84a68df7ff673d0fb90733481a9c54d2",
-      "message": "Cut the test runner's per-run overhead and the node suite's setup time\n\ncontrib resolved a real path per input file and recomputed the preparation\nplan four times a run, each prerequisite in its own identity scope. A\ndirectory's real path is now resolved once per scope and the plan's\nidentities share one scope; the identities and the checks are unchanged.\n\nThe node suite's global setups move from the root config onto its projects,\nso their workspace imports load from the bundle instead of being transformed\nmodule by module, and the setup no longer rebuilds the native binary contrib\nhas just prepared for the same run.",
+      "sha": "e9f44a5bfe901dceb85ba50894751ff11ad0d34d",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/e9f44a5bfe901dceb85ba50894751ff11ad0d34d",
+      "message": "Delete the generated required-checks document\n\nThe 1,600-line document restated the preflight registry, and a CI step, a pre-push check and a channel existed only to keep the copy equal to the source. node scripts/preflight.mjs --list prints the checks a change selects, with their commands and capabilities, straight from the registry, so the docs that linked the document now point there. The misses-log rule moves into the registry's header comment, and build-guard enrollment is the one validator CI evidence can still reuse.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-19T18:18:14Z"
+      "authorDate": "2026-11-21T01:07:38Z"
     },
     {
-      "sha": "bb2b8ef08ba34fc2a5acb3547228f7d2e17568b8",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/bb2b8ef08ba34fc2a5acb3547228f7d2e17568b8",
-      "message": "Reset the paged verification fixture before its gated write\n\nThe fixture ran the application reset inside the follower-gated write, so the\ngate was checked before the reset. A file run earlier on the same worker\ndatabase that left the gate at an applied view made the fixture's write\nrefused, and both paged tests failed depending on file order.",
+      "sha": "2c523b06ba2f93b8da9c06d216842ea8ce2d6793",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/2c523b06ba2f93b8da9c06d216842ea8ce2d6793",
+      "message": "Delete unread and regenerable test fixtures\n\nThe resolver proof-fit sweep fixtures (the frozen sweep output, its unfit pin\nand the pre-Option-B baseline) have had no reader since f69a0ddb2 deleted the\nsweep test, and no generator exists to refresh them, so they guarded nothing.\nThey go, with the frozen channel, the skill's blind-spot note and the\ntest-quality audit section and ticket scope that described them.\n\nThe validation benchmark's ledger and transaction-sequence fixtures (about\n35,000 lines) come from bench:fixtures:generate and nothing in CI reads them.\nThey are now gitignored; the benchmark's missing-fixture message names the\ngenerate command, and the generator moves to the registry's ignored list.\n\ntests/txs/txs_0.json held 1,000 one-to-one self-transfers, of which the CI\ntests read only the first. It keeps that one; the codec and phase-A\nbenchmarks repeat it TX_LIMIT times instead of slicing the list.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-19T17:45:30Z"
+      "authorDate": "2026-11-21T01:07:13Z"
     },
     {
-      "sha": "08180348037052172e8a1a726a17cd7f77198bc5",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/08180348037052172e8a1a726a17cd7f77198bc5",
-      "message": "Bind the parsed fault-proof blueprint, not the raw one\n\nThe workflow deployment binding kept the raw blueprint JSON, so every\nadapter and every direct-purpose transaction build parsed the whole\nblueprint again: 9,063 parses and 24 s in the unused-script-witness\nmaximum-shape file, one per page-fit attempt. The binding and the\ndirect-purpose custody now hold the blueprint the resolver already\nparses, typed so a raw blueprint cannot reach the build path. No cache is\nadded and nothing is accepted or refused differently.",
+      "sha": "c370d3251e15441133cc8066837b0a563a2dd985",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/c370d3251e15441133cc8066837b0a563a2dd985",
+      "message": "Keep the TypeScript-compiler import ban to node runtime source\n\nThe ban landed on the block that covers all of midgard-node and midgard-node-tools, so it also refused the compiler in their tests and dev tooling, which may use it. It now sits on a src-only block. The shared import patterns are restated through one helper, which keeps the config under its 500-line cap; every other file resolves the same restrictions as before.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-19T17:15:37Z"
+      "authorDate": "2026-11-21T01:05:42Z"
     },
     {
-      "sha": "7a4ee743f89dbcecd97fc36788d5fd871803e5b9",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/7a4ee743f89dbcecd97fc36788d5fd871803e5b9",
-      "message": "Hash and encode the validation-trace replay with fewer copies\n\nThe replay spent about a third of its time on copies around hashing and\non re-encoding: Buffer.from, the generic CBOR encoder for the CEK machine\nstate, and a full witness encoding per step. Hash through libsodium's raw\nexport over one fixed heap region, hash multi-part input without joining\nit, write the machine state's CBOR straight into one buffer, and build\neach execution's core-step witness once with the step's state hash\ndropped in. Every digest, encoded byte and refusal is unchanged, and any\nvalue that is not a plain byte array still takes the previous path. The\nmaximum-shape builtin dispute file goes from about 280 s to about 190 s.\n\nThe hashed-byte counter the scaling gates use now binds libsodium's\nexport before wrapping it and refuses a run whose hook was replaced.",
+      "sha": "b668971cc63d2b1007ae5c23ef6d7bc4d56a0883",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/b668971cc63d2b1007ae5c23ef6d7bc4d56a0883",
+      "message": "Delete unused benchmark, release and contributor helper scripts\n\nNothing in CI, production or the drill runs the benchmark regression check, the defect-signature tagger, the SDK tarball audit, the Dockerfile build-plan generator, the load watchdog, the nominal activity generator, the module-size inventory script, contrib reproduce, or the pstack dispatcher and work-log helpers. Their tests only exercised themselves. The Dockerfiles lose the generator's marker comments, and the docs and skills that pointed at the deleted commands now say what to do without them.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-19T17:08:40Z"
+      "authorDate": "2026-11-21T01:04:14Z"
     },
     {
-      "sha": "97fed92cd0d4a1ef3a33d852754228570587a07e",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/97fed92cd0d4a1ef3a33d852754228570587a07e",
-      "message": "Resolve ledger descriptors once per retained deposit block build\n\nThe deposit-events block helper rebuilt the whole ledger root and\nre-derived every entry's descriptor on each inserted deposit, 47 s of a\n128 s inline-cap file. It now shares one descriptor resolver per block\nbuild; roots and payloads are byte-identical. The nine inline-cap entries\nin the duration table are scaled by the measured ratio.",
+      "sha": "26514830591ea39d5f780863ead2feb04b9ebb0c",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/26514830591ea39d5f780863ead2feb04b9ebb0c",
+      "message": "Write vector fixtures one vector per line\n\nThe remaining JSON vector fixtures and the script-budget table were written\nwith JSON.stringify(..., null, 2), which spreads every field of every vector\nover its own indented line: about 62,000 lines for eleven files, and a diff\nthat shows a changed vector as scattered field lines.\n\ngolden-channel.mjs gains vectorsJson, which puts each top-level entry on its\nown line and spreads an array or keyed object under it one compact element\nper line. Every emitter of these files now writes through it, including\nscript-budgets.mjs for script-budgets.json; cek-builtin-step-evidence-vectors.json,\nwhich is hand-maintained, was rewritten once the same way. Only the layout\nchanged: each file parses to the same value, in the same order, as before.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-19T16:30:29Z"
+      "authorDate": "2026-11-21T01:02:10Z"
     },
     {
-      "sha": "2aac80d0a322b98bac90711d2c094c5553616b3c",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/2aac80d0a322b98bac90711d2c094c5553616b3c",
-      "message": "Build the operator deployment once per run under the follower provider\n\nEight node files each built the same deployment through the follower\nprovider, about a minute apiece. The first file now builds it into a\nrun-shared fixture and every test starts from a fresh clone, so no file\ndepends on run order. operator-watchdog-emulator still builds its own, so\nits stored-equals-confirmed check covers the deployment transactions in\nevery run, and each file's own check over what it submits is unchanged.\nThe duration table carries the measured ratios for those files and for\nthe frame-pressure file.",
+      "sha": "2a300eb2392b60893d6d3d1cef40ccbe9589b3be",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/2a300eb2392b60893d6d3d1cef40ccbe9589b3be",
+      "message": "Delete the differential tests against the retired recursive walks\n\nThe CBOR codec, the semantic-Data encode, commit and rebuild, and the BLS expression evaluator were each rewritten as iterative walks, and these tests compared them against vendored copies of the recursive versions they replaced. The rewrites have landed; the copies now only pin the new code to the old code's behaviour, and the codec is also pinned by the cross-language golden channels.\n\nThe semantic-Data cases that need no oracle stay as plain tests in cek-proof-semantic.test.ts: a self-containing value is refused rather than overflowing the stack, a shared (DAG) value commits and rebuilds in linear time, a list with holes is refused, and a non-integer leaf is named.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-19T16:30:22Z"
+      "authorDate": "2026-11-21T00:57:42Z"
     },
     {
-      "sha": "59979ff38b41f2ce659077ecae02544b6c0f5e14",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/59979ff38b41f2ce659077ecae02544b6c0f5e14",
-      "message": "Find the frame-pressure payload sizes by estimate and bisection\n\nEach target size took over twenty full payload builds to find. Start from\na one-probe estimate, widen and bisect, and build each target once per\nmode for the cases that share it. The sizes found and both exact-size\nchecks are unchanged.",
+      "sha": "12380afa31f4aefb629a3589faf6654050606e83",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/12380afa31f4aefb629a3589faf6654050606e83",
+      "message": "Delete the repository drift scans and the mocked CLI wiring tests\n\nThe drift scans compare one file's text against another's (workflow steps against test files, shard counts against the matrix, doc entries against source names, package scripts against a flag list, env keys against a snapshot, removed provider names against node sources, HTTP tokens against the DA modules). They fail on edits that change no behaviour and are kept only by being re-derived. The CLI wiring tests mock their own package's modules and assert the calls between them. The owner ordered both kinds deleted.\n\nThree behaviour tests in those files are kept: the acceptance CLI's deadline refusal stays in its file, the service-port refusals move to devnet-stack-service-ports.test.ts, and the journey catalogue keeps its fixture-selection tests while its literal owner counts go. The preflight registry no longer names the deleted self-tests, its own test drops the cases that named them, and the skills and the Node CI comment that pointed at them are corrected.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-19T16:30:15Z"
+      "authorDate": "2026-11-21T00:56:46Z"
     }
   ],
   "contributors": [
@@ -372,19 +372,13 @@
       "title": "Watcher: an availability row past retention blocks the actor in any other deployment",
       "html_url": "https://github.com/Anastasia-Labs/midgard/issues/946",
       "updated_at": "2026-11-14T03:47:05Z"
-    },
-    {
-      "number": 937,
-      "title": "Committee promise clock: decide the trusted clock before enabling DA_PROMISE_*",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/937",
-      "updated_at": "2026-11-14T03:01:21Z"
     }
   ],
   "releases": [],
   "commitActivity": [
     {
       "week": 1763856000,
-      "total": 44
+      "total": 16
     },
     {
       "week": 1764460800,
@@ -432,23 +426,23 @@
     },
     {
       "week": 1771113600,
-      "total": 13
+      "total": 14
     },
     {
       "week": 1771718400,
-      "total": 45
+      "total": 47
     },
     {
       "week": 1772323200,
-      "total": 24
+      "total": 26
     },
     {
       "week": 1772928000,
-      "total": 35
+      "total": 36
     },
     {
       "week": 1773532800,
-      "total": 28
+      "total": 29
     },
     {
       "week": 1774137600,
@@ -464,23 +458,23 @@
     },
     {
       "week": 1775952000,
-      "total": 32
+      "total": 28
     },
     {
       "week": 1776556800,
-      "total": 17
+      "total": 16
     },
     {
       "week": 1777161600,
-      "total": 26
+      "total": 10
     },
     {
       "week": 1777766400,
-      "total": 33
+      "total": 19
     },
     {
       "week": 1778371200,
-      "total": 41
+      "total": 40
     },
     {
       "week": 1778976000,
@@ -496,11 +490,11 @@
     },
     {
       "week": 1780790400,
-      "total": 18
+      "total": 32
     },
     {
       "week": 1781395200,
-      "total": 21
+      "total": 20
     },
     {
       "week": 1782000000,
@@ -520,11 +514,11 @@
     },
     {
       "week": 1784419200,
-      "total": 44
+      "total": 47
     },
     {
       "week": 1785024000,
-      "total": 149
+      "total": 156
     },
     {
       "week": 1785628800,
@@ -544,11 +538,11 @@
     },
     {
       "week": 1788048000,
-      "total": 2
+      "total": 3
     },
     {
       "week": 1788652800,
-      "total": 45
+      "total": 46
     },
     {
       "week": 1789257600,
@@ -556,19 +550,19 @@
     },
     {
       "week": 1789862400,
-      "total": 172
+      "total": 174
     },
     {
       "week": 1790467200,
-      "total": 209
+      "total": 210
     },
     {
       "week": 1791072000,
-      "total": 475
+      "total": 482
     },
     {
       "week": 1791676800,
-      "total": 270
+      "total": 269
     },
     {
       "week": 1792281600,
@@ -588,7 +582,7 @@
     },
     {
       "week": 1794700800,
-      "total": 200
+      "total": 201
     }
   ]
 }
