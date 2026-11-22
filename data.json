@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-11-21T14:26:59.890Z",
+  "fetchedAt": "2026-11-22T14:21:55.657Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 25,
@@ -17,109 +17,109 @@
   },
   "commits": [
     {
+      "sha": "21202bcaa1beee8f51ba93b4bffab0af0747e83f",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/21202bcaa1beee8f51ba93b4bffab0af0747e83f",
+      "message": "Move the await-free workflow fixtures out of the fixture module that awaits\n\nThe earlier fix covered one import; the dispute runner and the case history\nstill reached workflow.make-adapter.ts, whose load awaits two signed\ntransactions, so the node's es2020 emulator suite still failed to transform.\nThe release-finality authority, the accepting terminal verifier and the\nfixture chain now live in two support modules with no await, and every\nshared support module imports those. workflow.make-adapter.ts re-exports\nthem for the tests that use it directly.\n\nChecked by walking value imports from all 16 exported test-support entries:\nnone reaches the awaiting module. tsc for fault-proofs and node: 0 errors.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-11-22T08:00:55Z"
+    },
+    {
+      "sha": "5437999a6f7cf25b3bb446af5d7da10b87e9f90c",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/5437999a6f7cf25b3bb446af5d7da10b87e9f90c",
+      "message": "Rename what was still named for the workflow journal\n\nNo fault-proof workflow keeps a journal, but names said otherwise.\n\n- workflow/journal.ts re-exported workflow/journal.fraud-proof-workflow-\n  terminal.ts; the one module is now workflow/identity.ts, and the package\n  export is ./workflow/identity.\n- JournalJson*, normalizeJournalJson and journalJsonDigest become\n  WorkflowJson*, normalizeWorkflowJson and workflowJsonDigest;\n  exactJournalRecord becomes exactArtifactRecord.\n- one-step-staging-journal.ts becomes one-step-staging-types.ts and\n  ValidationTraceStagingJournal becomes ValidationTraceStagings.\n- The two timeout-correction modules named for recovering and reconciling\n  an attempt hold the plan and the parameters and are named for those.\n- The test helpers submit-unjournaled.* become submit-steps.*, and their\n  functions lose the Unjournaled suffix.\n- The watcher config key workflowJournalDirectory becomes\n  decisionJournalDirectory: the directory holds the fault decision journal\n  and the queue journal, which remain.\n\nDeleted: the journal interfaces and loader fields of the two script-decoding\nfamilies, which nothing implemented or read.\n\n496 files changed, 3932 insertions(+), 4734 deletions(-). Most changed lines are the formatter re-wrapping\nshorter names.\n\nRan: tsc for fault-proofs, watcher, node and node-tools (0 errors); eslint\nand prettier on changed files; module-size, doc-link, skill and\nbuilder-export checks.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-11-22T07:24:50Z"
+    },
+    {
+      "sha": "d35425c535a3827b0babe6d9d2a1887a486ab590",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d35425c535a3827b0babe6d9d2a1887a486ab590",
+      "message": "Delete the timeout-correction journal and the remembered removal\n\nThe unattested-block timeout correction kept an on-disk journal of its\nattempts, with recover, supersede and reconcile steps, and the node recorded\neach step in its intent journal. Every decision the journal made has a chain\nanswer: the target is the lock datum or the oldest timed-out header, a\nlanded step is a header gone from the queue, completion is an idle lock, and\nthe correction lock is a singleton every step spends, so the ledger admits\none attempt. Each run now reads the queue and the lock, builds the step they\ncall for and submits it. The node runs one step per head change; a tick\nthat meets a step still in flight is refused by the ledger and the next\ntick reads again.\n\nRemoved with it: --correction-journal, the node's journal file and its\nenvironment override, the correction family of the node intent journal, the\nreadiness progress count the chain cannot give, and the superseded-attempt\nread schedule.\n\nThe network-id adapter no longer remembers the removal it submitted; the\nraw-L1 route derives it from the chain and the provider route reports that\nit cannot.\n\n53 files changed, 229 insertions(+), 3288 deletions(-)\n\nRan: tsc for fault-proofs, node, watcher and node-tools (0 errors); eslint\nand prettier on changed files; fault-proofs fast tier 6,959 passed, 0\nfailed, 3 skipped; watcher fast tier 1,553 passed; node fast tier 4,244\npassed with two failures, one fixed here and rerun, one fixed in the\nprevious commit.\nNot run: the node fast tier after those two fixes, the fault-proofs slow\ntier beyond edited files, Docker and devnet suites. No test drives the\nnode's correction action end to end.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-11-22T07:18:04Z"
+    },
+    {
+      "sha": "eefbdb87965278173a42ea7e758b09bdf9c76fc9",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/eefbdb87965278173a42ea7e758b09bdf9c76fc9",
+      "message": "Keep top-level await out of the node emulator suite's import graph\n\nThe funded runner imported its terminal verifier from a fixture module that\nawaits two signed transactions at load. The node suite compiles for es2020,\nwhere that does not load, so validation-trace-defense-end-to-end-emulator\nfailed to transform. The runner builds the verifier itself.\n\nChecked by bundling each node emulator test for es2020: no top-level await\nerror; the same bundle of the fixture module reports one.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-11-22T07:17:58Z"
+    },
+    {
+      "sha": "2b6c12e742ac0db3cf1e4f15b39460be19ee279e",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/2b6c12e742ac0db3cf1e4f15b39460be19ee279e",
+      "message": "Find our carriage outputs by content instead of remembering them\n\nThe CLI and direct step paths kept an in-memory map of the out-refs they\npublished and read their outputs back by it. Every caller now does what the\nworkflow already did: read the address and take the output whose content the\nslot expects. Carriage sits at an address only the prover spends and the\nchain checks its bytes alone; a certificate is valid whoever minted it. The\nclaims map, its lag state and the tests of remembering are deleted.\n\nOne transcript changes: spend-input-signer-missing-lifecycle drops from 174\nto 94 transactions because chunks are reused instead of republished on each\nCLI call.\n\n245 files changed, 1192 insertions(+), 3070 deletions(-)\n\nRan: fault-proofs tsc (0 errors), eslint and prettier on changed files,\nfault-proofs fast tier 6,984 passed, 0 failed, 3 skipped, 16 slow-tier files\n74 passed, watcher fast tier 1,553 passed, the watcher installed journey.\nNot run: the rest of the fault-proofs slow tier, Docker-backed suites.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-11-22T06:19:55Z"
+    },
+    {
+      "sha": "bfc92bcff10518c04fa767593dafcb71c1bb9a0a",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/bfc92bcff10518c04fa767593dafcb71c1bb9a0a",
+      "message": "Remove the hand-ported pstack skills; use the upstream plugin\n\nThe repository carried a rewritten copy of pstack 0.15.6 (52 skill\ndirectories, a role configuration and a port README). Upstream now ships\nits own build for the same host, so the copy and every local edit to it are\ndeleted. Install the current release with:\n\n  /plugin marketplace add cursor/plugins\n  /plugin install pstack@cursor-plugins\n\n167 files deleted. The 19 Midgard skills are unchanged.\n\nRan: check-agent-skills (19 skills), check-doc-links, check-enforcement-tags,\ncheck-agent-config, check-registry-paths, and the scripts/agents and\nscripts/ci tests (169 passed).",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-11-22T04:27:04Z"
+    },
+    {
+      "sha": "9a52fc5a2899fb150584d46b2d77c58c1cef65fb",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/9a52fc5a2899fb150584d46b2d77c58c1cef65fb",
+      "message": "Drop the tradeoff order; state that performance is highly important\n\nThe ranked list put performance below simplicity. The guide now names the\ntwo kinds of failure and says performance is a product requirement.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-11-22T04:16:11Z"
+    },
+    {
+      "sha": "488fc14780effbc1710c095e2b0f413a1d3880ef",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/488fc14780effbc1710c095e2b0f413a1d3880ef",
+      "message": "Register the placeholder category id in the own-thread cancel plan test\n\nThe catalogue scan lists every category id written in the repository that\nno family registers. The cancel-plan test uses ffffffff to prove no cancel\nis planned for an unregistered id.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-11-22T04:00:46Z"
+    },
+    {
+      "sha": "bdf0d5a141bd65e759b169dbafe98fa2360d087d",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/bdf0d5a141bd65e759b169dbafe98fa2360d087d",
+      "message": "Delete the pending wait, the reconciliation-only mode and two mempool overlays\n\nA workflow run that ends pending now returns pending; the supervisor's next\nobservation pass runs the job again. The loop that re-ran a pending workflow\nevery second for up to thirty minutes inside one supervisor turn is gone,\ntogether with the harness clock and the two tests that existed for it.\n\nReconciliation-only mode had no production caller beyond the departure\ncompletion check and the proof-materials sweep, which keep a permit that\ncarries no live fault and is revoked on rollback. The fresh-submission\nrefusal, the deadline-null job branch and the arms that served it are gone.\n\nThe mempool is decoded once, in @al-ft/midgard-l1-follower/mempool; the\nprovider and the workflow's next-state view both use that overlay. A listed\ntransaction that does not decode is skipped instead of failing the capture.\n\nAlso removed: the own-view `unseen` hook, the slot on the mempool listing\n(Go sidecar, TypeScript transport, fake sidecar), the preflight-stall retry\nthat nothing called, and two duration entries for deleted tests.\n\n131 files, +515 / -3,154.\n\nRan: tsc for l1-follower, l1-node-transport, fault-proofs, watcher and\nnode-tools (0 errors); eslint and prettier on changed files; go test in the\nsidecar; l1-follower 740/740; l1-node-transport 35 passed, 4 devnet skips;\nfault-proofs fast tier 6,993 passed, 0 failed, 3 skipped; watcher fast tier\n1,553/1,553; the watcher installed journey.\nNot run: fault-proofs and watcher slow tiers beyond the touched harness\nfiles, devnet and Docker-backed suites.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-11-22T02:22:17Z"
+    },
+    {
+      "sha": "bfe0e953c3bb039ff9c63fc7867f421589279992",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/bfe0e953c3bb039ff9c63fc7867f421589279992",
+      "message": "Remove the goal spec; keep its protocol reference in docs/spec\n\ndocs/exec-plans/GOAL_SPEC.md was a program plan: work packages, acceptance\ncriteria and evidence rules, some of them mandating machinery that has since\nbeen deleted. Its protocol content (the protocol decisions, the exact margin\nthresholds and the per-family output contract) moves to\ndocs/spec/protocol-decisions.md as plain reference. The plan and its digest\nare deleted.\n\nReferences are repointed to the new file where they cite moved content, and\ndropped where the comment already states the rule or cited a plan row. Aiken\nand TypeScript changes are comments only: the blueprint built before and\nafter has the same 1,183 validators, byte for byte.\n\nAlso marks references in three old decision records to files deleted earlier\nas historical, so the documentation link check passes.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-11-21T23:44:01Z"
+    },
+    {
+      "sha": "290c7c6760345d93dd8e7f4f7aa8fb7ae1cab486",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/290c7c6760345d93dd8e7f4f7aa8fb7ae1cab486",
+      "message": "Make simplicity a ranked tradeoff and put the burden of proof on complexity\n\nThe contributor guide ranked correctness, safety, liveness, performance and\nconvenience, and described every failure as a risk to funds. Nothing in it\npushed code out, so guards, records and alerts accumulated for failures of our\nown process whose whole cost was a fee.\n\nAGENTS.md now separates protocol failure from operational cost, ranks\nsimplicity after liveness, and states two principles: a mechanism stays only\nwhen it names a realistic trigger and a protocol failure nothing else\nprevents, and the preferred change is the one that deletes.\ndocs/agents/production-l2.md gives the four-part test a mechanism has to pass\nand the facts that remove whole classes of handling (the chain and our node's\nmempool are the record; our transaction cannot land script-invalid). The\nconsensus review skill gains an excess lens: code that fails the test is a\nfinding equal to a gap.\n\nAlways-loaded text shrinks: CLAUDE.md is a short router, the longest skill\ndescriptions are cut, and the skill check caps a description at 320\ncharacters.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-11-21T23:43:25Z"
+    },
+    {
+      "sha": "e6040086152febf76d29ac92da31b80ed4bf52f6",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/e6040086152febf76d29ac92da31b80ed4bf52f6",
+      "message": "Derive fault-proof workflow progress from the ledger and the node's mempool\n\nA transaction the workflow sent is in a block or in our node's mempool; if it\nis in neither, the next pass builds it again. The workflow now reads that view\non every pass and keeps no record of what it sent.\n\nThe L1 node transport lists the node's mempool (LocalTxMonitor; frame protocol\nversion 3). The follower decodes the listed transactions and overlays them on\nits ledger view, in the provider and in the fault-proof capture, at the node's\ntip. Stage derivation uses the overlaid view: a target that is live on the\nledger but spent in the mempool is a pending stage, and the next action is\nbuilt on the pending outputs without waiting for a block. Evidence, completion\nand finality stay ledger-only; validation-trace finality comes from the\ncapture's confirmation depth.\n\nDeleted: the in-memory in-flight send set, coin holds, the absence rule, the\nreleased-send follow, the restart wait and its readiness reason, the\nwallet-only send gate, the three-minute wallet-only validity bound and its SDK\nbuilder parameter, the fixed coin choice, signed-transaction recovery and\nrebroadcast, and the resubmission hold with its readiness reason and alert.\n\nStep transcripts are regenerated: rows lose the ttl the bound added, and later\nrows move in the indices and validity windows that follow from earlier\ntransactions being built sooner.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-11-21T23:42:41Z"
+    },
+    {
+      "sha": "726288faa24196591daebfc2be8cd4cf9fcbf480",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/726288faa24196591daebfc2be8cd4cf9fcbf480",
+      "message": "Follow released in-flight sends and restore the pre-sign shape check\n\n- An objective no run drives any more keeps what it sent in flight until\n  the chain settles it: each completed pass at tip reads those\n  transactions, settles the ones that landed final or can no longer land,\n  and forgets the objective's part once nothing is left\n  (workflow/in-flight-released.ts). Its coins are no longer held until\n  restart, and a dead transaction no longer blocks an action waiting on\n  an address it could have landed at.\n- A transaction of another action leaves an expired predecessor's\n  required coins held for that action, and only its rebuild is offered\n  them.\n- A proof-materials sweep that failed or was lost runs again at the next\n  completed pass at tip while the views still hold sweepable materials.\n- Before signing, the workflow wallet checks the transaction's shape from\n  its bytes: outputs only to rostered contracts, our wallet and our\n  proof-materials address; embedded scripts on the roster; collateral\n  from and to our wallet; a fee our coins pay within the ceiling\n  (workflow/transaction-shape.ts).\n- The in-flight decoders free their CML objects.\n- Funding helpers nothing in production read are deleted or moved to\n  test support.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-11-21T18:02:57Z"
+    },
+    {
+      "sha": "883949de961b048fee5915fa90c4363ef14b3fc8",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/883949de961b048fee5915fa90c4363ef14b3fc8",
+      "message": "Replace the fault-proof workflow's stored record with chain-derived recovery\n\nThe workflow runner no longer writes or reads a crash journal. What a\nrestarted process needs it reads from the chain; what it must remember\nbetween its own observations it holds in process memory.\n\nProof holds\nStartup no longer releases a hold because a workflow execution is absent;\na verified completion still releases. A hold no objective owns is released\nonly in a completed admission pass at tip, once its header is out of the\nfinalized queue with its departure beyond k+1, and no held unit has a live\ncarrier (outside the fraud-proof spend address) or a move within k+1. A new\nproof roster prune floor holds pruning at the follower origin until the\nfirst pass at tip in the process and never drops once lifted. Prune floor\nlags and the unowned and live-kept hold counts are reported as follower\ndegradations. The lost-defense slash-due read holds the receipt unit with\nthe case unit so a burned case token's history stays readable.\n\nOwn computation threads\nAdd a header-free cancel of our own computation threads, one per\nregistered family, derived from the family application registry, and a\nwatcher sweep that finds them from the L1 follower alone: live carriers\nunder the computation-thread policy whose step datum names our key,\npaged under a fixed cap and classified against the tip and the block\nfinalDepth deep. A thread whose header is gone at both is cancelled\nback to our wallet, after a recheck just before submission. The\nsupervisor's pump runs one bounded pass after the jobs of each admitted\nobservation.\n\nThe sweep reads no stored workflow record and keeps no durable state;\na cancel spends its thread, so it cannot land twice. Fees come from\nwallet coins no funding reservation leases, held until the cancel's\nvalidity ends. Operators see fault_proof_own_thread_unreclaimed and\nfault_proof_own_thread_uncancellable as status-only degradations.\n\nProof materials\nEach prover key gets one process-memory view of its proof-materials\naddress. Proof chunks, field carriage, transition-trace carriage and\nscript-decode staging resolve through it by exact inline datum, strictly\nshaped and ordered by out-ref, so a restarted workflow finds its earlier\npublication without the stored record. Workflows register what they need\nand the dispute family pins its staging outputs. The end-of-workflow\nsweep takes only strictly shaped outputs nobody needs, and no longer\nholds the ending on sweep finality. The follower gains bounded plain-\noutput reads, and the watcher opens sweeping after the first admission\npass at its tip once every objective admitted by then has observed. The\nfield-preimage publication is funded from the largest plain coin alone,\nso a rebuild over an unchanged wallet is the same transaction.\n\nDispute own view\nThe dispute finds its threads, pending claim, cases, record, receipts,\nstaging outputs and field publications from the chain view by prover\nkey, with the trace recomputed and checked against the claim and case\ndatums. Only \"submitted by this process and not yet applied\" still\ncomes from the workflow record, behind one port. Staging outputs a live\nthread of ours still needs are held by recomputed plan datums from the\nfirst observation after a restart, and outputs no move read are spent\nback with the rest. A record on our key is our own: every live case of\nours plays to its close, nearest deadline first, and once our record's\nremoval completes the remaining cases still close. The ending waits on\nno spend-back finality. Field-carriage certificates are found by token\nand content. A wallet-only send held by the restart wait skips only\nthat action, and the objective stays admitted.\n\nStored record\n- In-flight sends and the wallet coins they spend are held in memory\n  (workflow/in-flight.ts, workflow/workflow-wallet.ts). The runner holds\n  only on an in-flight transaction of the action the observation\n  requires, and does not build an action inferred from an absent output\n  while a transaction of ours may still land at that address.\n- Reconcile, supersede, the funding reservation and funding runtime, the\n  stored dispute view and the departed-header drive are removed. Under\n  reconciliation-only authority the proof-materials sweep and the staging\n  spend back are admitted by kind; nothing else is signed.\n- A landed transaction of ours is final at release finality depth. When\n  our removal makes the header depart, the objective completes from the\n  chain at that depth and one sweep-only run collects its materials.\n- Completion markers bind the removal transaction; older rows still\n  parse. watcher.sqlite is no longer opened. The collateral accounting\n  and forfeiture alerts, the workflowJournalDirectories option and the\n  --workflow-journal-dir flag are gone.\n- The dispute own view reuses admitted transactions and decoded staging\n  reads between hops.\n- The unused bound-data publication capability is deleted.\n\nTests that pinned only the deleted record are removed; the rest read\ntheir state from the chain.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-11-21T17:04:44Z"
+    },
+    {
       "sha": "6943f1e66b09e891bad125ab075fdc96d41c73da",
       "html_url": "https://github.com/Anastasia-Labs/midgard/commit/6943f1e66b09e891bad125ab075fdc96d41c73da",
       "message": "Remove an import the deleted committee store test left unused",
       "authorName": "Philip DiSarro",
       "authorDate": "2026-11-21T07:14:46Z"
-    },
-    {
-      "sha": "e2069657e9d686bb52be3e2ecb9f38f3ae91f983",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/e2069657e9d686bb52be3e2ecb9f38f3ae91f983",
-      "message": "Drop three test expectations that named deleted code\n\nThe SDK layer owners list still named the deleted cek-selection module, the committee store test still expected the removed store upgrade to refill a missing commit clock, and the Flat encoder differential test asserted a program count that included the deleted script-decode-step fixtures.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-21T06:21:17Z"
-    },
-    {
-      "sha": "427157810f6c894a51b6900a6b2f5e7e5551425f",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/427157810f6c894a51b6900a6b2f5e7e5551425f",
-      "message": "Drop duration and lint-baseline entries for deleted files\n\nThe three CI duration tables still listed test files this branch deletes, and the lint baseline kept one site in a deleted export. Neither affects coverage; they are removed so the tables describe files that exist.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-21T03:29:50Z"
-    },
-    {
-      "sha": "150db5666cba1e49e283296d2d2625a6b4a9387c",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/150db5666cba1e49e283296d2d2625a6b4a9387c",
-      "message": "Remove the watcher's legacy journal directory warnings\n\nPrelaunch deployments start with a fresh journal, so no watcher will find a leftover file journal or an old proof layout to warn about. The startup checks, their module, their test and the README section describing them are removed.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-21T03:00:10Z"
-    },
-    {
-      "sha": "dcbd9d5ef40b1c1365a7cf23115ab4a4ac769f2c",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/dcbd9d5ef40b1c1365a7cf23115ab4a4ac769f2c",
-      "message": "Remove the committee store upgrade\n\nLaunch starts every committee from a fresh store, so the in-place upgrade of older stores never runs. It covered the conflict-evidence column drop, the end-time backfill, the outbox quarantine-field strip and the L1 record upgrade. The block_time_ms column that the upgrade added now sits in the CREATE TABLE at the same position, so a fresh database gets the schema it had before. The upgrade fixture, its tests and the security-parameter open check are deleted with it, and the decision record now says the store starts fresh.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-21T03:00:09Z"
-    },
-    {
-      "sha": "cef3c8448ed8585a7850e7e37f16dee1cb28b240",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/cef3c8448ed8585a7850e7e37f16dee1cb28b240",
-      "message": "Delete unreferenced TypeScript exports\n\nThe 167 exports were referenced nowhere in the repository. Deleting them left further helpers, types and barrel lines with no remaining user, and those go too. Two fault-proof modules and one SDK module were left empty and are deleted. The eslint baseline drops the one localeCompare site that went with them.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-21T03:00:08Z"
-    },
-    {
-      "sha": "78fe751bfdde3f6665ab2570dfd0c75b65144bad",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/78fe751bfdde3f6665ab2570dfd0c75b65144bad",
-      "message": "Delete unreferenced Aiken library functions\n\nThirty-eight library functions and constants had no caller in any validator, library module or test. Removing them leaves every validator hash unchanged (1191 validators compared before and after) and the build warning count at its baseline.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-21T02:59:37Z"
-    },
-    {
-      "sha": "123f98a9c3f058d737d14194eb40a7fbcce2fd65",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/123f98a9c3f058d737d14194eb40a7fbcce2fd65",
-      "message": "Name three golden generators' Aiken outputs by full path\n\nThe preflight registry selects a golden check from the file paths its generator names. Once the JSON fixtures were gone, the staged-arm, serialise-loop and write-bits-loop generators only named their Aiken module as a bare file name joined to a directory, so an edit to the generated module no longer selected its own check. Name the module by its repository path, as the routing generator does. Also restore Prettier formatting of channels.json.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-21T01:14:58Z"
-    },
-    {
-      "sha": "e9f44a5bfe901dceb85ba50894751ff11ad0d34d",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/e9f44a5bfe901dceb85ba50894751ff11ad0d34d",
-      "message": "Delete the generated required-checks document\n\nThe 1,600-line document restated the preflight registry, and a CI step, a pre-push check and a channel existed only to keep the copy equal to the source. node scripts/preflight.mjs --list prints the checks a change selects, with their commands and capabilities, straight from the registry, so the docs that linked the document now point there. The misses-log rule moves into the registry's header comment, and build-guard enrollment is the one validator CI evidence can still reuse.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-21T01:07:38Z"
-    },
-    {
-      "sha": "2c523b06ba2f93b8da9c06d216842ea8ce2d6793",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/2c523b06ba2f93b8da9c06d216842ea8ce2d6793",
-      "message": "Delete unread and regenerable test fixtures\n\nThe resolver proof-fit sweep fixtures (the frozen sweep output, its unfit pin\nand the pre-Option-B baseline) have had no reader since f69a0ddb2 deleted the\nsweep test, and no generator exists to refresh them, so they guarded nothing.\nThey go, with the frozen channel, the skill's blind-spot note and the\ntest-quality audit section and ticket scope that described them.\n\nThe validation benchmark's ledger and transaction-sequence fixtures (about\n35,000 lines) come from bench:fixtures:generate and nothing in CI reads them.\nThey are now gitignored; the benchmark's missing-fixture message names the\ngenerate command, and the generator moves to the registry's ignored list.\n\ntests/txs/txs_0.json held 1,000 one-to-one self-transfers, of which the CI\ntests read only the first. It keeps that one; the codec and phase-A\nbenchmarks repeat it TX_LIMIT times instead of slicing the list.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-21T01:07:13Z"
-    },
-    {
-      "sha": "c370d3251e15441133cc8066837b0a563a2dd985",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/c370d3251e15441133cc8066837b0a563a2dd985",
-      "message": "Keep the TypeScript-compiler import ban to node runtime source\n\nThe ban landed on the block that covers all of midgard-node and midgard-node-tools, so it also refused the compiler in their tests and dev tooling, which may use it. It now sits on a src-only block. The shared import patterns are restated through one helper, which keeps the config under its 500-line cap; every other file resolves the same restrictions as before.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-21T01:05:42Z"
-    },
-    {
-      "sha": "b668971cc63d2b1007ae5c23ef6d7bc4d56a0883",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/b668971cc63d2b1007ae5c23ef6d7bc4d56a0883",
-      "message": "Delete unused benchmark, release and contributor helper scripts\n\nNothing in CI, production or the drill runs the benchmark regression check, the defect-signature tagger, the SDK tarball audit, the Dockerfile build-plan generator, the load watchdog, the nominal activity generator, the module-size inventory script, contrib reproduce, or the pstack dispatcher and work-log helpers. Their tests only exercised themselves. The Dockerfiles lose the generator's marker comments, and the docs and skills that pointed at the deleted commands now say what to do without them.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-21T01:04:14Z"
-    },
-    {
-      "sha": "26514830591ea39d5f780863ead2feb04b9ebb0c",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/26514830591ea39d5f780863ead2feb04b9ebb0c",
-      "message": "Write vector fixtures one vector per line\n\nThe remaining JSON vector fixtures and the script-budget table were written\nwith JSON.stringify(..., null, 2), which spreads every field of every vector\nover its own indented line: about 62,000 lines for eleven files, and a diff\nthat shows a changed vector as scattered field lines.\n\ngolden-channel.mjs gains vectorsJson, which puts each top-level entry on its\nown line and spreads an array or keyed object under it one compact element\nper line. Every emitter of these files now writes through it, including\nscript-budgets.mjs for script-budgets.json; cek-builtin-step-evidence-vectors.json,\nwhich is hand-maintained, was rewritten once the same way. Only the layout\nchanged: each file parses to the same value, in the same order, as before.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-21T01:02:10Z"
-    },
-    {
-      "sha": "2a300eb2392b60893d6d3d1cef40ccbe9589b3be",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/2a300eb2392b60893d6d3d1cef40ccbe9589b3be",
-      "message": "Delete the differential tests against the retired recursive walks\n\nThe CBOR codec, the semantic-Data encode, commit and rebuild, and the BLS expression evaluator were each rewritten as iterative walks, and these tests compared them against vendored copies of the recursive versions they replaced. The rewrites have landed; the copies now only pin the new code to the old code's behaviour, and the codec is also pinned by the cross-language golden channels.\n\nThe semantic-Data cases that need no oracle stay as plain tests in cek-proof-semantic.test.ts: a self-containing value is refused rather than overflowing the stack, a shared (DAG) value commits and rebuilds in linear time, a list with holes is refused, and a non-integer leaf is named.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-21T00:57:42Z"
-    },
-    {
-      "sha": "12380afa31f4aefb629a3589faf6654050606e83",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/12380afa31f4aefb629a3589faf6654050606e83",
-      "message": "Delete the repository drift scans and the mocked CLI wiring tests\n\nThe drift scans compare one file's text against another's (workflow steps against test files, shard counts against the matrix, doc entries against source names, package scripts against a flag list, env keys against a snapshot, removed provider names against node sources, HTTP tokens against the DA modules). They fail on edits that change no behaviour and are kept only by being re-derived. The CLI wiring tests mock their own package's modules and assert the calls between them. The owner ordered both kinds deleted.\n\nThree behaviour tests in those files are kept: the acceptance CLI's deadline refusal stays in its file, the service-port refusals move to devnet-stack-service-ports.test.ts, and the journey catalogue keeps its fixture-selection tests while its literal owner counts go. The preflight registry no longer names the deleted self-tests, its own test drops the cases that named them, and the skills and the Node CI comment that pointed at them are corrected.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-21T00:56:46Z"
     }
   ],
   "contributors": [
@@ -326,6 +326,12 @@
   ],
   "issues": [
     {
+      "number": 82,
+      "title": "Utilize Merkelized Validator for Fetching Hub Oracle Datum",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/82",
+      "updated_at": "2026-11-21T23:25:06Z"
+    },
+    {
       "number": 954,
       "title": "Migration events store their details as a JSON string instead of an object",
       "html_url": "https://github.com/Anastasia-Labs/midgard/issues/954",
@@ -366,20 +372,10 @@
       "title": "Test the availability spend lookup's liveness read",
       "html_url": "https://github.com/Anastasia-Labs/midgard/issues/948",
       "updated_at": "2026-11-14T05:02:06Z"
-    },
-    {
-      "number": 946,
-      "title": "Watcher: an availability row past retention blocks the actor in any other deployment",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/issues/946",
-      "updated_at": "2026-11-14T03:47:05Z"
     }
   ],
   "releases": [],
   "commitActivity": [
-    {
-      "week": 1763856000,
-      "total": 16
-    },
     {
       "week": 1764460800,
       "total": 17
@@ -454,27 +450,27 @@
     },
     {
       "week": 1775347200,
-      "total": 40
+      "total": 42
     },
     {
       "week": 1775952000,
-      "total": 28
+      "total": 32
     },
     {
       "week": 1776556800,
-      "total": 16
+      "total": 29
     },
     {
       "week": 1777161600,
-      "total": 10
+      "total": 26
     },
     {
       "week": 1777766400,
-      "total": 19
+      "total": 33
     },
     {
       "week": 1778371200,
-      "total": 40
+      "total": 41
     },
     {
       "week": 1778976000,
@@ -494,7 +490,7 @@
     },
     {
       "week": 1781395200,
-      "total": 20
+      "total": 21
     },
     {
       "week": 1782000000,
@@ -518,7 +514,7 @@
     },
     {
       "week": 1785024000,
-      "total": 156
+      "total": 202
     },
     {
       "week": 1785628800,
@@ -562,7 +558,7 @@
     },
     {
       "week": 1791676800,
-      "total": 269
+      "total": 272
     },
     {
       "week": 1792281600,
@@ -582,7 +578,11 @@
     },
     {
       "week": 1794700800,
-      "total": 201
+      "total": 206
+    },
+    {
+      "week": 1795305600,
+      "total": 9
     }
   ]
 }
