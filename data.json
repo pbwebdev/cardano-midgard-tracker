@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-11-22T14:21:55.657Z",
+  "fetchedAt": "2026-11-23T17:45:46.647Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 25,
@@ -16,6 +16,41 @@
     "Perl": 37
   },
   "commits": [
+    {
+      "sha": "2709868fae0f4fc5e6460669a6c75bb7f3101fde",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/2709868fae0f4fc5e6460669a6c75bb7f3101fde",
+      "message": "Fault-proof L1 captures read and decode only new history\n\nA capture holds the whole history of each unit it names, and a dispute\ncaptures once per move over hundreds of moves. Each capture read every\nhistory transaction from the follower store, admitted it, and decoded it\nagain to check unit coverage.\n\nThe snapshot authority now takes the transactions the caller already\nadmitted: the follower source serves one still included at the same point\nfrom them and reads only the rest, so a rollback re-reads what moved.\nFacts derived from an admitted transaction's bytes (the units it touches,\nthe outputs it pays) are derived once and carried to the object the next\nadmission makes of the same bytes. The case history holds what each\nheader's captures admitted, so every read under the header shares it,\nincluding the item chain's per-hop read of the thread history.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-11-22T19:36:11Z"
+    },
+    {
+      "sha": "3a831b14247759dcc75f7460b18a0ca640d1e5b4",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/3a831b14247759dcc75f7460b18a0ca640d1e5b4",
+      "message": "ci: split traced refusals by project and run fault-proofs on nine shards\n\nRun 45043324915 put the seven shards at 20 to 27.5 minutes. A shard's\ntest step ran about 13% over the sum of its files' seconds, and shard 1's\ntraced-refusal step alone took 1,383 s, so no shard count could bring it\nunder 25 minutes.\n\nrun-traced-refusals.mjs takes --project and answers for the pins that\nproject's cases reach; shard 1 runs the interactive-emulator project\n(2,873 s of runs, four at a time) and shard 2 the testing-profile one\n(1,674 s). Nine shards project 1,012 s each.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-11-22T17:19:30Z"
+    },
+    {
+      "sha": "6e88e14fc4cf6914cc4fa8c5fdc67ea9b09a792d",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/6e88e14fc4cf6914cc4fa8c5fdc67ea9b09a792d",
+      "message": "ci: run fault-proofs on seven shards from a refreshed duration table\n\nThe table held medians from before snapshot admission was made linear,\nso the shards were unbalanced: 23 to 30 minutes in run 45037768081.\nRefresh it from that run (15,616 s, down from 17,725 s; the writeBits\nloop dispute 877 s, down from 3,464 s; the traced-refusal step 1,188 s,\ndown from 1,658 s) and add a seventh shard, which projects every shard\nat 1,285 s. An eighth would leave shard 1 with no test files, since its\ntraced-refusal step alone outweighs an even share.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-11-22T16:20:40Z"
+    },
+    {
+      "sha": "ba5c464d8cb32e068a9552f8e4a64f80f89c3dbe",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ba5c464d8cb32e068a9552f8e4a64f80f89c3dbe",
+      "message": "node tests: reset the database before seed takes the fixture gate\n\nseed reset the application tables inside its gated write, so the gate\nrefused it whenever an earlier file on the same worker database had left\na follower view applied. confirmed-ledger-verification failed that way\non the first attempt of two consecutive Node CI runs. Reset first, as\nfixture already does.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-11-22T16:20:36Z"
+    },
+    {
+      "sha": "d21481177627cf7ef0f4cbb188a1b0f57e1b5d2a",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d21481177627cf7ef0f4cbb188a1b0f57e1b5d2a",
+      "message": "fault-proofs: decode each transaction once when checking unit history\n\nSnapshot admission checked every history unit against every transaction\nby converting all of the transaction's outputs to Lucid form, once per\nunit. A dispute thread's history grows with each turn and the snapshot\nis admitted each turn, so the cost grew quadratically: the 839-hop\nwriteBits dispute spent 72% to 86% of its CPU there and took 3,464 s on\nCI.\n\nParse each transaction and scope output once per admission and ask the\nvalue for the asked units directly. The same test now takes 379 s\nlocally, where it did not finish in 900 s before.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-11-22T15:20:19Z"
+    },
     {
       "sha": "21202bcaa1beee8f51ba93b4bffab0af0747e83f",
       "html_url": "https://github.com/Anastasia-Labs/midgard/commit/21202bcaa1beee8f51ba93b4bffab0af0747e83f",
@@ -85,41 +120,6 @@
       "message": "Remove the goal spec; keep its protocol reference in docs/spec\n\ndocs/exec-plans/GOAL_SPEC.md was a program plan: work packages, acceptance\ncriteria and evidence rules, some of them mandating machinery that has since\nbeen deleted. Its protocol content (the protocol decisions, the exact margin\nthresholds and the per-family output contract) moves to\ndocs/spec/protocol-decisions.md as plain reference. The plan and its digest\nare deleted.\n\nReferences are repointed to the new file where they cite moved content, and\ndropped where the comment already states the rule or cited a plan row. Aiken\nand TypeScript changes are comments only: the blueprint built before and\nafter has the same 1,183 validators, byte for byte.\n\nAlso marks references in three old decision records to files deleted earlier\nas historical, so the documentation link check passes.",
       "authorName": "Philip DiSarro",
       "authorDate": "2026-11-21T23:44:01Z"
-    },
-    {
-      "sha": "290c7c6760345d93dd8e7f4f7aa8fb7ae1cab486",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/290c7c6760345d93dd8e7f4f7aa8fb7ae1cab486",
-      "message": "Make simplicity a ranked tradeoff and put the burden of proof on complexity\n\nThe contributor guide ranked correctness, safety, liveness, performance and\nconvenience, and described every failure as a risk to funds. Nothing in it\npushed code out, so guards, records and alerts accumulated for failures of our\nown process whose whole cost was a fee.\n\nAGENTS.md now separates protocol failure from operational cost, ranks\nsimplicity after liveness, and states two principles: a mechanism stays only\nwhen it names a realistic trigger and a protocol failure nothing else\nprevents, and the preferred change is the one that deletes.\ndocs/agents/production-l2.md gives the four-part test a mechanism has to pass\nand the facts that remove whole classes of handling (the chain and our node's\nmempool are the record; our transaction cannot land script-invalid). The\nconsensus review skill gains an excess lens: code that fails the test is a\nfinding equal to a gap.\n\nAlways-loaded text shrinks: CLAUDE.md is a short router, the longest skill\ndescriptions are cut, and the skill check caps a description at 320\ncharacters.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-21T23:43:25Z"
-    },
-    {
-      "sha": "e6040086152febf76d29ac92da31b80ed4bf52f6",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/e6040086152febf76d29ac92da31b80ed4bf52f6",
-      "message": "Derive fault-proof workflow progress from the ledger and the node's mempool\n\nA transaction the workflow sent is in a block or in our node's mempool; if it\nis in neither, the next pass builds it again. The workflow now reads that view\non every pass and keeps no record of what it sent.\n\nThe L1 node transport lists the node's mempool (LocalTxMonitor; frame protocol\nversion 3). The follower decodes the listed transactions and overlays them on\nits ledger view, in the provider and in the fault-proof capture, at the node's\ntip. Stage derivation uses the overlaid view: a target that is live on the\nledger but spent in the mempool is a pending stage, and the next action is\nbuilt on the pending outputs without waiting for a block. Evidence, completion\nand finality stay ledger-only; validation-trace finality comes from the\ncapture's confirmation depth.\n\nDeleted: the in-memory in-flight send set, coin holds, the absence rule, the\nreleased-send follow, the restart wait and its readiness reason, the\nwallet-only send gate, the three-minute wallet-only validity bound and its SDK\nbuilder parameter, the fixed coin choice, signed-transaction recovery and\nrebroadcast, and the resubmission hold with its readiness reason and alert.\n\nStep transcripts are regenerated: rows lose the ttl the bound added, and later\nrows move in the indices and validity windows that follow from earlier\ntransactions being built sooner.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-21T23:42:41Z"
-    },
-    {
-      "sha": "726288faa24196591daebfc2be8cd4cf9fcbf480",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/726288faa24196591daebfc2be8cd4cf9fcbf480",
-      "message": "Follow released in-flight sends and restore the pre-sign shape check\n\n- An objective no run drives any more keeps what it sent in flight until\n  the chain settles it: each completed pass at tip reads those\n  transactions, settles the ones that landed final or can no longer land,\n  and forgets the objective's part once nothing is left\n  (workflow/in-flight-released.ts). Its coins are no longer held until\n  restart, and a dead transaction no longer blocks an action waiting on\n  an address it could have landed at.\n- A transaction of another action leaves an expired predecessor's\n  required coins held for that action, and only its rebuild is offered\n  them.\n- A proof-materials sweep that failed or was lost runs again at the next\n  completed pass at tip while the views still hold sweepable materials.\n- Before signing, the workflow wallet checks the transaction's shape from\n  its bytes: outputs only to rostered contracts, our wallet and our\n  proof-materials address; embedded scripts on the roster; collateral\n  from and to our wallet; a fee our coins pay within the ceiling\n  (workflow/transaction-shape.ts).\n- The in-flight decoders free their CML objects.\n- Funding helpers nothing in production read are deleted or moved to\n  test support.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-21T18:02:57Z"
-    },
-    {
-      "sha": "883949de961b048fee5915fa90c4363ef14b3fc8",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/883949de961b048fee5915fa90c4363ef14b3fc8",
-      "message": "Replace the fault-proof workflow's stored record with chain-derived recovery\n\nThe workflow runner no longer writes or reads a crash journal. What a\nrestarted process needs it reads from the chain; what it must remember\nbetween its own observations it holds in process memory.\n\nProof holds\nStartup no longer releases a hold because a workflow execution is absent;\na verified completion still releases. A hold no objective owns is released\nonly in a completed admission pass at tip, once its header is out of the\nfinalized queue with its departure beyond k+1, and no held unit has a live\ncarrier (outside the fraud-proof spend address) or a move within k+1. A new\nproof roster prune floor holds pruning at the follower origin until the\nfirst pass at tip in the process and never drops once lifted. Prune floor\nlags and the unowned and live-kept hold counts are reported as follower\ndegradations. The lost-defense slash-due read holds the receipt unit with\nthe case unit so a burned case token's history stays readable.\n\nOwn computation threads\nAdd a header-free cancel of our own computation threads, one per\nregistered family, derived from the family application registry, and a\nwatcher sweep that finds them from the L1 follower alone: live carriers\nunder the computation-thread policy whose step datum names our key,\npaged under a fixed cap and classified against the tip and the block\nfinalDepth deep. A thread whose header is gone at both is cancelled\nback to our wallet, after a recheck just before submission. The\nsupervisor's pump runs one bounded pass after the jobs of each admitted\nobservation.\n\nThe sweep reads no stored workflow record and keeps no durable state;\na cancel spends its thread, so it cannot land twice. Fees come from\nwallet coins no funding reservation leases, held until the cancel's\nvalidity ends. Operators see fault_proof_own_thread_unreclaimed and\nfault_proof_own_thread_uncancellable as status-only degradations.\n\nProof materials\nEach prover key gets one process-memory view of its proof-materials\naddress. Proof chunks, field carriage, transition-trace carriage and\nscript-decode staging resolve through it by exact inline datum, strictly\nshaped and ordered by out-ref, so a restarted workflow finds its earlier\npublication without the stored record. Workflows register what they need\nand the dispute family pins its staging outputs. The end-of-workflow\nsweep takes only strictly shaped outputs nobody needs, and no longer\nholds the ending on sweep finality. The follower gains bounded plain-\noutput reads, and the watcher opens sweeping after the first admission\npass at its tip once every objective admitted by then has observed. The\nfield-preimage publication is funded from the largest plain coin alone,\nso a rebuild over an unchanged wallet is the same transaction.\n\nDispute own view\nThe dispute finds its threads, pending claim, cases, record, receipts,\nstaging outputs and field publications from the chain view by prover\nkey, with the trace recomputed and checked against the claim and case\ndatums. Only \"submitted by this process and not yet applied\" still\ncomes from the workflow record, behind one port. Staging outputs a live\nthread of ours still needs are held by recomputed plan datums from the\nfirst observation after a restart, and outputs no move read are spent\nback with the rest. A record on our key is our own: every live case of\nours plays to its close, nearest deadline first, and once our record's\nremoval completes the remaining cases still close. The ending waits on\nno spend-back finality. Field-carriage certificates are found by token\nand content. A wallet-only send held by the restart wait skips only\nthat action, and the objective stays admitted.\n\nStored record\n- In-flight sends and the wallet coins they spend are held in memory\n  (workflow/in-flight.ts, workflow/workflow-wallet.ts). The runner holds\n  only on an in-flight transaction of the action the observation\n  requires, and does not build an action inferred from an absent output\n  while a transaction of ours may still land at that address.\n- Reconcile, supersede, the funding reservation and funding runtime, the\n  stored dispute view and the departed-header drive are removed. Under\n  reconciliation-only authority the proof-materials sweep and the staging\n  spend back are admitted by kind; nothing else is signed.\n- A landed transaction of ours is final at release finality depth. When\n  our removal makes the header depart, the objective completes from the\n  chain at that depth and one sweep-only run collects its materials.\n- Completion markers bind the removal transaction; older rows still\n  parse. watcher.sqlite is no longer opened. The collateral accounting\n  and forfeiture alerts, the workflowJournalDirectories option and the\n  --workflow-journal-dir flag are gone.\n- The dispute own view reuses admitted transactions and decoded staging\n  reads between hops.\n- The unused bound-data publication capability is deleted.\n\nTests that pinned only the deleted record are removed; the rest read\ntheir state from the chain.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-21T17:04:44Z"
-    },
-    {
-      "sha": "6943f1e66b09e891bad125ab075fdc96d41c73da",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/6943f1e66b09e891bad125ab075fdc96d41c73da",
-      "message": "Remove an import the deleted committee store test left unused",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-21T07:14:46Z"
     }
   ],
   "contributors": [
@@ -378,7 +378,7 @@
   "commitActivity": [
     {
       "week": 1764460800,
-      "total": 17
+      "total": 8
     },
     {
       "week": 1765065600,
@@ -446,15 +446,15 @@
     },
     {
       "week": 1774742400,
-      "total": 30
+      "total": 29
     },
     {
       "week": 1775347200,
-      "total": 42
+      "total": 41
     },
     {
       "week": 1775952000,
-      "total": 32
+      "total": 31
     },
     {
       "week": 1776556800,
@@ -490,7 +490,7 @@
     },
     {
       "week": 1781395200,
-      "total": 21
+      "total": 20
     },
     {
       "week": 1782000000,
@@ -506,11 +506,11 @@
     },
     {
       "week": 1783814400,
-      "total": 11
+      "total": 10
     },
     {
       "week": 1784419200,
-      "total": 47
+      "total": 26
     },
     {
       "week": 1785024000,
@@ -518,7 +518,7 @@
     },
     {
       "week": 1785628800,
-      "total": 190
+      "total": 189
     },
     {
       "week": 1786233600,
@@ -534,11 +534,11 @@
     },
     {
       "week": 1788048000,
-      "total": 3
+      "total": 2
     },
     {
       "week": 1788652800,
-      "total": 46
+      "total": 45
     },
     {
       "week": 1789257600,
@@ -546,19 +546,19 @@
     },
     {
       "week": 1789862400,
-      "total": 174
+      "total": 172
     },
     {
       "week": 1790467200,
-      "total": 210
+      "total": 209
     },
     {
       "week": 1791072000,
-      "total": 482
+      "total": 480
     },
     {
       "week": 1791676800,
-      "total": 272
+      "total": 267
     },
     {
       "week": 1792281600,
@@ -578,11 +578,11 @@
     },
     {
       "week": 1794700800,
-      "total": 206
+      "total": 186
     },
     {
       "week": 1795305600,
-      "total": 9
+      "total": 14
     }
   ]
 }
