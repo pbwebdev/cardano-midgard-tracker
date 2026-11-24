@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-11-23T17:45:46.647Z",
+  "fetchedAt": "2026-11-24T17:17:53.308Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 25,
@@ -17,109 +17,109 @@
   },
   "commits": [
     {
-      "sha": "2709868fae0f4fc5e6460669a6c75bb7f3101fde",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/2709868fae0f4fc5e6460669a6c75bb7f3101fde",
-      "message": "Fault-proof L1 captures read and decode only new history\n\nA capture holds the whole history of each unit it names, and a dispute\ncaptures once per move over hundreds of moves. Each capture read every\nhistory transaction from the follower store, admitted it, and decoded it\nagain to check unit coverage.\n\nThe snapshot authority now takes the transactions the caller already\nadmitted: the follower source serves one still included at the same point\nfrom them and reads only the rest, so a rollback re-reads what moved.\nFacts derived from an admitted transaction's bytes (the units it touches,\nthe outputs it pays) are derived once and carried to the object the next\nadmission makes of the same bytes. The case history holds what each\nheader's captures admitted, so every read under the header shares it,\nincluding the item chain's per-hop read of the thread history.",
+      "sha": "f9102abcd04212a3991b8d389d8a6e2b19941939",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/f9102abcd04212a3991b8d389d8a6e2b19941939",
+      "message": "Relay the commit program's ledger-revert notice in the emulator harness\n\nMidgard Node CI failed on 15f60017f in\ntests/deposit-flow-emulator-merge-payout.test.ts, \"runs deposit, reserve\nabsorption, withdrawal commitment, and payout to conclusion\": after the\nwithdrawal block rejected two transactions at commit, the validation cache\nstill held their outputs and lacked the input the revert restored\n(tests/helpers/production-lifecycle.ts:307, the cache compared with the\nspendable ledger).\n\nA commit-stage rejection tells the cache which rows it changed through the\nworker's MempoolLedgerRevertedNotice, which the parent turns into stale\nmarks. The emulator harness runs the commit program in process and passed\nit no notifier, so the notice was never posted and nothing else names those\nrows: the block that lands includes neither transaction, so the rebase's\nkeys do not cover them. The comparison in the lifecycle helper and the\nstale marks both arrived with the validation-cache commits, and this suite\nwas not among the ones rerun for them.\n\nThe harness's production path now passes a notifier that hands a\nMempoolLedgerRevertedNotice to the parent's dispatcher\n(takeCommitWorkerOutput), so the same code marks the keys as in the node.\nThe other notices feed readiness, which the fixture does not follow, and\nare not relayed. No source change: the node's worker already posts the\nnotice and its parent already marks the keys\n(tests/mempool-ledger-cache.stale-marks.ts,\ntests/commit-worker-reverted-notice.test.ts).\n\nVerified (rerun here):\n- Red before, same command:\n  node scripts/contrib.mjs test --package midgard-node --file tests/deposit-flow-emulator-merge-payout.test.ts\n  failed (2 passed, 1 failed) with the CI assertion at\n  tests/helpers/production-lifecycle.ts:307.\n- Green after: 3 passed in 1 file.\n- Typecheck of midgard-node; eslint --max-warnings=0 and prettier on the\n  two files.\n\nNot verified:\n- Which of the validation-cache commits first made the case red.\n- The other emulator suites on this harness were not rerun here; the change\n  acts only when a commit rejects a transaction after admission, which no\n  other suite on the production path does. CI runs them all.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-22T19:36:11Z"
+      "authorDate": "2026-11-24T07:01:11Z"
     },
     {
-      "sha": "3a831b14247759dcc75f7460b18a0ca640d1e5b4",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/3a831b14247759dcc75f7460b18a0ca640d1e5b4",
-      "message": "ci: split traced refusals by project and run fault-proofs on nine shards\n\nRun 45043324915 put the seven shards at 20 to 27.5 minutes. A shard's\ntest step ran about 13% over the sum of its files' seconds, and shard 1's\ntraced-refusal step alone took 1,383 s, so no shard count could bring it\nunder 25 minutes.\n\nrun-traced-refusals.mjs takes --project and answers for the pins that\nproject's cases reach; shard 1 runs the interactive-emulator project\n(2,873 s of runs, four at a time) and shard 2 the testing-profile one\n(1,674 s). Nine shards project 1,012 s each.",
+      "sha": "a7850bbe0fbc97db032ca5129e957e3f868e54b2",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/a7850bbe0fbc97db032ca5129e957e3f868e54b2",
+      "message": "Claim the one-step fixture's ledger-steps module in the channel table\n\nThe one-step cross-language generator gained a second module\n(generate-validation-one-step-aiken-fixture.ledger-steps.mjs) when its\nledger roots moved to a library-trie oracle. The golden channel table\nstill listed only the entry module, so the table's own test refused the\nnew file as an unclaimed generator and Agent Skills CI failed on the\nbranch head.\n\nVerified (rerun here):\n- Red before, the workflow's command\n  (node --test over every .agents/skills/*/scripts/*.test.mjs):\n  210 tests, 1 failed, \"PROBLEM: demo/midgard-validation/scripts/\n  generate-validation-one-step-aiken-fixture.ledger-steps.mjs looks like a\n  generator but no channel claims it (add it to channels.json)\".\n- Green after, same command: 210 tests, 210 passed.\n- node scripts/ci/check-agent-skills.mjs exits 0; its own test passes 8 of 8.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-22T17:19:30Z"
+      "authorDate": "2026-11-24T06:16:56Z"
     },
     {
-      "sha": "6e88e14fc4cf6914cc4fa8c5fdc67ea9b09a792d",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/6e88e14fc4cf6914cc4fa8c5fdc67ea9b09a792d",
-      "message": "ci: run fault-proofs on seven shards from a refreshed duration table\n\nThe table held medians from before snapshot admission was made linear,\nso the shards were unbalanced: 23 to 30 minutes in run 45037768081.\nRefresh it from that run (15,616 s, down from 17,725 s; the writeBits\nloop dispute 877 s, down from 3,464 s; the traced-refusal step 1,188 s,\ndown from 1,658 s) and add a seventh shard, which projects every shard\nat 1,285 s. An eighth would leave shard 1 with no test files, since its\ntraced-refusal step alone outweighs an even share.",
+      "sha": "15f60017fb439dc777657aa23dc36ca535453a76",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/15f60017fb439dc777657aa23dc36ca535453a76",
+      "message": "Realign the recovery table after its refusal example got shorter\n\nDropping \"and RUN_GENESIS_ON_STARTUP=false\" from the configuration-refusal\nrow left the table's column padding off. Whitespace only.\n\nVerified (rerun here):\n- prettier --check on the file fails before this change and passes after.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-22T16:20:40Z"
+      "authorDate": "2026-11-24T06:05:11Z"
     },
     {
-      "sha": "ba5c464d8cb32e068a9552f8e4a64f80f89c3dbe",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ba5c464d8cb32e068a9552f8e4a64f80f89c3dbe",
-      "message": "node tests: reset the database before seed takes the fixture gate\n\nseed reset the application tables inside its gated write, so the gate\nrefused it whenever an earlier file on the same worker database had left\na follower view applied. confirmed-ledger-verification failed that way\non the first attempt of two consecutive Node CI runs. Reset first, as\nfixture already does.",
+      "sha": "99e6d40f2f1cddc068bd2a99e7930b7b5acd8c25",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/99e6d40f2f1cddc068bd2a99e7930b7b5acd8c25",
+      "message": "Reload the validation cache when a rolled-back deposit is admitted again\n\nA deposit an own landed block includes stays assigned to that block's\nheader when the follower rewinds past its L1 admission. Its output leaves\nthe spendable ledger, and the rewind's full reload drops it from the\nvalidation cache. When a later L1 block admitted the deposit again, the\ndriver saw an advance with no orphans to settle and no mempool row to\nrestore, so nothing told the cache to read the output again: a spend of it\nwas rejected as a missing input until the next full reload. A deposit a\nforeign landed block includes was not affected (its orphan keeps the write\ngate pending, and clearing it recomputes).\n\nreconcileFollowerEvents now also reports the working-ledger outrefs of\nheader-assigned deposits whose admission entered the chain after the view\nit last ingested (l1_event_keys.first_canonical_slot above\nfollower_event_ingestion.slot), read before the ingestion point moves. They\ntravel with the restored rows as `spendableRestored` (outrefs; it replaces\n`spendableUpserts`), so the advance raises the recompute for them and the\nkeyed repair names them, as both already did for restored rows.\n\nThe regression case is in tests/follower-tick.test.ts, over the production\ndriver, sink and recompute on a real follower store and one validation\ncache: the deposit's output is spent (accepted), the chain rolls back one\nblock (the spend is rejected E_INPUT_NOT_FOUND), the next block admits the\ndeposit again and the spend must be accepted. The helper\ntestDriverRecomputeOverCache leaves the cache layer to the caller so the\ntest reads the cache the recompute repairs.\n\nVerified (rerun here):\n- Red before the fix, same command:\n  node scripts/contrib.mjs test --package midgard-node --file tests/follower-tick.test.ts\n  failed (1 passed, 1 failed) at the last spend: expected\n  { accepted: 1, rejected: [] }, got\n  { accepted: 0, rejected: [ 'E_INPUT_NOT_FOUND' ] }; the re-admission run\n  before it was an applied advance with no holds.\n- Green after: 2 passed in 1 file.\n- Suites the change reaches, by file: 74 passed in 12 files\n  (follower-tick, follower-driver-recompute, follower-events-ingestion,\n  follower-events-refusals, own-block-event-orphaned, six landed-blocks\n  suites, withdrawal-deep-datum-ingestion) and 7 passed in 2 files\n  (deposit-flow-emulator-commit-selection, l2-peer-scheduler-emulator).\n- Typecheck: midgard-node, midgard-watcher, midgard-node-tools,\n  midgard-fault-proofs. eslint --max-warnings=0 and prettier on the six\n  files; \"Verified 215 module-size ceilings.\"\n- spendableUpserts has no remaining reference under demo/.\n\nNot verified:\n- No devnet or live run; the full midgard-node suite was not rerun.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-22T16:20:36Z"
+      "authorDate": "2026-11-24T05:55:08Z"
     },
     {
-      "sha": "d21481177627cf7ef0f4cbb188a1b0f57e1b5d2a",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d21481177627cf7ef0f4cbb188a1b0f57e1b5d2a",
-      "message": "fault-proofs: decode each transaction once when checking unit history\n\nSnapshot admission checked every history unit against every transaction\nby converting all of the transaction's outputs to Lucid form, once per\nunit. A dispute thread's history grows with each turn and the snapshot\nis admitted each turn, so the cost grew quadratically: the 839-hop\nwriteBits dispute spent 72% to 86% of its CPU there and took 3,464 s on\nCI.\n\nParse each transaction and scope output once per admission and ask the\nvalue for the asked units directly. The same test now takes 379 s\nlocally, where it did not finish in 900 s before.",
+      "sha": "789c1ce592b7186496afdfd6c706755009b42fd5",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/789c1ce592b7186496afdfd6c706755009b42fd5",
+      "message": "Move the whole-ledger map helpers out of the node's source\n\n`ledgerMap`, `applyDelta`, `LedgerMap`, `landedLedger` and\n`LandedLedger` built or read a whole ledger in memory. Their last\ncallers in the node's source went with the validation-trace defense's\nmove to the store ledger; only test helpers still used them.\n\n- `ledgerMap`, `applyDelta` and `LedgerMap` move unchanged to\n  tests/helpers/ledger-map.ts.\n- `landedLedger` and `LandedLedger` are deleted. Its one caller, the\n  correction admission scenario's replay, reads `landedChain` and\n  `confirmed_ledger` itself.\n\nVerified (rerun here):\n- typecheck of midgard-node (with the final files), and of\n  midgard-fault-proofs, midgard-watcher and midgard-node-tools.\n- contrib test midgard-node --file tests/landed-blocks-fork-sim.test.ts:\n  4 passed, exit 0 (reaches helpers/landed-blocks-sim.ts).\n- contrib test midgard-node --file\n  tests/correction-admission-rollback-emulator.test.ts: 1 passed,\n  exit 0 (reaches the scenario's replay).\n- contrib test midgard-node --file\n  tests/validation-trace-defense-survey-emulator.test.ts, with\n  MIDGARD_DEPLOYMENT_PROFILE=preprod-emulator-testing: 8 passed\n  (reaches helpers/validation-trace-defense-scene.landed.ts).\n- eslint --max-warnings=0 and prettier on the five files; the\n  module-size check.\n\nNot verified: the other suites that import these helpers (listed by\n`rg -l` over tests/) were typechecked only.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-22T15:20:19Z"
+      "authorDate": "2026-11-24T04:20:54Z"
     },
     {
-      "sha": "21202bcaa1beee8f51ba93b4bffab0af0747e83f",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/21202bcaa1beee8f51ba93b4bffab0af0747e83f",
-      "message": "Move the await-free workflow fixtures out of the fixture module that awaits\n\nThe earlier fix covered one import; the dispute runner and the case history\nstill reached workflow.make-adapter.ts, whose load awaits two signed\ntransactions, so the node's es2020 emulator suite still failed to transform.\nThe release-finality authority, the accepting terminal verifier and the\nfixture chain now live in two support modules with no await, and every\nshared support module imports those. workflow.make-adapter.ts re-exports\nthem for the tests that use it directly.\n\nChecked by walking value imports from all 16 exported test-support entries:\nnone reaches the awaiting module. tsc for fault-proofs and node: 0 errors.",
+      "sha": "2de32e781bc0ac55a461bdb505185e8992102ced",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/2de32e781bc0ac55a461bdb505185e8992102ced",
+      "message": "Move the whole-ledger map helpers out of the node's source\n\n`ledgerMap`, `applyDelta`, `LedgerMap`, `landedLedger` and\n`LandedLedger` built or read a whole ledger in memory. Their last\ncallers in the node's source went with the validation-trace defense's\nmove to the store ledger; only test helpers still used them.\n\n- `ledgerMap`, `applyDelta` and `LedgerMap` move unchanged to\n  tests/helpers/ledger-map.ts.\n- `landedLedger` and `LandedLedger` are deleted. Its one caller, the\n  correction admission scenario's replay, reads `landedChain` and\n  `confirmed_ledger` itself.\n\nVerified (rerun here):\n- typecheck of midgard-node (with the final files), and of\n  midgard-fault-proofs, midgard-watcher and midgard-node-tools.\n- contrib test midgard-node --file tests/landed-blocks-fork-sim.test.ts:\n  4 passed, exit 0 (reaches helpers/landed-blocks-sim.ts).\n- contrib test midgard-node --file\n  tests/correction-admission-rollback-emulator.test.ts: 1 passed,\n  exit 0 (reaches the scenario's replay).\n- contrib test midgard-node --file\n  tests/validation-trace-defense-survey-emulator.test.ts, with\n  MIDGARD_DEPLOYMENT_PROFILE=preprod-emulator-testing: 8 passed\n  (reaches helpers/validation-trace-defense-scene.landed.ts).\n- eslint --max-warnings=0 and prettier on the five files; the\n  module-size check.\n\nNot verified: the other suites that import these helpers (listed by\n`rg -l` over tests/) were typechecked only.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-22T08:00:55Z"
+      "authorDate": "2026-11-24T04:20:54Z"
     },
     {
-      "sha": "5437999a6f7cf25b3bb446af5d7da10b87e9f90c",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/5437999a6f7cf25b3bb446af5d7da10b87e9f90c",
-      "message": "Rename what was still named for the workflow journal\n\nNo fault-proof workflow keeps a journal, but names said otherwise.\n\n- workflow/journal.ts re-exported workflow/journal.fraud-proof-workflow-\n  terminal.ts; the one module is now workflow/identity.ts, and the package\n  export is ./workflow/identity.\n- JournalJson*, normalizeJournalJson and journalJsonDigest become\n  WorkflowJson*, normalizeWorkflowJson and workflowJsonDigest;\n  exactJournalRecord becomes exactArtifactRecord.\n- one-step-staging-journal.ts becomes one-step-staging-types.ts and\n  ValidationTraceStagingJournal becomes ValidationTraceStagings.\n- The two timeout-correction modules named for recovering and reconciling\n  an attempt hold the plan and the parameters and are named for those.\n- The test helpers submit-unjournaled.* become submit-steps.*, and their\n  functions lose the Unjournaled suffix.\n- The watcher config key workflowJournalDirectory becomes\n  decisionJournalDirectory: the directory holds the fault decision journal\n  and the queue journal, which remain.\n\nDeleted: the journal interfaces and loader fields of the two script-decoding\nfamilies, which nothing implemented or read.\n\n496 files changed, 3932 insertions(+), 4734 deletions(-). Most changed lines are the formatter re-wrapping\nshorter names.\n\nRan: tsc for fault-proofs, watcher, node and node-tools (0 errors); eslint\nand prettier on changed files; module-size, doc-link, skill and\nbuilder-export checks.",
+      "sha": "e84d6e2dd4337a9cf2db970344890938fe2d6333",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/e84d6e2dd4337a9cf2db970344890938fe2d6333",
+      "message": "Mark stale keys for the validation cache instead of logging deltas\n\nWriters of `mempool_ledger` outside the validation cache told it what\nchanged through a versioned delta ring. Production published only\nfull-reload markers on it, so every outside write cost the cache a\nwhole-table load, and the ring needed a size limit\n(VALIDATION_LEDGER_DELTA_LOG_MAX).\n\nThe ring is replaced by stale marks, `MEMPOOL_LEDGER_STALE: { all,\nkeys }`. A writer marks the keys it changed once its write has\ncommitted (`markMempoolLedgerStale`), or every key when it cannot name\nthem. The cache takes the marks when it synchronizes and reads those\nkeys again, or loads in full when every key is marked, and repeats\nuntil no mark arrived during its read. A failed read puts its marks\nback. The spendable view cannot tell at a marked key or one being read\nagain, and anywhere while every key is marked or a full load runs.\n\n- The commit worker's revert notice now carries the out-refs the\n  commit-stage rejection deleted or inserted\n  (`MempoolLedgerRevertedNotice.outRefs`), built and parsed in the\n  shared boundary module `workers/utils/commit-block-header.ts`; the\n  parent marks exactly those keys. A notice whose payload it cannot\n  read marks every key.\n  `revertCommitStageRejectedLedgerEffects` returns those out-refs.\n- A failed commit attempt, and a worker error with no output, still\n  mark every key: which rows a committed revert changed is unknown.\n- A keyed read that failed in a poisoned-epoch or canonical recovery\n  used to lose its keys; they are marked stale again.\n- Deleted with no replacement: the delta log and its ring,\n  `publishMempoolLedgerDelta`, `publishFullMempoolLedgerReload`, the\n  journal overlay in the spendable view, the delta-apply counter\n  (`validation_ledger_cache_delta_apply_count`),\n  `SuccessfulSubmissionOutput.mempoolLedgerDeletedOutRefHexes`, and the\n  configuration key VALIDATION_LEDGER_DELTA_LOG_MAX.\n\nNot built: a keyed repair for a follower recompute with no orphans.\nIt rests on every spendability change of such an ingestion being named\nin its spendable upserts or rebase keys, and that does not hold: a\nheader-assigned deposit's row becomes spendable or unspendable with\nits follower admission alone, which no ingestion result names.\n\nTests:\n- tests/mempool-ledger-cache.stale-marks.ts (new, in\n  tests/mempool-ledger-cache.test.ts): a key marked during the full\n  load is read again; every key marked during a load loads again; a\n  marked key is read with no full load; a failed read leaves its marks;\n  the spendable view at marked keys and during reads; which worker\n  outputs mark; a revert notice has exactly its out-refs read again;\n  seven malformed notice payloads mark every key.\n- tests/commit-worker-reverted-notice.test.ts (new, compiled): the\n  notice crosses from the compiled worker codec to the compiled\n  dispatcher with its out-refs, and malformed payloads mark every key.\n\nBehaviour to know:\n- a key marked stale is answered \"cannot tell\" until the cache's next\n  synchronization reads it; admission then falls back to its own read.\n- a keyed read with no keys is skipped.\n- the cache still loads `mempool_ledger` in full at process start and\n  wherever a writer cannot name its keys (a follower recompute, a failed\n  commit attempt, a worker error, an unreadable notice).\n\nVerified (rerun here):\n- contrib test midgard-node, 23 files (mempool-ledger-cache,\n  commit-worker-reverted-notice, the commit readiness, planning, journal\n  and worker suites, the peer admission and forwarder suites,\n  landed-blocks-rebase-keyed-io, own-block-event-orphaned): 190 passed,\n  0 failed, exit 0.\n- contrib test midgard-node --file tests/database.test.ts --name\n  \"commit-stage rejection\": 1 passed, exit 0.\n- contrib boundary --package midgard-node: passed; contrib gate\n  process-boundaries: passed (three receipts, exit 0);\n  tests/commit-worker-reverted-notice.test.ts against the fresh dist:\n  1 passed.\n- eslint --max-warnings=0 and prettier on every changed file; the\n  module-size check (215 ceilings).\n\n- typecheck of midgard-node, midgard-fault-proofs, midgard-watcher and\n  midgard-node-tools.\n- five guards removed one at a time, each by an edit undone afterwards,\n  with tests/mempool-ledger-cache.test.ts (35 tests) run against each:\n  the synchronization stopping after one read (2 failed: the row marked\n  during the load, the reload when every key is marked); a failed read\n  not putting its marks back (1 failed); the view ignoring marks not\n  yet taken (2 failed); the parent marking every key for a readable\n  notice (1 failed: \"exactly its outrefs read again\"); the parent\n  marking nothing for an unreadable notice (7 failed, the malformed\n  rows).\n\nNot verified:\n- the emulator suites whose helpers changed\n  (deposit-flow-emulator-shared.run-owned-native-commit,\n  helpers/emulator-l1-follower, helpers/l2-peer-node) were typechecked\n  only, and the two benchmark files were not run.\n- tests/commit-worker-reverted-notice.test.ts is not in the\n  process-boundaries gate's file list; it runs with the node suite.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-22T07:24:50Z"
+      "authorDate": "2026-11-24T04:07:13Z"
     },
     {
-      "sha": "d35425c535a3827b0babe6d9d2a1887a486ab590",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/d35425c535a3827b0babe6d9d2a1887a486ab590",
-      "message": "Delete the timeout-correction journal and the remembered removal\n\nThe unattested-block timeout correction kept an on-disk journal of its\nattempts, with recover, supersede and reconcile steps, and the node recorded\neach step in its intent journal. Every decision the journal made has a chain\nanswer: the target is the lock datum or the oldest timed-out header, a\nlanded step is a header gone from the queue, completion is an idle lock, and\nthe correction lock is a singleton every step spends, so the ledger admits\none attempt. Each run now reads the queue and the lock, builds the step they\ncall for and submits it. The node runs one step per head change; a tick\nthat meets a step still in flight is refused by the ledger and the next\ntick reads again.\n\nRemoved with it: --correction-journal, the node's journal file and its\nenvironment override, the correction family of the node intent journal, the\nreadiness progress count the chain cannot give, and the superseded-attempt\nread schedule.\n\nThe network-id adapter no longer remembers the removal it submitted; the\nraw-L1 route derives it from the chain and the provider route reports that\nit cannot.\n\n53 files changed, 229 insertions(+), 3288 deletions(-)\n\nRan: tsc for fault-proofs, node, watcher and node-tools (0 errors); eslint\nand prettier on changed files; fault-proofs fast tier 6,959 passed, 0\nfailed, 3 skipped; watcher fast tier 1,553 passed; node fast tier 4,244\npassed with two failures, one fixed here and rerun, one fixed in the\nprevious commit.\nNot run: the node fast tier after those two fixes, the fault-proofs slow\ntier beyond edited files, Docker and devnet suites. No test drives the\nnode's correction action end to end.",
+      "sha": "c9cb0e9748c65cdf6d2fcb57f3509416f771f5f7",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/c9cb0e9748c65cdf6d2fcb57f3509416f771f5f7",
+      "message": "Mark stale keys for the validation cache instead of logging deltas\n\nWriters of `mempool_ledger` outside the validation cache told it what\nchanged through a versioned delta ring. Production published only\nfull-reload markers on it, so every outside write cost the cache a\nwhole-table load, and the ring needed a size limit\n(VALIDATION_LEDGER_DELTA_LOG_MAX).\n\nThe ring is replaced by stale marks, `MEMPOOL_LEDGER_STALE: { all,\nkeys }`. A writer marks the keys it changed once its write has\ncommitted (`markMempoolLedgerStale`), or every key when it cannot name\nthem. The cache takes the marks when it synchronizes and reads those\nkeys again, or loads in full when every key is marked, and repeats\nuntil no mark arrived during its read. A failed read puts its marks\nback. The spendable view cannot tell at a marked key or one being read\nagain, and anywhere while every key is marked or a full load runs.\n\n- The commit worker's revert notice now carries the out-refs the\n  commit-stage rejection deleted or inserted\n  (`MempoolLedgerRevertedNotice.outRefs`), built and parsed in the\n  shared boundary module `workers/utils/commit-block-header.ts`; the\n  parent marks exactly those keys. A notice whose payload it cannot\n  read marks every key.\n  `revertCommitStageRejectedLedgerEffects` returns those out-refs.\n- A failed commit attempt, and a worker error with no output, still\n  mark every key: which rows a committed revert changed is unknown.\n- A keyed read that failed in a poisoned-epoch or canonical recovery\n  used to lose its keys; they are marked stale again.\n- Deleted with no replacement: the delta log and its ring,\n  `publishMempoolLedgerDelta`, `publishFullMempoolLedgerReload`, the\n  journal overlay in the spendable view, the delta-apply counter\n  (`validation_ledger_cache_delta_apply_count`),\n  `SuccessfulSubmissionOutput.mempoolLedgerDeletedOutRefHexes`, and the\n  configuration key VALIDATION_LEDGER_DELTA_LOG_MAX.\n\nNot built: a keyed repair for a follower recompute with no orphans.\nIt rests on every spendability change of such an ingestion being named\nin its spendable upserts or rebase keys, and that does not hold: a\nheader-assigned deposit's row becomes spendable or unspendable with\nits follower admission alone, which no ingestion result names.\n\nTests:\n- tests/mempool-ledger-cache.stale-marks.ts (new, in\n  tests/mempool-ledger-cache.test.ts): a key marked during the full\n  load is read again; every key marked during a load loads again; a\n  marked key is read with no full load; a failed read leaves its marks;\n  the spendable view at marked keys and during reads; which worker\n  outputs mark; a revert notice has exactly its out-refs read again;\n  seven malformed notice payloads mark every key.\n- tests/commit-worker-reverted-notice.test.ts (new, compiled): the\n  notice crosses from the compiled worker codec to the compiled\n  dispatcher with its out-refs, and malformed payloads mark every key.\n\nBehaviour to know:\n- a key marked stale is answered \"cannot tell\" until the cache's next\n  synchronization reads it; admission then falls back to its own read.\n- a keyed read with no keys is skipped.\n- the cache still loads `mempool_ledger` in full at process start and\n  wherever a writer cannot name its keys (a follower recompute, a failed\n  commit attempt, a worker error, an unreadable notice).\n\nVerified (rerun here):\n- contrib test midgard-node, 23 files (mempool-ledger-cache,\n  commit-worker-reverted-notice, the commit readiness, planning, journal\n  and worker suites, the peer admission and forwarder suites,\n  landed-blocks-rebase-keyed-io, own-block-event-orphaned): 190 passed,\n  0 failed, exit 0.\n- contrib test midgard-node --file tests/database.test.ts --name\n  \"commit-stage rejection\": 1 passed, exit 0.\n- contrib boundary --package midgard-node: passed; contrib gate\n  process-boundaries: passed (three receipts, exit 0);\n  tests/commit-worker-reverted-notice.test.ts against the fresh dist:\n  1 passed.\n- eslint --max-warnings=0 and prettier on every changed file; the\n  module-size check (215 ceilings).\n\n- typecheck of midgard-node, midgard-fault-proofs, midgard-watcher and\n  midgard-node-tools.\n- five guards removed one at a time, each by an edit undone afterwards,\n  with tests/mempool-ledger-cache.test.ts (35 tests) run against each:\n  the synchronization stopping after one read (2 failed: the row marked\n  during the load, the reload when every key is marked); a failed read\n  not putting its marks back (1 failed); the view ignoring marks not\n  yet taken (2 failed); the parent marking every key for a readable\n  notice (1 failed: \"exactly its outrefs read again\"); the parent\n  marking nothing for an unreadable notice (7 failed, the malformed\n  rows).\n\nNot verified:\n- the emulator suites whose helpers changed\n  (deposit-flow-emulator-shared.run-owned-native-commit,\n  helpers/emulator-l1-follower, helpers/l2-peer-node) were typechecked\n  only, and the two benchmark files were not run.\n- tests/commit-worker-reverted-notice.test.ts is not in the\n  process-boundaries gate's file list; it runs with the node suite.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-22T07:18:04Z"
+      "authorDate": "2026-11-24T04:07:13Z"
     },
     {
-      "sha": "eefbdb87965278173a42ea7e758b09bdf9c76fc9",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/eefbdb87965278173a42ea7e758b09bdf9c76fc9",
-      "message": "Keep top-level await out of the node emulator suite's import graph\n\nThe funded runner imported its terminal verifier from a fixture module that\nawaits two signed transactions at load. The node suite compiles for es2020,\nwhere that does not load, so validation-trace-defense-end-to-end-emulator\nfailed to transform. The runner builds the verifier itself.\n\nChecked by bundling each node emulator test for es2020: no top-level await\nerror; the same bundle of the fixture module reports one.",
+      "sha": "c8cb3db864ff95cdaf5bba6e113b4ab29169cc7c",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/c8cb3db864ff95cdaf5bba6e113b4ab29169cc7c",
+      "message": "Read again the keys of patches a keyed canonical recovery drops\n\nA canonical recovery that names the keys its repair changed set the\ncache at those keys and dropped every unpromoted patch without reading\nthe dropped patches' keys again. A patch whose persistence committed\nwhile the retirement stopped its promotion then left the cache with the\npre-patch answers at its keys (a spent input still spendable, a\nproduced output missing) until the next full load.\n\nThe recovery now reads the dropped patches' keys again from\n`mempool_ledger`, as the poisoned-epoch recovery already does.\n\nTest (added to the canonical history cache retirement cases of\ntests/mempool-ledger-cache.test.ts): a persistence that commits while a\nkeyed recovery retires its epoch; the cache must answer the committed\nrows with no full reload, and the keyed read must be asked for exactly\nthe patch's keys.\n\nFrom the implementer's runs, not rerun at this commit:\n- before the fix the test failed: the cache held the spent input and\n  not the produced output; after the fix it passed.\n\nVerified (rerun here) at the following commit, which rewrites these\nlines: the test passes there.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-22T07:17:58Z"
+      "authorDate": "2026-11-24T04:07:04Z"
     },
     {
-      "sha": "2b6c12e742ac0db3cf1e4f15b39460be19ee279e",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/2b6c12e742ac0db3cf1e4f15b39460be19ee279e",
-      "message": "Find our carriage outputs by content instead of remembering them\n\nThe CLI and direct step paths kept an in-memory map of the out-refs they\npublished and read their outputs back by it. Every caller now does what the\nworkflow already did: read the address and take the output whose content the\nslot expects. Carriage sits at an address only the prover spends and the\nchain checks its bytes alone; a certificate is valid whoever minted it. The\nclaims map, its lag state and the tests of remembering are deleted.\n\nOne transcript changes: spend-input-signer-missing-lifecycle drops from 174\nto 94 transactions because chunks are reused instead of republished on each\nCLI call.\n\n245 files changed, 1192 insertions(+), 3070 deletions(-)\n\nRan: fault-proofs tsc (0 errors), eslint and prettier on changed files,\nfault-proofs fast tier 6,984 passed, 0 failed, 3 skipped, 16 slow-tier files\n74 passed, watcher fast tier 1,553 passed, the watcher installed journey.\nNot run: the rest of the fault-proofs slow tier, Docker-backed suites.",
+      "sha": "1d5617059b0643fc770a587c1906a875a86bbad5",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/1d5617059b0643fc770a587c1906a875a86bbad5",
+      "message": "Read again the keys of patches a keyed canonical recovery drops\n\nA canonical recovery that names the keys its repair changed set the\ncache at those keys and dropped every unpromoted patch without reading\nthe dropped patches' keys again. A patch whose persistence committed\nwhile the retirement stopped its promotion then left the cache with the\npre-patch answers at its keys (a spent input still spendable, a\nproduced output missing) until the next full load.\n\nThe recovery now reads the dropped patches' keys again from\n`mempool_ledger`, as the poisoned-epoch recovery already does.\n\nTest (added to the canonical history cache retirement cases of\ntests/mempool-ledger-cache.test.ts): a persistence that commits while a\nkeyed recovery retires its epoch; the cache must answer the committed\nrows with no full reload, and the keyed read must be asked for exactly\nthe patch's keys.\n\nFrom the implementer's runs, not rerun at this commit:\n- before the fix the test failed: the cache held the spent input and\n  not the produced output; after the fix it passed.\n\nVerified (rerun here) at the following commit, which rewrites these\nlines: the test passes there.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-22T06:19:55Z"
+      "authorDate": "2026-11-24T04:07:04Z"
     },
     {
-      "sha": "bfc92bcff10518c04fa767593dafcb71c1bb9a0a",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/bfc92bcff10518c04fa767593dafcb71c1bb9a0a",
-      "message": "Remove the hand-ported pstack skills; use the upstream plugin\n\nThe repository carried a rewritten copy of pstack 0.15.6 (52 skill\ndirectories, a role configuration and a port README). Upstream now ships\nits own build for the same host, so the copy and every local edit to it are\ndeleted. Install the current release with:\n\n  /plugin marketplace add cursor/plugins\n  /plugin install pstack@cursor-plugins\n\n167 files deleted. The 19 Midgard skills are unchanged.\n\nRan: check-agent-skills (19 skills), check-doc-links, check-enforcement-tags,\ncheck-agent-config, check-registry-paths, and the scripts/agents and\nscripts/ci tests (169 passed).",
+      "sha": "ebe5ba3867dcf19ff64a76cd5d6a598208e77d67",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ebe5ba3867dcf19ff64a76cd5d6a598208e77d67",
+      "message": "Build validation-trace defense material on the store ledger\n\nThe defense material build loaded all of `confirmed_ledger`, replayed\nthe landed chain over it in memory and passed the whole predecessor\nledger to its worker thread. It now takes the ledger at the disputed\nblock's parent from the node's ledger store by its root (rebuilt from\nthe newest retained ledger on the chain to the parent when the store\nno longer holds that root), keeps it on the main thread, and serves\nthe worker's reads over a message channel of its own\n(`validation-trace-defense/ledger-port.ts`): trie nodes by hash and\noutputs by out-ref. A build reads only what the event's replay\ntouches.\n\n- The block's retained DA payload is looked up before any ledger work:\n  a case whose payload is missing reads no ledger.\n- Every failure to get or read the parent ledger makes the case\n  `unavailable`, which is retried at the next tick and never cached.\n- The owner-store lookup landed-block processing uses is now one\n  function, `ownerRetainedLedger`, shared with the defense fiber.\n- `landedLedger`, `applyDelta` and `LedgerMap` in\n  `landed-blocks/ledger.ts` have no caller left in `src`.\n\nTests:\n- tests/validation-trace-defense-ledger-port.test.ts (new, no\n  emulator): the build over the channel gives the fault-proofs\n  builder's material byte for byte at four step counts, and the\n  operator's fault on a failing block; a predecessor 256 times larger\n  serves the same outputs and at most two more trie levels per touched\n  key; a served read failing at any one read gives `unavailable` or the\n  reference material, never another verdict; the worker side gets each\n  output as a `Buffer`.\n- tests/validation-trace-defense-survey-emulator.test.ts (three\n  added): no ledger lookup and no ledger row read for a case with no\n  retained payload; `unavailable` and nothing cached while the store\n  cannot give the parent ledger, then an answer once it can; the same\n  material from a store that retains only the frontier's ledger.\n\nVerified (rerun here):\n- contrib test midgard-node, survey, fiber, max-shape, restart and\n  end-to-end emulator suites with the port test: 25 passed in 6 files,\n  exit 0.\n- contrib test midgard-node, race, replacement, funding and references\n  emulator suites: 14 passed in 4 files.\n- tests/landed-blocks-rebase-keyed-io.test.ts: 1 passed, exit 0.\n- Each guard weakened by a temporary edit, then restored: an output\n  left a plain Uint8Array (the Buffer test fails), a build failure\n  reported as an operator fault (the fault sweep fails), a store\n  failure reported as an operator fault, the ledger looked up before\n  the payload, and an empty lineage (one survey test fails for each).\n- Typecheck of midgard-node, midgard-fault-proofs, midgard-watcher and\n  midgard-node-tools; eslint, prettier and the module-size check.\n\nFrom the implementer's runs, not rerun:\n- contrib boundary --package midgard-node and contrib gate\n  process-boundaries passed; the gate does not include the defense\n  material worker.\n- A rejected read resolved as an empty answer makes the fault sweep\n  fail.\n- Trie nodes read by one build: 12 at 16 predecessor entries, 74 at\n  4,096. The consensus-maximum build's Defend tick took 6,669 ms.\n\nNot verified:\n- One earlier survey-suite run had the frontier-only case answer\n  `unavailable` while another process rebuilt the native owner binary\n  under it; it passed in every run since (four here), and its cause\n  was not captured.\n- The emulator suites ran with\n  MIDGARD_DEPLOYMENT_PROFILE=preprod-emulator-testing set by hand.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-22T04:27:04Z"
+      "authorDate": "2026-11-24T03:52:18Z"
     },
     {
-      "sha": "9a52fc5a2899fb150584d46b2d77c58c1cef65fb",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/9a52fc5a2899fb150584d46b2d77c58c1cef65fb",
-      "message": "Drop the tradeoff order; state that performance is highly important\n\nThe ranked list put performance below simplicity. The guide now names the\ntwo kinds of failure and says performance is a product requirement.",
+      "sha": "2ca80af72180b63f38e5560cbce45b735ac5b22c",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/2ca80af72180b63f38e5560cbce45b735ac5b22c",
+      "message": "Build validation-trace defense material on the store ledger\n\nThe defense material build loaded all of `confirmed_ledger`, replayed\nthe landed chain over it in memory and passed the whole predecessor\nledger to its worker thread. It now takes the ledger at the disputed\nblock's parent from the node's ledger store by its root (rebuilt from\nthe newest retained ledger on the chain to the parent when the store\nno longer holds that root), keeps it on the main thread, and serves\nthe worker's reads over a message channel of its own\n(`validation-trace-defense/ledger-port.ts`): trie nodes by hash and\noutputs by out-ref. A build reads only what the event's replay\ntouches.\n\n- The block's retained DA payload is looked up before any ledger work:\n  a case whose payload is missing reads no ledger.\n- Every failure to get or read the parent ledger makes the case\n  `unavailable`, which is retried at the next tick and never cached.\n- The owner-store lookup landed-block processing uses is now one\n  function, `ownerRetainedLedger`, shared with the defense fiber.\n- `landedLedger`, `applyDelta` and `LedgerMap` in\n  `landed-blocks/ledger.ts` have no caller left in `src`.\n\nTests:\n- tests/validation-trace-defense-ledger-port.test.ts (new, no\n  emulator): the build over the channel gives the fault-proofs\n  builder's material byte for byte at four step counts, and the\n  operator's fault on a failing block; a predecessor 256 times larger\n  serves the same outputs and at most two more trie levels per touched\n  key; a served read failing at any one read gives `unavailable` or the\n  reference material, never another verdict; the worker side gets each\n  output as a `Buffer`.\n- tests/validation-trace-defense-survey-emulator.test.ts (three\n  added): no ledger lookup and no ledger row read for a case with no\n  retained payload; `unavailable` and nothing cached while the store\n  cannot give the parent ledger, then an answer once it can; the same\n  material from a store that retains only the frontier's ledger.\n\nVerified (rerun here):\n- contrib test midgard-node, survey, fiber, max-shape, restart and\n  end-to-end emulator suites with the port test: 25 passed in 6 files,\n  exit 0.\n- contrib test midgard-node, race, replacement, funding and references\n  emulator suites: 14 passed in 4 files.\n- tests/landed-blocks-rebase-keyed-io.test.ts: 1 passed, exit 0.\n- Each guard weakened by a temporary edit, then restored: an output\n  left a plain Uint8Array (the Buffer test fails), a build failure\n  reported as an operator fault (the fault sweep fails), a store\n  failure reported as an operator fault, the ledger looked up before\n  the payload, and an empty lineage (one survey test fails for each).\n- Typecheck of midgard-node, midgard-fault-proofs, midgard-watcher and\n  midgard-node-tools; eslint, prettier and the module-size check.\n\nFrom the implementer's runs, not rerun:\n- contrib boundary --package midgard-node and contrib gate\n  process-boundaries passed; the gate does not include the defense\n  material worker.\n- A rejected read resolved as an empty answer makes the fault sweep\n  fail.\n- Trie nodes read by one build: 12 at 16 predecessor entries, 74 at\n  4,096. The consensus-maximum build's Defend tick took 6,669 ms.\n\nNot verified:\n- One earlier survey-suite run had the frontier-only case answer\n  `unavailable` while another process rebuilt the native owner binary\n  under it; it passed in every run since (four here), and its cause\n  was not captured.\n- The emulator suites ran with\n  MIDGARD_DEPLOYMENT_PROFILE=preprod-emulator-testing set by hand.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-22T04:16:11Z"
+      "authorDate": "2026-11-24T03:52:18Z"
     },
     {
-      "sha": "488fc14780effbc1710c095e2b0f413a1d3880ef",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/488fc14780effbc1710c095e2b0f413a1d3880ef",
-      "message": "Register the placeholder category id in the own-thread cancel plan test\n\nThe catalogue scan lists every category id written in the repository that\nno family registers. The cancel-plan test uses ffffffff to prove no cancel\nis planned for an unregistered id.",
+      "sha": "ca48c275d11f297b99a1f7f18d78cf4ef3a94bc3",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ca48c275d11f297b99a1f7f18d78cf4ef3a94bc3",
+      "message": "Expose the node and output source a store ledger reads\n\n`ledgerReads(ledger)` gives the source a ledger store ledger reads its\ntrie nodes and outputs from, its overlay first and then its store. A\nreader that cannot hold the ledger itself (a worker thread served over\na message port) reads as the ledger does through\n`ledgerAt(ledger.root, ledgerReads(ledger))`. A `Ledger` that is not a\nledger store ledger is refused.\n\nThe validation-trace defender scene's test support also exports the\none-event Plutus block fixture and the predecessor filler, for builds\noutside the emulator.\n\nTests (two added to tests/ledger-store.read.test.ts):\n- under `ledgerAt`, the source of a store ledger, and of one with an\n  applied overlay, gives that ledger's reads, proofs and root;\n- a ledger that is not a ledger store ledger is refused.\n\nVerified (rerun here):\n- contrib test @al-ft/midgard-fault-proofs --file\n  tests/ledger-store.read.test.ts: 10 passed in 1 file, exit 0.\n- midgard-fault-proofs typecheck.\n\nFrom the implementer's runs, not rerun:\n- with the refusal removed, \"refuses a ledger that is not a ledger\n  store ledger\" fails.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-22T04:00:46Z"
+      "authorDate": "2026-11-24T03:52:16Z"
     },
     {
-      "sha": "bdf0d5a141bd65e759b169dbafe98fa2360d087d",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/bdf0d5a141bd65e759b169dbafe98fa2360d087d",
-      "message": "Delete the pending wait, the reconciliation-only mode and two mempool overlays\n\nA workflow run that ends pending now returns pending; the supervisor's next\nobservation pass runs the job again. The loop that re-ran a pending workflow\nevery second for up to thirty minutes inside one supervisor turn is gone,\ntogether with the harness clock and the two tests that existed for it.\n\nReconciliation-only mode had no production caller beyond the departure\ncompletion check and the proof-materials sweep, which keep a permit that\ncarries no live fault and is revoked on rollback. The fresh-submission\nrefusal, the deadline-null job branch and the arms that served it are gone.\n\nThe mempool is decoded once, in @al-ft/midgard-l1-follower/mempool; the\nprovider and the workflow's next-state view both use that overlay. A listed\ntransaction that does not decode is skipped instead of failing the capture.\n\nAlso removed: the own-view `unseen` hook, the slot on the mempool listing\n(Go sidecar, TypeScript transport, fake sidecar), the preflight-stall retry\nthat nothing called, and two duration entries for deleted tests.\n\n131 files, +515 / -3,154.\n\nRan: tsc for l1-follower, l1-node-transport, fault-proofs, watcher and\nnode-tools (0 errors); eslint and prettier on changed files; go test in the\nsidecar; l1-follower 740/740; l1-node-transport 35 passed, 4 devnet skips;\nfault-proofs fast tier 6,993 passed, 0 failed, 3 skipped; watcher fast tier\n1,553/1,553; the watcher installed journey.\nNot run: fault-proofs and watcher slow tiers beyond the touched harness\nfiles, devnet and Docker-backed suites.",
+      "sha": "8520dddaf5bc5d6174f9e76e73e54cf1cab4efd5",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/8520dddaf5bc5d6174f9e76e73e54cf1cab4efd5",
+      "message": "Expose the node and output source a store ledger reads\n\n`ledgerReads(ledger)` gives the source a ledger store ledger reads its\ntrie nodes and outputs from, its overlay first and then its store. A\nreader that cannot hold the ledger itself (a worker thread served over\na message port) reads as the ledger does through\n`ledgerAt(ledger.root, ledgerReads(ledger))`. A `Ledger` that is not a\nledger store ledger is refused.\n\nThe validation-trace defender scene's test support also exports the\none-event Plutus block fixture and the predecessor filler, for builds\noutside the emulator.\n\nTests (two added to tests/ledger-store.read.test.ts):\n- under `ledgerAt`, the source of a store ledger, and of one with an\n  applied overlay, gives that ledger's reads, proofs and root;\n- a ledger that is not a ledger store ledger is refused.\n\nVerified (rerun here):\n- contrib test @al-ft/midgard-fault-proofs --file\n  tests/ledger-store.read.test.ts: 10 passed in 1 file, exit 0.\n- midgard-fault-proofs typecheck.\n\nFrom the implementer's runs, not rerun:\n- with the refusal removed, \"refuses a ledger that is not a ledger\n  store ledger\" fails.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-22T02:22:17Z"
+      "authorDate": "2026-11-24T03:52:16Z"
     },
     {
-      "sha": "bfe0e953c3bb039ff9c63fc7867f421589279992",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/bfe0e953c3bb039ff9c63fc7867f421589279992",
-      "message": "Remove the goal spec; keep its protocol reference in docs/spec\n\ndocs/exec-plans/GOAL_SPEC.md was a program plan: work packages, acceptance\ncriteria and evidence rules, some of them mandating machinery that has since\nbeen deleted. Its protocol content (the protocol decisions, the exact margin\nthresholds and the per-family output contract) moves to\ndocs/spec/protocol-decisions.md as plain reference. The plan and its digest\nare deleted.\n\nReferences are repointed to the new file where they cite moved content, and\ndropped where the comment already states the rule or cited a plan row. Aiken\nand TypeScript changes are comments only: the blueprint built before and\nafter has the same 1,183 validators, byte for byte.\n\nAlso marks references in three old decision records to files deleted earlier\nas historical, so the documentation link check passes.",
+      "sha": "4f861a451fec803eaad9df697b51a37dbda6559f",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/4f861a451fec803eaad9df697b51a37dbda6559f",
+      "message": "Keep the validation cache's working ledger once, and repair it at keys\n\nThe cache held the working ledger in memory twice: the durable entries,\nand a second map with the unpromoted Phase B patches applied. After\nevery landed-block rebase it cleared the second map and copied every\ndurable entry into it again. A poisoned pipeline epoch reloaded all of\nmempool_ledger.\n\n- One in-memory ledger (mempool-ledger-cache.working-ledger.ts): the\n  durable entries, with the unpromoted patches looked up over them,\n  newest first. Nothing is copied. currentState and the spendable view\n  answer through that lookup; MempoolLedgerState is the lookup type.\n- applyPatchAndSync, which nothing in src called, is gone.\n- A poisoned epoch drops the unpromoted patches and reads again only the\n  keys they named. Each persistence commits its ledger rows in one\n  transaction (txAdmissions.mark-accepted.ts) at keys its patch names,\n  and recovery waits for earlier persistence under the persistence lock,\n  so the durable entries can differ from the table only at those keys.\n- spendableAt moves from the follower repair into MempoolLedgerDB, and\n  the cache takes it as its keyed read.\n- New counter validation_ledger_cache_entry_write_count: entries written\n  into the in-memory ledger by full loads, deltas, keyed repairs and\n  promotions.\n\nThe cache still loads the whole working ledger at process start and\nwherever the changed keys are unknown.\n\nTests (tests/mempool-ledger-cache.working-ledger.ts, run from\nmempool-ledger-cache.test.ts):\n- A keyed recovery and a promotion over 2,000 loaded rows move the\n  counter by 3 and 2: red if a copy of the ledger comes back.\n- 80 seeded random steps of patches, promotions, cancels, keyed and full\n  recoveries: every key answers as a cache loaded from scratch does.\n- A poisoned recovery asks the keyed read for exactly the patch keys,\n  the full-reload count does not move, and a persistence that committed\n  before its promotion was interrupted is found.\nThe tests that walked the cache's map now compare lookups at the keys\nthey wrote.\n\nVerified (rerun here): 51 passed in 6 files (mempool-ledger-cache,\nown-block-event-orphaned, landed-blocks-rebase-keyed-io,\nadmission-input-claims, listen-router.tx-evaluate,\nfollower-driver-recompute); midgard-node typecheck.\n\nFrom the implementer's runs, not rerun: each guard killed once (a full\ncopy in repair and in promote, repair or promote skipping deletes or\nupserts, a poisoned recovery that reloads in full, re-reads without\nrepairing, asks for one key fewer or leaves out deletes: every one\nfailed a test); deposit-flow-emulator-submission and\ncommit-parent-lease-emulator (2 passed); the database suite's submit\nlatency case (1 passed); typechecks of midgard-watcher,\nmidgard-fault-proofs and midgard-node-tools; eslint, prettier and the\nmodule-size check.\n\nNot verified: wall-clock or memory before and after; the benchmark was\nedited and typechecks but was not run; no test poisons an epoch through\nthe production construction of the cache.",
       "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-21T23:44:01Z"
+      "authorDate": "2026-11-24T02:26:22Z"
     }
   ],
   "contributors": [
@@ -378,7 +378,7 @@
   "commitActivity": [
     {
       "week": 1764460800,
-      "total": 8
+      "total": 17
     },
     {
       "week": 1765065600,
@@ -446,31 +446,31 @@
     },
     {
       "week": 1774742400,
-      "total": 29
+      "total": 30
     },
     {
       "week": 1775347200,
-      "total": 41
+      "total": 42
     },
     {
       "week": 1775952000,
-      "total": 31
+      "total": 28
     },
     {
       "week": 1776556800,
-      "total": 29
+      "total": 28
     },
     {
       "week": 1777161600,
-      "total": 26
+      "total": 10
     },
     {
       "week": 1777766400,
-      "total": 33
+      "total": 19
     },
     {
       "week": 1778371200,
-      "total": 41
+      "total": 40
     },
     {
       "week": 1778976000,
@@ -490,7 +490,7 @@
     },
     {
       "week": 1781395200,
-      "total": 20
+      "total": 21
     },
     {
       "week": 1782000000,
@@ -506,19 +506,19 @@
     },
     {
       "week": 1783814400,
-      "total": 10
+      "total": 11
     },
     {
       "week": 1784419200,
-      "total": 26
+      "total": 47
     },
     {
       "week": 1785024000,
-      "total": 202
+      "total": 201
     },
     {
       "week": 1785628800,
-      "total": 189
+      "total": 190
     },
     {
       "week": 1786233600,
@@ -534,11 +534,11 @@
     },
     {
       "week": 1788048000,
-      "total": 2
+      "total": 3
     },
     {
       "week": 1788652800,
-      "total": 45
+      "total": 46
     },
     {
       "week": 1789257600,
@@ -546,19 +546,19 @@
     },
     {
       "week": 1789862400,
-      "total": 172
+      "total": 174
     },
     {
       "week": 1790467200,
-      "total": 209
+      "total": 210
     },
     {
       "week": 1791072000,
-      "total": 480
+      "total": 482
     },
     {
       "week": 1791676800,
-      "total": 267
+      "total": 69
     },
     {
       "week": 1792281600,
@@ -578,11 +578,11 @@
     },
     {
       "week": 1794700800,
-      "total": 186
+      "total": 250
     },
     {
       "week": 1795305600,
-      "total": 14
+      "total": 218
     }
   ]
 }
