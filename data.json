@@ -1,10 +1,10 @@
 {
-  "fetchedAt": "2026-11-25T16:58:48.541Z",
+  "fetchedAt": "2026-11-26T16:39:39.494Z",
   "scope": "all-branches",
   "repo": {
     "stargazers_count": 25,
     "forks_count": 11,
-    "open_issues_count": 217
+    "open_issues_count": 216
   },
   "languages": {
     "Aiken": 359544,
@@ -17,11 +17,53 @@
   },
   "commits": [
     {
+      "sha": "2f9b7cb228affd02a85db02b288a1aed94a687a3",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/2f9b7cb228affd02a85db02b288a1aed94a687a3",
+      "message": "Remove milestone labels, history narration and code kept for past designs\n\nComments, test titles, messages, docs and skills state the rule as it is:\nissue numbers, goal and phase labels, ruling labels and accounts of what\nthe code used to do are gone. File names and identifiers that carried a\nlabel are renamed after what they do.\n\nCode that existed only for a delivered milestone or a past shape is\ndeleted rather than renamed: the journal kill-recovery harness, the\nisolated-chain bootstrap scripts, the phase stress gates and their knobs,\nthe lettered benchmarks, the ledger-store exit benchmarks, retired CLI\nroutes and environment-variable guards, one-time table renames, the\nmigration_version column, unused submit result types, and on-chain\nlibrary functions reached only by their own tests.\n\nEvery validator keeps its hash and size.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-11-26T06:20:35Z"
+    },
+    {
+      "sha": "9e9e0113dce43033563451e391ebe47b539dec79",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/9e9e0113dce43033563451e391ebe47b539dec79",
+      "message": "Decide the import checker's deadline tests by a clock the test sets\n\nThe late-verdict and saturated-admission tests took a deadline from\n`Date.now()`, waited for it on a timer, and then expected the checker,\nwhich reads the wall clock, to have seen it pass. A timer runs on the\nmonotonic clock. When the wall clock was stepped backward during the wait,\nthe checker was still short of the deadline at the assertion, and the\nmissed alarm was absent (`expected [] to deeply equal [...]` at\nimport-check.late-verdicts.test.ts:151 and\nimport-check.saturation.test.ts:128).\n\nThe saturation test also left its sweep loop running when an assertion\nthrew. The loop then expired the next test's entry before that test swept,\nwhich is the second failure the same runs show (line 213).\n\nThe tests now set the checker's time themselves:\n\n- The late verdict comes from the scripted evaluator, whose run takes the\n  test clock from before the deadline to exactly the deadline.\n- The saturated pass and its sweeps run on one clock the test sets, with\n  real sleeps because the pass waits on a real pool. The test waits for\n  the run to be asked for and for admission to finish seven more runs\n  after that, then sweeps one millisecond before the deadline (no alarm),\n  at it (the alarm) and after it (not again). The pass is settled before\n  the test ends, whatever failed.\n- The entry \"already past its deadline\" is an hour past it, as the entries\n  not yet due in these suites are an hour ahead.\n\nThese tests no longer sleep, and the two files run in about 6 s where\nthey took about 10 s.\n\nOn the machine the failures came from, the kernel log records the wall\nclock jumping backward, and every recorded failure of these tests sits\nin a run whose log timestamps go backward, in all but one of them by 1.7\nto 2.1 s about every 30 s; no run with a steady clock failed. With\n`Date.now` replaced in the setup file by a clock that steps back 700 ms\nevery second (a temporary edit), the old tests failed at the three\nassertions above (4 of 9 tests) and the new ones passed 20 runs of 20;\nthey also passed 20 of 20 on the plain clock. Each of these changes to\nchecker.ts turns them red: `>=` to `>` on the verdict's deadline check,\n`<=` to `<` on the sweep's, and dropping the raised-once guard in\n`raiseMissed`.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-11-26T01:24:38Z"
+    },
+    {
+      "sha": "e9b9278e05eab88df92224cdfb191c494dd6ce68",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/e9b9278e05eab88df92224cdfb191c494dd6ce68",
+      "message": "Install the ledger in the test fixtures that ingest events without a node\n\nA node gives no L1 event a row before its ledger is installed. Four test\nfiles drive event ingestion without starting a node and never installed\none, so their deposits and forced orders got no row. Midgard Node CI\nfailed on a218a1df4 with six tests in these files.\n\n- `deposit-flow-emulator-shared.ts`: an unowned fixture starts its native\n  owner, whose start is the install, before each event ingestion. It was\n  started by the first commit worker run, after the first ingestion. Fixes\n  `da-bond-pool-bootstrap-emulator` and\n  `state-queue-node-floor-challenge-emulator`.\n- `forced-order-carriage-emulator.test.ts` and one test of\n  `history-commit-window.test.ts` install the empty ledger in their setup.\n\nTest files only; no source change.\n\nVerified (rerun here):\n- The four files: 16 passed, 0 failed.\n- The 28 test files that import an edited file, directly or through\n  another fixture: 50 passed, 0 failed.\n- The files `contrib test --related` reaches from every source file this\n  branch changed: 238 passed in 34 files.\n- tsc --noEmit for midgard-node; eslint and prettier on the three files.\n\nNot verified:\n- The whole node suite locally. CI ran it on a218a1df4, where only these\n  six tests failed.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-11-26T00:28:37Z"
+    },
+    {
       "sha": "ab673d6b38d617bd45640217b76b05ba77abc8b3",
       "html_url": "https://github.com/Anastasia-Labs/midgard/commit/ab673d6b38d617bd45640217b76b05ba77abc8b3",
       "message": "Let the acceptance settlement drill outwait and recognise a settlement\n\nThe acceptance arms kill-node-on-settlement before the withdrawals phase\nsubmits its orders and gave it 1200 s. On the devnet profile a withdrawal's\nsettlement starts no sooner than the event wait (300 s) and block maturity\n(900 s) after its order, so the wait always ended first: on a live stack\nthe first settlement transaction appeared 1348 s after arming. The wait is\nnow the profile's event wait and block maturity plus 25 minutes.\n\nThe trigger also listed two details the node stopped reporting in\nbc56f0822, and not the one it reports while a settlement transaction is in\na block short of confirmation depth. Four of eleven settlement\ntransactions on that stack went from checkpointed to landed with no\njournaled report between. The node's two wordings now live in\nsettlement.attempt-detail.ts, and the catalogue test builds its status\nbodies from them, so a reworded detail fails the test.\n\nRed before the fix (tests/devnet-stack-chaos.test.ts, 6 passed, 2 failed):\n  recognises each targeted moment from the node's status bodies\n    expected [ ...(2) ] to deeply equal [ ...(2) ]\n    (the landed detail, false against true)\n  lets the acceptance wait past the earliest a withdrawal's settlement can\n  start\n    expected 1200000 to be greater than 1200000",
       "authorName": "Philip DiSarro",
       "authorDate": "2026-11-25T09:44:42Z"
+    },
+    {
+      "sha": "a218a1df49ef56b05d8ea7b19c1ee8fb2952092d",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/a218a1df49ef56b05d8ea7b19c1ee8fb2952092d",
+      "message": "Correct the retention rationale in decision record 0002\n\nThe parameter table said parties replay retained payloads from genesis. A\njoining node or watcher now replays only the blocks above the confirmed\nstate; the 120 days stay as set.\n\nNot verified: no doc check beyond prettier was run for this commit.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-11-25T09:02:28Z"
+    },
+    {
+      "sha": "00b26b77038c6327ab6734350de6b09330a2896d",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/00b26b77038c6327ab6734350de6b09330a2896d",
+      "message": "Remove the late-join limit from the docs\n\nA node with an empty database now takes the confirmed ledger from a node\nof the deployment, and a watcher already did. The readiness, security,\nthreat-model and parameters pages said every party replays from genesis\nand that no state snapshot exists; they now say what a joining node or\nwatcher does and what it needs (one node serving the ledger, and the\nretained payloads above the confirmed state).\n\nThe stack and e2e pages keep their attach-before-the-first-block flow and\nsay that joining after a merged block has not been run through the\nharness.\n\nNot verified: no doc check or preflight was run for this commit.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-11-25T08:52:48Z"
+    },
+    {
+      "sha": "6cea79a137f686504ae49b5fc95ebf40edf5fc5d",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/6cea79a137f686504ae49b5fc95ebf40edf5fc5d",
+      "message": "Start a node with no ledger from a peer's snapshot of the confirmed head\n\nA node with no ledger stamp started only on a queue with no block. On any\nother queue its first recompute failed with a hold that is not retried and\nstartup exited. It now takes in the ledger at the landed queue's confirmed\nheader H, whose post-state UTxO root is R, and syncs forward from there.\n\nThe take-in (`services/ledger-snapshot-start.ts`), run where the native\nowner is initialized:\n\n- R the empty ledger's root: the empty ledger, also when unmerged blocks\n  sit above the confirmed head; landed-block processing replays them.\n- Otherwise the peers in the new `LEDGER_SNAPSHOT_PEERS` (libp2p\n  multiaddrs ending in `/p2p/<peer id>`) are asked in order for R over\n  `ledger-snapshot`, from the node's DA libp2p host. The stream is staged\n  in `node_ledger_snapshot_staging` and fed to the ledger store's `admit`,\n  which checks it against R. A peer whose stream fails the check is not\n  asked again by the process; a peer that does not serve R is asked again\n  on the next attempt.\n- With no peer serving, the node stays up and holds the new readiness\n  reason `ledger_snapshot_pending`, retried without a deadline.\n- One transaction installs it: the staged rows become `confirmed_ledger`\n  and `mempool_ledger`, the frontier is set to (H, R), the ledger is\n  stamped at R and the anchor is recorded. The stamp is the commit point:\n  a start with no stamp empties the staging table and takes the ledger in\n  again.\n\nEvery node now records an anchor, so the event rule reads one fact:\n`givesNoRow` gives no row to any L1 event before the install, and after it\nto none included at or before the anchor's end time. Landed-block\nprocessing does nothing before the install.\n\nDeleted, superseded by the install:\n\n- the genesis-only admit in `native-mpf-startup.ts`, its two refusals\n  (\"requires the authenticated clean state queue\", \"Stale native ledger\n  store\") and `writeGenesisLedger`;\n- `bootstrapFrontier`, the `genesis` port and the no-frontier hold: the\n  install always sets the frontier. Test fixtures install through\n  `takeInLedger` (`tests/helpers/ledger-install.ts`);\n- `tests/landed-blocks-bootstrap-frontier.test.ts` and the two stale-store\n  stages of `native-mpf-startup-emulator.test.ts`, which tested the\n  deleted behaviour.\n\nNo on-chain change and no wire change.\n\nTests added: the install in one transaction, a wrong first peer refused\nand the second used, pending then success, a crash between `admit` and the\ninstall finished by the next start (`ledger-snapshot-take-in.test.ts`);\nthe node's configured peers dialed over real libp2p against a node's\nretained-payload server (`ledger-snapshot-peers.test.ts`); a merge that\nlands during the transfer folded from the queue history\n(`confirmed-ledger-behind-recovery.test.ts`); and, through the production\nlifecycle, an unmerged deployment starting empty, a merged one starting\nfrom a peer after a pending ask, a deposit at or below the anchor given no\nrow and spendable once, a deposit above it taken by the node's next block,\nthe anchor's merge rolled back and landed again, and a block committed on\nthe tail (`ledger-snapshot-start-emulator.test.ts`).\n\nVerified by the implementing and review runs, not rerun here:\n- 75 midgard-node test files covering every touched test and fixture user:\n  440 passed, 2 failed, both in tests/import-check.saturation.test.ts,\n  which this change does not reach and which passed alone (4 of 4).\n- Each new behaviour test seen red on a mutant of the code it covers,\n  except the two deposit assertions added last: their mutants fail the\n  test earlier than the new lines.\n- tsc --noEmit for midgard-node; eslint and prettier on the changed files;\n  contrib boundary --package midgard-node.\n\nNot verified:\n- Two node processes, a devnet or Preprod.\n- A request in flight is not aborted on shutdown: the node's libp2p\n  request takes no abort signal, so it ends at the per-request timeout.\n- Preflight.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-11-25T08:52:48Z"
     },
     {
       "sha": "6a97e3cc8db1f4288ec6ec1900f39cd77144e15f",
@@ -36,6 +78,27 @@
       "message": "Give the devnet node read budgets the acceptance drills fit in\n\nAn armed acceptance phase drill reads its trigger every 10 ms. The devnet\nnode ran with the public rate limits (10 reads and 5 health reads a second\nfor one client), and the controller, its drills and the CLIs are one\nloopback client. The node therefore refused most of the drill's reads and\nthe journey's own: /tx-status answered 429 with a JSON body, which the\njourney read as \"not committed yet\".\n\nSeen on a fresh devnet stack (campaign acceptance-user-cli-2, 2026-11-25):\nthe node committed transfers T1-T3 and their block landed six seconds after\nthey were submitted, yet the journey reported \"still waiting for L2 tx ...\nto be committed (node ready)\" for 19 minutes, and kill-node-on-admission\nended with 'trigger \"durable admission backlog > 0\" did not hold within\n1200 s'. The backlog was above zero for 37 ms. On that stack, 60 reads of\n/pipeline-status in a row got 30 answers and then 429s, and /tx-status\nanswered 429 with them. The 10 ms interval dates from 2026-10-04; the rate\nlimits from 2026-10-26.\n\n- The devnet node's environment raises the read and health budgets\n  (HTTP_RATE_LIMIT_READ, HTTP_RATE_LIMIT_HEALTH). Every other class keeps\n  its default.\n- The journey treats a 429 as an unanswered read and names it in its\n  reports, like a 5xx, instead of reading the refusal's body as a status.\n- The interval has a name, ACCEPTANCE_TRIGGER_POLL_MS, which the test\n  compares the budgets with.\n\nTests, both red before the fix:\n- the node's own reading of the devnet listen environment must allow more\n  reads a second than the drills make, for read (client and global) and\n  health;\n- a wait whose reads are refused with 429 must name the refusal when it\n  times out.\n\nVerified (run here):\n- contrib test --package midgard-node-tools --file\n  tests/devnet-stack-l1-origin.test.ts: 13 passed, 1 failed before; 14\n  passed after.\n- contrib test --package midgard-node-tools --file\n  tests/devnet-stack-journey-robustness.test.ts: 22 passed, 1 failed\n  before; 23 passed after.\n- contrib test --package midgard-node-tools --related on the four changed\n  sources: 777 passed, 0 failed, 6 skipped in 72 files (the\n  deployment-profile skips).\n- tsc --noEmit in midgard-node-tools; eslint and prettier on the changed\n  files; module-size ceilings.\n\nNot verified:\n- No passing acceptance run on a devnet stack yet. Whether 10 ms reads\n  catch the 37 ms admission moment every time is not shown.",
       "authorName": "Philip DiSarro",
       "authorDate": "2026-11-25T06:30:24Z"
+    },
+    {
+      "sha": "2fe860f404af116ced7b2b2eecaf0357eab829cc",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/2fe860f404af116ced7b2b2eecaf0357eab829cc",
+      "message": "Bind every store to hubOraclePolicyId once at startup and drop redundant DA checks\n\nEvery persistent store now uses the single deployment identity defined in CONTEXT.md (hubOraclePolicyId) checked once at startup, failing closed on mismatch.\n\n- da-committee-node: drop manifest_sha256, contract_deployment_info_sha256 and manifest_raw from committee_deployment, simplify initDeployment to write-once hubOraclePolicyId binding, drop the circular manifest re-hash in assertRetirementBinding, drop unused deploymentManifestRaw and contractDeploymentInfoSha256 from CommitteeConfig, and remove the per-/readyz getDeployment() query and 3-hash re-checks (deployment on /readyz is now { hubOraclePolicyId }).\n- midgard-node-tools: drop the redundant storeMatchesConfigured check from committeeIsReady.\n- midgard-watcher: store hub_oracle_policy_id in watcher_journal_schema and verify it once when opening watcher-journal.sqlite, failing closed with WatcherJournalConfigurationError before binding (even on an empty journal) without latching disk corruption.\n- docs/public_testnet_readiness.md: replace the stale multi-field store-identity requirement with the single-identity startup rule and mark Store identity Done.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-11-25T06:25:42Z"
+    },
+    {
+      "sha": "0ec0e401aa0c952491c95e047232380512b302aa",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/0ec0e401aa0c952491c95e047232380512b302aa",
+      "message": "Record a node's snapshot anchor and give earlier events no row\n\nA node that takes its ledger from a peer's snapshot of the confirmed head\nholds what every event included by that head's block or an earlier one\ndid. This adds the record of that head and the rule that follows from it.\nNothing writes the record yet: the snapshot install does.\n\n- `node_ledger_snapshot_anchor` (one row, written once): the confirmed\n  header, its post-state UTxO root and its end time.\n  `database/snapshot-anchor.ts` writes and reads it and holds the rule in\n  its two forms, `includedByAnchor` and the SQL `includedAfterAnchor`.\n- An event whose inclusion time is at or before the anchor's end time gets\n  no row: deposits and withdrawals in `reconcileFollowerEvents`, forced\n  orders in the forced-order hook. A block includes the events after its\n  start time and at or before its end time, so these are exactly the\n  events the anchor's block or an earlier one included.\n- The commit horizon skips the same forced orders. A live order with no\n  row bounds the horizon at its inclusion time minus one, which would have\n  held every block after the anchor.\n\nA node with no anchor row behaves as before.\n\nVerified (rerun here):\n- midgard-node tests/follower-events-snapshot-anchor.test.ts and\n  tests/forced-orders-holds.test.ts: 6 passed.\n\nVerified by the implementing run, not rerun here:\n- Red before the rule: the deposit and the order at the anchor's end time\n  each got a row (`expected [ …(2) ] to deeply equal [ Array(1) ]`); with\n  the ingest rule alone the horizon stayed bounded (`expected 4999 to be\n  null`).\n- Eight midgard-node event and forced-order test files: 74 passed.\n  node-schema and reset-application-tables: 3 passed. tsc --noEmit for\n  midgard-node; eslint and prettier on the changed files.\n\nNot verified:\n- The commit-worker and commit-anchor tests that read the horizon.\n- Preflight.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-11-25T06:05:11Z"
+    },
+    {
+      "sha": "121c7abdc122e80016cda22b50b2041b58df8b61",
+      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/121c7abdc122e80016cda22b50b2041b58df8b61",
+      "message": "Move the ledger-snapshot paging client into midgard-core\n\nThe watcher was the only client of the `ledger-snapshot` protocol. A node\nstarting from a peer's snapshot needs the same client, so the paging moves\nnext to the wire codec and the server's page reader, and the watcher calls\nit.\n\n- `fetchDaLedgerSnapshot` (`@al-ft/midgard-core/da-transport`) asks one\n  peer for a root page by page and yields the entries in trie order. The\n  caller supplies the function that sends one request and returns one\n  response, and the transfer's abort signal. It asks for the next page only\n  after the consumer took the current one, and checks nothing: the consumer\n  (`LedgerStore.admit`) checks the stream against the root.\n- `DaLedgerSnapshotUnserved` (the peer does not hold the root, rejected the\n  request, or the request failed) and `DaLedgerSnapshotMalformed` replace\n  the watcher's two error classes. The message texts are unchanged.\n- The watcher keeps its request function (timeout, permit, admission,\n  libp2p transport) in `ledger-snapshot-fetch.ts`.\n\nThe wire messages, the protocol id and the page size are unchanged.\n\nVerified (rerun here):\n- midgard-core tests/da-transport.ledger-snapshot.test.ts: 35 passed (9 new\n  for the client).\n- midgard-watcher ledger-snapshot-libp2p, ledger-snapshot-bootstrap and\n  replayed-ledger.confirmed-chain tests: 17 passed, unchanged files.\n- contrib mutate: removing the abort check and weakening the empty-page\n  check are each caught by a test.\n- tsc --noEmit for midgard-core, midgard-watcher, midgard-node,\n  midgard-fault-proofs and midgard-node-tools; eslint and prettier on the\n  changed files; contrib boundary --package midgard-watcher.\n\nNot verified:\n- The other test files of both packages, and preflight.",
+      "authorName": "Philip DiSarro",
+      "authorDate": "2026-11-25T05:57:44Z"
     },
     {
       "sha": "7439ec98835d8d8814190a3ad30d1d3defe54ba1",
@@ -57,69 +120,6 @@
       "message": "Run acceptance deposits and withdrawals through midgard-user\n\n6e43bd7ed moved deposits and withdrawals to midgard-user and taught the\njourney's own runner to honour a request's tool. The acceptance runner kept\nits own copy of the launch and always ran the node CLI, so acceptance stopped\nat its first journey phase with \"error: unknown command 'deposit'\".\n\nBoth runners now take the program, directory and environment from one\nhelper, cliProcess, and the run key from journeyRunKey; each keeps only its\nown way of executing the process.\n\nTest: a request naming the user tool, run through the acceptance runner\nagainst stub CLIs, must start dist/cli.js in the user CLI package with the\nuser environment, the user's seed and the submission markers, and none of the\noperator's secrets. Before the fix it failed with \"expected 'node CLI' to be\n'midgard-user'\". A request naming no tool still runs the node CLI. It sits\nbeside the acceptance process tests because no existing test runs a request\nthrough this runner.\n\nVerified (run here):\n- contrib test --package midgard-node-tools --file\n  tests/devnet-stack-acceptance-process.test.ts: 3 passed, 1 failed before\n  the fix; 4 passed after.\n- contrib test --package midgard-node-tools --related on the three changed\n  sources: 774 passed, 0 failed, 6 skipped in 72 files (the skips are\n  deployment-profile conditions in devnet-stack-watcher and\n  devnet-stack-service-preflight).\n- tsc --noEmit in midgard-node-tools; eslint and prettier on the four files.\n\nNot verified:\n- No acceptance run on a devnet stack.",
       "authorName": "Philip DiSarro",
       "authorDate": "2026-11-25T01:53:56Z"
-    },
-    {
-      "sha": "47623f71c1f988d4a9db225e2b3d8db1395c51f5",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/47623f71c1f988d4a9db225e2b3d8db1395c51f5",
-      "message": "Close a node worker's L1 node transport before its thread ends\n\nA sidecar is a child of the thread that spawned it, and only that thread\ncollects its exit. The commit worker and the settlement worker open the\nshared L1 node transport and never closed it: the node's L1 access closes\nonly its fact store. The commit worker's parent terminates the thread on its\noutput, once per commit tick, so every run left one defunct\nmidgard-l1-node-transport child of the node (425 after 65 minutes of a\nlocal devnet, one per commit worker output).\n\n- The commit worker's output post is now postCommitWorkerOutput, which\n  closes the thread's shared transports and waits for the sidecars' exits\n  before it posts the output the parent terminates on.\n- runSettlementWorker closes them when its program ends, either way, before\n  it reports.\n- L1NodeTransport.close() also ends a sidecar that is still in its hello\n  exchange, and waits for it. SidecarProcess.start is split into spawn and\n  hello so the supervisor holds the child from the moment it exists. A\n  failed hello now ends its child before a restart is scheduled.\n- The commit worker's completion log prints byte arrays (ownerEpoch,\n  generationId) as hex.\n\nNo other package spawns the sidecar from a worker thread: the watcher, the\nDA committee node and the follower package start no workers, and the node's\nother workers do not open the transport.\n\nNot covered: a worker thread that ends without reaching its end path still\nleaves one defunct child. That is a parent terminating it mid-run (an\ninterrupted commit fiber, the settlement watchdog or its scope release) and\na crashed thread. Only a sidecar owned by the main thread covers those.\n\nRed before the fix, tests/worker-l1-sidecar-exit.test.ts, 0 passed, 4 failed:\n  AssertionError: expected [ Array(5) ] to strictly equal []\n  (received five \"Z MainThread\", the fake sidecar's process name)\n\nVerified (rerun here):\n- contrib test midgard-node, 8 files (worker-l1-sidecar-exit,\n  settlement-tick-reporting, settlement-worker-supervision,\n  local-node-transport.not-ready,\n  prepare-hub-oracle-nonce.l1-origin-observer,\n  contract-deployment-info.manifest-l1-origin.prover,\n  operator-command-node-index, commit-worker-reverted-notice): 48 passed,\n  0 failed.\n- contrib test @al-ft/l1-node-transport: 35 passed, 0 failed, 4 skipped\n  (tests/devnet.test.ts needs a running devnet).\n- contrib test @al-ft/midgard-l1-follower, 3 files (follow-loop.transport,\n  find-origin, native-reward-account): 52 passed, 0 failed; vitest run\n  tests/fork-sim/transport.test.ts: 1 passed.\n- contrib mutate on close() no longer ending a starting sidecar: killed by\n  the commit worker's at-once case.\n- tsc --noEmit and eslint in demo/l1-node-transport, tsc --noEmit and\n  eslint on the changed files in demo/midgard-node,\n  check-module-size-exceptions.\n\nNot verified:\n- No devnet rerun; the defunct count on a running node was not re-measured.\n- The settlement worker's success path (the test fails its program) and the\n  Go sidecar binary (the tests spawn the fake sidecar).",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-25T01:43:00Z"
-    },
-    {
-      "sha": "6548b861044d94b914a4430fca2a1e61fffdf1fd",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/6548b861044d94b914a4430fca2a1e61fffdf1fd",
-      "message": "Delete the native MPF crate's one-shot WASM path\n\nThe crate still built a wasm-bindgen package (ArchitectureGSession and\nrun_architecture_f over the MEF6/MEFO one-shot format) beside the\narchitecture-g-owner binary. Nothing loads that package: no source, script,\nworkflow or doc outside the crate names its exports or its\n.architecture-f-wasm output directory, and no build step runs wasm-pack.\n\nRemove the session, the one-shot engine, input parser and output encoder, and\nthe constants, Caps, Arena::rollback and Arena::dirty_records that only they\nused. Drop the wasm-bindgen dependency, the cdylib crate type, the wasm32\ncfg gates, the Makefile build target and the four ignore entries for the\ngenerated package. The README now describes only the owner binary and keeps\nthe node record and event op layouts the RPC payloads refer to.\n\nThe crate's root tests ran through the one-shot engine. The two that pin\nlive arena behavior (an absent-key delete is refused; an empty event keeps\nthe root and a reinsert changes it) now call Arena::apply_event directly, the\nempty-root constant test stays, and the test of the one-shot's emitted delta\nis gone with it. The owner tests list a seed arena's nodes through\ngenerated_reachable_nodes, which the owner itself uses, in place of\ndirty_records.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-24T22:11:57Z"
-    },
-    {
-      "sha": "a8bf304612b7680cb3bd1d1a17263e30b4baaac0",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/a8bf304612b7680cb3bd1d1a17263e30b4baaac0",
-      "message": "Create each store's schema whole, shut a removed operator's node down, and drop dead labels\n\nSchemas: no deployment exists to migrate, so every store now creates one\nschema on an empty database and refuses a database created by a different\none. The node's 38 migrations, their runner and checksum ledger, the\nfollower's migration sets, the watcher journal migration, the db:migrate,\ndb:status, db:verify and db:checksum commands and the midgard-node-migrate\nCompose service are removed. A refused database must be recreated.\n\nRemoved operator: a node whose operator leaves the active set reports\n/readyz unready with operator_removed and then exits 0. The node's Compose\nservice restarts on failure only, and the process supervisor leaves a\nservice that exits 0 stopped. A removed operator recovers the bond and\nregisters again with --l1 kupmios or --l1 blockfrost. The operator-pause\ndrill expects the removed node to report and then exit.\n\nLabels and docs: review, plan-phase and goal labels with no defining record\nare removed from comments, test titles and messages, including the Aiken\ndoc comments that feed the blueprint. The network-id lifecycle snapshot is\nregenerated because its transcript is seeded by the test title.\nTX_VALIDATION_TABLE_ROLES.md, docs/test-quality and the testing research\nnote are deleted; the transaction spec's rejection section, the security\nclaim, the threat model and SECURITY.md name the current limits.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-24T21:48:21Z"
-    },
-    {
-      "sha": "1959201470a7737324b62fd894fbc9180847c8c5",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/1959201470a7737324b62fd894fbc9180847c8c5",
-      "message": "Lower the native owner service's module-size ceiling to 883 lines\n\nThe file shrank from 913 lines when the second promote check and the\nread-wait bookkeeping were deleted.\n\nVerified (rerun here):\n- node demo/scripts/check-module-size-exceptions.mjs: 214 ceilings verified.\n\nNot verified:\n- Nothing else; no code changed.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-24T21:36:57Z"
-    },
-    {
-      "sha": "190b7e1039779477753c94f859edb4c5556b935a",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/190b7e1039779477753c94f859edb4c5556b935a",
-      "message": "Stop checking the native owner's promoted nodes twice, and delete what the node cache left behind\n\nPromote was the larger part of a block and most of it was the node\nchecking the child's output again.\n\n- The JavaScript re-hash of every promoted node is gone, with\n  hashStoredNode and the golden case that pinned it. The child hashes the\n  nodes and authenticates each one it is given back.\n- validatePromotionClosure is deleted. The store's adopt already walks from\n  the new root, refuses a node neither held nor supplied, and does not\n  write a supplied node the walk does not reach.\n- The record count, the unique hash order and the aggregate digest stay;\n  the digest now covers the received bytes in one update.\n- The ledger store reads a level's reference counts in key order.\n\nLeftovers of the resident trie:\n\n- Ready carries the root only; its four unused counters are gone on both\n  sides.\n- A restore no longer waits for in-flight diagnostics reads: it keeps the\n  child, so there is no displaced child for a read to finish on. The\n  diagnostics_before_request test hook goes with it.\n- assertStoredNode is no longer exported.\n- Comments, the readiness-reason reference, .env.example, the benchmark\n  compose file and the operator message no longer speak of a sidecar, an\n  index cap, or a root held \"in full\".\n\nPromote, one run on each ledger with\ntests/benchmarks/native-owner-node-cache.bench.ts, before and after this\ncommit:\n\n  200,000 UTxOs    10,000 ops 0.9-1.3 s -> 0.74-0.86 s\n                   40,000 ops 2.4-2.7 s -> 1.9-2.3 s\n  1,000,000 UTxOs  10,000 ops 1.7-2.4 s -> 1.1-1.7 s\n                   40,000 ops 4.7-5.6 s -> 3.5-3.8 s\n\nWhat is left grows with the ledger: for every new branch the store reads\nand rewrites the reference count of each child. A 256 MiB LevelDB block\ncache with a 64 MiB write buffer was tried and changed nothing, so it is\nnot included.\n\nTests. \"restores while a diagnostics read is in flight, and answers the\nread\" replaces the read-wait test: it catches diagnostics being counted as\nan operation, which makes a restore refuse whenever a readiness probe is\nin flight. It lives next to the other restore cases because it needs the\nreal child.\n\nVerified (rerun here):\n- cargo fmt --check; cargo test --release --locked: 14 passed.\n- midgard-node, 31 files (mpf-native-*, native-mpf-*, mpf-differential,\n  mpf-node-encoding-v1, mpf-runtime-config, readiness-native-mpf-owner-route,\n  landed-blocks rebase, restore-holds and fork-sim, ledger-store-level):\n  186 passed, 0 failed.\n- midgard-fault-proofs ledger-store tests, 5 files: 128 passed.\n- With diagnostics counted as an operation (temporary edit, undone) the new\n  restore test fails with \"Native MPF canonical recovery requires drained\n  operations\"; the other 12 cases in the file pass.\n- tsc --noEmit for midgard-node and midgard-fault-proofs; eslint and\n  prettier on the changed files.\n- contrib boundary --package midgard-node; contrib gate process-boundaries.\n- preflight: registry-paths, agent-doc-links, agent-enforcement-tags,\n  agent-config, golden:mpf-node-encoding-v1.\n\nNot verified:\n- The other test files of both packages, the devnet and the live run.\n- The measurements are one run each on one machine.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-24T21:29:51Z"
-    },
-    {
-      "sha": "c2964d750456613d1d447fbb7d36dd89faa48543",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/c2964d750456613d1d447fbb7d36dd89faa48543",
-      "message": "Replace the native owner's resident trie with a bounded node cache\n\nThe owner child kept every node of the ledger trie in memory. The node\nwalked every stored node twice at start, on a child restart and whenever\nthe root moved back, and the child refused promotions at 2,000,000 nodes,\nwhich was also the ledger's ceiling.\n\nThe child now keeps a cache of nodes keyed by content hash, bounded at\n1 GiB (NATIVE_MPF_OWNER_NODE_CACHE_BYTES). An apply that reaches a node it\nlacks answers NeedNodes; the node reads those nodes from LevelDB in one\ngetMany, sends them in ProvideNodes and sends the same ApplyEvents again,\nfor at most 66 rounds. Start, a child restart and restoreCanonicalRoot send\nonly the root (SetRoot); a restore keeps the same child. Applies are\nserialized, since the child trims its cache when an apply ends. RPC schema\n2; the binary is pinned by hash as before. Roots, the node encoding and\nthe LevelDB format are unchanged.\n\nRemoved: the resident index and its load messages, both walks, the sidecar\nfile and MPF_NATIVE_OWNER_SIDECAR_PATH, the full-index accounting, the\npromotion and restore index-cap refusals with their readiness reasons\n(native_mpf_promotion_index_cap_exceeded,\nnative_mpf_restore_index_cap_exceeded), and the owner's one-shot CLI.\nReadiness diagnostics report cachedNodes and cachedBytes. A node the store\nlacks under the durable root raises NativeMpfClosureIncomplete, naming it.\n\nThe promotion check no longer reads each new branch's stored children one\nget at a time: the store's adopt already refuses a node neither held nor\nsupplied before it writes anything (ledger-store.test.ts covers it).\n\nThe L1 plan's tickets M1-M5 and benchmark B4 planned root switching,\nclosure import, sweeps and compaction for the resident trie; they are\nreplaced by a note.\n\nMeasured once per ledger, before and after, with\ntests/benchmarks/native-owner-node-cache.bench.ts (added):\n- 1,000,000 UTxOs: start 22-26 s -> 11-27 ms; roots of 10,000 operations\n  0.13-0.18 s -> 0.16 s with the paths cached, 0.53-0.71 s first after\n  start; promote of 10,000 operations 3.6-4.3 s -> 1.7-2.4 s; child memory\n  after start 772 MiB -> 2 MiB, 639 MiB with every path cached.\n- 200,000 UTxOs: start 4.3-4.7 s -> 13-26 ms; roots of 10,000 operations\n  unchanged at 0.13 s cached, 0.45-0.69 s first after start; promote\n  2.3-2.9 s -> 0.9-1.3 s.\n\nVerified (rerun here):\n- cargo fmt --check and cargo test --release --locked in\n  native/mpf-event-flat-wasm: 14 tests passed.\n- contrib native --package midgard-node: exit 0.\n- contrib test --package midgard-node over 20 files (the 16 mpf-native and\n  native-mpf files, mpf-runtime-config, mpf-differential and the three\n  landed-blocks fork-sim, restore-holds and rebase files): 100 passed.\n- tsc --noEmit for midgard-node; eslint and prettier on the files changed\n  after the last full lint.\n- contrib boundary --package midgard-node and contrib gate\n  process-boundaries: exit 0.\n- check-registry-paths, check-docs-links, check-module-size-exceptions:\n  exit 0.\n\nNot verified:\n- tsc for midgard-node-tools, midgard-fault-proofs and midgard-watcher,\n  the readiness, public-status and phase4 suites, and the red runs of the\n  three new negative tests were run by the implementing pass and not\n  rerun here.\n- No emulator, devnet or live run. The measurements are one run each.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-24T20:41:36Z"
-    },
-    {
-      "sha": "f9102abcd04212a3991b8d389d8a6e2b19941939",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/f9102abcd04212a3991b8d389d8a6e2b19941939",
-      "message": "Relay the commit program's ledger-revert notice in the emulator harness\n\nMidgard Node CI failed on 15f60017f in\ntests/deposit-flow-emulator-merge-payout.test.ts, \"runs deposit, reserve\nabsorption, withdrawal commitment, and payout to conclusion\": after the\nwithdrawal block rejected two transactions at commit, the validation cache\nstill held their outputs and lacked the input the revert restored\n(tests/helpers/production-lifecycle.ts:307, the cache compared with the\nspendable ledger).\n\nA commit-stage rejection tells the cache which rows it changed through the\nworker's MempoolLedgerRevertedNotice, which the parent turns into stale\nmarks. The emulator harness runs the commit program in process and passed\nit no notifier, so the notice was never posted and nothing else names those\nrows: the block that lands includes neither transaction, so the rebase's\nkeys do not cover them. The comparison in the lifecycle helper and the\nstale marks both arrived with the validation-cache commits, and this suite\nwas not among the ones rerun for them.\n\nThe harness's production path now passes a notifier that hands a\nMempoolLedgerRevertedNotice to the parent's dispatcher\n(takeCommitWorkerOutput), so the same code marks the keys as in the node.\nThe other notices feed readiness, which the fixture does not follow, and\nare not relayed. No source change: the node's worker already posts the\nnotice and its parent already marks the keys\n(tests/mempool-ledger-cache.stale-marks.ts,\ntests/commit-worker-reverted-notice.test.ts).\n\nVerified (rerun here):\n- Red before, same command:\n  node scripts/contrib.mjs test --package midgard-node --file tests/deposit-flow-emulator-merge-payout.test.ts\n  failed (2 passed, 1 failed) with the CI assertion at\n  tests/helpers/production-lifecycle.ts:307.\n- Green after: 3 passed in 1 file.\n- Typecheck of midgard-node; eslint --max-warnings=0 and prettier on the\n  two files.\n\nNot verified:\n- Which of the validation-cache commits first made the case red.\n- The other emulator suites on this harness were not rerun here; the change\n  acts only when a commit rejects a transaction after admission, which no\n  other suite on the production path does. CI runs them all.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-24T07:01:11Z"
-    },
-    {
-      "sha": "a7850bbe0fbc97db032ca5129e957e3f868e54b2",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/a7850bbe0fbc97db032ca5129e957e3f868e54b2",
-      "message": "Claim the one-step fixture's ledger-steps module in the channel table\n\nThe one-step cross-language generator gained a second module\n(generate-validation-one-step-aiken-fixture.ledger-steps.mjs) when its\nledger roots moved to a library-trie oracle. The golden channel table\nstill listed only the entry module, so the table's own test refused the\nnew file as an unclaimed generator and Agent Skills CI failed on the\nbranch head.\n\nVerified (rerun here):\n- Red before, the workflow's command\n  (node --test over every .agents/skills/*/scripts/*.test.mjs):\n  210 tests, 1 failed, \"PROBLEM: demo/midgard-validation/scripts/\n  generate-validation-one-step-aiken-fixture.ledger-steps.mjs looks like a\n  generator but no channel claims it (add it to channels.json)\".\n- Green after, same command: 210 tests, 210 passed.\n- node scripts/ci/check-agent-skills.mjs exits 0; its own test passes 8 of 8.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-24T06:16:56Z"
-    },
-    {
-      "sha": "15f60017fb439dc777657aa23dc36ca535453a76",
-      "html_url": "https://github.com/Anastasia-Labs/midgard/commit/15f60017fb439dc777657aa23dc36ca535453a76",
-      "message": "Realign the recovery table after its refusal example got shorter\n\nDropping \"and RUN_GENESIS_ON_STARTUP=false\" from the configuration-refusal\nrow left the table's column padding off. Whitespace only.\n\nVerified (rerun here):\n- prettier --check on the file fails before this change and passes after.",
-      "authorName": "Philip DiSarro",
-      "authorDate": "2026-11-24T06:05:11Z"
     }
   ],
   "contributors": [
@@ -426,11 +426,11 @@
     },
     {
       "week": 1771718400,
-      "total": 47
+      "total": 45
     },
     {
       "week": 1772323200,
-      "total": 26
+      "total": 25
     },
     {
       "week": 1772928000,
@@ -446,7 +446,7 @@
     },
     {
       "week": 1774742400,
-      "total": 30
+      "total": 29
     },
     {
       "week": 1775347200,
@@ -454,35 +454,35 @@
     },
     {
       "week": 1775952000,
-      "total": 32
+      "total": 28
     },
     {
       "week": 1776556800,
-      "total": 29
+      "total": 28
     },
     {
       "week": 1777161600,
-      "total": 26
+      "total": 10
     },
     {
       "week": 1777766400,
-      "total": 33
+      "total": 19
     },
     {
       "week": 1778371200,
-      "total": 41
+      "total": 40
     },
     {
       "week": 1778976000,
-      "total": 16
+      "total": 15
     },
     {
       "week": 1779580800,
-      "total": 2
+      "total": 1
     },
     {
       "week": 1780185600,
-      "total": 26
+      "total": 25
     },
     {
       "week": 1780790400,
@@ -490,7 +490,7 @@
     },
     {
       "week": 1781395200,
-      "total": 21
+      "total": 20
     },
     {
       "week": 1782000000,
@@ -506,7 +506,7 @@
     },
     {
       "week": 1783814400,
-      "total": 11
+      "total": 10
     },
     {
       "week": 1784419200,
@@ -514,11 +514,11 @@
     },
     {
       "week": 1785024000,
-      "total": 197
+      "total": 202
     },
     {
       "week": 1785628800,
-      "total": 190
+      "total": 90
     },
     {
       "week": 1786233600,
@@ -578,11 +578,11 @@
     },
     {
       "week": 1794700800,
-      "total": 250
+      "total": 228
     },
     {
       "week": 1795305600,
-      "total": 230
+      "total": 140
     }
   ]
 }
